@@ -4,3 +4,8 @@
 
 ## 🇮🇹 Diario dello sviluppatore
 
+## Obiettivi
+
+- Aiutare chi organizza i concorsi
+- Aiutare chi partecipa ai concorsi
+- Aiutare chi controlla i concorsi
