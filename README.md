@@ -3,6 +3,7 @@
 🇮🇹 Sì, è l'ennesima piattaforma di gestione concorsi fotografici.
 
 ## 🇮🇹 Diario dello sviluppatore
+[Indice](./dev-diary/index.md)
 
 ## Obiettivi
 
