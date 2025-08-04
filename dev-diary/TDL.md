@@ -13,7 +13,17 @@ in uso a 4 gruppi: *organizzatori*, *concorrenti*, *giurati* e *controllori*.
 
 ### Users - utenti, persone
 
-Pagine e funzioni per gli utenti, a prescindere dal ruolo
+Pagine e funzioni per gli utenti, a prescindere dal ruolo.  
+- iscriversi alla piattaforma 
+- modificare la propria anagrafica
+- ricevere notifiche sui login
+- fare il login
+- fare logout
+- consultare il proprio deposito immagini
+- caricare immagini nel proprio deposito
+- selezionare un concorso dall'elenco
+- inserire il proprio circolo organizzatore
+- altro, segue
 
 - [ ] route /users/add get
 - [ ] view users/add
