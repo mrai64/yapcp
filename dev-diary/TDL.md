@@ -11,6 +11,10 @@ in uso a 4 gruppi: *organizzatori*, *concorrenti*, *giurati* e *controllori*.
 
 ## Lista generale di cose fatte e da fare
 
+### sistema - alla base del resto 
+
+- [ ] Definire una gestione dell'internazionalizzazione i18n(text)
+
 ### Users - utenti, persone
 
 Pagine e funzioni per gli utenti, a prescindere dal ruolo. Cosa deve fare un utente:
