@@ -8,6 +8,7 @@ in uso a 4 gruppi: *organizzatori*, *concorrenti*, *giurati* e *controllori*.
 - [ ] factory per caricare user
 - [ ] factory per caricare elenco paesi
 - [ ] tenere aggiornata la lista
+- [ ] tenere aggiornato (./index.md)
 
 ## Lista generale di cose fatte e da fare
 
