@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -59,4 +59,39 @@ class UserController extends Controller
 
     return view('users.home', ['youAre' => $youAre ]);
   }
+
+  /**
+   * 4. login
+   */
+  public function LoginFormView() {
+    Auth::logout();
+
+    return view('auth.login');
+  }
+  public function LoginValidateForm(Request $request) {
+    $validated   = $request->validate([
+      'email' => 'required|email',
+      'password' => 'required|string',
+    ]);
+    if (Auth::attempt($validated)) {
+      $request->session()->regenerate();
+      return redirect()->route('userHome', ['id' => Auth::id() ]);
+    }
+    // ouch
+    throw ValidationException::withMessages([
+      'credentials' => 'Sorry, incorrect credentials.',
+    ]);
+  }
+
+  public function LogoutValidateForm(Request $request) {
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect()->route('welcome');
+  }
+
+  /**
+   * 
+   */
+
 }

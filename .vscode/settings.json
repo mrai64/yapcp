@@ -3,6 +3,7 @@
     "laravel",
     "pcpdb",
     "personalcard",
+    "softdelete",
     "yapcp"
   ]
 }

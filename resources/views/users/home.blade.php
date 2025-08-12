@@ -7,13 +7,27 @@
   <title>Your home page </title>
 </head>
 <body>
-  <p>Homepage for User</p>
-	<div class="container pt-5">
+  <div class="container pt-5">
     <div class="row">
-			<div class="col-md-12">
-				@if (session('success'))
+      <div class="col-12">
+        <span class="fs-3">Yapcp</span>
+        @auth 
+        <form action="{{ route('logout') }}" method="post" class="m-0">
+          @csrf 
+          <button
+            type="submit"
+            class="btn btn-secondary float-end"
+            >Logout
+          </button>
+        </form>
+        @else
+        <a href="{{ route('loginForm') }}" class="btn btn-secondary float-end">Login</a>
+        @endauth
+      </div>
+      <div class="col-md-12">
+        @if (session('success'))
 				<div class="alert alert-success">
-					{{ session('success') }}
+          {{ session('success') }}
 				</div> 
 				@endif
         @if ($errors->any())
@@ -26,13 +40,35 @@
         </div> 
         @endif
         <h1>{{ $youAre['name'] }} Personal data</h1>
+        <p>Homepage for User</p>
         <ul>
           <li>Name: {{ $youAre['name'] }}</li>
-          <li>Assigned id: {{ $youAre['id'] }}</li>
           <li>Country code: {{ $youAre['country_iso3'] }}</li>
-          <li>Last Update record: {{ $youAre['updated_at'] }}</li>
+          <li><small>Last Update record: {{ $youAre['updated_at'] }}</small><br>
+          </li>
+          <li>Assigned id: {{ $youAre['id'] }}<br>
+            <small>That code is only for internal use.</small>
+          </li>
         </ul>
-        <p>All ok or you wanna change something?</p>
+        <h2>as Participant</h2>
+        <ul>
+          <li>Status of Salons</li>
+          <li>Apply for a Contest</li>
+          <li>Works depot</li>
+        </ul>
+        <h2>as Organizer</h2>
+        <ul>
+          <li>Status of Salons</li>
+          <li>New Salon</li>
+        </ul>
+        <h2>as Juror</h2>
+        <ul>
+          <li>Make your choice</li>
+        </ul>
+        <h2>as National/International Photo Organization</h2>
+        <ul>
+          <li>Salon inspection</li>
+        </ul>
       </div>
     </div>
   </div>
