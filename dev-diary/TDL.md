@@ -12,14 +12,15 @@ in uso a 4 gruppi: *organizzatori*, *concorrenti*, *giurati* e *controllori*.
 
 ## Lista generale di cose fatte e da fare
 
-### sistema - alla base del resto 
+### sistema - alla base del resto
 
-- [ ] i18n __() 
+- [ ] i18n __()
 
 ### Users - utenti, persone
 
 - [ ] aggiungere alla tabella Users il cognome i dati di residenza e telefono internazionale,
   attualmente ci sono solo user id name e password
+- [ ] modificare la pagina di iscrizione, creare la pagina di modifica dei dati personali.
 
 Pagine e funzioni per gli utenti, a prescindere dal ruolo. Cosa deve fare un utente:
 
