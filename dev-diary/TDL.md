@@ -25,16 +25,28 @@ in uso a 4 gruppi: *organizzatori*, *concorrenti*, *giurati* e *controllori*.
 Pagine e funzioni per gli utenti, a prescindere dal ruolo. Cosa deve fare un utente:
 
 - iscriversi alla piattaforma
-  - [ ] route /users/add get
-  - [ ] view users/add
-  - [ ] route /users/add post
-  - [ ] controller users/add
+  - [X] route /users/add get
+  - [X] view users/add
+  - [X] route /users/add post
+  - [X] controller users/add
 - fare il login
-  - ricevere notifiche sui login
+  - [X] route /login
+  - [X] modulo login user /login get
+  - [X] route /logout
+  - [X] link-pulsante login
+  - [X] modulo-pulsante logout
+  - [ ] ricevere notifiche sui login
+  - [ ] route /users/recpass 
+  - [ ] modulo recupera password
+  - [ ] route get /users/recovery/{hash} verifica
+  - [ ] router post /users/recovery modulo modifica password
+
 - fare logout
+  - [X] controller /logout 
+
 - modificare la propria anagrafica
-  - [ ] route /users/mod/{id} get
-  - [ ] view users/mod
+  - [X] route /users/mod/{id} get
+  - [X] view users/mod
   - [ ] route /users/mod/{id} post
   - [ ] controller users/mod/{id}
 - consultare il proprio deposito immagini
@@ -43,9 +55,6 @@ Pagine e funzioni per gli utenti, a prescindere dal ruolo. Cosa deve fare un ute
 - inserire il proprio circolo organizzatore
 - altro, segue
 
-- [ ] pulsante recupera password /users/pass_recovery get
-- [ ] route modifica password /users/pass_recovery post
-- [ ] modulo login user /login get
 - [ ] modulo scelta del ruolo se ne ha più di uno
 - [ ] link logout user /logout
 
