@@ -36,13 +36,13 @@ Pagine e funzioni per gli utenti, a prescindere dal ruolo. Cosa deve fare un ute
   - [X] link-pulsante login
   - [X] modulo-pulsante logout
   - [ ] ricevere notifiche sui login
-  - [ ] route /users/recpass 
+  - [ ] route /users/recovery_pass
   - [ ] modulo recupera password
   - [ ] route get /users/recovery/{hash} verifica
   - [ ] router post /users/recovery modulo modifica password
 
 - fare logout
-  - [X] controller /logout 
+  - [X] controller /logout
 
 - modificare la propria anagrafica
   - [X] route /users/mod/{id} get
@@ -94,6 +94,17 @@ Il concorso ha una serie di caratteristiche che diventano
 - elenco dei temi e sezioni
   - elenco dei giurati
   - elenco dei premi
+
+### un due, un due, un due
+
+- risolvere l'uso di singolare plurale
+  - model User Country
+  - table users countries plurale
+  - controller UserController CountryController
+  - factory UserFactory CountryFactory
+  - seeder UserSeeder CountrySeeder
+
+- elenco iso 3 lettere 2 lettere, caricare con seeder
 
 ## Come si fa a fare?
 
