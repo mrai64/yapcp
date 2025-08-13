@@ -14,9 +14,12 @@ in uso a 4 gruppi: *organizzatori*, *concorrenti*, *giurati* e *controllori*.
 
 ### sistema - alla base del resto 
 
-- [ ] Definire una gestione dell'internazionalizzazione i18n(text)
+- [ ] i18n __() 
 
 ### Users - utenti, persone
+
+- [ ] aggiungere alla tabella Users il cognome i dati di residenza e telefono internazionale,
+  attualmente ci sono solo user id name e password
 
 Pagine e funzioni per gli utenti, a prescindere dal ruolo. Cosa deve fare un utente:
 
