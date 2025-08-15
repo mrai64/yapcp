@@ -5,17 +5,18 @@ in uso a 4 gruppi: *organizzatori*, *concorrenti*, *giurati* e *controllori*.
 
 ## Prossime cose da fare
 
-- [ ] factory per caricare user
-- [ ] factory per caricare elenco paesi
 - [ ] tenere aggiornata la lista
 - [ ] tenere aggiornato (./index.md)
+- [ ] ripulire web.php perché ci sono controller e ci sono funzioni in linea,
+  molto meglio che tutto sia nei controller
 
 ## Lista generale di cose fatte e da fare
 
 ### sistema - alla base del resto
 
-- [ ] i18n __()
-
+- [ ] i18n __() Visto che la funzione potrebbe esserci già, dove sta?
+  Come si può impostare il codice perché sia usabile ovunque?
+  
 ### Users - utenti, persone
 
 - [ ] aggiungere alla tabella Users il cognome i dati di residenza e telefono internazionale,
