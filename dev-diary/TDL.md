@@ -7,8 +7,10 @@ in uso a 4 gruppi: *organizzatori*, *concorrenti*, *giurati* e *controllori*.
 
 - [ ] tenere aggiornata la lista
 - [ ] tenere aggiornato (./index.md)
-- [ ] ripulire web.php perché ci sono controller e ci sono funzioni in linea,
-  molto meglio che tutto sia nei controller
+- [ ] verifica indirizzo email, rifare tutto daccapo
+- [ ] ripulire web.php perché ci sono controller
+      e ci sono funzioni in linea,
+      molto meglio che tutto sia nei controller
 
 ## Lista generale di cose fatte e da fare
 
@@ -19,9 +21,12 @@ in uso a 4 gruppi: *organizzatori*, *concorrenti*, *giurati* e *controllori*.
   
 ### Users - utenti, persone
 
-- [ ] aggiungere alla tabella Users il cognome i dati di residenza e telefono internazionale,
+- [ ] funzione di verifica dell'indirizzo email, secondo tentativo
+- [ ] aggiungere alla tabella Users il cognome,
+  i dati di residenza e telefono internazionale,
   attualmente ci sono solo user id name e password
-- [ ] modificare la pagina di iscrizione, creare la pagina di modifica dei dati personali.
+- [ ] modificare la pagina di iscrizione,
+  creare la pagina di modifica dei dati personali.
 
 Pagine e funzioni per gli utenti, a prescindere dal ruolo. Cosa deve fare un utente:
 
@@ -30,6 +35,8 @@ Pagine e funzioni per gli utenti, a prescindere dal ruolo. Cosa deve fare un ute
   - [X] view users/add
   - [X] route /users/add post
   - [X] controller users/add
+  - [X] email di avvenuta iscrizione
+  - [ ] verifica email
 - fare il login
   - [X] route /login
   - [X] modulo login user /login get
@@ -44,6 +51,7 @@ Pagine e funzioni per gli utenti, a prescindere dal ruolo. Cosa deve fare un ute
 
 - fare logout
   - [X] controller /logout
+  - [X] link logout user /logout
 
 - modificare la propria anagrafica
   - [X] route /users/mod/{id} get
@@ -57,7 +65,6 @@ Pagine e funzioni per gli utenti, a prescindere dal ruolo. Cosa deve fare un ute
 - altro, segue
 
 - [ ] modulo scelta del ruolo se ne ha più di uno
-- [ ] link logout user /logout
 
 ### UserRoles - i ruoli degli utenti
 

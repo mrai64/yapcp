@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
+use App\Mail\WelcomeNewUser; 
 
 class UserController extends Controller
 {
@@ -38,9 +41,13 @@ class UserController extends Controller
 
     Auth::login($newUser);
 
+    // Benvenuto e link verifica email
+    // use App\Mail\WelcomeNewUser; 
+    Mail::to($newUser->email, $newUser->name)->send(new WelcomeNewUser($newUser));
+
     return redirect()
       ->route('userHome', [ 'id' => $newUser['id'] ] )
-      ->with('success', 'Registrazione utente '. $validated['name'] . ' id: '. $newUser['id'] . ' effettuata.');
+      ->with('success', 'New user '. $validated['name'] . ' assigned id: '. $newUser['id'] . ' don\'t divulgate.');
     
   }
 
