@@ -3,6 +3,8 @@
  * 2025-07-25 ITA Elenco delle nazioni basato sulla codifica
  *                iso3166-3, potrebbe essere sostituito da un
  *                file di configurazione.
+ *            ENG Country list based on iso-3166-3 list,
+ *                or use a config file.
  */
 
 use Illuminate\Database\Migrations\Migration;
@@ -17,8 +19,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('countries', function (Blueprint $table) {
-            $table->string('iso3', 3)->primary();
-            $table->string('country', 100)->index();
+            $table->string('iso3', 3)->primary(); // id
+            $table->string('country', 100)->index(); // english
             // $table->timestamps();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrent()->useCurrentOnUpdate();

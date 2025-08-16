@@ -5,32 +5,49 @@ in uso a 4 gruppi: *organizzatori*, *concorrenti*, *giurati* e *controllori*.
 
 ## Prossime cose da fare
 
-- [ ] factory per caricare user
-- [ ] factory per caricare elenco paesi
 - [ ] tenere aggiornata la lista
 - [ ] tenere aggiornato (./index.md)
+- [ ] ripulire web.php perché ci sono controller e ci sono funzioni in linea,
+  molto meglio che tutto sia nei controller
 
 ## Lista generale di cose fatte e da fare
 
-### sistema - alla base del resto 
+### sistema - alla base del resto
 
-- [ ] Definire una gestione dell'internazionalizzazione i18n(text)
-
+- [ ] i18n __() Visto che la funzione potrebbe esserci già, dove sta?
+  Come si può impostare il codice perché sia usabile ovunque?
+  
 ### Users - utenti, persone
+
+- [ ] aggiungere alla tabella Users il cognome i dati di residenza e telefono internazionale,
+  attualmente ci sono solo user id name e password
+- [ ] modificare la pagina di iscrizione, creare la pagina di modifica dei dati personali.
 
 Pagine e funzioni per gli utenti, a prescindere dal ruolo. Cosa deve fare un utente:
 
 - iscriversi alla piattaforma
-  - [ ] route /users/add get
-  - [ ] view users/add
-  - [ ] route /users/add post
-  - [ ] controller users/add
+  - [X] route /users/add get
+  - [X] view users/add
+  - [X] route /users/add post
+  - [X] controller users/add
 - fare il login
-  - ricevere notifiche sui login
+  - [X] route /login
+  - [X] modulo login user /login get
+  - [X] route /logout
+  - [X] link-pulsante login
+  - [X] modulo-pulsante logout
+  - [ ] ricevere notifiche sui login
+  - [ ] route /users/recovery_pass
+  - [ ] modulo recupera password
+  - [ ] route get /users/recovery/{hash} verifica
+  - [ ] router post /users/recovery modulo modifica password
+
 - fare logout
+  - [X] controller /logout
+
 - modificare la propria anagrafica
-  - [ ] route /users/mod/{id} get
-  - [ ] view users/mod
+  - [X] route /users/mod/{id} get
+  - [X] view users/mod
   - [ ] route /users/mod/{id} post
   - [ ] controller users/mod/{id}
 - consultare il proprio deposito immagini
@@ -39,9 +56,6 @@ Pagine e funzioni per gli utenti, a prescindere dal ruolo. Cosa deve fare un ute
 - inserire il proprio circolo organizzatore
 - altro, segue
 
-- [ ] pulsante recupera password /users/pass_recovery get
-- [ ] route modifica password /users/pass_recovery post
-- [ ] modulo login user /login get
 - [ ] modulo scelta del ruolo se ne ha più di uno
 - [ ] link logout user /logout
 
@@ -81,6 +95,17 @@ Il concorso ha una serie di caratteristiche che diventano
 - elenco dei temi e sezioni
   - elenco dei giurati
   - elenco dei premi
+
+### un due, un due, un due
+
+- risolvere l'uso di singolare plurale
+  - model User Country
+  - table users countries plurale
+  - controller UserController CountryController
+  - factory UserFactory CountryFactory
+  - seeder UserSeeder CountrySeeder
+
+- elenco iso 3 lettere 2 lettere, caricare con seeder
 
 ## Come si fa a fare?
 
