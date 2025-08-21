@@ -1,0 +1,45 @@
+# legend 
+# - int integer 
+# - bigint integer upto 20 digits
+# - unsigned not less 0
+# - pk  primary key 
+# - nus Not-Unique index (Sort) 
+# - datetime format ccyy-mm-dd hh:mm:ss.000000 from 
+#   from 0001-01-01 00:00:00
+#   upto 9999-12-31 23:59:59 (named ENDOFTIME)
+# #####
+
+# Persons is one of 4 main tables: persons, contests, pictures, participations
+# as main table have some extention tables like person_phones, person_addresses
+# 
+persons {
+  person_id        bigint unsigned pk
+  country_code_id  char(3) nus > country_code.country_id
+  first_name       varchar 200 nus
+  last_name        varchar(200) nus 
+  lat_update_rec   datetime upd:current_timestamp nus
+  removable_from   datetime def:'9999-12-31 23:59:59' nus 
+}
+
+# Reference iso-3166-1 alpha 3
+country_code {
+  country_id       char(3) pk 
+  country_name     varchar(200)
+  lat_update_rec   datetime upd:current_timestamp nus
+  removable_from   datetime def:'9999-12-31 23:59:59' nus 
+}
+
+# country code localization 
+country_code_l10n {
+  contry_id             char(3) pk > country_code.country_id
+  national_id           char(3) pk > country_code.country_id
+  national_country_name varchar(200)
+  lat_update_rec   datetime upd:current_timestamp nus
+  removable_from   datetime def:'9999-12-31 23:59:59' nus 
+}
+
+federations {
+  federation_id    bigint unsigned pk
+  country_id_ext   char(3)         nus
+  fed_name         varchar(200)
+}
