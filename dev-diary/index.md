@@ -1,7 +1,7 @@
 # 🇮🇹 Diario dello sviluppatore
 
-aka *developer journal*
-Free thinking, in italian lang
+aka *MAD developer journal*
+Free thinking, in italian lang  
 [ToDo List](./TDL.md) \[date format used d/m]
 
 ## agosto 2025
