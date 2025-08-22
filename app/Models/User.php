@@ -12,6 +12,8 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    public const version = '2025.08.1 dev';
+
     /**
      * The attributes that are mass assignable.
      *
