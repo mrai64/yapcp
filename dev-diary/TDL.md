@@ -12,6 +12,7 @@
 
 - [ ] Attivare gli avvisi di registrazione per email ai nuovi utenti
 - [ ] Attivare gli avvisi di login per email agli utenti
+- [ ] scoprire come usare MAMP al posto di artisan serve.
 
 E sempre tenere aggiornato il [diario dello sviluppatore](./index.md)
 
