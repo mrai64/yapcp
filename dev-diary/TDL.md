@@ -13,6 +13,8 @@
 - [ ] Attivare gli avvisi di registrazione per email ai nuovi utenti
 - [ ] Attivare gli avvisi di login per email agli utenti
 
+E sempre tenere aggiornato il [diario dello sviluppatore](./index.md)
+
 ## Elenco cose da fare nell'ordine in cui farle
 
 - [ ] `__()` come funziona la cosa?
