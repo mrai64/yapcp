@@ -10,6 +10,8 @@
   
   - [ ] cambiare lang
 
+- [ ] Creare la tabella country, solo colonne id, timestamp e code
+- [ ] country.code->unique()
 - [ ] Attivare gli avvisi di registrazione per email ai nuovi utenti
 - [ ] Attivare gli avvisi di login per email agli utenti
 - [ ] scoprire come usare MAMP al posto di artisan serve.
