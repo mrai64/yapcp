@@ -2,7 +2,7 @@
     <p class="mb-4 font-medium">{{ __('LAST CALL. Are you SURE to delete that?')}} </p>
     <p class="mb-4"> 
         <a  href="{{ route('federation-list') }}" 
-            target="_blank" rel="noopener noreferrer">
+            rel="noopener noreferrer">
         [ {{ __('Back to list') }} ]
         </a>?
     </p>
