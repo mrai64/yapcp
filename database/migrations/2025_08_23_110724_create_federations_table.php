@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             // TODO country_code 
             $table->string('code', 6)->index()->comment('all capitals');
-            $table->string('name');
+            $table->string('name')->index();
             $table->string('website')->comment('Official federation web');
             // TODO 2K38bug change into dateTime
             $table->timestamps();
