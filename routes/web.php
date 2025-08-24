@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Federation;
 use App\Livewire\ShowFederationList;
+use App\Livewire\AddFederation;
 
 Route::view('/', 'welcome');
 
@@ -16,7 +17,8 @@ Route::view('profile', 'profile')
 
 require __DIR__.'/auth.php';
 
-// rounte > model NO
+// route > model NO
 // Route::get('/federation', Federation::class);
 // route > component YES 
-Route::get('/federation/list', ShowFederationList::class);
+Route::get( '/federation/list', ShowFederationList::class)->name('federation-list');
+Route::get( '/federation/add', AddFederation::class)->name('add-federation');
