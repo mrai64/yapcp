@@ -7,6 +7,8 @@
         </a>?
     </p>
     <form wire:submit="save">
+        @csrf 
+
         <!-- Federation name -->
         <div>
         <label class="block font-medium text-sm text-gray-700" for="name">

@@ -1,5 +1,7 @@
 <div class="">
     <form wire:submit.prevent="changeName">
+        @csrf 
+        
         <div class="mt-2"> <!-- TODO __() -->
 
             <input 

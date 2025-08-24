@@ -1,5 +1,7 @@
 <div>
     <form wire:submit="update">
+        @csrf 
+        
         <div>
             <label class="block font-medium text-sm text-gray-700" for="name">
                 Federation Name
