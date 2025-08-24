@@ -1,14 +1,24 @@
 # To Do List
 
 ## Prossime attività
+- [ ] travasare showfederationlist in federation.list
+- [ ] travasare addfederation in federation.add
+- [ ] travasare modifyfederation in federation.modify
+- [ ] travasare deletefederation in federation.remove
 
 - [ ] provare a usare un lang diverso da *en*, per esempio *it*.
   - [x] installato language
-  - [x] duplicata cartella en
-
-  - [x] IN CORSO traduzione cartella
+  - [x] duplicata cartella en in it
+  - [x] SOSPESA traduzione cartella
+  - [ ] aggiungere le chiavi mancanti
   
   - [ ] cambiare lang
+
+- [ ] Creare tabella Organizations, quelli che fanno i concorsi
+  - [ ] usare uuid al posto di id
+
+- [ ] Creare la tabella Federation-Section, l'elenco delle sezioni
+e temi che sono normati nei regolamenti delle federazioni
 
 - [ ] Creare la tabella country, solo colonne id, timestamp e code
 - [ ] country.code->unique()
