@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
+// use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Federation>
@@ -18,7 +18,7 @@ class FederationFactory extends Factory
     public function definition(): array
     {
         return [
-            'code' => fake()->regexify('[A-Z]{6}'), // tutte sigle da 6
+            'code' => fake()->regexify('[A-Z]{6}'), // check howto build random but from 3 to 6 chars
             //'code' => Str::limit( fake()->regexify('[A-Z]{6}'), rand(3,6) ),
             'name' => fake()->text(),
             'website' => fake()->url(),

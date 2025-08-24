@@ -18,10 +18,11 @@ return new class extends Migration
             $table->string('name')->index();
             $table->string('website')->comment('Official federation web');
             // TODO 2K38bug change into dateTime
-            $table->timestamps();
-            // $table->dateTime('created_at')->useCurrent();
-            // $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate();
-            // $table->dateTime('deleted_at')->nullable();
+            // $table->timestamps();
+            $table->dateTime('created_at')->useCurrent();
+            $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate();
+            // softDeletes
+            $table->dateTime('deleted_at')->nullable();
         });
     }
 

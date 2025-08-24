@@ -8,19 +8,19 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Federation extends Model
 {
-    use HasFactory;
-    // use SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     protected $fillable =[
         'code',
         'name',
         'website',
     ];
+
     protected function casts(): array{
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
-            // 'deleted_at' => 'datetime',
+            'deleted_at' => 'datetime',
         ];
     }
 
