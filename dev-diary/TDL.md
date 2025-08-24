@@ -101,3 +101,8 @@ Sono quelle dell'elenco qui sopra ma con un ordine un po' diverso.
 - Ripristinata la configurazione email in `.env`
 - Creata tabella Federation (non completa), e caricata con dati fake
 - Creata pagina component per elencare le federazioni (non completa)
+- pagina elenco delle federazioni, con link per aggiungere
+- pagina modifica con rientro all'elenco
+- pagina aggiungi con rientro all'elenco
+- pagina di confermazione cancellazione con rientro all'elenco
+
