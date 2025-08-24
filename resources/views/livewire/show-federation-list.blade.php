@@ -18,6 +18,9 @@
             <a  href="/federation/modify/{{$federation->id}}"
                 class="font-medium rounded-md px-4 py-2"
                 >[ {{ __('Modify') }} ]</a>
+            <a  href="/federation/remove/{{$federation->id}}"
+                class="font-medium rounded-md px-4 py-2"
+                >[ {{ __('Remove') }} ]</a>
         </li>
         @endforeach        
     </ul>
