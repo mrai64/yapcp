@@ -1,4 +1,4 @@
-# To Do List
+# `To Do List`
 
 ## Prossime attività
 - [ ] travasare showfederationlist in federation.list
@@ -46,7 +46,7 @@ Tabella Federation
 - [x] Creato model
 - [x] Creato factory
 - [x] Creato seeder
-- [ ] Convertire i timestamps in datetime
+- [x] Convertire i timestamps in datetime
 - [ ] Aggiungere il campo country_code, quando sarà creata la tabella Country.  
 Il contry_code fa riferimento alla sede legale,
 e si userà il codice ansi a 3 lettere, per esempio delle olimpiadi.
