@@ -42,14 +42,14 @@ Il contry_code fa riferimento alla sede legale,
 e si userà il codice ansi a 3 lettere, per esempio delle olimpiadi.
 - [ ] Seeder con dati reali
 
-Componente show-federation-list
+(c**R**ud) Componente show-federation-list
 
 - [x] Creato component ShowFederationList (ops: ShowFederation**s**List)
 - [x] Creata view show-federation-list
-- [ ] Pulsante Modify in show-federation-list
+- [x] Pulsante Modify in show-federation-list
   Questo ha più senso perché sono stati caricati
   un tot di record e vale la pena usarli con dati seri.
-- [ ] Pulsante Add
+- [x] Pulsante Add
   Questo dirotta nel componente AddFederation
 - [ ] Paginazione della lista
   Anche questa piuttosto inutile, però se
@@ -61,19 +61,21 @@ Componente show-federation-list
   Non serve componente, si chiama un metodo del Model e via,
   si va alla lista che sarà aggiornata.
 
-Componente modify-federation
+(**C**rud) Componente AddFederation
 
-- [ ] Creare classe componente ModifyFederation
-- [ ] Creare view modify-federation
+- [x] Creare il componente AddFederation
+- [x] Creare la view add-federation  
+  Quasi tutto come modify-federation ma togliendo il campo id
+
+(cr**U**d) Componente modify-federation
+
+- [x] Creare classe componente ModifyFederation
+- [x] Creare view modify-federation
   Lasciare che il campo id stia in input hidden
   e ricordarsi l'elemento @csrf
-- [ ] Creare route per chiamare /federation/modify/{id}
+- [x] Creare route per chiamare /federation/modify/{id}
 
-Componente AddFederation
-
-- [ ] Creare il componente AddFederation
-- [ ] Creare la view add-federation  
-  Quasi tutto come modify-federation ma togliendo il campo id
+(cru**D**) Componente delete-federation
 
 - [ ] Convertire AddFederation in Federation/Add  
 - [ ] Convertire ShowFederation(s)List in Federation/List  
