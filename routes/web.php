@@ -22,11 +22,6 @@ require __DIR__.'/auth.php';
 // route > model NO
 // Route::get('/federation', Federation::class);
 // route > component YES 
-// Route::get(   '/federation/add',         AddFederation::class)->name('add-federation');
-// Route::get(   '/federation/list',        ShowFederationList::class)->name('federation-list');
-// Route::get(   '/federation/modify/{id}', ModifyFederation::class, ['id'])->name('modify-federation');
-// Route::get(   '/federation/remove/{id}', DeleteFederation::class, ['id'])->name('delete-federation');
-Route::delete('/federation/remove/{id}', DeleteFederation::class, ['id']);
 Route::get(   '/federation/add',         Federation\Add::class)->name('add-federation');
 Route::get(   '/federation/list',        Federation\Listed::class)->name('federation-list');
 Route::get(   '/federation/modify/{id}', Federation\Modify::class, ['id'])->name('modify-federation');
