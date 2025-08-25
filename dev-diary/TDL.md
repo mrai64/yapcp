@@ -4,16 +4,28 @@
 
 Convertire i componenti in cartelle di componenti
 
-- [ ] travasare `showfederationlist` in federation.list
-- [ ] travasare `addfederation` in federation.add
-- [ ] travasare `modifyfederation` in federation.modify
-- [ ] travasare `deletefederation` in federation.remove
-
-- [ ] Creare tabella Organizations, quelli che fanno i concorsi
-  - [ ] usare uuid al posto di id
+- [ ] Creare tabella Organizations, Molto simile a Federation;
+  Sono quelli che *fanno* i concorsi
+  - [ ] Migration
+    usare uuid al posto di id
+  - [ ] Factory
+  - [ ] Seeder
+  - [ ] Organization\Listed
+  - [ ] Organization\Modify
+  - [ ] Organization\Add
+  - [ ] Organization\Remove
 
 - [ ] Creare la tabella Federation-Section, l'elenco delle sezioni
-e temi che sono normati nei regolamenti delle federazioni
+  e temi che sono normati nei regolamenti delle federazioni.  
+  Nei bandi dei concorsi le sezioni saranno abbinate a uno o più di questi
+  record, i quali a loro volta saranno abbinati a una serie di regole
+  che sono verifiche attuabili in automatico. Se per esempio
+  la section FIAF.BN è associata alla regola Max:4 per le opere da
+  presentare, l'autore partecipante potrà avere a disposizione
+  4 slot per il concorso da riempire con le sue opere. Se la section
+  è associata alla regola MaxLength:2500, i pixel lato lungo saranno
+  confrontati e verificati in automatico. Quello che si può controllare
+  si controllerà.
 
 - [ ] Creare la tabella country, solo colonne id, timestamp e code
 - [ ] country.code->unique()
@@ -108,3 +120,10 @@ Sono quelle dell'elenco qui sopra ma con un ordine un po' diverso.
 - pagina modifica con rientro all'elenco
 - pagina aggiungi con rientro all'elenco
 - pagina di confermazione cancellazione con rientro all'elenco
+- travasato in una cartella le 4 pagine per leggere,
+  aggiungere, modificare e cancellare (softdelete)
+  le Federation;
+  - ShowFederationList > Federation\Listed (no List, è riservato)
+  - AddFederation > Federation\Add (no Create)
+  - ModifyFederation > Federation\Modify (no Update)
+  - DeleteFederation > Federation\Remove (no Delete, è classe riservata)
