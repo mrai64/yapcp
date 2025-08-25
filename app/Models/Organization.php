@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class Organization extends Model
 {
@@ -46,6 +47,20 @@ class Organization extends Model
         ];
     }
 
+    /**
+     * Per garantire l'ordine 
+     * . country_code
+     *   - name
+     */
+    public static function ListedByCountryCodeName(){
 
-
+        $organizations = DB::table('organizations')
+            ->select('id', 'country_code', 'name', 'email', 'website')
+            ->orderBy('country_code','asc')
+            ->orderBy('name','asc')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        
+        return $organizations;
+    }
 }

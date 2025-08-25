@@ -2,10 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Federation;
-use App\Livewire\ShowFederationList;
-use App\Livewire\AddFederation;
-use App\Livewire\DeleteFederation;
-use App\Livewire\ModifyFederation;
+use App\Livewire\Organization;
 
 Route::view('/', 'welcome');
 
@@ -27,3 +24,5 @@ Route::get(   '/federation/list',        Federation\Listed::class)->name('federa
 Route::get(   '/federation/modify/{id}', Federation\Modify::class, ['id'])->name('modify-federation');
 Route::get(   '/federation/remove/{id}', Federation\Remove::class, ['id'])->name('delete-federation');
 Route::delete('/federation/remove/{id}', Federation\Remove::class, ['id']);
+
+Route::get(   '/organization/list',      Organization\Listed::class)->name('organization-list');
