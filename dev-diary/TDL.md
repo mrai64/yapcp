@@ -1,18 +1,13 @@
 # `To Do List`
 
 ## Prossime attività
-- [ ] travasare showfederationlist in federation.list
-- [ ] travasare addfederation in federation.add
-- [ ] travasare modifyfederation in federation.modify
-- [ ] travasare deletefederation in federation.remove
 
-- [ ] provare a usare un lang diverso da *en*, per esempio *it*.
-  - [x] installato language
-  - [x] duplicata cartella en in it
-  - [x] SOSPESA traduzione cartella
-  - [ ] aggiungere le chiavi mancanti
-  
-  - [ ] cambiare lang
+Convertire i componenti in cartelle di componenti
+
+- [ ] travasare `showfederationlist` in federation.list
+- [ ] travasare `addfederation` in federation.add
+- [ ] travasare `modifyfederation` in federation.modify
+- [ ] travasare `deletefederation` in federation.remove
 
 - [ ] Creare tabella Organizations, quelli che fanno i concorsi
   - [ ] usare uuid al posto di id
@@ -25,6 +20,14 @@ e temi che sono normati nei regolamenti delle federazioni
 - [ ] Attivare gli avvisi di registrazione per email ai nuovi utenti
 - [ ] Attivare gli avvisi di login per email agli utenti
 - [ ] scoprire come usare MAMP al posto di artisan serve.
+
+- [ ] provare a usare un lang diverso da *en*, per esempio *it*.
+  - [x] installato language
+  - [x] duplicata cartella en in it
+  - [x] SOSPESA traduzione cartella
+  - [ ] aggiungere le chiavi mancanti
+  
+  - [ ] cambiare lang
 
 E sempre tenere aggiornato il [diario dello sviluppatore](./index.md)
 
@@ -48,7 +51,7 @@ Tabella Federation
 - [x] Creato seeder
 - [x] Convertire i timestamps in datetime
 - [ ] Aggiungere il campo country_code, quando sarà creata la tabella Country.  
-Il contry_code fa riferimento alla sede legale,
+Il country_code fa riferimento alla sede legale,
 e si userà il codice ansi a 3 lettere, per esempio delle olimpiadi.
 - [ ] Seeder con dati reali
 
@@ -105,4 +108,3 @@ Sono quelle dell'elenco qui sopra ma con un ordine un po' diverso.
 - pagina modifica con rientro all'elenco
 - pagina aggiungi con rientro all'elenco
 - pagina di confermazione cancellazione con rientro all'elenco
-
