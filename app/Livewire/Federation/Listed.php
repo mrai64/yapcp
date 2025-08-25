@@ -7,11 +7,11 @@ use App\Models\Federation;
 
 class Listed extends Component
 {
-    public $federations_list = [];
+    public $federation_list = [];
 
     public function render()
     {
-        $this->federations_list = Federation::all();
+        $this->federation_list = Federation::all();
         // TODO order by name
         // TODO order by country_code, name
         return view('livewire.federation.listed');
