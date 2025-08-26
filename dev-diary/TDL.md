@@ -4,17 +4,20 @@
 
 Convertire i componenti in cartelle di componenti
 
-- [ ] Creare tabella Organizations, Molto simile a Federation;
+- [x] Creare tabella Organizations, Molto simile a Federation;
   Sono quelli che *fanno* i concorsi
-  - [ ] Migration
+  - [x] Migration
     usare uuid al posto di id
-  - [ ] Factory
-  - [ ] Seeder
-  - [ ] Organization\Listed
-  - [ ] Organization\Modify
+  - [x] Factory
+  - [x] Seeder
+  - [x] Organization\Listed
   - [ ] Organization\Add
-  - [ ] Organization\Remove
+  - [ ] Organization\Modify
+  - [ ] Organization\Remove ()
 
+- [ ] Studiare abilitazione e autenticazione,
+  l'obiettivo è avere una tabella di user con i ruoli granulari, e inserire nelle loro abilitazioni i codici associati alle operazioni e alle gestioni errore. Deve essere registrato nel log A B C che utente userA non è abilitato alla funzione functionB per cui serve il codice di abilitazione abilC. All'utente userA deve arrivare solo il messaggio che deve farsi abilitare rivolgendosi all'amministrazione del sistema.
+  
 - [ ] Creare la tabella Federation-Section, l'elenco delle sezioni
   e temi che sono normati nei regolamenti delle federazioni.  
   Nei bandi dei concorsi le sezioni saranno abbinate a uno o più di questi
