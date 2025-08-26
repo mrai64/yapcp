@@ -77,10 +77,14 @@
                         @endif
                     </header>
 
+
+
                     <main class="mt-6">
-                        <livewire:federation />
+                        <livewire:federation.listed />
                     </main>
 
+
+                    
                     <footer class="py-16 text-center text-sm text-black dark:text-white/70">
                         yaPCP v{{ App\Models\User::version }}
                     </footer>

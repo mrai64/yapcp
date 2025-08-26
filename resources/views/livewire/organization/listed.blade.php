@@ -20,9 +20,9 @@
        @foreach($organization_list as $org)
        <li class="block p-4 mb-4 border rounded-md">
        <strong class="fyk text-xl">{{$org->name}} / {{$org->country_code}}<br /></strong> 
-       {{__('email')}}   :{{$org->email}}<br />
-       {{__('website')}} :{{$org->website}}<br />
-       <small>{{__('uuid')}}    :{{$org->id}}</small>
+       <em>{{__('email')}}:</em> {{$org->email}}<br />
+       <em>{{__('website')}}:</em> {{$org->website}}<br />
+       <small><em>{{__('uuid')}}: {{$org->id}}</em></small>
        <a href="/organization/modify/{{$org->id}}" 
           class="font-medium rounded-md px-4 py-4">
           [ {{__('Modify')}} ]
