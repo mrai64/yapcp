@@ -1,5 +1,10 @@
 <div>
-    [ {{ __('Add a new Organization') }} ]
+    <a  href="{{ route('add-organization') }}" 
+        class="float-end font-medium rounded-md mb-4 py-2"
+        >
+        [ {{ __('Add a new Organization') }} ]
+    </a>
+
     <hr class="my-4" />
 
     @if (session('success'))

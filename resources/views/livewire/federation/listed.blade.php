@@ -1,6 +1,6 @@
 <div>
     <a href="{{ route('add-federation')}}" 
-        class="float-end font-medium rounded-md px-4 py-2"
+        class="float-end font-medium rounded-md py-2"
         >[ {{__('Add a new Federation')}} ]</a>
     <hr />
     @if (session('success'))
