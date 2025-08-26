@@ -38,7 +38,8 @@ class Add extends Component
     {
         return [
             // TODO Country::idValidate( string ) : bool
-            'country_code' => 'required|string|min:3|max:3',
+            // https://laravel.com/docs/12.x/validation#available-validation-rules
+            'country_code' => 'required|string|uppercase|min:3|max:3',
             'name' => 'required|string|min:3|max:255',
             'email' => 'required|string|email|max:255',
             'website' => 'string|url|max:255',

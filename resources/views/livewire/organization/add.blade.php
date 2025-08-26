@@ -1,6 +1,6 @@
 <div>
-    <p class="mb-4">Well, new organization? Insert Few data here.</p>
-    <p class="mb.4">Before, check 
+    <p class="">Well, new organization? Insert Few data here.</p>
+    <p class="mb-4">Before, check 
         <a href="{{ route('organization-list') }}"></a>
         [ {{__('Organization list')}} ]
     </p>
@@ -9,7 +9,7 @@
 
         <div>
             <label for="country_code" 
-                class="block font-medium text-sm text-gray-700"
+                class="block mt-4 font-medium text-sm text-gray-700"
                 >
                 {{__('Country_code')}}
             </label>
@@ -27,7 +27,7 @@
 
         <div>
             <label for="name" 
-                class="block font-medium text-sm text-gray-700"
+                class="block mt-4 font-medium text-sm text-gray-700"
                 >
                 {{__('name')}}
             </label>
@@ -45,7 +45,7 @@
 
         <div>
             <label for="email" 
-                class="block font-medium text-sm text-gray-700"
+                class="block mt-4 font-medium text-sm text-gray-700"
                 >
                 {{__('email')}}
             </label>
@@ -63,7 +63,7 @@
 
         <div>
             <label for="website" 
-                class="block font-medium text-sm text-gray-700"
+                class="block mt-4 font-medium text-sm text-gray-700"
                 >
                 {{__('website')}}
             </label>
@@ -73,6 +73,7 @@
                 wire:model="website"
                 value="{{ old('website') }}"
                 required="required"
+                placeholder="An https:// url"
                 />
             @error('website')
             <div class="alert alert-danger small">{{ $message }}</div>
@@ -82,7 +83,7 @@
         <hr />
 
         <button type="submit" 
-            class="inline-flex items-center px-4 py-2 mt-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-3"
+            class="inline-flex items-center px-4 py-2 m-0 mt-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-3"
             >
             {{ __('Add new organization') }}
         </button>
