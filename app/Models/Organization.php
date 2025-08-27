@@ -19,17 +19,11 @@ use Illuminate\Support\Facades\DB;
 
 class Organization extends Model
 {
-    use HasFactory, SoftDeletes ;
+    use HasFactory, SoftDeletes;
 
-    //uuid
+    //id is uuid
     protected $keyType = 'string';//     uuid string(36)
     public    $incrementing = false;//   uuid don't need ++
-    public static function booted() {
-        static::creating(function ($model) {
-            $model->id = Str::uuid(); // uuid generator
-        });
-    }
-    //uuid
 
     protected $fillable = [
         'country_code',
@@ -37,6 +31,15 @@ class Organization extends Model
         'email',
         'website',
     ];
+
+    /**
+     * uuid 
+     */
+    public static function booted() {
+        static::creating(function ($model) {
+            $model->id = Str::uuid(); // uuid generator
+        });
+    }
 
     protected function casts()
     {
@@ -46,7 +49,7 @@ class Organization extends Model
             'deleted_at' => 'datetime',
         ];
     }
-
+    
     /**
      * Per garantire l'ordine 
      * . country_code
@@ -56,6 +59,7 @@ class Organization extends Model
 
         $organizations = DB::table('organizations')
             ->select('id', 'country_code', 'name', 'email', 'website')
+            ->whereNull('deleted_at')
             ->orderBy('country_code','asc')
             ->orderBy('name','asc')
             ->orderBy('created_at', 'desc')

@@ -28,3 +28,5 @@ Route::delete('/federation/remove/{id}', Federation\Remove::class, ['id']);
 Route::get(   '/organization/list',        Organization\Listed::class)->name('organization-list');
 Route::get(   '/organization/add',         Organization\Add::class)->name('add-organization');
 Route::get(   '/organization/modify/{id}', Organization\Modify::class, ['id'])->name('modify-organization');
+Route::get(   '/organization/remove/{id}', Organization\Remove::class, ['id'])->name('delete-organization');
+Route::delete('/organization/remove/{id}', Organization\Remove::class, ['id']);
