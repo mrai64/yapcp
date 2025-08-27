@@ -30,6 +30,7 @@ class Organization extends Model
         'name',
         'email',
         'website',
+        'contact',
     ];
 
     /**
@@ -52,8 +53,10 @@ class Organization extends Model
     
     /**
      * Per garantire l'ordine 
-     * . country_code
+     *   - country_code
      *   - name
+     *   - data di creazione (in caso di doppie, ma poteva essere id)
+     * evitando i record cancellati
      */
     public static function ListedByCountryCodeName(){
 

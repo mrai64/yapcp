@@ -1,6 +1,6 @@
 <?php
 /**
- * - Not id but uuid
+ * - Not int id but string uuid id
  * - Factory yes 
  * - SoftDelete yes
  */

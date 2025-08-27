@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * 2025-08-27 add contact country_id
+ * 2025-08-27 add contact field
+ */
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,9 +14,11 @@ class Federation extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable =[
+        'country',
         'code',
         'name',
         'website',
+        'contact',
     ];
 
     protected function casts(): array{

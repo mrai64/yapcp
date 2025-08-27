@@ -4,7 +4,7 @@
 
 Convertire i componenti in cartelle di componenti
 
-- [ ] Creare la tabella Federation-Section, l'elenco delle sezioni
+- [x] Creare la tabella Federation-Section, l'elenco delle sezioni
   e temi che sono normati nei regolamenti delle federazioni.  
   Nei bandi dei concorsi le sezioni saranno abbinate a uno o più di questi
   record, i quali a loro volta saranno abbinati a una serie di regole
@@ -19,12 +19,15 @@ Convertire i componenti in cartelle di componenti
 - [ ] Studiare abilitazione e autenticazione,
   l'obiettivo è avere una tabella di user con i ruoli granulari, e inserire nelle loro abilitazioni i codici associati alle operazioni e alle gestioni errore. Deve essere registrato nel log A B C che utente userA non è abilitato alla funzione functionB per cui serve il codice di abilitazione abilC. All'utente userA deve arrivare solo il messaggio che deve farsi abilitare rivolgendosi all'amministrazione del sistema.
 
-- [ ] Aggiungere textarea CONTACT per l'indirizzo postale sia su Federation sia su Country
+- [x] Aggiungere textarea CONTACT per l'indirizzo postale sia su Federation sia su Organization
+  - [ ] Modifiche alle blade e ai controller per aggiungere il campo al giro
+
 - [ ] Creare la tabella country, solo colonne id, timestamp e code
 - [ ] country.code->unique()
 - [ ] Attivare gli avvisi di registrazione per email ai nuovi utenti
 - [ ] Attivare gli avvisi di login per email agli utenti
 - [ ] scoprire come usare MAMP al posto di artisan serve.
+  Si deve puntare alla cartella /public che però deve sparire dall'url
 
 - [ ] provare a usare un lang diverso da *en*, per esempio *it*.
   - [x] installato language
