@@ -4,17 +4,6 @@
 
 Convertire i componenti in cartelle di componenti
 
-- [x] Creare tabella Organizations, Molto simile a Federation;
-  Sono quelli che *fanno* i concorsi
-  - [x] Migration
-    usare uuid al posto di id
-  - [x] Factory
-  - [x] Seeder
-  - [x] Organization\Listed
-  - [ ] Organization\Add
-  - [ ] Organization\Modify
-  - [ ] Organization\Remove ()
-
 - [ ] Studiare abilitazione e autenticazione,
   l'obiettivo è avere una tabella di user con i ruoli granulari, e inserire nelle loro abilitazioni i codici associati alle operazioni e alle gestioni errore. Deve essere registrato nel log A B C che utente userA non è abilitato alla funzione functionB per cui serve il codice di abilitazione abilC. All'utente userA deve arrivare solo il messaggio che deve farsi abilitare rivolgendosi all'amministrazione del sistema.
   
@@ -131,3 +120,13 @@ Sono quelle dell'elenco qui sopra ma con un ordine un po' diverso.
   - AddFederation > Federation\Add (no Create)
   - ModifyFederation > Federation\Modify (no Update)
   - DeleteFederation > Federation\Remove (no Delete, è classe riservata)
+- Creata tabella Organizations, molto simile a Federation;
+  Sono quelli che *fanno* i concorsi
+  - [x] Migration
+    usare uuid al posto di id
+  - [x] Factory
+  - [x] Seeder
+  - [x] Organization\Listed
+  - [x] Organization\Add
+  - [x] Organization\Modify
+  - [x] Organization\Remove ()
