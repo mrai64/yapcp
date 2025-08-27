@@ -4,7 +4,21 @@
 
 Convertire i componenti in cartelle di componenti
 
-- [x] Creare la tabella Federation-Section, l'elenco delle sezioni
+- [x] Creare tabella Organizations, Molto simile a Federation;
+  Sono quelli che *fanno* i concorsi
+  - [x] Migration
+    usare uuid al posto di id
+  - [x] Factory
+  - [x] Seeder
+  - [x] Organization\Listed
+  - [ ] Organization\Add
+  - [ ] Organization\Modify
+  - [ ] Organization\Remove ()
+
+- [ ] Studiare abilitazione e autenticazione,
+  l'obiettivo è avere una tabella di user con i ruoli granulari, e inserire nelle loro abilitazioni i codici associati alle operazioni e alle gestioni errore. Deve essere registrato nel log A B C che utente userA non è abilitato alla funzione functionB per cui serve il codice di abilitazione abilC. All'utente userA deve arrivare solo il messaggio che deve farsi abilitare rivolgendosi all'amministrazione del sistema.
+  
+- [ ] Creare la tabella Federation-Section, l'elenco delle sezioni
   e temi che sono normati nei regolamenti delle federazioni.  
   Nei bandi dei concorsi le sezioni saranno abbinate a uno o più di questi
   record, i quali a loro volta saranno abbinati a una serie di regole
@@ -15,12 +29,6 @@ Convertire i componenti in cartelle di componenti
   è associata alla regola MaxLength:2500, i pixel lato lungo saranno
   confrontati e verificati in automatico. Quello che si può controllare
   si controllerà.
-
-- [ ] Studiare abilitazione e autenticazione,
-  l'obiettivo è avere una tabella di user con i ruoli granulari, e inserire nelle loro abilitazioni i codici associati alle operazioni e alle gestioni errore. Deve essere registrato nel log A B C che utente userA non è abilitato alla funzione functionB per cui serve il codice di abilitazione abilC. All'utente userA deve arrivare solo il messaggio che deve farsi abilitare rivolgendosi all'amministrazione del sistema.
-
-- [x] Aggiungere textarea CONTACT per l'indirizzo postale sia su Federation sia su Organization
-  - [ ] Modifiche alle blade e ai controller per aggiungere il campo al giro
 
 - [ ] Creare la tabella country, solo colonne id, timestamp e code
 - [ ] country.code->unique()
@@ -58,8 +66,7 @@ Tabella Federation
 - [x] Creato factory
 - [x] Creato seeder
 - [x] Convertire i timestamps in datetime
-- [x] Aggiungere il campo country_code. 
-  - [ ] Associarlo alla tabella Country quando sarà creata la tabella Country.  
+- [ ] Aggiungere il campo country_code, quando sarà creata la tabella Country.  
 Il country_code fa riferimento alla sede legale,
 e si userà il codice ansi a 3 lettere, per esempio delle olimpiadi.
 - [ ] Seeder con dati reali
@@ -124,15 +131,3 @@ Sono quelle dell'elenco qui sopra ma con un ordine un po' diverso.
   - AddFederation > Federation\Add (no Create)
   - ModifyFederation > Federation\Modify (no Update)
   - DeleteFederation > Federation\Remove (no Delete, è classe riservata)
-- Creata tabella Organizations, Molto simile a Federation;
-  Sono quelli che *fanno* i concorsi
-  - Migration
-    / usata string uuid al posto di bigint unsigned autoincrement id  
-    perché in seguito sara parte di abilitazioni
-  - Factory
-  - Seeder
-  - Organization\Listed
-  - Organization\Add
-  - Organization\Modify
-  - Organization\Remove ()
-- Il marchio dell'application ora è quello di yaPCP
