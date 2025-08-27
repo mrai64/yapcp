@@ -77,14 +77,14 @@
                         @endif
                     </header>
 
-
-
                     <main class="mt-6">
-                        <livewire:federation.listed />
+                        <h2><a href="{{ route('federation-list') }}">{{ __('Federation List') }}</a></h2>
+                        <br />
+                        <br />
+                        <h2><a href="{{ route('organization-list') }}">{{ __('Organization List') }}</a></h2>
+
                     </main>
 
-
-                    
                     <footer class="py-16 text-center text-sm text-black dark:text-white/70">
                         yaPCP v{{ App\Models\User::version }}
                     </footer>
