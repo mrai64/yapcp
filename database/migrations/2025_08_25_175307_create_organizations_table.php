@@ -16,7 +16,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('organizations', function (Blueprint $table) {
-            $table->uuid('id')->primary()->comment('assigned'); // $table->id();
+            $table->uuid('id')->primary()->comment('uuid assigned'); // $table->id();
             $table->string('country_code',3)->index()->comment('ALL UPPERCASE, one of iso-3166 alpha-3');
             $table->string('name')->index();
             $table->string('email')->unique()->comment('Should became verified');
