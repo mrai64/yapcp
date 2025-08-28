@@ -25,8 +25,11 @@ Route::get(   '/federation/modify/{id}', Federation\Modify::class, ['id'])->name
 Route::get(   '/federation/remove/{id}', Federation\Remove::class, ['id'])->name('delete-federation');
 Route::delete('/federation/remove/{id}', Federation\Remove::class, ['id']);
 
+Route::get(   '/federation/section/{fid}/list', Federation\Section\Listed::class, ['fid'])->name('federation-section-list');
+
 Route::get(   '/organization/list',        Organization\Listed::class)->name('organization-list');
 Route::get(   '/organization/add',         Organization\Add::class)->name('add-organization');
 Route::get(   '/organization/modify/{id}', Organization\Modify::class, ['id'])->name('modify-organization');
 Route::get(   '/organization/remove/{id}', Organization\Remove::class, ['id'])->name('delete-organization');
 Route::delete('/organization/remove/{id}', Organization\Remove::class, ['id']);
+

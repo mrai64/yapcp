@@ -21,6 +21,8 @@ class Organization extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public const table_name = 'organizations';
+
     //id is uuid
     protected $keyType = 'string';//     uuid string(36)
     public    $incrementing = false;//   uuid don't need ++

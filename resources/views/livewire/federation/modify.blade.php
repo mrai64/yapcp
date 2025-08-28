@@ -2,7 +2,7 @@
     <form wire:submit="update">
         @csrf 
         
-        <div>
+        <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="name">
                 Federation Name
             </label>
@@ -18,7 +18,7 @@
             <!-- Federation name -->
         </div>
         
-        <div>
+        <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="code">
                 Federation Shortcode
             </label>
@@ -31,7 +31,7 @@
             <div class="alert alert-danger small">@error('code') {{ $message }} @enderror</div>
         </div>
         
-        <div>
+        <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="website">
                 {{__('Official website')}}
             </label>
@@ -43,6 +43,15 @@
             >
             <div class="alert alert-danger small">@error('website') {{ __($message) }} @enderror</div>
         </div>
+
+        <p>&nbsp;</p>
+        <a href="/federation/section/{{$id}}/list" 
+            class="fyk text-xl mb-4"
+            target="_blank" rel="noopener noreferrer"
+            >
+        Federation' Coded Sections List 🗒️
+        </a>
+
         <p>&nbsp;</p>
         <button type="submit" 
             class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-3"

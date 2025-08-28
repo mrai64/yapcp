@@ -2,22 +2,8 @@
 
 ## Prossime attività
 
-Convertire i componenti in cartelle di componenti
-
-- [ ] Studiare abilitazione e autenticazione,
-  l'obiettivo è avere una tabella di user con i ruoli granulari, e inserire nelle loro abilitazioni i codici associati alle operazioni e alle gestioni errore. Deve essere registrato nel log A B C che utente userA non è abilitato alla funzione functionB per cui serve il codice di abilitazione abilC. All'utente userA deve arrivare solo il messaggio che deve farsi abilitare rivolgendosi all'amministrazione del sistema.
-  
-- [ ] Creare la tabella Federation-Section, l'elenco delle sezioni
-  e temi che sono normati nei regolamenti delle federazioni.  
-  Nei bandi dei concorsi le sezioni saranno abbinate a uno o più di questi
-  record, i quali a loro volta saranno abbinati a una serie di regole
-  che sono verifiche attuabili in automatico. Se per esempio
-  la section FIAF.BN è associata alla regola Max:4 per le opere da
-  presentare, l'autore partecipante potrà avere a disposizione
-  4 slot per il concorso da riempire con le sue opere. Se la section
-  è associata alla regola MaxLength:2500, i pixel lato lungo saranno
-  confrontati e verificati in automatico. Quello che si può controllare
-  si controllerà.
+Convertire i componenti in cartelle di componenti  
+Modelli in cartella unica
 
 - [ ] Creare la tabella country, solo colonne id, timestamp e code
 - [ ] country.code->unique()
@@ -35,6 +21,10 @@ Convertire i componenti in cartelle di componenti
   - [ ] cambiare lang
 
 E sempre tenere aggiornato il [diario dello sviluppatore](./index.md)
+
+- [ ] Studiare abilitazione e autenticazione,
+  l'obiettivo è avere una tabella di user con i ruoli granulari, e inserire nelle loro abilitazioni i codici associati alle operazioni e alle gestioni errore. Deve essere registrato nel log A B C che utente userA non è abilitato alla funzione functionB per cui serve il codice di abilitazione abilC. All'utente userA deve arrivare solo il messaggio che deve farsi abilitare rivolgendosi all'amministrazione del sistema.
+  
 
 ## Elenco cose da fare nell'ordine in cui farle
 
@@ -120,6 +110,7 @@ Sono quelle dell'elenco qui sopra ma con un ordine un po' diverso.
   - AddFederation > Federation\Add (no Create)
   - ModifyFederation > Federation\Modify (no Update)
   - DeleteFederation > Federation\Remove (no Delete, è classe riservata)
+
 - Creata tabella Organizations, molto simile a Federation;
   Sono quelli che *fanno* i concorsi
   - [x] Migration
@@ -130,3 +121,19 @@ Sono quelle dell'elenco qui sopra ma con un ordine un po' diverso.
   - [x] Organization\Add
   - [x] Organization\Modify
   - [x] Organization\Remove ()
+
+- [x] Creare la tabella FederationSections, l'elenco delle sezioni
+  e temi che sono normati nei regolamenti delle federazioni.  
+  Nei bandi dei concorsi le sezioni saranno abbinate a uno o più di questi
+  record, i quali a loro volta saranno abbinati a una serie di regole
+  che sono verifiche attuabili in automatico. Se per esempio
+  la section FIAF.BN è associata alla regola Max:4 per le opere da
+  presentare, l'autore partecipante potrà avere a disposizione
+  4 slot per il concorso da riempire con le sue opere. Se la section
+  è associata alla regola MaxLength:2500, i pixel lato lungo saranno
+  confrontati e verificati in automatico. Quello che si può controllare
+  si controllerà.
+
+  Mentre il component laravel si presta alla suddivisione in cartelle,
+  i Model e i seeders litigano, per ora si usa una struttura più lineare.
+  

@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * 2025-07-28 add $id (readonly) for federation-section and other child tables 
+ */
 namespace App\Livewire\Federation;
 
 use Livewire\Component;
@@ -10,6 +12,8 @@ class Modify extends Component
 {
     public Federation $federation;
     
+    public $id; // readonly
+
     #[Validate('required|string|max:255')]
     public $name = '';
     
@@ -32,6 +36,7 @@ class Modify extends Component
         // $this->federation = Federation::findOrFail($id);
         $fed = New Federation(); 
         $this->federation = $fed->findOrFail($id);
+        $this->id         = $this->federation->id;
         $this->name       = $this->federation->name;
         $this->code       = $this->federation->code;
         $this->website    = $this->federation->website;
