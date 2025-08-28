@@ -7,6 +7,7 @@
  * federation_id  bigint u
  * code           vchar 5
  * name           vchar 255
+ * excerptum      text
  * created_at     datetime
  * updated_at     datetime
  * deleted_at     datetime N
