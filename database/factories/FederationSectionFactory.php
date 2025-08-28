@@ -1,6 +1,6 @@
 <?php
 /**
- * FederactionSection
+ * FederationSection
  * child of Federation 
  */
 namespace Database\Factories;
@@ -24,6 +24,7 @@ class FederationSectionFactory extends Factory
             'federation_id' => Federation::all('id')->random(5)->first()['id'],
             'code' => fake()->regexify('[A-Z]{3}'),
             'name' => fake()->text(),
+            'excerptum' => fake()->text(),
             //
         ];
     }

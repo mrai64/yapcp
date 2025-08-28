@@ -6,9 +6,14 @@
 <psmall>That's the coded list picked from Regulatory doc found in Federation official site.
     When you see some difference say us for a fast alignment. </small>
 <p>&nbsp;</p>
-<div
-    class="table-responsive"
->
+
+@if (session('success'))
+<div class="float-end font-medium rounded-md px-4 py-2">
+    {{ session('success') }}
+</div> 
+@endif
+
+<div class="table-responsive">
     <table
         class="table table-primary table-striped"
     >
@@ -27,15 +32,15 @@
                 <td nowrap>
                     <a href="/federation/section/modify/{{$sec->id}}">[Mod]</a>
                     &nbsp;|&nbsp;
-                    <a href="/federation/section/modify/{{$sec->id}}">[Rem]</a>
+                    <a href="/federation/section/remove/{{$sec->id}}">[Rem]</a>
                 </td>
             </tr>
             @endforeach
-            <tr class="">
+            <tr class="my-2 py-2">
                 <td scope="row">&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>
-                    <a href="#">[Add New]</a>
+                    <a href="/federation/section/add/{{$federation->id}}">[Add New]</a>
                 </td>
             </tr>
         </tbody>

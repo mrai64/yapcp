@@ -45,7 +45,7 @@
         </div>
 
         <p>&nbsp;</p>
-        <a href="/federation/section/{{$id}}/list" 
+        <a href="/federation/section/list/{{$id}}" 
             class="fyk text-xl mb-4"
             target="_blank" rel="noopener noreferrer"
             >
@@ -59,7 +59,5 @@
             {{ __('Update') }}
         </button>
 
-        </div>
     </form>
-
 </div>

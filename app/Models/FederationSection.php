@@ -1,6 +1,6 @@
 <?php
 /**
- * FederactionSection
+ * FederationSection
  * child of Federation
  * 
  * id             bigint u a+ pk
@@ -27,6 +27,7 @@ class FederationSection extends Model
         'federation_id',
         'code',
         'name',
+        'excerptum',
     ];
 
     protected function casts()
