@@ -14,21 +14,22 @@ Modelli in cartella unica
 - [ ] scoprire come usare MAMP al posto di artisan serve.
   Si deve puntare alla cartella /public che però deve sparire dall'url
 
-- [ ] provare a usare un lang diverso da *en*, per esempio *it*.
+- [x] provare a usare un lang diverso da *en*, per esempio *it*.
   - [x] installato language
   - [x] duplicata cartella en in it
   - [x] SOSPESA traduzione cartella
-  - [ ] aggiungere le chiavi mancanti
+  - [x] aggiungere le chiavi mancanti
   
-  - [ ] cambiare lang
+  - [x] cambiare lang
+
 
 - [ ] Studiare abilitazione e autenticazione,
   l'obiettivo è avere una tabella di user con i ruoli granulari, e inserire nelle loro abilitazioni i codici associati alle operazioni e alle gestioni errore. Deve essere registrato nel log A B C che utente userA non è abilitato alla funzione functionB per cui serve il codice di abilitazione abilC. All'utente userA deve arrivare solo il messaggio che deve farsi abilitare rivolgendosi all'amministrazione del sistema.
   
+
 ## Elenco cose da fare nell'ordine in cui farle
 
-- [ ] `__()` come funziona la cosa?
-
+- [x] `__()` come funziona la cosa?  
   Come aggiungere termini all'elenco e come funziona per lang diversi da en
 
 - [ ] Timezone, fare la tabella o fare il json di configurazione
@@ -44,10 +45,10 @@ Tabella Federation
 - [x] Creato factory
 - [x] Creato seeder
 - [x] Convertire i timestamps in datetime
-- [ ] Aggiungere il campo country_code, quando sarà creata la tabella Country.  
+- [x] Aggiungere il campo country_code, quando sarà creata la tabella Country.  
 Il country_code fa riferimento alla sede legale,
 e si userà il codice ansi a 3 lettere, per esempio delle olimpiadi.
-- [ ] Seeder con dati reali
+- [x] Seeder con dati reali
 
 (c**R**ud) Componente show-federation-list
 
@@ -61,7 +62,7 @@ e si userà il codice ansi a 3 lettere, per esempio delle olimpiadi.
 - [ ] Paginazione della lista
   Anche questa piuttosto inutile, però se
   metto dentro parecchi membri della FIAP,... ci sta.
-- [ ] Pulsante Delete
+- [x] Pulsante Delete
   Probabilmente il più inutile pulsante Delete perché
   dovrebbe chiudere una federazione nazionale o internazionale
   e finora questo non è mai capitato.  
@@ -84,9 +85,9 @@ e si userà il codice ansi a 3 lettere, per esempio delle olimpiadi.
 
 (cru**D**) Componente delete-federation
 
-- [ ] Convertire AddFederation in Federation/Add  
-- [ ] Convertire ShowFederation(s)List in Federation/List  
-- [ ] Convertire ModifyFederation in Federation/Mod
+- [x] Convertire AddFederation in Federation/Add  
+- [x] Convertire ShowFederation(s)List in Federation/List  
+- [x] Convertire ModifyFederation in Federation/Mod
 
 ## Elenco delle cose già fatte
 
@@ -135,3 +136,14 @@ Sono quelle dell'elenco qui sopra ma con un ordine un po' diverso.
 
   Mentre il component laravel si presta alla suddivisione in cartelle,
   i Model e i seeders litigano, per ora si usa una struttura più lineare.
+  - [ ] Creare Federation\Section\Add
+  - [ ] Creare Federation/Section/Remove
+
+## tabella federationContacts
+ 
+* id
+* Federation_id
+* user_id
+* role_code (president, secretary, ecc.)
+* datetime e softdelete
+
