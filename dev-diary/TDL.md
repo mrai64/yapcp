@@ -1,5 +1,7 @@
 # `To Do List`
 
+Tenere aggiornato il [diario dello sviluppatore](./index.md)
+
 ## Prossime attività
 
 Convertire i componenti in cartelle di componenti  
@@ -20,7 +22,6 @@ Modelli in cartella unica
   
   - [ ] cambiare lang
 
-E sempre tenere aggiornato il [diario dello sviluppatore](./index.md)
 
 - [ ] Studiare abilitazione e autenticazione,
   l'obiettivo è avere una tabella di user con i ruoli granulari, e inserire nelle loro abilitazioni i codici associati alle operazioni e alle gestioni errore. Deve essere registrato nel log A B C che utente userA non è abilitato alla funzione functionB per cui serve il codice di abilitazione abilC. All'utente userA deve arrivare solo il messaggio che deve farsi abilitare rivolgendosi all'amministrazione del sistema.
@@ -136,4 +137,3 @@ Sono quelle dell'elenco qui sopra ma con un ordine un po' diverso.
 
   Mentre il component laravel si presta alla suddivisione in cartelle,
   i Model e i seeders litigano, per ora si usa una struttura più lineare.
-  
