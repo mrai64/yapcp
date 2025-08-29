@@ -2,10 +2,10 @@
 
 Tenere aggiornato il [diario dello sviluppatore](./index.md)
 
-## Prossime attività
-
 Convertire i componenti in cartelle di componenti  
 Modelli in cartella unica
+
+## Prossime attività
 
 - [ ] Creare la tabella country, solo colonne id, timestamp e code
 - [ ] country.code->unique()
@@ -14,28 +14,47 @@ Modelli in cartella unica
 - [ ] scoprire come usare MAMP al posto di artisan serve.
   Si deve puntare alla cartella /public che però deve sparire dall'url
 
-- [x] provare a usare un lang diverso da *en*, per esempio *it*.
-  - [x] installato language
-  - [x] duplicata cartella en in it
-  - [x] SOSPESA traduzione cartella
-  - [x] aggiungere le chiavi mancanti
-  
-  - [ ] cambiare lang
-
 - [ ] Studiare abilitazione e autenticazione,
   l'obiettivo è avere una tabella di user con i ruoli granulari, e inserire nelle loro abilitazioni i codici associati alle operazioni e alle gestioni errore. Deve essere registrato nel log A B C che utente userA non è abilitato alla funzione functionB per cui serve il codice di abilitazione abilC. All'utente userA deve arrivare solo il messaggio che deve farsi abilitare rivolgendosi all'amministrazione del sistema.
-  
 
 ## Elenco cose da fare nell'ordine in cui farle
 
-- [x] `__()` come funziona la cosa?  
-  Come aggiungere termini all'elenco e come funziona per lang diversi da en
+- [ ] Timezone, fare la tabella o ?
+  le alternative sono: 
+  - una tabella dedicata all'elenco, con Model Factory e Seeder dei dati reali
+  - fare un file json che viene caricato in memoria e sta a disposizione in una istanza unica del Model\Timezone
 
-- [ ] Timezone, fare la tabella o fare il json di configurazione
 - [ ] Country: codice paese a 2 o 3 lettere, nome inglese del paese, prefisso telefonico,
 area geografica (Africa/Europe/Americas/Asia ecc.)
+  le alternative come per timezone sono:
+  - una tabella dedicata all'elenco, con Model Factory e Seeder dei dati reali
+  - fare un file json che viene caricato in memoria e sta a disposizione in una istanza unica del Model\Country
 
-- [x] creato componente app.php
+
+## Elenco delle cose già fatte
+
+Sono quelle dell'elenco qui sopra ma con un ordine un po' diverso.
+
+- Ripristinati TDL, index, dev-diaries
+- Ricostruito il marchio yaPCP in svg e inserirlo al posto di quello standard di laravel, una copia nella cartella [di agosto](./2025-08/)
+- modificata la pagina welcome - cambio marchio
+- Ripristinata la configurazione email in `.env`
+
+### Federation
+
+- Creata tabella Federation (non completa), e caricata con dati fake
+- Creata pagina component per elencare le federazioni (non completa)
+- pagina elenco delle federazioni, con link per aggiungere
+- pagina modifica con rientro all'elenco
+- pagina aggiungi con rientro all'elenco
+- pagina di confermazione cancellazione con rientro all'elenco
+- travasato in una cartella le 4 pagine per leggere,
+  aggiungere, modificare e cancellare (softdelete)
+  le Federation;
+  - ShowFederationList > Federation\Listed (no List, è riservato)
+  - AddFederation > Federation\Add (no Create)
+  - ModifyFederation > Federation\Modify (no Update)
+  - DeleteFederation > Federation\Remove (no Delete, è classe riservata)
 
 Tabella Federation
 
@@ -88,27 +107,7 @@ e si userà il codice ansi a 3 lettere, per esempio delle olimpiadi.
 - [x] Convertire ShowFederation(s)List in Federation/List  
 - [x] Convertire ModifyFederation in Federation/Mod
 
-## Elenco delle cose già fatte
-
-Sono quelle dell'elenco qui sopra ma con un ordine un po' diverso.
-
-- Ripristinati TDL, index, dev-diaries
-- Ricostruito il marchio yaPCP in svg e inserirlo al posto di quello standard di laravel, una copia nella cartella [di agosto](./2025-08/)
-- modificata la pagina welcome - cambio marchio
-- Ripristinata la configurazione email in `.env`
-- Creata tabella Federation (non completa), e caricata con dati fake
-- Creata pagina component per elencare le federazioni (non completa)
-- pagina elenco delle federazioni, con link per aggiungere
-- pagina modifica con rientro all'elenco
-- pagina aggiungi con rientro all'elenco
-- pagina di confermazione cancellazione con rientro all'elenco
-- travasato in una cartella le 4 pagine per leggere,
-  aggiungere, modificare e cancellare (softdelete)
-  le Federation;
-  - ShowFederationList > Federation\Listed (no List, è riservato)
-  - AddFederation > Federation\Add (no Create)
-  - ModifyFederation > Federation\Modify (no Update)
-  - DeleteFederation > Federation\Remove (no Delete, è classe riservata)
+### Organization
 
 - Creata tabella Organizations, molto simile a Federation;
   Sono quelli che *fanno* i concorsi
@@ -120,6 +119,8 @@ Sono quelle dell'elenco qui sopra ma con un ordine un po' diverso.
   - [x] Organization\Add
   - [x] Organization\Modify
   - [x] Organization\Remove ()
+
+### Federation/Section
 
 - [x] Creare la tabella FederationSections, l'elenco delle sezioni
   e temi che sono normati nei regolamenti delle federazioni.  
@@ -135,3 +136,17 @@ Sono quelle dell'elenco qui sopra ma con un ordine un po' diverso.
 
   Mentre il component laravel si presta alla suddivisione in cartelle,
   i Model e i seeders litigano, per ora si usa una struttura più lineare.
+
+### Language
+
+- [x] provare a usare un lang diverso da *en*, per esempio *it*.
+  - [x] installato language
+  - [x] duplicata cartella en in it
+  - [x] SOSPESA traduzione cartella
+  - [x] aggiungere le chiavi mancanti
+  - [x] cambiare lang
+
+- [x] `__()` come funziona la cosa?  
+  Come aggiungere termini all'elenco e come funziona per lang diversi da en
+
+- [x] creato componente app.php
