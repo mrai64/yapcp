@@ -1,0 +1,15 @@
+{
+  "__FEDERATION__" : "__FEDERAZIONI__",
+  "Add a new Federation" : "Aggiungi un'altra Federazione",
+  "New Federation added to list, enjoy!" : "Aggiunta Federazione all'elenco, bene!",
+  "Federation data updated, thanks!" : "Informazioni della Federazione aggiornati, grazie!",
+  "Federation data safely removed, thanks!" : "Informazioni della Federazione rimosse in sicurezza, grazie!",
+
+  "__GENERIC__" : "__GENERICI__",
+  "Modify" : "Cambia",
+  "Remove" : "Elimina",
+  "Add New" : "Aggiungi",
+  "Dashboard" : "Quadro comandi",
+
+  "__the Last message__" : "__Ultimo rigo__"
+}
