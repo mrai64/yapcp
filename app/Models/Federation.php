@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Federation extends Model
 {
+    // use env('DB_TABLE_PREFIX')
+    public const table_name = 'federations';
+
     use HasFactory, SoftDeletes;
 
     protected $fillable =[

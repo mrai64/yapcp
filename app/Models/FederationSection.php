@@ -21,8 +21,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class FederationSection extends Model
 {
     use HasFactory, SoftDeletes;
-
-    public const table_name = 'federation_sections'; // see migration
+    //use env('DB_TABLE_PREFIX') . 
+    public const table_name = 'federation_sections';
 
     protected $fillable = [
         'federation_id',

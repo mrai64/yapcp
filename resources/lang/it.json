@@ -5,11 +5,21 @@
   "Federation data updated, thanks!" : "Informazioni della Federazione aggiornati, grazie!",
   "Federation data safely removed, thanks!" : "Informazioni della Federazione rimosse in sicurezza, grazie!",
 
+  "__FEDERATION SECTION__" : "__Sezioni dalle federazioni__",
+  "Section Shortcode" : "Sigla Sezione",
+  "Section name" : "Sezione",
+  "Section definition" : "Estratto del regolamento",
+  "Section safely removed from list, thanks!" : "Sezione rimossa con cautele dalla lista, grazie!",
+
   "__GENERIC__" : "__GENERICI__",
   "Modify" : "Cambia",
   "Remove" : "Elimina",
+  "Update" : "Aggiorna",
+  "Confirm" : "Confermi",
   "Add New" : "Aggiungi",
   "Dashboard" : "Quadro comandi",
+  "LAST CALL. Are you SURE to delete that?" : "ULTIMO AVVISO. Siete sicuri di voler eliminare proprio questo?",
+  "Back to list" : "Ritorna all'elenco",
 
   "__the Last message__" : "__Ultimo rigo__"
 }

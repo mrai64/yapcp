@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\DB;
 class Organization extends Model
 {
     use HasFactory, SoftDeletes;
-
+    // use env('DB_TABLE_PREFIX') . 
     public const table_name = 'organizations';
 
     //id is uuid
