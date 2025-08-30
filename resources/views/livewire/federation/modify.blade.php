@@ -1,10 +1,17 @@
 <div>
+    <p class="mb-4">{{ __('Modify Federation data here.')}}</p>
+    <p class="mb-4">
+        <a href="{{ route('federation-list') }}" 
+            target="_blank" rel="noopener noreferrer">
+            {{ __('Back to Federation list') }} 
+        </a>
+    </p>
     <form wire:submit="update">
         @csrf 
         
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="name">
-                Federation Name
+                {{ __('Federation Name') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -15,12 +22,11 @@
             @error('name')
             <div class="alert alert-danger small">{{ $message }} </div>
             @enderror
-            <!-- Federation name -->
         </div>
         
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="code">
-                Federation Shortcode
+                {{ __('Federation Shortcode')}}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-48" 
@@ -42,6 +48,37 @@
             value="{{ old('website') }}"
             >
             <div class="alert alert-danger small">@error('website') {{ __($message) }} @enderror</div>
+        </div>
+
+        <div class="mb-4">
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="country_id">
+                {{ __('Country') }}
+            </label>
+            <select 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                wire:model.live="country_id"
+                name="country_id" 
+                required="required"
+                >
+
+                @foreach ($countries as $country)
+                <option value="{{ trim($country->id) }}" {{ ($country->id === $country_id ) ? 'selected' : '' }}>{{ $country->country }}</option>
+                @endforeach
+            </select>
+            <div class="small">@error('country_id') {{ $message }} @enderror</div>
+        </div>
+        
+        <div class="mb-4">
+            <style>textarea {resize:vertical;}</style>
+            <label class="block font-medium text-sm text-gray-700" for="contact">
+                {{ __('Federation Contacts') }}
+            </label>
+            <textarea 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                type="text" name="contact"
+                wire:model="contact"
+            >{{ old('contact') }}</textarea>
+            <div class="small">@error('contact') {{ $message }} @enderror</div>
         </div>
 
         <p>&nbsp;</p>

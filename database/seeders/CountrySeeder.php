@@ -13,1001 +13,1001 @@ class CountrySeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Country::truncate();
         Country::factory()->create([
-            'country' => "Afghanistan, Afghānistān, Afghanistan (l'), Afghānistān",
+            'country' =>  "Afghanistan",
             'id' => "AFG",
         ]);
         Country::factory()->create([
-            'country' => "Albania, Albanie (l'), Shqipëria; Shqipëri",
+            'country' =>  "Albania",
             'id' => "ALB",
         ]);
         Country::factory()->create([
-            'country' => "Al Jazā'ir, Algeria, Algérie (l')",
+            'country' =>  "Algeria",
             'id' => "DZA",
         ]);
         Country::factory()->create([
-            'country' => "American Samoa, Samoa américaines (les)",
+            'country' =>  "American Samoa",
             'id' => "ASM",
         ]);
         Country::factory()->create([
-            'country' => "Andorra, Andorra, Andorre (l')",
+            'country' =>  "Andorra",
             'id' => "AND",
         ]);
         Country::factory()->create([
-            'country' => "Angola, Angola (l'), Angola",
+            'country' =>  "Angola",
             'id' => "AGO",
         ]);
         Country::factory()->create([
-            'country' => "Anguilla, Anguilla",
+            'country' =>  "Anguilla",
             'id' => "AIA",
         ]);
         Country::factory()->create([
-            'country' => "Antarctica, Antarctique (l')",
+            'country' =>  "Antarctica",
             'id' => "ATA",
         ]);
         Country::factory()->create([
-            'country' => "Antigua and Barbuda, Antigua-et-Barbuda",
+            'country' =>  "Antigua and Barbuda",
             'id' => "ATG",
         ]);
         Country::factory()->create([
-            'country' => "Argentina, Argentine (l'), Argentina (la)",
+            'country' =>  "Argentina",
             'id' => "ARG",
         ]);
         Country::factory()->create([
-            'country' => "Armenia, Arménie (l'), Hayastan",
+            'country' =>  "Armenia",
             'id' => "ARM",
         ]);
         Country::factory()->create([
-            'country' => "Aruba, Aruba, Aruba, Aruba",
+            'country' =>  "Aruba",
             'id' => "ABW",
         ]);
         Country::factory()->create([
-            'country' => "Australia, Australie (l')",
+            'country' =>  "Australia",
             'id' => "AUS",
         ]);
         Country::factory()->create([
-            'country' => "Österreich, Austria, Autriche (l')",
+            'country' =>  "Austria",
             'id' => "AUT",
         ]);
         Country::factory()->create([
-            'country' => "Azərbaycan, Azerbaijan, Azerbaïdjan (l')",
+            'country' =>  "Azerbaijan",
             'id' => "AZE",
         ]);
         Country::factory()->create([
-            'country' => "Bahamas (The), Bahamas (Les)",
+            'country' =>  "Bahamas (The)",
             'id' => "BHS",
         ]);
         Country::factory()->create([
-            'country' => "Al Baḩrayn, Bahrain, Bahreïn",
+            'country' =>  "Bahrain",
             'id' => "BHR",
         ]);
         Country::factory()->create([
-            'country' => "Bāṁlādesh, Bangladesh, Bangladesh (le)",
+            'country' =>  "Bangladesh",
             'id' => "BGD",
         ]);
         Country::factory()->create([
-            'country' => "Barbados, Barbade (la)",
+            'country' =>  "Barbados",
             'id' => "BRB",
         ]);
         Country::factory()->create([
-            'country' => "Bielaruś, Belarus, Bélarus (le), Belarus'",
+            'country' =>  "Belarus",
             'id' => "BLR",
         ]);
         Country::factory()->create([
-            'country' => "Belgien, Belgium, Belgique (la), België",
+            'country' =>  "Belgium",
             'id' => "BEL",
         ]);
         Country::factory()->create([
-            'country' => "Belize, Belize (le)",
+            'country' =>  "Belize",
             'id' => "BLZ",
         ]);
         Country::factory()->create([
-            'country' => "Benin, Bénin (le)",
+            'country' =>  "Benin",
             'id' => "BEN",
         ]);
         Country::factory()->create([
-            'country' => "Bermuda, Bermudes (les)",
+            'country' =>  "Bermuda",
             'id' => "BMU",
         ]);
         Country::factory()->create([
-            'country' => "Åland Islands, Åland(les Îles), Åland",
+            'country' =>  "Åland Islands",
             'id' => "ALA",
         ]);
         Country::factory()->create([
-            'country' => "Druk-Yul, Bhutan, Bhoutan (le)",
+            'country' =>  "Bhutan",
             'id' => "BTN",
         ]);
         Country::factory()->create([
-            'country' => "Bolivia (Plurinational State of), Bolivie (État plurinational de), Bolivia,  Estado Plurinacional de",
+            'country' =>  "Bolivia (Plurinational State of)",
             'id' => "BOL",
         ]);
         Country::factory()->create([
-            'country' => "Bonaire, Sint Eustatius and Saba, Bonaire, Saint-Eustache et Saba, Bonaire, Sint Eustatius en Saba, Boneiru, Sint Eustatius y Saba",
+            'country' =>  "Bonaire, Sint Eustatius and Saba",
             'id' => "BES",
         ]);
         Country::factory()->create([
-            'country' => "Bosna i Hercegovina, Bosnia and Herzegovina, Bosnie-Herzégovine (la), Bosna i Hercegovina, Bosna i Hercegovina",
+            'country' =>  "Bosnia and Herzegovina",
             'id' => "BIH",
         ]);
         Country::factory()->create([
-            'country' => "Botswana, Botswana (le)",
+            'country' =>  "Botswana",
             'id' => "BWA",
         ]);
         Country::factory()->create([
-            'country' => "Bouvet Island, Bouvet (l'Île), Bouvetøya, Bouvetøya",
+            'country' =>  "Bouvet Island",
             'id' => "BVT",
         ]);
         Country::factory()->create([
-            'country' => "Brazil, Brésil (le), Brasil (o)",
+            'country' =>  "Brazil",
             'id' => "BRA",
         ]);
         Country::factory()->create([
-            'country' => "British Indian Ocean Territory (the), Indien (le Territoire britannique de l'océan)",
+            'country' =>  "British Indian Ocean Territory (the)",
             'id' => "IOT",
         ]);
         Country::factory()->create([
-            'country' => "Brunei Darussalam, Brunéi Darussalam (le), Negara Brunei Darussalam",
+            'country' =>  "Brunei Darussalam",
             'id' => "BRN",
         ]);
         Country::factory()->create([
-            'country' => "Bulgaria, Bulgaria, Bulgarie (la)",
+            'country' =>  "Bulgaria",
             'id' => "BGR",
         ]);
         Country::factory()->create([
-            'country' => "Burkina Faso, Burkina Faso (le)",
+            'country' =>  "Burkina Faso",
             'id' => "BFA",
         ]);
         Country::factory()->create([
-            'country' => "Burundi, Burundi (le), Burundi",
+            'country' =>  "Burundi",
             'id' => "BDI",
         ]);
         Country::factory()->create([
-            'country' => "Cabo Verde, Cabo Verde, Cabo Verde",
+            'country' =>  "Cabo Verde",
             'id' => "CPV",
         ]);
         Country::factory()->create([
-            'country' => "Cambodia, Cambodge (le), Kâmpŭchéa",
+            'country' =>  "Cambodia",
             'id' => "KHM",
         ]);
         Country::factory()->create([
-            'country' => "Cameroon, Cameroun (le)",
+            'country' =>  "Cameroon",
             'id' => "CMR",
         ]);
         Country::factory()->create([
-            'country' => "Canada, Canada (le)",
+            'country' =>  "Canada",
             'id' => "CAN",
         ]);
         Country::factory()->create([
-            'country' => "Cayman Islands (the), Caïmans (les Îles)",
+            'country' =>  "Cayman Islands (the)",
             'id' => "CYM",
         ]);
         Country::factory()->create([
-            'country' => "Central African Republic (the), République centrafricaine (la), Ködörösêse tî Bêafrîka",
+            'country' =>  "Central African Republic (the)",
             'id' => "CAF",
         ]);
         Country::factory()->create([
-            'country' => "Tshād, Chad, Tchad (le)",
+            'country' =>  "Chad",
             'id' => "TCD",
         ]);
         Country::factory()->create([
-            'country' => "Chile, Chili (le), Chile",
+            'country' =>  "Chile",
             'id' => "CHL",
         ]);
         Country::factory()->create([
-            'country' => "China, Chine (la), Zhongguo",
+            'country' =>  "China",
             'id' => "CHN",
         ]);
         Country::factory()->create([
-            'country' => "Christmas Island, Christmas (l'Île)",
+            'country' =>  "Christmas Island",
             'id' => "CXR",
         ]);
         Country::factory()->create([
-            'country' => "Cocos (Keeling) Islands (the), Cocos (les Îles)/ Keeling (les Îles)",
+            'country' =>  "Cocos (Keeling) Islands (the)",
             'id' => "CCK",
         ]);
         Country::factory()->create([
-            'country' => "Colombia, Colombie (la), Colombia",
+            'country' =>  "Colombia",
             'id' => "COL",
         ]);
         Country::factory()->create([
-            'country' => "Komori, Al Qamar, Comoros (the), Comores (les)",
+            'country' =>  "Comoros (the)",
             'id' => "COM",
         ]);
         Country::factory()->create([
-            'country' => "Congo (the Democratic Republic of the), Congo (la République démocratique du)",
+            'country' =>  "Congo (the Democratic Republic of the)",
             'id' => "COD",
         ]);
         Country::factory()->create([
-            'country' => "Congo (the), Congo (le)",
+            'country' =>  "Congo (the)",
             'id' => "COG",
         ]);
         Country::factory()->create([
-            'country' => "Cook Islands (the), Cook (les Îles)",
+            'country' =>  "Cook Islands (the)",
             'id' => "COK",
         ]);
         Country::factory()->create([
-            'country' => "Costa Rica, Costa Rica (le), Costa Rica",
+            'country' =>  "Costa Rica",
             'id' => "CRI",
         ]);
         Country::factory()->create([
-            'country' => "Croatia, Croatie (la), Hrvatska",
+            'country' =>  "Croatia",
             'id' => "HRV",
         ]);
         Country::factory()->create([
-            'country' => "Cuba, Cuba, Cuba",
+            'country' =>  "Cuba",
             'id' => "CUB",
         ]);
         Country::factory()->create([
-            'country' => "Curaçao, Curaçao, Curaçao, Kòrsou",
+            'country' =>  "Curaçao",
             'id' => "CUW",
         ]);
         Country::factory()->create([
-            'country' => "Kýpros, Cyprus, Chypre, Kıbrıs",
+            'country' =>  "Cyprus",
             'id' => "CYP",
         ]);
         Country::factory()->create([
-            'country' => "Česko, Czechia, Tchéquie (la)",
+            'country' =>  "Czechia",
             'id' => "CZE",
         ]);
         Country::factory()->create([
-            'country' => "Côte d'Ivoire, Côte d'Ivoire (la)",
+            'country' =>  "Côte d'Ivoire",
             'id' => "CIV",
         ]);
         Country::factory()->create([
-            'country' => "Danmark, Denmark, Danemark (le)",
+            'country' =>  "Denmark",
             'id' => "DNK",
         ]);
         Country::factory()->create([
-            'country' => "Jībūtī, Djibouti, Djibouti",
+            'country' =>  "Djibouti",
             'id' => "DJI",
         ]);
         Country::factory()->create([
-            'country' => "Dominica, Dominique (la)",
+            'country' =>  "Dominica",
             'id' => "DMA",
         ]);
         Country::factory()->create([
-            'country' => "Dominican Republic (the), dominicaine (la République), República Dominicana (la)",
+            'country' =>  "Dominican Republic (the)",
             'id' => "DOM",
         ]);
         Country::factory()->create([
-            'country' => "Ecuador, Équateur (l'), Ecuador (el)",
+            'country' =>  "Ecuador",
             'id' => "ECU",
         ]);
         Country::factory()->create([
-            'country' => "Mişr, Egypt, Égypte (l')",
+            'country' =>  "Egypt",
             'id' => "EGY",
         ]);
         Country::factory()->create([
-            'country' => "El Salvador, El Salvador, El Salvador",
+            'country' =>  "El Salvador",
             'id' => "SLV",
         ]);
         Country::factory()->create([
-            'country' => "Equatorial Guinea, Guinée équatoriale (la), Guiné Equatorial (a), Guinea Ecuatorial",
+            'country' =>  "Equatorial Guinea",
             'id' => "GNQ",
         ]);
         Country::factory()->create([
-            'country' => "Irītrīyā, Eritrea, Érythrée (l'), Iertra",
+            'country' =>  "Eritrea",
             'id' => "ERI",
         ]);
         Country::factory()->create([
-            'country' => "Estonia, Eesti, Estonie (l')",
+            'country' =>  "Estonia",
             'id' => "EST",
         ]);
         Country::factory()->create([
-            'country' => "Eswatini, Eswatini (l'), eSwatini",
+            'country' =>  "Eswatini",
             'id' => "SWZ",
         ]);
         Country::factory()->create([
-            'country' => "Ītyop'iya, Ethiopia, Éthiopie (l')",
+            'country' =>  "Ethiopia",
             'id' => "ETH",
         ]);
         Country::factory()->create([
-            'country' => "Falkland Islands (the) [Malvinas], Falkland (les Îles)/Malouines (les Îles)",
+            'country' =>  "Falkland Islands (the) [Malvinas]",
             'id' => "FLK",
         ]);
         Country::factory()->create([
-            'country' => "Færøerne, Faroe Islands (the), Føroyar, Féroé (les Îles)",
+            'country' =>  "Faroe Islands (the)",
             'id' => "FRO",
         ]);
         Country::factory()->create([
-            'country' => "Fiji, Viti, Fidji (les)",
+            'country' =>  "Fiji",
             'id' => "FJI",
         ]);
         Country::factory()->create([
-            'country' => "Finland, Suomi, Finlande (la), Finland",
+            'country' =>  "Finland",
             'id' => "FIN",
         ]);
         Country::factory()->create([
-            'country' => "France, France (la)",
+            'country' =>  "France",
             'id' => "FRA",
         ]);
         Country::factory()->create([
-            'country' => "French Guiana, Guyane française (la )",
+            'country' =>  "French Guiana",
             'id' => "GUF",
         ]);
         Country::factory()->create([
-            'country' => "French Polynesia, Polynésie française (la)",
+            'country' =>  "French Polynesia",
             'id' => "PYF",
         ]);
         Country::factory()->create([
-            'country' => "French Southern Territories (the), Terres australes françaises (les)",
+            'country' =>  "French Southern Territories (the)",
             'id' => "ATF",
         ]);
         Country::factory()->create([
-            'country' => "Gabon, Gabon (le)",
+            'country' =>  "Gabon",
             'id' => "GAB",
         ]);
         Country::factory()->create([
-            'country' => "Gambia (the), Gambie (la)",
+            'country' =>  "Gambia (the)",
             'id' => "GMB",
         ]);
         Country::factory()->create([
-            'country' => "Georgia, Géorgie (la), Sakartvelo",
+            'country' =>  "Georgia",
             'id' => "GEO",
         ]);
         Country::factory()->create([
-            'country' => "Deutschland, Germany, Allemagne (l')",
+            'country' =>  "Germany",
             'id' => "DEU",
         ]);
         Country::factory()->create([
-            'country' => "Ghana, Ghana (le)",
+            'country' =>  "Ghana",
             'id' => "GHA",
         ]);
         Country::factory()->create([
-            'country' => "Gibraltar, Gibraltar",
+            'country' =>  "Gibraltar",
             'id' => "GIB",
         ]);
         Country::factory()->create([
-            'country' => "Elláda, Greece, Grèce (la)",
+            'country' =>  "Greece",
             'id' => "GRC",
         ]);
         Country::factory()->create([
-            'country' => "Grønland, Greenland, Groenland (le), Kalaallit Nunaat",
+            'country' =>  "Greenland",
             'id' => "GRL",
         ]);
         Country::factory()->create([
-            'country' => "Grenada, Grenade (la)",
+            'country' =>  "Grenada",
             'id' => "GRD",
         ]);
         Country::factory()->create([
-            'country' => "Guadeloupe, Guadeloupe (la)",
+            'country' =>  "Guadeloupe",
             'id' => "GLP",
         ]);
         Country::factory()->create([
-            'country' => "Guam, Guam",
+            'country' =>  "Guam",
             'id' => "GUM",
         ]);
         Country::factory()->create([
-            'country' => "Guatemala, Guatemala (le), Guatemala",
+            'country' =>  "Guatemala",
             'id' => "GTM",
         ]);
         Country::factory()->create([
-            'country' => "Guernsey, Guernesey",
+            'country' =>  "Guernsey",
             'id' => "GGY",
         ]);
         Country::factory()->create([
-            'country' => "Guinea, Guinée (la)",
+            'country' =>  "Guinea",
             'id' => "GIN",
         ]);
         Country::factory()->create([
-            'country' => "Guinea-Bissau, Guinée-Bissau (la), Guiné-Bissau (a)",
+            'country' =>  "Guinea-Bissau",
             'id' => "GNB",
         ]);
         Country::factory()->create([
-            'country' => "Guyana, Guyana (le)",
+            'country' =>  "Guyana",
             'id' => "GUY",
         ]);
         Country::factory()->create([
-            'country' => "Haiti, Haïti, Ayiti",
+            'country' =>  "Haiti",
             'id' => "HTI",
         ]);
         Country::factory()->create([
-            'country' => "Heard Island and McDonald Islands, Heard-et-Îles MacDonald (l'Île)",
+            'country' =>  "Heard Island and McDonald Islands",
             'id' => "HMD",
         ]);
         Country::factory()->create([
-            'country' => "Holy See (the), Saint-Siège (le), Santa Sede (la), Sancta Sedes",
+            'country' =>  "Holy See (the)",
             'id' => "VAT",
         ]);
         Country::factory()->create([
-            'country' => "Honduras, Honduras (le), Honduras",
+            'country' =>  "Honduras",
             'id' => "HND",
         ]);
         Country::factory()->create([
-            'country' => "Hong Kong, Hong Kong, Xianggang",
+            'country' =>  "Hong Kong",
             'id' => "HKG",
         ]);
         Country::factory()->create([
-            'country' => "Hungary, Hongrie (la), Magyarország",
+            'country' =>  "Hungary",
             'id' => "HUN",
         ]);
         Country::factory()->create([
-            'country' => "Iceland, Islande (l'), Ísland",
+            'country' =>  "Iceland",
             'id' => "ISL",
         ]);
         Country::factory()->create([
-            'country' => "India, Inde (l'), Bhārat",
+            'country' =>  "India",
             'id' => "IND",
         ]);
         Country::factory()->create([
-            'country' => "Indonesia, Indonésie (l'), Indonesia",
+            'country' =>  "Indonesia",
             'id' => "IDN",
         ]);
         Country::factory()->create([
-            'country' => "Iran (Islamic Republic of), Jomhūrī-ye Eslāmī-ye Īrān, Iran (République Islamique d')",
+            'country' =>  "Iran (Islamic Republic of)",
             'id' => "IRN",
         ]);
         Country::factory()->create([
-            'country' => "Al ‘Irāq, Iraq, Iraq (l'), ‘Êraq",
+            'country' =>  "Iraq",
             'id' => "IRQ",
         ]);
         Country::factory()->create([
-            'country' => "Ireland, Irlande (l'), Éire",
+            'country' =>  "Ireland",
             'id' => "IRL",
         ]);
         Country::factory()->create([
-            'country' => "Isle of Man, Île de Man",
+            'country' =>  "Isle of Man",
             'id' => "IMN",
         ]);
         Country::factory()->create([
-            'country' => "Isrā'īl, Israel, Israël, Yisra'el",
+            'country' =>  "Israel",
             'id' => "ISR",
         ]);
         Country::factory()->create([
-            'country' => "Italy, Italie (l'), Italia (l')",
+            'country' =>  "Italy",
             'id' => "ITA",
         ]);
         Country::factory()->create([
-            'country' => "Jamaica, Jamaïque (la)",
+            'country' =>  "Jamaica",
             'id' => "JAM",
         ]);
         Country::factory()->create([
-            'country' => "Japan, Japon (le), Nihon/Nippon",
+            'country' =>  "Japan",
             'id' => "JPN",
         ]);
         Country::factory()->create([
-            'country' => "Jersey, Jersey",
+            'country' =>  "Jersey",
             'id' => "JEY",
         ]);
         Country::factory()->create([
-            'country' => "Al Urdun, Jordan, Jordanie (la)",
+            'country' =>  "Jordan",
             'id' => "JOR",
         ]);
         Country::factory()->create([
-            'country' => "Kazakhstan, Kazakhstan (le), Qazaqstan, Kazahstan",
+            'country' =>  "Kazakhstan",
             'id' => "KAZ",
         ]);
         Country::factory()->create([
-            'country' => "Kenya, Kenya (le), Kenya",
+            'country' =>  "Kenya",
             'id' => "KEN",
         ]);
         Country::factory()->create([
-            'country' => "Kiribati, Kiribati, Kiribati",
+            'country' =>  "Kiribati",
             'id' => "KIR",
         ]);
         Country::factory()->create([
-            'country' => "Korea (the Democratic People's Republic of), Corée (la République populaire démocratique de), Chosŏn",
+            'country' =>  "Korea (the Democratic People's Republic of)",
             'id' => "PRK",
         ]);
         Country::factory()->create([
-            'country' => "Korea (the Republic of), Corée (la République de), Hanguk",
+            'country' =>  "Korea (the Republic of)",
             'id' => "KOR",
         ]);
         Country::factory()->create([
-            'country' => "Al Kuwayt, Kuwait, Koweït (le)",
+            'country' =>  "Kuwait",
             'id' => "KWT",
         ]);
         Country::factory()->create([
-            'country' => "Kyrgyzstan, Kirghizistan (le), Kyrgyzstan, Kyrgyzstan",
+            'country' =>  "Kyrgyzstan",
             'id' => "KGZ",
         ]);
         Country::factory()->create([
-            'country' => "Lao People's Democratic Republic (the), Lao (la République démocratique populaire), Sathalanalat Paxathipatai Paxaxôn Lao",
+            'country' =>  "Lao People's Democratic Republic (the)",
             'id' => "LAO",
         ]);
         Country::factory()->create([
-            'country' => "Latvia, Lettonie (la), Latvija",
+            'country' =>  "Latvia",
             'id' => "LVA",
         ]);
         Country::factory()->create([
-            'country' => "Lubnān, Lebanon, Liban (le)",
+            'country' =>  "Lebanon",
             'id' => "LBN",
         ]);
         Country::factory()->create([
-            'country' => "Lesotho, Lesotho (le), Lesotho",
+            'country' =>  "Lesotho",
             'id' => "LSO",
         ]);
         Country::factory()->create([
-            'country' => "Liberia, Libéria (le)",
+            'country' =>  "Liberia",
             'id' => "LBR",
         ]);
         Country::factory()->create([
-            'country' => "Lībiyā, Libya, Libye (la)",
+            'country' =>  "Libya",
             'id' => "LBY",
         ]);
         Country::factory()->create([
-            'country' => "Liechtenstein, Liechtenstein, Liechtenstein (le)",
+            'country' =>  "Liechtenstein",
             'id' => "LIE",
         ]);
         Country::factory()->create([
-            'country' => "Lithuania, Lituanie (la), Lietuva",
+            'country' =>  "Lithuania",
             'id' => "LTU",
         ]);
         Country::factory()->create([
-            'country' => "Luxemburg, Luxembourg, Luxembourg (le), Lëtzebuerg",
+            'country' =>  "Luxembourg",
             'id' => "LUX",
         ]);
         Country::factory()->create([
-            'country' => "Macao, Macao, Macau, Aomen",
+            'country' =>  "Macao",
             'id' => "MAC",
         ]);
         Country::factory()->create([
-            'country' => "Madagascar, Madagascar, Madagasikara",
+            'country' =>  "Madagascar",
             'id' => "MDG",
         ]);
         Country::factory()->create([
-            'country' => "Malawi, Malawi (le), Malaŵi",
+            'country' =>  "Malawi",
             'id' => "MWI",
         ]);
         Country::factory()->create([
-            'country' => "Malaysia, Malaisie (la), Malaysia",
+            'country' =>  "Malaysia",
             'id' => "MYS",
         ]);
         Country::factory()->create([
-            'country' => "Dhivehi Raajje, Maldives, Maldives (les)",
+            'country' =>  "Maldives",
             'id' => "MDV",
         ]);
         Country::factory()->create([
-            'country' => "Mali, Mali (le)",
+            'country' =>  "Mali",
             'id' => "MLI",
         ]);
         Country::factory()->create([
-            'country' => "Malta, Malte, Malta",
+            'country' =>  "Malta",
             'id' => "MLT",
         ]);
         Country::factory()->create([
-            'country' => "Marshall Islands (the), Marshall (les Îles), Aelōn̄ in M̧ajeļ",
+            'country' =>  "Marshall Islands (the)",
             'id' => "MHL",
         ]);
         Country::factory()->create([
-            'country' => "Martinique, Martinique (la)",
+            'country' =>  "Martinique",
             'id' => "MTQ",
         ]);
         Country::factory()->create([
-            'country' => "Mūrītāniyā, Mauritania, Mauritanie (la)",
+            'country' =>  "Mauritania",
             'id' => "MRT",
         ]);
         Country::factory()->create([
-            'country' => "Mauritius, Maurice",
+            'country' =>  "Mauritius",
             'id' => "MUS",
         ]);
         Country::factory()->create([
-            'country' => "Mayotte, Mayotte",
+            'country' =>  "Mayotte",
             'id' => "MYT",
         ]);
         Country::factory()->create([
-            'country' => "Mexico, Mexique (le), México",
+            'country' =>  "Mexico",
             'id' => "MEX",
         ]);
         Country::factory()->create([
-            'country' => "Micronesia (Federated States of), Micronésie (États fédérés de)",
+            'country' =>  "Micronesia (Federated States of)",
             'id' => "FSM",
         ]);
         Country::factory()->create([
-            'country' => "Moldova (the Republic of), Moldova (la République de), Republica Moldova",
+            'country' =>  "Moldova (the Republic of)",
             'id' => "MDA",
         ]);
         Country::factory()->create([
-            'country' => "Monaco, Monaco",
+            'country' =>  "Monaco",
             'id' => "MCO",
         ]);
         Country::factory()->create([
-            'country' => "Mongolia, Mongolie (la), Mongol",
+            'country' =>  "Mongolia",
             'id' => "MNG",
         ]);
         Country::factory()->create([
-            'country' => "Crna Gora, Montenegro, Monténégro (le)",
+            'country' =>  "Montenegro",
             'id' => "MNE",
         ]);
         Country::factory()->create([
-            'country' => "Montserrat, Montserrat",
+            'country' =>  "Montserrat",
             'id' => "MSR",
         ]);
         Country::factory()->create([
-            'country' => "Al Maghrib, Morocco, Maroc (le)",
+            'country' =>  "Morocco",
             'id' => "MAR",
         ]);
         Country::factory()->create([
-            'country' => "Mozambique, Mozambique (le), Moçambique",
+            'country' =>  "Mozambique",
             'id' => "MOZ",
         ]);
         Country::factory()->create([
-            'country' => "Myanmar, Myanmar (le), Myanma",
+            'country' =>  "Myanmar",
             'id' => "MMR",
         ]);
         Country::factory()->create([
-            'country' => "Namibia, Namibie (la)",
+            'country' =>  "Namibia",
             'id' => "NAM",
         ]);
         Country::factory()->create([
-            'country' => "Nauru, Nauru, Naoero",
+            'country' =>  "Nauru",
             'id' => "NRU",
         ]);
         Country::factory()->create([
-            'country' => "Nepal, Népal (le), Nepāl",
+            'country' =>  "Nepal",
             'id' => "NPL",
         ]);
         Country::factory()->create([
-            'country' => "Netherlands (Kingdom of the), Pays-Bas (Royaume des), Nederland",
+            'country' =>  "Netherlands (Kingdom of the)",
             'id' => "NLD",
         ]);
         Country::factory()->create([
-            'country' => "New Caledonia, Nouvelle-Calédonie (la)",
+            'country' =>  "New Caledonia",
             'id' => "NCL",
         ]);
         Country::factory()->create([
-            'country' => "New Zealand, Nouvelle-Zélande (la), Aotearoa",
+            'country' =>  "New Zealand",
             'id' => "NZL",
         ]);
         Country::factory()->create([
-            'country' => "Nicaragua, Nicaragua (le), Nicaragua",
+            'country' =>  "Nicaragua",
             'id' => "NIC",
         ]);
         Country::factory()->create([
-            'country' => "Niger (the), Niger (le)",
+            'country' =>  "Niger (the)",
             'id' => "NER",
         ]);
         Country::factory()->create([
-            'country' => "Nigeria, Nigéria (le)",
+            'country' =>  "Nigeria",
             'id' => "NGA",
         ]);
         Country::factory()->create([
-            'country' => "Niue, Niue, Niue",
+            'country' =>  "Niue",
             'id' => "NIU",
         ]);
         Country::factory()->create([
-            'country' => "Norfolk Island, Norfolk (l'Île)",
+            'country' =>  "Norfolk Island",
             'id' => "NFK",
         ]);
         Country::factory()->create([
-            'country' => "North Macedonia, Macédoine du Nord (la), Severna Makedonija",
+            'country' =>  "North Macedonia",
             'id' => "MKD",
         ]);
         Country::factory()->create([
-            'country' => "Northern Mariana Islands (the), Mariannes du Nord (les Îles)",
+            'country' =>  "Northern Mariana Islands (the)",
             'id' => "MNP",
         ]);
         Country::factory()->create([
-            'country' => "Norway, Norvège (la), Noreg, Norge",
+            'country' =>  "Norway",
             'id' => "NOR",
         ]);
         Country::factory()->create([
-            'country' => "‘Umān, Oman, Oman",
+            'country' =>  "Oman",
             'id' => "OMN",
         ]);
         Country::factory()->create([
-            'country' => "Pakistan, Pakistan (le), Pākistān",
+            'country' =>  "Pakistan",
             'id' => "PAK",
         ]);
         Country::factory()->create([
-            'country' => "Palau, Palaos (les), Belau",
+            'country' =>  "Palau",
             'id' => "PLW",
         ]);
         Country::factory()->create([
-            'country' => "Dawlat Filasţīn, Palestine, State of, Palestine, État de",
+            'country' =>  "Palestine, State of",
             'id' => "PSE",
         ]);
         Country::factory()->create([
-            'country' => "Panama, Panama (le), Panamá",
+            'country' =>  "Panama",
             'id' => "PAN",
         ]);
         Country::factory()->create([
-            'country' => "Papua New Guinea, Papouasie-Nouvelle-Guinée (la), Papuaniugini, Papuaniugini",
+            'country' =>  "Papua New Guinea",
             'id' => "PNG",
         ]);
         Country::factory()->create([
-            'country' => "Paraguay, Paraguay (le), Paraguay, Paraguay (el)",
+            'country' =>  "Paraguay",
             'id' => "PRY",
         ]);
         Country::factory()->create([
-            'country' => "Perú, Peru, Pérou (le), Perú, Perú (el)",
+            'country' =>  "Peru",
             'id' => "PER",
         ]);
         Country::factory()->create([
-            'country' => "Philippines (the), Philippines (les), Pilipinas",
+            'country' =>  "Philippines (the)",
             'id' => "PHL",
         ]);
         Country::factory()->create([
-            'country' => "Pitcairn, Pitcairn",
+            'country' =>  "Pitcairn",
             'id' => "PCN",
         ]);
         Country::factory()->create([
-            'country' => "Poland, Pologne (la), Polska",
+            'country' =>  "Poland",
             'id' => "POL",
         ]);
         Country::factory()->create([
-            'country' => "Portugal, Portugal (le), Portugal",
+            'country' =>  "Portugal",
             'id' => "PRT",
         ]);
         Country::factory()->create([
-            'country' => "Puerto Rico, Porto Rico, Puerto Rico",
+            'country' =>  "Puerto Rico",
             'id' => "PRI",
         ]);
         Country::factory()->create([
-            'country' => "Qaţar, Qatar, Qatar (le)",
+            'country' =>  "Qatar",
             'id' => "QAT",
         ]);
         Country::factory()->create([
-            'country' => "Romania, Roumanie (la), România",
+            'country' =>  "Romania",
             'id' => "ROU",
         ]);
         Country::factory()->create([
-            'country' => "Russian Federation (the), Russie (la Fédération de), Rossijskaja Federacija",
+            'country' =>  "Russian Federation (the)",
             'id' => "RUS",
         ]);
         Country::factory()->create([
-            'country' => "Rwanda, Rwanda (le), Rwanda",
+            'country' =>  "Rwanda",
             'id' => "RWA",
         ]);
         Country::factory()->create([
-            'country' => "Réunion, Réunion (La)",
+            'country' =>  "Réunion",
             'id' => "REU",
         ]);
         Country::factory()->create([
-            'country' => "Saint Barthélemy, Saint-Barthélemy",
+            'country' =>  "Saint Barthélemy",
             'id' => "BLM",
         ]);
         Country::factory()->create([
-            'country' => "Saint Helena, Ascension and Tristan da Cunha, Sainte-Hélène, Ascension et Tristan da Cunha",
+            'country' =>  "Saint Helena, Ascension and Tristan da Cunha",
             'id' => "SHN",
         ]);
         Country::factory()->create([
-            'country' => "Saint Kitts and Nevis, Saint-Kitts-et-Nevis",
+            'country' =>  "Saint Kitts and Nevis",
             'id' => "KNA",
         ]);
         Country::factory()->create([
-            'country' => "Saint Lucia, Sainte-Lucie",
+            'country' =>  "Saint Lucia",
             'id' => "LCA",
         ]);
         Country::factory()->create([
-            'country' => "Saint Martin (French part), Saint-Martin (partie française)",
+            'country' =>  "Saint Martin (French part)",
             'id' => "MAF",
         ]);
         Country::factory()->create([
-            'country' => "Saint Pierre and Miquelon, Saint-Pierre-et-Miquelon",
+            'country' =>  "Saint Pierre and Miquelon",
             'id' => "SPM",
         ]);
         Country::factory()->create([
-            'country' => "Saint Vincent and the Grenadines, Saint-Vincent-et-les Grenadines",
+            'country' =>  "Saint Vincent and the Grenadines",
             'id' => "VCT",
         ]);
         Country::factory()->create([
-            'country' => "Samoa, Samoa (le), Samoa",
+            'country' =>  "Samoa",
             'id' => "WSM",
         ]);
         Country::factory()->create([
-            'country' => "San Marino, Saint-Marin, San Marino",
+            'country' =>  "San Marino",
             'id' => "SMR",
         ]);
         Country::factory()->create([
-            'country' => "Sao Tome and Principe, Sao Tomé-et-Principe, São Tomé e Príncipe",
+            'country' =>  "Sao Tome and Principe",
             'id' => "STP",
         ]);
         Country::factory()->create([
-            'country' => "As Su‘ūdīyah, Saudi Arabia, Arabie saoudite (l')",
+            'country' =>  "Saudi Arabia",
             'id' => "SAU",
         ]);
         Country::factory()->create([
-            'country' => "Senegal, Sénégal (le)",
+            'country' =>  "Senegal",
             'id' => "SEN",
         ]);
         Country::factory()->create([
-            'country' => "Serbia, Serbie (la), Srbija",
+            'country' =>  "Serbia",
             'id' => "SRB",
         ]);
         Country::factory()->create([
-            'country' => "Sesel, Seychelles, Seychelles (les)",
+            'country' =>  "Seychelles",
             'id' => "SYC",
         ]);
         Country::factory()->create([
-            'country' => "Sierra Leone, Sierra Leone (la)",
+            'country' =>  "Sierra Leone",
             'id' => "SLE",
         ]);
         Country::factory()->create([
-            'country' => "Singapore, Singapour, Singapura, Chiṅkappūr, Xinjiapo",
+            'country' =>  "Singapore",
             'id' => "SGP",
         ]);
         Country::factory()->create([
-            'country' => "Sint Maarten (Dutch part), Saint-Martin (partie néerlandaise), Sint Maarten",
+            'country' =>  "Sint Maarten (Dutch part)",
             'id' => "SXM",
         ]);
         Country::factory()->create([
-            'country' => "Slovakia, Slovaquie (la), Slovensko",
+            'country' =>  "Slovakia",
             'id' => "SVK",
         ]);
         Country::factory()->create([
-            'country' => "Slovenia, Slovénie (la), Slovenija",
+            'country' =>  "Slovenia",
             'id' => "SVN",
         ]);
         Country::factory()->create([
-            'country' => "Solomon Islands, Salomon (les Îles)",
+            'country' =>  "Solomon Islands",
             'id' => "SLB",
         ]);
         Country::factory()->create([
-            'country' => "Aş Şūmāl, Somalia, Somalie (la), Soomaaliya",
+            'country' =>  "Somalia",
             'id' => "SOM",
         ]);
         Country::factory()->create([
-            'country' => "Suid-Afrika, South Africa, Afrique du Sud (l'), Sewula Afrika, Afrika-Borwa, Afrika-Borwa, Ningizimu Afrika, Afrika-Borwa, Afrika-Dzonga, Afrika Tshipembe, Mzantsi Afrika, Ningizimu Afrika",
+            'country' =>  "South Africa",
             'id' => "ZAF",
         ]);
         Country::factory()->create([
-            'country' => "South Georgia and the South Sandwich Islands, Géorgie du Sud-et-les Îles Sandwich du Sud (la)",
+            'country' =>  "South Georgia and the South Sandwich Islands",
             'id' => "SGS",
         ]);
         Country::factory()->create([
-            'country' => "South Sudan, Soudan du Sud (le)",
+            'country' =>  "South Sudan",
             'id' => "SSD",
         ]);
         Country::factory()->create([
-            'country' => "Spain, Espagne (l'), España",
+            'country' =>  "Spain",
             'id' => "ESP",
         ]);
         Country::factory()->create([
-            'country' => "Sri Lanka, Sri Lanka, Shrī Laṁkā, Ilaṅkai",
+            'country' =>  "Sri Lanka",
             'id' => "LKA",
         ]);
         Country::factory()->create([
-            'country' => "As Sūdān, Sudan (the), Soudan (le)",
+            'country' =>  "Sudan (the)",
             'id' => "SDN",
         ]);
         Country::factory()->create([
-            'country' => "Suriname, Suriname (le), Suriname",
+            'country' =>  "Suriname",
             'id' => "SUR",
         ]);
         Country::factory()->create([
-            'country' => "Svalbard and Jan Mayen, Svalbard et l'Île Jan Mayen (le), Svalbard og Jan Mayen, Svalbard og Jan Mayen",
+            'country' =>  "Svalbard and Jan Mayen",
             'id' => "SJM",
         ]);
         Country::factory()->create([
-            'country' => "Sweden, Suède (la), Sverige",
+            'country' =>  "Sweden",
             'id' => "SWE",
         ]);
         Country::factory()->create([
-            'country' => "Schweiz (die), Switzerland, Suisse (la), Svizzera (la), Svizra (la)",
+            'country' =>  "Switzerland",
             'id' => "CHE",
         ]);
         Country::factory()->create([
-            'country' => "Al Jumhūrīyah al ‘Arabīyah as Sūrīyah, Syrian Arab Republic (the), République arabe syrienne (la)",
+            'country' =>  "Syrian Arab Republic (the)",
             'id' => "SYR",
         ]);
         Country::factory()->create([
-            'country' => "Taiwan (Province of China), Taïwan (Province de Chine), Taiwan",
+            'country' =>  "Taiwan (Province of China)",
             'id' => "TWN",
         ]);
         Country::factory()->create([
-            'country' => "Tajikistan, Tadjikistan (le), Tojikiston",
+            'country' =>  "Tajikistan",
             'id' => "TJK",
         ]);
         Country::factory()->create([
-            'country' => "Tanzania, the United Republic of, Tanzanie (la République-Unie de), Jamhuri ya Muungano wa Tanzania",
+            'country' =>  "Tanzania, the United Republic of",
             'id' => "TZA",
         ]);
         Country::factory()->create([
-            'country' => "Thailand, Thaïlande (la), Prathet Thai",
+            'country' =>  "Thailand",
             'id' => "THA",
         ]);
         Country::factory()->create([
-            'country' => "Timor-Leste, Timor-Leste (le), Timor-Leste, Timor Lorosa'e",
+            'country' =>  "Timor-Leste",
             'id' => "TLS",
         ]);
         Country::factory()->create([
-            'country' => "Togo, Togo (le)",
+            'country' =>  "Togo",
             'id' => "TGO",
         ]);
         Country::factory()->create([
-            'country' => "Tokelau, Tokelau (les), Tokelau",
+            'country' =>  "Tokelau",
             'id' => "TKL",
         ]);
         Country::factory()->create([
-            'country' => "Tonga, Tonga (les), Tonga",
+            'country' =>  "Tonga",
             'id' => "TON",
         ]);
         Country::factory()->create([
-            'country' => "Trinidad and Tobago, Trinité-et-Tobago (la)",
+            'country' =>  "Trinidad and Tobago",
             'id' => "TTO",
         ]);
         Country::factory()->create([
-            'country' => "Tūnis, Tunisia, Tunisie (la)",
+            'country' =>  "Tunisia",
             'id' => "TUN",
         ]);
         Country::factory()->create([
-            'country' => "Turkmenistan, Turkménistan (le), Türkmenistan",
+            'country' =>  "Turkmenistan",
             'id' => "TKM",
         ]);
         Country::factory()->create([
-            'country' => "Turks and Caicos Islands (the), Turks-et-Caïcos (les Îles)",
+            'country' =>  "Turks and Caicos Islands (the)",
             'id' => "TCA",
         ]);
         Country::factory()->create([
-            'country' => "Tuvalu, Tuvalu (les), Tuvalu",
+            'country' =>  "Tuvalu",
             'id' => "TUV",
         ]);
         Country::factory()->create([
-            'country' => "Türkiye, Türkiye (la), Türkiye",
+            'country' =>  "Türkiye",
             'id' => "TUR",
         ]);
         Country::factory()->create([
-            'country' => "Uganda, Ouganda (l')",
+            'country' =>  "Uganda",
             'id' => "UGA",
         ]);
         Country::factory()->create([
-            'country' => "Ukraine, Ukraine (l'), Ukraina",
+            'country' =>  "Ukraine",
             'id' => "UKR",
         ]);
         Country::factory()->create([
-            'country' => "Al Imārāt, United Arab Emirates (the), Émirats arabes unis (les)",
+            'country' =>  "United Arab Emirates (the)",
             'id' => "ARE",
         ]);
         Country::factory()->create([
-            'country' => "United Kingdom of Great Britain and Northern Ireland (the), Royaume-Uni de Grande-Bretagne et d'Irlande du Nord (le)",
+            'country' =>  "United Kingdom of Great Britain and Northern Ireland (the)",
             'id' => "GBR",
         ]);
         Country::factory()->create([
-            'country' => "United States Minor Outlying Islands (the), Îles mineures éloignées des États-Unis (les)",
+            'country' =>  "United States Minor Outlying Islands (the)",
             'id' => "UMI",
         ]);
         Country::factory()->create([
-            'country' => "United States of America (the), États-Unis d'Amérique (les)",
+            'country' =>  "United States of America (the)",
             'id' => "USA",
         ]);
         Country::factory()->create([
-            'country' => "Uruguay, Uruguay (l'), Uruguay (el)",
+            'country' =>  "Uruguay",
             'id' => "URY",
         ]);
         Country::factory()->create([
-            'country' => "Uzbekistan, Ouzbékistan (l'), O‘zbekiston",
+            'country' =>  "Uzbekistan",
             'id' => "UZB",
         ]);
         Country::factory()->create([
-            'country' => "Vanuatu, Vanuatu, Vanuatu (le)",
+            'country' =>  "Vanuatu",
             'id' => "VUT",
         ]);
         Country::factory()->create([
-            'country' => "Venezuela (Bolivarian Republic of), Venezuela (République bolivarienne du), Venezuela, República Bolivariana de",
+            'country' =>  "Venezuela (Bolivarian Republic of)",
             'id' => "VEN",
         ]);
         Country::factory()->create([
-            'country' => "Viet Nam, Viet Nam (le), Việt Nam",
+            'country' =>  "Viet Nam",
             'id' => "VNM",
         ]);
         Country::factory()->create([
-            'country' => "Virgin Islands (British), Vierges britanniques (les Îles)",
+            'country' =>  "Virgin Islands (British)",
             'id' => "VGB",
         ]);
         Country::factory()->create([
-            'country' => "Virgin Islands (U.S.), Vierges des États-Unis (les Îles)",
+            'country' =>  "Virgin Islands (U.S.)",
             'id' => "VIR",
         ]);
         Country::factory()->create([
-            'country' => "Wallis and Futuna, Wallis-et-Futuna ",
+            'country' =>  "Wallis and Futuna",
             'id' => "WLF",
         ]);
         Country::factory()->create([
-            'country' => "Aş Şaḩrā' al Gharbīyah, Western Sahara*, Sahara occidental (le)*",
+            'country' =>  "Western Sahara*",
             'id' => "ESH",
         ]);
         Country::factory()->create([
-            'country' => "Al Yaman, Yemen, Yémen (le)",
+            'country' =>  "Yemen",
             'id' => "YEM",
         ]);
         Country::factory()->create([
-            'country' => "Zambia, Zambie (la)",
+            'country' =>  "Zambia",
             'id' => "ZMB",
         ]);
         Country::factory()->create([
-            'country' => "Zimbabwe, Zimbabwe (le)",
+            'country' =>  "Zimbabwe",
             'id' => "ZWE",
         ]);
     }

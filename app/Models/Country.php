@@ -7,6 +7,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Country extends Model
 {
@@ -25,5 +26,18 @@ class Country extends Model
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
         ];
+    }
+
+    /**
+     * like Country::all() but sorted by country
+     */
+    public function allByCountry(){
+
+        $countries = DB::table(self::table_name)
+            ->whereNull('deleted_at')
+            ->orderBy('country','asc')
+            ->get();
+
+        return $countries; 
     }
 }

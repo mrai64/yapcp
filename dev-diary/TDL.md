@@ -7,8 +7,10 @@ Modelli in cartella unica
 
 ## Prossime attività
 
-- [ ] Creare la tabella country, solo colonne id, timestamp e code
-- [ ] country.code->unique()
+- [ ] Creare component per i moduli nazione, select
+  che sarà sostituito da campo testo con autocomplete. Autocomplete
+  che comporta un pacco di lavoro.
+
 - [ ] Attivare gli avvisi di registrazione per email ai nuovi utenti
 - [ ] Attivare gli avvisi di login per email agli utenti
 - [ ] scoprire come usare MAMP al posto di artisan serve.
@@ -150,3 +152,9 @@ e si userà il codice ansi a 3 lettere, per esempio delle olimpiadi.
   Come aggiungere termini all'elenco e come funziona per lang diversi da en
 
 - [x] creato componente app.php
+
+
+### Countries 
+
+- [x] Creare la tabella country, solo colonne id, timestamp e code
+- [x] country.code->unique()

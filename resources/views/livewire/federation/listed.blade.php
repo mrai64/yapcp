@@ -15,7 +15,7 @@
         @foreach($federation_list as $federation)
         <li class="my-2 p-4 font-medium">
             <strong class="fyk text-xl">{{$federation->name}}</strong><br />
-            {{$federation->code}} | web: {{$federation->website}}
+            {{$federation->code}} | Country: {{$federation->country_id}} | web: {{$federation->website}}
             <a  href="/federation/modify/{{$federation->id}}"
                 class="font-medium rounded-md px-4 py-2"
                 >[ {{ __('Modify') }} ]</a>
