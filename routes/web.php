@@ -36,4 +36,3 @@ Route::get(   '/organization/add',         Organization\Add::class)->name('add-o
 Route::get(   '/organization/modify/{id}', Organization\Modify::class, ['id'])->name('modify-organization');
 Route::get(   '/organization/remove/{id}', Organization\Remove::class, ['id'])->name('delete-organization');
 Route::delete('/organization/remove/{id}', Organization\Remove::class, ['id']);
-
