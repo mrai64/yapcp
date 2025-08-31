@@ -4,23 +4,24 @@
     <form wire:submit="update">
         @csrf
 
-        <div>
-            <label for="country_code" 
-                class="block mt-4 font-medium text-sm text-gray-700"
-                >
-                {{__('Country_code')}}
+        <div class="mb-4">
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="country_id">
+                {{ __('Country') }}
             </label>
-            <input 
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-40" 
-                type="text" name="country_code" 
-                wire:model.live.debounce.1000ms="country_code"
+            <select 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                wire:model.live="country_id"
+                name="country_id" 
                 required="required"
-                />
-            @error('country_code')
-            <div class="alert alert-danger small">{{ $message }}</div>
-            @enderror
-        </div>
+                >
 
+                @foreach ($countries as $country)
+                <option value="{{ trim($country->id) }}" {{ ($country->id === $country_id ) ? 'selected' : '' }}>{{ $country->country }}</option>
+                @endforeach
+            </select>
+            <div class="small">@error('country_id') {{ $message }} @enderror</div>
+        </div>
+        
         <div>
             <label for="name" 
                 class="block mt-4 font-medium text-sm text-gray-700"

@@ -19,7 +19,7 @@
        <?php $first_bool = true; ?>
        @foreach($organization_list as $org)
        <li class="block p-4 mb-4 border rounded-md">
-       <strong class="fyk text-xl">{{$org->name}} / {{$org->country_code}}<br /></strong> 
+       <strong class="fyk text-xl">{{$org->name}} / {{$org->country_id}}<br /></strong> 
        <em>{{__('email')}}:</em> {{$org->email}}<br />
        <em>{{__('website')}}:</em> {{$org->website}}<br />
        <small><em>{{__('uuid')}}: {{$org->id}}</em></small>

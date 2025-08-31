@@ -6,19 +6,25 @@ namespace App\Livewire\Organization;
 
 use Livewire\Component;
 use App\Models\Organization;
+use App\Models\Country;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Validate;
 
 class Remove extends Component
 {
     public Organization $organization;
+
     public string $id; // not int id but uuid 
-    public string $country_code;
+
+    public string $country_id;
     public string $name;
     public string $email;
     public string $website;
     // created_at
     // updated_at
     // deleted_at
+
+    public $country;
 
     /**
      * 
@@ -28,11 +34,15 @@ class Remove extends Component
         $org = New Organization();
         $this->organization = $org->findOrFail($id);
         $this->id           = $this->organization->id; // uuid
-        $this->country_code = $this->organization->country_code;
+        $this->country_id = $this->organization->country_id;
         $this->name         = $this->organization->name;
         $this->email        = $this->organization->email;
         $this->website      = $this->organization->website;
 
+        $this->country = DB::table( Country::table_name )
+            ->whereNull('deleted_at')
+            ->where('id', $this->country_id )
+            ->pluck('id');
     }
 
     /**
@@ -51,7 +61,7 @@ class Remove extends Component
         return [
             // TODO Country::idValidate( string ) : bool
             // https://laravel.com/docs/12.x/validation#available-validation-rules
-            'country_code' => 'required|string|uppercase|min:3|max:3',
+            'country_id' => 'required|string|uppercase|min:3|max:3',
             'name' => 'required|string|min:3|max:255',
             'email' => 'required|string|email|max:255',
             'website' => 'string|url|max:255',

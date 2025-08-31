@@ -7,6 +7,8 @@
  * hasFactory
  * softDelete
  * verifyEmail(?)
+ * 
+ * 2025-08-30 rename country_code in country_id, fk countries.id
  */
 
 namespace App\Models;
@@ -28,7 +30,7 @@ class Organization extends Model
     public    $incrementing = false;//   uuid don't need ++
 
     protected $fillable = [
-        'country_code',
+        'country_id',
         'name',
         'email',
         'website',
@@ -55,7 +57,7 @@ class Organization extends Model
     
     /**
      * Per garantire l'ordine 
-     *   - country_code
+     *   - country_id
      *   - name
      *   - data di creazione (in caso di doppie, ma poteva essere id)
      * evitando i record cancellati
@@ -63,9 +65,9 @@ class Organization extends Model
     public static function ListedByCountryCodeName(){
 
         $organizations = DB::table('organizations')
-            ->select('id', 'country_code', 'name', 'email', 'website')
+            ->select('id', 'country_id', 'name', 'email', 'website')
             ->whereNull('deleted_at')
-            ->orderBy('country_code','asc')
+            ->orderBy('country_id','asc')
             ->orderBy('name','asc')
             ->orderBy('created_at', 'desc')
             ->get();

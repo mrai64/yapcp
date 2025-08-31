@@ -9,21 +9,21 @@
         @csrf
 
         <div>
-            <label for="country_code" 
-                class="block mt-4 font-medium text-sm text-gray-700"
-                >
-                {{__('Country_code')}}
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="country_id">
+                {{ __('Country') }}
             </label>
-            <input 
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-40" 
-                type="text" name="country_code" 
-                wire:model="country_code"
-                value="{{ old('country_code') }}"
-                required="required"
-                />
-            @error('country_code')
-            <div class="alert alert-danger small">{{ $message }}</div>
-            @enderror
+            <select 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                wire:model="country_id"
+                name="country_id" 
+                required="required
+                >
+                <option value="">{{ __('-- choose country --') }}</option>
+                @foreach ($countries as $country)
+                <option value="{{ $country->id }}">{{ $country->country }}</option>
+                @endforeach
+            </select>
+            <div class="small">@error('country_id') {{ $message }} @enderror</div>
         </div>
 
         <div>

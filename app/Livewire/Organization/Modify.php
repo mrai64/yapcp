@@ -6,13 +6,15 @@ namespace App\Livewire\Organization;
 
 use Livewire\Component;
 use App\Models\Organization;
+use App\Models\Country;
 use Livewire\Attributes\Validate;
 
 class Modify extends Component
 {
     public Organization $organization;
+
     // uuid
-    public string $country_code;
+    public string $country_id;
     public string $name;
     public string $email;
     public string $website;
@@ -20,15 +22,45 @@ class Modify extends Component
     // updated_at
     // deleted_at
 
+    // readonly 
+    public $countries;
+
+    /**
+     * Be prepared
+     */
+    public function mount(string $id) // as 'id' in route()
+    {
+        $org = New Organization();
+        $this->organization = $org->findOrFail($id);
+        // id uuid
+        $this->country_id = $this->organization->country_id;
+        $this->name         = $this->organization->name;
+        $this->email        = $this->organization->email;
+        $this->website      = $this->organization->website;
+        // created_at
+        // updated_at
+        // deleted_at
+    }
+
+    /**
+     * Show must go
+     */
+    public function render()
+    {
+        $country = New Country();
+        $this->countries = $country->allByCountry();
+
+        return view('livewire.organization.modify');
+    }
+
     /**
      * Validation rules
      */
     public function rules()
     {
         return [
-            // TODO Country::idValidate( string ) : bool
-            // https://laravel.com/docs/12.x/validation#available-validation-rules
-            'country_code' => 'required|string|uppercase|min:3|max:3',
+            // 'country_id' => 'required|string|uppercase|min:3|max:3',
+            'country_id' => 'required|string|uppercase|min:3|exists:countries,id',
             'name' => 'required|string|min:3|max:255',
             'email' => 'required|string|email|max:255',
             'website' => 'string|url|max:255',
@@ -48,28 +80,5 @@ class Modify extends Component
         return redirect()
             ->route('organization-list')
             ->with('success', __('Organization data updated, thanks!') );
-
-    }
-
-    /**
-     * Be prepared
-     */
-    public function mount(string $id) // as 'id' in route()
-    {
-        $org = New Organization();
-        $this->organization = $org->findOrFail($id);
-        // id uuid
-        $this->country_code = $this->organization->country_code;
-        $this->name         = $this->organization->name;
-        $this->email        = $this->organization->email;
-        $this->website      = $this->organization->website;
-        // created_at
-        // updated_at
-        // deleted_at
-    }
-
-    public function render()
-    {
-        return view('livewire.organization.modify');
     }
 }

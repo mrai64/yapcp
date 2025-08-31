@@ -7,14 +7,10 @@ Modelli in cartella unica
 
 ## Prossime attività
 
-- [ ] Creare component per i moduli nazione, select
-  che sarà sostituito da campo testo con autocomplete. Autocomplete
-  che comporta un pacco di lavoro.
-
 - [ ] Attivare gli avvisi di registrazione per email ai nuovi utenti
 - [ ] Attivare gli avvisi di login per email agli utenti
 - [ ] scoprire come usare MAMP al posto di artisan serve.
-  Si deve puntare alla cartella /public che però deve sparire dall'url
+  Si deve puntare alla cartella /public che però deve sparire dall'URL
 
 - [ ] Studiare abilitazione e autenticazione,
   l'obiettivo è avere una tabella di user con i ruoli granulari, e inserire nelle loro abilitazioni i codici associati alle operazioni e alle gestioni errore. Deve essere registrato nel log A B C che utente userA non è abilitato alla funzione functionB per cui serve il codice di abilitazione abilC. All'utente userA deve arrivare solo il messaggio che deve farsi abilitare rivolgendosi all'amministrazione del sistema.
@@ -25,13 +21,6 @@ Modelli in cartella unica
   le alternative sono: 
   - una tabella dedicata all'elenco, con Model Factory e Seeder dei dati reali
   - fare un file json che viene caricato in memoria e sta a disposizione in una istanza unica del Model\Timezone
-
-- [ ] Country: codice paese a 2 o 3 lettere, nome inglese del paese, prefisso telefonico,
-area geografica (Africa/Europe/Americas/Asia ecc.)
-  le alternative come per timezone sono:
-  - una tabella dedicata all'elenco, con Model Factory e Seeder dei dati reali
-  - fare un file json che viene caricato in memoria e sta a disposizione in una istanza unica del Model\Country
-
 
 ## Elenco delle cose già fatte
 
@@ -58,7 +47,7 @@ Sono quelle dell'elenco qui sopra ma con un ordine un po' diverso.
   - ModifyFederation > Federation\Modify (no Update)
   - DeleteFederation > Federation\Remove (no Delete, è classe riservata)
 
-Tabella Federation
+#### Tabella Federation
 
 - [x] Creato migration
 - [x] Creato model
@@ -69,6 +58,9 @@ Tabella Federation
 Il country_code fa riferimento alla sede legale,
 e si userà il codice ansi a 3 lettere, per esempio delle olimpiadi.
 - [x] Seeder con dati reali
+- [x] Creata la tabella, aggiornato factory e seeder
+- [x] aggiornate pagine Add, Modify, Remove (no List, c'era
+e resta la sigla della nazione)
 
 (c**R**ud) Componente show-federation-list
 
@@ -121,6 +113,9 @@ e si userà il codice ansi a 3 lettere, per esempio delle olimpiadi.
   - [x] Organization\Add
   - [x] Organization\Modify
   - [x] Organization\Remove ()
+  - [x] Cambiare con refactory country_code con country_id
+  - [x] Cambiare factory e seeder
+  - [x] Sistemare le pagine di List Add Modify Remove
 
 ### Federation/Section
 
@@ -158,3 +153,5 @@ e si userà il codice ansi a 3 lettere, per esempio delle olimpiadi.
 
 - [x] Creare la tabella country, solo colonne id, timestamp e code
 - [x] country.code->unique()
+~~Creare component per i moduli nazione, select che sarà sostituito da campo testo con autocomplete. Autocomplete che comporta un pacco di lavoro.~~
+

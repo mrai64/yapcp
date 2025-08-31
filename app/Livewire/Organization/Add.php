@@ -2,7 +2,7 @@
 /**
  * Organization CRUD: Create
  * - uuid
- * - country_code
+ * - country_id
  * 
  */
 namespace App\Livewire\Organization;
@@ -13,7 +13,7 @@ use App\Models\Organization;
 class Add extends Component
 {
     // uuid
-    public string $country_code;
+    public string $country_id;
     public string $name;
     public string $email;
     public string $website;
@@ -21,33 +21,42 @@ class Add extends Component
     // updated_at
     // deleted_at
 
-    public function save() 
+    /**
+     * before show
+     */
+    public function render()
     {
-        // here rules() apply: true or fail
-        $validated = $this->validate();
-        // here we go!
-        $org = New Organization();
-        $org->create( $validated );
-        // done back to list see web.php
-        return redirect()
-          ->route('organization-list')
-          ->with('success', __('New Organization added to list, enjoy!') );
+        return view('livewire.organization.add');
     }
-
+    /**
+     * after show
+     */
     public function rules()
     {
         return [
             // TODO Country::idValidate( string ) : bool
             // https://laravel.com/docs/12.x/validation#available-validation-rules
-            'country_code' => 'required|string|uppercase|min:3|max:3',
+            'country_id' => 'required|string|uppercase|min:3|max:3',
             'name' => 'required|string|min:3|max:255',
             'email' => 'required|string|email|max:255',
             'website' => 'string|url|max:255',
         ];
     }
-    
-    public function render()
+    /**
+     * after show
+     */    
+    public function save() 
     {
-        return view('livewire.organization.add');
+        // here rules() apply: true or fail
+        $validated = $this->validate();
+
+        // here we go!
+        $org = New Organization();
+        $org->create( $validated );
+        
+        // done back to list - see web.php
+        return redirect()
+          ->route('organization-list')
+          ->with('success', __('New Organization added to list, enjoy!') );
     }
 }

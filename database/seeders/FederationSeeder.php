@@ -14,6 +14,8 @@ class FederationSeeder extends Seeder
      */
     public function run(): void
     {
+        /**
+         * 
         Federation::factory()->create([
             'country_id' => 'LUX',
             'code' => 'FIAP',
@@ -34,6 +36,14 @@ class FederationSeeder extends Seeder
             "website" => 'https://www.unioneitalianafotoamatori.it/',
             "contact" => "Via Acque 9\n17045 Mallare SV"
         ]);
+        Federation::factory()->create([
+            'country_id' => 'GRC',
+            'code' => 'GPU',
+            "name" => "Global Photographic Union",
+            "website" => 'https://www.gpuphoto.com/',
+        ]);
+         * 
+         */
 
         Federation::factory()->count(2)->create();
     }

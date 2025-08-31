@@ -11,20 +11,18 @@
 
         <input type="hidden" name="id" wire:model.fill="id" />
 
-        <div>
-            <label for="country_code"
-                class="block mt-4 font-medium text-sm text-gray-700"
-                >
-                {{__('Country_code')}}
+        <div class="mb-4">
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="country_id">
+                {{ __('Country') }}
             </label>
-            <input
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-40"
-                type="text" name="country_code"
-                wire:model.fill="country_code"
+            <input 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                type="text" name="website" 
+                wire:model.fill="country"
                 readonly
-                />
+            >
         </div>
-
+        
         <div>
             <label for="name"
                 class="block mt-4 font-medium text-sm text-gray-700"

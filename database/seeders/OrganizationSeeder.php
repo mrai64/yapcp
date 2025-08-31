@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * 
+ */
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -13,6 +15,6 @@ class OrganizationSeeder extends Seeder
      */
     public function run(): void
     {
-        Organization::factory()->count(5)->create();
+        Organization::factory()->count(2)->create();
     }
 }
