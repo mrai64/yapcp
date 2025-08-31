@@ -7,6 +7,26 @@ Modelli in cartella unica
 
 ## Prossime attività
 
+### user works
+
+- [ ] Tabella per i lavori degli user
+  - [ ] migration
+  - [ ] factory
+    Cercando generatori di immagini, visto che quello di laravel
+    dicono abbia chiuso,
+    [FakerJS](https://fakerjs.dev/api/image.html#personportrait)
+  - [ ] seeder
+  - [ ] link nella cartella /dashboard per gli utenti
+    - vista "vuota"
+    - lista miniature
+    - "carica una immagine alla volta" add > modify > list
+    - modifica dati
+    - cestina immagine
+
+### federation rules
+
+- definire le rules che le federazioni prevedono
+
 - [ ] Attivare gli avvisi di registrazione per email ai nuovi utenti
 - [ ] Attivare gli avvisi di login per email agli utenti
 - [ ] scoprire come usare MAMP al posto di artisan serve.
@@ -18,7 +38,7 @@ Modelli in cartella unica
 ## Elenco cose da fare nell'ordine in cui farle
 
 - [ ] Timezone, fare la tabella o ?
-  le alternative sono: 
+  le alternative sono:
   - una tabella dedicata all'elenco, con Model Factory e Seeder dei dati reali
   - fare un file json che viene caricato in memoria e sta a disposizione in una istanza unica del Model\Timezone
 
@@ -148,10 +168,8 @@ e resta la sigla della nazione)
 
 - [x] creato componente app.php
 
-
-### Countries 
+### Countries
 
 - [x] Creare la tabella country, solo colonne id, timestamp e code
 - [x] country.code->unique()
 ~~Creare component per i moduli nazione, select che sarà sostituito da campo testo con autocomplete. Autocomplete che comporta un pacco di lavoro.~~
-

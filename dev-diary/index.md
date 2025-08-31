@@ -42,4 +42,4 @@ Free thinking, in italian lang
 
 ## settembre 2025
 
-: 
+:
