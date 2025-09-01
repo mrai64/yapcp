@@ -15,6 +15,9 @@ class Country extends Model
     // use env('DB_TABLE_PREFIX')
     public const table_name = 'countries';
 
+    protected $keyType   = 'string';
+    public $incrementing = false;
+
     protected $fillable = [
         'id',
         'country',

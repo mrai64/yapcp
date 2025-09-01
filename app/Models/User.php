@@ -21,6 +21,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     // used to show a version number
     public const version = '2025.09.1 dev';
+    public const table_name = 'users';
 
     /**
      * The attributes that are mass assignable.

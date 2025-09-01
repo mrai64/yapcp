@@ -6,6 +6,9 @@
  * user is only for platform registration
  * user_contacts is for more data on user
  * don't need an uuid() as primary key
+ * 
+ * user_id should be also user_contacts pk
+ * 
  */
 
 use Illuminate\Database\Migrations\Migration;
