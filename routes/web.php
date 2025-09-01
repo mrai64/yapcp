@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Federation;
 use App\Livewire\Organization;
+use Illuminate\Support\Facades\Auth;
 
 Route::view('/', 'welcome');
 
@@ -14,7 +15,7 @@ Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
 
-require __DIR__.'/auth.php';
+    require __DIR__.'/auth.php';
 
 // route > model NO
 // Route::get('/federation', Federation::class);

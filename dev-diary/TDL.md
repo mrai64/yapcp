@@ -9,6 +9,8 @@ Modelli in cartella unica
 
 ### user works
 
+- [ ] Email verifica email 
+
 - [ ] Tabella per i lavori degli user
   - [ ] migration
   - [ ] factory
