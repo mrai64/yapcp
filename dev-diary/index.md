@@ -42,4 +42,5 @@ Free thinking, in italian lang
 
 ## settembre 2025
 
-:
+: [1 set](./2025-09/2025-09-01_IT.md)
+: [2 set](./2025-09/2025-09-02_IT.md)
