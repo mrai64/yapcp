@@ -1,8 +1,8 @@
 <div>
     <h2 class="fyk mb-4">{{ __('Maintain updated your personal info') }}</h2>
-    <p class="small">It's our choice, we mantain user n password out of your personal information.</p>
+    <p class="small">It's our choice, we maintain user n password out of your personal information.</p>
 
-    <form wire:submit="update" >
+    <form wire:submit="update" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-4">
@@ -101,19 +101,27 @@
             <div class="small">@error('cellular') {{ $message }} @enderror</div>
         </div>
 
-        <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="passport_photo">
+        <div class="block mb-4">
+            <label class="block font-medium text-sm text-gray-700" for="passport_photo_image">
                 {{ __('Passport Photo') }}
             </label>
+            @if ($passport_photo_image)
+            <img src="{{ $passport_photo_image->temporaryUrl() }}" style="float: left;" class="block w-48 me-3" />
+            @else
+            <img src="{{ asset('storage/photos') . '/' . $passport_photo }}" alt="" style="float: left;" class="block w-48 me-3">
+            @endif
             <input 
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="file" name="passport_photo"
-                wire:model.live.debounce.500ms="passport_photo" 
+            class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1" 
+            type="file" accept="image/jpeg"
+            name="passport_photo_image" wire:model="passport_photo_image"
+            aria-describedby="photoHelp"
             />
-            <div class="small">@error('passport_photo') {{ $message }} @enderror</div>
+            <div wire:loading wire:target="passport_photo_image">Uploading...</div>
+            <div class="small" id="photoHelp">{{ __('Jpg only, Better 480px w 640px h max 2 MBi') }}</div>
+            <div class="small">@error('passport_photo_image') {{ $message }} @enderror</div>
         </div>
-
-        <div class="mb-4">
+        <br style="clear:both;" />
+        <div class="mt-4 mb-4">
             <label class="block font-medium text-sm text-gray-700" for="address">
                 {{ __('Address') }}
             </label>

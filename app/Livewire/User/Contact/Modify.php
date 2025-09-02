@@ -12,11 +12,14 @@ use Livewire\Component;
 use App\Models\Country;
 use App\Models\User;
 use App\Models\UserContact;
-use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Storage; // passport_photo
+use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class Modify extends Component
 {
+    use WithFileUploads;
+
     // dati che viaggiano 
     // Country 
     // country_id 
@@ -54,8 +57,11 @@ class Modify extends Component
     #[Validate('string|integer|min_digits:6|max_digits:14|min:1')]
     public string $cellular;
 
-    #[Validate('string|max:255')]
+    #[Validate('nullable|string|max:255')]
     public string $passport_photo;
+    
+    #[Validate('nullable|image|mimes:jpg,png|max:2048')]
+    public $passport_photo_image; // readonly
 
     #[Validate('string|max:255')]
     public string $address;
@@ -104,7 +110,10 @@ class Modify extends Component
         $this->nick_name      = $this->user_contact->nick_name;
         $this->email          = $this->user_contact->email;
         $this->cellular       = $this->user_contact->cellular;
-        $this->passport_photo = $this->user_contact->passport_photo;
+        $photo_name           = $this->user_contact->passport_photo;
+        // $photo_name = str_ireplace('%20', ' ', $photo_name);
+        // $photo_name = str_ireplace('+',   '',  $photo_name);
+        $this->passport_photo = $photo_name; // img path, not in form
         $this->address        = $this->user_contact->address;
         $this->address_line2  = $this->user_contact->address_line2;
         $this->city           = $this->user_contact->city;
@@ -115,7 +124,8 @@ class Modify extends Component
         $this->x_twitter      = $this->user_contact->x_twitter;
         $this->instagram      = $this->user_contact->instagram;
         $this->whatsapp       = $this->user_contact->whatsapp;
-
+        //
+        $this->passport_photo_image = null;
     }
     /**
      * Show on
@@ -141,7 +151,21 @@ class Modify extends Component
     {
         // apply the rules
         $this->validate();
-        // 
+
+        // see also: https://livewire.laravel.com/docs/uploads#storing-uploaded-files
+        $photo_path = null;
+        $photo_name = $this->country_id . '_' . $this->last_name . '_' 
+                    . $this->first_name . '_' . date( DATE_ISO8601_EXPANDED ).'.jpg';
+        $photo_name = str_ireplace(':', '-', $photo_name);
+        $photo_name = str_ireplace('+', '',  $photo_name);
+        $photo_name = str_ireplace(' ', '-', $photo_name);
+        // $photo_name = str_ireplace('--','-', $photo_name);
+
+        if ($this->passport_photo_image){
+            $this->passport_photo_image->storePubliclyAs( 'photos', $photo_name, 'public' );
+            $this->passport_photo = $photo_name;
+        }
+
         $this->user_contact->update(
             $this->all()
         );
