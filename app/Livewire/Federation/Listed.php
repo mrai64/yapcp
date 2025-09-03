@@ -14,11 +14,6 @@ class Listed extends Component
     {
         // $this->federation_list = Federation::all();
         $fed = New Federation();
-        // $this->federation_list = DB::table( Federation::table_name )
-        //     ->whereNull('deleted_at')
-        //     ->orderBy('country_id')
-        //     ->orderBy('name')
-        //     ->get();
         $this->federation_list = DB::table( Federation::table_name )
             ->whereNull('deleted_at')
             ->orderBy('name')

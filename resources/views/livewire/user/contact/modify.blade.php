@@ -7,7 +7,7 @@
 
         <div class="mb-4">
             <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="user_id">
-                {{ __('Internal code') }}
+                {{ __('Internal code') }} | 🔒
             </label>
             <input 
                 class="text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -15,6 +15,7 @@
                 wire:model.fill="user_id"
                 readonly
                 />
+            <div class="small" id="cellularHelp">{{ __('As assigned id, that field must be readonly.') }}</div>
             <div class="alert alert-danger small">@error('user_id') {{ $message }} @enderror</div>
         </div>
 
@@ -76,14 +77,15 @@
 
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="email">
-                {{ __('Email') }}
+                {{ __('Email') }} | 🔒
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
                 type="email" name="email"
                 wire:model.live.debounce.500ms="email" 
-                required="required" 
+                readonly
             />
+            <div class="small" id="cellularHelp">{{ __('As your email is the key to enter here, that field must be readonly.') }}</div>
             <div class="small">@error('email') {{ $message }} @enderror</div>
         </div>
 

@@ -53,14 +53,15 @@ class Modify extends Component
 
     #[Validate('string|email|max:255')]
     public string $email;
+    public string $email_old; // to assure that 
 
-    #[Validate('string|integer|min_digits:6|max_digits:14|min:1')]
+    #[Validate('integer|min_digits:6|max_digits:14|min:1')]
     public string $cellular;
 
     #[Validate('nullable|string|max:255')]
     public string $passport_photo;
     
-    #[Validate('nullable|image|mimes:jpg,png|max:2048')]
+    #[Validate('nullable|image|mimes:jpg,png,webp|max:2048')]
     public $passport_photo_image; // readonly
 
     #[Validate('string|max:255')]
@@ -109,6 +110,7 @@ class Modify extends Component
         $this->last_name      = $this->user_contact->last_name;
         $this->nick_name      = $this->user_contact->nick_name;
         $this->email          = $this->user_contact->email;
+        $this->email_old      = $this->user_contact->email;
         $this->cellular       = $this->user_contact->cellular;
         $photo_name           = $this->user_contact->passport_photo;
         // $photo_name = str_ireplace('%20', ' ', $photo_name);
@@ -119,11 +121,11 @@ class Modify extends Component
         $this->city           = $this->user_contact->city;
         $this->region         = $this->user_contact->region;
         $this->postal_code    = $this->user_contact->postal_code;
-        $this->website        = $this->user_contact->website;
-        $this->facebook       = $this->user_contact->facebook;
-        $this->x_twitter      = $this->user_contact->x_twitter;
-        $this->instagram      = $this->user_contact->instagram;
-        $this->whatsapp       = $this->user_contact->whatsapp;
+        $this->website        = $this->user_contact->website || '';
+        $this->facebook       = $this->user_contact->facebook || '';
+        $this->x_twitter      = $this->user_contact->x_twitter || '';
+        $this->instagram      = $this->user_contact->instagram || '';
+        $this->whatsapp       = $this->user_contact->whatsapp || '';
         //
         $this->passport_photo_image = null;
     }
@@ -151,20 +153,27 @@ class Modify extends Component
     {
         // apply the rules
         $this->validate();
+        
+        $this->user_contact->country_id     = $this->country_id;
+        $this->user_contact->first_name     = $this->first_name;
+        $this->user_contact->last_name      = $this->last_name;
+
+        // where is him/her photo_box?
+        $photo_path = $this->user_contact->photo_box();
 
         // see also: https://livewire.laravel.com/docs/uploads#storing-uploaded-files
-        $photo_path = null;
-        $photo_name = $this->country_id . '_' . $this->last_name . '_' 
-                    . $this->first_name . '_' . date( DATE_ISO8601_EXPANDED ).'.jpg';
+        $photo_name = $photo_path .  '/' . '__passport_photo.jpg';
         $photo_name = str_ireplace(':', '-', $photo_name);
         $photo_name = str_ireplace('+', '',  $photo_name);
         $photo_name = str_ireplace(' ', '-', $photo_name);
-        // $photo_name = str_ireplace('--','-', $photo_name);
 
         if ($this->passport_photo_image){
             $this->passport_photo_image->storePubliclyAs( 'photos', $photo_name, 'public' );
             $this->passport_photo = $photo_name;
         }
+
+        // reset
+        $this->email = $this->email_old;
 
         $this->user_contact->update(
             $this->all()

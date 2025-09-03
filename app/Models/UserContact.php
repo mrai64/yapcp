@@ -3,7 +3,9 @@
  * UserContact is 
  * child of Users
  * 
- * user_id as uuid() should be primary key also for user_contact 
+ * user_id as uuid() should be primary key also for user_contact
+ * 2025-09-03 photo_box where store user works and passport_photo
+ * 
  */
 namespace App\Models;
 
@@ -27,7 +29,7 @@ class UserContact extends Model
         'nick_name',
         'email', //      users.email
         'cellular', //   [0-9]{7..20}
-        'passport_photo', // \path\file.ext
+        'passport_photo', // /photo_box/__passport_photo.jpg
         'address',
         'address_line2',
         'city',
@@ -50,5 +52,21 @@ class UserContact extends Model
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
         ];
+    }
+
+    /**
+     * return the string used to store works and passport_photo
+     */
+    public function photo_box() : string
+    {
+        $pb = $this->country_id . '/'
+        . $this->last_name  . '/'
+        . $this->first_name . '_'
+        . $this->user_id; // substr( $this->id, 0, 4);
+
+        $pb = str_ireplace(':', '-', $pb);
+        $pb = str_ireplace('+', '',  $pb);
+        $pb = str_ireplace(' ', '-', $pb);
+        return $pb;
     }
 }

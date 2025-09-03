@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Livewire\Federation;
 use App\Livewire\Organization;
 use App\Livewire\User;
+use App\Livewire\Work;
 
 Route::view('/', 'welcome');
 
@@ -44,3 +45,8 @@ Route::delete('/organization/remove/{id}', Organization\Remove::class, ['id']);
 
 // App\Livewire\User
 Route::get(   '/user/contact/modify/{uid}', User\Contact\Modify::class, ['uid'])->name('user-contact-modify');
+
+// App\Livewire\Work
+Route::get(   '/work/list',    Work\Listed::class)
+    ->middleware(['auth', 'verified'])
+    ->name('photo-box-list');

@@ -7,13 +7,11 @@ Modelli in cartella unica
 
 ## Prossime attività
 
-### user works
+### user works, anzi solo Works
 
-- [ ] Email verifica email 
-
-- [ ] Tabella per i lavori degli user
-  - [ ] migration
-  - [ ] factory
+- [x] Tabella per i lavori degli user
+  - [x] migration
+  - [ ] factory 
     Cercando generatori di immagini, visto che quello di laravel
     dicono abbia chiuso,
     [FakerJS](https://fakerjs.dev/api/image.html#personportrait)
@@ -24,6 +22,11 @@ Modelli in cartella unica
     - "carica una immagine alla volta" add > modify > list
     - modifica dati
     - cestina immagine
+
+- [x] creare una public function nel model ~~User~~ che consegni
+  la stringa in cui si mettono via le passport_photo e i lavori dei
+  concorrenti users. photo_box. archive. Forse meglio photo_box.  
+  **User_contacts** e non users.
 
 ### federation rules
 
@@ -175,3 +178,18 @@ e resta la sigla della nazione)
 - [x] Creare la tabella country, solo colonne id, timestamp e code
 - [x] country.code->unique()
 ~~Creare component per i moduli nazione, select che sarà sostituito da campo testo con autocomplete. Autocomplete che comporta un pacco di lavoro.~~
+
+### User/Contact
+
+La tabella user è della piattaforma, in gestione al sistema di laravel,
+è già stata fatta l'attività relativa alla verifica della email all'iscrizione.
+Va verificato come si può cambiare la email e se questo a sua volta scatena 
+una verifica del cambio email che coinvolga sia la mail vecchia che quella nuova
+col principio che se si tratta di scippo, lo scippato viene almeno allertato.
+
+- [x] Email verifica email all'inscrizione
+- [ ] Email verifica email al cambio email
+
+I dati di contatto "veri e propri" saranno invece a carico di una tabella figlia,
+col particolare di figlia unigenita perché la chiave esterna user_id l'ho messa
+con indice unique().
