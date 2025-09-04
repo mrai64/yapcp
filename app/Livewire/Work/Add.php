@@ -4,10 +4,10 @@ namespace App\Livewire\Work;
 
 use Livewire\Component;
 
-class Store extends Component
+class Add extends Component
 {
     public function render()
     {
-        return view('livewire.work.store');
+        return view('livewire.work.add');
     }
 }

@@ -22,11 +22,8 @@ Modelli in cartella unica
     - "carica una immagine alla volta" add > modify > list
     - modifica dati
     - cestina immagine
-
-- [x] creare una public function nel model ~~User~~ che consegni
-  la stringa in cui si mettono via le passport_photo e i lavori dei
-  concorrenti users. photo_box. archive. Forse meglio photo_box.  
-  **User_contacts** e non users.
+  - [x] listed - tabella delle immagini 
+  - [ ] Add per caricare le immagini 
 
 ### federation rules
 
@@ -193,3 +190,8 @@ col principio che se si tratta di scippo, lo scippato viene almeno allertato.
 I dati di contatto "veri e propri" saranno invece a carico di una tabella figlia,
 col particolare di figlia unigenita perché la chiave esterna user_id l'ho messa
 con indice unique().
+
+- [x] creare una public function nel model ~~User~~ che consegni
+  la stringa in cui si mettono via le passport_photo e i lavori dei
+  concorrenti users. photo_box. archive. Forse meglio photo_box.  
+  **User_contacts** e non users.
