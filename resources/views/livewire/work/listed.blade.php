@@ -1,5 +1,5 @@
 <div>
-    <a  href="#" 
+    <a  href="{{ route('photo-box-add') }}" 
         class="float-end font-medium rounded-md mb-4 py-2"
         >
         [ {{ __('Add new selected works') }} ]
@@ -32,28 +32,28 @@
             <tbody>
             <?php $odd = true; ?>
             @foreach ($work_list as $work)
-                <tr >
-                    <td class="px-4" scope="row" style="background-color: {{ $odd ? '#f0f0f0' : '#ccffff' }}" >
+                <tr>
+                    <td class="px-4" scope="row" style="background-color: <?=$odd ? '#f0f0f0' : '#ccffff' ?>" >
                         <img src="{{ asset('storage/photos') . '/' . $work['work_file'] }}" 
                             style="max-width:300px !important;max-height:300px !important;" 
                             loading="lazy" />
                             <br style="clear: both;" />
                             <span class="text-xs">img assigned id: [{{$work['id']}}]</span>
                     </td>
-                    <td class="px-4" style="background-color: {{ $odd ? '#f0f0f0' : '#ccffff' }}" >
+                    <td class="px-4" style="background-color: <?= $odd ? '#f0f0f0' : '#ccffff' ?>" >
                         <p>year: [{{$work['reference_year']}}] | long size: [{{$work['long_side']}}] | short size: [{{$work['short_side']}}] <br /> title: [{{$work['title_en']}}]<br/> local title: [{{$work['title_loca']}}] </p>
                     </td>
-                    <td nowrap  style="background-color: {{ $odd ? '#f0f0f0' : '#ccffff' }}">
+                    <td nowrap  style="background-color: <?= $odd ? '#f0f0f0' : '#ccffff' ?>">
                         <a href="#">[Mod]</a>
                         &nbsp;|&nbsp;
                         <a href="#">[Rem]</a>
                     </td>
                 </tr>
-                {{ $odd = !($odd) }}
+                <?php $odd = !($odd) ?>
             @endforeach
             </tbody>
         </table>
-        <a href="#">{{ __('Not enought? Add other works!') }}</a>
+        <a href="{{ route('photo-box-add') }}">{{ __('Not enough? Add other works!') }}</a>
         @endif
     </div>
 
