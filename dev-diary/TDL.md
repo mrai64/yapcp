@@ -16,6 +16,11 @@ Modelli in cartella unica
 ### user contact
 
 - [ ] Aggiungere il language alla scheda user_contact
+  - ref <https://www.w3schools.com/tags/ref_language_codes.asp> iso-639-1 language
+  - fare anche per questa u a tabella o fare un componente
+     he carica un array e stop. class public const ecc.
+     Se anche un paese ogni tanto cambia nome, italiano resta italiano
+      che sia d'Italia, Svizzera, Argentina.
 
 ### federation rules
 
