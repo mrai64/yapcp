@@ -1,6 +1,6 @@
 <?php
 /**
- * Modify only part of firld list.
+ * Modify only part of fields list.
  * NOT update work file
  */
 namespace App\Livewire\Work;

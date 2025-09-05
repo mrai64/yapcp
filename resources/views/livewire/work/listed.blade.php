@@ -53,7 +53,7 @@
                     <td nowrap  class="fyk text-xl" >
                         <a href="{{ route( 'photo-box-modify', [ 'wid' => $work[ 'id' ] ] ) }}">[Mod]</a>
                         &nbsp;|&nbsp;
-                        <a href="#">[Rem]</a>
+                        <a href="{{ route( 'delete-photo-box', [ 'wid' => $work[ 'id' ] ] ) }}">[Rem]</a>
                     </td>
                 </tr>
             @endforeach

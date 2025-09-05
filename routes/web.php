@@ -50,3 +50,5 @@ Route::get(   '/user/contact/modify', User\Contact\Modify::class)->middleware(['
 Route::get(   '/work/list',         Work\Listed::class)->middleware(['auth', 'verified'])->name('photo-box-list');
 Route::get(   '/work/add',          Work\Add::class   )->middleware(['auth', 'verified'])->name('photo-box-add');
 Route::get(   '/work/modify/{wid}', Work\Modify::class, ['wid'])->name('photo-box-modify');
+Route::get(   '/work/remove/{wid}', Work\Remove::class, ['wid'])->name('delete-photo-box');
+Route::delete('/work/remove/{wid}', Work\Remove::class, ['wid']);
