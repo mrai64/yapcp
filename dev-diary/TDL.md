@@ -7,9 +7,14 @@ Modelli in cartella unica
 
 ## Prossime attività
 
-### user works, anzi solo Works
+### work / remove 
 
-- [ ] Modify per aggiornare i titoli delle immagini
+- [ ] copiare da modify per mettere i campi readony fill
+  e poi passare per la funzione remove che fa soft delete.
+- [ ] vedere che il work viene escluso dalla lista 
+
+### user contact
+
 - [ ] Aggiungere il language alla scheda user_contact
 
 ### federation rules
@@ -203,7 +208,7 @@ al posto di assegnarlo con Str::uuid()
     - [x] vista "vuota"
     - [x] lista miniature
     - [x] "Carica una immagine alla volta" add > modify > list
-    - [ ] modifica dati
+    - [x] modifica dati
     - [ ] cestina immagine
   - [x] listed - tabella delle immagini
   - [x] Add per caricare le immagini
