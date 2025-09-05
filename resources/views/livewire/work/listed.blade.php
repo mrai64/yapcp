@@ -1,18 +1,18 @@
 <div>
-    <a  href="{{ route('photo-box-add') }}" 
-        class="float-end font-medium rounded-md mb-4 py-2"
-        >
-        [ {{ __('Add new selected works') }} ]
-    </a>
-
-    <hr class="my-4" />
-
     <div class="mb-4 fyk" style="font-size:3rem">
-        {{ ($country['flag_code']) ? $country['flag_code'] : '🏳️‍🌈' }} 
-        {{ $user_contact['first_name']}} {{ $user_contact['last_name']}} [nick_name]
+        {{ ($country['flag_code']) ? $country['flag_code'] : '🏳️‍🌈' }}
+        {{ $user_contact['first_name']}} {{ $user_contact['last_name']}}
         <br />
     </div>
-    <p class="text-xs">Your assigned id: {{ $user_contact['user_id'] }}</small></p>
+    <p>{{ __('Works are sorted by english title.') }} </small></p>
+    <hr class="my-4" />
+    <div class="mb-4 fyk text-xl">
+        <a  href="{{ route('photo-box-add') }}"
+            class="float-end font-medium rounded-md mb-4 py-2"
+            >
+            [ {{ __('Add new selected works') }} ]
+        </a>
+    </div>
 
     <hr class="my-4" />
     <div>
@@ -30,34 +30,38 @@
                 </tr>
             </thead>
             <tbody>
-            <?php $odd = true; ?>
             @foreach ($work_list as $work)
-                <tr>
-                    <td class="px-4" scope="row" style="background-color: <?=$odd ? '#f0f0f0' : '#ccffff' ?>" >
-                        <img src="{{ asset('storage/photos') . '/' . $work['work_file'] }}" 
-                            style="max-width:300px !important;max-height:300px !important;" 
+                <tr class="border">
+                    <td class="px-4" scope="row" style="background-color: #808080">
+                        <a href="{{ route( 'photo-box-modify', [ 'wid' => $work[ 'id' ] ] ) }}">
+                        <br style="clear: both;" />
+                        <img src="{{ asset('storage/photos') . '/' . $work['work_file'] }}"
+                            style="max-width:300px !important;max-height:300px !important;"
                             loading="lazy" />
-                            <br style="clear: both;" />
-                            <span class="text-xs">img assigned id: [{{$work['id']}}]</span>
+                        <br style="clear: both;" />
+                        </a>
                     </td>
-                    <td class="px-4" style="background-color: <?= $odd ? '#f0f0f0' : '#ccffff' ?>" >
+                    <td class="px-4" >
+                        <a href="{{ route( 'photo-box-modify', [ 'wid' => $work[ 'id' ] ] ) }}">
                         <p>
-                            year: [{{$work['reference_year']}}] | long size: [{{$work['long_side']}}] | short size: [{{$work['short_side']}}] <br /> 
-                            title: [{{$work['title_en']}}]<br/> 
-                            local title: [{{$work['title_local']}}] 
+                            English title : [{{$work['title_en']}}]<br/>
+                            Local title: [{{$work['title_local']}}]<br />
+                            Ref.Year: [{{$work['reference_year']}}] | Long size: [{{$work['long_side']}}] | Short size: [{{$work['short_side']}}] <br />
                         </p>
+                        </a>
                     </td>
-                    <td nowrap  style="background-color: <?= $odd ? '#f0f0f0' : '#ccffff' ?>">
+                    <td nowrap  class="fyk text-xl" >
                         <a href="{{ route( 'photo-box-modify', [ 'wid' => $work[ 'id' ] ] ) }}">[Mod]</a>
                         &nbsp;|&nbsp;
                         <a href="#">[Rem]</a>
                     </td>
                 </tr>
-                <?php $odd = !($odd) ?>
             @endforeach
             </tbody>
         </table>
-        <a href="{{ route('photo-box-add') }}">{{ __('Not enough? Add other works!') }}</a>
+        <div class="mt-4 fyk text-xl">
+            <a href="{{ route('photo-box-add') }}">{{ __('Not enough? Add other works!') }}</a>
+        </div>
         @endif
     </div>
 

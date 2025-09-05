@@ -16,7 +16,7 @@ class Listed extends Component
     public $user_contact = null;
     public $country      = [];
     public $work_list    = [];
-    public $odd; // alterned background rows
+    public $odd; // alternated background rows
     
     /**
      * Before the show
