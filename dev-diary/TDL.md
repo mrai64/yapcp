@@ -9,33 +9,20 @@ Modelli in cartella unica
 
 ### user works, anzi solo Works
 
-- [x] Tabella per i lavori degli user
-  - [x] migration
-  - [ ] factory 
-    Cercando generatori di immagini, visto che quello di laravel
-    dicono abbia chiuso,
-    [FakerJS](https://fakerjs.dev/api/image.html#personportrait)
-  - [ ] seeder
-  - [ ] link nella cartella /dashboard per gli utenti
-    - vista "vuota"
-    - lista miniature
-    - "carica una immagine alla volta" add > modify > list
-    - modifica dati
-    - cestina immagine
-  - [x] listed - tabella delle immagini 
-  - [ ] Add per caricare le immagini 
+- [ ] Modify per aggiornare i titoli delle immagini
+- [ ] Aggiungere il language alla scheda user_contact
 
 ### federation rules
 
 - definire le rules che le federazioni prevedono
 
-- [ ] Attivare gli avvisi di registrazione per email ai nuovi utenti
+- [x] Attivare gli avvisi di registrazione per email ai nuovi utenti
 - [ ] Attivare gli avvisi di login per email agli utenti
 - [ ] scoprire come usare MAMP al posto di artisan serve.
   Si deve puntare alla cartella /public che però deve sparire dall'URL
 
 - [ ] Studiare abilitazione e autenticazione,
-  l'obiettivo è avere una tabella di user con i ruoli granulari, e inserire nelle loro abilitazioni i codici associati alle operazioni e alle gestioni errore. Deve essere registrato nel log A B C che utente userA non è abilitato alla funzione functionB per cui serve il codice di abilitazione abilC. All'utente userA deve arrivare solo il messaggio che deve farsi abilitare rivolgendosi all'amministrazione del sistema.
+  l'obiettivo è avere una tabella di user con i ruoli granulari, e inserire nelle loro abilitazioni i codici associati alle operazioni e alle gestioni errore. Deve essere registrato nel log A B C che utente userA non è abilitato alla funzione functionB per cui serve il codice di abilitazione abilC. All'utente userA deve arrivare solo il messaggio che deve farsi abilitare rivolgendosi all'amministrazione del sistema. C'è già un middleware che controlla iscrizione e verifica email, va esteso.
 
 ## Elenco cose da fare nell'ordine in cui farle
 
@@ -180,7 +167,7 @@ e resta la sigla della nazione)
 
 La tabella user è della piattaforma, in gestione al sistema di laravel,
 è già stata fatta l'attività relativa alla verifica della email all'iscrizione.
-Va verificato come si può cambiare la email e se questo a sua volta scatena 
+Va verificato come si può cambiare la email e se questo a sua volta scatena
 una verifica del cambio email che coinvolga sia la mail vecchia che quella nuova
 col principio che se si tratta di scippo, lo scippato viene almeno allertato.
 
@@ -195,3 +182,28 @@ con indice unique().
   la stringa in cui si mettono via le passport_photo e i lavori dei
   concorrenti users. photo_box. archive. Forse meglio photo_box.  
   **User_contacts** e non users.
+
+## Works (anche user/works)
+
+TODO La factory non funziona come vorrei, serve
+trovare un generatore di immagini casuali
+
+TODO Verificare se alla creazione New Work()
+viene già assegnato un work.id, e usare quello
+al posto di assegnarlo con Str::uuid()
+
+- [x] Tabella per i lavori degli user
+  - [x] migration
+  - [ ] factory
+    Cercando generatori di immagini, visto che quello di laravel
+    dicono abbia chiuso,
+    [FakerJS](https://fakerjs.dev/api/image.html#personportrait)
+  - [ ] seeder
+  - [x] link nella cartella /dashboard per gli utenti
+    - [x] vista "vuota"
+    - [x] lista miniature
+    - [x] "Carica una immagine alla volta" add > modify > list
+    - [ ] modifica dati
+    - [ ] cestina immagine
+  - [x] listed - tabella delle immagini
+  - [x] Add per caricare le immagini

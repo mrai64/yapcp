@@ -41,10 +41,14 @@
                             <span class="text-xs">img assigned id: [{{$work['id']}}]</span>
                     </td>
                     <td class="px-4" style="background-color: <?= $odd ? '#f0f0f0' : '#ccffff' ?>" >
-                        <p>year: [{{$work['reference_year']}}] | long size: [{{$work['long_side']}}] | short size: [{{$work['short_side']}}] <br /> title: [{{$work['title_en']}}]<br/> local title: [{{$work['title_loca']}}] </p>
+                        <p>
+                            year: [{{$work['reference_year']}}] | long size: [{{$work['long_side']}}] | short size: [{{$work['short_side']}}] <br /> 
+                            title: [{{$work['title_en']}}]<br/> 
+                            local title: [{{$work['title_local']}}] 
+                        </p>
                     </td>
                     <td nowrap  style="background-color: <?= $odd ? '#f0f0f0' : '#ccffff' ?>">
-                        <a href="#">[Mod]</a>
+                        <a href="{{ route( 'photo-box-modify', [ 'wid' => $work[ 'id' ] ] ) }}">[Mod]</a>
                         &nbsp;|&nbsp;
                         <a href="#">[Rem]</a>
                     </td>
