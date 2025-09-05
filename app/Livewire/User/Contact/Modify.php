@@ -3,7 +3,7 @@
  * user/contact/modify
  * child of: user
  * 
- * 
+ * use passport_photo so yes: upload file
  */
 
 namespace App\Livewire\User\Contact;
@@ -13,6 +13,7 @@ use App\Models\Country;
 use App\Models\User;
 use App\Models\UserContact;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage; // passport_photo
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
@@ -20,7 +21,7 @@ class Modify extends Component
 {
     use WithFileUploads;
 
-    // dati che viaggiano 
+    // dati che viaggiano
     // Country 
     // country_id 
     public string $country; //     readonly
@@ -29,8 +30,6 @@ class Modify extends Component
     // User
     // user_id 
     public User $user; //          readonly
-
-    // UserContact
     public UserContact $user_contact;
 
     #[Validate('required|exists:user_contacts,id')]
@@ -97,12 +96,12 @@ class Modify extends Component
     /**
      * Before the show
      */
-    public function mount(string $uid) // named uid as in route()
+    public function mount() // no params in route()
     {
         $user_contact          = New UserContact();
-        $this->id              = $user_contact->where('user_id', $uid)->pluck('id')[0];
+        $this->id              = $user_contact->where('user_id', Auth::id() )->pluck('id')[0];
         $this->user_contact    = $user_contact->find( $this->id );
-        
+
         $this->id             = $this->user_contact->id;
         $this->user_id        = $this->user_contact->user_id;
         $this->country_id     = $this->user_contact->country_id;
@@ -121,11 +120,11 @@ class Modify extends Component
         $this->city           = $this->user_contact->city;
         $this->region         = $this->user_contact->region;
         $this->postal_code    = $this->user_contact->postal_code;
-        $this->website        = $this->user_contact->website || '';
-        $this->facebook       = $this->user_contact->facebook || '';
-        $this->x_twitter      = $this->user_contact->x_twitter || '';
-        $this->instagram      = $this->user_contact->instagram || '';
-        $this->whatsapp       = $this->user_contact->whatsapp || '';
+        $this->website        = $this->user_contact->website;
+        $this->facebook       = $this->user_contact->facebook;
+        $this->x_twitter      = $this->user_contact->x_twitter;
+        $this->instagram      = $this->user_contact->instagram;
+        $this->whatsapp       = $this->user_contact->whatsapp;
         //
         $this->passport_photo_image = null;
     }

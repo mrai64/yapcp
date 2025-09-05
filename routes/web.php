@@ -44,7 +44,7 @@ Route::get(   '/organization/remove/{id}', Organization\Remove::class, ['id'])->
 Route::delete('/organization/remove/{id}', Organization\Remove::class, ['id']);
 
 // App\Livewire\User
-Route::get(   '/user/contact/modify/{uid}', User\Contact\Modify::class, ['uid'])->name('user-contact-modify');
+Route::get(   '/user/contact/modify', User\Contact\Modify::class)->middleware(['auth', 'verified'])->name('user-contact-modify');
 
 // App\Livewire\Work
 Route::get(   '/work/list',         Work\Listed::class)->middleware(['auth', 'verified'])->name('photo-box-list');
