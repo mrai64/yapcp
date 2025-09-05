@@ -7,20 +7,20 @@ Modelli in cartella unica
 
 ## Prossime attività
 
-### work / remove 
-
-- [ ] copiare da modify per mettere i campi readony fill
-  e poi passare per la funzione remove che fa soft delete.
-- [ ] vedere che il work viene escluso dalla lista 
-
 ### user contact
 
 - [ ] Aggiungere il language alla scheda user_contact
   - ref <https://www.w3schools.com/tags/ref_language_codes.asp> iso-639-1 language
   - fare anche per questa u a tabella o fare un componente
-     he carica un array e stop. class public const ecc.
+     che carica un array e stop. class public const ecc.
      Se anche un paese ogni tanto cambia nome, italiano resta italiano
-      che sia d'Italia, Svizzera, Argentina.
+      che sia d'Italia, Svizzera, Argentina. **E se fosse Enum?**
+
+### timezones
+
+- [ ] solo Model con creazione elenco e funzione is_timezone
+  che verifica se un elemento è in array. Verificare Enum().
+
 
 ### federation rules
 
@@ -217,3 +217,9 @@ al posto di assegnarlo con Str::uuid()
     - [ ] cestina immagine
   - [x] listed - tabella delle immagini
   - [x] Add per caricare le immagini
+
+### work / remove 
+
+- [ ] copiare da modify per mettere i campi readony fill
+  e poi passare per la funzione remove che fa soft delete.
+- [ ] vedere che il work viene escluso dalla lista 
