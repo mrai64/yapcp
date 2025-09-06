@@ -11,17 +11,17 @@ Modelli in cartella unica
 
 Lang non è Country. Uno può stare a San Marino e parlare italiano.
 
-- [ ] Creare modello con lista fissa.  
+- [x] Creare modello con lista fissa.  
   public const ['en' => English, 'it' => 'Italian'].  
   Enum non è quello che serve, lingua base è "en",
   con traduzione "it", che ci penso io. Poi serve una gestione dei
-  file di traduzione.
-- [ ] Alla voce lingua aggiungere un * per "translation incomplete or missing"
+  file di traduzione. per ora limito la lista alle lingue presenti, 2.
+- [x] Alla voce lingua aggiungere un * per "translation incomplete or missing"
   traduzione incompleta o mancante.
 - [ ] Poi serve un component, un coso che abbia in input un $lang
   e crei la lista delle option con tutti i valori.
 - [ ] Aggiungere il campo lang string:5 nella tabella user contact, valore predefinito 'en_US'.
-- [ ] Aggiungere il campo per la scelta
+- [ ] Aggiungere il campo per la scelta nel pannello user/contact
 
 ### user contact
 
@@ -51,11 +51,10 @@ Lang non è Country. Uno può stare a San Marino e parlare italiano.
 
 ## Altre cose da fare
 
-- [ ] Timezone, fare la tabella o ?
-  le alternative sono:
-  - una tabella dedicata all'elenco, con Model Factory e Seeder dei dati reali
-  - fare un file json che viene caricato in memoria e sta a disposizione in una istanza unica del Model\Timezone
+- [ ] Timezone, fatto il Model andare ad aggiungere il dato richiesto in
+  tabella UserContact tipo string:40
 - [ ] Tabella User, mandare email di accesso effettuato
+
 - [ ] Revisione del marchio con esclusione dei rettangoli, solo numeri sfalsati in altezza
   con un rigo sottostante a suggerire lo scalino e le lettere yaPCP o PCP (o PhoConPla?)
 
