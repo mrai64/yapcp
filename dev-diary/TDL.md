@@ -7,6 +7,22 @@ Modelli in cartella unica
 
 ## Prossime attività
 
+### Lang
+
+Lang non è Country. Uno può stare a San Marino e parlare italiano.
+
+- [ ] Creare modello con lista fissa.  
+  public const ['en' => English, 'it' => 'Italian'].  
+  Enum non è quello che serve, lingua base è "en",
+  con traduzione "it", che ci penso io. Poi serve una gestione dei
+  file di traduzione.
+- [ ] Alla voce lingua aggiungere un * per "translation incomplete or missing"
+  traduzione incompleta o mancante.
+- [ ] Poi serve un component, un coso che abbia in input un $lang
+  e crei la lista delle option con tutti i valori.
+- [ ] Aggiungere il campo lang string:5 nella tabella user contact, valore predefinito 'en_US'.
+- [ ] Aggiungere il campo per la scelta
+
 ### user contact
 
 - [ ] Aggiungere il language alla scheda user_contact
@@ -21,7 +37,6 @@ Modelli in cartella unica
 - [ ] solo Model con creazione elenco e funzione is_timezone
   che verifica se un elemento è in array. Verificare Enum().
 
-
 ### federation rules
 
 - definire le rules che le federazioni prevedono
@@ -34,19 +49,26 @@ Modelli in cartella unica
 - [ ] Studiare abilitazione e autenticazione,
   l'obiettivo è avere una tabella di user con i ruoli granulari, e inserire nelle loro abilitazioni i codici associati alle operazioni e alle gestioni errore. Deve essere registrato nel log A B C che utente userA non è abilitato alla funzione functionB per cui serve il codice di abilitazione abilC. All'utente userA deve arrivare solo il messaggio che deve farsi abilitare rivolgendosi all'amministrazione del sistema. C'è già un middleware che controlla iscrizione e verifica email, va esteso.
 
-## Elenco cose da fare nell'ordine in cui farle
+## Altre cose da fare
 
 - [ ] Timezone, fare la tabella o ?
   le alternative sono:
   - una tabella dedicata all'elenco, con Model Factory e Seeder dei dati reali
   - fare un file json che viene caricato in memoria e sta a disposizione in una istanza unica del Model\Timezone
+- [ ] Tabella User, mandare email di accesso effettuato
+- [ ] Revisione del marchio con esclusione dei rettangoli, solo numeri sfalsati in altezza
+  con un rigo sottostante a suggerire lo scalino e le lettere yaPCP o PCP (o PhoConPla?)
+
+## Indice alfabetico delle tabelle
+
+- [Lang](#lang)
+- [User Contact](#user-contact)
+- [Works](#works-anche-userworks)
 
 ## Elenco delle cose già fatte
 
-Sono quelle dell'elenco qui sopra ma con un ordine un po' diverso.
-
-- Ripristinati TDL, index, dev-diaries
-- Ricostruito il marchio yaPCP in svg e inserirlo al posto di quello standard di laravel, una copia nella cartella [di agosto](./2025-08/)
+- Ripristinati TDL, index, dev-diaries dal repository incasinato
+- Ricostruito il marchio yaPCP in svg e inseritoo al posto di quello standard di laravel, una copia nella cartella [di agosto](./2025-08/)
 - modificata la pagina welcome - cambio marchio
 - Ripristinata la configurazione email in `.env`
 
@@ -175,6 +197,12 @@ e resta la sigla della nazione)
 
 ### User/Contact
 
+Ho separato la tabella usata dal login con user e password
+da quella dei dati anagrafici. una è solo per entrare l'altra è
+per i dati di contatto.
+
+TODO Al login mandare una mail di avviso effettuato login.
+
 La tabella user è della piattaforma, in gestione al sistema di laravel,
 è già stata fatta l'attività relativa alla verifica della email all'iscrizione.
 Va verificato come si può cambiare la email e se questo a sua volta scatena
@@ -214,12 +242,12 @@ al posto di assegnarlo con Str::uuid()
     - [x] lista miniature
     - [x] "Carica una immagine alla volta" add > modify > list
     - [x] modifica dati
-    - [ ] cestina immagine
+    - [x] cestina immagine
   - [x] listed - tabella delle immagini
   - [x] Add per caricare le immagini
 
-### work / remove 
+### work / remove
 
-- [ ] copiare da modify per mettere i campi readony fill
+- [x] copiare da modify per mettere i campi readony fill
   e poi passare per la funzione remove che fa soft delete.
-- [ ] vedere che il work viene escluso dalla lista 
+- [x] vedere che il work viene escluso dalla lista
