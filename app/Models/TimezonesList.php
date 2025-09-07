@@ -433,6 +433,10 @@ class TimezonesList extends Model
 		'Pacific/Wallis',
 	];
 
+	function __construct()
+	{
+		return self::timezones_list;
+	}
     public function is_timezone(string $timezone_in) : bool
     {
         return (in_array( $timezone_in, self::timezones_list));

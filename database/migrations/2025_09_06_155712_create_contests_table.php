@@ -41,7 +41,7 @@ return new class extends Migration
             $table->string('url_1_rule')->nullable()
                 ->comment('how read english rules and subscribe link');
             $table->string('url_2_concurrent_list')->nullable();
-            $table->string('url_3_admit_n_award list')->nullable()
+            $table->string('url_3_admit_n_award_list')->nullable()
                 ->comment('only the result list, not a catalogue');
             $table->string('url_4_catalogue')->nullable()
                 ->comment('catalogue download page');

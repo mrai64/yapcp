@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Livewire\Contest;
 use App\Livewire\Federation;
 use App\Livewire\Organization;
 use App\Livewire\User;
@@ -52,3 +53,6 @@ Route::get(   '/work/add',          Work\Add::class   )->middleware(['auth', 've
 Route::get(   '/work/modify/{wid}', Work\Modify::class, ['wid'])->name('photo-box-modify');
 Route::get(   '/work/remove/{wid}', Work\Remove::class, ['wid'])->name('delete-photo-box');
 Route::delete('/work/remove/{wid}', Work\Remove::class, ['wid']);
+
+// App\Livewire\Contest
+Route::get( '/contest/add/{oid}', Contest\Add::class, ['oid'])->middleware(['auth', 'verified'])->name('contest-add');

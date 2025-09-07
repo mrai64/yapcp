@@ -11,7 +11,7 @@ class Listed extends Component
 
     public function render()
     {
-        $this->organization_list = Organization::ListedByCountryCodeName();
+        $this->organization_list = Organization::listed_by_country_id_name();
         return view('livewire.organization.listed');
     }
 }

@@ -23,6 +23,12 @@ class LangList extends Model
         'he', // Hebrew
         // incomplete list
     ];
+
+    function __construct()
+    {
+        return self::lang_list;
+    }
+    
     /**
      * @param string $lang_code a language code 
      * @return bool true if lang code is in the list

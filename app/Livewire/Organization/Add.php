@@ -3,7 +3,7 @@
  * Organization CRUD: Create
  * - uuid
  * - country_id
- * 
+ * TODO country_id Country esist:id
  */
 namespace App\Livewire\Organization;
 

@@ -62,7 +62,7 @@ class Organization extends Model
      *   - data di creazione (in caso di doppie, ma poteva essere id)
      * evitando i record cancellati
      */
-    public static function ListedByCountryCodeName(){
+    public static function listed_by_country_id_name(){
 
         $organizations = DB::table('organizations')
             ->select('id', 'country_id', 'name', 'email', 'website')
