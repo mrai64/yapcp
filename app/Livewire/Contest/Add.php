@@ -17,9 +17,13 @@ use App\Models\Country;
 use App\Models\LangList;
 use App\Models\Organization;
 use App\Models\TimezonesList;
+use DateTimeImmutable;
 use Illuminate\Support\Str;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
+// use Livewire\Attributes\Validate;
+// use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Validator;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class Add extends Component
@@ -146,10 +150,79 @@ class Add extends Component
 
     /**
      * Validation 
+     * see also <https://laravel.com/docs/12.x/validation#available-validation-rules>
+     * see also <https://laravel.com/docs/12.x/validation#custom-validation-rules>
+     * 
+     * rules() first for auto validation
+     * after() after rules()
      */
     public function rules()
     {
-        // TODO 
+        return [
+            // id           assigned, not in form
+            'country_id'  => 'required|string|exists:countries,id',
+            'name_en'     => 'required|string',
+            'name_local'  => 'required|string',
+            'lang_local'  => 'required|string', // in(LangList::lang_list)
+            // organization_id by uri,   not in form
+            // contest_mark
+            'contact_info'    => 'required|string',
+            'is_circuit'      => 'required|string|uppercase|max:1', // in(['N','Y'])
+            'circuit_id'      => 'nullable|string|exists:contests,id', //
+            'federation_list' => 'string|max:255',
+            'url_1_rule'               => 'required|string|max:255',
+            'url_2_concurrent_list'    => 'required|string|max:255',
+            'url_3_admit_n_award_list' => 'required|string|max:255',
+            'url_4_catalogue'          => 'required|string|max:255',
+            'timezone'                 => 'required|string',
+            'day_1_opening'       => 'required|date|after_or_equal:today',
+            'day_2_closing'       => 'required|date|after_or_equal:day_1_opening',
+            'day_3_jury_opening'  => 'required|date|after_or_equal:day_2_closing',
+            'day_4_jury_closing'  => 'required|date|after_or_equal:day_3_jury_opening',
+            'day_5_revelations'   => 'required|date|after_or_equal:day_4_jury_closing',
+            'day_6_awards'        => 'required|date|after_or_equal:day_5_revelations',
+            'day_7_catalogues'    => 'required|date|after_or_equal:day_6_awards',
+            'day_8_closing'       => 'required|date|after_or_equal:day_7_catalogues',
+            'award_ceremony_info' => 'required|string',
+            // created_at
+            // updated_at
+            // deleted_at
+        ];
+
+    }
+    /**
+     * after means after rules()
+     */
+    public function after() : array
+    {
+        return [
+            function (Validator $validator) {
+                // like validate but
+                if( $this->is_circuit != 'Y'){
+                    $this->is_circuit = 'N';
+                }
+
+                if (!in_array( $this->timezone, TimezonesList::timezones_list )) {
+                    $validator->errors()->add(
+                        'timezone',
+                        __('Must be one of list')
+                    );
+                }
+
+                // insert here check for date limits
+                $day_1_opening = New DateTimeImmutable( $this->day_1_opening);
+                $day_2_closing = New DateTimeImmutable( $this->day_2_closing);
+                $day_8_closing = New DateTimeImmutable( $this->day_8_closing);
+                $duration      = date_diff($day_2_closing, $day_8_closing);
+                if ($duration->format("%a%") > "65"){
+                    // maybe 7 greater than 65?
+                    $validator->errors()->add(
+                        'day_8_closing',
+                        __('Must not be more than 65 day from day_2 participation closing')
+                    );
+                }
+            }
+        ];
     }
 
     /**
@@ -157,7 +230,39 @@ class Add extends Component
      */
     public function save()
     {
-        $this->validate(); // apply rules
-        // TODO 
+        $validated = $this->validate(); // apply rules
+
+        // TODO pick from form all fields and put in update()
+        // TODO because create was in mount()
+        $this->contest->id              = $this->contest_id;
+        $this->contest->country_id      = $this->country_id;
+        $this->contest->name_en         = $this->name_en;
+        $this->contest->name_local      = $this->name_local;
+        $this->contest->lang_local      = $this->lang_local;
+        $this->contest->contact_info    = $this->contact_info;
+        $this->contest->is_circuit      = $this->is_circuit;
+        $this->contest->circuit_id      = $this->circuit_id;
+        $this->contest->federation_list = $this->federation_list;
+        $this->contest->url_1_rule               = $this->url_1_rule;
+        $this->contest->url_2_concurrent_list    = $this->url_2_concurrent_list;
+        $this->contest->url_3_admit_n_award_list = $this->url_3_admit_n_award_list;
+        $this->contest->url_4_catalogue     = $this->url_4_catalogue;
+        $this->contest->timezone            = $this->timezone;
+        $this->contest->day_1_opening       = $this->day_1_opening;
+        $this->contest->day_2_closing       = $this->day_2_closing;
+        $this->contest->day_3_jury_opening  = $this->day_3_jury_opening;
+        $this->contest->day_4_jury_closing  = $this->day_4_jury_closing;
+        $this->contest->day_5_revelations   = $this->day_5_revelations;
+        $this->contest->day_6_awards        = $this->day_6_awards;
+        $this->contest->day_7_catalogues    = $this->day_7_catalogues;
+        $this->contest->day_8_closing       = $this->day_8_closing;
+        $this->contest->award_ceremony_info = $this->award_ceremony_info;   
+        // ⏰
+        $this->contest->save();
+
+        // redirect
+        return redirect()
+          ->route('organization-dashboard', ['oid' => $this->organization_id ])
+          ->with('success', __('New Contest added to list, enjoy!') );
     }
 }

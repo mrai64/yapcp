@@ -4,15 +4,20 @@
  * child of: user
  * 
  * use passport_photo so yes: upload file
+ * 2025-09-10: rename col lang into lang_local
  */
 
 namespace App\Livewire\User\Contact;
 
 use Livewire\Component;
 use App\Models\Country;
+use App\Models\LangList;
+use App\Models\TimezonesList;
 use App\Models\User;
 use App\Models\UserContact;
-use Livewire\Attributes\Validate;
+// use Livewire\Attributes\Validate;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage; // passport_photo
 use Livewire\Features\SupportFileUploads\WithFileUploads;
@@ -32,66 +37,38 @@ class Modify extends Component
     public User $user; //          readonly
     public UserContact $user_contact;
 
-    #[Validate('required|exists:user_contacts,id')]
     public int $id; //             readonly user_contacts.id bigint unsigned
-
-    #[Validate('required|exists:users,id')]
     public string $user_id; //     readonly users.id        string uuid
-
-    #[Validate('required|exists:countries,id')]
     public string $country_id; //           countries.id.   char
-
-    #[Validate('required|string|max:255')]
     public string $first_name;
-
-    #[Validate('required|string|max:255')]
     public string $last_name;
-
-    #[Validate('string|max:255')]
     public string $nick_name;
 
-    #[Validate('string|email|max:255')]
     public string $email;
     public string $email_old; // to assure that 
 
-    #[Validate('integer|min_digits:6|max_digits:14|min:1')]
     public string $cellular;
 
-    #[Validate('nullable|string|max:255')]
     public string $passport_photo;
-    
-    #[Validate('nullable|image|mimes:jpg,png,webp|max:2048')]
     public $passport_photo_image; // readonly
 
-    #[Validate('string|max:255')]
     public string $address;
-
-    #[Validate('string|max:255')]
     public string $address_line2;
-
-    #[Validate('string|max:255')]
     public string $city;
-
-    #[Validate('string|max:255')]
     public string $region;
-
-    #[Validate('string|max:10')]
     public string $postal_code;
 
-    #[Validate('string|active_url|max:255')]
     public string $website;
-
-    #[Validate('string|active_url|max:255')]
     public string $facebook;
-
-    #[Validate('string|active_url|max:255')]
     public string $x_twitter;
-
-    #[Validate('string|active_url|max:255')]
     public string $instagram;
-
-    #[Validate('string|active_url|max:255')]
     public string $whatsapp;
+
+    public string $lang_local;
+    public array  $lang_list = [];
+
+    public string $timezone;
+    public array  $timezone_list = [];
 
     /**
      * Before the show
@@ -120,6 +97,10 @@ class Modify extends Component
         $this->city           = $this->user_contact->city;
         $this->region         = $this->user_contact->region;
         $this->postal_code    = $this->user_contact->postal_code;
+        $this->lang_list      = LangList::lang_list;
+        $this->lang_local     = $this->user_contact->lang_local;
+        $this->timezone       = $this->user_contact->timezone;
+        $this->timezone_list  = TimezonesList::timezones_list;
         $this->website        = $this->user_contact->website;
         $this->facebook       = $this->user_contact->facebook;
         $this->x_twitter      = $this->user_contact->x_twitter;
@@ -139,11 +120,53 @@ class Modify extends Component
         return view('livewire.user.contact.modify');
     }
     /**
-     * Validation rules
-     * 
-     * See definition fields
-     * 
+     * Validation rules 1 / 2
      */
+    public function rules() {
+        return [
+            'id' => 'required|exists:user_contacts,id',
+            'user_id' => 'required|exists:users,id',
+            'country_id' => 'required|exists:countries,id',
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'nick_name' => 'string|max:255',
+            'email' => 'string|email|max:255',
+            'cellular' => 'integer|min_digits:6|max_digits:14|min:1',
+            'passport_photo' => 'nullable|string|max:255',
+            'passport_photo_image' => 'nullable|image|mimes:jpg,png,webp|max:2048',
+            'address' => 'string|max:255',
+            'address_line2' => 'string|max:255',
+            'city' => 'string|max:255',
+            'region' => 'string|max:255',
+            'postal_code' => 'string|max:10',
+            'website' => 'string|active_url|max:255',
+            'facebook' => 'string|active_url|max:255',
+            'x_twitter' => 'string|active_url|max:255',
+            'instagram' => 'string|active_url|max:255',
+            'whatsapp' => 'string|active_url|max:255',
+            'lang_local' => 'string|max:5',
+            'timezone' => 'string|max:40',
+        ];
+    }
+    /**
+     * validation rules 2 / 2
+     */
+    public function after() 
+    {
+        return [
+            function (Validator $validator) {
+                // lang_local
+
+                // timezone
+                if (!in_array( $this->timezone, TimezonesList::timezones_list )){
+                    $validator->errors()->add(
+                        'timezone',
+                        __('Must be one of list')
+                    );
+                }
+            }
+        ];
+    }
 
     /**
      * After the show,... update?
@@ -151,7 +174,7 @@ class Modify extends Component
     public function update()
     {
         // apply the rules
-        $this->validate();
+        $validated = $this->validate();
         
         $this->user_contact->country_id     = $this->country_id;
         $this->user_contact->first_name     = $this->first_name;

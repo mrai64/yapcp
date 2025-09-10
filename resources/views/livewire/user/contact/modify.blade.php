@@ -103,6 +103,42 @@
             <div class="small">@error('cellular') {{ $message }} @enderror</div>
         </div>
 
+        <div class="mb-4">
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="lang_local">
+                {{ __('Language code (for future use)') }}
+            </label>
+            <select 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl" 
+                wire:model="lang_local"
+                name="lang_local" 
+                required="required
+                >
+                @foreach ($lang_list as $lang_code => $lang_lang)
+                <option value="{{ $lang_code }}" {{($lang_code == $lang_local) ? 'selected' : '' }} > {{ $lang_lang }}</option>
+                @endforeach
+            </select>
+            <div class="small">{{ __('When * marked, we need help to complete i18n. Help us.')}}</div>
+            <div class="small">@error('lang_local') {{ $message }} @enderror</div>
+        </div>
+
+        <div class="mb-4">
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl" for="timezone">
+                {{ __('Timezone') }}
+            </label>
+            <select 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                wire:model="timezone"
+                name="timezone" 
+                required="required"
+                >
+                @foreach ($timezone_list as $timezone_item)
+                <option value="{{ $timezone_item }}" {{ ($timezone_item == $timezone) ? 'selected' : '' }}> {{ $timezone_item }} </option>
+                @endforeach
+            </select>
+            <div class="small">{{ __('As worldwide platform we need to manage correctly time.') }} {{ __('List is in alphabetically order A>Z') }}</div>
+            <div class="small">@error('timezone') {{ $message }} @enderror</div>
+        </div>
+
         <div class="block mb-4">
             <label class="block font-medium text-sm text-gray-700" for="passport_photo_image">
                 {{ __('Passport Photo') }}

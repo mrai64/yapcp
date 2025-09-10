@@ -5,6 +5,7 @@
  * 
  * user_id as uuid() should be primary key also for user_contact
  * 2025-09-03 photo_box where store user works and passport_photo
+ * 2025-09-10 add timezone and lang_local (for search: local_lang)
  * 
  */
 namespace App\Models;
@@ -35,6 +36,8 @@ class UserContact extends Model
         'city',
         'region',
         'postal_code',
+        'lang_local', //previously only 'lang'
+        'timezone',
         'website', //     url
         'facebook', //    url
         'x_twitter', //   url
@@ -55,7 +58,7 @@ class UserContact extends Model
     }
 
     /**
-     * return the string used to store works and passport_photo
+     * @return the string used to store works and passport_photo
      */
     public function photo_box() : string
     {
