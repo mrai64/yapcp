@@ -7,36 +7,6 @@ Modelli in cartella unica
 
 ## Prossime attività
 
-### Lang
-
-Lang non è Country. Uno può stare a San Marino e parlare italiano.
-
-- [x] Creare modello con lista fissa.  
-  public const ['en' => English, 'it' => 'Italian'].  
-  Enum non è quello che serve, lingua base è "en",
-  con traduzione "it", che ci penso io. Poi serve una gestione dei
-  file di traduzione. per ora limito la lista alle lingue presenti, 2.
-- [x] Alla voce lingua aggiungere un * per "translation incomplete or missing"
-  traduzione incompleta o mancante.
-- [ ] Poi serve un component, un coso che abbia in input un $lang
-  e crei la lista delle option con tutti i valori.
-- [ ] Aggiungere il campo lang string:5 nella tabella user contact, valore predefinito 'en_US'.
-- [ ] Aggiungere il campo per la scelta nel pannello user/contact
-
-### user contact
-
-- [ ] Aggiungere il language alla scheda user_contact
-  - ref <https://www.w3schools.com/tags/ref_language_codes.asp> iso-639-1 language
-  - fare anche per questa u a tabella o fare un componente
-     che carica un array e stop. class public const ecc.
-     Se anche un paese ogni tanto cambia nome, italiano resta italiano
-      che sia d'Italia, Svizzera, Argentina. **E se fosse Enum?**
-
-### timezones
-
-- [ ] solo Model con creazione elenco e funzione is_timezone
-  che verifica se un elemento è in array. Verificare Enum().
-
 ### federation rules
 
 - definire le rules che le federazioni prevedono
@@ -61,13 +31,13 @@ Lang non è Country. Uno può stare a San Marino e parlare italiano.
 ## Indice alfabetico delle tabelle
 
 - [Lang](#lang)
-- [User Contact](#user-contact)
+- [User Contact](#usercontact)
 - [Works](#works-anche-userworks)
 
 ## Elenco delle cose già fatte
 
 - Ripristinati TDL, index, dev-diaries dal repository incasinato
-- Ricostruito il marchio yaPCP in svg e inseritoo al posto di quello standard di laravel, una copia nella cartella [di agosto](./2025-08/)
+- Ricostruito il marchio yaPCP in svg e inserito al posto di quello standard di laravel, una copia nella cartella [di agosto](./2025-08/)
 - modificata la pagina welcome - cambio marchio
 - Ripristinata la configurazione email in `.env`
 
@@ -220,6 +190,19 @@ con indice unique().
   concorrenti users. photo_box. archive. Forse meglio photo_box.  
   **User_contacts** e non users.
 
+- [x] Aggiungere il language alla scheda user_contact
+  - ref <https://www.w3schools.com/tags/ref_language_codes.asp> iso-639-1 language
+  - fare anche per questa u a tabella o fare un componente
+     che carica un array e stop. class public const ecc.
+     Se anche un paese ogni tanto cambia nome, italiano resta italiano
+      che sia d'Italia, Svizzera, Argentina. **E se fosse Enum?**
+
+### Timezones
+
+- [x] solo Model con creazione elenco e funzione is_timezone
+  che verifica se un elemento è in array. ~~Verificare Enum().~~
+  Enum non va bene, sono troppi elementi (quasi 494).
+
 ## Works (anche user/works)
 
 TODO La factory non funziona come vorrei, serve
@@ -247,6 +230,22 @@ al posto di assegnarlo con Str::uuid()
 
 ### work / remove
 
-- [x] copiare da modify per mettere i campi readony fill
+- [x] copiare da modify per mettere i campi readonly fill
   e poi passare per la funzione remove che fa soft delete.
 - [x] vedere che il work viene escluso dalla lista
+
+### Lang
+
+Lang non è Country. Uno può stare a San Marino e parlare italiano.
+
+- [x] Creare modello con lista fissa.  
+  public const ['en' => English, 'it' => 'Italian'].  
+  Enum non è quello che serve, lingua base è "en",
+  con traduzione "it", che ci penso io. Poi serve una gestione dei
+  file di traduzione. per ora limito la lista alle lingue presenti, 2.
+- [x] Alla voce lingua aggiungere un * per "translation incomplete or missing"
+  traduzione incompleta o mancante.
+- [ ] Poi serve un component, un coso che abbia in input un $lang
+  e crei la lista delle option con tutti i valori.
+- [ ] Aggiungere il campo lang string:5 nella tabella user contact, valore predefinito 'en_US'.
+- [ ] Aggiungere il campo per la scelta nel pannello user/contact
