@@ -9,7 +9,18 @@ Modelli in cartella unica
 
 ### federation rules
 
-- definire le rules che le federazioni prevedono
+- [ ] definire le rules che le federazioni prevedono
+
+### Contest section
+
+- [ ] tabella che compone il concorso elencando
+le sezioni e i temi di cui è composto
+- [ ] le regole delle federazioni possono essere una lista di regole 
+e nella la section la regola "c'è", "c'è", "manca".
+
+### Contest jury list
+
+
 
 - [x] Attivare gli avvisi di registrazione per email ai nuovi utenti
 - [ ] Attivare gli avvisi di login per email agli utenti
