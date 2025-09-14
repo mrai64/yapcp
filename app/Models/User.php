@@ -3,6 +3,8 @@
  * Table generate by laravel installation and
  * modified to use uuid as primary key
  * 2025-08-31 id became uuid instead of bigint unsigned autoincrement
+ * 2025-09-13 Notify users login w/email
+ * 
  */
 namespace App\Models;
 
