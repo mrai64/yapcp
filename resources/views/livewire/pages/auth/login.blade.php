@@ -1,10 +1,15 @@
 <?php
-
+/**
+ * 2025-09-12 Add notification in $login
+ */
 use App\Livewire\Forms\LoginForm;
 use Illuminate\Support\Facades\Session;
 
 use function Livewire\Volt\form;
 use function Livewire\Volt\layout;
+use App\Models\User;
+use App\Notifications\LoginDone;
+use Illuminate\Support\Facades\Log;
 
 layout('layouts.guest');
 
@@ -14,6 +19,10 @@ $login = function () {
     $this->validate();
 
     $this->form->authenticate();
+
+    Log::debug( __CLASS__ . ' Validate ok, authenticate ok, adesso chiamo notify');
+    $user = New User();
+    $user->notify(New LoginDone($this->form));
 
     Session::regenerate();
 
