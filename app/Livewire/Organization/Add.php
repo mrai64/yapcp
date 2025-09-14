@@ -51,7 +51,7 @@ class Add extends Component
         $validated = $this->validate();
 
         // here we go!
-        $org = New Organization();
+        $org = new Organization();
         $org->create( $validated );
         
         // done back to list - see web.php

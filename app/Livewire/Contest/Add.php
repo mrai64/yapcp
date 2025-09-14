@@ -83,7 +83,7 @@ class Add extends Component
         $this->organization    = Organization::where('id', $oid)->get()[0];
         $this->organization_id = $this->organization->id; // $oid
 
-        $this->country    = New Country;
+        $this->country    = new Country;
         $this->countries  = $this->country->allByCountry();
         $this->country_id = $this->organization->country_id;
         
@@ -113,7 +113,7 @@ class Add extends Component
         $this->url_4_catalogue          = 'http://example.local/4';
         $this->award_ceremony_info      = '';
 
-        $this->contest                  = New Contest();
+        $this->contest                  = new Contest();
         $this->contest->id              = $this->contest_id;
         $this->contest->organization_id = $this->organization_id; // $oid
         $this->contest->country_id      = $this->country_id;
@@ -210,9 +210,9 @@ class Add extends Component
                 }
 
                 // insert here check for date limits
-                $day_1_opening = New DateTimeImmutable( $this->day_1_opening);
-                $day_2_closing = New DateTimeImmutable( $this->day_2_closing);
-                $day_8_closing = New DateTimeImmutable( $this->day_8_closing);
+                $day_1_opening = new DateTimeImmutable( $this->day_1_opening);
+                $day_2_closing = new DateTimeImmutable( $this->day_2_closing);
+                $day_8_closing = new DateTimeImmutable( $this->day_8_closing);
                 $duration      = date_diff($day_2_closing, $day_8_closing);
                 if ($duration->format("%a%") > "65"){
                     // maybe 7 greater than 65?

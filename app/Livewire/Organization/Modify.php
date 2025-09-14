@@ -30,7 +30,7 @@ class Modify extends Component
      */
     public function mount(string $id) // as 'id' in route()
     {
-        $org = New Organization();
+        $org = new Organization();
         $this->organization = $org->findOrFail($id);
         // id uuid
         $this->country_id = $this->organization->country_id;
@@ -47,7 +47,7 @@ class Modify extends Component
      */
     public function render()
     {
-        $country = New Country();
+        $country = new Country();
         $this->countries = $country->allByCountry();
 
         return view('livewire.organization.modify');

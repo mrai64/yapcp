@@ -27,7 +27,7 @@ class Add extends Component
     {
         $validated = $this->validate();
         // Federation::create($validated);
-        $fed = New Federation();
+        $fed = new Federation();
         $fed->create($validated);
 
         return redirect()
@@ -51,7 +51,7 @@ class Add extends Component
 
     public function render()
     {
-        $country = New Country();
+        $country = new Country();
         $this->countries = $country->allByCountry();
 
         return view('livewire.federation.add');

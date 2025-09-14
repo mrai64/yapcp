@@ -27,7 +27,7 @@ class Remove extends Component
 
     public function mount(int $id)
     {
-        $fed = New Federation();
+        $fed = new Federation();
         $this->federation =$fed->findOrFail($id);
         $this->name    = $this->federation->name;
         $this->code    = $this->federation->code;
@@ -43,7 +43,7 @@ class Remove extends Component
     public function delete()
     {
         $this->validate();
-        $fed = New Federation();
+        $fed = new Federation();
         $fed->findOrFail($this->id)->delete();
         // to list 
         return redirect()

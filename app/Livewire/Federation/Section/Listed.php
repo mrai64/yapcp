@@ -21,7 +21,7 @@ class Listed extends Component
      */
     public function mount(int $fid) // same name in route()
     {
-        $f = New Federation();
+        $f = new Federation();
         $this->federation = $f->findOrFail($fid);
 
         $this->section = DB::table( FederationSection::table_name )

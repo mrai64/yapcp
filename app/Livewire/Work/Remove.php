@@ -71,7 +71,7 @@ class Remove extends Component
     {
         $this->validate();
 
-        $work = New Work();
+        $work = new Work();
         $work->findOrFail( $this->work_id )->delete();
         // back to list
         return redirect()

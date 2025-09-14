@@ -33,7 +33,7 @@ class Add extends Component
      */
     public function mount(int $fid) // fid as in route()
     {
-        $federation = New Federation();
+        $federation = new Federation();
         $federation->findOrFail($fid);
 
         $this->federation_id = $fid;
@@ -56,7 +56,7 @@ class Add extends Component
         // 
         $validated = $this->validate();
         $validated['federation_id'] = $this->federation_id;
-        $sec = New FederationSection();
+        $sec = new FederationSection();
         $sec->create($validated);
 
         return redirect()

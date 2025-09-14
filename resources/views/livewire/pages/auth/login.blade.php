@@ -22,7 +22,7 @@ $login = function () {
 
     $user = User::where('email', $this->form->email)->firstOrFail();
     Log::debug( __CLASS__ . 'Validate ok, authenticate ok, adesso chiamo notify per: '. $user->email);
-    $user->notify(New LoginDone($this->form));
+    $user->notify(new LoginDone($this->form));
 
     Session::regenerate();
 

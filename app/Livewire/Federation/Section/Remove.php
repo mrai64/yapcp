@@ -31,7 +31,7 @@ class Remove extends Component
      */
     public function mount(int $id) // id as in route()
     {
-        $sec = New FederationSection();
+        $sec = new FederationSection();
         $this->sec = $sec->findOrFail($id);
 
         $this->id            = $this->sec->id;
@@ -56,7 +56,7 @@ class Remove extends Component
     public function delete()
     {
         $this->validate();
-        $sec = New FederationSection();
+        $sec = new FederationSection();
         $sec->findOrFail($this->id)->delete();
         // back to list
         return redirect()

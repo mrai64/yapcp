@@ -75,7 +75,7 @@ class Modify extends Component
      */
     public function mount() // no params in route()
     {
-        $user_contact          = New UserContact();
+        $user_contact          = new UserContact();
         $this->id              = $user_contact->where('user_id', Auth::id() )->pluck('id')[0];
         $this->user_contact    = $user_contact->find( $this->id );
 
@@ -114,7 +114,7 @@ class Modify extends Component
      */
     public function render()
     {
-        $countries = New Country();
+        $countries = new Country();
         $this->countries = $countries->allByCountry();
 
         return view('livewire.user.contact.modify');

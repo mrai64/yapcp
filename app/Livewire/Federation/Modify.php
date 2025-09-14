@@ -41,7 +41,7 @@ class Modify extends Component
     public function mount(int $id) // $id as 'id' in route()
     {
         // $this->federation = Federation::findOrFail($id);
-        $fed = New Federation();
+        $fed = new Federation();
         $this->federation = $fed->findOrFail($id);
 
         $this->id         = $this->federation->id;
@@ -57,7 +57,7 @@ class Modify extends Component
      */
     public function render()
     {
-        $country = New Country();
+        $country = new Country();
         $this->countries = $country->allByCountry();
 
         return view('livewire.federation.modify');

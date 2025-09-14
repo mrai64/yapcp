@@ -31,7 +31,7 @@ class Modify extends Component
      */
     public function mount(int $id) // id as in route()
     {
-        $sec = New FederationSection();
+        $sec = new FederationSection();
         $this->sec = $sec->findOrFail($id);
 
         $this->id            = $this->sec->id;

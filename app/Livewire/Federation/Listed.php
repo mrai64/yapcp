@@ -13,7 +13,7 @@ class Listed extends Component
     public function render()
     {
         // $this->federation_list = Federation::all();
-        $fed = New Federation();
+        $fed = new Federation();
         $this->federation_list = DB::table( Federation::table_name )
             ->whereNull('deleted_at')
             ->orderBy('name')

@@ -83,7 +83,7 @@ class Add extends Component
         $this->work_image->storePubliclyAs( 'photos', $this->work_file, 'public');
         $this->monochromatic = strtoupper($this->monochromatic) === 'Y' ? strtoupper($this->monochromatic) : 'N';
 
-        $this->work                 = New Work();
+        $this->work                 = new Work();
         $this->work->id             = $this->id;
         $this->work->user_id        = $this->user_id;
         $this->work->work_file      = $this->work_file;
