@@ -16,15 +16,15 @@ class LoginDone extends Notification
 {
     use Queueable;
 
-    public $form;
+    public $user;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($form)
+    public function __construct($user)
     {
-        // Log::debug( __CLASS__ . ' ' . __FUNCTION__ . ' ' . serialize( $form) );
-        $this->form = $form;
+        Log::debug( __CLASS__ . ' ' . __FUNCTION__ . ' ' . $user->email );
+        $this->user = $user;
     }
 
     /**
@@ -42,7 +42,7 @@ class LoginDone extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $subject = (string) env('APP_NAME') . ' security alert for ' . $this->form->email;
+        $subject = (string) env('APP_NAME') . ' security alert for ' . $this->user->email;
         Log::debug( __CLASS__ . ' ' . __FUNCTION__ . ' subject:' . $subject );
 
         return (new MailMessage)
@@ -50,7 +50,7 @@ class LoginDone extends Notification
             ->line('We\'d like to confirm some recent activity on your account.')
             ->line('If this activity is your own, or a co-worker\'s, then you can simply ignore this email.')
             ->line('If this seems odd, we recommend that you see what steps you can take in the event your account has been compromised or get in touch with our support team to report potentially malicious activity on your account.')
-            ->line('Thank you for using our platform!');
+            ->line('Thank you for using our contest platform!');
     }
 
     /**

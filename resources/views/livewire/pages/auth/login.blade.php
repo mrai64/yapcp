@@ -20,8 +20,8 @@ $login = function () {
 
     $this->form->authenticate();
 
-    Log::debug( __CLASS__ . ' Validate ok, authenticate ok, adesso chiamo notify');
-    $user = New User();
+    $user = User::where('email', $this->form->email)->firstOrFail();
+    Log::debug( __CLASS__ . 'Validate ok, authenticate ok, adesso chiamo notify per: '. $user->email);
     $user->notify(New LoginDone($this->form));
 
     Session::regenerate();
