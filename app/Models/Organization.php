@@ -56,14 +56,14 @@ class Organization extends Model
     }
     
     /**
-     * Per garantire l'ordine 
+     * Sorted by 
      *   - country_id
      *   - name
-     *   - data di creazione (in caso di doppie, ma poteva essere id)
-     * evitando i record cancellati
+     *   - created_at (to avoid dup, theoretically not but in real world)
+     * & exclusion for deleted_at
      */
-    public static function listed_by_country_id_name(){
-
+    public static function listed_by_country_id_name()
+    {
         $organizations = DB::table('organizations')
             ->select('id', 'country_id', 'name', 'email', 'website')
             ->whereNull('deleted_at')
@@ -71,7 +71,7 @@ class Organization extends Model
             ->orderBy('name','asc')
             ->orderBy('created_at', 'desc')
             ->get();
-        
+        // Log::debug ... 
         return $organizations;
     }
 }
