@@ -2,10 +2,12 @@
 /**
  * FederationSection
  * child of Federation
+ * 2025-08-28 renamed definition as excerptum (latin, means synopsis)
+ * 2025-08-28 enlarged code 5 > 10
  * 
  * id             bigint u a+ pk
  * federation_id  bigint u
- * code           vchar 5
+ * code           vchar 10
  * name           vchar 255
  * excerptum      text
  * created_at     datetime
