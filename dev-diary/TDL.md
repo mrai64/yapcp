@@ -7,25 +7,55 @@ Modelli in cartella unica
 
 ## Prossime attività
 
-### federation rules
+La definizione del concorso passa da più fasi:
 
-- [ ] definire le rules che le federazioni prevedono
+1. definire il concorso: organizzatore, nome, calendario, patrocini (idem per i circuiti), quote di partecipazione
+2. definire le sezioni del concorso (il circuito non ne ha)
+3. definire le giurie del concorso (il circuito non ne ha)
+4. definire i premi del concorso (del circuito), e delle sezioni del concorso (non ci sono per i circuiti)
 
-### Contest section
+### 1. Contest
 
-- [ ] tabella che compone il concorso elencando
+- [ ] Aggiungere le indicazioni per la quota di partecipazione (campo ditipo text)
+
+I link per il pagamento saranno parted ella pagina che contiene la scheda di iscrizione.
+Chi non è inserito nella piattaforma scrivendosi
+al concorso entra a farvi parte, ottenendo dei vantaggi
+che può anche decidere di non sfruttare.
+
+### 2. Contest section
+
+- [x] tabella che compone il concorso elencando
 le sezioni e i temi di cui è composto
 - [ ] le regole delle federazioni possono essere una lista di regole 
 e nella la section la regola "c'è", "c'è", "manca".
 
-### Contest jury list
+### 3. Contest jury list
 
+- [ ] tabella che in base al concorso / circuito elenca dei premi,  
+ciascuno con un identificativo univoco all'interno del concorso.
+- [ ] la sezione all'interno della tabella premi dev'essere nullable,  
+intendendosi che dove manca una sezione è un premio di circuito/ concorso
+es. premio del giurato, miglior autore, ecc.
 
+### Federation rules
+
+- [ ] definire le rules che le federazioni prevedono,  
+ovvero che per i concorsi a immagini digitali c'è un
+minimo (0) e un massimo (4) di lavori partecipanti,
+che il lato lungo dev'essere max(2500) pixel, in formato jpg, tif,
+e cose così. Ogni regola deve avere una funzione che esegue la verifica
+su un oggetto work, a cui accede
+
+## Generale
 
 - [x] Attivare gli avvisi di registrazione per email ai nuovi utenti
-- [ ] Attivare gli avvisi di login per email agli utenti
-- [ ] scoprire come usare MAMP al posto di artisan serve.
-  Si deve puntare alla cartella /public che però deve sparire dall'URL
+- [x] Attivare gli avvisi di login per email agli utenti
+- [ ] scoprire come usare MAMP al posto di `php artisan serve`.  
+  Si deve puntare alla cartella /public che però deve sparire dall'URL,
+  ho provato a spostare sulla radice del progetto l'indirizzo
+  base di MAMP, e funziona ma solo fino a un certo punto.
+
 
 - [ ] Studiare abilitazione e autenticazione,
   l'obiettivo è avere una tabella di user con i ruoli granulari, e inserire nelle loro abilitazioni i codici associati alle operazioni e alle gestioni errore. Deve essere registrato nel log A B C che utente userA non è abilitato alla funzione functionB per cui serve il codice di abilitazione abilC. All'utente userA deve arrivare solo il messaggio che deve farsi abilitare rivolgendosi all'amministrazione del sistema. C'è già un middleware che controlla iscrizione e verifica email, va esteso.
