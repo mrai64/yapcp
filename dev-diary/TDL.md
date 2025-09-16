@@ -13,10 +13,12 @@ La definizione del concorso passa da più fasi:
 2. definire le sezioni del concorso (il circuito non ne ha)
 3. definire le giurie del concorso (il circuito non ne ha)
 4. definire i premi del concorso (del circuito), e delle sezioni del concorso (non ci sono per i circuiti)
+5. ricavare da quanto sopra il testo di una bozza di regolamento che sia spedibile agli enti sponsor.
 
 ### 1. Contest
 
-- [ ] Aggiungere le indicazioni per la quota di partecipazione (campo di tipo text)
+- [ ] Aggiungere le indicazioni per la quota di partecipazione (campo di tipo text)  
+In precedenza questa informazione può far parte della pagina del bando e regolame to
 
 I link per il pagamento saranno parted ella pagina che contiene la scheda di iscrizione.
 Chi non è inserito nella piattaforma scrivendosi
