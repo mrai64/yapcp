@@ -16,7 +16,7 @@ La definizione del concorso passa da più fasi:
 
 ### 1. Contest
 
-- [ ] Aggiungere le indicazioni per la quota di partecipazione (campo ditipo text)
+- [ ] Aggiungere le indicazioni per la quota di partecipazione (campo di tipo text)
 
 I link per il pagamento saranno parted ella pagina che contiene la scheda di iscrizione.
 Chi non è inserito nella piattaforma scrivendosi
