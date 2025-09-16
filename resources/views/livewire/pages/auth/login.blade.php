@@ -1,6 +1,7 @@
 <?php
 /**
  * 2025-09-12 Add notification in $login
+ * 2025-09-15 UserContact instead of User 
  */
 use App\Livewire\Forms\LoginForm;
 use Illuminate\Support\Facades\Session;
@@ -22,7 +23,7 @@ $login = function () {
 
     $user = User::where('email', $this->form->email)->firstOrFail();
     Log::debug( __CLASS__ . 'Validate ok, authenticate ok, adesso chiamo notify per: '. $user->email);
-    $user->notify(new LoginDone($this->form));
+    $user->notify(new LoginDone($user));
 
     Session::regenerate();
 

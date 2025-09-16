@@ -21,9 +21,10 @@ class LoginDone extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct($user)
+    public function __construct(User $user)
     {
-        Log::debug( __CLASS__ . ' ' . __FUNCTION__ . ' ' . $user->email );
+        Log::debug( __CLASS__ . ' ' . __FUNCTION__ . ' email:' . $user->email );
+        Log::debug( __CLASS__ . ' ' . __FUNCTION__ . ' name:' . $user['name'] );
         $this->user = $user;
     }
 
@@ -47,7 +48,7 @@ class LoginDone extends Notification
 
         return (new MailMessage)
             ->subject( $subject )
-            ->line('We\'d like to confirm some recent activity on your account.')
+            ->line($this->user['name'] . ', we\'d like to confirm some recent activity on your account.')
             ->line('If this activity is your own, or a co-worker\'s, then you can simply ignore this email.')
             ->line('If this seems odd, we recommend that you see what steps you can take in the event your account has been compromised or get in touch with our support team to report potentially malicious activity on your account.')
             ->line('Thank you for using our contest platform!');
