@@ -1,6 +1,7 @@
 <div>
     <p class="mb-4">{{ __('Well, Contest record is already created.') }}<br />
      {{ __('If you interrupt compiling form, you can retrieve it in your Organization Daskboard.') }}</p>
+     <p class="mb-4">{{ __('After that contest general definition, next step are: section list, jury definition, prize list definition.') }}</p>
 
     <p class="mb-4"> 
         <a  href="{{ route('dashboard') }}" 
@@ -194,7 +195,7 @@
 
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="url_4_catalogue">
-                {{ __('Official Contest Result List url') }}
+                {{ __('Official Contest Catalogues url') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -203,6 +204,20 @@
                 value="{{ old('url_4_catalogue') }}"
                 >
             <div class="small">@error('url_4_catalogue') {{ $message }} @enderror</div>
+        </div>
+
+        <div class="mb-4">
+            <style>textarea {resize:vertical;}</style>
+            <label class="block font-medium text-sm text-gray-700" for="fee_info">
+                {{ __('Participation Fee info') }}
+            </label>
+            <textarea 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                type="text" name="fee_info"
+                wire:model="fee_info"
+            >{{ old('fee_info') }}</textarea>
+            <div class="small">{{ __('Only for info, and replied in Rules pdf. Even for free fee.') }}</div>
+            <div class="small">@error('fee_info') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -281,7 +296,7 @@
 
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="day_6_awards">
-                {{ __('Award ceremony date / 1 of 2') }}
+                {{ __("Award' Ceremony 1 Date") }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-xl" 
@@ -297,7 +312,7 @@
         <div class="mb-4">
             <style>textarea {resize:vertical;}</style>
             <label class="block font-medium text-sm text-gray-700" for="award_ceremony_info">
-                {{ __('Award\' Ceremony info / 2 of 2') }}
+                {{ __("Award' Ceremony 2 location info") }}
             </label>
             <textarea 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -342,7 +357,7 @@
         <button type="submit" 
             class="inline-flex items-center px-4 py-2 mt-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-3"
             >
-            {{ __('Completed') }}
+            {{ __('Completed, NEXT') }}
         </button>
 
     </form>

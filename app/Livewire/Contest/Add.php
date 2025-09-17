@@ -1,13 +1,14 @@
 <?php
 /**
  * Contest record
- * 
+ *
  * upload contest mark logo
  * rules()
- * 
+ *
  * WARNING: That module FIRST SAVE, then modify Contest record
  * and not as usual LAST SAVE record
- * 
+ *
+ * 2025-09-17 fee_info added
  */
 
 namespace App\Livewire\Contest;
@@ -31,7 +32,7 @@ class Add extends Component
     use WithFileUploads;
 
     /**
-     * form fields and tmp var 
+     * form fields and tmp var
      */
     public Contest $contest;
     public Contest $circuit;
@@ -46,8 +47,8 @@ class Add extends Component
     public string $name_local; //
     public string $lang_local; // LangList[]
     public        $lang_list = [];
-    public string $organization_id; // organizations.id 
-    public string $contest_mark; // path n fle 
+    public string $organization_id; // organizations.id
+    public string $contest_mark; // path n fle
     public        $contest_image; // stored in 'contest' disk
     public string $contact_info; // address, email, cell, and so on
     public string $is_circuit; // Y/N, not bool N when not Y
@@ -71,11 +72,12 @@ class Add extends Component
     // created_at assigned
     // updated_at assigned
     // deleted_at assigned
+    public string $fee_info;
 
     /**
      * Before the show
-     * 
-     * 
+     *
+     *
      */
     public function mount(string $oid) // organization_id as in route()
     {
@@ -86,32 +88,33 @@ class Add extends Component
         $this->country    = new Country;
         $this->countries  = $this->country->allByCountry();
         $this->country_id = $this->organization->country_id;
-        
+
         $this->timezone_list = TimezonesList::timezones_list;
         $this->timezone   = 'Europe/Rome';
-        
+
         $this->name_en    = 'Contest name';
         $this->name_local = 'Contest name';
-        
+
         $this->lang_list  = LangList::lang_list;
         $this->lang_local = 'en';
         $this->is_circuit = 'N';
 
         // TODO use day, day+1, day+7 and so on...
-        $this->day_1_opening      = date(DATE_ATOM); // 
-        $this->day_2_closing      = date(DATE_ATOM); // 
-        $this->day_3_jury_opening = date(DATE_ATOM); // 
-        $this->day_4_jury_closing = date(DATE_ATOM); // 
-        $this->day_5_revelations  = date(DATE_ATOM); // 
-        $this->day_6_awards       = date(DATE_ATOM); // 
-        $this->day_7_catalogues   = date(DATE_ATOM); // 
-        $this->day_8_closing      = date(DATE_ATOM); // 
+        $this->day_1_opening      = date(DATE_ATOM); //
+        $this->day_2_closing      = date(DATE_ATOM); //
+        $this->day_3_jury_opening = date(DATE_ATOM); //
+        $this->day_4_jury_closing = date(DATE_ATOM); //
+        $this->day_5_revelations  = date(DATE_ATOM); //
+        $this->day_6_awards       = date(DATE_ATOM); //
+        $this->day_7_catalogues   = date(DATE_ATOM); //
+        $this->day_8_closing      = date(DATE_ATOM); //
 
         $this->url_1_rule               = 'http://example.local/1';
         $this->url_2_concurrent_list    = 'http://example.local/2';
         $this->url_3_admit_n_award_list = 'http://example.local/3';
         $this->url_4_catalogue          = 'http://example.local/4';
         $this->award_ceremony_info      = '';
+        $this->fee_info                 = '';
 
         $this->contest                  = new Contest();
         $this->contest->id              = $this->contest_id;
@@ -134,8 +137,9 @@ class Add extends Component
         $this->contest->url_2_concurrent_list    = $this->url_2_concurrent_list   ;
         $this->contest->url_3_admit_n_award_list = $this->url_3_admit_n_award_list;
         $this->contest->url_4_catalogue          = $this->url_4_catalogue         ;
-        $this->contest->contact_info             = $this->organization->name;         ;
-        $this->contest->award_ceremony_info      = $this->organization->name;         ;
+        $this->contest->contact_info             = $this->organization->name;
+        $this->contest->award_ceremony_info      = $this->award_ceremony_info;
+        $this->contest->fee_info                 = $this->fee_info;
         // to store uuid and default values
         $this->contest->save();
     }
@@ -149,10 +153,10 @@ class Add extends Component
     }
 
     /**
-     * Validation 
+     * Validation
      * see also <https://laravel.com/docs/12.x/validation#available-validation-rules>
      * see also <https://laravel.com/docs/12.x/validation#custom-validation-rules>
-     * 
+     *
      * rules() first for auto validation
      * after() after rules()
      */
@@ -184,6 +188,7 @@ class Add extends Component
             'day_7_catalogues'    => 'required|date|after_or_equal:day_6_awards',
             'day_8_closing'       => 'required|date|after_or_equal:day_7_catalogues',
             'award_ceremony_info' => 'required|string',
+            'fee_info'            => 'required|string',
             // created_at
             // updated_at
             // deleted_at
@@ -226,7 +231,7 @@ class Add extends Component
     }
 
     /**
-     * 
+     *
      */
     public function save()
     {
@@ -256,8 +261,9 @@ class Add extends Component
         $this->contest->day_6_awards        = $this->day_6_awards;
         $this->contest->day_7_catalogues    = $this->day_7_catalogues;
         $this->contest->day_8_closing       = $this->day_8_closing;
-        $this->contest->award_ceremony_info = $this->award_ceremony_info;   
-        // ⏰
+        $this->contest->award_ceremony_info = $this->award_ceremony_info;
+        $this->contest->fee_info            = $this->fee_info;
+        // ✏️
         $this->contest->save();
 
         // redirect

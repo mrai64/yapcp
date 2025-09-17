@@ -3,8 +3,11 @@
  * Contest - main table
  * must be father of seven
  * use uuid 
- * parent of Organization
+ * related of Organization
  * 
+ * 2025-09-17 In the photo contest organization some contest are grouped
+ *            into so named circuit. A circuit have a contest record without
+ *            section and jury. A circuit record 
  * 
  */
 namespace App\Models;
@@ -33,11 +36,13 @@ class Contest extends Model
         'contest_mark',
         'contact_info',
         'is_circuit',
+        // circuit_id
         'federation_list',
         'url_1_rule',
         'url_2_concurrent_list',
         'url_3_admit_n_award_list',
         'url_4_catalogue',
+        // timezone
         'day_1_opening',
         'day_2_closing',
         'day_3_jury_opening',
@@ -47,6 +52,10 @@ class Contest extends Model
         'day_7_catalogues',
         'day_8_closing',
         'award_ceremony_info',
+        'fee_info',
+        // created_at
+        // updated_at
+        // deleted_at
     ];
 
     // uuid as pk 
