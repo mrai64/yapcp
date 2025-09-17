@@ -48,8 +48,8 @@ class LoginDone extends Notification
 
         return (new MailMessage)
             ->subject( $subject )
-            ->line($this->user['name'] . ', we\'d like to confirm some recent activity on your account.')
-            ->line('If this activity is your own, or a co-worker\'s, then you can simply ignore this email.')
+            ->line($this->user['name'] . ", we'd like to confirm some recent activity on your account.")
+            ->line("If this activity is your own, or a co-worker's, then you can simply ignore this email.")
             ->line('If this seems odd, we recommend that you see what steps you can take in the event your account has been compromised or get in touch with our support team to report potentially malicious activity on your account.')
             ->line('Thank you for using our contest platform!');
     }
