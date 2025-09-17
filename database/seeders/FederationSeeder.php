@@ -14,8 +14,8 @@ class FederationSeeder extends Seeder
      */
     public function run(): void
     {
-        /**
-         * 
+        // Federation::factory()->count(2)->create();
+
         Federation::factory()->create([
             'country_id' => 'LUX',
             'code' => 'FIAP',
@@ -42,9 +42,12 @@ class FederationSeeder extends Seeder
             "name" => "Global Photographic Union",
             "website" => 'https://www.gpuphoto.com/',
         ]);
-         * 
-         */
+        Federation::factory()->create([
+            'country_id' => 'USA',
+            'code' => 'PAA',
+            "name" => "Photographic Alliance of America",
+            "website" => 'https://www.paausa.org/',
+        ]);
 
-        Federation::factory()->count(2)->create();
     }
 }
