@@ -1,6 +1,7 @@
 <?php
 /**
  * 2025-08-29 picked from iso.org open broad data
+ * 2025-09-17 flag_code added to fillable fields
  */
 namespace App\Models;
 
@@ -21,6 +22,10 @@ class Country extends Model
     protected $fillable = [
         'id',
         'country',
+        'flag_code',
+        // created_at
+        // updated_at
+        // deleted_at
     ];
 
     protected function casts(): array{
