@@ -7,21 +7,35 @@ Modelli in cartella unica
 
 ## Prossime attività
 
-La definizione del concorso passa da più fasi:
+La definizione del concorso e del circuito concorsi passa da più fasi:
 
 1. definire il concorso: organizzatore, nome, calendario, patrocini (idem per i circuiti), quote di partecipazione
 2. definire le sezioni del concorso (il circuito non ne ha)
 3. definire le giurie del concorso (il circuito non ne ha)
 4. definire i premi del concorso (del circuito), e delle sezioni del concorso (non ci sono per i circuiti)
-5. ricavare da quanto sopra il testo di una bozza di regolamento che sia spedibile agli enti sponsor.
+5. ricavare da quanto sopra il testo di una bozza di regolamento che sia inviabile agli enti sponsor.
 
 ### 1. Contest
 
-- [ ] Aggiungere le indicazioni per la quota di partecipazione (campo di tipo text)  
-In precedenza questa informazione può far parte della pagina del bando e regolame to
+- [x] Aggiungere le indicazioni per la quota di partecipazione (campo di tipo text)  
+In precedenza questa informazione può far parte della pagina del bando e regolamento
+- [ ] Aggiungere al pannello Add e Modify un flag tri-stato
+  - Questo è un circuito
+  - Questo concorso fa parte di un circuito
+  - Nessuna delle precedenti
+  Nel primo caso vale il nome del circuito, il calendario, e i link per i siti.  
+  Nel secondo caso si può fornire un uuid preso dal circuito che quindi
+  precompila i campi già presenti rendendoli readonly.  
+  Nel terzo caso tutti i campi obbligatori.  
+- [ ] Creare pagina Contest/Modify  
+Sulla base della pagina add.blade fare la pagina modify.blade, si possono modificare
+i concorsi anche sulla presenza di un circuit id che prima non c'era.
+- [ ] Aggiungere alla pagina un flag di readonly quando la data di sistema sia superiore
+alla data di pubblicazione del concorso e consentire solo la cancellazione del concorso
+o nemmeno quella. Da far fare a un admin di yaPCP.
 
-I link per il pagamento saranno parted ella pagina che contiene la scheda di iscrizione.
-Chi non è inserito nella piattaforma scrivendosi
+I link per il pagamento saranno parte della pagina che contiene la scheda di iscrizione.
+Chi non è inserito nella piattaforma, iscrivendosi
 al concorso entra a farvi parte, ottenendo dei vantaggi
 che può anche decidere di non sfruttare.
 
@@ -29,25 +43,33 @@ che può anche decidere di non sfruttare.
 
 - [x] tabella che compone il concorso elencando
 le sezioni e i temi di cui è composto
-- [ ] le regole delle federazioni possono essere una lista di regole 
+- [ ] le regole delle federazioni possono essere una lista di regole
 e nella la section la regola "c'è", "c'è", "manca".
 
 ### 3. Contest jury list
 
+- record FACOLTATIVO (non esiste per i circuiti)
 - [ ] tabella che in base al concorso / circuito elenca dei premi,  
 ciascuno con un identificativo univoco all'interno del concorso.
 - [ ] la sezione all'interno della tabella premi dev'essere nullable,  
 intendendosi che dove manca una sezione è un premio di circuito/ concorso
 es. premio del giurato, miglior autore, ecc.
 
-### Federation rules
+### 4. Contest section prize award list
+
+- [ ] Dev'essere previsto un flag se si tratta di Premio o Menzione
+- [ ] Il campo relativo al concorso e circuito sarà obbligatorio, mentre
+il campo relativo al codice sezione tema sarà facoltativo, nel caso manchi
+il premio si intende "di circuito e/o di concorso"
+
+### Federation Rules List
 
 - [ ] definire le rules che le federazioni prevedono,  
 ovvero che per i concorsi a immagini digitali c'è un
 minimo (0) e un massimo (4) di lavori partecipanti,
 che il lato lungo dev'essere max(2500) pixel, in formato jpg, tif,
 e cose così. Ogni regola deve avere una funzione che esegue la verifica
-su un oggetto work, a cui accede
+su un oggetto work, a cui accede e risponde con uno status di compliance o no.
 
 ## Generale
 
@@ -58,15 +80,18 @@ su un oggetto work, a cui accede
   ho provato a spostare sulla radice del progetto l'indirizzo
   base di MAMP, e funziona ma solo fino a un certo punto.
 
-
-- [ ] Studiare abilitazione e autenticazione,
-  l'obiettivo è avere una tabella di user con i ruoli granulari, e inserire nelle loro abilitazioni i codici associati alle operazioni e alle gestioni errore. Deve essere registrato nel log A B C che utente userA non è abilitato alla funzione functionB per cui serve il codice di abilitazione abilC. All'utente userA deve arrivare solo il messaggio che deve farsi abilitare rivolgendosi all'amministrazione del sistema. C'è già un middleware che controlla iscrizione e verifica email, va esteso.
+- [ ] Studiare abilitazione e autenticazione,  
+  L'obiettivo è avere una tabella di user con i ruoli granulari,
+  e inserire nelle loro abilitazioni i codici associati alle
+  operazioni e alle gestioni errore. Deve essere registrato nel
+  log A B C che utente userA non è abilitato alla funzione
+  functionB per cui serve il codice di abilitazione abilC.
+  All'utente userA deve arrivare solo il messaggio che deve
+  farsi abilitare rivolgendosi all'amministrazione del sistema.
+  C'è già un middleware che controlla iscrizione e verifica email,
+  va esteso o sostituito.
 
 ## Altre cose da fare
-
-- [ ] Timezone, fatto il Model andare ad aggiungere il dato richiesto in
-  tabella UserContact tipo string:40
-- [ ] Tabella User, mandare email di accesso effettuato
 
 - [ ] Revisione del marchio con esclusione dei rettangoli, solo numeri sfalsati in altezza
   con un rigo sottostante a suggerire lo scalino e le lettere yaPCP o PCP (o PhoConPla?)
@@ -74,7 +99,15 @@ su un oggetto work, a cui accede
 ## Indice alfabetico delle tabelle
 
 - [Lang](#lang)
+- [Contest]
+- [Contest Section]
+- [Federation]
+- [Federation Section]
+- [Federation Rules List]
+- [Organization]
+- [User]
 - [User Contact](#usercontact)
+- [User Role]
 - [Works](#works-anche-userworks)
 
 ## Elenco delle cose già fatte
@@ -292,3 +325,7 @@ Lang non è Country. Uno può stare a San Marino e parlare italiano.
   e crei la lista delle option con tutti i valori.
 - [ ] Aggiungere il campo lang string:5 nella tabella user contact, valore predefinito 'en_US'.
 - [ ] Aggiungere il campo per la scelta nel pannello user/contact
+
+- [x] Timezone, fatto il Model andare ad aggiungere il dato richiesto in
+  tabella UserContact tipo string:40
+- [x] Tabella User, mandare email di accesso effettuato
