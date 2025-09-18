@@ -33,6 +33,11 @@
             <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
                 {{ $slot }}
             </div>
+
+            <footer class="py-16 text-center text-sm text-black dark:text-white/70">
+                {{ config('app.name') }} v{{ App\Models\User::version }}
+            </footer>
+
         </div>
     </body>
 </html>
