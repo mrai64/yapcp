@@ -9,6 +9,7 @@ use App\Livewire\User;
 use App\Livewire\Work;
 
 Route::view('/', 'welcome');
+Route::view('/credits', 'credits');
 
 Route::view('dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
