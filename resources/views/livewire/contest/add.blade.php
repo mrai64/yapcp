@@ -50,7 +50,7 @@
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl" 
                 wire:model="country_id"
                 name="country_id" 
-                required="required
+                required="required"
                 >
                 <option value="">{{ __('-- choose country --') }}</option>
                 @foreach ($countries as $country)
@@ -68,7 +68,7 @@
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl" 
                 wire:model="lang_local"
                 name="lang_local" 
-                required="required
+                required="required"
                 >
                 @foreach ($lang_list as $lang_code => $lang_lang)
                 <option value="{{ $lang_code }}" {{($lang_code == $lang_local) ? 'selected' : '' }} > {{ $lang_lang }}</option>
@@ -111,22 +111,23 @@
 
         <div class="mt-4 mb-4">
             <label class="block font-medium text-sm text-gray-700">
-                {{ __('Is that a Circuit record?') }}
+                {{ __("Contest in Circuit Y/N") }}
             </label>
             <label class="block font-medium text-sm text-gray-700">
                 <input type="radio" name="is_circuit" id="" value="Y" />
-                {{ __('Yes, it\'s a Circuit record') }}
+                {{ __("That's a Contest of Circuit") }}
             </label>
             <label class="block font-medium text-sm text-gray-700">
                 <input type="radio" name="is_circuit" id="" value="N" checked />
-                {{ __('No, it\'s a Contest') }}
+                {{ __("That's only a Contest, out of circuit. Or it's che Circuit record, to obtain circuit_id for next Contest records") }}
             </label>
+            <div class="small">{{ __("Are you registering a Circuit record? Well, check: No, because Circuit is Circuit, NOT a Contest in Circuit") }}</div>
             <div class="small">@error('is_circuit') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="circuit_id">
-                {{ __('Cut n paste Circuit uuid - chain id') }}
+                {{ __('Circuit Id') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -134,6 +135,7 @@
                 wire:model="circuit_id" 
                 value="{{ old('circuit_id') }}"
                 />
+            <div class="small">{{ __("Leave empty if previous field was 'no'. If it's a contest in circuit, insert circuit id previously registered") }}</div>
             <div class="small">@error('circuit_id') {{ $message }} @enderror</div>
         </div>
 
