@@ -437,8 +437,12 @@ class TimezonesList extends Model
 	{
 		return self::timezones_list;
 	}
-    public function is_timezone(string $timezone_in) : bool
-    {
-        return (in_array( $timezone_in, self::timezones_list));
-    }
+
+	/**
+	 * as validator
+	 */
+	public function is_timezone(string $timezone_in) : bool
+	{
+			return (in_array( $timezone_in, self::timezones_list));
+	}
 }
