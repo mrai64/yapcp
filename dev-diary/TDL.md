@@ -7,37 +7,42 @@ Modelli in cartella unica
 
 ## Prossime attività
 
+- [ ] aggiornamento dell'elenco paesi con gli emoji delle bandiere nazionali
+- [ ] ricostruzione del seeder con gli emoji delle bandiere
+
 La definizione del concorso e del circuito concorsi passa da più fasi:
 
 1. definire il concorso: organizzatore, nome, calendario, patrocini (idem per i circuiti), quote di partecipazione
 2. definire le sezioni del concorso (il circuito non ne ha)
 3. definire le giurie del concorso (il circuito non ne ha)
-4. definire i premi del concorso (del circuito), e delle sezioni del concorso (non ci sono per i circuiti)
+4. definire i premi del concorso (del circuito), e delle sezioni del concorso (non ci sono premi di sezione per i circuiti)
 5. ricavare da quanto sopra il testo di una bozza di regolamento che sia inviabile agli enti sponsor.
 
 ### 1. Contest
 
 - [x] Aggiungere le indicazioni per la quota di partecipazione (campo di tipo text)  
 In precedenza questa informazione può far parte della pagina del bando e regolamento
-- [ ] Aggiungere al pannello Add e Modify un flag tri-stato
-  - Questo è un circuito
-  - Questo concorso fa parte di un circuito
-  - Nessuna delle precedenti
-  Nel primo caso vale il nome del circuito, il calendario, e i link per i siti.  
-  Nel secondo caso si può fornire un uuid preso dal circuito che quindi
-  precompila i campi già presenti rendendoli readonly.  
-  Nel terzo caso tutti i campi obbligatori.  
-- [ ] Creare pagina Contest/Modify  
+- [X] Creare pagina Contest/Modify  
 Sulla base della pagina add.blade fare la pagina modify.blade, si possono modificare
 i concorsi anche sulla presenza di un circuit id che prima non c'era.
-- [ ] Aggiungere alla pagina un flag di readonly quando la data di sistema sia superiore
-alla data di pubblicazione del concorso e consentire solo la cancellazione del concorso
+- [ ] TODO Aggiungere alla pagina un flag di readonly quando la data di sistema sia superiore
+alla data di apertura del concorso e consentire solo la cancellazione del concorso
 o nemmeno quella. Da far fare a un admin di yaPCP.
+- [ ] TODO Quando si aggiunge un campo circuit_id andare al record e pescare
+alcuni campi con cui impostare i dati del concorso.
+- [ ] Quando viene impostato Y il flag is_circuit, il campo circuit_id diventa readonly e
+viene impostato al valore di id in salvataggio dati.
 
 I link per il pagamento saranno parte della pagina che contiene la scheda di iscrizione.
 Chi non è inserito nella piattaforma, iscrivendosi
 al concorso entra a farvi parte, ottenendo dei vantaggi
-che può anche decidere di non sfruttare.
+che può anche decidere di non sfruttare.  
+In futuro ci sarà un contratto con le organizzazioni che propongono
+concorsi con una bassa fee per concorrente, indipendente dal numero di sezioni.
+Ci sarà un contratto con una bassa fee annuale con i concorrenti se manterranno le opere in linea
+per almeno una cinquina di concorsi traendo vantaggio dalla facilità di iscrizione.
+Non metto limiti al numero di opere archiviabili, ma al tempo di archiviazione
+penso di max 4 anni.
 
 ### 2. Contest section
 
