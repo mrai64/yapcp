@@ -14,13 +14,6 @@
 
         <!-- Styles -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-<style>
-.fyk {font-family: 'Yanone Kaffeesatz', sans-serif;}
-.bg-blue {
-  --tw-bg-opacity: 1;
-  background-color:rgb(0 0 245 / var(--tw-bg-opacity, 1))
-}
-</style>
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
