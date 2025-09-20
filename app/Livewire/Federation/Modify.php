@@ -2,6 +2,7 @@
 /**
  * 2025-07-28 add $id (readonly) for federation-section and other child tables
  * 2025-08-30 add country_id, contact
+ * 2025-09-20 enlarge 6 > 10 code field
  */
 namespace App\Livewire\Federation;
 
@@ -20,7 +21,7 @@ class Modify extends Component
     #[Validate('required|string|max:255')]
     public $name = '';
 
-    #[Validate('required|string|max:6')]
+    #[Validate('required|string|max:10')]
     public $code = '';
 
     #[Validate('string|url|max:255')]

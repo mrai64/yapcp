@@ -1,6 +1,6 @@
 <div>
-    <p class="mb-4">{{ __('Modify Federation data here.')}}</p>
-    <p class="mb-4">
+    <p class="fyk text-2xl mb-4">{{ __('Modify Federation data here.')}}</p>
+    <p class="fyk text-xl mb-4">
         <a href="{{ route('federation-list') }}" 
             target="_blank" rel="noopener noreferrer">
             {{ __('Back to Federation list') }} 
@@ -81,13 +81,22 @@
             <div class="small">@error('contact') {{ $message }} @enderror</div>
         </div>
 
-        <p>&nbsp;</p>
-        <a href="/federation/section/list/{{$id}}" 
-            class="fyk text-xl mb-4"
-            target="_blank" rel="noopener noreferrer"
-            >
-        Federation' Coded Sections List 🗒️
-        </a>
+        <p class="fyk text-xl mb-4">
+            <br />
+            <a href="/federation/section/list/{{$id}}" 
+                class="fyk text-xl mb-4"
+                target="_blank" rel="noopener noreferrer"
+                >
+            Federation' Coded Sections List 🗒️
+            </a>
+        </p>
+
+        <p class="fyk text-xl mb-4">
+            <a href="{{ route('federation-list') }}" 
+                target="_blank" rel="noopener noreferrer">
+                {{ __('Back to Federation list') }} 
+            </a>
+        </p>
 
         <p>&nbsp;</p>
         <button type="submit" 

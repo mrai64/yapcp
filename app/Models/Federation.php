@@ -2,6 +2,7 @@
 /**
  * 2025-08-27 add contact country_id
  * 2025-08-27 add contact field
+ * 2025-09-20 add 4 char to code
  */
 namespace App\Models;
 
@@ -17,7 +18,7 @@ class Federation extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable =[
-        'country',
+        'country_id',
         'code',
         'name',
         'website',
