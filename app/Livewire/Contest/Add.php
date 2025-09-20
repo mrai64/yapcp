@@ -21,9 +21,6 @@ use App\Models\TimezonesList;
 use DateTimeImmutable;
 use Illuminate\Support\Str;
 use Livewire\Component;
-// use Livewire\Attributes\Validate;
-// use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
@@ -233,36 +230,36 @@ class Add extends Component
     /**
      *
      */
-    public function save()
+    public function saveNewContest()
     {
         $validated = $this->validate(); // apply rules
 
         // TODO pick from form all fields and put in update()
         // TODO because create was in mount()
-        $this->contest->id              = $this->contest_id;
-        $this->contest->country_id      = $this->country_id;
-        $this->contest->name_en         = $this->name_en;
-        $this->contest->name_local      = $this->name_local;
-        $this->contest->lang_local      = $this->lang_local;
-        $this->contest->contact_info    = $this->contact_info;
-        $this->contest->is_circuit      = $this->is_circuit;
-        $this->contest->circuit_id      = $this->circuit_id;
-        $this->contest->federation_list = $this->federation_list;
-        $this->contest->url_1_rule               = $this->url_1_rule;
-        $this->contest->url_2_concurrent_list    = $this->url_2_concurrent_list;
-        $this->contest->url_3_admit_n_award_list = $this->url_3_admit_n_award_list;
-        $this->contest->url_4_catalogue     = $this->url_4_catalogue;
-        $this->contest->timezone            = $this->timezone;
-        $this->contest->day_1_opening       = $this->day_1_opening;
-        $this->contest->day_2_closing       = $this->day_2_closing;
-        $this->contest->day_3_jury_opening  = $this->day_3_jury_opening;
-        $this->contest->day_4_jury_closing  = $this->day_4_jury_closing;
-        $this->contest->day_5_revelations   = $this->day_5_revelations;
-        $this->contest->day_6_awards        = $this->day_6_awards;
-        $this->contest->day_7_catalogues    = $this->day_7_catalogues;
-        $this->contest->day_8_closing       = $this->day_8_closing;
-        $this->contest->award_ceremony_info = $this->award_ceremony_info;
-        $this->contest->fee_info            = $this->fee_info;
+        $this->contest->id                       = $this->contest_id;
+        $this->contest->country_id               = $validated['country_id'];
+        $this->contest->name_en                  = $validated['name_en'];
+        $this->contest->name_local               = $validated['name_local'];
+        $this->contest->lang_local               = $validated['lang_local'];
+        $this->contest->contact_info             = $validated['contact_info'];
+        $this->contest->is_circuit               = $validated['is_circuit'];
+        $this->contest->circuit_id               = $validated['circuit_id'];
+        $this->contest->federation_list          = $validated['federation_list'];
+        $this->contest->url_1_rule               = $validated['url_1_rule'];
+        $this->contest->url_2_concurrent_list    = $validated['url_2_concurrent_list'];
+        $this->contest->url_3_admit_n_award_list = $validated['url_3_admit_n_award_list'];
+        $this->contest->url_4_catalogue          = $validated['url_4_catalogue'];
+        $this->contest->timezone                 = $validated['timezone'];
+        $this->contest->day_1_opening            = $validated['day_1_opening'];
+        $this->contest->day_2_closing            = $validated['day_2_closing'];
+        $this->contest->day_3_jury_opening       = $validated['day_3_jury_opening'];
+        $this->contest->day_4_jury_closing       = $validated['day_4_jury_closing'];
+        $this->contest->day_5_revelations        = $validated['day_5_revelations'];
+        $this->contest->day_6_awards             = $validated['day_6_awards'];
+        $this->contest->day_7_catalogues         = $validated['day_7_catalogues'];
+        $this->contest->day_8_closing            = $validated['day_8_closing'];
+        $this->contest->award_ceremony_info      = $validated['award_ceremony_info'];
+        $this->contest->fee_info                 = $validated['fee_info'];
         // ✏️
         $this->contest->save();
 

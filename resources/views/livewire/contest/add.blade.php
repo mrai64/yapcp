@@ -11,7 +11,7 @@
     </p>
 
 
-    <form wire:submit="save">
+    <form wire:submit="saveNewContest">
         @csrf
 
         <div class="mb-4">
@@ -111,17 +111,16 @@
 
         <div class="mt-4 mb-4">
             <label class="block font-medium text-sm text-gray-700">
-                {{ __("Contest in Circuit Y/N") }}
+                {{ __("Is that a Circuit record or a Contest record?") }}
             </label>
             <label class="block font-medium text-sm text-gray-700">
                 <input type="radio" name="is_circuit" id="" value="Y" />
-                {{ __("That's a Contest of Circuit") }}
+                {{ __("That's a CIRCUIT record, NOT of a Contest") }}
             </label>
             <label class="block font-medium text-sm text-gray-700">
                 <input type="radio" name="is_circuit" id="" value="N" checked />
-                {{ __("That's only a Contest, out of circuit. Or it's che Circuit record, to obtain circuit_id for next Contest records") }}
+                {{ __("That's a CONTEST, NOT a Circuit") }}
             </label>
-            <div class="small">{{ __("Are you registering a Circuit record? Well, check: No, because Circuit is Circuit, NOT a Contest in Circuit") }}</div>
             <div class="small">@error('is_circuit') {{ $message }} @enderror</div>
         </div>
 
