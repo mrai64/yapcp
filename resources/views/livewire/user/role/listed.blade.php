@@ -42,17 +42,47 @@
         <li class="my-2 p-4 font-medium">
             <strong class="fyk text-xl">
                 {{$role['role']}}
-                <br />
+            </strong>
+            <br />
             @if ($role['organization'])
+            <strong class="fyk text-xl">
                 Organization {{$role['organization']}}
+            </strong>
+            <span class="px-4">&nbsp;|</span>
+            <a  href="/dashboard/role/organization/{{$role['organization_id']}}/modify"
+                class="font-medium rounded-md px-4 py-2"
+            >[ {{ __('Modify') }} ]</a>
+            <a  href="/dashboard/role/organization/{{$role['organization_id']}}/closing"
+                class="font-medium rounded-md px-4 py-2"
+                >[ {{ __('Closing') }} ]</a>
+            <a  href="{{ route('dashboard-organization', ['id' => $role['organization_id'] ]) }}"
+                class="font-medium rounded-md px-4 py-2"
+                >[ {{ __('Organization dashboard') }} ]</a>
             @endif
             @if ($role['federation'])
+            <strong class="fyk text-xl">
                 Federation {{$role['federation']}}
+            </strong>
+            <span class="px-4">&nbsp;|</span>
+            <a  href="/dashboard/role/federation/{{$role['federation_id']}}/modify"
+                class="font-medium rounded-md px-4 py-2"
+            >[ {{ __('Modify') }} ]</a>
+            <a  href="/dashboard/role/federation/{{$role['federation_id']}}/closing"
+                class="font-medium rounded-md px-4 py-2"
+                >[ {{ __('Closing') }} ]</a>
             @endif
             @if ($role['contest'])
+            <strong class="fyk text-xl">
                 Contest {{$role['contest']}}
-            @endif
             </strong>
+            <span class="px-4">&nbsp;|</span>
+            <a  href="/dashboard/role/contest/{{$role['contest_id']}}/modify"
+                class="font-medium rounded-md px-4 py-2"
+            >[ {{ __('Modify') }} ]</a>
+            <a  href="/dashboard/role/contest/{{$role['contest_id']}}/closing"
+                class="font-medium rounded-md px-4 py-2"
+                >[ {{ __('Closing') }} ]</a>
+            @endif
             <br />
             <span class="small">
                 from: {{$role['start']}} upto: {{$role['end']}}
