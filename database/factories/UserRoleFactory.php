@@ -54,9 +54,9 @@ class UserRoleFactory extends Factory
             // id
             'user_id'         => $user->id,
             'role'            => UserRole::valid_roles[$role],
-            'organization_id' => ($organization_id === '') ? NULL : $organization_id->id,
-            'contest_id'      => ($contest_id === ''     ) ? NULL : $contest_id->id,
-            'federation_id'   => ($federation_id === ''  ) ? NULL : $federation_id->id,
+            'organization_id' => ($organization_id === '') ? NULL : $organization_id->id, //uuid
+            'contest_id'      => ($contest_id === ''     ) ? NULL : $contest_id->id, //     uuid
+            'federation_id'   => ($federation_id === ''  ) ? NULL : $federation_id->id, //  id
             // 'role_opening'
             // 'role_closing'
         ];

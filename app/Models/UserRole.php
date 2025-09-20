@@ -45,9 +45,9 @@ class UserRole extends Model
     }
 
     /**
-     * complex validation 
+     * Complex validation, a field of 3 and only 1, not 0, not 2.
      */
-    public function only_one_roled(UserRole $user_role) : bool 
+    public function only_one_role(UserRole $user_role) : bool 
     {
         // 2 is too much
         if (($user_role->organization_id) && ($user_role->contest_id)) {
