@@ -7,6 +7,7 @@
  */
 namespace App\Livewire\Organization;
 
+use App\Models\Country;
 use Livewire\Component;
 use App\Models\Organization;
 
@@ -20,12 +21,16 @@ class Add extends Component
     // created_at
     // updated_at
     // deleted_at
+    public $countries;
 
     /**
      * before show
      */
     public function render()
     {
+        $countries       = new Country();
+        $this->countries = $countries->allByCountry();
+
         return view('livewire.organization.add');
     }
     /**

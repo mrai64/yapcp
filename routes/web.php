@@ -1,12 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Auth;
 use App\Livewire\Contest;
 use App\Livewire\Federation;
 use App\Livewire\Organization;
 use App\Livewire\User;
 use App\Livewire\Work;
+use App\Models\UserRole;
 
 Route::view('/', 'welcome');
 Route::view('/credits', 'credits');
@@ -40,20 +41,25 @@ Route::delete('/federation/section/remove/{id}', Federation\Section\Remove::clas
 
 // App\Livewire\Organization
 Route::get(   '/organization/list',        Organization\Listed::class)->name('organization-list');
-Route::get(   '/organization/add',         Organization\Add::class)->name('add-organization');
-Route::get(   '/organization/modify/{id}', Organization\Modify::class, ['id'])->name('modify-organization');
-Route::get(   '/organization/remove/{id}', Organization\Remove::class, ['id'])->name('delete-organization');
-Route::delete('/organization/remove/{id}', Organization\Remove::class, ['id']);
+Route::get(   '/organization/add/',        Organization\Add::class)->middleware(['auth', 'verified'])->name('add-organization');
+Route::get(   '/organization/modify/{id}', Organization\Modify::class, ['id'])->middleware(['auth', 'verified'])->name('modify-organization');
+Route::get(   '/organization/remove/{id}', Organization\Remove::class, ['id'])->middleware(['auth', 'verified'])->name('delete-organization');
+Route::delete('/organization/remove/{id}', Organization\Remove::class, ['id'])->middleware(['auth', 'verified']);
+Route::get(   '/organization/dashboard/{id}', Organization\Dashboard::class, ['id'])->middleware(['auth', 'verified'])->name('dashboard-organization');
 
 // App\Livewire\User
 Route::get(   '/user/contact/modify', User\Contact\Modify::class)->middleware(['auth', 'verified'])->name('user-contact-modify');
 
 // App\Livewire\Work
-Route::get(   '/work/list',         Work\Listed::class)->middleware(['auth', 'verified'])->name('photo-box-list');
-Route::get(   '/work/add',          Work\Add::class   )->middleware(['auth', 'verified'])->name('photo-box-add');
-Route::get(   '/work/modify/{wid}', Work\Modify::class, ['wid'])->name('photo-box-modify');
-Route::get(   '/work/remove/{wid}', Work\Remove::class, ['wid'])->name('delete-photo-box');
-Route::delete('/work/remove/{wid}', Work\Remove::class, ['wid']);
+Route::get(   '/work/list',         Work\Listed::class         )->middleware(['auth', 'verified'])->name('photo-box-list');
+Route::get(   '/work/add',          Work\Add::class            )->middleware(['auth', 'verified'])->name('photo-box-add');
+Route::get(   '/work/modify/{wid}', Work\Modify::class, ['wid'])->middleware(['auth', 'verified'])->name('photo-box-modify');
+Route::get(   '/work/remove/{wid}', Work\Remove::class, ['wid'])->middleware(['auth', 'verified'])->name('delete-photo-box');
+Route::delete('/work/remove/{wid}', Work\Remove::class, ['wid'])->middleware(['auth', 'verified']);
 
 // App\Livewire\Contest
-Route::get( '/contest/add/{oid}', Contest\Add::class, ['oid'])->middleware(['auth', 'verified'])->name('contest-add');
+Route::get( '/contest/add/{oid}', Contest\Add::class, ['oid']      )->middleware(['auth', 'verified'])->name('contest-add');
+Route::get( '/contest/modify/{cid}', Contest\Modify::class, ['cid'])->middleware(['auth', 'verified'])->name('modify-contest');
+
+// App\Livewire\UserRole
+Route::get( '/dashboard/role', User\Role\Listed::class)->middleware(['auth', 'verified'])->name('user-role-list');
