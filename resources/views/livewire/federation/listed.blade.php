@@ -1,4 +1,4 @@
-<div>
+<x-app-layout>
     <a href="{{ route('add-federation')}}" 
         class="float-end font-medium rounded-md py-2"
         >[ {{__('Add a new Federation')}} ]</a>
@@ -30,4 +30,4 @@
         {{ __('Empty federation list') }}
     </div>
     @endif
-</div>
+</x-app-layout>
