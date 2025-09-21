@@ -112,7 +112,7 @@ su un oggetto work, a cui accede e risponde con uno status di compliance o no.
 - [Organization]
 - [User]
 - [User Contact](#usercontact)
-- [User Role]
+- [User Role](user-role)
 - [Works](#works-anche-userworks)
 
 ## Elenco delle cose già fatte
@@ -277,6 +277,12 @@ con indice unique().
      che carica un array e stop. class public const ecc.
      Se anche un paese ogni tanto cambia nome, italiano resta italiano
       che sia d'Italia, Svizzera, Argentina. **E se fosse Enum?**
+
+### User/Role
+
+Si tratta di una tabella in cui allo user_id  iene assegnato un ruolo verso una organzzazione,
+un concorso o una federazione. Più ruoli, più record. Sono presenti due date di inizio e termine,
+memorizzate per ora in datetime.
 
 ### Timezones
 
