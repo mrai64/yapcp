@@ -6,6 +6,7 @@
  * user_id as uuid() should be primary key also for user_contact
  * 2025-09-03 photo_box where store user works and passport_photo
  * 2025-09-10 add timezone and lang_local (for search: local_lang)
+ * 2025-09-21 add getter functions
  * 
  */
 namespace App\Models;
@@ -71,5 +72,21 @@ class UserContact extends Model
         $pb = str_ireplace('+', '',  $pb);
         $pb = str_ireplace(' ', '-', $pb);
         return $pb;
+    }
+    /**
+     * 
+     */
+    public static function get_first_last_name(string $uid) : string
+    {
+        $user = self::where('user_id', $uid)->get()[0];
+        return $user->first_name . ' ' . $user->last_name . ' /'. $user->country_id;
+    }
+    /**
+     * 
+     */
+    public static function get_last_first_name(string $uid) : string
+    {
+        $user = self::where('id', $uid)->get()[0];
+        return $user['last_name'] . ', ' . $user['first_name'] . ' /'. $user['country_id'];
     }
 }
