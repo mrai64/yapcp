@@ -1,15 +1,33 @@
 # `To Do List`
 
-Tenere aggiornato il [diario dello sviluppatore](./index.md)
-
-Convertire i componenti in cartelle di componenti  
-Modelli in cartella unica
+Tenere aggiornato il [diario dello sviluppatore](./index.md)  
+Tenere aggiornato il [diario dello sviluppatore](./index.md)  
+Tenere aggiornato il [diario dello sviluppatore](./index.md)  
 
 ## Prossime attività
 
-- [ ] aggiornamento dell'elenco paesi con gli emoji delle bandiere nazionali
-- [ ] ricostruzione del seeder con gli emoji delle bandiere
+* [ ] Concorsi Modifica  
+Aggiungere una variabile basata sulla data
+che discrimini i campi readonly o modificabili/required.
+* [ ] Creare una barra di navigazione Principale / Sezioni / Giurie ecc. 
+* [ ] Preparare il modulo Concorsi Sezioni / Add  
+* [ ] Preparare il modulo Concorsi Sezioni / Modify  
+* [ ] Preparare il modulo Concorsi Giurie / Add  
+* [ ] Preparare il modulo Concorsi Giurie / Modify
 
+## Generale - a seguire
+
+### Organizzatori 
+
+* [ ] nella dashboard delle organizzazioni sistemare
+i concorsi dividendoli tra "quelli in progetto", "quelli in corso"
+e "quelli conclusi". Evitare il semaforo verde arancio rosso.
+
+### Concorsi
+
+Completare il giro dei concorsi. Oltre al pannello principale
+ci deve essere un pannello Vista che riassume tutti i campi
+definiti in una sola scheda, per quanto lunga.  
 La definizione del concorso e del circuito concorsi passa da più fasi:
 
 1. definire il concorso: organizzatore, nome, calendario, patrocini (idem per i circuiti), quote di partecipazione
@@ -18,19 +36,39 @@ La definizione del concorso e del circuito concorsi passa da più fasi:
 4. definire i premi del concorso (del circuito), e delle sezioni del concorso (non ci sono premi di sezione per i circuiti)
 5. ricavare da quanto sopra il testo di una bozza di regolamento che sia inviabile agli enti sponsor.
 
-### 1. Contest
+* [ ] Concorsi principale / add  
+manca il caricamento del marchio
+* [ ] Concorsi principale / modify  
+manca il caricamento del marchio
+* [ ] concorsi/ sezioni / add  
+Il modulo va presentato se nel se il record principale NON è marcato come is_circuit
+* [ ] concorsi / premi / add  
+Da fare, possono esserci premi legati alle sezioni e altri senza sezione quindi di concorso
+* [ ] concorsi / giurie / add  
+Da fare. Richiedere per i giurati nome cognome nazione ed email,  se non sono censiti come user fare un inserimento automatico usando l'indirizzo email come password iniziale, andrà comunque cambiato tramite modifica password. Vanno anche registrati in UserRole.
 
-- [x] Aggiungere le indicazioni per la quota di partecipazione (campo di tipo text)  
+### User
+
+* [ ] controllare che recupera password sia funzionante
+
+### Paesi
+
+* [ ] Aggiornamento dell'elenco paesi con gli emoji delle bandiere nazionali
+* [ ] Ricostruzione del seeder per i paesi con gli emoji delle bandiere
+
+### 1. Contest - principale
+
+* [x] Aggiungere le indicazioni per la quota di partecipazione (campo di tipo text)  
 In precedenza questa informazione può far parte della pagina del bando e regolamento
-- [X] Creare pagina Contest/Modify  
+* [X] Creare pagina Contest/Modify  
 Sulla base della pagina add.blade fare la pagina modify.blade, si possono modificare
 i concorsi anche sulla presenza di un circuit id che prima non c'era.
-- [ ] TODO Aggiungere alla pagina un flag di readonly quando la data di sistema sia superiore
+* [ ] TODO Aggiungere alla pagina un flag di readonly quando la data di sistema sia superiore
 alla data di apertura del concorso e consentire solo la cancellazione del concorso
 o nemmeno quella. Da far fare a un admin di yaPCP.
-- [ ] TODO Quando si aggiunge un campo circuit_id andare al record e pescare
+* [ ] TODO Quando si aggiunge un campo circuit_id andare al record e pescare
 alcuni campi con cui impostare i dati del concorso.
-- [ ] Quando viene impostato Y il flag is_circuit, il campo circuit_id diventa readonly e
+* [ ] Quando viene impostato Y il flag is_circuit, il campo circuit_id diventa readonly e
 viene impostato al valore di id in salvataggio dati.
 
 I link per il pagamento saranno parte della pagina che contiene la scheda di iscrizione.
@@ -46,30 +84,30 @@ penso di max 4 anni.
 
 ### 2. Contest section
 
-- [x] tabella che compone il concorso elencando
+* [x] tabella che compone il concorso elencando
 le sezioni e i temi di cui è composto
-- [ ] le regole delle federazioni possono essere una lista di regole
+* [ ] le regole delle federazioni possono essere una lista di regole
 e nella la section la regola "c'è", "c'è", "manca".
 
 ### 3. Contest jury list
 
-- record FACOLTATIVO (non esiste per i circuiti)
-- [ ] tabella che in base al concorso / circuito elenca dei premi,  
+* record FACOLTATIVO (non esiste per i circuiti)
+* [ ] tabella che in base al concorso / circuito elenca dei premi,  
 ciascuno con un identificativo univoco all'interno del concorso.
-- [ ] la sezione all'interno della tabella premi dev'essere nullable,  
+* [ ] la sezione all'interno della tabella premi dev'essere nullable,  
 intendendosi che dove manca una sezione è un premio di circuito/ concorso
 es. premio del giurato, miglior autore, ecc.
 
 ### 4. Contest section prize award list
 
-- [ ] Dev'essere previsto un flag se si tratta di Premio o Menzione
-- [ ] Il campo relativo al concorso e circuito sarà obbligatorio, mentre
+* [ ] Dev'essere previsto un flag se si tratta di Premio o Menzione
+* [ ] Il campo relativo al concorso e circuito sarà obbligatorio, mentre
 il campo relativo al codice sezione tema sarà facoltativo, nel caso manchi
 il premio si intende "di circuito e/o di concorso"
 
 ### Federation Rules List
 
-- [ ] definire le rules che le federazioni prevedono,  
+* [ ] definire le rules che le federazioni prevedono,  
 ovvero che per i concorsi a immagini digitali c'è un
 minimo (0) e un massimo (4) di lavori partecipanti,
 che il lato lungo dev'essere max(2500) pixel, in formato jpg, tif,
@@ -78,14 +116,14 @@ su un oggetto work, a cui accede e risponde con uno status di compliance o no.
 
 ## Generale
 
-- [x] Attivare gli avvisi di registrazione per email ai nuovi utenti
-- [x] Attivare gli avvisi di login per email agli utenti
-- [ ] scoprire come usare MAMP al posto di `php artisan serve`.  
+* [x] Attivare gli avvisi di registrazione per email ai nuovi utenti
+* [x] Attivare gli avvisi di login per email agli utenti
+* [ ] scoprire come usare MAMP al posto di `php artisan serve`.  
   Si deve puntare alla cartella /public che però deve sparire dall'URL,
   ho provato a spostare sulla radice del progetto l'indirizzo
   base di MAMP, e funziona ma solo fino a un certo punto.
 
-- [ ] Studiare abilitazione e autenticazione,  
+* [ ] Studiare abilitazione e autenticazione,  
   L'obiettivo è avere una tabella di user con i ruoli granulari,
   e inserire nelle loro abilitazioni i codici associati alle
   operazioni e alle gestioni errore. Deve essere registrato nel
@@ -98,245 +136,6 @@ su un oggetto work, a cui accede e risponde con uno status di compliance o no.
 
 ## Altre cose da fare
 
-- [ ] Revisione del marchio con esclusione dei rettangoli, solo numeri sfalsati in altezza
+* [ ] Revisione del marchio con esclusione dei rettangoli, solo numeri sfalsati in altezza
   con un rigo sottostante a suggerire lo scalino e le lettere yaPCP o PCP (o PhoConPla?)
 
-## Indice alfabetico delle tabelle
-
-- [Lang](#lang)
-- [Contest]
-- [Contest Section]
-- [Federation]
-- [Federation Section]
-- [Federation Rules List]
-- [Organization]
-- [User]
-- [User Contact](#usercontact)
-- [User Role](user-role)
-- [Works](#works-anche-userworks)
-
-## Elenco delle cose già fatte
-
-- Ripristinati TDL, index, dev-diaries dal repository incasinato
-- Ricostruito il marchio yaPCP in svg e inserito al posto di quello standard di laravel, una copia nella cartella [di agosto](./2025-08/)
-- modificata la pagina welcome - cambio marchio
-- Ripristinata la configurazione email in `.env`
-
-### Federation
-
-- Creata tabella Federation (non completa), e caricata con dati fake
-- Creata pagina component per elencare le federazioni (non completa)
-- pagina elenco delle federazioni, con link per aggiungere
-- pagina modifica con rientro all'elenco
-- pagina aggiungi con rientro all'elenco
-- pagina di confermazione cancellazione con rientro all'elenco
-- travasato in una cartella le 4 pagine per leggere,
-  aggiungere, modificare e cancellare (softdelete)
-  le Federation;
-  - ShowFederationList > Federation\Listed (no List, è riservato)
-  - AddFederation > Federation\Add (no Create)
-  - ModifyFederation > Federation\Modify (no Update)
-  - DeleteFederation > Federation\Remove (no Delete, è classe riservata)
-
-#### Tabella Federation
-
-- [x] Creato migration
-- [x] Creato model
-- [x] Creato factory
-- [x] Creato seeder
-- [x] Convertire i timestamps in datetime
-- [x] Aggiungere il campo country_code, quando sarà creata la tabella Country.  
-Il country_code fa riferimento alla sede legale,
-e si userà il codice ansi a 3 lettere, per esempio delle olimpiadi.
-- [x] Seeder con dati reali
-- [x] Creata la tabella, aggiornato factory e seeder
-- [x] aggiornate pagine Add, Modify, Remove (no List, c'era
-e resta la sigla della nazione)
-
-(c**R**ud) Componente show-federation-list
-
-- [x] Creato component ShowFederationList (ops: ShowFederation**s**List)
-- [x] Creata view show-federation-list
-- [x] Pulsante Modify in show-federation-list
-  Questo ha più senso perché sono stati caricati
-  un tot di record e vale la pena usarli con dati seri.
-- [x] Pulsante Add
-  Questo dirotta nel componente AddFederation
-- [ ] Paginazione della lista
-  Anche questa piuttosto inutile, però se
-  metto dentro parecchi membri della FIAP,... ci sta.
-- [x] Pulsante Delete
-  Probabilmente il più inutile pulsante Delete perché
-  dovrebbe chiudere una federazione nazionale o internazionale
-  e finora questo non è mai capitato.  
-  Non serve componente, si chiama un metodo del Model e via,
-  si va alla lista che sarà aggiornata.
-
-(**C**rud) Componente AddFederation
-
-- [x] Creare il componente AddFederation
-- [x] Creare la view add-federation  
-  Quasi tutto come modify-federation ma togliendo il campo id
-
-(cr**U**d) Componente modify-federation
-
-- [x] Creare classe componente ModifyFederation
-- [x] Creare view modify-federation
-  Lasciare che il campo id stia in input hidden
-  e ricordarsi l'elemento @csrf
-- [x] Creare route per chiamare /federation/modify/{id}
-
-(cru**D**) Componente delete-federation
-
-- [x] Convertire AddFederation in Federation/Add  
-- [x] Convertire ShowFederation(s)List in Federation/List  
-- [x] Convertire ModifyFederation in Federation/Mod
-
-### Organization
-
-- Creata tabella Organizations, molto simile a Federation;
-  Sono quelli che *fanno* i concorsi
-  - [x] Migration
-    usare uuid al posto di id
-  - [x] Factory
-  - [x] Seeder
-  - [x] Organization\Listed
-  - [x] Organization\Add
-  - [x] Organization\Modify
-  - [x] Organization\Remove ()
-  - [x] Cambiare con refactory country_code con country_id
-  - [x] Cambiare factory e seeder
-  - [x] Sistemare le pagine di List Add Modify Remove
-
-### Federation/Section
-
-- [x] Creare la tabella FederationSections, l'elenco delle sezioni
-  e temi che sono normati nei regolamenti delle federazioni.  
-  Nei bandi dei concorsi le sezioni saranno abbinate a uno o più di questi
-  record, i quali a loro volta saranno abbinati a una serie di regole
-  che sono verifiche attuabili in automatico. Se per esempio
-  la section FIAF.BN è associata alla regola Max:4 per le opere da
-  presentare, l'autore partecipante potrà avere a disposizione
-  4 slot per il concorso da riempire con le sue opere. Se la section
-  è associata alla regola MaxLength:2500, i pixel lato lungo saranno
-  confrontati e verificati in automatico. Quello che si può controllare
-  si controllerà.
-
-  Mentre il component laravel si presta alla suddivisione in cartelle,
-  i Model e i seeders litigano, per ora si usa una struttura più lineare.
-
-### Language
-
-- [x] provare a usare un lang diverso da *en*, per esempio *it*.
-  - [x] installato language
-  - [x] duplicata cartella en in it
-  - [x] SOSPESA traduzione cartella
-  - [x] aggiungere le chiavi mancanti
-  - [x] cambiare lang
-
-- [x] `__()` come funziona la cosa?  
-  Come aggiungere termini all'elenco e come funziona per lang diversi da en
-
-- [x] creato componente app.php
-
-### Countries
-
-- [x] Creare la tabella country, solo colonne id, timestamp e code
-- [x] country.code->unique()
-~~Creare component per i moduli nazione, select che sarà sostituito da campo testo con autocomplete. Autocomplete che comporta un pacco di lavoro.~~
-
-### User/Contact
-
-Ho separato la tabella usata dal login con user e password
-da quella dei dati anagrafici. una è solo per entrare l'altra è
-per i dati di contatto.
-
-TODO Al login mandare una mail di avviso effettuato login.
-
-La tabella user è della piattaforma, in gestione al sistema di laravel,
-è già stata fatta l'attività relativa alla verifica della email all'iscrizione.
-Va verificato come si può cambiare la email e se questo a sua volta scatena
-una verifica del cambio email che coinvolga sia la mail vecchia che quella nuova
-col principio che se si tratta di scippo, lo scippato viene almeno allertato.
-
-- [x] Email verifica email all'inscrizione
-- [ ] Email verifica email al cambio email
-
-I dati di contatto "veri e propri" saranno invece a carico di una tabella figlia,
-col particolare di figlia unigenita perché la chiave esterna user_id l'ho messa
-con indice unique().
-
-- [x] creare una public function nel model ~~User~~ che consegni
-  la stringa in cui si mettono via le passport_photo e i lavori dei
-  concorrenti users. photo_box. archive. Forse meglio photo_box.  
-  **User_contacts** e non users.
-
-- [x] Aggiungere il language alla scheda user_contact
-  - ref <https://www.w3schools.com/tags/ref_language_codes.asp> iso-639-1 language
-  - fare anche per questa u a tabella o fare un componente
-     che carica un array e stop. class public const ecc.
-     Se anche un paese ogni tanto cambia nome, italiano resta italiano
-      che sia d'Italia, Svizzera, Argentina. **E se fosse Enum?**
-
-### User/Role
-
-Si tratta di una tabella in cui allo user_id  iene assegnato un ruolo verso una organzzazione,
-un concorso o una federazione. Più ruoli, più record. Sono presenti due date di inizio e termine,
-memorizzate per ora in datetime.
-
-### Timezones
-
-- [x] solo Model con creazione elenco e funzione is_timezone
-  che verifica se un elemento è in array. ~~Verificare Enum().~~
-  Enum non va bene, sono troppi elementi (quasi 494).
-
-## Works (anche user/works)
-
-TODO La factory non funziona come vorrei, serve
-trovare un generatore di immagini casuali
-
-TODO Verificare se alla creazione New Work()
-viene già assegnato un work.id, e usare quello
-al posto di assegnarlo con Str::uuid()
-
-- [x] Tabella per i lavori degli user
-  - [x] migration
-  - [ ] factory
-    Cercando generatori di immagini, visto che quello di laravel
-    dicono abbia chiuso,
-    [FakerJS](https://fakerjs.dev/api/image.html#personportrait)
-  - [ ] seeder
-  - [x] link nella cartella /dashboard per gli utenti
-    - [x] vista "vuota"
-    - [x] lista miniature
-    - [x] "Carica una immagine alla volta" add > modify > list
-    - [x] modifica dati
-    - [x] cestina immagine
-  - [x] listed - tabella delle immagini
-  - [x] Add per caricare le immagini
-
-### work / remove
-
-- [x] copiare da modify per mettere i campi readonly fill
-  e poi passare per la funzione remove che fa soft delete.
-- [x] vedere che il work viene escluso dalla lista
-
-### Lang
-
-Lang non è Country. Uno può stare a San Marino e parlare italiano.
-
-- [x] Creare modello con lista fissa.  
-  public const ['en' => English, 'it' => 'Italian'].  
-  Enum non è quello che serve, lingua base è "en",
-  con traduzione "it", che ci penso io. Poi serve una gestione dei
-  file di traduzione. per ora limito la lista alle lingue presenti, 2.
-- [x] Alla voce lingua aggiungere un * per "translation incomplete or missing"
-  traduzione incompleta o mancante.
-- [ ] Poi serve un component, un coso che abbia in input un $lang
-  e crei la lista delle option con tutti i valori.
-- [ ] Aggiungere il campo lang string:5 nella tabella user contact, valore predefinito 'en_US'.
-- [ ] Aggiungere il campo per la scelta nel pannello user/contact
-
-- [x] Timezone, fatto il Model andare ad aggiungere il dato richiesto in
-  tabella UserContact tipo string:40
-- [x] Tabella User, mandare email di accesso effettuato
