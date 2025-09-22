@@ -6,22 +6,26 @@ Tenere aggiornato il [diario dello sviluppatore](./index.md)
 
 ## Prossime attività
 
-* [ ] Concorsi Modifica  
-Aggiungere una variabile basata sulla data
-che discrimini i campi readonly o modificabili/required.
-* [ ] Creare una barra di navigazione Principale / Sezioni / Giurie ecc. 
 * [ ] Preparare il modulo Concorsi Sezioni / Add  
-* [ ] Preparare il modulo Concorsi Sezioni / Modify  
-* [ ] Preparare il modulo Concorsi Giurie / Add  
-* [ ] Preparare il modulo Concorsi Giurie / Modify
 
 ## Generale - a seguire
 
-### Organizzatori 
+* [ ] Preparare il modulo Concorsi Sezioni / Modify  
+* [ ] Preparare il modulo Concorsi Giurie / Add  
+* [ ] Preparare il modulo Concorsi Giurie / Modify
+* [ ] Concorsi Modifica  
+Aggiungere una variabile basata sulla data
+che discrimini i campi readonly o modificabili/required.
+* [ ] Creare una barra di navigazione Principale / Sezioni / Giurie ecc.
+* [ ] Refactory EXCERPTUM va cambiato con SYNOPSIS in FederationSections
+
+### Organizzatori
 
 * [ ] nella dashboard delle organizzazioni sistemare
 i concorsi dividendoli tra "quelli in progetto", "quelli in corso"
 e "quelli conclusi". Evitare il semaforo verde arancio rosso.
+* [ ] User Roles / Add e Modify  
+Cambiare il campo di Role in un select, no testo libero.
 
 ### Concorsi
 
