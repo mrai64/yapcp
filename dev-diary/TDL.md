@@ -6,8 +6,6 @@ Tenere aggiornato il [diario dello sviluppatore](./index.md)
 
 ## Prossime attività
 
-* [ ] Preparare il modulo Concorsi Sezioni / Add  
-
 ## Generale - a seguire
 
 * [ ] Preparare il modulo Concorsi Sezioni / Modify  
@@ -49,10 +47,18 @@ La definizione del concorso e del circuito concorsi passa da più fasi:
 manca il caricamento del marchio
 * [ ] Concorsi principale / modify  
 manca il caricamento del marchio
+* [ ] Concorsi principale / Add e modify  
+Va gestito uno user che faccia da Chairman - Segretario del concorso,
+indicando nome cognome email e nazionalità (sufficiente l'email
+che è unica nella piattaforma) e che questo venga aggiunto anche
+nella tabella degli UserRole (chairman of / contest)
+
 * [ ] concorsi/ sezioni / add  
 Il modulo va presentato se nel se il record principale NON è marcato come is_circuit
+
 * [ ] concorsi / premi / add  
 Da fare, possono esserci premi legati alle sezioni e altri senza sezione quindi di concorso
+
 * [ ] concorsi / giurie / add  
 Da fare. Richiedere per i giurati nome cognome nazione ed email,  se non sono censiti come user fare un inserimento automatico usando l'indirizzo email come password iniziale, andrà comunque cambiato tramite modifica password. Vanno anche registrati in UserRole.
 
@@ -95,8 +101,18 @@ penso di max 4 anni.
 
 * [x] tabella che compone il concorso elencando
 le sezioni e i temi di cui è composto
+* [x] Preparato il modulo Concorsi Sezioni / Add  
+Questo fa vedere alcune info del concorso (TODO da rivedere),
+un elenco delle sezioni già presenti e aggiunge la sezione.
+TODO
+* [ ] Quando marcato "under_patronage" Y,
+considerare una verifica che la sezione sia una di quelle
+previste da almeno una delle federazioni elencate.
+* [ ] Modifiche per CIRCUIT (da definire)
+* [ ] Fare la funzione di Modifica
+* [ ] Fare la funzione di Remove
 * [ ] le regole delle federazioni possono essere una lista di regole
-e nella la section la regola "c'è", "c'è", "manca".
+e nella la section la regola "c'è", "c'è", "manca". (da definire)
 
 ### 3. Contest jury list
 
@@ -147,4 +163,3 @@ su un oggetto work, a cui accede e risponde con uno status di compliance o no.
 
 * [ ] Revisione del marchio con esclusione dei rettangoli, solo numeri sfalsati in altezza
   con un rigo sottostante a suggerire lo scalino e le lettere yaPCP o PCP (o PhoConPla?)
-
