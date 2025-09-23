@@ -2,6 +2,7 @@
 /**
  * 2025-08-29 picked from iso.org open broad data
  * 2025-09-17 flag_code added to fillable fields
+ * 2025-09-22 add getter function
  */
 namespace App\Models;
 
@@ -47,5 +48,13 @@ class Country extends Model
             ->get();
 
         return $countries; 
+    }
+    /**
+     * inline
+     */
+    public static function country_name(string $country_id) : string
+    {
+        $country = self::where('id', $country_id)->get()[0];
+        return $country->country . ' /' . $country->flag_code;
     }
 }
