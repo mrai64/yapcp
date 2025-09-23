@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-4">
         <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
@@ -53,8 +53,8 @@
         </div>
     </div>
 
-    <div class="py-12">
-        <div class="w-full sm:px-6 lg:px-8">
+    <div class_="pb-4">
+        <div class_="w-full sm:px-6 lg:px-8">
             <!-- for {{ Auth::id() }} -->
             <livewire:user.role.listed />
         </div>
