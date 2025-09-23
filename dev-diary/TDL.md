@@ -18,6 +18,11 @@ Aggiungere una variabile basata sulla data
 che discrimini i campi readonly o modificabili/required.
 * [ ] Creare una barra di navigazione Principale / Sezioni / Giurie ecc.
 * [ ] Refactory EXCERPTUM va cambiato con SYNOPSIS in FederationSections
+* [ ] Sostituire il campo circuit_id text con una select di record id presi
+tra quelli che hanno is_circuit, messi in ordine updated_at desc perché
+è ragionevole che i concorsi vengano inseriti insieme al circuito e quindi
+sia stato inserito da poco. Quando il flag is_circuit vale Y il campo deve
+diventare readonly.
 
 ### Organizzatori
 
