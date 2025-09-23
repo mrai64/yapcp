@@ -1,5 +1,11 @@
 <div>
-    <div class="py-12">
+    @if (session('success'))
+    <div class="float-end font-medium rounded-md px-4 py-2">
+        {{ session('success') }}
+    </div> 
+    @endif
+
+    <div class="py-6">
         <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
@@ -30,12 +36,6 @@
     </div>
 
     <hr />
-    @if (session('success'))
-    <div class="float-end font-medium rounded-md px-4 py-2">
-        {{ session('success') }}
-    </div> 
-    @endif
-
     @if (isset($user_role_list) && (count($user_role_list) > 0))
     <ul>
         @foreach($user_role_list as $role)

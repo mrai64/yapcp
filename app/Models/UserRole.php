@@ -15,10 +15,11 @@ class UserRole extends Model
     //
     public const table_name = 'user_roles';
     public const array valid_roles = [
-        'chairman of',
-        'member of',
-        'president of',
-        'secretary of',
+        'chairman',
+        'juror',
+        'member',
+        'president',
+        'secretary',
     ];
 
     // no factory and seeders, not now
