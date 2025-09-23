@@ -1,11 +1,15 @@
 <?php
-
+/**
+ * organization dashboard need some help
+ * 
+ */
 use App\Models\UserContact;
+
 ?>
 
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="fyk font-semibold text-2xl text-gray-800 leading-tight">
+        <h2 class="fyk font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Organization Dashboard for/') }}
         </h2>
         <h2 class="fyk font-semibold text-2xl text-gray-800 leading-tight">
@@ -13,15 +17,18 @@ use App\Models\UserContact;
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <!-- contest list -->
+    <section name="contest_list" class="py-12">
         <div class="w-full sm:px-6 lg:px-8">
-            <!-- contest list -->
             <p class="fyk text-xl">Contest list</p>
             @if (count($contest_list) > 0)
             <ul>
                 @foreach($contest_list as $contest)
-                <li class="fyk my-2 p-4">
+                <li class="my-2 p-4">
                     <strong class="fyk text-2xl">{{$contest->name_en}}</strong>
+                    <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
+                        [ {{ _("Contest Dashboard") }} ]
+                    </a>
                 </li>
                 @endforeach
             </ul>
@@ -32,11 +39,11 @@ use App\Models\UserContact;
                 >[ {{__('Add a new Contest')}} ]</a>
             <hr />
         </div>
-    </div>
+    </section>
 
-    <div class="py-12">
+    <!-- member list -->
+    <section name="member_list" class="py-12">
         <div class="w-full sm:px-6 lg:px-8">
-            <!-- member list -->
             <p class="fyk text-xl">
             Member list
             </p>
@@ -50,6 +57,6 @@ use App\Models\UserContact;
             <hr />
             <small>{{__("Every Organization Member to be in the list must have to register in platform as individual, then set her/him membership to Organization")}}</small>
         </div>
-    </div>
+    </section>
 
 </x-app-layout>
