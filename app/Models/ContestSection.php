@@ -16,8 +16,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Str; // uuid booted()
-use App\Models\Contest; // father_table
+use Illuminate\Support\Str; //  uuid booted()
+use App\Models\Contest; //      father_table
+use Illuminate\Support\Facades\Log;
 
 class ContestSection extends Model
 {
@@ -36,7 +37,7 @@ class ContestSection extends Model
     ];
 
     protected $fillable = [
-        // id 
+        // id section_id
         'contest_id',
         'code',
         'under_patronage',
@@ -80,12 +81,24 @@ class ContestSection extends Model
         foreach ($section_list as $section) {
             $section_array[] = [
                 'id'              => $section->id,
+                // contest_id
                 'code'            => $section->code,
                 'under_patronage' => $section->under_patronage,
                 'name_en'         => $section->name_en,
                 'name_local'      => $section->name_local,
+                // created_at,
+                // updated_at,
+                // deleted_at,
             ];
         }
         return $section_array;
+    }
+    /**
+     * 
+     */
+    public static function first_section_id(string $contest_id) : string
+    {
+        return self::whereNull('deleted_at')->where('contest_id', $contest_id)
+            ->orderBy('id')->first('id')['id'];
     }
 }

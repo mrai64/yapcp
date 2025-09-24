@@ -86,7 +86,39 @@ class UserContact extends Model
      */
     public static function get_last_first_name(string $uid) : string
     {
-        $user = self::where('id', $uid)->get()[0];
+        $user = self::where('user_id', $uid)->get()[0];
         return $user['last_name'] . ', ' . $user['first_name'] . ' /'. $user['country_id'];
+    }
+    /** 
+     * 
+     */
+    public static function get_email(string $uid) : string
+    {
+        $user = self::where('user_id', $uid)->get('email')[0];
+        return $user['email'];
+    }
+    /** 
+     * 
+     */
+    public static function get_first_name(string $uid) : string
+    {
+        $user = self::where('user_id', $uid)->get('first_name')[0];
+        return $user['first_name'];
+    }
+    /** 
+     * 
+     */
+    public static function get_last_name(string $uid) : string
+    {
+        $user = self::where('user_id', $uid)->get('last_name')[0];
+        return $user['last_name'];
+    }
+    /** 
+     * 
+     */
+    public static function get_country_id(string $uid) : string
+    {
+        $user = self::where('user_id', $uid)->get('country_id')[0];
+        return $user['country_id'];
     }
 }

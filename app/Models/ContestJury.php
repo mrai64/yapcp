@@ -11,12 +11,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str; // uuid booted()
 
 class ContestJury extends Model
 {
     use HasFactory, SoftDeletes;
-    public const table_name = 'contest_jury';
+    public const table_name = 'contest_juries';
     // uuid as pk, don't need ++
     protected $keyType = 'string'; // char(36)
     public    $incrementing = false;
@@ -74,4 +75,15 @@ class ContestJury extends Model
         }
         return $jury_list;
     }
+    /**
+     * count of 
+     */
+    public static function count_juror(string $section_id) : int
+    {
+        Log::info(__FUNCTION__ . ' ' . __LINE__ . '  in: ' . $section_id);
+        $result = self::whereNull('deleted_at')->where('section_id', $section_id)->count();
+        Log::info(__FUNCTION__ . ' ' . __LINE__ . ' out: ' . $result);
+        return $result;
+    }
+    
 }

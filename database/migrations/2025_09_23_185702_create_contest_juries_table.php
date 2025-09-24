@@ -24,7 +24,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contest_jury', function (Blueprint $table) {
+        Schema::create('contest_juries', function (Blueprint $table) {
             $table->uuid('id')->primary()->comment('uuid assigned'); // uuid
             $table->foreignUuid('section_id')->comment('fx: contest_section.id 1:N '); // uuid
             $table->foreignUuid('user_contact_id')->comment('fx: user_contact.user_id'); // uuid
@@ -43,6 +43,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contest_jury');
+        Schema::dropIfExists('contest_juries');
     }
 };
