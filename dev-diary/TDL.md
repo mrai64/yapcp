@@ -6,15 +6,16 @@ Tenere aggiornato il [diario dello sviluppatore](./index.md)
 
 ## Prossime attività
 
+* [ ] Preparare il modulo Concorsi (sezioni) Giurie / Add & Modify
+* [ ] Preparare il modulo Concorsi (sezioni) Award / Add & modify
+
 ## Generale - a seguire
 
 * [ ] Preparare il modulo Concorsi Sezioni / Modify  
-* [ ] Preparare il modulo Concorsi Giurie / Add  
 * [ ] Preparare il modulo Concorsi Giurie / Modify
 * [ ] Concorsi Modifica  
 Aggiungere una variabile basata sulla data
 che discrimini i campi readonly o modificabili/required.
-* [ ] Creare una barra di navigazione Principale / Sezioni / Giurie ecc.
 * [ ] Refactory EXCERPTUM va cambiato con SYNOPSIS in FederationSections
 * [ ] Sostituire il campo circuit_id text con una select di record id presi
 tra quelli che hanno is_circuit, messi in ordine updated_at desc perché
@@ -43,6 +44,8 @@ La definizione del concorso e del circuito concorsi passa da più fasi:
 4. definire i premi del concorso (del circuito), e delle sezioni del concorso (non ci sono premi di sezione per i circuiti)
 5. ricavare da quanto sopra il testo di una bozza di regolamento che sia inviabile agli enti sponsor.
 
+* [x] Creare una barra di navigazione Principale / Sezioni / Giurie ecc.  
+Questa barra si ripete sotto alla prima intestazione della pagina evidenziando l'elemento in cui ci si trova con un font doppio.
 * [ ] Concorsi principale / add  
 manca il caricamento del marchio
 * [ ] Concorsi principale / modify  
