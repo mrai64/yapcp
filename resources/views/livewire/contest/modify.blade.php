@@ -1,3 +1,12 @@
+<?php
+/**
+ * Contest Main Modify
+ */
+
+use App\Models\ContestSection;
+
+?>
+
 <div>
     <!-- contest modify -->
     <header>
@@ -167,6 +176,7 @@
         </div>
 
     </form>
+
     <footer>
         <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -180,8 +190,7 @@
         <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="fyk p-6 text-gray-900">
-                    <!-- TODO the right route -->
-                    <a href="{{ route('contest-section-add', ['cid' => $contest->id]) }}">
+                    <a href="{{ route('contest-jury-add', ['sid' => ContestSection::first_section_id( $contest->id )] ); }}">
                     {{ __("Add Contest Jury") }}
                     </a>
                 </div>
@@ -191,7 +200,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="fyk p-6 text-gray-900">
                     <!-- TODO the right route -->
-                    <a href="{{ route('contest-section-add', ['cid' => $contest->id]) }}">
+                    <a href="{{ route('contest-section-add', ['cid' => $contest->id ]); }}">
                     {{ __("Add Contest Awards") }}
                     </a>
                 </div>
