@@ -4,6 +4,8 @@
  */
 
 use App\Models\Country;
+use App\Models\ContestSection;
+
 ?>
 
 <section>
@@ -110,7 +112,7 @@ use App\Models\Country;
                             <label class="block font-medium text-sm text-gray-700">
                                 <input type="radio" name="under_patronage" id="under_patronage" value="Y" 
                                 wire:model="under_patronage" 
-                                {{ ( old('under_patronage') == "Y") ? 'checked' : ''}}
+                                {{ ( old('under_patronage') == "Y" ) ? 'checked' : '';}}
                                 />
                                 {{ __("Follow patronage rules") }}
                             </label>
@@ -170,7 +172,7 @@ use App\Models\Country;
         <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="fyk p-6 text-gray-900">
-                    <a href="{{ route('contest-section-add', ['cid' => $contest->id]) }}">
+                    <a href="{{ route('contest-jury-add', ['sid' => ContestSection::first_section_id( $contest->id ) ]) }}">
                     {{ __("Add Contest Jury") }}
                     </a>
                 </div>
