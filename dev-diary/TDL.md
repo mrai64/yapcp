@@ -6,30 +6,56 @@ Tenere aggiornato il [diario dello sviluppatore](./index.md)
 
 ## Prossime attività
 
-* [ ] Preparare il modulo Concorsi (sezioni) Giurie / Add & Modify
 * [ ] Preparare il modulo Concorsi (sezioni) Award / Add & modify
 
 ## Generale - a seguire
 
-* [ ] Preparare il modulo Concorsi Sezioni / Modify  
+* [ ] Completare il modulo Concorsi / Giurie / Add  
+con una azione *"riprendi i giurati della sezione precedente"*
+
+* [ ] Completare l modulo Concorsi / Giurie / Add  
+Aggiungere la gestione del campo flag "è presidente"
+e l'elenco dei giurati deve avere l campo Y/N ordinato desc
+per mettere in cima il presidente di giuria. (A quello serve, non altro)
+
+* [ ] Preparare il modulo Concorsi Sezioni / Modify
+
 * [ ] Preparare il modulo Concorsi Giurie / Modify
+
 * [ ] Concorsi Modifica  
 Aggiungere una variabile basata sulla data
 che discrimini i campi readonly o modificabili/required.
-* [ ] Refactory EXCERPTUM va cambiato con SYNOPSIS in FederationSections
+
+* [ ] Federation Sections - Refactory EXCERPTUM va cambiato con SYNOPSIS
+
 * [ ] Sostituire il campo circuit_id text con una select di record id presi
 tra quelli che hanno is_circuit, messi in ordine updated_at desc perché
 è ragionevole che i concorsi vengano inseriti insieme al circuito e quindi
 sia stato inserito da poco. Quando il flag is_circuit vale Y il campo deve
 diventare readonly.
 
-### Organizzatori
+----
 
-* [ ] nella dashboard delle organizzazioni sistemare
-i concorsi dividendoli tra "quelli in progetto", "quelli in corso"
-e "quelli conclusi". Evitare il semaforo verde arancio rosso.
-* [ ] User Roles / Add e Modify  
-Cambiare il campo di Role in un select, no testo libero.
+## Generale
+
+* [ ] scoprire come usare MAMP al posto di `php artisan serve`.  
+  Si deve puntare alla cartella /public che però deve sparire dall'URL,
+  ho provato a spostare sulla radice del progetto l'indirizzo
+  base di MAMP, e funziona ma solo fino a un certo punto.
+
+* [ ] Studiare abilitazione e autenticazione,  
+  L'obiettivo è avere una tabella di user con i ruoli granulari,
+  e inserire nelle loro abilitazioni i codici associati alle
+  operazioni e alle gestioni errore. Deve essere registrato nel
+  log A B C che utente userA non è abilitato alla funzione
+  functionB per cui serve il codice di abilitazione abilC.
+  All'utente userA deve arrivare solo il messaggio che deve
+  farsi abilitare rivolgendosi all'amministrazione del sistema.
+  C'è già un middleware che controlla iscrizione e verifica email,
+  va esteso o sostituito.
+
+* [ ] Revisione del marchio con esclusione dei rettangoli, solo numeri sfalsati in altezza
+  con un rigo sottostante a suggerire lo scalino e le lettere yaPCP o PCP (o PhoConPla?)
 
 ### Concorsi
 
@@ -61,18 +87,6 @@ Il modulo va presentato se nel se il record principale NON è marcato come is_ci
 
 * [ ] concorsi / premi / add  
 Da fare, possono esserci premi legati alle sezioni e altri senza sezione quindi di concorso
-
-* [ ] concorsi / giurie / add  
-Da fare. Richiedere per i giurati nome cognome nazione ed email,  se non sono censiti come user fare un inserimento automatico usando l'indirizzo email come password iniziale, andrà comunque cambiato tramite modifica password. Vanno anche registrati in UserRole.
-
-### User
-
-* [ ] controllare che recupera password sia funzionante
-
-### Paesi
-
-* [ ] Aggiornamento dell'elenco paesi con gli emoji delle bandiere nazionali
-* [ ] Ricostruzione del seeder per i paesi con gli emoji delle bandiere
 
 ### 1. Contest - principale
 
@@ -117,21 +131,42 @@ previste da almeno una delle federazioni elencate.
 * [ ] le regole delle federazioni possono essere una lista di regole
 e nella la section la regola "c'è", "c'è", "manca". (da definire)
 
-### 3. Contest jury list
+### 3. Contest (section) jury list
 
 * record FACOLTATIVO (non esiste per i circuiti)
+
+* [x] concorsi / giurie / add  
+Richiede per i giurati nome, cognome, nazione ed email.
+L'email è unica in piattaforma, se non risulta presente
+vengono inseriti con i dati a disposizione User e UserContact.
+La password iniziale in quel caso sarà l'indirizzo email.
+Andrà comunque cambiato tramite *modifica password*.
+Vanno anche registrati in UserRole coinvolgendo il nuovo users.id
+con il concorso e l'associazione 'juror'.
+
+### 4. Contest (section) prize award list
+
 * [ ] tabella che in base al concorso / circuito elenca dei premi,  
 ciascuno con un identificativo univoco all'interno del concorso.
+
 * [ ] la sezione all'interno della tabella premi dev'essere nullable,  
 intendendosi che dove manca una sezione è un premio di circuito/ concorso
 es. premio del giurato, miglior autore, ecc.
 
-### 4. Contest section prize award list
-
 * [ ] Dev'essere previsto un flag se si tratta di Premio o Menzione
+
 * [ ] Il campo relativo al concorso e circuito sarà obbligatorio, mentre
 il campo relativo al codice sezione tema sarà facoltativo, nel caso manchi
 il premio si intende "di circuito e/o di concorso"
+
+### Country Paesi
+
+* [ ] Aggiornamento dell'elenco paesi con gli emoji delle bandiere nazionali
+* [ ] Ricostruzione del seeder per i paesi con gli emoji delle bandiere
+
+### Federation
+
+### Federation Section
 
 ### Federation Rules List
 
@@ -142,27 +177,28 @@ che il lato lungo dev'essere max(2500) pixel, in formato jpg, tif,
 e cose così. Ogni regola deve avere una funzione che esegue la verifica
 su un oggetto work, a cui accede e risponde con uno status di compliance o no.
 
-## Generale
+### Organization
+
+* [ ] nella dashboard delle organizzazioni sistemare
+i concorsi dividendoli tra "quelli in progetto", "quelli in corso"
+e "quelli conclusi". Evitare il semaforo verde arancio rosso.
+
+### User
 
 * [x] Attivare gli avvisi di registrazione per email ai nuovi utenti
 * [x] Attivare gli avvisi di login per email agli utenti
-* [ ] scoprire come usare MAMP al posto di `php artisan serve`.  
-  Si deve puntare alla cartella /public che però deve sparire dall'URL,
-  ho provato a spostare sulla radice del progetto l'indirizzo
-  base di MAMP, e funziona ma solo fino a un certo punto.
 
-* [ ] Studiare abilitazione e autenticazione,  
-  L'obiettivo è avere una tabella di user con i ruoli granulari,
-  e inserire nelle loro abilitazioni i codici associati alle
-  operazioni e alle gestioni errore. Deve essere registrato nel
-  log A B C che utente userA non è abilitato alla funzione
-  functionB per cui serve il codice di abilitazione abilC.
-  All'utente userA deve arrivare solo il messaggio che deve
-  farsi abilitare rivolgendosi all'amministrazione del sistema.
-  C'è già un middleware che controlla iscrizione e verifica email,
-  va esteso o sostituito.
+* [ ] Controllare che recupera password sia funzionante
 
-## Altre cose da fare
+### User Contact
 
-* [ ] Revisione del marchio con esclusione dei rettangoli, solo numeri sfalsati in altezza
-  con un rigo sottostante a suggerire lo scalino e le lettere yaPCP o PCP (o PhoConPla?)
+* [ ] Verificare che quando viene deletato (soft-delete) uno user
+vada in cascata a deletare UserContact UserRole ecc.
+
+### User Ruoli
+
+* [ ] User Roles / Add e Modify  
+Cambiare il campo di Role in un select, no testo libero.
+* [ ] Gestione degli intervalli da .. a.  
+Si deve verificare se ci sono intervalli che si sovrappongono
+a parità di Persona, Ruolo, Organizzazione, Concorso, Federazione
