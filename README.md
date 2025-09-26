@@ -6,7 +6,7 @@ Yeah, another Photo Contest Platform
 
 yaPCP wanna be a web application which aims to help: photo contest 
 participants, photo contest organizer and photo contest sponsors
-(usualcly international and national photographic organization)
+(i.e. international and national photographic organization)
 offering them a useful platform where all should found a useful place
 wherw show all the best.  
 For yaPCP mark we adopt a stylized podium and the initial of Photo Contest Platform.  
