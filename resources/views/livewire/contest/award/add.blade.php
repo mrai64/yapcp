@@ -78,7 +78,7 @@ use App\Models\ContestSection;
     <div class="my-4">
         <table class="data-table-container w-full">
             <tbody>
-                <form wire:submit="addContestAward">
+                <form wire:submit="add_contest_award">
                     @csrf
                 <tr class="border">
                     <td class="w-48" scope="row" valign="top">

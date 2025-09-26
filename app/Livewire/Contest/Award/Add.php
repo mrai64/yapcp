@@ -88,7 +88,7 @@ class Add extends Component
     /**
      * 4. At last validate n insert
     */
-    public function addContestAward()
+    public function add_contest_award()
     {
         Log::info(__FUNCTION__ . ' ' . __LINE__ . '');
         $validated = $this->validate();

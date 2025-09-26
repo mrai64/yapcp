@@ -103,7 +103,7 @@ class Add extends Component
     /**
      * 5. at last validate n insert
      */
-    public function addContestJuror()
+    public function add_contest_juror()
     {
         // first
         $validated = $this->validate();

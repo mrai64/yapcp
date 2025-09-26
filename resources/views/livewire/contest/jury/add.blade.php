@@ -124,7 +124,7 @@ use App\Models\ContestSection;
                     <td colspan="5">&nbsp;</td>
                 </tr>
                 <!-- finally the form -->
-                <form wire:submit="addContestJuror">
+                <form wire:submit="add_contest_juror">
                     @csrf
                     <tr>
                     <td scope="row">
