@@ -15,6 +15,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class Contest extends Model
@@ -84,6 +85,16 @@ class Contest extends Model
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
         ];
+    }
+    /**
+     * GETTERs
+     */
+    public static function get_name_en(string $contest_id) : string
+    {
+        $inp_id = Str::of($contest_id);
+        $get_contest = self::where('id', $inp_id)->get('name_en');
+        Log::info( __FUNCTION__ . ' ' . __LINE__ . $get_contest);
+        return (count($get_contest) == 0 ) ? '' : Str::of($get_contest[0]['name_en']);
     }
 
 }
