@@ -142,7 +142,6 @@ class Add extends Component
         $section_juror = ContestJury::create($validated);
         Log::info( __FUNCTION__ . ' ' . __LINE__. ' user->id: '. $user->id);
 
-        // si torna alla pagina, aggiornandola
         // redirect
         return redirect()
           ->route('contest-jury-add', ['sid' => $this->section_id ])

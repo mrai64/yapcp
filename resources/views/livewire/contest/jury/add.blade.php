@@ -15,15 +15,22 @@ use App\Models\ContestSection;
         <h2 class="fyk text-2xl font-medium text-gray-900">
             {{ __('JURY LIST f/SECTION ') }} {{ $section->name_en }} 
         </h2>
-        <!-- navigation --> 
         <h3>
-            <span class="fyk text-xl">Main</span>
+            <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
+                <span class="fyk text-xl">Main</span>
+            </a>
             . .
-            <span class="fyk text-xl">Sections</span>
+            <a href="{{ route('contest-section-add', ['cid' => $contest->id]) }}">
+                <span class="fyk text-xl">Sections</span>
+            </a>
             . .
-            <span class="fyk text-2xl">Jury</span>
+            <a href="{{ route('contest-jury-add', ['sid' => ContestSection::first_section_id( $contest->id )] ); }}">
+                <span class="fyk text-2xl">Jury</span>
+            </a>
             . .
-            <span class="fyk text-xl">Awards</span>
+            <a href="{{ route('contest-award-add', ['cid' => $contest->id ]); }}">
+                <span class="fyk text-xl">Awards</span>
+            </a>
             . .
             <span class="fyk text-xl">Participants</span>
             . .
@@ -43,9 +50,13 @@ use App\Models\ContestSection;
         <p class="fyk text-xl">Country: {{ Country::country_name( $contest->country_id ) }} </p>
         <p class="small">Closing date: {{ $contest->day_2_closing->format('Y-m-d') }} </p>
         @endif
-        <p class="small py-6">
+        <p class="flex-inline small py-6">
             <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
-                [ {{ __("Back to Main Contest card")}} ]
+                [ {{ __("Back to Main Contest Card")}} ]
+            </a>
+            . .
+            <a href="{{ route('contest-award-add', ['cid' => $contest->id ]) }}">
+                [ {{ __("Go to Award List Contest Card")}} ]
             </a>
         </p>
     </div>

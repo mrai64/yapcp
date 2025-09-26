@@ -1,15 +1,56 @@
-<div>
-    <p class="mb-4">{{ __('Well, Contest record is already created.') }}<br />
-     {{ __('If you interrupt compiling form, you can retrieve it in your Organization Daskboard.') }}</p>
-     <p class="mb-4">{{ __('After that contest general definition, next step are: section list, jury definition, prize list definition.') }}</p>
+<?php 
+/**
+ * Contest Main Card Add
+ */
 
+use App\Models\ContestSection;
+
+?>
+
+<div>
+    <header>
+        <h2 class="fyk text-2xl font-medium text-gray-900">
+            {{ __('CONTEST Main Card') }}
+        </h2>
+        <!-- navigation --> 
+        <h3>
+            <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
+                <span class="fyk text-2xl">Main</span>
+            </a>
+            . .
+            <a href="{{ route('contest-section-add', ['cid' => $contest->id]) }}">
+                <span class="fyk text-xl">Sections</span>
+            </a>
+            . .
+            <a href="{{ route('contest-jury-add', ['sid' => ContestSection::first_section_id( $contest->id )] ); }}">
+                <span class="fyk text-xl">Jury</span>
+            </a>
+            . .
+            <a href="{{ route('contest-award-add', ['cid' => $contest->id ]); }}">
+                <span class="fyk text-xl">Awards</span>
+            </a>
+            . .
+            <span class="fyk text-xl">Participants</span>
+            . .
+            <span class="fyk text-xl">Works</span>
+        </h3>
+    </header>
+
+    <hr />
+    
+    <p class="mb-4">{{ __('Well, Contest record is already created.') }}<br />
+        {{ __('If you interrupt compiling form, you can retrieve it in your Organization Daskboard.') }}
+    </p>
+    <p class="mb-4">
+        {{ __('After that contest general definition, next step are: section list, jury definition, prize list definition.') }}
+    </p>    
     <p class="mb-4"> 
-        <a  href="{{ route('dashboard') }}" 
-            rel="noopener noreferrer">
+        <a  href="{{ route('dashboard') }}" rel="noopener noreferrer">
         [ {{ __('Back to Dashboard')}} ]
         </a>?
     </p>
 
+    <hr />
 
     <form wire:submit="saveNewContest">
         @csrf

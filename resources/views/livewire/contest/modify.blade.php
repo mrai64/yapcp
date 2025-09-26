@@ -14,13 +14,21 @@ use App\Models\ContestSection;
             {{ __('Contest Main Form') }}
         </h2>
         <h3>
-            <span class="fyk text-2xl">Main</span>
+            <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
+                <span class="fyk text-2xl">Main</span>
+            </a>
             . .
-            <span class="fyk text-xl">Sections</span>
+            <a href="{{ route('contest-section-add', ['cid' => $contest->id]) }}">
+                <span class="fyk text-xl">Sections</span>
+            </a>
             . .
-            <span class="fyk text-xl">Jury</span>
+            <a href="{{ route('contest-jury-add', ['sid' => ContestSection::first_section_id( $contest->id )] ); }}">
+                <span class="fyk text-xl">Jury</span>
+            </a>
             . .
-            <span class="fyk text-xl">Awards</span>
+            <a href="{{ route('contest-award-add', ['cid' => $contest->id ]); }}">
+                <span class="fyk text-xl">Awards</span>
+            </a>
             . .
             <span class="fyk text-xl">Participants</span>
             . .
@@ -199,8 +207,7 @@ use App\Models\ContestSection;
         <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="fyk p-6 text-gray-900">
-                    <!-- TODO the right route -->
-                    <a href="{{ route('contest-section-add', ['cid' => $contest->id ]); }}">
+                    <a href="{{ route('contest-award-add', ['cid' => $contest->id ]); }}">
                     {{ __("Add Contest Awards") }}
                     </a>
                 </div>
