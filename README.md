@@ -28,4 +28,4 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 ## License
 
-At now yaPCP is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).  
+At now yaPCP is copyrighted software permitted by the [MIT license](https://opensource.org/licenses/MIT).  
