@@ -39,15 +39,16 @@ class Listed extends Component
 
         foreach($this->user_role as $role) {
             $this->user_role_list[] = [
-                'role'         => $role->role,
+                'id'              =>  $role->id,
+                'role'            =>  $role->role,
                 'organization_id' => ($role->organization_id > '') ? $role->organization_id : '',
+                'organization'    => ($role->organization_id > '') ? Organization::whereNull('deleted_at')->where( 'id', $role->organization_id )->get('name')[0]['name'] : '',
                 'federation_id'   => ($role->federation_id > '')   ? $role->federation_id : '',
+                'federation'      => ($role->federation_id > '')   ? Federation::whereNull('deleted_at')->where('id', $role->federation_id)->get('name')[0]['name'] : '',
                 'contest_id'      => ($role->contest_id > '')      ? $role->contest_id : '', 
-                'organization' => ($role->organization_id > '') ? Organization::whereNull('deleted_at')->where( 'id', $role->organization_id )->get('name')[0]['name'] : '',
-                'federation'   => ($role->federation_id > '')   ? Federation::whereNull('deleted_at')->where('id', $role->federation_id)->get('name')[0]['name'] : '',
-                'contest'      => ($role->contest_id > '')      ? Contest::whereNull('deleted_at')->where('id', $role->contest_id)->get('name_en')[0]['name_en'] : '', 
-                'start'        => $role->role_opening->format('Y-m-d'),
-                'end'          => $role->role_closing->format('Y-m-d'),
+                'contest'         => ($role->contest_id > '')      ? Contest::get_name_en( $role->contest_id) : '', 
+                'start'           =>  $role->role_opening->format('Y-m-d'),
+                'end'             =>  $role->role_closing->format('Y-m-d'),
             ];
         }
 
