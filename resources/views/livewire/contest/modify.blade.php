@@ -182,46 +182,5 @@ use App\Models\ContestSection;
                 {{ __('Saved.') }}
             </x-action-message>
         </div>
-
     </form>
-
-    <footer>
-        <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="fyk p-6 text-gray-900">
-                    <a href="{{ route('contest-section-add', ['cid' => $contest->id]) }}">
-                    {{ __("Add Contest Sections") }}
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="fyk p-6 text-gray-900">
-                    <a href="{{ route('contest-jury-add', ['sid' => ContestSection::first_section_id( $contest->id )] ); }}">
-                    {{ __("Add Contest Jury") }}
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="fyk p-6 text-gray-900">
-                    <a href="{{ route('contest-award-add', ['cid' => $contest->id ]); }}">
-                    {{ __("Add Contest Awards") }}
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="fyk p-6 text-gray-900">
-                    <!-- TODO the right route -->
-                    <a href="{{ route('contest-section-add', ['cid' => $contest->id]) }}">
-                    {{ __("Check n Manage Participants list") }}
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
 </div>
