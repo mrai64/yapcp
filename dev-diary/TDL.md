@@ -1,5 +1,7 @@
 # `To Do List`
 
+<a id="markdown-header" name="header"></a>
+
 ## Generalità
 
 Spiega per chi vuol capire questa struttura della To Do List, delle cose da fare.
@@ -24,10 +26,11 @@ diventano e diventeranno righe di titolo con ### o #### o #####.
 Si può anche fare un comando unix che tira fuori le intestazioni
 
 ```sh
-grep '^\#+ ' TDL.md | sort
+grep '^#' TDL.md | sort
 ```
 
-Nota: *Piccolo particolare: non funziona*
+**Avviso**: VSC ha una colonna con "barra laterale primaria", al cui interno
+sta un elemento "Struttura". VA USATO.
 
 ### Nuove note
 
@@ -54,14 +57,21 @@ sempre messa al passato *Risolvere* > *Risolto*.
 
 Qualora sia stato chiuso e cancellato il branch associato,
 il collegamento al branch deve essere trasformato in testo o rimosso.  
-`x (A) 2025-09-27 2025-09-27 Risolto problema alla pagina di caricamento immagini issue #17`  
+`### x (A) 2025-09-27 2025-09-27 Risolto problema alla pagina di caricamento immagini issue #17`  
 
 Prossime attività
 
 ## (A)(B) Alta priorità
 
-Vanno considerate di alta priorità le sistemazioni di problemi,
-issue resolution, e le cose che si possono fare e finire in pochissimo tempo.
+Vanno considerate di alta priorità (A) le sistemazioni di problemi,
+issue resolution, le cose collo di bottiglia che *se non fai questa non vai avanti*,
+e anche le cose che si possono fare e finire in pochissimo tempo.
+
+### (B) 2025-09-27 Pagina per elenco e caricamento delle opere
+
+La pagina deve consentire di vedere le miniature delle opere in uno
+spazio limitato dello schermo ma con scroll laterale, e consentire in un
+form il caricamento delle opere con i dati associati alla tabella `Works`.
 
 ## (C)(D) Priorità normale
 
@@ -78,6 +88,11 @@ e presentata in ordine alfabetico oppure di `'updated_at' desc`.
 sia stato inserito da poco.
 
 Quando il flag 'is_circuit' vale 'Y' il campo deve diventare readonly. Imparare gestione eventi
+
+### (C) 2025-09-27 Caricare una manciata di concorsi fake
+
+Impostare qualche concorso con almeno un paio di sezioni,
+per predisporre l'elenco dei concorsi da mostrare ai partecipanti.
 
 ### (D) 2025-09-23 Blocco campi per concorsi in corso - Concorsi Modifica  
 
@@ -177,6 +192,12 @@ Sono le cose che non rientrano nelle precedenti ma sono comunque da fare
 
 Manca il caricamento del marchio
 
+### (E) 2025-09-27 Modulo Concorsi principale Modify
+
+* [X] Creare pagina Contest/Modify  
+Sulla base della pagina add.blade fare la pagina modify.blade, si possono modificare
+i concorsi anche sulla presenza di un circuit id che prima non c'era.
+
 ### (E) 2025-09-27 Modulo principale Concorsi Modify - marchio
 
 Manca il caricamento del marchio
@@ -244,6 +265,25 @@ e quelli terminati.
 
 Queste sono raggruppate per tabelle e funzioni in ordine alfabetico
 
+* contests concorsi principale
+* contest_awards premi
+* contest_juries giurati
+* contest_sections sezioni e temi
+* countries paesi nazioni
+* federations
+* federation_sections
+* organizations
+* users
+* user_contacts
+* user_roles
+* works (potrebbe anche essere user_works)
+
+Nota: la lista non è completa, mancano ancora una manciata di tabelle:
+
+* contest_works opere partecipanti
+* contest_votes voti dei giurati
+* (altro?)
+
 ### Concorsi
 
 La definizione del concorso e del circuito concorsi passa da più fasi:
@@ -264,12 +304,8 @@ Questa barra si ripete sotto alla prima intestazione della pagina evidenziando l
 
 #### x 2025-09-27 2025-09-27 Concorsi Principale - Quota di partecipazione
 
-Aggiungere le indicazioni per la quota di partecipazione (campo di tipo text)  
+Aggiunto un campo `fee_info` le indicazioni per la quota di partecipazione (campo di tipo text)  
 In precedenza questa informazione può far parte della pagina del bando e regolamento
-
-* [X] Creare pagina Contest/Modify  
-Sulla base della pagina add.blade fare la pagina modify.blade, si possono modificare
-i concorsi anche sulla presenza di un circuit id che prima non c'era.
 
 I link per il pagamento saranno parte della pagina che contiene la scheda di iscrizione.
 Chi non è inserito nella piattaforma, iscrivendosi
