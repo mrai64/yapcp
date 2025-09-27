@@ -1,0 +1,34 @@
+# Todo yaml 
+# [it] Questa vuole essere una versione di todo.txt in formato yaml per 
+#      consentire una via di mezzo tra il markdown e il todo.txt
+# 
+
+"To Do List":
+  - (A) 2025-09-27 2025-09-26 Gestione dei task 
+    sinossi: >
+      Fare un qualcosa che prenda il concetto di testo libero
+      per appunti e riflessioni ma consenta allo stesso tempo
+      una gestione a colpo d'occhio delle cose da Fare
+      tramite una funzione di mostra/nascondi su diversi
+      livelli e che si possa inserire nella Gestione
+      del progetto in github
+  - (A) 2025-09-27 2025-09-26 Gestione dei task 
+    sinossi: >
+      Fare un qualcosa che prenda il concetto di testo libero
+      per appunti e riflessioni ma consenta allo stesso tempo
+      una gestione a colpo d'occhio delle cose da Fare
+      tramite una funzione di mostra/nascondi su diversi
+      livelli e che si possa inserire nella Gestione
+      del progetto in github
+  - (B) 2025-09-27 2025-09-26 Gestione dei task 
+    sinossi: >
+      Fare un qualcosa che prenda il concetto di testo libero
+      per appunti e riflessioni ma consenta allo stesso tempo
+      una gestione a colpo d'occhio delle cose da Fare
+      tramite una funzione di mostra/nascondi su diversi
+      livelli e che si possa inserire nella Gestione
+      del progetto in github.
+      
+
+"Due list":
+  x (A) 
