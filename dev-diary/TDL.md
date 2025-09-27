@@ -165,7 +165,7 @@ Quello che è verificabile con automatismi, ovvero:
 * peso in MB
 * nome *Senza Titolo*
 
-### (D) 2025-09-27 La cancellazione (soft-delete) di uno user deve cancellare anche altro 
+### (D) 2025-09-27 La cancellazione (soft-delete) di uno user deve cancellare anche altro
 
 In cascata e possibilmente in transazione (tutto o niente) vanno cancellati anche i dati correlati allo users.id nelle altre tabelle. Da analizzare
 
@@ -233,12 +233,12 @@ A seguire ricostruzione seeder
 
 Per comprendere gli emoji delle bandiere
 
-### (E) 2025-09-27 Lista Concorsi in Organization 
+### (E) 2025-09-27 Lista Concorsi in Organization
 
 Mettere una marcatura per distinguere i concorsi in progetto, quelli in corso
-e quelli terminati. 
+e quelli terminati.
 
-### (E) 2025-09-27 Verifica recupero password 
+### (E) 2025-09-27 Verifica recupero password
 
 ## (F) Cose già terminate
 
@@ -328,7 +328,7 @@ comprende country_code iso-3166 alpha 3, nome della nazione, emoji della bandier
 
 Sono presenti le organizzazioni nazionali e internazionali che hanno un proprio
 regolamento concorsi ed onorificenze e che per questo controllano l'andamento
-dei concorsi oltre a concedere patrocini. 
+dei concorsi oltre a concedere patrocini.
 
 ### Federation Section
 
@@ -337,8 +337,8 @@ qui vengono elencati codici e descrizioni.
 
 ### Federation Rules List
 
-Posto che ci son cose che NON si possono controllare automaticamente 
-altre sì, anche fosse "solo" la dimensione in pixel, o il numero di immagini 
+Posto che ci son cose che NON si possono controllare automaticamente
+altre sì, anche fosse "solo" la dimensione in pixel, o il numero di immagini
 che possono partecipare a una sezione, quello che si può automatizzare va automatizzato.
 Ogni regola deve avere una funzione che esegue la verifica
 su un oggetto della tabella Works, a cui accede e risponde con uno status di compliance o no.
