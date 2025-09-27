@@ -74,6 +74,23 @@ class UserContact extends Model
         return $pb;
     }
     /**
+     * getters
+     * 
+     */
+    public static function get_photo_box(string $uid) : string
+    {
+        $uc = self::where('user_id', $uid)->firstOrFail();
+        // compose pb
+        $photo_box = $uc->country_id
+        . '/' . $uc->last_name
+        . '/' . $uc->first_name
+        . '_' . $uc->user_id;
+        $photo_box = str_ireplace(':', '-', $photo_box);
+        $photo_box = str_ireplace('+', '',  $photo_box);
+        $photo_box = str_ireplace(' ', '-', $photo_box);
+        return $photo_box;
+    }
+    /**
      * 
      */
     public static function get_first_last_name(string $uid) : string

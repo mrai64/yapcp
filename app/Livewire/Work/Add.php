@@ -1,6 +1,10 @@
 <?php
 /**
- * TODO rules() to check monochromatic in ['Y', 'N'] and file size H x W
+ * (User) Works Add
+ * w/upload in photo_box directory
+ * - adopted by user_contact table
+ *
+ * 2025-09-27 reformat rules()
  */
 namespace App\Livewire\Work;
 
@@ -9,94 +13,106 @@ use App\Models\Work;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class Add extends Component
 {
     use WithFileUploads;
-    /**
-     * form fields and tmp vars 
-     */
-    public Work        $work;
-    public UserContact $user_contact;
-    // some value are via form but not all
-    public string $id;
-    public string $user_id;
-    public string $photo_box;
 
-    #[Validate('required|image|max:65536')]
+    // form fields and tmp vars
+    public Work        $work;
+
+    public UserContact $user_contact;
+
+    public string $id; // generated filename
+    public string $user_id;
+    public string $photo_box; // user folder
+
     public $work_image = null; // max: 64MB, enough?
 
     public string $work_file;
     public string $extension;
     public string $reference_year;
 
-    #[Validate('required|string|max:255')]
     public string $title_en;
-
-    #[Validate('string|max:255')]
     public string $title_local;
-
-    #[Validate('string|uppercase|max:1')]
     public string $monochromatic;
 
     /**
-     * Before the show
-     * 
+     * 1. Before the show
+     *
      */
     public function mount()
     {
-        $this->user_id = Auth::id();
-        $this->user_contact = UserContact::where( 'user_id', Auth::id() )->get()[0];
-        $this->photo_box = $this->user_contact->photo_box();
-        $this->extension = '';
+        Log::info( __FUNCTION__ .' '. __LINE__ );
+        $this->id             = Str::uuid();
+        $this->user_id        = Auth::id();
+        $this->photo_box      = UserContact::get_photo_box( $this->user_id );
+        $this->extension      = '';
         $this->reference_year = date("Y");
-        $this->title_en = '';
-        $this->title_local = '';
-        $this->monochromatic = 'N';
+        $this->title_en       = '';
+        $this->title_local    = '';
+        $this->monochromatic  = 'N';
     }
-
     /**
-     * Show must go
-     */
+     * 2. Show must go
+    */
     public function render()
     {
+        Log::info( __FUNCTION__ .' '. __LINE__ );
         return view('livewire.work.add');
     }
-
     /**
-     * After the show, 
-     * ...Really simple
-     */
-    public function save() 
+     * 3. Validation rules
+    */
+    public function rules()
     {
-        $this->validate();
+        Log::info( __FUNCTION__ .' '. __LINE__ );
+        return [
+            // id             assigned uuid
+            // user_id        assigned from Auth::id()
+            'work_image'    => 'required|image|max:65536',
+            'extension'     => 'string|lowercase|max:6',
+            'reference_year'=> 'int|min:1900|max:'.date('Y'),
+            'title_en'      => 'required|string|max:255',
+            'title_local'   => 'string|max:255',
+            // 'long_side',   assigned from image.size
+            // 'short_side',  assigned from image.size
+            'monochromatic' => 'required|string|uppercase|max:1|in:Y,N',
+        ];
+    }
+    
+    /**
+     * 4. After the show, validate n save
+    */
+    public function save_photo_box()
+    {
+        Log::info( __FUNCTION__ .' '. __LINE__ );
+        $validated = $this->validate();
+        // construct from work_image for work_file
+        $wh = $this->work_image->dimensions();
+        $validated['long_side']  = ($wh[0] >= $wh[1] ) ? $wh[0] : $wh[1];
+        $validated['short_side'] = ($wh[0] <= $wh[1] ) ? $wh[0] : $wh[1];
 
-        // for each in [] 
-        $this->id = Str::uuid();
-        $this->extension = strtolower(pathinfo( $this->work_image->getClientOriginalName(), PATHINFO_EXTENSION ));
-        if (!$this->extension){
-            $this->extension = 'jpg';
+        // missing data integration
+        $validated['id'] = $this->id;
+        $validated['user_id'] = $this->user_id;
+
+        $validated['extension'] = Str::lower( pathinfo( $this->work_image->getClientOriginalName(), PATHINFO_EXTENSION) );
+        if ( !in_array($validated['extension'], Work::valid_extensions) ){
+            $validated['extension'] = 'jpg';
         }
-        $this->work_file = $this->photo_box . '/' . $this->id . '.' . $this->extension;
-        $this->work_image->storePubliclyAs( 'photos', $this->work_file, 'public');
-        $this->monochromatic = strtoupper($this->monochromatic) === 'Y' ? strtoupper($this->monochromatic) : 'N';
 
-        $this->work                 = new Work();
-        $this->work->id             = $this->id;
-        $this->work->user_id        = $this->user_id;
-        $this->work->work_file      = $this->work_file;
-        $this->work->extension      = $this->extension;
-        $this->work->reference_year = $this->reference_year;
-        $this->work->title_en       = $this->title_en;
-        $this->work->title_local    = $this->title_local;
-        $this->work->long_side      = 0;
-        $this->work->short_side     = 0;
-        $this->work->monochromatic  = $this->monochromatic;
+        $validated['work_file'] = $this->photo_box . '/' . $validated['id'] . '.' . $validated['extension'];
+        Log::info( __FUNCTION__ .' '. __LINE__ . ' ' . $validated['work_file']);
+        $this->work_image->storePubliclyAs( 'photos', $validated['work_file'], 'public');
+        $validated['work_image'] = '';
 
-        $this->work->save();
+        $validate['monochromatic'] = ($validated['monochromatic'] === 'Y') ? $validated['monochromatic'] : 'N';
 
+        $this->work = Work::create($validated);
+        Log::info( __FUNCTION__ .' '. __LINE__ . ' ' . $this->work );
         // Next!?
         return redirect()
             ->route('photo-box-add')
