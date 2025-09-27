@@ -24,7 +24,7 @@ diventano e diventeranno righe di titolo con ### o #### o #####.
 Si può anche fare un comando unix che tira fuori le intestazioni
 
 ```sh
-grep '\#+ ' TDL.md | sort
+grep '^\#+ ' TDL.md | sort
 ```
 
 Nota: *Piccolo particolare: non funziona*
