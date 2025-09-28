@@ -1,10 +1,10 @@
 # `To Do List`
 
-<a id="markdown-header" name="header"></a>
-
 ## Generalità
 
 Spiega per chi vuol capire questa struttura della To Do List, delle cose da fare.
+
+Aggiornamento: ho aperto un ["progetto"](https://github.com/users/mrai64/projects/1) in github.com e man mano le schede qui sotto saranno trasferite in quello.
 
 L'attività è partita mesi fa e adesso sto cercando in una pausa
 di riordinare le cose per organizzarle al meglio. Sono un operaio di tastiera
@@ -66,12 +66,6 @@ Prossime attività
 Vanno considerate di alta priorità (A) le sistemazioni di problemi,
 issue resolution, le cose collo di bottiglia che *se non fai questa non vai avanti*,
 e anche le cose che si possono fare e finire in pochissimo tempo.
-
-### (B) 2025-09-27 Pagina per elenco e caricamento delle opere
-
-La pagina deve consentire di vedere le miniature delle opere in uno
-spazio limitato dello schermo ma con scroll laterale, e consentire in un
-form il caricamento delle opere con i dati associati alla tabella `Works`.
 
 ## (C)(D) Priorità normale
 
@@ -269,6 +263,8 @@ Queste sono raggruppate per tabelle e funzioni in ordine alfabetico
 * contest_awards premi
 * contest_juries giurati
 * contest_sections sezioni e temi
+* contest_votes (da fare)
+* contest_works (da fare)
 * countries paesi nazioni
 * federations
 * federation_sections
@@ -277,12 +273,6 @@ Queste sono raggruppate per tabelle e funzioni in ordine alfabetico
 * user_contacts
 * user_roles
 * works (potrebbe anche essere user_works)
-
-Nota: la lista non è completa, mancano ancora una manciata di tabelle:
-
-* contest_works opere partecipanti
-* contest_votes voti dei giurati
-* (altro?)
 
 ### Concorsi
 
@@ -354,6 +344,27 @@ es. premio del giurato, miglior autore, ecc.
 dove la differenza la fa non il valore del premio ma se lo stesso
 vale per la statistica della federazione sponsor.
 
+### 5. Contest (juror) Votes
+
+Tabella che raccoglie i voti dei giurati per le opere che partecipano
+al concorso, e consente di stabilire una graduatoria.
+Il voto è una qualsiasi forma di valore scalabile, può essere
+di espressione numerica (da 1 a 5, da 1 a 10, da 1 a 30),
+di espressione alfanumerica ('non ammesso', 'ammesso', 'a premio')
+e si possono utilizzare anche simboli emoji purché
+gli venga assegnato un valore scalare (🌑 🌓 🌔 🌕) (😖 ☹️ 🤔 🙂 😃 🎖️ 🏆).
+
+### 6. Contest (user) Works
+
+Tabella che raccoglie le opere che gli user mettono in partecipazione,
+e che verranno presentate ai giurati in forma anonimizzata, rimuovendo
+la possibilità di fare download.
+
+Altre piattaforme, anche se non è molto legale, espongono le opere caricate
+dagli autori e "consentono" lo scaricamento, esattamente. Chi ha un minimo
+di competenze tecniche può risalire all'autore delle opere, quando e da che
+macchina sono state scattate e perfino dove sono state scattate.
+
 ### Country Paesi
 
 Si tratta di un elenco statico, abbastanza statico, in cui però ci sono più
@@ -404,3 +415,13 @@ in un concorso ma non per sempre, possono esserci dei ruoli sovrapponibili
 p.es. membro di una organizzazione e chairman di un concorso
 e membro di una federazione, e altri incompatibili:
 partecipante e chairman dello stesso concorso.
+
+### Works
+
+Sono le opere che in deposito partecipano, hanno partecipato e possono
+partecipare ai concorsi.
+
+#### x (B) 2025-09-27 2025-09-27 Pagina per elenco e caricamento delle opere
+
+La pagina è raggiungibile dalla dashboard dell'utente, consente di vedere le miniature delle opere (in uno spazio limitato dello schermo ma con scroll laterale), e consentire (in una pagina dedicata) il caricamento delle opere con i dati associati alla tabella `Works`.
+
