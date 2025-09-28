@@ -67,12 +67,15 @@ Vanno considerate di alta priorità (A) le sistemazioni di problemi,
 issue resolution, le cose collo di bottiglia che *se non fai questa non vai avanti*,
 e anche le cose che si possono fare e finire in pochissimo tempo.
 
+### (B) 2025-09-28 In elenco ruoli rimuovere i duplicati [github fix #5](https://github.com/mrai64/yapcp/issues/5)
+
 ## (C)(D) Priorità normale
 
 Sono le cose che vanno fatte e non rientrano nelle alte priorità
 
 ### (C) 2025-09-27 Sostituire il campo circuit_id text con una select - Modulo Contest Principale
 
+[github feat: #4](https://github.com/mrai64/yapcp/issues/4)  
 Nel modulo principale di definizione del concorso c'è un campo flag
 'Circuito' seguito da un campo che richiede il circuit-id. Che può creare
 difficoltà e dev'essere migliorato. Va creata una selezione di record che
@@ -81,7 +84,7 @@ e presentata in ordine alfabetico oppure di `'updated_at' desc`.
 È ragionevole che i concorsi vengano inseriti insieme al circuito e quindi
 sia stato inserito da poco.
 
-Quando il flag 'is_circuit' vale 'Y' il campo deve diventare readonly. Imparare gestione eventi
+Quando il flag 'is_circuit' vale 'Y' il campo deve diventare readonly. Imparare gestione eventi.
 
 ### (C) 2025-09-27 Caricare una manciata di concorsi fake
 
@@ -308,10 +311,17 @@ per almeno una cinquina di concorsi traendo vantaggio dalla facilità di iscrizi
 Non metto limiti al numero di opere archiviabili, ma al tempo di archiviazione
 penso di max 4 anni.
 
+Quando viene cancellato il contest, vanno nello stesso tempo cancellati i
+corrispondenti record nelle tabelle contest_sections, contest_juries, contest_awards,
+contest_votes, contest_works.
+
 ### 2. Contest section
 
 Tabella che compone il concorso elencando
-le sezioni e i temi di cui è composto
+le sezioni e i temi di cui è composto.
+Quando il record principale è definito "circuito" questi dati
+sono in seguito ripresi dai concorsi che fanno parte del circuito
+tramite l'assegnazione del campo circuit_id
 
 #### x 2025-09-27 2025-09-27 Preparato il modulo Concorsi Sezioni / Add  
 
@@ -418,10 +428,14 @@ partecipante e chairman dello stesso concorso.
 
 ### Works
 
-Sono le opere che in deposito partecipano, hanno partecipato e possono
-partecipare ai concorsi.
+Si poteva chiamare User_works, sono le opere che in deposito partecipano,
+hanno partecipato e possono partecipare ai concorsi.  
+Possono essere cancellate dall'utente, ma restano a disposizione
+per le liste di presentazione dei concorsi, i file possono
+quindi essere rimossi solo quando i record sono stati
+fisicamente rimossi dalla tabella works e dalla tabella contest_works
+e dalla tabella contest_votes.
 
 #### x (B) 2025-09-27 2025-09-27 Pagina per elenco e caricamento delle opere
 
-La pagina è raggiungibile dalla dashboard dell'utente, consente di vedere le miniature delle opere (in uno spazio limitato dello schermo ma con scroll laterale), e consentire (in una pagina dedicata) il caricamento delle opere con i dati associati alla tabella `Works`.
-
+La pagina è raggiungibile dalla dashboard dell'utente, consente di vedere le miniature delle opere (TODO in uno spazio limitato dello schermo ma con scroll laterale), e consentire (in una pagina dedicata) il caricamento delle opere con i dati associati alla tabella `Works`.
