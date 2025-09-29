@@ -17,7 +17,7 @@ use App\Models\UserRole;
         <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <a href="{{ route('user-contact-modify') }}">
+                    <a href="{{ route('add-user-role-organization') }}">
                     {{ __("Add a role in existing Organization") }}
                     </a>
                 </div>

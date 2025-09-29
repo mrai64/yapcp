@@ -4,7 +4,7 @@
 
 Spiega per chi vuol capire questa struttura della To Do List, delle cose da fare.
 
-Aggiornamento: ho aperto un ["progetto"](https://github.com/users/mrai64/projects/1) in github.com e man mano le schede qui sotto saranno trasferite in quello.
+Aggiornamento: ho aperto un ["progetto"](https://github.com/users/mrai64/projects/1) in github.com e man mano le schede qui sotto saranno trasferite in quello. Dà un po' fastidio che vengano "tutti" etichettati come "problemi|issue".
 
 L'attività è partita mesi fa e adesso sto cercando in una pausa
 di riordinare le cose per organizzarle al meglio. Sono un operaio di tastiera
@@ -75,7 +75,8 @@ Sono le cose che vanno fatte e non rientrano nelle alte priorità
 
 ### (C) 2025-09-27 Sostituire il campo circuit_id text con una select - Modulo Contest Principale
 
-[github feat: #4](https://github.com/mrai64/yapcp/issues/4)  
+[github feat: #4](https://github.com/mrai64/yapcp/issues/4)
+
 Nel modulo principale di definizione del concorso c'è un campo flag
 'Circuito' seguito da un campo che richiede il circuit-id. Che può creare
 difficoltà e dev'essere migliorato. Va creata una selezione di record che

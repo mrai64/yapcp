@@ -1,0 +1,84 @@
+<?php
+/**
+ * User Role Organization Add
+ */
+
+use App\Models\Country;
+
+?>
+
+<div>
+    <header>
+        <h2 style="font-size:3rem;" class="fyk mb-4">{{ __('So, U are ... of ...?') }}</h2>
+    </header>
+
+    @if (session('success'))
+    <div class="float-end font-medium rounded-md px-4 py-2">
+        {{ session('success') }}
+    </div> 
+    @else 
+    <p class="small">{{__("Unlock platform feature based on your Organization Role")}}</p>
+    @endif
+    <br style="clear:both;" />
+    <a  href="{{ route('dashboard') }}" 
+        class="float-end font-medium rounded-md mb-4 py-2" >
+        [ {{ __('Back to dashboard') }} ]
+    </a>
+    <br style="clear:both;" />
+
+    <form wire:submit="save_user_role">
+        @csrf
+
+        <div class="mb-4">
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl" for="role">
+                {{ __('Role') }}
+            </label>
+            <select 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                wire:model="role"
+                name="role" 
+                required="required"
+                >
+                @foreach ($role_list as $role_item)
+                <option value="{{ $role_item }}" {{ ($role_item == $role) ? 'selected' : '' }}> {{ $role_item }} </option>
+                @endforeach
+            </select>
+            <div class="small">{{ __("If your role is missing tell us which is to add it in role list.") }}</div>
+            <div class="small">@error('role') {{ $message }} @enderror</div>
+        </div>
+
+
+        <div class="mb-4">
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl" for="organization">
+                {{ __('Organization') }}
+            </label>
+            <select 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                wire:model="organization_id"
+                name="organization_id" 
+                required="required"
+                >
+                @foreach ($organization_list as $organization_item)
+                <option value="{{ $organization_item->id }}" {{ ($organization_item->id == $organization_id) ? 'selected' : '' }}> {{ Country::country_flag( $organization_item->country_id ) }} | {{ $organization_item->name }}</option>
+                @endforeach
+            </select>
+            <div class="small">
+                {{ __("Organization are listed in name order.") }}
+                {{ __("All org, not only your' country org.") }}
+            </div>
+            <div class="small">@error('organization') {{ $message }} @enderror</div>
+        </div>
+
+        {{-- role_opening from date --}} 
+        {{-- role_closing to date   --}} 
+
+        <hr />
+        <button type="submit" 
+            class="inline-flex items-center px-4 py-2 m-0 mt-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-3"
+            >
+            {{ __('Well, add that role to my personal infos') }}
+        </button>
+
+    </form>
+
+</div>
