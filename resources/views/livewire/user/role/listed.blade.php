@@ -61,7 +61,7 @@
                 class="font-medium rounded-md py-2"
             >[ {{ __('Closing Role') }} ]</a>
             . .
-            <a  href="{{ route('dashboard-organization', ['id' => $role['organization_id'] ]) }}"
+            <a  href="{{ route('organization-dashboard', ['id' => $role['organization_id'] ]) }}"
                 class="font-medium rounded-md py-2"
                 >[ {{ __('Organization dashboard') }} ]</a>
             @endif

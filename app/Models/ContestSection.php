@@ -98,7 +98,12 @@ class ContestSection extends Model
      */
     public static function first_section_id(string $contest_id) : string
     {
-        return self::whereNull('deleted_at')->where('contest_id', $contest_id)
-            ->orderBy('id')->first('id')['id'];
+        try {
+            return self::whereNull('deleted_at')->where('contest_id', $contest_id)
+                ->orderBy('id')->first('id')['id'];
+        } catch (\Throwable $th) {
+            Log::error(__FUNCTION__.' '.__LINE__ . 'in: contest_id:' . $contest_id . ' out: ' . $th->getMessage() );
+            return '  ';
+        }
     }
 }

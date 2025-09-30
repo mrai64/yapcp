@@ -45,7 +45,7 @@ Route::get(   '/organization/add/',           Organization\Add::class)->middlewa
 Route::get(   '/organization/modify/{id}',    Organization\Modify::class, ['id'])->middleware(['auth', 'verified'])->name('modify-organization');
 Route::get(   '/organization/remove/{id}',    Organization\Remove::class, ['id'])->middleware(['auth', 'verified'])->name('delete-organization');
 Route::delete('/organization/remove/{id}',    Organization\Remove::class, ['id'])->middleware(['auth', 'verified']);
-Route::get(   '/organization/dashboard/{id}', Organization\Dashboard::class, ['id'])->middleware(['auth', 'verified'])->name('dashboard-organization');
+Route::get(   '/organization/dashboard/{id}', Organization\Dashboard::class, ['id'])->middleware(['auth', 'verified'])->name('organization-dashboard');
 
 // App\Livewire\User
 Route::get( '/user/contact/modify', User\Contact\Modify::class)->middleware(['auth', 'verified'])->name('user-contact-modify');

@@ -169,6 +169,7 @@ use App\Models\ContestSection;
         </div>
 
         <div class="mb-4">
+            <!-- TODO replace w/select -->
             <label class="block font-medium text-sm text-gray-700" for="circuit_id">
                 {{ __('Circuit Id') }}
             </label>
@@ -192,6 +193,7 @@ use App\Models\ContestSection;
                 wire:model="federation_list" 
                 value="{{ old('federation_list') }}"
                 />
+            <div class="small">{{ __("Insert comma separate federation codes.") }}</div>
             @error('federation_list')
             <div class="alert alert-danger small">{{ $message }} </div>
             @enderror
