@@ -9,11 +9,13 @@ namespace App\Livewire\Federation;
 use Livewire\Component;
 use App\Models\Federation;
 use App\Models\Country;
+use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Str;
 
 class Modify extends Component
 {
-    public Federation $federation;
+    public $federation;
 
     // readonly
     public $id;
@@ -39,18 +41,18 @@ class Modify extends Component
     /**
      * Before the show
      */
-    public function mount(int $id) // $id as 'id' in route()
+    public function mount(string $fid) // $fid as 'fid' in route()
     {
         // $this->federation = Federation::findOrFail($id);
-        $fed = new Federation();
-        $this->federation = $fed->findOrFail($id);
+        $this->federation = Federation::firstOrFail('id', $fid)->get()[0];
+        Log::info(__FUNCTION__.' '.__LINE__.' '. json_encode($this->federation));
 
-        $this->id         = $this->federation->id;
-        $this->name       = $this->federation->name;
-        $this->code       = $this->federation->code;
-        $this->website    = $this->federation->website;
-        $this->country_id = $this->federation->country_id;
-        $this->contact    = $this->federation->contact;
+        $this->id         = $this->federation['id'];
+        $this->name       = $this->federation['name'];
+        $this->code       = $this->federation['code'];
+        $this->website    = $this->federation['website'];
+        $this->country_id = $this->federation['country_id'];
+        $this->contact    = $this->federation['contact'];
     }
 
     /**

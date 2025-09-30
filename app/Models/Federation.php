@@ -20,11 +20,15 @@ class Federation extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable =[
+        // id int++
         'country_id',
         'code',
         'name',
         'website',
         'contact',
+        // created_at
+        // updated_at
+        // deleted_at
     ];
 
     protected function casts(): array{

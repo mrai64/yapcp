@@ -28,9 +28,9 @@ require __DIR__.'/auth.php';
 // App\Livewire\Federation
 Route::get(   '/federation/add',         Federation\Add::class)->name('add-federation');
 Route::get(   '/federation/list',        Federation\Listed::class)->name('federation-list');
-Route::get(   '/federation/modify/{id}', Federation\Modify::class, ['id'])->name('modify-federation');
-Route::get(   '/federation/remove/{id}', Federation\Remove::class, ['id'])->name('delete-federation');
-Route::delete('/federation/remove/{id}', Federation\Remove::class, ['id']);
+Route::get(   '/federation/modify/{fid}', Federation\Modify::class, ['fid'])->name('modify-federation');
+Route::get(   '/federation/remove/{fid}', Federation\Remove::class, ['fid'])->name('delete-federation');
+Route::delete('/federation/remove/{fid}', Federation\Remove::class, ['fid']);
 
 // App\Livewire\FederationSection
 Route::get(   '/federation/section/list/{fid}',  Federation\Section\Listed::class, ['fid'])->name('federation-section-list');

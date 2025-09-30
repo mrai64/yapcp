@@ -9,17 +9,16 @@
     </div> 
     @endif
 
-    @if(isset($federation_list) && 
-        count($federation_list) > 0 )
+    @if(isset($federation_list) && count($federation_list) > 0 )
     <ul>
         @foreach($federation_list as $federation)
         <li class="my-2 p-4 font-medium">
             <strong class="fyk text-xl">{{$federation->name}}</strong><br />
             {{$federation->code}} | Country: {{$federation->country_id}} | web: {{$federation->website}}
-            <a  href="/federation/modify/{{$federation->id}}"
+            <a  href="{{ route('modify-federation', ['fid' => $federation->id]) }}"
                 class="font-medium rounded-md px-4 py-2"
                 >[ {{ __('Modify') }} ]</a>
-            <a  href="/federation/remove/{{$federation->id}}"
+            <a  href="{{ route('delete-federation', ['fid' => $federation->id]) }}"
                 class="font-medium rounded-md px-4 py-2"
                 >[ {{ __('Remove') }} ]</a>
         </li>

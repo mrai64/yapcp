@@ -79,7 +79,7 @@
                 class="font-medium rounded-md py-2"
                 >[ {{ __('Closing Role (today)') }} ]</a>
             . .
-            <a  href="{{ route('modify-federation', ['id', $role['federation_id'] ]) }}"
+            <a  href="{{ route('modify-federation', ['fid' => $role['federation_id'] ]) }}"
                 class="font-medium rounded-md py-2"
                 >[ {{ __('Federation dashboard') }} ]</a>
             @endif
