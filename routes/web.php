@@ -52,6 +52,7 @@ Route::get( '/user/contact/modify', User\Contact\Modify::class)->middleware(['au
 
 // App\Livewire\UserRole
 Route::get( '/dashboard/role',     User\Role\Listed::class)->middleware(['auth', 'verified'])->name('user-role-list');
+Route::get( '/dashboard/role/federation/add', User\Role\Federation\Add::class)->middleware(['auth', 'verified'])->name('add-user-role-federation');
 Route::get( '/dashboard/role/organization/add', User\Role\Organization\Add::class)->middleware(['auth', 'verified'])->name('add-user-role-organization');
 
 // App\Livewire\Work

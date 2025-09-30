@@ -64,6 +64,6 @@ class Country extends Model
     {
         $flag = self::where('id', $country_id)->get('flag_code')[0];
         Log::info(__FUNCTION__ . ' ' . __LINE__ . ' ' . $country_id . ' ' . $flag );
-        return (is_null($flag)) ? '🏳️' : $flag['flag_code'];
+        return (is_null($flag['flag_code'])) ? '🏳️' : $flag['flag_code'];
     }
 }

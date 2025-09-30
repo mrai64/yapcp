@@ -1,9 +1,8 @@
 <?php
 /**
- * user dashboard
+ * in User dashboard
  */
 
-use App\Models\UserRole;
 ?>
 
 <div>
@@ -26,7 +25,7 @@ use App\Models\UserRole;
         <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <a href="{{ route('user-contact-modify') }}">
+                    <a href="{{ route('add-user-role-federation') }}">
                     {{ __("Add a role in existing Federation") }}
                     </a>
                 </div>
@@ -78,7 +77,7 @@ use App\Models\UserRole;
             . .
             <a  href="/dashboard/role/federation/{{$role['federation_id']}}/closing"
                 class="font-medium rounded-md py-2"
-                >[ {{ __('Closing Role') }} ]</a>
+                >[ {{ __('Closing Role (today)') }} ]</a>
             . .
             <a  href="{{ route('modify-federation', ['id', $role['federation_id'] ]) }}"
                 class="font-medium rounded-md py-2"

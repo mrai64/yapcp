@@ -67,6 +67,8 @@ Vanno considerate di alta priorità (A) le sistemazioni di problemi,
 issue resolution, le cose collo di bottiglia che *se non fai questa non vai avanti*,
 e anche le cose che si possono fare e finire in pochissimo tempo.
 
+### (B) 2025-09-29 Realizzare pagina aggiunta ruolo user federation [github feat: #11](https://github.com/mrai64/yapcp/issues/11)
+
 ### (B) 2025-09-28 In elenco ruoli rimuovere i duplicati [github fix #5](https://github.com/mrai64/yapcp/issues/5)
 
 ## (C)(D) Priorità normale
@@ -119,15 +121,6 @@ che sono state inserite.
 ### (D) 2025-07-23 Tenere aggiornato il [diario dello sviluppatore](./index.md)  
 
 Punto che non può essere chiuso fintanto che il progetto è attivo.  
-
-### (D) 2025-09-27 Spostare il diario nel [wiki](https://github.com/mrai64/yapcp/wiki)
-
-Finora il progetto è stato costellato di un commit al giorno,
-relativo all'aggiornamento del diario dello sviluppatore. Questo da un lato
-rende il progetto vivace, con molti commit, dall'altro continua a creare
-versioni che no riguardano il codice ma la logorrea dello sviluppatore.
-
-Dando priorità allo sviluppo di codice piano piano spostare tutto il diario nel wiki.
 
 ### (D) 2025-09-27 Revisione il modulo Concorsi (sezioni) Award / Add & modify
 
@@ -263,7 +256,8 @@ e quelli terminati.
 
 Queste sono raggruppate per tabelle e funzioni in ordine alfabetico
 
-* contests concorsi principale
+* [github e gestione progetto](#github-e-gestione-progetto)
+* [contests concorsi principale](#concorsi)
 * contest_awards premi
 * contest_juries giurati
 * contest_sections sezioni e temi
@@ -277,6 +271,22 @@ Queste sono raggruppate per tabelle e funzioni in ordine alfabetico
 * user_contacts
 * user_roles
 * works (potrebbe anche essere user_works)
+
+### Github e gestione progetto
+
+#### x (D) 2025-09-29 2025-09-27 Spostare il diario nel [wiki](https://github.com/mrai64/yapcp/wiki)
+
+Finora il progetto è stato costellato di un commit al giorno,
+relativo all'aggiornamento del diario dello sviluppatore. Questo da un lato
+rende il progetto vivace, con molti commit, dall'altro continua a creare
+versioni che no riguardano il codice ma la logorrea dello sviluppatore.
+
+Dando priorità allo sviluppo di codice piano piano spostare tutto il diario nel wiki.
+
+Contrordine compagni! wiki in github soffre di parecchie limitazioni rispetto
+a qualsiasi altro wiki: Non sono permesse "cartelle", il nome della pagina
+è il nome del file, è pensato per la creazione di "capitoli", ovvero
+poche pagine tematizzate con dentro contenuti anche lunghi. Non è adatta all'uso per diario dello sviluppatore.
 
 ### Concorsi
 
