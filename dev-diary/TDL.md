@@ -34,40 +34,24 @@ sta un elemento "Struttura". VA USATO.
 
 ### Nuove note
 
-**Nuove note**: vanno inserite in [priorità normale](#cd-priorità-normale),
-inserendo una lettera, una data e una riga di titolo, es.:  
-`### (C) 2025-09-27 Fare la pagina user carica lavori`  
-Qui, mutuato da todo.txt adotto la lettera di priorità,
-la data di registrazione appunto e la riga di titolo, che inizia con una maiuscola.  
-Sotto possono starci appunti e tutto quel che serve, l'editor consente di
-nascondere il contenuto lasciando la riga di intestazione.  
-Se la cosa è davvero urgente, per risolvere un problema o può essere eseguita subito in pochissimo tempo, va inserita nell'[alta priorità](#ab-alta-priorità)
-con lo stesso criterio, es.:  
-`### (A) 2025-09-27 Risolvere problema alla pagina di caricamento immagini issue #17`  
-`### (B) 2025-09-27 Inserire traduzioni italiano della pagina caricamento immagini`  
+**Nuove note**: non vanno più inserite in questo file ma va aperta una
+richiesta nella [pagina](https://github.com/users/mrai64/projects/1) (privata) github dei progetti. 
+usare un prefisso fix: per i problemi da sistemare, feat: per le cose da fare
+comprese le migliorie. Poche parole per dare un argomento e un \[id: aaaa-mm-gg.nn]. 
+C'è unacolonna open id, va complata con lo stessi id aaaa-mm-gg.nn dove 
+nn è un progressivo che ogni giorno parte da 01. Colonna asegnata a, ovviamente a me per ora. 
+Status Todo o in progress o Done. Done viene assegnato automaticamente quando vene chiusa la richiesta.
 
 **Branch**: La nuova nota può anche coincidere con l'apertura di un branch dedicato
-all'attività, che va inserito all'interno del blocco come collegamento al sito github.
+all'attività, farlo in previsione di uno sviluppo lungo e che può intralciare altre attività.
 
-### Chiusura delle note
-
-Quando l'attività termina prima della priorità (A) .. (F) viene messa una x,
-e dopo la priorità viene inserita la data chiusura attività. La frase andrebbe
-sempre messa al passato *Risolvere* > *Risolto*.
-
-Qualora sia stato chiuso e cancellato il branch associato,
-il collegamento al branch deve essere trasformato in testo o rimosso.  
-`### x (A) 2025-09-27 2025-09-27 Risolto problema alla pagina di caricamento immagini issue #17`  
-
-Prossime attività
+Attività da ribaltare in Project.
 
 ## (A)(B) Alta priorità
 
 Vanno considerate di alta priorità (A) le sistemazioni di problemi,
 issue resolution, le cose collo di bottiglia che *se non fai questa non vai avanti*,
 e anche le cose che si possono fare e finire in pochissimo tempo.
-
-### (B) 2025-09-29 Realizzare pagina aggiunta ruolo user federation [github feat: #11](https://github.com/mrai64/yapcp/issues/11)
 
 ### (B) 2025-09-28 In elenco ruoli rimuovere i duplicati [github fix #5](https://github.com/mrai64/yapcp/issues/5)
 
@@ -436,6 +420,8 @@ in un concorso ma non per sempre, possono esserci dei ruoli sovrapponibili
 p.es. membro di una organizzazione e chairman di un concorso
 e membro di una federazione, e altri incompatibili:
 partecipante e chairman dello stesso concorso.
+
+#### x 2025-09-30 2025-09-29 Realizzare pagina aggiunta ruolo user federation [github feat: #11](https://github.com/mrai64/yapcp/issues/11)
 
 ### Works
 
