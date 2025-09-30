@@ -46,8 +46,11 @@ use App\Models\ContestSection;
     </p>    
     <p class="mb-4"> 
         <a  href="{{ route('dashboard') }}" rel="noopener noreferrer">
-        [ {{ __('Back to Dashboard')}} ]
-        </a>?
+        [ {{ __('Back to Personal Dashboard')}} ]
+        </a>
+        <a  href="{{ route('organization-dashboard', [ 'id' => $organization_id ]) }}" rel="noopener noreferrer">
+        [ {{ __('Back to organization Dashboard')}} ]
+        </a>
     </p>
 
     <hr />
@@ -405,9 +408,9 @@ use App\Models\ContestSection;
     </form>
 
     <p class="mb-4"> 
-        <a  href="{{ route('federation-list') }}" 
+        <a  href="{{ route('organization-dashboard', [ 'id' => $organization_id ]) }}" 
             rel="noopener noreferrer">
-        [ {{ __('Back to Dashboard')}} ]
+        [ {{ __('Back to Organization Dashboard')}} ]
         </a>?
     </p>
 
