@@ -23,14 +23,14 @@ class Listed extends Component
     public function mount() // no parm
     {
         Log::info(__FUNCTION__.':'.__LINE__ );
-        $today = Carbon::now()->toDateString() . ' 23:59:59.000000Z';
+        $today = Carbon::now()->toDateString();// . ' 23:59:59.000000Z';
         // where AND where
-        $this->contest_get = Contest::where('day_2_closing', '>=', $today)
-        ->where('day_1_opening', '<=', $today)->get();
-        Log::info(__FUNCTION__.':'.__LINE__ . ' found:' . count($this->contest_get));
+        $this->contest_get = Contest::where('day_2_closing', '>=', $today)->where('day_1_opening', '<=', $today)->orderBy( 'day_2_closing' )->get();
+        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__ . ' found:' . count($this->contest_get));
         if (count($this->contest_get) > 0) {
             foreach ($this->contest_get as $contest) {
-                Log::info(__FUNCTION__.':'.__LINE__ . ' contest:' . $this->contest_get );
+                Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__ . ' contest:' . $this->contest_get );
+                $this->contest_list[] = $contest;
             }
         }
     }

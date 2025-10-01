@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class Organization extends Model
 {
@@ -55,6 +56,7 @@ class Organization extends Model
         ];
     }
     
+    // GETTERS
     /**
      * Sorted by 
      *   - country_id
@@ -73,5 +75,14 @@ class Organization extends Model
             ->get();
         // Log::debug ... 
         return $organizations;
+    }
+    /**
+     * 
+     */
+    public static function organization_name(string $organization_id) : string
+    {
+        $org_name = self::findOrFail( $organization_id)->get('name')[0];
+        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' found:'.$org_name);
+        return $org_name['name'];
     }
 }
