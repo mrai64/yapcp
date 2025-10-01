@@ -103,7 +103,7 @@ class ContestSection extends Model
                 ->orderBy('id')->first('id')['id'];
         } catch (\Throwable $th) {
             Log::error(__FUNCTION__.' '.__LINE__ . 'in: contest_id:' . $contest_id . ' out: ' . $th->getMessage() );
-            return '  ';
+            return '';
         }
     }
 }

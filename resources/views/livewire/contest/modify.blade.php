@@ -22,9 +22,16 @@ use App\Models\ContestSection;
                 <span class="fyk text-xl">Sections</span>
             </a>
             . .
-            <a href="{{ route('contest-jury-add', ['sid' => ContestSection::first_section_id( $contest->id )] ); }}">
+            {{ $sid = ContestSection::first_section_id( $contest->id ); }}
+            @if($sid > '')
+            <a href="{{ route('contest-jury-add', ['sid' => $sid] ); }}">
                 <span class="fyk text-xl">Jury</span>
             </a>
+            @else
+            <a href="#no-section-no-jury" text='{{ __("Before, add a section")}}' alt='{{ __("No link, almost a section before")}}'>
+                <span class="fyk text-xl">Jury</span>
+            </a>
+            @endif
             . .
             <a href="{{ route('contest-award-add', ['cid' => $contest->id ]); }}">
                 <span class="fyk text-xl">Awards</span>
@@ -39,10 +46,10 @@ use App\Models\ContestSection;
     <hr />
     
     <p class="mb-4">{{ __('Well, Contest record is already created.') }}<br />
-        {{ __('If you interrupt compiling form, you can retrieve it in your Organization Daskboard.') }}
+        {{ __('If you interrupt compiling form, you can retrieve it in your Organization Dashboard.') }}
     </p>
     <p class="mb-4">
-        {{ __('After that contest general definition, next step are: section list, jury definition, prize list definition.') }}
+        {{ __('After that contest main/general definition, next step are: section list, jury definition, prize list definition.') }}
     </p>    
     <p class="mb-4"> 
         <a  href="/dashboard" rel="noopener noreferrer">
