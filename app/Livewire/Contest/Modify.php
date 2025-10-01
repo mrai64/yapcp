@@ -71,7 +71,7 @@ class Modify extends Component
         $this->country_id               = $this->contest->country_id;
         $this->name_en                  = $this->contest->name_en;
         $this->name_local               = $this->contest->name_local;
-        $this->lang_local               = $this->contest->local;
+        $this->lang_local               = $this->contest->lang_local;
         $this->organization_id          = $this->contest->organization_id;
         // $this->contest_mark          = $this->contest->contest_mark;
         $this->contact_info             = $this->contest->contact_info;
