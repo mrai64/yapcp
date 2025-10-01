@@ -168,7 +168,8 @@ use App\Models\ContestSection;
         </table>
         <br />
         <p class="small">
-            {{ __("Assign a unique code to every section, and remember to see if you are under sponsor / patronage") }}
+            {{ __("Assign a unique code to every section, and") }}
+            {{ __("remember to see if you are under sponsor / patronage") }}
             {{ __("use code valid for your sponsor.") }}
         </p>
     </div>
