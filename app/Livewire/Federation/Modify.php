@@ -44,8 +44,9 @@ class Modify extends Component
     public function mount(string $fid) // $fid as 'fid' in route()
     {
         // $this->federation = Federation::findOrFail($id);
-        $this->federation = Federation::firstOrFail('id', $fid)->get()[0];
-        Log::info(__FUNCTION__.' '.__LINE__.' '. json_encode($this->federation));
+        Log::info(__FUNCTION__.' '.__LINE__.' fid: '. $fid);
+        $this->federation = Federation::where('id', $fid)->get()[0];
+        Log::info(__FUNCTION__.' '.__LINE__.' found:'. json_encode($this->federation));
 
         $this->id         = $this->federation['id'];
         $this->name       = $this->federation['name'];

@@ -1,6 +1,6 @@
 <?php
 /**
- * Contest Section Add
+ * Contest Section Modify work in progress
  */
 
 use App\Models\Country;
@@ -103,7 +103,7 @@ use App\Models\ContestSection;
                 </tr>
                 @endif
                 <!-- Form Add section -->
-                <form wire:submit="addSectionToContest">
+                <form wire:submit="modify_section_contest">
                     @csrf
                 <tr>
                     <td scope="row" valign="top" style="width:15% !important">

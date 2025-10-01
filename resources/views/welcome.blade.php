@@ -47,10 +47,25 @@
                             helping you to build a rule contest following national and international 
                             photo organization (i.e. FIAP) contest rules.
                         </p>
-                        <h2><a href="{{ route('federation-list') }}">{{ __('Federation List') }}</a></h2>
+                        <h2 class="fyk text-2xl text-center my-6">
+                            <a href="{{ route('contest-list') }}">
+                                {{ __('Open Contest List') }}
+                            </a>
+                        </h2>
                         <br />
                         <br />
-                        <h2><a href="{{ route('organization-list') }}">{{ __('Organization List') }}</a></h2>
+                        <h2 class="fyk text-2xl text-center my-6">
+                            <a href="{{ route('organization-list') }}">
+                                {{ __('Organization List') }}
+                            </a>
+                        </h2>
+                        <br />
+                        <br />
+                        <h2 class="fyk text-2xl text-center my-6">
+                            <a href="{{ route('federation-list') }}">
+                                {{ __('Federation List') }}
+                            </a>
+                        </h2>
 
                     </main>
 

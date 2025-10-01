@@ -65,6 +65,7 @@ Route::delete('/work/remove/{wid}', Work\Remove::class, ['wid'])->middleware(['a
 // App\Livewire\Contest
 Route::get( '/contest/add/{oid}', Contest\Add::class, ['oid']      )->middleware(['auth', 'verified'])->name('contest-add');
 Route::get( '/contest/modify/{cid}', Contest\Modify::class, ['cid'])->middleware(['auth', 'verified'])->name('modify-contest');
+Route::get( '/contest/listed', Contest\Listed::class, ['cid'])->middleware(['auth', 'verified'])->name('contest-list');
 
 // App\Livewire\Contest\Section
 Route::get( '/contest/section/add/{cid}',       Contest\Section\Add::class, ['cid'] )->middleware(['auth', 'verified'])->name('contest-section-add');
