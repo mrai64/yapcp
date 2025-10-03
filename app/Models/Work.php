@@ -33,6 +33,7 @@ class Work extends Model
     use HasFactory, SoftDeletes;
 
     public const table_name = 'works';
+    
     public const valid_extensions = [
         'jpg',
         'jpeg',

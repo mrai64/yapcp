@@ -63,9 +63,9 @@ Route::get(   '/work/remove/{wid}', Work\Remove::class, ['wid'])->middleware(['a
 Route::delete('/work/remove/{wid}', Work\Remove::class, ['wid'])->middleware(['auth', 'verified']);
 
 // App\Livewire\Contest
-Route::get( '/contest/add/{oid}',    Contest\Add::class, ['oid']   )->middleware(['auth', 'verified'])->name('contest-add');
-Route::get( '/contest/modify/{cid}', Contest\Modify::class, ['cid'])->middleware(['auth', 'verified'])->name('modify-contest');
-Route::get( '/contest/listed',       Contest\Listed::class         )->middleware(['auth', 'verified'])->name('contest-list');
+Route::get( '/contest/add/{oid}',       Contest\Add::class,       ['oid'])->middleware(['auth', 'verified'])->name('contest-add');
+Route::get( '/contest/modify/{cid}',    Contest\Modify::class,    ['cid'])->middleware(['auth', 'verified'])->name('modify-contest');
+Route::get( '/contest/listed',          Contest\Listed::class            )->middleware(['auth', 'verified'])->name('contest-list');
 
 // App\Livewire\Contest\Section
 Route::get( '/contest/section/add/{cid}',       Contest\Section\Add::class, ['cid'] )->middleware(['auth', 'verified'])->name('contest-section-add');
@@ -79,3 +79,7 @@ Route::get( '/contest/jury/add/{sid}', Contest\Jury\Add::class, ['sid'] )->middl
 
 // App\Livewire\Contest\Awards
 Route::get( '/contest/award/add/{cid}', Contest\Award\Add::class, ['cid'] )->middleware(['auth', 'verified'])->name('contest-award-add');
+
+// App\Livewire\Contest\Subscribe
+Route::get(    '/contest/subscribe/{cid}',       Contest\Subscribe::class, ['cid'])->middleware(['auth', 'verified'])->name('participate-contest');
+Route::delete( '/contest/subscribe/remove/{pid}', Contest\Subscribe\Remove::class, ['pid'])->middleware(['auth', 'verified'])->name('remove-work-contest');
