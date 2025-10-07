@@ -35,15 +35,78 @@ sta un elemento "Struttura". VA USATO.
 ### Nuove note
 
 **Nuove note**: non vanno più inserite in questo file ma va aperta una
-richiesta nella [pagina](https://github.com/users/mrai64/projects/1) (privata) github dei progetti. 
+richiesta nella [pagina](https://github.com/users/mrai64/projects/1) (privata) github dei progetti.
 usare un prefisso fix: per i problemi da sistemare, feat: per le cose da fare
-comprese le migliorie. Poche parole per dare un argomento e un \[id: aaaa-mm-gg.nn]. 
-C'è unacolonna open id, va complata con lo stessi id aaaa-mm-gg.nn dove 
-nn è un progressivo che ogni giorno parte da 01. Colonna asegnata a, ovviamente a me per ora. 
+comprese le migliorie. Poche parole per dare un argomento e un \[id: aaaa-mm-gg.nn].
+C'è unacolonna open id, va complata con lo stessi id aaaa-mm-gg.nn dove
+nn è un progressivo che ogni giorno parte da 01. Colonna asegnata a, ovviamente a me per ora.
 Status Todo o in progress o Done. Done viene assegnato automaticamente quando vene chiusa la richiesta.
 
 **Branch**: La nuova nota può anche coincidere con l'apertura di un branch dedicato
 all'attività, farlo in previsione di uno sviluppo lungo e che può intralciare altre attività.
+
+## Indice generale
+
+Può costituire l'indice del /docs. Quelle "terminate" in realtà funzionano,
+ma possono essere tutte revisionate. Quelle che non sono ancora
+terminate possono essere già funzionanti (e aggiornare l'elenco) oppure da fare.  
+Per quelle da fare si procede man mano che il percorso del concorso avanza,
+per scrivere e testare il funzionamento delle cose. Non sono previsti cicli
+di test automatici perché non ho imparato a farli e gestirli.  
+Php, laravel e livewire sono usati per avvantaggiarmi ma li sto imparando facendo.
+alcune funzioni realizzate potrebbero avere delle parti di laravel e livewire
+che le agevolano ma le devo imparare.
+
+* Documentazione utente
+* utenti - quelli che fanno cose
+  * ✅ iscrizione alla piattaforma
+  * ✅ modifica password
+  * ✅ caricamento opere
+  * ✅ assegnazione ruolo in organizzazione
+  * [ ] assegnazione ruolo in federazione
+  * [ ] assegnazione ruolo in concorso
+  * [ ] iscrizione a concorso
+  * [ ] Vista concorsi aperti
+  * [ ] Vista opere partecipanti a...
+  * [ ] Vista risultati ottenuti
+  * ✅ caricamento lavori in concorso
+* federazioni - definiscono e controllano i concorsi a cui danno patrocinio
+  * ✅ Definizione scheda principale - nome, web
+  * [ ] Definizione delle sezioni a concorso
+* organizzazioni - creano e gestiscono concorsi
+  * ✅ Creazione scheda principale
+  * [ ] Lista ruoli utenti in organizzazione
+  * [ ] Creazione concorsi in capo a organizzazioni
+  * [ ] Lista concorsi in corso
+  * [ ] Lista concorrenti con assegnazione quota versata
+* concorsi
+  * ✅ definizione scheda principale - nome, calendario, referenti, sito web
+  * ✅ definizione delle sezioni a concorso
+  * ✅ definizione delle giurie dei concorsi
+  * ✅ definizione dei premi dei concorsi
+  * [ ] predisposizione verbale "automatico" per copia incolla su carta intestata
+  * [ ] predisposizione elenchi per ammessi e premiati / catalogo web
+  * [ ] predisposizione elenchi per scarico immagini uso catalogo
+  * [ ] Circuiti - definizione scheda principale - nome, calendario, web
+  * [ ] Circuiti - definizione sezioni
+  * NO Circuiti - definizione giurie
+  * [ ] Circuiti - definizione premi
+  * [ ] Sezione Portfolio - aggiungere un campo sequenza a fianco della sezione
+* Giurie
+  * ✅ Caricamento delle giurie in concorso (vedi Concorsi > definizione delle giurie)
+  * ✅ Registrazione dei giurati come user in piattaforma
+  * [ ] Regolare accesso giurati con calendario da..a del concorso
+  * [ ] Elenco opere in concorso per la sezione ... - miniature
+  * [ ] Visione delle opere doppiamente anonima
+  * [ ] Gestione delle votazioni per giuria
+  * [ ] Riepilogo votazioni generale
+  * [ ] Assegnazione premi
+  * [ ] Convalida dei risultati da parte della giuria
+* Manutentori
+  * [ ] Funzione backup archivi
+  * [ ] Funzione cancellazioni archivi
+  * [ ] Funzione cancellazione opere non più presenti in archivio
+  * [ ] Funzione comunicazioni broadcast agli organizzatori per manutenzione programmate o anomalie
 
 Attività da ribaltare in Project.
 
