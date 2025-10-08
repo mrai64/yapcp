@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * Contest Participate / Add
+ * 
+ * 
+ */
 namespace App\Livewire\Contest\Subscribe;
 
 use App\Models\Contest;
@@ -8,6 +12,7 @@ use App\Models\ContestSection;
 use App\Models\User;
 use App\Models\UserContact;
 use App\Models\Work;
+use App\Rules\ContestSectionRule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
@@ -55,8 +60,17 @@ class Add extends Component
     {
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in:'.json_encode($this));
         return [
-            'work_id' => 'string|exists:works,id',
-            'section_id' => 'string|exists:contest_sections,id',
+            // first section_id, then work_id according w/ContesSectionRule
+            'section_id' => [
+                'string',
+                'exists:contest_sections,id',
+                new ContestSectionRule(),
+            ],
+            'work_id' => [
+                'string',
+                'exists:works,id',
+                new ContestSectionRule(),
+            ],
             'user_id' => 'string|exists:users,id',
             'contest_id' => 'string|exists:contests,id',
         ];

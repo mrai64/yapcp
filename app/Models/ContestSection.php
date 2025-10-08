@@ -43,6 +43,14 @@ class ContestSection extends Model
         'under_patronage',
         'name_en',
         'name_local',
+        // rule_format
+        // rule_min
+        // rule_max
+        // rule_min_size
+        // rule_max_size
+        // rule_max_weight
+        // rule_monochromatic
+
     ]; 
 
     // pk is uuid

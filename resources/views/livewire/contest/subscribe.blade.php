@@ -76,6 +76,7 @@ use Illuminate\Support\Facades\Log;
                     {{$work->reference_year}}
                 <em>{{ __("Long side:")}}</em>
                     {{$work->long_side}}
+                    <x-input-error class="small" :messages="$errors->get('long_side')" />
                 <em>{{ __("Short side:")}}</em> 
                     {{$work->short_side}}
                 </td>
