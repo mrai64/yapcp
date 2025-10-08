@@ -114,9 +114,7 @@ Attività da ribaltare in Project.
 
 Vanno considerate di alta priorità (A) le sistemazioni di problemi,
 issue resolution, le cose collo di bottiglia che *se non fai questa non vai avanti*,
-e anche le cose che si possono fare e finire in pochissimo tempo.
-
-### (B) 2025-09-28 In elenco ruoli rimuovere i duplicati [github fix #5](https://github.com/mrai64/yapcp/issues/5)
+e con (B) le cose che non sono (A) e si possono fare e finire in pochissimo tempo.
 
 ## (C)(D) Priorità normale
 
@@ -330,7 +328,7 @@ versioni che no riguardano il codice ma la logorrea dello sviluppatore.
 
 Dando priorità allo sviluppo di codice piano piano spostare tutto il diario nel wiki.
 
-Contrordine compagni! wiki in github soffre di parecchie limitazioni rispetto
+🛑Contrordine compagni! wiki in github soffre di parecchie limitazioni rispetto
 a qualsiasi altro wiki: Non sono permesse "cartelle", il nome della pagina
 è il nome del file, è pensato per la creazione di "capitoli", ovvero
 poche pagine tematizzate con dentro contenuti anche lunghi. Non è adatta all'uso per diario dello sviluppatore.
@@ -350,6 +348,8 @@ e delle sezioni del concorso (non ci sono premi di sezione per i circuiti)
 
 Creare una barra di navigazione Principale / Sezioni / Giurie ecc.  
 Questa barra si ripete sotto alla prima intestazione della pagina evidenziando l'elemento in cui ci si trova con un font doppio.
+
+#### x (B) 2025-10-08 2025-09-28 In elenco ruoli rimuovere i duplicati [github fix #5](https://github.com/mrai64/yapcp/issues/5)
 
 ### 1. Contest Principale
 
