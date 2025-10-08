@@ -18,18 +18,22 @@
     <ul class="">   
        <?php $first_bool = true; ?>
        @foreach($organization_list as $org)
-       <li class="block p-4 mb-4 border rounded-md">
-       <strong class="fyk text-xl">{{$org->name}} / {{$org->country_id}}<br /></strong> 
-       <em>{{__('email')}}:</em> {{$org->email}}<br />
-       <em>{{__('website')}}:</em> {{$org->website}}<br />
-       <small><em>{{__('uuid')}}: {{$org->id}}</em></small>
-       <a href="/organization/modify/{{$org->id}}" 
-          class="font-medium rounded-md px-4 py-4">
-          [ {{__('Modify')}} ]
+        <li class="block p-4 mb-4 border rounded-md">
+        <strong class="fyk text-xl">{{$org->name}} / {{$org->country_id}}<br /></strong> 
+        <em>{{__('email')}}:</em> {{$org->email}}<br />
+        <em>{{__('website')}}:</em> {{$org->website}}<br />
+        <small><em>{{__('uuid')}}: {{$org->id}}</em></small>
+        <a href="{{route('organization-dashboard', ['id' => $org->id ])}}" 
+        class="font-medium rounded-md px-4 py-4">
+            [ {{__('Dashboard')}} ]
         </a>
-       <a href="/organization/remove/{{$org->id}}" 
-          class="font-medium rounded-md px-4 py-4">
-          [ {{__('Remove')}} ]
+        <a href="{{route('modify-organization', ['id' => $org->id ])}}" 
+            class="font-medium rounded-md px-4 py-4">
+            [ {{__('Modify')}} ]
+        </a>
+        <a href="/organization/remove/{{$org->id}}" 
+            class="font-medium rounded-md px-4 py-4">
+            [ {{__('Remove')}} ]
         </a>
        @endforeach
     </ul>

@@ -38,8 +38,8 @@ sta un elemento "Struttura". VA USATO.
 richiesta nella [pagina](https://github.com/users/mrai64/projects/1) (privata) github dei progetti.
 usare un prefisso fix: per i problemi da sistemare, feat: per le cose da fare
 comprese le migliorie. Poche parole per dare un argomento e un \[id: aaaa-mm-gg.nn].
-C'è unacolonna open id, va complata con lo stessi id aaaa-mm-gg.nn dove
-nn è un progressivo che ogni giorno parte da 01. Colonna asegnata a, ovviamente a me per ora.
+C'è una colonna open id, va compilata con lo stessi id aaaa-mm-gg.nn dove
+nn è un progressivo che ogni giorno parte da 01. Colonna assegnata a, ovviamente a me per ora.
 Status Todo o in progress o Done. Done viene assegnato automaticamente quando vene chiusa la richiesta.
 
 **Branch**: La nuova nota può anche coincidere con l'apertura di un branch dedicato
@@ -309,7 +309,7 @@ Queste sono raggruppate per tabelle e funzioni in ordine alfabetico
 * contest_juries giurati
 * contest_sections sezioni e temi
 * contest_votes (da fare)
-* contest_works (da fare)
+* contest_works
 * countries paesi nazioni
 * federations
 * federation_sections
@@ -432,6 +432,13 @@ Altre piattaforme, anche se non è molto legale, espongono le opere caricate
 dagli autori e "consentono" lo scaricamento, esattamente. Chi ha un minimo
 di competenze tecniche può risalire all'autore delle opere, quando e da che
 macchina sono state scattate e perfino dove sono state scattate.
+
+#### (C) 2025-10-08 Aggiungere colonna del peso del file
+
+Tra le richieste delle federazioni c'è che il file sia entro i X MB,
+ora occorre stabilire se siano byte "vecchio corso" K = 1024x o
+"millesimati"  K = 1000x, 
+
 
 ### Country Paesi
 

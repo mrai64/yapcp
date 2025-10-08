@@ -1,6 +1,6 @@
 <?php
 /**
- * Contest Section validation rule
+ * Contest Subscribe ADD validation rule
  *
  * Give from mixed $value a section_id and a work_id,
  * then check if work_id respect all rules coded in
@@ -59,6 +59,9 @@ class ContestSectionRule implements ValidationRule
             Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' work:'.json_encode($this->work));
             if ($this->work->long_side > $this->section->rule_max){
                 $fail("🟥 Long side");
+            }
+            if (($this->section->rule_monochromatic === 'Y') && ($this->work->monochromatic != 'Y')) {
+                $fail("🟥 Monochromatic");
             }
         }
     }

@@ -2,9 +2,11 @@
 /**
  * User Role list
  * child table of Users
+ * 
  * must have user_id
  * <livewire:user.role.listed :uid="" >
  * 
+ * 2025-10-08 reformat mount() to avoid duplicate rec (usually juror for more section)
  */
 namespace App\Livewire\User\Role;
 
@@ -13,7 +15,9 @@ use App\Models\Federation;
 use App\Models\Organization;
 use App\Models\User;
 use App\Models\UserRole;
+use DateTimeImmutable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Listed extends Component
@@ -27,6 +31,7 @@ class Listed extends Component
     public Contest $contest_list;
     public Federation $federation_list;
     public $user_role_list = [];
+    public $sorted_user_role_list = [];
 
     /**
      * 1. before the show
@@ -35,22 +40,35 @@ class Listed extends Component
     {
         $this->uid               = Auth::id();
         $this->user              = User::findOrFail($this->uid);
-        $this->user_role         = UserRole::whereNull('deleted_at')->where('user_id', $this->uid)->orderBy('updated_at', 'desc')->get();
+        $this->user_role         = UserRole::select( DB::raw('max(id) AS `id_max` '), 'role', 'organization_id', 'federation_id', 'contest_id')
+            ->where('user_id', $this->uid)
+            ->groupBy('organization_id')
+            ->groupBy('federation_id')
+            ->groupBy('contest_id')
+            ->groupBy('role')
+            ->orderBy('organization_id')
+            ->orderBy('federation_id')
+            ->orderBy('contest_id')
+            ->orderBy('role')
+            ->get();
 
         foreach($this->user_role as $role) {
             $this->user_role_list[] = [
-                'id'              =>  $role->id,
+                'id'              =>  $role->id_max,
                 'role'            =>  $role->role,
                 'organization_id' => ($role->organization_id > '') ? $role->organization_id : '',
-                'organization'    => ($role->organization_id > '') ? Organization::whereNull('deleted_at')->where( 'id', $role->organization_id )->get('name')[0]['name'] : '',
+                'organization'    => ($role->organization_id > '') ? Organization::where( 'id', $role->organization_id )->get('name')[0]['name'] : '',
                 'federation_id'   => ($role->federation_id > '')   ? $role->federation_id : '',
-                'federation'      => ($role->federation_id > '')   ? Federation::whereNull('deleted_at')->where('id', $role->federation_id)->get('name')[0]['name'] : '',
+                'federation'      => ($role->federation_id > '')   ? Federation::where('id', $role->federation_id)->get('name')[0]['name'] : '',
                 'contest_id'      => ($role->contest_id > '')      ? $role->contest_id : '', 
                 'contest'         => ($role->contest_id > '')      ? Contest::get_name_en( $role->contest_id) : '', 
-                'start'           =>  $role->role_opening->format('Y-m-d'),
-                'end'             =>  $role->role_closing->format('Y-m-d'),
+                'start'           =>  UserRole::where('id', $role->id_max)->get('role_opening')[0]['role_opening']->format('Y-m-d'),
+                'end'             =>  UserRole::where('id', $role->id_max)->get('role_closing')[0]['role_closing']->format('Y-m-d'),
             ];
         }
+
+        $this->sorted_user_role_list = collect($this->user_role_list)->sortby('federation')->sortby('organization')->sortBy('contest')->sortBy('role')->toArray();
+        $this->user_role_list = $this->sorted_user_role_list;
 
     }
     /**

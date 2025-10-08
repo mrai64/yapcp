@@ -28,8 +28,8 @@ class Dashboard extends Component
     public function mount(string $id) // as in route/web.php
     {
         $this->organization = Organization::where('id', $id)->get(['id', 'country_id', 'name'])[0];
-        $this->user_role_list = UserRole::whereNull('deleted_at')->where('organization_id', $id)->orderBy('role')->orderBy('updated_at')->get(['id', 'user_id','role', 'role_opening', 'role_closing']);
-        $this->contest_list = Contest::whereNull('deleted_at')->where('organization_id', $id)->orderBy('updated_at')->get(['id','name_en', 'day_2_closing']);
+        $this->user_role_list = UserRole::where('organization_id', $id)->orderBy('role')->orderBy('updated_at')->get(['id', 'user_id','role', 'role_opening', 'role_closing']);
+        $this->contest_list = Contest::where('organization_id', $id)->orderBy('updated_at')->get(['id','name_en', 'day_2_closing']);
 
     }
     /**

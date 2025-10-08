@@ -3,19 +3,30 @@
  * organization dashboard need some help
  * 
  */
+
 use App\Models\UserContact;
 
 ?>
 
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="fyk font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Organization Dashboard for/') }}
-        </h2>
         <h2 class="fyk font-semibold text-2xl text-gray-800 leading-tight">
+            {{ __('Organization Dashboard for/') }}
             {{ $organization->name; }}
         </h2>
     </x-slot>
+
+    <h3 class="mb-4 w-full sm:px-6 lg:px-8"">
+        {{"Back to "}}
+        <a href="{{ route('organization-list') }}">
+        [ {{ __('Organization list') }} ]
+        </a>
+        . .
+        {{"Back to "}}
+        <a href="{{ route('organization-dashboard', ['id' => $id ]) }}">
+        [ {{ __('Organization dashboard') }} ]
+        </a>
+    </h3>
 
     <!-- contest list -->
     <section name="contest_list" class="py-12">

@@ -47,6 +47,7 @@ class UserRole extends Model
 
     /**
      * Complex validation, a field of 3 and only 1, not 0, not 2.
+     * TODO build a UserRoleRule rule
      */
     public function only_one_role(UserRole $user_role) : bool 
     {

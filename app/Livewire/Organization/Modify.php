@@ -7,13 +7,14 @@ namespace App\Livewire\Organization;
 use Livewire\Component;
 use App\Models\Organization;
 use App\Models\Country;
-use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Log;
 
 class Modify extends Component
 {
     public Organization $organization;
 
     // uuid
+    public string $id;
     public string $country_id;
     public string $name;
     public string $email;
@@ -26,38 +27,43 @@ class Modify extends Component
     public $countries;
 
     /**
-     * Be prepared
+     * 1. Before the show
      */
     public function mount(string $id) // as 'id' in route()
     {
-        $org = new Organization();
-        $this->organization = $org->findOrFail($id);
-        // id uuid
-        $this->country_id = $this->organization->country_id;
+        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        // $org = new Organization();
+        // $this->organization = $org->findOrFail($id);
+        $this->id           = $id;
+        $this->organization = Organization::where('id', $id)->get()[0];
+        $this->country_id   = $this->organization->country_id;
         $this->name         = $this->organization->name;
         $this->email        = $this->organization->email;
         $this->website      = $this->organization->website;
+        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($this));
         // created_at
         // updated_at
         // deleted_at
     }
-
+    
     /**
-     * Show must go
-     */
+     * 2. Show must go
+    */
     public function render()
     {
+        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $country = new Country();
         $this->countries = $country->allByCountry();
-
+        
         return view('livewire.organization.modify');
     }
-
+    
     /**
-     * Validation rules
-     */
+     * 3. Validation rules
+    */
     public function rules()
     {
+        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         return [
             // 'country_id' => 'required|string|uppercase|min:3|max:3',
             'country_id' => 'required|string|uppercase|min:3|exists:countries,id',
@@ -66,16 +72,16 @@ class Modify extends Component
             'website' => 'string|url|max:255',
         ];
     }
-
+    
     /**
-     * At last, Update?
-     */
-    public function update()
+     * 4. At last, Update?
+    */
+    public function update_organization()
     {
-        $this->validate();
-        $this->organization->update(
-            $this->all()
-        );
+        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        $validated = $this->validate();
+        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' validate:'.json_encode($validated));
+        $this->organization->update($validated);
         // to list 
         return redirect()
             ->route('organization-list')
