@@ -5,7 +5,7 @@
  */
 namespace App\Livewire\Contest\Subscribe;
 
-use App\Models\ContestParticipant;
+use App\Models\ContestWork;
 use App\Models\ContestSection;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
@@ -26,7 +26,7 @@ class Remove extends Component
     {
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in:'. $pid);
         $this->participant_id = $pid;
-        $this->participant = ContestParticipant::where('id', $pid)->get()[0];
+        $this->participant = ContestWork::where('id', $pid)->get()[0];
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' found:'. json_encode($this->participant));
 
         $this->contest_id = $this->participant->contest_id; 
@@ -60,7 +60,7 @@ class Remove extends Component
     {
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         //
-        $this->participant = ContestParticipant::where('id', $this->participant_id)->get()[0];
+        $this->participant = ContestWork::where('id', $this->participant_id)->get()[0];
         $this->res = $this->participant->delete();
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' deleted:'. json_encode($this->participant));
         return redirect()

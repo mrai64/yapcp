@@ -7,7 +7,7 @@
 namespace App\Livewire\Contest\Subscribe;
 
 use App\Models\Contest;
-use App\Models\ContestParticipant;
+use App\Models\ContestWork;
 use App\Models\ContestSection;
 use App\Models\User;
 use App\Models\UserContact;
@@ -90,7 +90,7 @@ class Add extends Component
         $validated['country_id'] = UserContact::get_country_id($this->user_id);        
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' validated' . json_encode($validated));
 
-        $this->contest_participant = ContestParticipant::create($validated);
+        $this->contest_participant = ContestWork::create($validated);
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' out:' . json_encode($this->contest_participant));
 
         return redirect()

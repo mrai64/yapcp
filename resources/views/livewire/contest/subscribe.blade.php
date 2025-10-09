@@ -9,7 +9,7 @@
  *
  */
 
-use App\Models\ContestParticipant;
+use App\Models\ContestWork;
 use Illuminate\Support\Facades\Log;
 
 ?>
@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Log;
         <!-- Contest work list w/counter -->
         <div class="fyk text-xl">{{__("Your counter:")}}
         @foreach($contest_section_list as $section)
-        <p class="inline-flex small">[ {{$section->code}} your:{{ ContestParticipant::get_participant_by_section_n_user($section->id, $user_id) }} / {{$section->rule_max}}]</p>
+        <p class="inline-flex small">[ {{$section->code}} your:{{ ContestWork::count_works_for_section_user($section->id, $user_id) }} / {{$section->rule_max}}]</p>
         @endforeach
         </div>
 
@@ -55,10 +55,10 @@ use Illuminate\Support\Facades\Log;
             <tr class="border my-4">
                 <td scope="row" class="text-center" align="center">
                     <!-- td add leave -->
-                    @if( ContestParticipant::get_participant_by_work($contest_id, $work->id) === '')
+                    @if( ContestWork::get_user_for_contest_work($contest_id, $work->id) === '')
                     @livewire('contest.subscribe.add', ['data_json' => json_encode(['contest_id' => $contest->id, 'contest_section_list' => $contest_section_list, 'work_id' => $work->id ]) ])
                     @else
-                    @livewire('contest.subscribe.remove', ['pid' => ContestParticipant::get_participant_by_work($contest_id, $work->id) ])
+                    @livewire('contest.subscribe.remove', ['pid' => ContestWork::get_user_for_contest_work($contest_id, $work->id) ])
                     @endif
                 </td>
                 <td>

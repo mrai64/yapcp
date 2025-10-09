@@ -1,11 +1,16 @@
 <?php
 /**
- * Contest (user n works ) Participant
- * - the table with most fk 
- * - one payload field only: is_admit
+ * Contest Works participant n admitted
+ * relation between
+ * - works
+ *   - user_contact
+ *     - country_id
+ * - section
+ *   - contest
  * 
- * TODO refactor to apply new table
+ * field is_admit have a limited-set-of-valid-value 
  */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,13 +19,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log; // Log::info
 use Illuminate\Support\Str; //         pk uuid 
 
-class ContestParticipant extends Model
+class ContestWork extends Model
 {
     //
     use HasFactory, SoftDeletes;
-
-    public const table_name = 'contest_participants';
-
+    public const table_name = 'contest_works';
     // pk uuid
     protected $keyType      = 'string';
     public    $incrementing = false;
@@ -70,6 +73,7 @@ class ContestParticipant extends Model
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.$count);
         return $count;
     }
+
     public static function get_user_for_contest_work(string $contest_id, string $work_id) : string
     {
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in: 1:'.$contest_id. ' 2:'. $work_id);

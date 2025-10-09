@@ -7,7 +7,7 @@
 namespace App\Livewire\Contest;
 
 use App\Models\Contest;
-use App\Models\ContestParticipant;
+use App\Models\ContestWork;
 use App\Models\ContestSection;
 use App\Models\UserContact;
 use App\Models\Work;
