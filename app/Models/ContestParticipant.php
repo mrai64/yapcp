@@ -1,18 +1,15 @@
 <?php
 /**
- * Contest (user n works ) Participant
- * - the table with most fk 
- * - one payload field only: is_admit
+ * Contest users participants 
  * 
- * TODO refactor to apply new table
  */
 namespace App\Models;
 
+use App\Models\UserContact;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log; // Log::info
-use Illuminate\Support\Str; //         pk uuid 
 
 class ContestParticipant extends Model
 {
@@ -21,36 +18,23 @@ class ContestParticipant extends Model
 
     public const table_name = 'contest_participants';
 
-    // pk uuid
-    protected $keyType      = 'string';
-    public    $incrementing = false;
-
-    // is_admit
+    // fee payment
     public const valid_YN = [
         'Y',
         'N',
     ];
+    
 
     // field list fillable in factory
     protected $fillable = [
-        // id - uuid assigned
-        'contest_id', // uuid fk
-        'section_id', // uuid fk
-        'country_id', // char(3)
-        'user_id', //    uuid fk
-        'work_id', //    uuid fk
-        'is_admit', //   Y/N
+        // id - unsigned bigint autoincrement assigned
+        'contest_id', //            uuid fk
+        'user_id', //               uuid fk
+        'fee_payment_completed', // Y/N
         // created_at
         // updated_at
         // deleted_at
     ];
-
-    // pk uuid
-    public static function booted() {
-        static::creating(function ($model) {
-            $model->id = Str::uuid7(); // uuid generator
-        });
-    }
 
     protected function casts()
     {
@@ -61,22 +45,39 @@ class ContestParticipant extends Model
         ];
     }
     // GETTERS
+    /**
+     * @param $contest_id - uuid fk contests.id
+     * @return array<string, string>
+     * 
+     */
+    public function get_participant_list(string $contest_id) : array
+    {
+        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        $participant_list = [];
 
-    // public function get_participant_list_by_contest_id()
-    // public function get_contest_id_list_by_user_id()
-    public static function count_works_for_section_user(string $section_id, string $user_id) : string
-    {
-        $count = self::where('user_id', $user_id)->where('section_id', $section_id)->count();
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.$count);
-        return $count;
-    }
-    public static function get_user_for_contest_work(string $contest_id, string $work_id) : string
-    {
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in: 1:'.$contest_id. ' 2:'. $work_id);
-        $participant = self::where('contest_id', $contest_id)->where('work_id', $work_id)->get('id');
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.$participant);
-        $participant_id = (count($participant)) ? $participant[0]['id'] : '';
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.$participant_id);
-        return $participant_id;
+        $participants = self::where('contest_id', $contest_id)->get();
+        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' found: '.count($participants));
+        if (count($participants) < 1) {
+            return $participant_list;
+        }
+
+        foreach($participants as $participant) {
+            $user_contact = UserContact::where('user_id', $participant->user_id)->get()[0];
+            $participant_list[] = [
+                // idx
+                'country'    => $user_contact->country_id,
+                'last_name'  => $user_contact->last_name,
+                'first_name' => $user_contact->first_name,
+                // payload
+                'fee_payment_completed' => $participant->fee_payment_completed,
+                'user_id' => $participant->user_id,
+                'contest_id' => $participant->contest_id,
+            ];
+        }
+
+        // sort array
+        $participant_list = collect($participant_list)->sortBy(['country_id', 'last_name', 'first_name'])->toArray();
+
+        return $participant_list;
     }
 }
