@@ -15,7 +15,6 @@ use App\Models\Federation;
 use App\Models\Organization;
 use App\Models\User;
 use App\Models\UserRole;
-use DateTimeImmutable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -67,7 +66,8 @@ class Listed extends Component
             ];
         }
 
-        $this->sorted_user_role_list = collect($this->user_role_list)->sortby('federation')->sortby('organization')->sortBy('contest')->sortBy('role')->toArray();
+        // 
+        $this->sorted_user_role_list = collect($this->user_role_list)->sortBy('federation')->sortBy('organization')->sortBy('contest')->sortBy('role')->toArray();
         $this->user_role_list = $this->sorted_user_role_list;
 
     }
