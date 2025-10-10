@@ -7,6 +7,7 @@ namespace App\Livewire\User\Role\Federation;
 
 use App\Models\Federation;
 use App\Models\UserRole;
+use App\Models\UserRolesRoleSet;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
@@ -28,7 +29,7 @@ class Add extends Component
     public function mount() // no id use Auth::id()
     {
         $this->user_id = Auth::id();
-        $this->role_list  = UserRole::valid_roles; // []
+        $this->role_list  = UserRolesRoleSet::valid_roles(); // []
         $this->federation_list =Federation::listed_by_country_id_name();
     }
     /**
@@ -44,7 +45,8 @@ class Add extends Component
     public function rules()
     {
         return [
-            'role'          => 'required|string|max:255',
+         // 'role'          => 'required|string|max:255',
+            'role'          => 'required|exists:user_roles_role_sets,status',
             'federation_id' => 'required|string|exists:federations,id',
         ];
     }

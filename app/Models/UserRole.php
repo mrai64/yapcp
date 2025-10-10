@@ -2,6 +2,9 @@
 /**
  * UserRoles is child of Users
  * 
+ * 2025-10-10 created an auxiliary table user_roles_role_set to manage
+ *            previously value of valid_roles[]
+ * 
  */
 namespace App\Models;
 
@@ -14,24 +17,17 @@ class UserRole extends Model
     use HasFactory, SoftDeletes;
     //
     public const table_name = 'user_roles';
-    public const array valid_roles = [
-        'chairman',
-        'juror',
-        'member',
-        'president',
-        'secretary',
-    ];
 
     // no factory and seeders, not now
     protected $fillable = [
         // 'id',
-        'user_id', // a uuid from users.id
-        'role', // one of valid_roles[]
+        'user_id', //         a uuid from users.id
+        'role', //            in auxiliary table user_roles_role_sets
         'organization_id', // a uuid from organizations.id | NULL 
-        'contest_id', // a uuid from contests.id | NULL
-        'federation_id', // a uuid from federations.id | NULL
-        'role_opening', // datetime
-        'role_closing', // datetime >= role_opening
+        'contest_id', //      a uuid from contests.id | NULL
+        'federation_id', //   a uuid from federations.id | NULL
+        'role_opening', //    datetime
+        'role_closing', //    datetime >= role_opening
     ];
 
     protected function casts()
@@ -47,6 +43,7 @@ class UserRole extends Model
 
     /**
      * Complex validation, a field of 3 and only 1, not 0, not 2.
+     * call it XOR
      * TODO build a UserRoleRule rule
      */
     public function only_one_role(UserRole $user_role) : bool 
@@ -67,11 +64,5 @@ class UserRole extends Model
         }
         // 0 is too less
         return false;
-    }
-    /**
-     * validation like enum
-     */
-    public function is_a_valid_role(UserRole $user_role) : bool {
-        return (in_array( $user_role->role, self::valid_roles, true));
     }
 }

@@ -7,6 +7,7 @@ namespace App\Livewire\User\Role\Organization;
 
 use App\Models\Organization;
 use App\Models\UserRole;
+use App\Models\UserRolesRoleSet;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -27,7 +28,7 @@ class Add extends Component
     public function mount() // no id for user_id
     {
         $this->user_id   = Auth::id();
-        $this->role_list = UserRole::valid_roles; // it's an []
+        $this->role_list = UserRolesRoleSet::valid_roles(); // it's an []
         $this->organization_list = Organization::listed_by_country_id_name(); // country_id, name
 
     }
@@ -44,7 +45,7 @@ class Add extends Component
     public function rules()
     {
         return [
-            'role'            => 'required|string|max:255',
+            'role'            => 'required|exists:user_roles_role_sets,status',
             'organization_id' => 'required|string|exists:organizations,id',
         ];
     }
