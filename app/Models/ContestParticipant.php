@@ -2,6 +2,9 @@
 /**
  * Contest users participants 
  * 
+ * 2025-10-10 created an auxiliary table contest_participants_fee_paymen_completes_sets to manage
+ *            previously value of valid_YN[]
+ * 
  */
 namespace App\Models;
 
@@ -30,7 +33,7 @@ class ContestParticipant extends Model
         // id - unsigned bigint autoincrement assigned
         'contest_id', //            uuid fk
         'user_id', //               uuid fk
-        'fee_payment_completed', // Y/N
+        'fee_payment_completed', // in auxiliary table user_participants_fee_payment_completes_sets Y/N
         // created_at
         // updated_at
         // deleted_at
@@ -50,7 +53,7 @@ class ContestParticipant extends Model
      * @return array<string, string>
      * 
      */
-    public function get_participant_list(string $contest_id) : array
+    public static function get_participant_list(string $contest_id) : array
     {
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $participant_list = [];
@@ -61,11 +64,12 @@ class ContestParticipant extends Model
             return $participant_list;
         }
 
+        // array_fill
         foreach($participants as $participant) {
             $user_contact = UserContact::where('user_id', $participant->user_id)->get()[0];
             $participant_list[] = [
                 // idx
-                'country'    => $user_contact->country_id,
+                'country_id' => $user_contact->country_id,
                 'last_name'  => $user_contact->last_name,
                 'first_name' => $user_contact->first_name,
                 // payload

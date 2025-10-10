@@ -37,6 +37,9 @@ use App\Models\Organization;
         <p class="small">{{ __("Organized by")}}: {{ Organization::organization_name($contest->organization_id) }}</p>
         <p class="small">{{$contest->id}}</p>
         <p class="mb-4">
+            <a  href="{{ route('public-participant-list', [ 'cid' => $contest->id ] ) }}" rel="noopener noreferrer">
+                [ {{ __('Participation list')}} ]
+            </a>
             <a  href="{{ route('participate-contest', [ 'cid' => $contest->id ] ) }}" rel="noopener noreferrer">
                 [ {{ __('Participate? Great!')}} ]
             </a>

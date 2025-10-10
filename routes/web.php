@@ -83,3 +83,6 @@ Route::get( '/contest/award/add/{cid}', Contest\Award\Add::class, ['cid'] )->mid
 // App\Livewire\Contest\Subscribe
 Route::get(    '/contest/subscribe/{cid}',       Contest\Subscribe::class, ['cid'])->middleware(['auth', 'verified'])->name('participate-contest');
 Route::delete( '/contest/subscribe/remove/{pid}', Contest\Subscribe\Remove::class, ['pid'])->middleware(['auth', 'verified'])->name('remove-work-contest');
+
+// App\Livewire\Contest\Participants
+Route::get( '/contest/participants/listed/{cid}', Contest\Participants\Listed::class )->middleware(['auth', 'verified'])->name('public-participant-list');
