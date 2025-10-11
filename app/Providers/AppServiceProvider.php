@@ -1,7 +1,12 @@
 <?php
-
+/**
+ * 2025-10-11 Add first gates 'contest-participants-update'
+ * 
+ */
 namespace App\Providers;
 
+use App\Policies\ContestPaymentChangePolicy;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,5 +25,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+        Gate::define('contest-participants-update', [ContestPaymentChangePolicy::class, 'update']);
     }
 }

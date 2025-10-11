@@ -2,8 +2,9 @@
 /**
  * Contest users participants 
  * 
- * 2025-10-10 created an auxiliary table contest_participants_fee_paymen_completes_sets to manage
+ * 2025-10-10 created an auxiliary table contest_participants_fee_payment_completes_sets to manage
  *            previously value of valid_YN[]
+ * 2025-10-11 add Gates n Policy 
  * 
  */
 namespace App\Models;
@@ -21,7 +22,7 @@ class ContestParticipant extends Model
 
     public const table_name = 'contest_participants';
 
-    // fee payment
+    // fee payment TODO 
     public const valid_YN = [
         'Y',
         'N',
@@ -41,6 +42,7 @@ class ContestParticipant extends Model
 
     protected function casts()
     {
+        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
