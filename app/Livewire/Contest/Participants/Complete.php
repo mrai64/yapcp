@@ -68,6 +68,9 @@ class Complete extends Component
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' this:'. json_encode($participant));
         $participant->save();
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' exit:');
+        //
+        return redirect()
+            ->route('modify-participant-list', [ 'cid' => $this->contest_id ] );
 
     }
 }
