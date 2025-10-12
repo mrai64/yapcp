@@ -86,3 +86,4 @@ Route::delete( '/contest/subscribe/remove/{pid}', Contest\Subscribe\Remove::clas
 
 // App\Livewire\Contest\Participants
 Route::get( '/contest/participants/listed/{cid}', Contest\Participants\Listed::class )->middleware(['auth', 'verified'])->name('public-participant-list');
+Route::get( '/contest/participants/modify/{cid}', Contest\Participants\Modify::class )->middleware(['auth', 'verified'])->name('modify-participant-list');

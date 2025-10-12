@@ -59,7 +59,7 @@ class ContestParticipant extends Model
     {
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $participant_list = [];
-
+        
         $participants = self::where('contest_id', $contest_id)->get();
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' found: '.count($participants));
         if (count($participants) < 1) {
@@ -80,10 +80,11 @@ class ContestParticipant extends Model
                 'contest_id' => $participant->contest_id,
             ];
         }
-
+        
         // sort array
         $participant_list = collect($participant_list)->sortBy(['country_id', 'last_name', 'first_name'])->toArray();
-
+        
+        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' exit participant_list:'.json_encode($participant_list));
         return $participant_list;
     }
 }

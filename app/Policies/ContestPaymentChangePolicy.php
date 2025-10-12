@@ -17,16 +17,17 @@ use App\Models\UserRole;
 use Carbon\Carbon;
 use \Carbon\CarbonImmutable;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 
 class ContestPaymentChangePolicy
 {
-    public $contest;
-    public $deadline;
-    public $organization;
-    public $today;
-    public string $user_id;
-    public $user_role;
+    public Contest      $contest;
+    public              $deadline;
+    public Organization $organization;
+    public              $today;
+    public string       $user_id;
+    public              $user_role;
 
     /**
      * Create a new policy instance.
@@ -39,39 +40,43 @@ class ContestPaymentChangePolicy
     /**
      * Determine if contest_participant should be updated by (...)
      * Request by gate::inspect
+     * 
      * @param User $user online user auth::id
      * @param ContestParticipant $contest_participant
      */
     public function update(User $user, ContestParticipant $contest_participant): Response
     {
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        $this->contest = Contest::where('id', $contest_participant->contest_id)->get()[0];
+        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' user:' . json_encode($user));
+        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' participant:' . json_encode($contest_participant));
+        $this->contest = Contest::where('id', $contest_participant->contest_id )->get()[0]; // out -> | [] ?
+        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' contest:' . json_encode($this->contest));
         if (!isset($this->contest->id)){
             Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' ko 2');
             return Response::deny( __("You do not modify that record") );
         }
 
-        $this->today = CarbonImmutable::now();
-        $this->deadline = CarbonImmutable::parse( $this->contest->day_3_jury_opening);
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' today vs deadline: '. json_encode($this->today).' vs '.json_encode($this->deadline));
-        if ($this->today >= $this->contest->day_3_jury_opening) {
-            Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' ko 3');
-            return Response::deny( __("You do not modify that record") );
-        }
+     // $this->today = CarbonImmutable::now();
+     // $this->deadline = CarbonImmutable::parse( $this->contest->day_3_jury_opening);
+     // Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' today vs deadline: '. json_encode($this->today).' vs '.json_encode($this->deadline));
+     // if ($this->today >= $this->contest->day_3_jury_opening) {
+     //     Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' ko 3');
+     //     return Response::deny( __("You do not modify that record") );
+     // }
 
-        if ($user->id === $contest_participant->user_id){
+        if ($user->id === $contest_participant->user_id ){
             Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' ok 1');
             return Response::allow();
         }
 
-        $this->organization = Organization::where('id', $this->contest->organization_id);
+        $this->organization = Organization::where('id', $this->contest->organization_id)->get()[0];
         if (!isset($this->organization->id)){
             Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' ko 4');
             return Response::deny( __("You do not modify that record") );
         }
 
         $this->user_role = UserRole::where('user_id', $user->id)->whereNull('federation_id')
-        ->whereNot('role', 'juror')->get();
+            ->whereNot('role', 'juror')->get();
         if (count($this->user_role) < 1){
             Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' ko 5');
             return Response::deny( __("You do not modify that record") );
