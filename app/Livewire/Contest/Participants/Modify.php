@@ -33,6 +33,7 @@ class Modify extends Component
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $this->participant_list = [];
         $this->contest_id       = $cid;
+        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' this:'.json_encode($this));
 
         $this->contest          = Contest::where('id', $cid)->get()[0];
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' contest:'.json_encode($this->contest));
@@ -49,6 +50,7 @@ class Modify extends Component
     public function render()
     {
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' §§ this:'.json_encode($this));
         return view('livewire.contest.participants.modify');
     }
     /**

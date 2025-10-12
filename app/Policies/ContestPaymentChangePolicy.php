@@ -6,6 +6,11 @@
  * - TODO if contest_participants.user_id === Auth::id()
  *   uploading receipt pdf
  * - if Auth::id() in (organization_id > contest_participants.contest_id)
+ * 
+ * used in: 
+ * define /app/Providers/AppServiceProvider 
+ * @can   /resources/views/livewire/contest/participant/modify.blade.php 
+ * 
  */
 namespace App\Policies;
 

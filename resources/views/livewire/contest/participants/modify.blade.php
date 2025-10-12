@@ -12,6 +12,7 @@
 
 use App\Models\Country;
 use App\Models\ContestParticipant;
+use App\Models\ContestSection;
 use App\Models\ContestWork;
 use Illuminate\Support\Facades\Gate;
 
@@ -23,6 +24,35 @@ use Illuminate\Support\Facades\Gate;
             {{ __('Participant List for Contest:') }}<br />
             {{ $contest->name_en }}
         </h2>
+        <h3>
+            <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
+                <span class="fyk text-xl">Main</span>
+            </a>
+            . .
+            <a href="{{ route('contest-section-add', ['cid' => $contest->id]) }}">
+                <span class="fyk text-xl">Sections</span>
+            </a>
+            {{ $sid = ContestSection::first_section_id( $contest->id ); }}
+            @if($sid > '')
+            <a href="{{ route('contest-jury-add', ['sid' => $sid] ); }}">
+                <span class="fyk text-xl">Jury</span>
+            </a>
+            @else
+            <a href="#no-section-no-jury" text='{{ __("Before, add a section")}}' alt='{{ __("No link, almost a section before")}}'>
+                <span class="fyk text-xl">Jury</span>
+            </a>
+            @endif
+            . .
+            <a href="{{ route('contest-award-add', ['cid' => $contest->id ]); }}">
+                <span class="fyk text-xl">Awards</span>
+            </a>
+            . .
+            <a href="{{ route('modify-participant-list', ['cid' => $contest->id ]); }}">
+                <span class="fyk text-2xl">Participants</span>
+            </a>
+            . .
+            <span class="fyk text-xl">Works</span>
+        </h3>
     </header>
     @if (count($participant_list) < 1)
     <div>

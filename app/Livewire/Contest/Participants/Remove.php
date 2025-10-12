@@ -9,7 +9,7 @@ use App\Models\ContestParticipant;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
-class Complete extends Component
+class Remove extends Component
 {
     public string $contest_id;
     public string $participant_id;
@@ -18,11 +18,10 @@ class Complete extends Component
     public ContestParticipant $participant;
 
     /**
-     * 1. before
+     * 1. Before the Show
      */
-    public function mount(string $data_json)
+    public function mount(string $data_json) // @livewire
     {
-
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in:'. $data_json);
         $data = json_decode($data_json);
@@ -46,6 +45,7 @@ class Complete extends Component
     public function render()
     {
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' this:'.json_encode($this));
         return view('livewire.contest.participants.remove');
     }
     /**
