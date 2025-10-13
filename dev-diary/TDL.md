@@ -4,7 +4,7 @@
 
 Spiega per chi vuol capire questa struttura della To Do List, delle cose da fare.
 
-Aggiornamento: ho aperto un ["progetto"](https://github.com/users/mrai64/projects/1) in github.com e man mano le schede qui sotto saranno trasferite in quello. Dà un po' fastidio che vengano "tutti" etichettati come "problemi|issue".
+**Aggiornamento: ho aperto un ["progetto"](https://github.com/users/mrai64/projects/1) in github.com e man mano le schede qui sotto saranno trasferite in quello. Dà un po' fastidio che vengano "tutti" etichettati come "problemi|issue".**
 
 L'attività è partita mesi fa e adesso sto cercando in una pausa
 di riordinare le cose per organizzarle al meglio. Sono un operaio di tastiera
