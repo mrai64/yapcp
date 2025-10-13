@@ -5,7 +5,9 @@
 
 ## Intro
 
-Here we have only a index.
+Here we have only a index. And language adopted is english,
+if you don't like automated translations check the
+[lang index](./index_lang.md).
 
 ## Platform users - contest participants
 
