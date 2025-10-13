@@ -4,7 +4,7 @@
 
 Spiega per chi vuol capire questa struttura della To Do List, delle cose da fare.
 
-**Aggiornamento: ho aperto un ["progetto"](https://github.com/users/mrai64/projects/1) in github.com e man mano le schede qui sotto saranno trasferite in quello. Dà un po' fastidio che vengano "tutti" etichettati come "problemi|issue".**
+**Aggiornamento: ho aperto un ["progetto"](https://github.com/users/mrai64/projects/1) in github.com e man mano le schede qui sotto saranno trasferite in quello. Dà un po' fastidio che vengano "tutti" etichettati come "problemi|issue". Se è già presente un issue per i punti sotto e un link all'issue manca, va inserito il link e/o aggiornata la scheda in issue.**
 
 L'attività è partita mesi fa e adesso sto cercando in una pausa
 di riordinare le cose per organizzarle al meglio. Sono un operaio di tastiera
@@ -16,8 +16,7 @@ wordpress una pagina Todolist, in cui con l'editor a blocchi spostavo i
 paragrafi mettendogli anche un titolo, i paragrafi hanno come intestazione
 una valutazione di urgenza alta normale bassa e una data di annotazione,
 man mano che vengono terminati i task il blocco viene eliminato.
-Qui in md non c'è un editor blocchi che mi consente il trascinamento, si va di
-Taglia e incolla.
+Qui in md non c'è un editor blocchi che mi consente il trascinamento, si va di Taglia e incolla.
 
 Decido quindi di riformattare il file usando i livelli # ## ### ####
 e tenere aperto il pannello di sinistra Struttura|Outlook per avere una vista
@@ -116,6 +115,10 @@ Vanno considerate di alta priorità (A) le sistemazioni di problemi,
 issue resolution, le cose collo di bottiglia che *se non fai questa non vai avanti*,
 e con (B) le cose che non sono (A) e si possono fare e finire in pochissimo tempo.
 
+### (B) 2025-07-23 Tenere aggiornato il [diario dello sviluppatore](./index.md)  
+
+Punto che non può essere chiuso fintanto che il progetto è attivo.  
+
 ## (C)(D) Priorità normale
 
 Sono le cose che vanno fatte e non rientrano nelle alte priorità
@@ -163,9 +166,11 @@ Quando un utente va a visionare l'elenco dei concorsi a disposizione
 deve avere una scheda che dettaglia di un concorso tutte le schede
 che sono state inserite.
 
-### (D) 2025-07-23 Tenere aggiornato il [diario dello sviluppatore](./index.md)  
-
-Punto che non può essere chiuso fintanto che il progetto è attivo.  
+* Elenco delle sezioni in concorso
+* Elenco dei giurati
+* Calendario
+* Quote di partecipazione
+* link regolamento e link per iscrizione
 
 ### (D) 2025-09-27 Revisione il modulo Concorsi (sezioni) Award / Add & modify
 
@@ -319,7 +324,7 @@ Queste sono raggruppate per tabelle e funzioni in ordine alfabetico
 
 ### Github e gestione progetto
 
-#### x (D) 2025-09-29 2025-09-27 Spostare il diario nel [wiki](https://github.com/mrai64/yapcp/wiki)
+#### x 2025-09-29 2025-09-27 Spostare il diario nel [wiki](https://github.com/mrai64/yapcp/wiki)
 
 Finora il progetto è stato costellato di un commit al giorno,
 relativo all'aggiornamento del diario dello sviluppatore. Questo da un lato
@@ -344,12 +349,14 @@ La definizione del concorso e del circuito concorsi passa da più fasi:
 e delle sezioni del concorso (non ci sono premi di sezione per i circuiti)
 5. ricavare da quanto sopra il testo di una bozza di regolamento che sia inviabile agli enti sponsor.
 
-### x (D) 2025-09-27 2025-09-27 Moduli concorsi - Barra di navigazione
+### x 2025-09-27 2025-09-27 Moduli concorsi - Barra di navigazione
 
 Creare una barra di navigazione Principale / Sezioni / Giurie ecc.  
 Questa barra si ripete sotto alla prima intestazione della pagina evidenziando l'elemento in cui ci si trova con un font doppio.
 
-#### x (B) 2025-10-08 2025-09-28 In elenco ruoli rimuovere i duplicati [github fix #5](https://github.com/mrai64/yapcp/issues/5)
+#### x 2025-10-08 2025-09-28 In elenco ruoli rimuovere i duplicati [github fix #5](https://github.com/mrai64/yapcp/issues/5)
+
+Quando una/un giurato è giurato in più sezioni, viene riportato più volte in elenco.
 
 ### 1. Contest Principale
 
