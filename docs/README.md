@@ -2,7 +2,7 @@
 
 yaPCP means yeah, another Photo Contest Platform.  
 Created an maintaneid at now by onemanonly.  
-See [Contacts](./contacts.md)  
+See [Contacts](./en/contacts.md)  
 
 Here I wrote howto for:
 
