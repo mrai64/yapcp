@@ -158,7 +158,7 @@ class UserContact extends Model
      */
     public function user()
     {
-        $user = $this->belongsTo(Users::class)
+        $user = $this->belongsTo(User::class);
     }
 
 }
