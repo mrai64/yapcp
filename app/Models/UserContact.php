@@ -13,7 +13,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Log;
 
 class UserContact extends Model
 {
@@ -51,34 +53,39 @@ class UserContact extends Model
 
     protected function casts()
     {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
         ];
     }
-
+    
     /**
      * @return the string used to store works and passport_photo
-     */
+    */
     public function photo_box() : string
     {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         $pb = $this->country_id . '/'
         . $this->last_name  . '/'
         . $this->first_name . '_'
         . $this->user_id; // substr( $this->id, 0, 4);
-
+        
         $pb = str_ireplace(':', '-', $pb);
         $pb = str_ireplace('+', '',  $pb);
         $pb = str_ireplace(' ', '-', $pb);
         return $pb;
     }
+    
+    // GETTERS
     /**
-     * getters
+     * get photo_box folder name
      * 
-     */
+    */
     public static function get_photo_box(string $uid) : string
     {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         $uc = self::where('user_id', $uid)->firstOrFail();
         // compose pb
         $photo_box = $uc->country_id
@@ -92,50 +99,66 @@ class UserContact extends Model
     }
     /**
      * 
-     */
+    */
     public static function get_first_last_name(string $uid) : string
     {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         $user = self::where('user_id', $uid)->get()[0];
         return $user->first_name . ' ' . $user->last_name . ' /'. $user->country_id;
     }
     /**
      * 
-     */
+    */
     public static function get_last_first_name(string $uid) : string
     {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         $user = self::where('user_id', $uid)->get()[0];
         return $user['last_name'] . ', ' . $user['first_name'] . ' /'. $user['country_id'];
     }
     /** 
      * 
-     */
+    */
     public static function get_email(string $uid) : string
     {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         $user = self::where('user_id', $uid)->get('email')[0];
         return $user['email'];
     }
     /** 
      * 
-     */
+    */
     public static function get_first_name(string $uid) : string
     {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         $user = self::where('user_id', $uid)->get('first_name')[0];
         return $user['first_name'];
     }
     /** 
      * 
-     */
+    */
     public static function get_last_name(string $uid) : string
     {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         $user = self::where('user_id', $uid)->get('last_name')[0];
         return $user['last_name'];
     }
     /** 
      * 
-     */
+    */
     public static function get_country_id(string $uid) : string
     {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         $user = self::where('user_id', $uid)->get('country_id')[0];
         return $user['country_id'];
     }
+
+    /**
+     * 1:1 relationship between users n user_contacts
+     * $user_contact->user
+     */
+    public function user()
+    {
+        $user = $this->belongsTo(Users::class)
+    }
+
 }

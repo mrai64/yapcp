@@ -4,6 +4,8 @@
  * modified to use uuid as primary key
  * 2025-08-31 id became uuid instead of bigint unsigned autoincrement
  * 2025-09-13 Notify users login w/email
+ * 2025-10-13 User n UserContact are in relationship 1:1
+ *            User n UserRole    are in relationship 1:N
  * 
  */
 namespace App\Models;
@@ -14,6 +16,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str; // uuid booted()
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 // class User extends Authenticatable
 class User extends Authenticatable implements MustVerifyEmail
@@ -22,8 +27,8 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory, Notifiable, SoftDeletes;
 
     // used to show a version number
-    public const version = '2025.09.1 dev';
-    public const table_name = 'users';
+    public const version = '2025.10.1 dev';
+    public const table_name = 'users'; // MAYBE $this->table_name()
 
     /**
      * The attributes that are mass assignable.
@@ -53,8 +58,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public $incrementing = false;
     public static function booted()
     {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         static::creating(function ($model){
-            $model->id = Str::uuid();
+            $model->id = Str::uuid7();
         });
     }
 
@@ -65,9 +71,38 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected function casts(): array
     {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    // GETTERS
+    /**
+     * 1:1 relationship bw/users n user_contact
+     * $user->contact not $user_contact()
+     * 
+     * user_contacts.user_id match users.id 
+     */
+    public function contact()
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        
+        $contact = $this->hasOne(UserContact::class); // normally
+        // $contact = $this->hasOne(UserContact::class, 'user_id', 'id'); // when foreignId() and foreign key are out of standard
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' contact: '.json_encode($contact));
+        
+        return $contact;
+    }
+    /**
+     * 1:N relationship bw/users n user_roles
+     * 
+     * user_roles.user_id match users.id
+     */
+    public function roles()
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        $roles = $this->hasMany(UserRole::class); 
     }
 }
