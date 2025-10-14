@@ -1,9 +1,12 @@
 # yaPCP Documentations
 
-That's a Photo Contest Platform.  
-Here we wrote howto for:
+yaPCP means yeah, another Photo Contest Platform.  
+Created an maintaneid at now by onemanonly.  
+See [Contacts](./contacts.md)  
 
-* [for contest' participants](./participans/index.md)
+Here I wrote howto for:
+
+* [for contest' participants](./en/participans/index.md)
 * for contest' organizations
 * for contest' sponsor
 * for yaPCP maintainers, translators and helpers
@@ -21,5 +24,5 @@ because it's a job.
 
 ----
 
-Docs are available in [🇬🇧|EN](./en/index.md) and in [🇮🇹|IT](./it/index.md).
-Both are incomplete and needs volunteers ti collaborate and maintain it.
+Docs are available in [🇬🇧 EN](./en/index.md) and in [🇮🇹 IT](./it/index.md).
+Both are incomplete and needs volunteers to collaborate and maintain it.
