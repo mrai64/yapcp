@@ -8,7 +8,7 @@
 
 
 ?>
-<form wire:submit.prevent="add_participant">
+<form wire:submit.prevent="add_work_to_contest">
     @csrf
 
     <input name="work_id" wire:model="work_id" type="hidden" 

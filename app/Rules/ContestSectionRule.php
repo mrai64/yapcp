@@ -57,12 +57,18 @@ class ContestSectionRule implements ValidationRule
             $this->work_id = $value;
             $this->work = Work::where('id', $value)->get()[0];
             Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' work:'.json_encode($this->work));
-            if ($this->work->long_side > $this->section->rule_max){
+            
+            if ($this->work->long_side > $this->section->rule_max_size){
                 $fail("🟥 Long side");
+            }
+            if ($this->work->short_side < $this->section->rule_min_size){
+                $fail("🟥 Short side");
             }
             if (($this->section->rule_monochromatic === 'Y') && ($this->work->monochromatic != 'Y')) {
                 $fail("🟥 Monochromatic");
             }
+            Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' ok ok');
         }
+
     }
 }

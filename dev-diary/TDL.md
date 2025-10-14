@@ -62,7 +62,7 @@ che le agevolano ma le devo imparare.
   * ✅ modifica password
   * ✅ caricamento opere
   * ✅ assegnazione ruolo in organizzazione
-  * [ ] assegnazione ruolo in federazione
+  * ✅ assegnazione ruolo in federazione
   * [ ] assegnazione ruolo in concorso
   * [ ] iscrizione a concorso
   * [ ] Vista concorsi aperti
@@ -75,9 +75,9 @@ che le agevolano ma le devo imparare.
 * organizzazioni - creano e gestiscono concorsi
   * ✅ Creazione scheda principale
   * [ ] Lista ruoli utenti in organizzazione
-  * [ ] Creazione concorsi in capo a organizzazioni
+  * ✅ Creazione concorsi in capo a organizzazioni
   * [ ] Lista concorsi in corso
-  * [ ] Lista concorrenti con assegnazione quota versata
+  * ✅ Lista concorrenti con assegnazione quota versata
 * concorsi
   * ✅ definizione scheda principale - nome, calendario, referenti, sito web
   * ✅ definizione delle sezioni a concorso

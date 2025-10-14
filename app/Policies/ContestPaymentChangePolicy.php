@@ -54,6 +54,7 @@ class ContestPaymentChangePolicy
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' user:' . json_encode($user));
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' participant:' . json_encode($contest_participant));
+
         $this->contest = Contest::where('id', $contest_participant->contest_id )->get()[0]; // out -> | [] ?
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' contest:' . json_encode($this->contest));
         if (!isset($this->contest->id)){

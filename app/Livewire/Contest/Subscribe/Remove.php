@@ -1,10 +1,14 @@
 <?php
 /**
- * Contest Participation Subscribe Remove 
- * 
+ * Contest Work Participation Subscribe Remove
+ *
+ * 2025-10-14 renamed last function
+ *            Count works remained in contest and if was the last
+ *            remove also user from contest_participants
  */
 namespace App\Livewire\Contest\Subscribe;
 
+use App\Models\ContestParticipant;
 use App\Models\ContestWork;
 use App\Models\ContestSection;
 use Illuminate\Support\Facades\Log;
@@ -12,12 +16,12 @@ use Livewire\Component;
 
 class Remove extends Component
 {
-    public $participant_id;
-    public $participant;
+    public $participant_work_id;
+    public $work_in_contest;
     public $res;
     public $section;
     public $section_code;
-    public $contest_id; 
+    public $contest_id;
 
     /**
      * 1. Before show from @livewire
@@ -25,13 +29,13 @@ class Remove extends Component
     public function mount($pid) // as in route()
     {
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in:'. $pid);
-        $this->participant_id = $pid;
-        $this->participant = ContestWork::where('id', $pid)->get()[0];
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' found:'. json_encode($this->participant));
+        $this->participant_work_id = $pid;
+        $this->work_in_contest = ContestWork::where('id', $pid)->get()[0];
+        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' found:'. json_encode($this->work_in_contest));
 
-        $this->contest_id = $this->participant->contest_id; 
+        $this->contest_id = $this->work_in_contest->contest_id;
 
-        $this->section = ContestSection::where('id', $this->participant->section_id )->get()[0];
+        $this->section = ContestSection::where('id', $this->work_in_contest->section_id )->get()[0];
         $this->section_code = $this->section->code;
 
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' exit:' );
@@ -56,13 +60,21 @@ class Remove extends Component
     /**
      * 4. delete
     */
-    public function delete()
+    public function remove_work_from_contest()
     {
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        //
-        $this->participant = ContestWork::where('id', $this->participant_id)->get()[0];
-        $this->res = $this->participant->delete();
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' deleted:'. json_encode($this->participant));
+        // validate not necessary 
+
+        // check if was the last 
+        $is_the_last = ContestWork::where('user_id', $this->work_in_contest->user_id)->where('contest_id', $this->work_in_contest->contest_id)->count();
+        if ($is_the_last == 1) {
+            // yes, is the last
+            $user_participant = ContestParticipant::where('user_id', $this->work_in_contest->user_id)->where('contest_id', $this->work_in_contest->contest_id)->first();
+            $user_participant->delete();
+        }
+        $this->work_in_contest = ContestWork::where('id', $this->participant_work_id)->get()[0];
+        $this->res = $this->work_in_contest->delete();
+        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' deleted:'. json_encode($this->work_in_contest));
         return redirect()
             ->route('participate-contest', [ 'cid' => $this->contest_id ] )
             ->with('success', __('Work removed. Now U have a slot free.') );

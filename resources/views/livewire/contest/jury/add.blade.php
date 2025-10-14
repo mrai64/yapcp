@@ -118,7 +118,9 @@ use App\Models\ContestSection;
                     <td>{{ UserContact::get_first_name( $juror->user_contact_id ) }}</td>
                     <td>{{ UserContact::get_last_name( $juror->user_contact_id ) }}</td>
                     <td>{{ Country::country_name( UserContact::get_country_id( $juror->user_contact_id ) ) }}</td>
-                    <td> &nbsp; </td>
+                    <td>
+                        {{ $juror->id }}
+                    </td>
                 </tr>
                 @endforeach
                 @endif
