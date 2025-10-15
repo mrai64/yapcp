@@ -219,6 +219,7 @@ Quello che è verificabile con automatismi, ovvero:
 
 * dimensioni immagini
 * peso in MB
+* M quando è chiesto M
 * nome *Senza Titolo*
 
 ### (D) 2025-09-27 La cancellazione (soft-delete) di uno user deve cancellare anche altro
