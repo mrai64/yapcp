@@ -2,6 +2,7 @@
 /**
  * Open Contest List
  * 
+ * 2025-10-15 fix
  */
 namespace App\Livewire\Contest;
 
@@ -13,7 +14,7 @@ use Livewire\Component;
 class Listed extends Component
 {
     public $contest_get;
-    public $contest_list = [];
+    public $contest_list;
     public $today;
 
     /**
@@ -22,14 +23,20 @@ class Listed extends Component
      */
     public function mount() // no parm
     {
-        Log::info(__FUNCTION__.':'.__LINE__ );
+        Log::info('Component '.__CLASS__. ' ' . __FUNCTION__.':'.__LINE__ . ' called');
         $today = Carbon::now()->toDateString();// . ' 23:59:59.000000Z';
-        // where AND where
-        $this->contest_get = Contest::where('day_2_closing', '>=', $today)->where('day_1_opening', '<=', $today)->orderBy( 'day_2_closing' )->get();
+
+        // get collection
+        $this->contest_list=[];
+        $this->contest_get = 
+            Contest::where('day_2_closing', '>=', $today)
+                ->where('day_1_opening', '<=', $today)
+                ->orderBy( 'day_2_closing' )->get();
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__ . ' found:' . count($this->contest_get));
+
         if (count($this->contest_get) > 0) {
             foreach ($this->contest_get as $contest) {
-                Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__ . ' contest:' . $this->contest_get );
+                Log::info('Component '.__CLASS__. ' ' . __FUNCTION__.':'.__LINE__ . ' contest:' . json_encode($this->contest_get) );
                 $this->contest_list[] = $contest;
             }
         }
@@ -37,10 +44,10 @@ class Listed extends Component
     /**
      * 2. show and stop
      * 
-    */
+     */
     public function render()
     {
-        Log::info(__FUNCTION__.':'.__LINE__ );
+        Log::info('Component '.__CLASS__. ' ' . __FUNCTION__.':'.__LINE__ . ' called');
         return view('livewire.contest.listed');
     }
 }

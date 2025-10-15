@@ -9,6 +9,8 @@
  * verifyEmail(?)
  * 
  * 2025-08-30 rename country_code in country_id, fk countries.id
+ * 2025-10-15 fix organization_name()
+ * 
  */
 
 namespace App\Models;
@@ -66,6 +68,7 @@ class Organization extends Model
      */
     public static function listed_by_country_id_name()
     {
+        Log::info('Model ' . __CLASS__.' '.__FUNCTION__.':'.__LINE__.' called' );
         $organizations = DB::table('organizations')
             ->select('id', 'country_id', 'name', 'email', 'website')
             ->whereNull('deleted_at')
@@ -73,7 +76,7 @@ class Organization extends Model
             ->orderBy('name','asc')
             ->orderBy('created_at', 'desc')
             ->get();
-        // Log::debug ... 
+        Log::info('Model ' . __CLASS__.' '.__FUNCTION__.':'.__LINE__.' found:'.json_encode($organization) );
         return $organizations;
     }
     /**
@@ -81,8 +84,9 @@ class Organization extends Model
      */
     public static function organization_name(string $organization_id) : string
     {
-        $org_name = self::findOrFail( $organization_id)->get('name')[0];
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' found:'.$org_name);
-        return $org_name['name'];
+        Log::info('Model ' . __CLASS__.' '.__FUNCTION__.':'.__LINE__.' in:'.$organization_id);
+        $organization = self::where('id', $organization_id)->first();
+        Log::info('Model ' . __CLASS__.' '.__FUNCTION__.':'.__LINE__.' found:'.json_encode($organization) );
+        return $organization->name;
     }
 }
