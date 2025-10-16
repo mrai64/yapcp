@@ -1,40 +1,39 @@
+<?php 
+/**
+ * 2025-10-16 federations table refactored - now v.2
+ * 
+ */
+
+?> 
+
 <div>
-    <p class="fyk text-2xl mb-4">{{ __('Modify Federation data here.')}}</p>
-    <p class="fyk text-xl mb-4">
-        <a href="{{ route('federation-list') }}" 
-            target="_blank" rel="noopener noreferrer">
-            {{ __('Back to Federation list') }} 
-        </a>
+    <header>
+        <h2 class="fyk text-2xl font-medium text-gray-900">
+            {{ __('Modify few Federation infos') }}
+        </h2>
+    </header>
+    <p class="mb-4">
+        <a  href="{{ route('federation-list') }}"
+            rel="noopener noreferrer">
+        [ {{ __('Back to Fed list') }} ]
+        </a>?
     </p>
-    <form wire:submit="update">
+    <form wire:submit="update_federation">
         @csrf 
         
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="name">
-                {{ __('Federation Name') }}
+            <label class="block font-medium text-sm text-gray-700" for="name_en">
+                {{ __('Federation Name [en]') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="name"
-                wire:model.live.debounce.500ms="name" 
+                type="text" name="name_en"
+                wire:model.live.debounce.500ms="name_en" 
                 required="required" 
             />
-            @error('name')
+            @error('name_en')
             <div class="alert alert-danger small">{{ $message }} </div>
             @enderror
-        </div>
-        
-        <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="code">
-                {{ __('Federation Shortcode')}}
-            </label>
-            <input 
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-48" 
-                wire:model.live.debounce.500ms="code" 
-                type="text" name="code"
-                required="required" 
-            />
-            <div class="alert alert-danger small">@error('code') {{ $message }} @enderror</div>
         </div>
         
         <div class="mb-4">
@@ -70,18 +69,18 @@
         
         <div class="mb-4">
             <style>textarea {resize:vertical;}</style>
-            <label class="block font-medium text-sm text-gray-700" for="contact">
+            <label class="block font-medium text-sm text-gray-700" for="contact_info">
                 {{ __('Federation Contacts') }}
             </label>
             <textarea 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="contact"
-                wire:model="contact"
-            >{{ old('contact') }}</textarea>
-            <div class="small">@error('contact') {{ $message }} @enderror</div>
+                type="text" name="contact_info"
+                wire:model="contact_info"
+            >{{ old('contact_info') }}</textarea>
+            <div class="small">@error('contact_info') {{ $message }} @enderror</div>
         </div>
 
-        <p class="fyk text-xl mb-4">
+        <p class="mb-4">
             <br />
             <a href="/federation/section/list/{{$id}}" 
                 class="fyk text-xl mb-4"

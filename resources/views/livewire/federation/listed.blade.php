@@ -1,12 +1,27 @@
 <?php
 /**
  * 2025-10-16 changed table
+ * 
  */
-
 
 ?>
 
-<x-app-layout>
+<div>
+    <header>
+        <h2 class="fyk text-2xl font-medium text-gray-900">
+            {{ __('Federation List') }}
+        </h2>
+        <p class="small mb-4">
+            {{ __("If the organizations manage the competitions, ") }}
+            {{ __("the federations are the ones who set the rules and sponsor ") }}
+            {{ __("national and international competitions. ") }}
+            <br />
+            {{ __("It's their job to define how to ensure successful preparation, ") }}
+            {{ __("successful management, and a successful conclusion to each competition.") }}
+            <br />
+            {{ __("But as contest organizators they must be also 'in' Organization list.") }}
+        </p>
+    </header>
     <a href="{{ route('add-federation')}}" 
         class="float-end font-medium rounded-md py-2"
         >[ {{__('Add a new Federation')}} ]</a>
@@ -37,4 +52,4 @@
         {{ __('Empty federation list') }}
     </div>
     @endif
-</x-app-layout>
+</div>

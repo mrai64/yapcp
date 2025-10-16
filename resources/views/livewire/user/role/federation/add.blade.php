@@ -6,8 +6,6 @@
  *            For the same result, not to fix an error.
  */
 
-use App\Models\Federation;
-
 ?>
 
 <div>
@@ -61,7 +59,7 @@ use App\Models\Federation;
                 required="required"
                 >
                 @foreach ($federation_list as $fed)
-                <option value="{{ $fed->id }}" {{ ($fed->id == $federation_id) ? 'selected' : '' }}> {{ $fed->country->flag_code }} | {{ $fed->name_en }}</option>
+                <option value="{{ $fed->id }}" {{ ($fed->id == $federation_id) ? 'selected' : '' }}> {{ $fed->country->flag_code }} {{ $fed->id }} | {{ $fed->name_en }}</option>
                 @endforeach
             </select>
             <div class="small">
