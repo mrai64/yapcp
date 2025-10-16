@@ -60,6 +60,7 @@ class Country extends Model
         $country = self::where('id', $country_id)->get()[0];
         return $country->country . ' /' . $country->flag_code;
     }
+
     public static function country_flag(string $country_id) : string
     {
         $flag = self::where('id', $country_id)->get('flag_code')[0];

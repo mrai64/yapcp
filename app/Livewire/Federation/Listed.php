@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * 2025-10-16 table refactor
+ */
 namespace App\Livewire\Federation;
 
 use Livewire\Component;
@@ -15,18 +17,16 @@ class Listed extends Component
      */
     public function mount() // no parm
     {
-        Log::info(__FUNCTION__.':'.__LINE__);
-        $this->federation_list = Federation::whereNull('deleted_at')
-        ->orderBy('name')
-        ->get();
-        Log::info(__FUNCTION__.':'.__LINE__.' found: '. $this->federation_list);
+        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' called');
+        $this->federation_list = Federation::listed_by_country_id_name();
+        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' out:'. json_encode($this->federation_list));
     }
     /**
      * 2. show and stop
     */
     public function render()
     {
-        Log::info(__FUNCTION__.':'.__LINE__);
+        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' called');
         return view('livewire.federation.listed');
     }
 }

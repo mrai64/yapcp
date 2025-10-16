@@ -37,13 +37,13 @@ class ContestSection extends Model
     ];
 
     protected $fillable = [
-        // id section_id
-        'contest_id',
-        'code',
-        'under_patronage',
+        // id section_id an uuid pk but
+        'contest_id',//    real pk is combo of 
+        'code', //         contest_id(uuid)+code(char(10))
+        'under_patronage', // set Y/N or boolean or ?
         'name_en',
         'name_local',
-        // rule_format
+        // rule_format - they have default values
         // rule_min
         // rule_max
         // rule_min_size

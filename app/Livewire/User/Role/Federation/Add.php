@@ -28,34 +28,37 @@ class Add extends Component
      */
     public function mount() // no id use Auth::id()
     {
-        $this->user_id = Auth::id();
-        $this->role_list  = UserRolesRoleSet::valid_roles(); // []
-        $this->federation_list =Federation::listed_by_country_id_name();
+        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        $this->user_id         = Auth::id();
+        $this->role_list       = UserRolesRoleSet::valid_roles(); // []
+        $this->federation_list = Federation::listed_by_country_id_name();
     }
     /**
      * 2. Show
-     */
+    */
     public function render()
     {
+        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         return view('livewire.user.role.federation.add');
     }
     /**
      * 3. Validation rules
-     */
+    */
     public function rules()
     {
+        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         return [
-         // 'role'          => 'required|string|max:255',
+            // 'role'          => 'required|string|max:255',
             'role'          => 'required|exists:user_roles_role_sets,status',
             'federation_id' => 'required|string|exists:federations,id',
         ];
     }
     /**
      * 4. check n save
-     */
+    */
     public function save_user_role()
     {
-        Log::info(__FUNCTION__. ' ' . __LINE__ );
+        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $validated = $this->validate();
 
         // integration 

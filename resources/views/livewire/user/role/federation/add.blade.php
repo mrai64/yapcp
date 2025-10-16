@@ -2,9 +2,11 @@
 /**
  * User Role Federation Add
  * 
+ * 2025-10-16 federations now manage hasOne w/countries, more elegant code.
+ *            For the same result, not to fix an error.
  */
 
-use App\Models\Country; 
+use App\Models\Federation;
 
 ?>
 
@@ -58,8 +60,8 @@ use App\Models\Country;
                 name="federation_id" 
                 required="required"
                 >
-                @foreach ($federation_list as $federation_item)
-                <option value="{{ $federation_item['id'] }}" {{ ($federation_item['id'] == $federation_id) ? 'selected' : '' }}> {{ Country::country_flag( $federation_item['country_id'] ) }} | {{ $federation_item['name'] }}</option>
+                @foreach ($federation_list as $fed)
+                <option value="{{ $fed->id }}" {{ ($fed->id == $federation_id) ? 'selected' : '' }}> {{ $fed->country->flag_code }} | {{ $fed->name_en }}</option>
                 @endforeach
             </select>
             <div class="small">

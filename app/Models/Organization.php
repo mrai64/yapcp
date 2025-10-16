@@ -76,7 +76,7 @@ class Organization extends Model
             ->orderBy('name','asc')
             ->orderBy('created_at', 'desc')
             ->get();
-        Log::info('Model ' . __CLASS__.' '.__FUNCTION__.':'.__LINE__.' found:'.json_encode($organization) );
+        Log::info('Model ' . __CLASS__.' '.__FUNCTION__.':'.__LINE__.' found:'.json_encode($organizations) );
         return $organizations;
     }
     /**

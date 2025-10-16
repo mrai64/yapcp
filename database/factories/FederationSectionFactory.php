@@ -2,6 +2,8 @@
 /**
  * FederationSection
  * child of Federation 
+ * 
+ * 2025-10-16 based on new table definition
  */
 namespace Database\Factories;
 
@@ -22,10 +24,21 @@ class FederationSectionFactory extends Factory
     {
         return [
             'federation_id' => Federation::all('id')->random(5)->first()['id'],
-            'code' => fake()->regexify('[A-Z]{3}'),
-            'name' => fake()->text(),
-            'excerptum' => fake()->text(),
-            //
+            'code' => fake()->regexify('[A-Z]{6}'),
+            'name_en' => fake()->text(),
+            // local_lang
+            // rule_definition 
+            // file formats
+            // min_works
+            // max_works
+            // min_short_side
+            // max_long_side
+            // max_weight
+            // monochromatic_required
+            // raw_required
+            // created_at
+            // updated_at
+            // deleted_at
         ];
     }
 }

@@ -7,6 +7,7 @@
  * <livewire:user.role.listed :uid="" >
  * 
  * 2025-10-08 reformat mount() to avoid duplicate rec (usually juror for more section)
+ * 2025-10-16 federation table changed
  */
 namespace App\Livewire\User\Role;
 
@@ -58,7 +59,7 @@ class Listed extends Component
                 'organization_id' => ($role->organization_id > '') ? $role->organization_id : '',
                 'organization'    => ($role->organization_id > '') ? Organization::where( 'id', $role->organization_id )->get('name')[0]['name'] : '',
                 'federation_id'   => ($role->federation_id > '')   ? $role->federation_id : '',
-                'federation'      => ($role->federation_id > '')   ? Federation::where('id', $role->federation_id)->get('name')[0]['name'] : '',
+                'federation'      => ($role->federation_id > '')   ? Federation::where('id', $role->federation_id)->get('name_en')[0]['name_en'] : '',
                 'contest_id'      => ($role->contest_id > '')      ? $role->contest_id : '', 
                 'contest'         => ($role->contest_id > '')      ? Contest::get_name_en( $role->contest_id) : '', 
                 'start'           =>  UserRole::where('id', $role->id_max)->get('role_opening')[0]['role_opening']->format('Y-m-d'),
