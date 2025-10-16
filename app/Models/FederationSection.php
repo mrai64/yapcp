@@ -29,8 +29,20 @@ class FederationSection extends Model
     protected $fillable = [
         'federation_id',
         'code',
-        'name',
-        'excerptum',
+        'name_en',
+        // local_lang
+        // name_local
+        'rule_definition',
+        // file_formats
+        // min_works
+        // max_works
+        // min_short_side
+        // max_long_side
+        // monochromatic_required
+        // raw_required
+        // created_at
+        // updated_at
+        // deleted_at
     ];
 
     protected function casts()

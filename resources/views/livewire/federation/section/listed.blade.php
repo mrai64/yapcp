@@ -1,10 +1,18 @@
+<?php
+
+?>
+
 <div>
-<h1 class="fyk text-xl">Coded Section for Federation 
-    {{$federation->name}} |
-    {{$federation->id}}
-</h1>
-<psmall>That's the coded list picked from Regulatory doc found in Federation official site.
-    When you see some difference say us for a fast alignment. </small>
+    <header>
+        <h1 class="fyk text-2xl">
+            {{__("Coded Section for Federation:")}} 
+            {{$federation->id}} |
+            {{$federation->name_en}} 
+        </h1>
+    </header>
+<p class="small">{{ __("That's the coded list picked from Regulatory doc found in Federation official site.")}}
+    <br />
+    {{ __("When you see some difference say us for a fast alignment.")}} </small>
 <p>&nbsp;</p>
 
 @if (session('success'))
@@ -28,11 +36,11 @@
             @foreach ($section as $sec)
             <tr class="border my-2 py-2">
                 <td scope="row">{{$sec->code}}</td>
-                <td>{{$sec->name}}</td>
+                <td>{{$sec->name_en}}</td>
                 <td nowrap>
-                    <a href="/federation/section/modify/{{$sec->id}}">[Mod]</a>
+                    <a href="/federation/section/modify/{{$federation->id}}.{{$sec->id}}">[Mod]</a>
                     &nbsp;|&nbsp;
-                    <a href="/federation/section/remove/{{$sec->id}}">[Rem]</a>
+                    <a href="/federation/section/remove/{{$federation->id}}.{{$sec->id}}">[Rem]</a>
                 </td>
             </tr>
             @endforeach
