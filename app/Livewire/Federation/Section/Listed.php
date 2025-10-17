@@ -11,7 +11,6 @@ namespace App\Livewire\Federation\Section;
 
 use App\Models\Federation;
 use App\Models\FederationSection;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
@@ -27,12 +26,12 @@ class Listed extends Component
     public function mount(string $fid) // same name in route()
     {
         Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' called');
-        $f = new Federation();
-        $this->federation = $f->findOrFail($fid);
+        $this->federation = Federation::where('id', $fid)->first();
+        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' federation:' . json_encode($this->federation) );
         
         $this->section = FederationSection::where('federation_id', $fid)
-        ->orderBy('code')
-        ->get();
+            ->orderBy('code')
+            ->get();
     }
     
     /**

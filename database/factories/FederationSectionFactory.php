@@ -1,8 +1,8 @@
 <?php
 /**
  * FederationSection
- * child of Federation 
- * 
+ * child of Federation
+ *
  * 2025-10-16 based on new table definition
  */
 namespace Database\Factories;
@@ -23,11 +23,13 @@ class FederationSectionFactory extends Factory
     public function definition(): array
     {
         return [
+            // id
             'federation_id' => Federation::all('id')->random(5)->first()['id'],
             'code' => fake()->regexify('[A-Z]{6}'),
             'name_en' => fake()->text(),
             // local_lang
-            // rule_definition 
+            // name_local
+            // rule_definition
             // file formats
             // min_works
             // max_works

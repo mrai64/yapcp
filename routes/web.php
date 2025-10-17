@@ -35,9 +35,9 @@ Route::delete('/federation/remove/{fid}', Federation\Remove::class, ['fid']);
 // App\Livewire\FederationSection
 Route::get(   '/federation/section/list/{fid}',  Federation\Section\Listed::class, ['fid'])->name('federation-section-list');
 Route::get(   '/federation/section/add/{fid}',   Federation\Section\Add::class,    ['fid'])->name('add-federation-section');
-Route::get(   '/federation/section/modify/{id}', Federation\Section\Modify::class, ['id'])->name('federation-section-modify');
-Route::get(   '/federation/section/remove/{id}', Federation\Section\Remove::class, ['id'])->name('delete-federation-section');
-Route::delete('/federation/section/remove/{id}', Federation\Section\Remove::class, ['id']);
+Route::get(   '/federation/section/modify/{fid}/{sid}', Federation\Section\Modify::class, ['fid','sid'])->name('federation-section-modify');
+Route::get(   '/federation/section/remove/{sid}', Federation\Section\Remove::class, ['sid'])->name('delete-federation-section');
+Route::delete('/federation/section/remove/{sid}', Federation\Section\Remove::class, ['sid']);
 
 // App\Livewire\Organization
 Route::get(   '/organization/list',           Organization\Listed::class)->name('organization-list');

@@ -4,15 +4,9 @@
  * child of Federation
  * 2025-08-28 renamed definition as excerptum (latin, means synopsis)
  * 2025-08-28 enlarged code 5 > 10
- * 
- * id             bigint u a+ pk
- * federation_id  bigint u
- * code           vchar 10
- * name           vchar 255
- * excerptum      text
- * created_at     datetime
- * updated_at     datetime
- * deleted_at     datetime N
+ * 2025-10-16 reformat
+ * 2025-10-17 return id pk
+ *
  */
 namespace App\Models;
 
@@ -23,25 +17,26 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class FederationSection extends Model
 {
     use HasFactory, SoftDeletes;
-    //use env('DB_TABLE_PREFIX') . 
+
     public const table_name = 'federation_sections';
 
     protected $fillable = [
+        // id assigned
         'federation_id',
         'code',
         'name_en',
-        // local_lang
-        // name_local
+        'local_lang',
+        'name_local',
         'rule_definition',
-        // file_formats
-        // min_works
-        // max_works
-        // min_short_side
-        // max_long_side
-        // monochromatic_required
-        // raw_required
-        // created_at
-        // updated_at
+        'file_formats',
+        'min_works',
+        'max_works',
+        'min_short_side',
+        'max_long_side',
+        'monochromatic_required',
+        'raw_required',
+        'created_at',
+        'updated_at',
         // deleted_at
     ];
 

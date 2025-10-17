@@ -1,6 +1,9 @@
 <?php
 /**
- * yyyy-mm-dd note
+ * Federation Section Add
+ *
+ * 2025-10-16 federations and federation_sections refactorize
+ *
  */
 namespace App\Livewire\Federation\Section;
 
@@ -17,7 +20,6 @@ class Add extends Component
      */
     public FederationSection $section;
 
-    // id                      assigned
     public $federation_id; //  readonly
 
     #[Validate('required|string|max:10')]
@@ -37,15 +39,15 @@ class Add extends Component
         Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' called');
         $federation = new Federation();
         $federation->findOrFail($fid);
-        
+
         $this->federation_id = $fid;
         $this->code          = '';
         $this->name_en       = '';
         $this->rule_definition     = '';
     }
     /**
-     * 2. Sho must go
-    */
+     * 2. Show must go
+     */
     public function render()
     {
         Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' called');
@@ -53,10 +55,10 @@ class Add extends Component
     }
     /**
      * 3. validation rules
-    */
+     */
     /**
      * 4. At last act
-    */
+     */
     public function save_new_section()
     {
         Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' called');
@@ -64,10 +66,10 @@ class Add extends Component
         //
         $validated = $this->validate();
         Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' validated:' . json_encode($validated) );
-        
+
         // integration
         $validated['federation_id'] = $this->federation_id;
-        
+
         $sec = FederationSection::create($validated);
         Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' out:' . json_encode($sec) );
 

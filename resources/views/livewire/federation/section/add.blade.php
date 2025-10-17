@@ -10,15 +10,14 @@
 <div>
     <header>
         <h1 class="fyk text-2xl font-medium text-gray-900">
-        {{__("New Section from Federation Contest Regulation")}} 
+            {{__("New Section from Federation Contest Regulation")}} 
         </h1>
-    </p>
-    <p class="mb-4">
-        <a href="/federation/section/list/{{$federation_id}}" 
-            rel="noopener noreferrer">
-        [ {{ __("Back to Federation Section list") }} ]
-        </a>
-    </p>
+        <p class="mb-4">
+            <a href="{{ route( 'federation-section-list', [ 'fid' => $federation_id]) }}"
+                rel="noopener noreferrer">
+            [ {{ __("Back to Federation Section list") }} ]
+            </a>
+        </p>
     </header>
 
     <form wire:submit="save_new_section">
