@@ -1,9 +1,13 @@
 <?php
-
+/**
+ * Database seeder
+ * 
+ * 2025-10-17 Class commented must be build
+ *            or should remain commented
+ * 
+ */
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,11 +17,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $this->call([
+            CountrySeeder::class,
+         // LanglistSeeder::class,
+         // TimezonelistSeeder::class,
+            FederationSeeder::class,
+            FederationSectionSeeder::class,
+         // OrganizationSeeder::class,
+            UserSeeder::class,
+         // UserContact::seeder,
+         // UserRoleSeeder::class,
+            WorkSeeder::class,
+         // ContestSeeder::class,
+         // ContestSectionSeeder::class,
+         // ContestJurySeeder::class,
+         // ContestAwardSeeder::class,
+         // ContestWorkSeeder::class,
+         // ContestParticipantSeeder::class,
+         // ContestVoteSeeder::class,
+        ]);        
     }
 }
