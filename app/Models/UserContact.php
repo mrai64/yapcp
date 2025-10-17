@@ -103,7 +103,7 @@ class UserContact extends Model
     public static function get_first_last_name(string $uid) : string
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
-        $user = self::where('user_id', $uid)->get()[0];
+        $user = self::where('user_id', $uid)->first();
         return $user->first_name . ' ' . $user->last_name . ' /'. $user->country_id;
     }
     /**
@@ -112,8 +112,8 @@ class UserContact extends Model
     public static function get_last_first_name(string $uid) : string
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
-        $user = self::where('user_id', $uid)->get()[0];
-        return $user['last_name'] . ', ' . $user['first_name'] . ' /'. $user['country_id'];
+        $user = self::where('user_id', $uid)->first();
+        return $user->last_name . ' ' . $user->first_name . ' /'. $user->country_id;
     }
     /** 
      * 

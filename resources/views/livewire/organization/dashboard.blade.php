@@ -5,6 +5,7 @@
  */
 
 use App\Models\UserContact;
+use Illuminate\Support\Facades\Log;
 
 ?>
 
@@ -59,6 +60,9 @@ use App\Models\UserContact;
             Member list
             </p>
             <ul>
+                @php
+                    Log::info('blade '.__FILE__.' user_role_list:'. json_encode($user_role_list) );
+                @endphp
                 @foreach($user_role_list as $user_role)
                 <li class="fyk my-2 p-4">
                     <strong class="fyk text-xl">{{ UserContact::get_first_last_name( $user_role->user_id ) }}, {{$user_role->role}}</strong>
