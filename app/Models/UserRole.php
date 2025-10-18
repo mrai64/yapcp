@@ -2,15 +2,18 @@
 /**
  * UserRoles is child of Users
  * 
- * 2025-10-10 created an auxiliary table user_roles_role_set to manage
+ * 2025-10-10 created an auxiliary table user_role_role_set to manage
  *            previously value of valid_roles[]
+ * 2025-10-18 user_roles had a 1:1: relationship w/user_role_role_sets 
  * 
  */
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Log;
 
 class UserRole extends Model
 {
@@ -22,7 +25,7 @@ class UserRole extends Model
     protected $fillable = [
         // 'id',
         'user_id', //         a uuid from users.id
-        'role', //            in auxiliary table user_roles_role_sets
+        'role', //            in auxiliary table user_role_role_sets
         'organization_id', // a uuid from organizations.id | NULL 
         'contest_id', //      a uuid from contests.id | NULL
         'federation_id', //   a uuid from federations.id | NULL
@@ -48,21 +51,15 @@ class UserRole extends Model
      */
     public function only_one_role(UserRole $user_role) : bool 
     {
-        // 2 is too much
-        if (($user_role->organization_id) && ($user_role->contest_id)) {
-            return false;
-        }
-        if (($user_role->organization_id) && ($user_role->federation_id)) {
-            return false;
-        }
-        if (($user_role->contest_id) && ($user_role->federation_id)) {
-            return false;
-        }
-        // 1 is right
-        if (($user_role->organization_id) || ($user_role->contest_id) || ($user_role->federation_id)) {
-            return true;
-        }
-        // 0 is too less
-        return false;
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        // 
+        return ( ($user_role->organization_id) Xor ( ($user_role->contest_id) Xor ($user_role->federation_id) ) );
+    }
+
+    public static function valid_roles()
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        $valid = UserRolesRoleSet::valid_roles();
+        return $valid;
     }
 }

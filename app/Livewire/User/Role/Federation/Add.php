@@ -49,7 +49,7 @@ class Add extends Component
         Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         return [
             // 'role'          => 'required|string|max:255',
-            'role'          => 'required|exists:user_roles_role_sets,status',
+            'role'          => 'required|exists:user_role_role_sets,status',
             'federation_id' => 'required|string|exists:federations,id',
         ];
     }
