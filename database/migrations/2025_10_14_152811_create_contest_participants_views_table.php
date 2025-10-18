@@ -22,13 +22,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::create('contest_participants_views', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->timestamps();
-        // });
-        
         DB::statement("
-        CREATE VIEW pcp_contest_participant_view AS
+        CREATE VIEW pcp_contest_participants_view AS
         SELECT
             c.name_en                AS contest_name,
             u.country_id,
@@ -59,8 +54,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Schema::dropIfExists('contest_participants_views');
-        DB::statement("DROP VIEW pcp_contest_participant_view");
+        DB::statement("DROP VIEW pcp_contest_participants_view");
 
     }
 };

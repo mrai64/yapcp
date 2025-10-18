@@ -8,6 +8,8 @@
  * 
  * WARNING: we must use pcp_ table prefix explicit.
  * 
+ * 2025-10-18 even if works should be named user_works, there is no user_works table
+ *            to apply a user_works_view, so renamed it to pcp_works_view for future refresh
  */
 
 use Illuminate\Database\Migrations\Migration;
@@ -22,12 +24,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::create('user_works_views', function (Blueprint $table) {
+        // Schema::create('works_views', function (Blueprint $table) {
         //     $table->id();
         //     $table->timestamps();
         // });
         DB::statement("
-        CREATE VIEW pcp_user_works_view AS
+        CREATE VIEW pcp_works_view AS
         SELECT
             u.country_id,
             u.last_name,
@@ -55,6 +57,6 @@ return new class extends Migration
     public function down(): void
     {
         // Schema::dropIfExists('user_works_views');
-        DB::statement("DROP VIEW pcp_user_works_view");
+        DB::statement("DROP VIEW pcp_works_view");
     }
 };
