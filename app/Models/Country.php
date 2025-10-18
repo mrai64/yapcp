@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Log;
 class Country extends Model
 {
     use HasFactory, SoftDeletes;
-    // use env('DB_TABLE_PREFIX')
+
     public const table_name = 'countries';
 
     protected $keyType   = 'string';
@@ -43,8 +43,8 @@ class Country extends Model
     /**
      * like Country::all() but sorted by country
      */
-    public function allByCountry(){
-
+    public function allByCountry()
+    {
         $countries = DB::table(self::table_name)
             ->whereNull('deleted_at')
             ->orderBy('country','asc')

@@ -14,6 +14,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -62,7 +64,7 @@ class Contest extends Model
     // uuid as pk 
     public static function booted() {
         static::creating(function ($model) {
-            $model->id = Str::uuid(); // uuid generator
+            $model->id = Str::uuid7(); // uuid generator
         });
     }
 
@@ -95,6 +97,37 @@ class Contest extends Model
         $get_contest = self::where('id', $inp_id)->get('name_en');
         Log::info( __FUNCTION__ . ' ' . __LINE__ . $get_contest);
         return (count($get_contest) == 0 ) ? '' : Str::of($get_contest[0]['name_en']);
+    }
+
+    
+    /**
+     * 
+     */
+    public function organization()
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        $organization = $this->hasOne(Organization::class);
+        return $organization;
+    }
+    
+    /**
+     * 
+     */
+    public function sections()
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        $sections = $this->hasMany(ContestSection::class);
+        return $sections;
+    }
+
+    /**
+     * 
+     */
+    public function participants()
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        $participants = $this->hasMany(ContestParticipant::class);
+        return $participants;
     }
 
 }

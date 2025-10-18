@@ -6,6 +6,7 @@
  * 2025-09-13 Notify users login w/email
  * 2025-10-13 User n UserContact are in relationship 1:1
  *            User n UserRole    are in relationship 1:N
+ *            User n (User)Work  are in relationship 1:N
  * 
  */
 namespace App\Models;
@@ -104,5 +105,26 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         $roles = $this->hasMany(UserRole::class); 
+        return $roles;
+    }
+    
+    /**
+     * 
+     */
+    public function works()
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        $works = $this->hasMany(Work::class);
+        return $works;
+    }
+    /**
+     * 
+     */
+    public function juries()
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        $juries = $this->hasMany(ContestJury::class);
+        return $juries;
+
     }
 }

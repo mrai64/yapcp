@@ -14,15 +14,19 @@
  */
 namespace App\Models;
 
+use App\Models\Contest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str; //  uuid booted()
-use App\Models\Contest; //      father_table
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Log;
 
 class ContestSection extends Model
 {
-    use SoftDeletes;
+    use HasFactory,SoftDeletes;
 
     public const table_name = 'contest_sections';
 
@@ -77,9 +81,8 @@ class ContestSection extends Model
     {
         return (in_array( $section->under_patronage, self::valid_under_patronages, true));
     }
-    /**
-     * GETTER
-     */
+
+    // GETTER
     public function get_section_list( Contest $contest) : array
     {
         $section_list = self::whereNull('deleted_at')->where('contest_id', $contest->id)
@@ -101,6 +104,7 @@ class ContestSection extends Model
         }
         return $section_array;
     }
+
     /**
      * 
      */
@@ -113,5 +117,16 @@ class ContestSection extends Model
             Log::error(__FUNCTION__.' '.__LINE__ . 'in: contest_id:' . $contest_id . ' out: ' . $th->getMessage() );
             return '';
         }
+    }
+
+    /**
+     * 
+     */
+    public function contest()
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        // belongsTo( class_parent::class, class_parent.id, class_child.parent_id)
+        $contest = $this->belongsTo(Contest::class); 
+        return $contest;
     }
 }
