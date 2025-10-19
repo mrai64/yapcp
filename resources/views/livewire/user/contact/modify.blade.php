@@ -2,7 +2,7 @@
     <h2 class="fyk mb-4">{{ __('Maintain updated your personal info') }}</h2>
     <p class="small">It's our choice, we maintain user n password out of your personal information.</p>
 
-    <form wire:submit="update" enctype="multipart/form-data">
+    <form wire:submit="update_user_contact" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-4">
@@ -278,6 +278,16 @@
             />
             <div class="small">@error('whatsapp') {{ $message }} @enderror</div>
         </div>
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li class="alert alert-danger">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <hr />
 
