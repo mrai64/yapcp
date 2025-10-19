@@ -5,6 +5,8 @@
  * - adopted by user_contact table
  *
  * 2025-09-27 reformat rules()
+ * 2025-10-19 rewrite partially the last function save_photo_box
+ *            add intervention package
  */
 namespace App\Livewire\Work;
 
@@ -12,9 +14,14 @@ use App\Models\UserContact;
 use App\Models\Work;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
+use Illuminate\Http\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Imagick\Driver;
+use Intervention\Image\Encoders\JpegEncoder;
 
 class Add extends Component
 {
@@ -45,8 +52,9 @@ class Add extends Component
      */
     public function mount()
     {
-        Log::info( __FUNCTION__ .' '. __LINE__ );
-        $this->id             = Str::uuid();
+        Log::info('Component '.__CLASS__.' from ' . __FILE__ );
+        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        $this->id             = Str::uuid(); // no
         $this->user_id        = Auth::id();
         $this->photo_box      = UserContact::get_photo_box( $this->user_id );
         $this->extension      = '';
@@ -60,7 +68,7 @@ class Add extends Component
     */
     public function render()
     {
-        Log::info( __FUNCTION__ .' '. __LINE__ );
+        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         return view('livewire.work.add');
     }
     /**
@@ -68,7 +76,7 @@ class Add extends Component
     */
     public function rules()
     {
-        Log::info( __FUNCTION__ .' '. __LINE__ );
+        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         return [
             // id             assigned uuid
             // user_id        assigned from Auth::id()
@@ -82,38 +90,85 @@ class Add extends Component
             'monochromatic' => 'required|string|uppercase|max:1|in:Y,N',
         ];
     }
-    
+
     /**
      * 4. After the show, validate n save
-    */
+     * Save record
+     * update record w/file name
+     * build a 300px miniature
+     */
     public function save_photo_box()
     {
-        Log::info( __FUNCTION__ .' '. __LINE__ );
+        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         $validated = $this->validate();
-        // construct from work_image for work_file
-        $wh = $this->work_image->dimensions();
-        $validated['long_side']  = ($wh[0] >= $wh[1] ) ? $wh[0] : $wh[1];
-        $validated['short_side'] = ($wh[0] <= $wh[1] ) ? $wh[0] : $wh[1];
-
-        // missing data integration
-        $validated['id'] = $this->id;
+        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' validated:' . json_encode($validated));
+        // data integration
         $validated['user_id'] = $this->user_id;
+        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' validated:' . json_encode($validated));
 
         $validated['extension'] = Str::lower( pathinfo( $this->work_image->getClientOriginalName(), PATHINFO_EXTENSION) );
         if ( !in_array($validated['extension'], Work::valid_extensions) ){
             $validated['extension'] = 'jpg';
         }
+        // construct from work_image for work_file
+        $wh = $this->work_image->dimensions();
+        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__ . ' size 0:' . $wh[0] . ' 1:' . $wh[1]);
+        $validated['long_side']  = ($wh[0] >= $wh[1] ) ? $wh[0] : $wh[1];
+        $validated['short_side'] = ($wh[0] <= $wh[1] ) ? $wh[0] : $wh[1];
+        $validated['monochromatic'] = ($validated['monochromatic'] === 'Y') ? 'Y' : 'N';
+        $validated['work_file'] = 'anon.jpg';
+
+        // 1. insert and give uuid
+        $this->work = Work::create($validated);
+        $validated['id'] = $this->work->id;
+        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' validated:' . json_encode($validated));
 
         $validated['work_file'] = $this->photo_box . '/' . $validated['id'] . '.' . $validated['extension'];
         Log::info( __FUNCTION__ .' '. __LINE__ . ' ' . $validated['work_file']);
         $this->work_image->storePubliclyAs( 'photos', $validated['work_file'], 'public');
         $validated['work_image'] = '';
 
-        $validate['monochromatic'] = ($validated['monochromatic'] === 'Y') ? $validated['monochromatic'] : 'N';
+        // 2. update file name
+        $this->work->update(['work_file' => $validated['work_file'] ]);
+        $this->work->save();
+        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' work:' . json_encode($this->work));
 
-        $this->work = Work::create($validated);
-        Log::info( __FUNCTION__ .' '. __LINE__ . ' ' . $this->work );
-        // Next!?
+        // 3. made a thumbs
+        // if ($wh[0]> 300 || $wh[1] > 300) {
+        // }
+        $img_man = new ImageManager(Driver::class);
+        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' resize:1' );
+
+        $resized = $img_man->read( $this->work_image);
+        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' resize:2' );
+        if ($wh[0] >= $wh[1]){
+            $resized->scale(width: 300);
+        } else {
+            $resized->scale(height: 300);
+        }
+
+        $resized_filename = $this->photo_box . '/' . $validated['id'] . '_300_.' . $validated['extension'];
+        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' resize_file: '.$resized_filename );
+
+        // NO $path_resized = Storage::putFileAs('photos', new File($this->photo_box . '/' . $validated['id'] . '_300_.' . $validated['extension']), $validated['id'] . '_300_.' . $validated['extension'] );
+        //    put non va, putFile putFileAs funzionano con file che arrivano dal form
+        
+        $resized_encoded = (string) $resized->encode( new JpegEncoder(quality: 90)); // quality 0..100
+        // NO $put_file = Storage::put('/public/storage/photos/'.$resized_filename , $resized_encoded, 'public');
+        //    anche dichiarandolo /public lo mette in /private 
+        // NO Storage::disk('photos')->put($resized_filename , $resized_encoded, 'public');
+        //    non è definito un disco 'photos'
+        // NO Storage::disk('public')->put($resized_filename , $resized_encoded, 'public');
+        //    e questo non ha fatto ...niente
+        // NO Storage::disk('public')->put('/public/storage/photos/'.$resized_filename , $resized_encoded, 'public');
+        //    Questo salva in /public/public/storage/photos/
+        // SI FINALMENTE SI
+        Storage::disk('public')->put('/photos/'.$resized_filename , $resized_encoded, 'public');
+
+        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' fine' );
+
+        //
+        // All done right, go to next upload
         return redirect()
             ->route('photo-box-add')
             ->with('success', __('Your personal Gallery has been updated, thanks! Another upload?'));
