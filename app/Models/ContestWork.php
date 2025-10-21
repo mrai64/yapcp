@@ -9,12 +9,21 @@
  *   - contest
  * 
  * field is_admit have a limited-set-of-valid-value 
+ * 
+ * relationship
+ * belongsTo father table Contest
+ * hasOne    auxiliary table set is_admit Y/N true false
+ * hasMany   child table jurors votes
+ * 
  */
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log; // Log::info
 use Illuminate\Support\Str; //         pk uuid 
@@ -23,6 +32,7 @@ class ContestWork extends Model
 {
     //
     use HasFactory, SoftDeletes;
+
     public const table_name = 'contest_works';
     // pk uuid
     protected $keyType      = 'string';

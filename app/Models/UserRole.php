@@ -35,6 +35,7 @@ class UserRole extends Model
 
     protected function casts()
     {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         return [
             'role_opening' => 'datetime',
             'role_closing' => 'datetime',
