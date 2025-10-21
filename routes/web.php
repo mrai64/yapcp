@@ -26,18 +26,18 @@ require __DIR__.'/auth.php';
 // route > component YES 
 
 // App\Livewire\Federation
-Route::get(   '/federation/add',         Federation\Add::class)->name('add-federation');
-Route::get(   '/federation/list',        Federation\Listed::class)->name('federation-list');
-Route::get(   '/federation/modify/{fid}', Federation\Modify::class, ['fid'])->name('modify-federation');
-Route::get(   '/federation/remove/{fid}', Federation\Remove::class, ['fid'])->name('delete-federation');
-Route::delete('/federation/remove/{fid}', Federation\Remove::class, ['fid']);
+Route::get(   '/federation/add',          Federation\Add::class)->middleware(['auth', 'verified'])->name('add-federation');
+Route::get(   '/federation/list',         Federation\Listed::class)->middleware(['auth', 'verified'])->name('federation-list');
+Route::get(   '/federation/modify/{fid}', Federation\Modify::class, ['fid'])->middleware(['auth', 'verified'])->name('modify-federation');
+Route::get(   '/federation/remove/{fid}', Federation\Remove::class, ['fid'])->middleware(['auth', 'verified'])->name('delete-federation');
+Route::delete('/federation/remove/{fid}', Federation\Remove::class, ['fid'])->middleware(['auth', 'verified']);
 
 // App\Livewire\FederationSection
-Route::get(   '/federation/section/list/{fid}',  Federation\Section\Listed::class, ['fid'])->name('federation-section-list');
-Route::get(   '/federation/section/add/{fid}',   Federation\Section\Add::class,    ['fid'])->name('add-federation-section');
-Route::get(   '/federation/section/modify/{fid}/{sid}', Federation\Section\Modify::class, ['fid','sid'])->name('federation-section-modify');
-Route::get(   '/federation/section/remove/{sid}', Federation\Section\Remove::class, ['sid'])->name('delete-federation-section');
-Route::delete('/federation/section/remove/{sid}', Federation\Section\Remove::class, ['sid']);
+Route::get(   '/federation/section/list/{fid}',  Federation\Section\Listed::class, ['fid'])->middleware(['auth', 'verified'])->name('federation-section-list');
+Route::get(   '/federation/section/add/{fid}',   Federation\Section\Add::class,    ['fid'])->middleware(['auth', 'verified'])->name('add-federation-section');
+Route::get(   '/federation/section/modify/{fid}/{sid}', Federation\Section\Modify::class, ['fid','sid'])->middleware(['auth', 'verified'])->name('federation-section-modify');
+Route::get(   '/federation/section/remove/{sid}', Federation\Section\Remove::class, ['sid'])->middleware(['auth', 'verified'])->name('delete-federation-section');
+Route::delete('/federation/section/remove/{sid}', Federation\Section\Remove::class, ['sid'])->middleware(['auth', 'verified']);
 
 // App\Livewire\Organization
 Route::get(   '/organization/list',           Organization\Listed::class)->name('organization-list');
@@ -55,7 +55,7 @@ Route::get( '/dashboard/role',     User\Role\Listed::class)->middleware(['auth',
 Route::get( '/dashboard/role/federation/add', User\Role\Federation\Add::class)->middleware(['auth', 'verified'])->name('add-user-role-federation');
 Route::get( '/dashboard/role/organization/add', User\Role\Organization\Add::class)->middleware(['auth', 'verified'])->name('add-user-role-organization');
 
-// App\Livewire\Work
+// App\Livewire\Work - (aka LiveWire\UserWork) parm user id passed via Auth::id()
 Route::get(   '/work/list',         Work\Listed::class         )->middleware(['auth', 'verified'])->name('photo-box-list');
 Route::get(   '/work/add',          Work\Add::class            )->middleware(['auth', 'verified'])->name('photo-box-add');
 Route::get(   '/work/modify/{wid}', Work\Modify::class, ['wid'])->middleware(['auth', 'verified'])->name('photo-box-modify');
@@ -68,10 +68,10 @@ Route::get( '/contest/modify/{cid}',    Contest\Modify::class,    ['cid'])->midd
 Route::get( '/contest/listed',          Contest\Listed::class            )->middleware(['auth', 'verified'])->name('contest-list');
 
 // App\Livewire\Contest\Section
-Route::get( '/contest/section/add/{cid}',       Contest\Section\Add::class, ['cid'] )->middleware(['auth', 'verified'])->name('contest-section-add');
-Route::get( '/contest/section/modify/{sid}',    Contest\Section\Modify::class, ['sid'] )->middleware(['auth', 'verified'])->name('modify-contest-section');
-Route::get( '/contest/section/modify/{sid}',    Contest\Section\Modify::class, ['sid'] )->middleware(['auth', 'verified'])->name('modify-contest-section');
-Route::get( '/contest/section/remove/{sid}',    Contest\Section\Remove::class, ['sid'] )->middleware(['auth', 'verified'])->name('remove-contest-section');
+Route::get(    '/contest/section/add/{cid}',    Contest\Section\Add::class, ['cid'] )->middleware(['auth', 'verified'])->name('contest-section-add');
+Route::get(    '/contest/section/modify/{sid}', Contest\Section\Modify::class, ['sid'] )->middleware(['auth', 'verified'])->name('modify-contest-section');
+Route::get(    '/contest/section/modify/{sid}', Contest\Section\Modify::class, ['sid'] )->middleware(['auth', 'verified'])->name('modify-contest-section');
+Route::get(    '/contest/section/remove/{sid}', Contest\Section\Remove::class, ['sid'] )->middleware(['auth', 'verified'])->name('remove-contest-section');
 Route::delete( '/contest/section/remove/{sid}', Contest\Section\Remove::class, ['sid'] )->middleware(['auth', 'verified']);
 
 // App\Livewire\Contest\Jury
@@ -80,9 +80,10 @@ Route::get( '/contest/jury/add/{sid}', Contest\Jury\Add::class, ['sid'] )->middl
 // App\Livewire\Contest\Awards
 Route::get( '/contest/award/add/{cid}', Contest\Award\Add::class, ['cid'] )->middleware(['auth', 'verified'])->name('contest-award-add');
 
-// App\Livewire\Contest\Subscribe
-Route::get(    '/contest/subscribe/{cid}',       Contest\Subscribe::class, ['cid'])->middleware(['auth', 'verified'])->name('participate-contest');
-Route::delete( '/contest/subscribe/remove/{pid}', Contest\Subscribe\Remove::class, ['pid'])->middleware(['auth', 'verified'])->name('remove-work-contest');
+// App\Livewire\Contest\Subscribe - maybe also contest\work\add
+Route::get(    '/contest/subscribe/{cid}',            Contest\Subscribe::class, ['cid'])->middleware(['auth', 'verified'])->name('participate-contest');
+Route::get(    '/contest/subscribe/{cid}/work/{wid}', Contest\Subscribe::class, ['cid', 'wid'])->middleware(['auth', 'verified'])->name('add-work-contest');
+Route::delete( '/contest/subscribe/remove/{pid}',     Contest\Subscribe\Remove::class, ['pid'])->middleware(['auth', 'verified'])->name('remove-work-contest');
 
 // App\Livewire\Contest\Participants
 Route::get( '/contest/participants/listed/{cid}', Contest\Participants\Listed::class, ['cid'])->middleware(['auth', 'verified'])->name('public-participant-list');
