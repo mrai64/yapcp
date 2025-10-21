@@ -128,6 +128,10 @@
     @else
     <div class="border text-xl rounded-md px-4 py-2">
         {{ __('No role found in any organization, federation, contest, but you can add one, in case.') }}
+        <br />
+        <strong>
+            {{ __("If it's your first entry, before any other op use Update your personal info.") }}
+        </strong>
     </div>
     @endif
 </div>
