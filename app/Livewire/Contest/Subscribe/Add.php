@@ -1,10 +1,10 @@
 <?php
 /**
  * Contest Work Participate / Add
- * 
+ *
  * 2025-10-14 ContestSectionRule don't work
- * 2025-10-18 image filename must be coherent with contest_works.id 
- * 
+ * 2025-10-18 image filename must be coherent with contest_works.id
+ *
  */
 namespace App\Livewire\Contest\Subscribe;
 
@@ -23,12 +23,13 @@ use Livewire\Component;
 class Add extends Component
 {
     public $work;
-    public $contest_section_list; 
+    public $contest_section_list;
     public $section;
     public $contest_id;
     public $section_id;
     public $user_id;
     public $work_id;
+    public $portfolio_sequence;
 
     public $work_in_contest;
 
@@ -44,7 +45,6 @@ class Add extends Component
         $this->contest_id = $data->contest_id;
         // section_id - form field
         $this->user_id = Auth::id(); // even $work->user_id
-
         $this->contest_section_list = $data->contest_section_list;
         Log::info('Component Contest/Subscribe/' . __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($this));
     }
@@ -76,6 +76,7 @@ class Add extends Component
             ],
             'user_id' => 'string|exists:users,id',
             'contest_id' => 'string|exists:contests,id',
+            'portfolio_sequence' => 'integer|min:0|max:255',
         ];
     }
     /**
@@ -90,12 +91,17 @@ class Add extends Component
         // integration from mount()
         $validated['contest_id'] = $this->contest_id;
         $validated['user_id']    = $this->user_id;
-        $validated['country_id'] = UserContact::get_country_id($this->user_id);        
+        $validated['country_id'] = UserContact::get_country_id($this->user_id);
+
+        if ($validated['portfolio_sequence'] == 0) {
+            $validated['portfolio_sequence']  = ContestWork::where('section_id', $validated['section_id'])->where('user_id', $this->user_id)->count();
+            $validated['portfolio_sequence'] += 1;
+        }
         Log::info('Component Contest/Subscribe/' . __CLASS__ .' '.__FUNCTION__.':'.__LINE__. ' validated' . json_encode($validated));
 
         $this->work_in_contest = ContestWork::create($validated);
         Log::info('Component Contest/Subscribe/' . __CLASS__ .' '.__FUNCTION__.':'.__LINE__. ' out:' . json_encode($this->work_in_contest));
-        
+
         // check user_participant then add if missing
         $user_participant = ContestParticipant::where('contest_id', $validated['contest_id'])->where('user_id', $validated['user_id'])->count();
         if ($user_participant == 0){

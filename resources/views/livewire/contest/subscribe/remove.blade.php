@@ -1,12 +1,16 @@
 <?php 
 /**
  * delete a work from contest / section participating list 
+ * 
+ * 2025-10-21 add portfolio sequence 
  */
 
 ?>
 
 <div class="text-center">
     [ {{ $section_code }} ]
+    / 
+    {{ $portfolio_sequence }}
     <br />
     <form wire:submit="remove_work_from_contest" method="DELETE">
         @csrf

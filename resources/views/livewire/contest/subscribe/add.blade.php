@@ -23,10 +23,19 @@
             <option value="{{$section->id}}">{{$section->code}}</option>
             @endforeach
         </select>
+        <!-- portfolio sequence -->
+        <input type="number" 
+            name="portfolio_sequence" wire:model.defer="portfolio_sequence" 
+            min="0" max="255"
+            class="inline-flex items-center border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-4 py-2 mt-4 w-12"
+            />
+
     </div>
+
     @foreach ($errors->all() as $message)
     <div class="small">{{$message}}</div>
     @endforeach
+
     <button type="submit"
         class="inline-flex items-center px-4 py-2 mt-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-3"
         >

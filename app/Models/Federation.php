@@ -5,7 +5,7 @@
  * 2025-09-20 add 4 char to code
  * 2025-09-30 add getter function
  * 2025-10-16 table changes - v.2
- *            old 'code' field become id, string 
+ *            old 'code' field become id, string
  * Relationship 1:1 country_id
  */
 namespace App\Models;
@@ -28,7 +28,7 @@ class Federation extends Model
     public    $incrementing = false;
 
     protected $fillable =[
-        'id', 
+        'id',
         'country_id', // fk countries.id
         'name_en',
         'local_lang',
@@ -49,9 +49,9 @@ class Federation extends Model
             'deleted_at' => 'datetime',
         ];
     }
-    
+
     // GETTER
-    public static function listed_by_country_id_name() 
+    public static function listed_by_country_id_name()
     {
         Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $f_list = self::select()
@@ -62,12 +62,15 @@ class Federation extends Model
         Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($f_list) );
         return $f_list;
     }
-    
+
+    // federation         = Federation::find('FIAP');
+    // federation_country = Federation::find('FIAP')->country;
     public function country() : HasOne
     {
         // Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in:'.json_encode($this) );
-        $country_ = $this->hasOne(Country::class, 'id', 'country_id');
+        $country_ = $this->hasOne(Country::class, 'id',           'country_id');
+        // . . . . . . . . . . . . . . . countries.id   federation.country_id
         Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($country_) );
         return $country_;
     }
@@ -75,7 +78,8 @@ class Federation extends Model
     public function sections() : HasMany
     {
         Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        $s_collection = $this->hasMany(FederationSection::class, 'federation_id', 'id');
+        $s_collection = $this->hasMany(FederationSection::class, 'federation_id',            'id');
+        // . . . . . . . . . . . . . . . . . .federation_sections.federation_id   federations.id
         Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($s_collection) );
         return $s_collection;
     }

@@ -22,6 +22,7 @@ class Remove extends Component
     public $section;
     public $section_code;
     public $contest_id;
+    public $portfolio_sequence;
 
     /**
      * 1. Before show from @livewire
@@ -30,13 +31,14 @@ class Remove extends Component
     {
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in:'. $pid);
         $this->participant_work_id = $pid;
-        $this->work_in_contest = ContestWork::where('id', $pid)->get()[0];
+        $this->work_in_contest = ContestWork::where('id', $pid)->first();
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' found:'. json_encode($this->work_in_contest));
 
         $this->contest_id = $this->work_in_contest->contest_id;
 
-        $this->section = ContestSection::where('id', $this->work_in_contest->section_id )->get()[0];
+        $this->section = ContestSection::where('id', $this->work_in_contest->section_id )->first();
         $this->section_code = $this->section->code;
+        $this->portfolio_sequence = $this->work_in_contest->portfolio_sequence;
 
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' exit:' );
 

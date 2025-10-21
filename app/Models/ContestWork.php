@@ -15,6 +15,7 @@
  * hasOne    auxiliary table set is_admit Y/N true false
  * hasMany   child table jurors votes
  * 
+ * 2025-10-21 Added portfolio_sequence, 0..255
  */
 
 namespace App\Models;
@@ -53,6 +54,7 @@ class ContestWork extends Model
         'user_id', //    uuid fk
         'work_id', //    uuid fk
         'is_admit', //   Y/N
+        'portfolio_sequence', // 0..255
         // created_at
         // updated_at
         // deleted_at
@@ -60,13 +62,15 @@ class ContestWork extends Model
 
     // pk uuid
     public static function booted() {
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
         static::creating(function ($model) {
             $model->id = Str::uuid7(); // uuid generator
         });
     }
-
+    
     protected function casts()
     {
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -80,17 +84,26 @@ class ContestWork extends Model
     public static function count_works_for_section_user(string $section_id, string $user_id) : string
     {
         $count = self::where('user_id', $user_id)->where('section_id', $section_id)->count();
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.$count);
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' out:'.$count);
         return $count;
     }
 
     public static function get_user_for_contest_work(string $contest_id, string $work_id) : string
     {
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in: 1:'.$contest_id. ' 2:'. $work_id);
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' in: 1:'.$contest_id. ' 2:'. $work_id);
         $participant = self::where('contest_id', $contest_id)->where('work_id', $work_id)->get('id');
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.$participant);
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' out:'.$participant);
         $participant_id = (count($participant)) ? $participant[0]['id'] : '';
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.$participant_id);
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' out:'.$participant_id);
         return $participant_id;
+    }
+    
+    // RELATIONSHIP
+    
+    public function work() {
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
+        $work = $this->hasOne(Work::class, 'id', 'work_id');
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' work:' . json_encode($work));
+        return $work;
     }
 }

@@ -33,6 +33,7 @@ class Subscribe extends Component
     public $contest_participant;
     public $contest_participant_list;
     public $contest_section_list;
+    public $contest_work_list;
 
     public $contest;
     public $country_id;
@@ -46,8 +47,10 @@ class Subscribe extends Component
     {
         $this->user_id         = Auth::id();
         $this->contest_id      = $cid;
+
         $this->work_list       = Work::where('user_id', $this->user_id)->get();
         if (count($this->work_list) < 1){
+            // no work to participate
             Log::info('Component ' . __CLASS__.' '.__FUNCTION__.':'.__LINE__.' work_list:'.json_encode($this->work_list));
             abort(404);
         }
@@ -55,9 +58,10 @@ class Subscribe extends Component
         
         $this->today           = new DateTimeImmutable("now");
         $this->contest         = Contest::where('id', $cid)
-        ->where('day_2_closing', '>=', $this->today->format('Y-m-d H:i:s'))
-        ->first(); // get()[0];
+            ->where('day_2_closing', '>=', $this->today->format('Y-m-d H:i:s'))
+            ->first(); // get()[0];
         if (!isset($this->contest->id)) {
+            // contest is closed
             Log::info('Component ' . __CLASS__.' '.__FUNCTION__.':'.__LINE__.' contest missing:'.$cid );
             abort(404);
         }
@@ -68,7 +72,16 @@ class Subscribe extends Component
 
         $this->section_id      = '';
         $this->work_id         = '';
+        
+        $this->contest_work_list = ContestWork::where('user_id', $this->user_id)
+            ->where('contest_id', $cid)
+            ->orderBy('section_id')
+            ->orderBy('portfolio_sequence')
+            ->orderBy('work_id')
+            ->get();
+        // Log::info('Component ' . __CLASS__.' '.__FUNCTION__.':'.__LINE__.' contest_work_list:'.json_encode($this->contest_work_list));
         Log::info('Component ' . __CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($this));
+
     }
     /**
      * 2. Show
