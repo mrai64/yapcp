@@ -21,6 +21,14 @@
             <a href="#">{{ __('Zero found, wanna add your works?') }}</a>
         </p>
         @else
+        <div class="mb-4 fyk text-xl">
+            <a  href="{{ route('contest-list') }}"
+                class="float-end font-medium rounded-md mb-4 py-2"
+                >
+                [ {{ __('Open Contest List') }} ]
+            </a>
+        </div>
+        <hr class="my-4" />
         <table class="data-table-container">
             <thead>
                 <tr>

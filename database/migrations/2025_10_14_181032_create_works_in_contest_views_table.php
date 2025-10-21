@@ -11,9 +11,7 @@
  */
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -22,12 +20,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::create('works_in_contest_views', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->timestamps();
-        // });
         DB::statement("
-        CREATE VIEW pcp_works_in_contest_view AS
+        CREATE VIEW pcp_contest_works_view AS
         SELECT
             c.name_en AS contest_name,
             s.name_en AS section_name,
@@ -68,7 +62,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        // Schema::dropIfExists('works_in_contest_views');
-        DB::statement("DROP VIEW pcp_works_in_contest_view");
+        DB::statement("DROP VIEW pcp_contest_works_view");
     }
 };

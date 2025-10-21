@@ -3,6 +3,7 @@
  * Contest Work Participate / Add
  * 
  * 2025-10-14 ContestSectionRule don't work
+ * 2025-10-18 image filename must be coherent with contest_works.id 
  * 
  */
 namespace App\Livewire\Contest\Subscribe;

@@ -1,7 +1,7 @@
 
 <?php
 /**
- * Contest Subscribe
+ * Contest Work Subscribe
  * Contest Participation
  *
  * user_id from Auth::id()
@@ -10,6 +10,7 @@
  */
 
 use App\Models\ContestWork;
+use App\Models\ContestSection;
 use Illuminate\Support\Facades\Log;
 
 ?>
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Log;
         <p class="fyk text-xl">{{__("Closing date:")}} {{$contest->day_2_closing->format("Y-m-d") }}</p>
         <!-- Contest section list w/counter -->
         @foreach($contest_section_list as $section)
-        <p class="inline-flex small">[ {{$section->code}} min:{{$section->rule_min}} max:{{$section->rule_max}}]</p>
+        <p class="small">[ {{$section->code}} min:{{$section->rule_min}} max:{{$section->rule_max}} short_side:{{$section->rule_min_size}} long_side:{{$section->rule_max_size}} monochromatic-required:{{($section->monochromatic)}} raw_required:{{'N'}} ]</p>
         @endforeach
         <hr />
         <!-- Contest work list w/counter -->
@@ -56,7 +57,7 @@ use Illuminate\Support\Facades\Log;
                 <td scope="row" class="text-center" align="center">
                     <!-- td add leave -->
                     @if( ContestWork::get_user_for_contest_work($contest_id, $work->id) === '')
-                    @livewire('contest.subscribe.add', ['data_json' => json_encode(['contest_id' => $contest->id, 'contest_section_list' => $contest_section_list, 'work_id' => $work->id ]) ])
+                    @livewire('contest.subscribe.add', ['data_json' => json_encode(['contest_id' => $contest->id, 'work_id' => $work->id, 'contest_section_list' => $contest_section_list ]) ])
                     @else
                     @livewire('contest.subscribe.remove', ['pid' => ContestWork::get_user_for_contest_work($contest_id, $work->id) ])
                     @endif
@@ -74,11 +75,11 @@ use Illuminate\Support\Facades\Log;
                     {{$work->title_local}}<br />
                 <em>{{ __("Reference Year:")}}</em>
                     {{$work->reference_year}}
+                <em>{{ __("Short side:")}}</em> 
+                    {{$work->short_side}}
                 <em>{{ __("Long side:")}}</em>
                     {{$work->long_side}}
                     <x-input-error class="small" :messages="$errors->get('long_side')" />
-                <em>{{ __("Short side:")}}</em> 
-                    {{$work->short_side}}
                 </td>
                 @endforeach
             </tr>
