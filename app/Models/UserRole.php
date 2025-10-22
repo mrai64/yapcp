@@ -63,4 +63,51 @@ class UserRole extends Model
         $valid = UserRolesRoleSet::valid_roles();
         return $valid;
     }
+    
+    // RELATIONS 
+    
+    public function user_contact()
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        $user_contact = $this->belongsTo(UserContact::class, 'user_id',           'user_id');
+        //. . . . . . . . . . . . . . . . . . . user_contacts.user_id   user_roles.user_id
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' user_contact:' . json_encode($user_contact) );
+        return $user_contact;
+        // return $this->belongsTo(UserContact::class, 'user_id', 'user_id');
+    }
+    
+    public function federation()
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        if ( is_null($this->federation_id)) {
+            return null;
+        }
+        $federation = $this->belongsTo(Federation::class, 'id', 'federation_id');
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' federation:' . json_encode($federation) );
+        return $federation;
+    }
+    
+    public function organization()
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        if ( is_null($this->organization_id)) {
+            return null;
+        }
+        $organization = $this->belongsTo(Organization::class, 'id', 'organization_id');
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' organization:' . json_encode($organization) );
+        return $organization;
+    }
+
+    public function contest()
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        if ( is_null($this->contest_id)) {
+            return null;
+        }
+        $contest = $this->belongsTo(Contest::class, 'contest_id',          'id');
+        //. . . . . . . . . . . . . . . . user_roles.contest_id    contests.id   
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' contest:' . json_encode($contest) );
+        return $contest;
+    }
+
 }
