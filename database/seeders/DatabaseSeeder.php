@@ -29,13 +29,13 @@ class DatabaseSeeder extends Seeder
             UserRoleRoleSetSeeder::class,
          // UserRoleSeeder::class,
             WorkSeeder::class,
+            ContestsVoteRuleSetSeeder::class,
          // ContestSeeder::class,
          // ContestSectionSeeder::class,
          // ContestJurySeeder::class,
          // ContestAwardSeeder::class,
          // ContestWorkSeeder::class,
          // ContestParticipantSeeder::class,
-         // ContestVoteSeeder::class,
         ]);        
     }
 }

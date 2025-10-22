@@ -8,6 +8,7 @@
  * 2025-09-17 In the photo contest organization some contest are grouped
  *            into so named circuit. A circuit have a contest record without
  *            section and jury. A circuit record 
+ * 2025-10-22 Created an auxiliary table and add col vote_rule
  * 
  */
 namespace App\Models;
@@ -56,6 +57,7 @@ class Contest extends Model
         'day_8_closing',
         'award_ceremony_info',
         'fee_info',
+        'vote_rule',
         // created_at
         // updated_at
         // deleted_at
