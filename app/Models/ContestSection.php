@@ -59,6 +59,7 @@ class ContestSection extends Model
 
     // pk is uuid
     public static function booted() {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         static::creating(function ($model) {
             $model->id = Str::uuid(); // uuid generator
         });
@@ -66,6 +67,7 @@ class ContestSection extends Model
 
     protected function casts()
     {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -79,12 +81,14 @@ class ContestSection extends Model
      */
     public function is_a_valid_under_patronage(ContestSection $section) : bool
     {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         return (in_array( $section->under_patronage, self::valid_under_patronages, true));
     }
 
     // GETTER
     public function get_section_list( Contest $contest) : array
     {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         $section_list = self::whereNull('deleted_at')->where('contest_id', $contest->id)
             ->order_by('code')->orderBy('name_en')
             ->get(['id', 'code', 'name_en', 'name_local', 'under_patronage']);
@@ -110,6 +114,7 @@ class ContestSection extends Model
      */
     public static function first_section_id(string $contest_id) : string
     {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         try {
             return self::whereNull('deleted_at')->where('contest_id', $contest_id)
                 ->orderBy('id')->first('id')['id'];
@@ -119,6 +124,8 @@ class ContestSection extends Model
         }
     }
 
+    // RELATIONSHIPs
+
     /**
      * 
      */
@@ -127,6 +134,18 @@ class ContestSection extends Model
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         // belongsTo( class_parent::class, class_parent.id, class_child.parent_id)
         $contest = $this->belongsTo(Contest::class); 
+        // . . . . . . . contests.id contest_sections.id
         return $contest;
+    }
+    
+    /**
+     * 
+     */
+    public function works()
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        $works = $this->hasMany(ContestWork::class, 'section_id',                 'id');
+        //. . . . . . . . . . . . . . .contest_works.section_id   contest_sections.id
+        return $works;
     }
 }

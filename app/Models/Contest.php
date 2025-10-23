@@ -132,4 +132,14 @@ class Contest extends Model
         return $participants;
     }
 
+    /**
+     * 
+     */
+    public function country()
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        $country = $this->hasOne(Country::class, 'id', 'country_id');
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' country: ' . json_encode($country));
+        return $country;
+    }
 }

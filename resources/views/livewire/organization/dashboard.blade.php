@@ -41,6 +41,9 @@ use Illuminate\Support\Facades\Log;
                     <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
                         [ {{ _("Contest Dashboard") }} ]
                     </a>
+                    <a href="{{ route('organization-contest-list', ['cid' => $contest->id ]) }}">
+                        [ {{ _("Contest Works List") }} ]
+                    </a>
                 </li>
                 @endforeach
             </ul>

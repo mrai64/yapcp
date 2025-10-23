@@ -2,9 +2,9 @@
 /**
  * UserRoles is child of Users
  * 
- * 2025-10-10 created an auxiliary table user_role_role_set to manage
+ * 2025-10-10 created an auxiliary table user_roles_role_set to manage
  *            previously value of valid_roles[]
- * 2025-10-18 user_roles had a 1:1: relationship w/user_role_role_sets 
+ * 2025-10-18 user_roles had a 1:1: relationship w/user_roles_role_sets 
  * 
  */
 namespace App\Models;
@@ -25,7 +25,7 @@ class UserRole extends Model
     protected $fillable = [
         // 'id',
         'user_id', //         a uuid from users.id
-        'role', //            in auxiliary table user_role_role_sets
+        'role', //            in auxiliary table user_roles_role_sets
         'organization_id', // a uuid from organizations.id | NULL 
         'contest_id', //      a uuid from contests.id | NULL
         'federation_id', //   a uuid from federations.id | NULL

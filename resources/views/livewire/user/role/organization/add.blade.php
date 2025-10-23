@@ -39,6 +39,7 @@ use App\Models\Country;
                 name="role" 
                 required="required"
                 >
+                <option value="">--</option>
                 @foreach ($role_list as $role_item)
                 <option value="{{ $role_item }}" {{ ($role_item == $role) ? 'selected' : '' }}> {{ $role_item }} </option>
                 @endforeach

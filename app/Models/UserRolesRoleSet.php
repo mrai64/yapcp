@@ -14,11 +14,11 @@ class UserRolesRoleSet extends Model
     //
     public static function valid_roles() : array
     {
-        Log::info( __CLASS__.' '.__FUNCTION__ .':'. __LINE__ . ' called' );
-        $all_values = self::all();
+        Log::info( 'Model '.__CLASS__.' f/'.__FUNCTION__ .':'. __LINE__ . ' called' );
+        $all_roles = self::all();
         $return_array = [];
-        foreach($all_values as $status) {
-            $return_array[] = $status->status;
+        foreach($all_roles as $role) {
+            $return_array[] = $role->role;
         }
         return $return_array;
     }

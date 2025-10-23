@@ -45,7 +45,7 @@ class Add extends Component
     public function rules()
     {
         return [
-            'role'            => 'required|exists:user_role_role_sets,status',
+            'role'            => 'required|exists:user_roles_role_sets,role',
             'organization_id' => 'required|string|exists:organizations,id',
         ];
     }
