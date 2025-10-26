@@ -20,7 +20,7 @@
             <div class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
                 <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                     <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
-                        <div class="flex lg:justify-start fyk h-20">yaPCP</div>
+                        <div class="flex lg:justify-start h-20 fyk text-2xl">yaPCP</div>
                         <div class="flex lg:justify-center lg:col-start-2">
                             <x-application-logo class="h-12 w-auto text-white lg:h-16 lg:text-[#FF2D20]" width="60px" height="60px" /> 
                         </div>

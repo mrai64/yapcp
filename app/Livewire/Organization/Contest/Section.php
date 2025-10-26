@@ -3,7 +3,7 @@
  * Contest Section Work List for Organization
  * CLASS: app/Livewire/Organization/Contest/Section.php
  * VIEW:  resources/views/livewire/organization/contest/section.blade.php
- * 
+ *
  */
 
 namespace App\Livewire\Organization\Contest;
@@ -23,10 +23,8 @@ class Section extends Component
     {
         Log::info('Component organization/Contest/'.__CLASS__.' f/'. __FUNCTION__.':'.__LINE__. ' called');
         $this->section = ContestSection::where('id', $sid)->first();
-        
-        
     }
-    
+
     /**
      * 2. before the show
      */

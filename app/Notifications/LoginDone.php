@@ -23,9 +23,9 @@ class LoginDone extends Notification
      */
     public function __construct(User $user)
     {
-        Log::debug( __CLASS__ . ' ' . __FUNCTION__ . ' email:' . $user->email );
-        Log::debug( __CLASS__ . ' ' . __FUNCTION__ . ' name:' . $user['name'] );
+        Log::info('Notification '. __CLASS__ .' f/'. __FUNCTION__ .':'. __LINE__ .' called' );
         $this->user = $user;
+        Log::info('Notification '. __CLASS__ .' f/'. __FUNCTION__ .':'. __LINE__ .' user:' . json_encode($this->user) );
     }
 
     /**
@@ -35,6 +35,7 @@ class LoginDone extends Notification
      */
     public function via(object $notifiable): array
     {
+        Log::info('Notification '. __CLASS__ .' f/'. __FUNCTION__ .':'. __LINE__ .' called' );
         return ['mail'];
     }
 
@@ -43,15 +44,18 @@ class LoginDone extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
+        Log::info('Notification '. __CLASS__ .' f/'. __FUNCTION__ .':'. __LINE__ .' called' );
         $subject = (string) env('APP_NAME') . ' security alert for ' . $this->user->email;
         Log::debug( __CLASS__ . ' ' . __FUNCTION__ . ' subject:' . $subject );
 
-        return (new MailMessage)
+        $mail_msg = (new MailMessage)
             ->subject( $subject )
             ->line($this->user['name'] . ", we'd like to confirm some recent activity on your account.")
             ->line("If this activity is your own, or a co-worker's, then you can simply ignore this email.")
             ->line('If this seems odd, we recommend that you see what steps you can take in the event your account has been compromised or get in touch with our support team to report potentially malicious activity on your account.')
             ->line('Thank you for using our contest platform!');
+        Log::info('Notification '. __CLASS__ .' f/'. __FUNCTION__ .':'. __LINE__ .' mail_msg:' . json_encode($mail_msg) );
+        return $mail_msg;
     }
 
     /**
@@ -67,4 +71,5 @@ class LoginDone extends Notification
     }
      * 
      */
+    
 }

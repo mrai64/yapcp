@@ -12,8 +12,16 @@
  * contest requirement. Maybe coloured picture against monochromatic
  * requirement; or the presence of a signature / mark that explain author.
  * 
- * First task: give contest info, section list, then the blade
- * for 
+ * First task: give contest info, section list, then the blade for 
+ * resource views livewire organization contest listed
+ * 
+ * Second task: page for contest sections
+ * resource views livewire organization contest section
+ * 
+ * Third task: page for work in contest section
+ * resource views livewire organization contest work
+ * 
+ * 
  */
 ?>
 

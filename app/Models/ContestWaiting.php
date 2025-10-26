@@ -11,12 +11,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class ContestWaiting extends Model
 {
-    use SoftDeletes;
+    use SoftDeletes,Notifiable;
 
     // protected $primaryKey= 'id';
     protected $keyType      = 'string';
@@ -29,6 +30,7 @@ class ContestWaiting extends Model
         'participant_user_id', //  uuid fk
         'work_id', //              uuid fk
         'portfolio_sequence', //   0..255
+        'email',
         'because', //              text
         'organization_user_id', // uuid fk
         // created_at
@@ -55,6 +57,42 @@ class ContestWaiting extends Model
         ];
     }
 
-    // RELATIONSHIP
+    // RELATIONSHIPs
+
+    public function contest()
+    {
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
+        $contest = $this->hasOne(Contest::class, 'id',                 'contest_id');
+        // . . . . . . . . . . . . . . . contests.id   contest_waitings.contest_id
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' contest:' . json_encode( $contest) );
+        return $contest;
+    }
+
+    public function section()
+    {
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
+        $section = $this->hasOne(ContestSection::class, 'id',                 'section_id');
+        // . . . . . . . . . . . . . . .contest:sections.id   contest_waitings.section_id
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' section:' . json_encode( $section) );
+        return $section;
+    }
+
+    public function work()
+    {
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
+        $work = $this->hasOne(Work::class, 'id',                 'work_id');
+        // . . . . . . . . . . . . . .works.id   contest_waitings.work_id
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' section:' . json_encode( $work) );
+        return $work;
+    }
+    
+    public function participant_user()
+    {
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
+        $participant_user = $this->hasOne(UserContact::class, 'user_id',                 'participant_user_id');
+        // . . . . . . . . . . . . . . . . . . . user_contacts.user_id   contest_waitings.participant_user_id
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' section:' . json_encode( $participant_user) );
+        return $participant_user;
+    }
 
 }

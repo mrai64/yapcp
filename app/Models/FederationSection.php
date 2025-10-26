@@ -24,7 +24,7 @@ class FederationSection extends Model
     public const table_name = 'federation_sections';
 
     protected $fillable = [
-        // id assigned
+        // id
         'federation_id',
         'code',
         'name_en',
@@ -52,9 +52,9 @@ class FederationSection extends Model
         ];
     }
 
-    // GETTERS 
+    // GETTERS
 
-    // RELATIONSHIP 
+    // RELATIONSHIP
     // federation_sections->federation
     public function federation()
     {

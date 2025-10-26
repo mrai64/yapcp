@@ -48,8 +48,10 @@ Route::delete('/organization/remove/{id}',    Organization\Remove::class, ['id']
 Route::get(   '/organization/dashboard/{id}', Organization\Dashboard::class, ['id'])->middleware(['auth', 'verified'])->name('organization-dashboard');
 
 // App\Livewire\Organization\Contest
-Route::get(   '/organization/contest/list/{cid}',    Organization\Contest\Listed::class,  ['cid'])->middleware(['auth', 'verified'])->name('organization-contest-list');
-Route::get(   '/organization/contest/section/{sid}', Organization\Contest\Section::class, ['sid'])->middleware(['auth', 'verified'])->name('organization-contest-section-list');
+Route::get( '/organization/contest/list/{cid}',    Organization\Contest\Listed::class,    ['cid'])->middleware(['auth', 'verified'])->name('organization-contest-list');
+Route::get( '/organization/contest/section/{sid}', Organization\Contest\Section::class,   ['sid'])->middleware(['auth', 'verified'])->name('organization-contest-section-list');
+Route::get( '/organization/contest/warn/{wid}',    Organization\Contest\WarnEmail::class, ['wid'])->middleware(['auth', 'verified'])->name('organization-contest-warn-email');
+Route::get( '/organization/contest/pass/{wid}',    Organization\Contest\PassNext::class,  ['wid'])->middleware(['auth', 'verified'])->name('organization-contest-pass-next');
 
 // App\Livewire\User
 Route::get( '/user/contact/modify', User\Contact\Modify::class)->middleware(['auth', 'verified'])->name('user-contact-modify');

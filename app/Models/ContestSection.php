@@ -8,9 +8,11 @@
  * code: free code, but when under_patronage == 'Y'
  * a check for federation_section_list should be done
  * and require a FederationSection access
- * 
+ *
  * no factory, no seeder
  * 
+ * 2025-10-26 add federation_section_id when under_patronage == Y
+ *
  */
 namespace App\Models;
 
@@ -31,6 +33,7 @@ class ContestSection extends Model
     public const table_name = 'contest_sections';
 
     // pk is uuid, and don'need ++
+    protected $primaryKey = 'id';
     protected $keyType = 'string'; // char(36)
     public    $incrementing = false;
 
@@ -41,9 +44,9 @@ class ContestSection extends Model
     ];
 
     protected $fillable = [
-        // id section_id an uuid pk but
-        'contest_id',//    real pk is combo of 
-        'code', //         contest_id(uuid)+code(char(10))
+        // id              uuid
+        'contest_id',//    
+        'code', //         unique( contest_id + code )
         'under_patronage', // set Y/N or boolean or ?
         'name_en',
         'name_local',
@@ -55,7 +58,7 @@ class ContestSection extends Model
         // rule_max_weight
         // rule_monochromatic
 
-    ]; 
+    ];
 
     // pk is uuid
     public static function booted() {
@@ -76,7 +79,7 @@ class ContestSection extends Model
     }
     /**
      * IS_A_Valid_field
-     * 
+     *
      * Check $section->under_patronage enum like
      */
     public function is_a_valid_under_patronage(ContestSection $section) : bool
@@ -86,6 +89,7 @@ class ContestSection extends Model
     }
 
     // GETTER
+
     public function get_section_list( Contest $contest) : array
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
@@ -109,9 +113,6 @@ class ContestSection extends Model
         return $section_array;
     }
 
-    /**
-     * 
-     */
     public static function first_section_id(string $contest_id) : string
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
@@ -126,26 +127,28 @@ class ContestSection extends Model
 
     // RELATIONSHIPs
 
-    /**
-     * 
-     */
     public function contest()
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         // belongsTo( class_parent::class, class_parent.id, class_child.parent_id)
-        $contest = $this->belongsTo(Contest::class); 
+        $contest = $this->belongsTo(Contest::class);
         // . . . . . . . contests.id contest_sections.id
         return $contest;
     }
-    
-    /**
-     * 
-     */
+
     public function works()
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         $works = $this->hasMany(ContestWork::class, 'section_id',                 'id');
         //. . . . . . . . . . . . . . .contest_works.section_id   contest_sections.id
         return $works;
+    }
+
+    public function federation_section()
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        $federation_section = $this->hasOne(FederationSection::class);
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' federation_section:' . json_encode($federation_section) );
+        return $federation_section;
     }
 }

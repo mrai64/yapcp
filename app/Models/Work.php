@@ -36,13 +36,13 @@ class Work extends Model
     use HasFactory, SoftDeletes;
 
     public const table_name = 'works';
-    
-    public const valid_extensions = [
-        'jpg',
-        'jpeg',
-        'webp',
-    ];
+    // uuid as pk 
+    // $primaryKey = 'id'
+    protected $keyType = 'string';
+    public $incrementing = false;
+
     protected $fillable = [
+        // id
         'user_id',
         'work_file',
         'extension',
@@ -52,17 +52,23 @@ class Work extends Model
         'long_side',
         'short_side',
         'monochromatic',
+        // created_at
+        // updated_at
+        // deleted_at
     ];
 
-    public User $owner;
+    // TODO are really used?
+    public const valid_extensions = [
+        'jpg',
+        'jpeg',
+        'webp',
+    ];
 
-    // uuid as pk 
-    protected $keyType = 'string';
-    public $incrementing = false;
+    // generate id when uuid
     public static function booted()
     {
         static::creating(function ($model){
-            $model->id = Str::uuid();
+            $model->id = Str::uuid7();
         });
     }
 
@@ -78,8 +84,10 @@ class Work extends Model
 
     // GETTER 
 
+    // RELATIONSHIP
+
     /**
-     * $works->user_contact
+     * $work->user_contact
      */
     public function user_contact()
     {
@@ -87,8 +95,8 @@ class Work extends Model
         $user_contact = $this->belongsTo(UserContact::class, 'user_id',     'user_id');
         // . . . . . . . . . . . . . . . . . . .user_contacts.user_id  works.user_id
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' user_contact:' . json_encode($user_contact) );
-
         return $user_contact;
+
     }
 
 }

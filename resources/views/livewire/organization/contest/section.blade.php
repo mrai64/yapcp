@@ -6,6 +6,15 @@
  * 
  * 
  */
+
+use App\Models\WorkValidation;
+use Illuminate\Support\Facades\Log;
+
+$inwork_validation = function(){
+    Log::info('Blade ' . __FILE__. ' in_work_validation:' . __LINE__ .' this:'. json_encode($this) );
+    $work_validation = WorkValidation::where('work_id', $this->work_id)->first();
+    return (isset($work_validation->id) );
+}
 ?>
 
 <div>
@@ -26,6 +35,12 @@
             @endforeach
         </ul>
     </div>
+    <!-- success -->
+    @if (session('success'))
+    <div class="float-end font-medium rounded-md px-4 py-2">
+        {{ session('success') }}
+    </div> 
+    @endif
     <!-- work list -->
     @foreach($section->works as $work)
     @livewire('organization.contest.work', ['wid' => $work->id])

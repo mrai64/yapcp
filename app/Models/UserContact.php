@@ -7,6 +7,7 @@
  * 2025-09-03 photo_box where store user works and passport_photo
  * 2025-09-10 add timezone and lang_local (for search: local_lang)
  * 2025-09-21 add getter functions
+ * 2025-10-26 add relationship w/country
  * 
  */
 namespace App\Models;
@@ -14,6 +15,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 
@@ -99,7 +101,7 @@ class UserContact extends Model
     }
     /**
      * 
-    */
+     */
     public static function get_first_last_name(string $uid) : string
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
@@ -108,7 +110,7 @@ class UserContact extends Model
     }
     /**
      * 
-    */
+     */
     public static function get_last_first_name(string $uid) : string
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
@@ -117,7 +119,7 @@ class UserContact extends Model
     }
     /** 
      * 
-    */
+     */
     public static function get_email(string $uid) : string
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
@@ -126,7 +128,7 @@ class UserContact extends Model
     }
     /** 
      * 
-    */
+     */
     public static function get_first_name(string $uid) : string
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
@@ -135,7 +137,7 @@ class UserContact extends Model
     }
     /** 
      * 
-    */
+     */
     public static function get_last_name(string $uid) : string
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
@@ -144,21 +146,31 @@ class UserContact extends Model
     }
     /** 
      * 
-    */
+     */
     public static function get_country_id(string $uid) : string
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         $user = self::where('user_id', $uid)->get('country_id')[0];
         return $user['country_id'];
     }
-
-    /**
-     * 1:1 relationship between users n user_contacts
-     * $user_contact->user
-     */
+    
+    // RELATIONSHIP 
+    
     public function user()
     {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         $user = $this->belongsTo(User::class);
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' user:' . json_encode($user) );
+        return $user;
+    }
+
+    // user_contact->country->country_flag
+    public function country()
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        $country = $this->hasOne(Country::class, 'id', 'country_id');
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' country:' . json_encode($country));
+        return $country;
     }
 
 }

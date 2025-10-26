@@ -80,6 +80,9 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     // GETTERS
+
+    // RELATIONSHIPs
+
     /**
      * 1:1 relationship bw/users n user_contact
      * $user->contact not $user_contact()
@@ -89,13 +92,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function contact()
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
-        
+
         $contact = $this->hasOne(UserContact::class); // normally
         // $contact = $this->hasOne(UserContact::class, 'user_id', 'id'); // when foreignId() and foreign key are out of standard
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' contact: '.json_encode($contact));
-        
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' contact: '.json_encode($contact) );
+
         return $contact;
     }
+
     /**
      * 1:N relationship bw/users n user_roles
      * 
@@ -107,7 +111,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $roles = $this->hasMany(UserRole::class); 
         return $roles;
     }
-    
+
     /**
      * 
      */
@@ -117,6 +121,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $works = $this->hasMany(Work::class);
         return $works;
     }
+
     /**
      * 
      */
@@ -125,6 +130,5 @@ class User extends Authenticatable implements MustVerifyEmail
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         $juries = $this->hasMany(ContestJury::class);
         return $juries;
-
     }
 }

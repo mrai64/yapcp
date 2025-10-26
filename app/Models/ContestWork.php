@@ -99,11 +99,41 @@ class ContestWork extends Model
     }
     
     // RELATIONSHIP
-    
-    public function work() {
+
+    public function contest()
+    {
         Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
-        $work = $this->hasOne(Work::class, 'id', 'work_id');
+        $contest = $this->hasOne(Contest::class, 'id',             'contest_id');
+        // . . . . . . . . . . . . . . . .contest.id  contest_works.contest_id
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' contest_section:' . json_encode($contest) );
+        return $contest;
+    }
+
+    public function contest_section()
+    {
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' section_id:' . json_encode($this->section_id));
+        $contest_section = $this->hasOne(ContestSection::class, 'id',             'section_id');
+        // . . . . . . . . . . . . . . .contest_sections.id  contest_works.section_id
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' contest_section:' . json_encode($contest_section));
+        return $contest_section;
+    }
+
+    public function work() 
+    {
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
+        $work = $this->belongsTo(Work::class);
         Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' work:' . json_encode($work));
         return $work;
+    }
+    
+    public function user_contact()
+    {
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
+        $user_contact = $this->hasOne(UserContact::class, 'user_id',               'user_id');
+        // . . . . . . . . . . . . . . . . . user_contacts.user_id    contest_works.user_id
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' user_contact:' . json_encode($user_contact) );
+        return $user_contact;
+
     }
 }
