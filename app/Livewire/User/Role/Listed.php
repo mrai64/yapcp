@@ -25,12 +25,12 @@ class Listed extends Component
     // input parm 
     public $uid; // same name of 
 
-    public User $user;
-    public $user_role;
+    public User         $user;
+    public              $user_role;
     public Organization $organization_list;
-    public Contest $contest_list;
-    public Federation $federation_list;
-    public $user_role_list = [];
+    public Contest      $contest_list;
+    public Federation   $federation_list;
+    public $user_role_list        = [];
     public $sorted_user_role_list = [];
 
     /**

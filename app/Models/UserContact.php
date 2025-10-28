@@ -172,5 +172,13 @@ class UserContact extends Model
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' country:' . json_encode($country));
         return $country;
     }
-
+    
+    // user_contact->juries
+    public function juries()
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        $juries = $this->hasMany(ContestJury::class, 'user_contact_id', 'user_id');
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' juries:' . json_encode( $juries ));
+        return $juries;
+    }
 }

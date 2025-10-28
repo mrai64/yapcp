@@ -128,7 +128,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function juries()
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
-        $juries = $this->hasMany(ContestJury::class);
+        $juries = $this->hasMany(ContestJury::class, 'user_contact_id', 'id');
         return $juries;
     }
 }

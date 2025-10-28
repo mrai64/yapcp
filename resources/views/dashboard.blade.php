@@ -1,3 +1,13 @@
+<?php
+/**
+ * User dashboard
+ */
+
+use App\Models\ContestJury;
+use Illuminate\Support\Facades\Auth;
+
+?>
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -56,9 +66,16 @@
 
     <div class_="pb-4">
         <div class_="w-full sm:px-6 lg:px-8">
-            <!-- for {{ Auth::id() }} -->
+            <p class="fyk text-xl">{{ __("Your roles in platform") }}</p>
             <livewire:user.role.listed />
         </div>
     </div>
+
+    <div class_="pb-4">
+        <div class="w-full sm:px-6 lg:px-8">
+            <livewire:contest.jury.listed />
+        </div>
+    </div>
+
 
 </x-app-layout>

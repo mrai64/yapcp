@@ -57,6 +57,10 @@ class ContestSection extends Model
         // rule_max_size
         // rule_max_weight
         // rule_monochromatic
+        // TODO rule_raw
+        // created_at
+        // updated_at
+        // deleted_at
 
     ];
 
