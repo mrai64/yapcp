@@ -41,6 +41,6 @@ class ContestsVoteRuleSet extends Model
 
     // RELATIONSHIP 
 
-    // contests_vote_rule_set.vote_role <-- 1:1 --> contests.vote_rule
+    // contests_vote_rule_set.vote_rule <-- 1:1 --> contests.vote_rule
 
 }
