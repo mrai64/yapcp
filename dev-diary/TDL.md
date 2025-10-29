@@ -56,22 +56,28 @@ Php, laravel e livewire sono usati per avvantaggiarmi ma li sto imparando facend
 alcune funzioni realizzate potrebbero avere delle parti di laravel e livewire
 che le agevolano ma le devo imparare.
 
+Attività da ribaltare in Project.
+
 * Documentazione utente
+  * [ ] Iscrizione alla piattaforma 
+  * [ ] Autoassegnazione di ruoli in federazioni e Organizzazioni
+  * [ ] Caricamento opere a deposito 
+  * [ ] iscrizione opere a concorso
 * utenti - quelli che fanno cose
   * ✅ iscrizione alla piattaforma
   * ✅ modifica password
   * ✅ caricamento opere
   * ✅ assegnazione ruolo in organizzazione
   * ✅ assegnazione ruolo in federazione
-  * [ ] assegnazione ruolo in concorso
-  * [ ] iscrizione a concorso
-  * [ ] Vista concorsi aperti
-  * [ ] Vista opere partecipanti a...
+  * ✅ assegnazione ruolo in concorso
+  * ✅ iscrizione a concorso
+  * ✅ Vista concorsi aperti
+  * ✅ Vista opere partecipanti a...
   * [ ] Vista risultati ottenuti
   * ✅ caricamento lavori in concorso
 * federazioni - definiscono e controllano i concorsi a cui danno patrocinio
   * ✅ Definizione scheda principale - nome, web
-  * [ ] Definizione delle sezioni a concorso
+  * ✅ Definizione delle sezioni a concorso
 * organizzazioni - creano e gestiscono concorsi
   * ✅ Creazione scheda principale
   * [ ] Lista ruoli utenti in organizzazione
@@ -91,12 +97,13 @@ che le agevolano ma le devo imparare.
   * NO Circuiti - definizione giurie
   * [ ] Circuiti - definizione premi
   * [ ] Sezione Portfolio - aggiungere un campo sequenza a fianco della sezione
+  * [ ] Ghigliottina per concorrenti non ammessi a concorso
 * Giurie
   * ✅ Caricamento delle giurie in concorso (vedi Concorsi > definizione delle giurie)
   * ✅ Registrazione dei giurati come user in piattaforma
-  * [ ] Regolare accesso giurati con calendario da..a del concorso
+  * ✅ Regolare accesso giurati con calendario da..a del concorso
   * [ ] Elenco opere in concorso per la sezione ... - miniature
-  * [ ] Visione delle opere doppiamente anonima
+  * ✅ Visione delle opere doppiamente anonima
   * [ ] Gestione delle votazioni per giuria
   * [ ] Riepilogo votazioni generale
   * [ ] Assegnazione premi
