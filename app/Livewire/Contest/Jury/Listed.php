@@ -2,8 +2,9 @@
 /**
  * CLASS: app/Livewire/Contest/Jury/Listed.php
  * VIEW:  resources/views/livewire/contest/jury/listed.blade.php
- * 
+ *
  * Creare n show the list where user is named as juror
+ *
  * 
  */
 
@@ -17,7 +18,7 @@ use Livewire\Component;
 
 class Listed extends Component
 {
-    // input 
+    // input
     public             $juror_user_id;
 
     public UserContact $juror;
@@ -25,7 +26,7 @@ class Listed extends Component
     /**
      * 1. Before the show
      */
-    public function mount()
+    public function mount() // no parm as use Auth::id
     {
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called');
 
@@ -37,11 +38,10 @@ class Listed extends Component
 
         $this->juries = $this->juror->juries;
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' juries:'. json_encode($this->juries) );
-        
 
     }
     /**
-     * 2. Show 
+     * 2. Show
     */
     public function render()
     {

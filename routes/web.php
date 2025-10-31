@@ -83,6 +83,9 @@ Route::delete( '/contest/section/remove/{sid}', Contest\Section\Remove::class, [
 // App\Livewire\Contest\Jury
 Route::get( '/contest/jury/add/{sid}',   Contest\Jury\Add::class,   ['sid'] )->middleware(['auth', 'verified'])->name('contest-jury-add');
 Route::get( '/contest/jury/board/{sid}', Contest\Jury\Board::class, ['sid'] )->middleware(['auth', 'verified'])->name('contest-jury-board');
+Route::get( '/contest/jury/vote/{sid}',  Contest\Jury\Vote::class,  ['sid'] )->middleware(['auth', 'verified'])->name('contest-jury-vote');
+Route::post('/contest/jury/vote/{sid}',  Contest\Jury\Vote::class,  ['sid'] )->middleware(['auth', 'verified']);
+// TODO vote again
 
 // App\Livewire\Contest\Awards
 Route::get( '/contest/award/add/{cid}', Contest\Award\Add::class, ['cid'] )->middleware(['auth', 'verified'])->name('contest-award-add');
