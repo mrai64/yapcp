@@ -1,16 +1,16 @@
 <?php
 /**
- * 
+ *
  * CLASS: app/Livewire/Contest/Jury/Vote.php
  * VIEW:  resources/views/livewire/contest/jury/vote.blade.php
- * 
+ *
  * Contest > section > Juror List > juror Vote
  * input: juror_id via Auth::id
  *        section_id via route
  * - check votes assigned in
  * - find works without vote
  * - when set of un-voted work become empty warn: end of jury, back to dashboard
- * 
+ *
  */
 namespace App\Livewire\Contest\Jury;
 
@@ -42,7 +42,7 @@ class Vote extends Component
     /**
      * 1. before the show
      */
-    public function mount(string $sid) // route() 
+    public function mount(string $sid) // route()
     {
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called');
         $this->contest_section_id = $sid;
@@ -65,16 +65,16 @@ class Vote extends Component
                 $this->valid_votes = [ '⭐️', '⭐️⭐️', '⭐️⭐️⭐️', '⭐️⭐️⭐️⭐️', '⭐️⭐️⭐️⭐️⭐️' ];
                 break;
             }
-        
+
         $this->voted_works_id = ContestVote::voted_ids( $this->contest_id, $this->contest_section_id);
         if ($this->voted_works_id->count() > 0) {
             $this->unvoted_work_first = DB::table( ContestWork::table_name)->whereNotIn('work_id', $this->voted_works_id )->first();
-            
+
         } else {
             $this->unvoted_work_first = ContestWork::where('contest_id', $this->contest->id)->where('section_id', $this->contest_section->id)->first();
         }
         $this->vote = [];
-        
+
     }
     /**
      * 2. Show it
@@ -91,33 +91,34 @@ class Vote extends Component
     public function rules()
     {
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called');
-        $rule = [
+        return [
             'vote' => 'string|'.Rule::in($this->valid_votes),
         ];
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' rule' . json_encode($rule));
-        return $rule;
     }
 
     /**
      * 4. Do the job
+     * Due the "invisible trouble" to pick checkbox value to validate,
+     * was choice the "direct way" to pass vote value as input of form
+     * called function
      */
-    public function assign_vote( string $vote) // form
+    public function assign_vote(string $vote) // form
     {
-
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called: ' . json_encode( $vote) );
         $this->vote = $vote;
-        // check value 
+
+        // check value
         $validated = $this->validate();
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' validated:' . json_encode($validated ));
-        
+
         // integrate array
-        $validated['contest_id']  = $this->contest_id;
-        $validated['section_id']  = $this->contest_section_id;
-        $validated['work_id']     = $this->unvoted_work_first->work_id;
+        $validated['contest_id']    = $this->contest_id;
+        $validated['section_id']    = $this->contest_section_id;
+        $validated['work_id']       = $this->unvoted_work_first->work_id;
         $validated['juror_user_id'] = $this->juror_user_id;
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' insert:' . json_encode( $validated ));
         // vote
-        
+
         // register value
         $registered_vote = ContestVote::create($validated);
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' out:' . json_encode( $registered_vote ));

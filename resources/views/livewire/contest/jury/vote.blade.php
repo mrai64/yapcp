@@ -28,7 +28,7 @@ namespace App\Livewire\Contest\Jury;
                     <tr>
                         <td><span>{{__(" best ")}}</span></td>
                         <td>
-<form action="{{ route('contest-jury-vote', ['sid' => $this->contest_section_id ]) }}" method="post">
+<form action="$refresh" method="post">
     @csrf
     <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('10')">10</label>
     <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('9')">9</label>
@@ -47,66 +47,67 @@ namespace App\Livewire\Contest\Jury;
                 </table>
         @endif
         @if ($vote_rule === 'num:1..30')
-            <form wire:click="assign_vote">
-                @csrf
                 <table>
                     <tr>
                         <td><span>{{__(" best ")}}</span></td>
                         <td>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="30">30</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="29">29</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="28">28</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="27">27</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="26">26</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="25">25</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="24">24</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="23">23</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="22">22</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="21">21</label>
-                <br />
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="20">20</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="19">19</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="18">18</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="17">17</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="16">16</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="15">15</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="14">14</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="13">13</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="12">12</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="11">11</label>
-                <br />
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="10">10</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="9">9</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="8">8</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="7">7</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="6">6</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="5">5</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="4">4</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="3">3</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="2">2</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="1">1</label>
+<form action="$refresh" method="post">
+    @csrf
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('30')">30</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('29')">29</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('28')">28</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('27')">27</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('26')">26</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('25')">25</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('24')">24</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('23')">23</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('22')">22</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('21')">21</label>
+    <br />
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('20')">20</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('19')">19</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('18')">18</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('17')">17</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('16')">16</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('15')">15</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('14')">14</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('13')">13</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('12')">12</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('11')">11</label>
+    <br />
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('10')">10</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('9')">9</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('8')">8</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('7')">7</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('6')">6</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('5')">5</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('4')">4</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('3')">3</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('2')">2</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('1')">1</label>
+</form>
                         </td>
                         <td><span>{{__(" worst ")}}</span> </td>
                     </tr>
                 </table>
-            </form>
         @endif
         @if ($vote_rule === 'star:1..5')
-            <form wire:click="assign_vote">
-                @csrf
                 <table>
                     <tr>
                         <td><span>{{__(" best ")}}</span></td>
                         <td>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="⭐️⭐️⭐️⭐️⭐️">⭐️⭐️⭐️⭐️⭐️</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="⭐️⭐️⭐️⭐️">⭐️⭐️⭐️⭐️</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="⭐️⭐️⭐️">⭐️⭐️⭐️</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="⭐️⭐️">⭐️⭐️</label>
-                <label style="width:4rem;display:inline-block;"><input type="checkbox" name="vote[]" value="⭐️">⭐️</label>                        </td>
+                            <form action="$refresh" method="post">
+                                @csrf
+                                <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('⭐️⭐️⭐️⭐️⭐️')">⭐️⭐️⭐️⭐️⭐️</label>
+                                <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('⭐️⭐️⭐️⭐️')">⭐️⭐️⭐️⭐️</label>
+                                <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('⭐️⭐️⭐️')">⭐️⭐️⭐️</label>
+                                <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('⭐️⭐️')">⭐️⭐️</label>
+                                <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('⭐️')">⭐️</label>
+                            </form>
+                        </td>
                         <td><span>{{__(" worst ")}}</span> </td>
                     </tr>
                 </table>
-            </form>
         @endif
 
         <div style="max-width:90%;max-height:90%;background-color:#f0f0f0;border:10px solid #ccc;display:flex;justify-content: center;align-items: center;box-shadow: 0 0 10px rgba(0,0,0,0.2);">
