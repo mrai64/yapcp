@@ -19,7 +19,7 @@ namespace App\Livewire\Contest\Jury;
     @if ( isset($unvoted_work_first->id) )
     <!-- vote img -->
     <div style="width:80%;height:80%;display:block;margin:0 auto;background-color:#f0f0f0;">
-        <a href="route('contest-jury-board', ['sid' => $this->section_id ])">
+        <a href="route('contest-jury-board', ['sid' => $this->contest_section_id ])">
             [ {{ __("Back to Board")}} ]
         </a>
         <!-- vote form -->
@@ -28,18 +28,18 @@ namespace App\Livewire\Contest\Jury;
                     <tr>
                         <td><span>{{__(" best ")}}</span></td>
                         <td>
-<form wire:click="assign_vote" method="post">
+<form action="{{ route('contest-jury-vote', ['sid' => $this->contest_section_id ]) }}" method="post">
     @csrf
-    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:model.defer="vote[]" value="10">10</label>
-    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:model.defer="vote[]" value="9">9</label>
-    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:model.defer="vote[]" value="8">8</label>
-    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:model.defer="vote[]" value="7">7</label>
-    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:model.defer="vote[]" value="6">6</label>
-    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:model.defer="vote[]" value="5">5</label>
-    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:model.defer="vote[]" value="4">4</label>
-    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:model.defer="vote[]" value="3">3</label>
-    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:model.defer="vote[]" value="2">2</label>
-    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:model.defer="vote[]" value="1">1</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('10')">10</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('9')">9</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('8')">8</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('7')">7</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('6')">6</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('5')">5</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('4')">4</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('3')">3</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('2')">2</label>
+    <label style="width:4rem;display:inline-block;"><input type="checkbox" class="form-control" wire:click="assign_vote('1')">1</label>
 </form>
                         </td>
                         <td><span>{{__(" worst ")}}</span> </td>

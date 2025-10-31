@@ -37,7 +37,7 @@ class Vote extends Component
     public        $valid_votes;
     public        $voted_works_id;
     public        $unvoted_work_first;
-    public        $vote;
+    public        $vote = [];
 
     /**
      * 1. before the show
@@ -92,19 +92,20 @@ class Vote extends Component
     {
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called');
         $rule = [
-            'vote.*' => 'string|in_array:'.Rule::in($this->valid_votes),
+            'vote' => 'string|'.Rule::in($this->valid_votes),
         ];
-        // Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' rule' . json_encode($rule));
+        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' rule' . json_encode($rule));
         return $rule;
     }
 
     /**
      * 4. Do the job
      */
-    public function assign_vote()
+    public function assign_vote( string $vote) // form
     {
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called');
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' vote[]' . json_encode($this->vote ) );
+
+        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called: ' . json_encode( $vote) );
+        $this->vote = $vote;
         // check value 
         $validated = $this->validate();
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' validated:' . json_encode($validated ));
