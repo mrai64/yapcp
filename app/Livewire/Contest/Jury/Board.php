@@ -60,7 +60,7 @@ class Board extends Component
         //
         // SET of voted - temporary set 
         // $this->voted_works = ContestWork::where('contest_id', $this->contest->id)->where('section_id', $this->contest_section->id)->orderBy('work_id')->get();
-        $this->voted_works = ContestVote::where('contest_id', $this->contest->id)->where('section_id', $this->contest_section->id)->orderBy('work_id')->get();
+        $this->voted_works = ContestVote::where('contest_id', $this->contest->id)->where('section_id', $this->contest_section->id)->orderByDesc('vote')->orderBy('work_id')->get();
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' voted_works:' . json_encode( $this->voted_works ) );
         
         $this->voted_ids = ContestVote::voted_ids( $this->contest->id, $this->contest_section->id);

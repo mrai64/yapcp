@@ -85,6 +85,7 @@ Route::get( '/contest/jury/add/{sid}',   Contest\Jury\Add::class,   ['sid'] )->m
 Route::get( '/contest/jury/board/{sid}', Contest\Jury\Board::class, ['sid'] )->middleware(['auth', 'verified'])->name('contest-jury-board');
 Route::get( '/contest/jury/vote/{sid}',  Contest\Jury\Vote::class,  ['sid'] )->middleware(['auth', 'verified'])->name('contest-jury-vote');
 Route::post('/contest/jury/vote/{sid}',  Contest\Jury\Vote::class,  ['sid'] )->middleware(['auth', 'verified']);
+Route::get( '/contest/jury/modify-vote/{vid}', Contest\Jury\VoteMod::class,  ['vid'] )->middleware(['auth', 'verified'])->name('contest-jury-vote-mod');
 // TODO vote again
 
 // App\Livewire\Contest\Awards

@@ -5,6 +5,7 @@
  * VIEW:  resources/views/livewire/contest/jury/vote.blade.php
  *
  */
+
 namespace App\Livewire\Contest\Jury;
 
 ?>
