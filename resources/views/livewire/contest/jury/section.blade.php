@@ -1,5 +1,7 @@
 <?php 
 /**
+ * List of theme - section for juror 
+ * 
  * CLASS: app/Livewire/Contest/Jury/Section.php
  * VIEW:  resources/views/livewire/contest/jury/section.blade.php
  * 

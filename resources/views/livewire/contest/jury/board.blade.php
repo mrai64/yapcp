@@ -1,7 +1,8 @@
 <?php
 /**
  * Contest Section Jury Board
- * list
+ * 
+ * work in vote list
  * CLASS: app/Livewire/Contest/Jury/Board.php
  * VIEW:  resources/views/livewire/contest/jury/board.blade.php
  * 
@@ -9,6 +10,7 @@
  * 
  * Section (list) > Board (list) > Board (single) Work > Jury Vote
  * 
+ * 2025-11-02 add counter voted / total 
  */
 
 ?>
@@ -22,6 +24,8 @@
             {{ $contest->day_3_jury_opening->format('Y-m-d') }}
             {{ __(" upto: ") }}
             {{ $contest->day_4_jury_closing->format('Y-m-d') }}
+            | {{ __("Vote Status for that section: ") }}
+            [ {{ $voted_works->count() }} / {{ $participant_works->count() + $voted_works->count() }} ]
         </p>
     </div>
 
