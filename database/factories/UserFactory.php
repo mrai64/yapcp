@@ -20,10 +20,10 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $name     = fake()->name();
+        $name     = fake()->lastName().', '.fake()->firstName();
         $email    = str_ireplace(['"', '  ', ' ', '..'], ['', ' ', '.', '.'], strtolower($name)).'@athesis77.it';
         $password = Hash::make($email);
-        
+
         return [
             'name'              => $name,
             'email'             => $email,
@@ -43,5 +43,5 @@ class UserFactory extends Factory
         ]);
     }
 
-    
+
 }
