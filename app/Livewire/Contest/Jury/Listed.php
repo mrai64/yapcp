@@ -1,5 +1,7 @@
 <?php
 /**
+ * User, you are juror in these contest
+ * 
  * CLASS: app/Livewire/Contest/Jury/Listed.php
  * VIEW:  resources/views/livewire/contest/jury/listed.blade.php
  *

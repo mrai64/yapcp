@@ -33,7 +33,8 @@ class Section extends Component
 
         $this->contest         = $this->contest_section->contest;
 
-        $this->today           = (new CarbonImmutable("2025-11-13"))->format("Y-m-d");
+        // $this->today = (new CarbonImmutable("now"))->format("Y-m-d");
+        $this->today = CarbonImmutable::now()->toDateTimeString(); // yyyy-mm-ddThh:ii:ss.000000
         if ( $this->today < $this->contest->day_3_jury_opening ){
             $this->open = false;
         } elseif ( $this->today > $this->contest->day_4_jury_closing ) {

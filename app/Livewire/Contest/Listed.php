@@ -7,7 +7,7 @@
 namespace App\Livewire\Contest;
 
 use App\Models\Contest;
-use Illuminate\Support\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
@@ -16,6 +16,7 @@ class Listed extends Component
     public $contest_get;
     public $contest_list;
     public $today;
+    public $tomorrow;
 
     /**
      * 1. Before the show
@@ -24,7 +25,7 @@ class Listed extends Component
     public function mount() // no parm
     {
         Log::info('Component '.__CLASS__. ' ' . __FUNCTION__.':'.__LINE__ . ' called');
-        $today = Carbon::now()->toDateString();// . ' 23:59:59.000000Z';
+        $today = CarbonImmutable::now()->toDateString();
 
         // get collection
         $this->contest_list=[];

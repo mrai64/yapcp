@@ -7,14 +7,14 @@
  *     - country_id
  * - section
  *   - contest
- * 
- * field is_admit have a limited-set-of-valid-value 
- * 
+ *
+ * field is_admit have a limited-set-of-valid-value
+ *
  * relationship
  * belongsTo father table Contest
  * hasOne    auxiliary table set is_admit Y/N true false
  * hasMany   child table jurors votes
- * 
+ *
  * 2025-10-21 Added portfolio_sequence, 0..255
  */
 
@@ -27,7 +27,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log; // Log::info
-use Illuminate\Support\Str; //         pk uuid 
+use Illuminate\Support\Str; //         pk uuid
 
 class ContestWork extends Model
 {
@@ -67,10 +67,10 @@ class ContestWork extends Model
             $model->id = Str::uuid7(); // uuid generator
         });
     }
-    
+
     protected function casts()
     {
-        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
+        // Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -97,7 +97,7 @@ class ContestWork extends Model
         Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' out:'.$participant_id);
         return $participant_id;
     }
-    
+
     // RELATIONSHIP
 
     public function contest()
@@ -119,14 +119,14 @@ class ContestWork extends Model
         return $contest_section;
     }
 
-    public function work() 
+    public function work()
     {
         Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
         $work = $this->belongsTo(Work::class);
         Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' work:' . json_encode($work));
         return $work;
     }
-    
+
     public function user_contact()
     {
         Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');

@@ -1,6 +1,11 @@
 <?php
 /**
+ * User factory 
+ * Note: w/sql trigger is also user_contacts factory
+ * 
  * 2025-08-31 id became uuid
+ * 2025-11-04 changed name() w/firstName() + lastName() to avoid title as Mr. Dr. Col. etc
+ * 
  */
 namespace Database\Factories;
 
@@ -20,8 +25,10 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $name     = fake()->lastName().', '.fake()->firstName();
-        $email    = str_ireplace(['"', '  ', ' ', '..'], ['', ' ', '.', '.'], strtolower($name)).'@athesis77.it';
+        $first    = fake()->firstName();
+        $last     = fake()->lastName();
+        $name     = $last .', '. $first;
+        $email    = str_ireplace(['"', ', ', '  ', ' ', '..'], ['', ' ', ' ', '.', '.'], strtolower($first.'.'.$last)).'@athesis77.it';
         $password = Hash::make($email);
 
         return [
