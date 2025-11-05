@@ -20,7 +20,7 @@ namespace App\Livewire\Contest\Jury;
     @if ( isset($unvoted_work_first->id) )
     <!-- vote img -->
     <div style="width:80%;height:80%;display:block;margin:0 auto;background-color:#f0f0f0;">
-        <a href="route('contest-jury-board', ['sid' => $this->contest_section_id ])">
+        <a href="{{route('contest-jury-board', ['sid' => $this->contest_section_id ])}}">
             [ {{ __("Back to Board")}} ]
         </a>
         <!-- vote form -->
