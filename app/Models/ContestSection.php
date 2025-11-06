@@ -74,7 +74,7 @@ class ContestSection extends Model
 
     protected function casts()
     {
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        // Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -130,7 +130,11 @@ class ContestSection extends Model
     }
 
     // RELATIONSHIPs
-
+    
+    /**
+     * @return Contest contest_sections.contest_id 1:1 contests.id
+     * 
+     */
     public function contest()
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
@@ -140,14 +144,22 @@ class ContestSection extends Model
         return $contest;
     }
 
+    /**
+     * @return ContestWork contest_sections.id 1:N contest_works.section_id 
+     */
     public function works()
     {
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        Log::info('Model ' . __CLASS__ .' f:'. __FUNCTION__.' l:' . __LINE__ . ' called');
         $works = $this->hasMany(ContestWork::class, 'section_id',                 'id');
         //. . . . . . . . . . . . . . .contest_works.section_id   contest_sections.id
+        //Log::info('Model ' . __CLASS__ .' f:'. __FUNCTION__.' l:' . __LINE__ . ' sid:' . ($this->id));
+        Log::info('Model ' . __CLASS__ .' f:'. __FUNCTION__.' l:' . __LINE__ . ' works:' . json_encode($works));
         return $works;
     }
 
+    /**
+     * @return FederationSection contest_sections.id 1:1 federation_sections.section_id
+     */
     public function federation_section()
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');

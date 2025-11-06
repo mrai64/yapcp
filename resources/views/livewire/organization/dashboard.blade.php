@@ -39,10 +39,10 @@ use Illuminate\Support\Facades\Log;
                 <li class="my-2 p-4">
                     <strong class="fyk text-2xl">{{$contest->name_en}}</strong>
                     <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
-                        [ {{ _("Contest Dashboard") }} ]
+                        [ {{ __("Contest Dashboard") }} ]
                     </a>
                     <a href="{{ route('organization-contest-list', ['cid' => $contest->id ]) }}">
-                        [ {{ _("Contest Works List") }} ]
+                        [ {{ __("Contest Section List") }} ]
                     </a>
                 </li>
                 @endforeach
@@ -51,7 +51,7 @@ use Illuminate\Support\Facades\Log;
             <hr />
             <a href="{{ route('contest-add', ['oid' => $organization->id] )}}" 
                 class="float-end font-medium rounded-md py-2"
-                >[ {{__('Add a new Contest')}} ]</a>
+                >[ {{ __('Add a new Contest')}} ]</a>
             <hr />
         </div>
     </section>

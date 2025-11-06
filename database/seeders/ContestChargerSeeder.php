@@ -89,8 +89,8 @@ class ContestChargerSeeder extends Seeder
                 ->take(5)
                 ->first();
             Log::info('Seeder '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' candidate:'. json_encode($this->work_participant) );
-            // out if already in or had any (too large) role as juror, organizatin etc.
-            // right exclusion only if role is in organization and juror in conest
+            // out if already in or had any (too large) role as juror, organization etc.
+            // right exclusion only if role is in organization and juror in contest
             if ( in_array( $this->work_participant->user_id, $this->excluded_ids)) {
                 Log::info('Seeder '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' out:'. json_encode($this->work_participant->user_id) );
                 continue;

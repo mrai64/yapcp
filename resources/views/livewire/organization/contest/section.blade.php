@@ -7,30 +7,24 @@
  * 
  */
 
-use App\Models\WorkValidation;
-use Illuminate\Support\Facades\Log;
-
-$inwork_validation = function(){
-    Log::info('Blade ' . __FILE__. ' in_work_validation:' . __LINE__ .' this:'. json_encode($this) );
-    $work_validation = WorkValidation::where('work_id', $this->work_id)->first();
-    return (isset($work_validation->id) );
-}
 ?>
 
 <div>
     <div class="header">
-        <h2 class="fyk text-2xl">{{$section->contest->country->flag_code}} | {{$section->contest->name_en }} </h2>
+        <h2 class="fyk text-2xl">{{$contest->country->flag_code}} | {{$contest->name_en }} </h2>
         <p class="small">
-            Begin Jury: {{$section->contest->day_3_jury_opening->format("Y-m-d") }} 
-            End   Jury: {{$section->contest->day_4_jury_closing->format("Y-m-d") }} 
+            Begin Jury: {{$contest->day_3_jury_opening->format("Y-m-d") }} 
+            End   Jury: {{$contest->day_4_jury_closing->format("Y-m-d") }} 
         </p>
         <h3 class="fyk text-xl">{{ __("Section list")}}</h3>
         <ul>
-            @foreach( $section->contest->sections as $section_item)
+            @foreach($section_set as $section_item)
             <li class="small">
-                #{{ $section_item->works->count() }} {{ __(" works participants") }} | {{$section_item->code}} | {{$section_item->name_en }} <br />
+                #{{ $section_item->works->count() }} {{ __(" works participants") }} | {{$section_item->code}} | {{$section_item->name_en }} 
+                <br />
                 <a href="{{ route('organization-contest-section-list', ['sid' => $section_item->id]) }}">
-                [ {{ __("Review") }} ]</a> <br /> <br />
+                [ {{ __("Review") }} ]
+                </a>
             </li>
             @endforeach
         </ul>
@@ -42,7 +36,7 @@ $inwork_validation = function(){
     </div> 
     @endif
     <!-- work list -->
-    @foreach($section->works as $work)
+    @foreach($work_participants_set as $work)
     @livewire('organization.contest.work', ['wid' => $work->id])
     @endforeach
 </div>

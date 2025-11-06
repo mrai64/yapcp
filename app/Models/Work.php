@@ -1,24 +1,23 @@
 <?php
 /**
- * Works, should be named UserWorks
- * child table for: UserContact 1:N
- * grandchild  for: User
+ * Works, but should be named UserWorks
+ * TODO refactor as UserWork
  * 
- * 
- * pk is uuid
- * - id
- * - user_id // users & user_contacts
- * - work_file
+ * - id //        uuid
+ * - user_id //   fk users & user_contacts
+ * - work_file // path and namefile
  * - extension
  * - reference_year
  * - title_en
  * - title_local
  * - long_side
  * - short_side
- * _ monochromatic
+ * - monochromatic
  * - created_at
  * - updated_at
  * - deleted_at
+ * 
+ * TODO missing field for: raw_required / raw_present
  */
 namespace App\Models;
 
@@ -36,9 +35,7 @@ class Work extends Model
     use HasFactory, SoftDeletes;
 
     public const table_name = 'works';
-    // uuid as pk 
-    // $primaryKey = 'id'
-    protected $keyType = 'string';
+    protected $keyType = 'string'; // pk uuid
     public $incrementing = false;
 
     protected $fillable = [
@@ -52,16 +49,20 @@ class Work extends Model
         'long_side',
         'short_side',
         'monochromatic',
+        // TODO raw_?
         // created_at
         // updated_at
         // deleted_at
     ];
 
-    // TODO are really used?
+    // to check file extension 
     public const valid_extensions = [
-        'jpg',
         'jpeg',
-        'webp',
+        'jpg',
+        'tiff',
+        'tif',
+        'avif',
+        'jfif',
     ];
 
     // generate id when uuid
@@ -74,7 +75,7 @@ class Work extends Model
 
     protected function casts(): array
     {
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        // Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -84,10 +85,23 @@ class Work extends Model
 
     // GETTER 
 
+    /**
+     * Miniature path+name
+     * img name miniature 300px_name
+     * 
+     */
+    public function miniature() : string
+    {
+        Log::info('Model '. __CLASS__ .' f/'.__FUNCTION__.':'.__LINE__.' called');
+        $last_slash = strrpos($this->work_file, '/');
+        return substr($this->work_file, 0, $last_slash).'/300px_'.substr($this->work_file, $last_slash+1, 50);
+    }
+
     // RELATIONSHIP
 
     /**
      * $work->user_contact
+     * @return UserContact works.user_id 1:1 user_contacts.user_id
      */
     public function user_contact()
     {
@@ -96,7 +110,5 @@ class Work extends Model
         // . . . . . . . . . . . . . . . . . . .user_contacts.user_id  works.user_id
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' user_contact:' . json_encode($user_contact) );
         return $user_contact;
-
     }
-
 }
