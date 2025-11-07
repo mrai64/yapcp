@@ -30,7 +30,7 @@ class Listed extends Component
      */
     public function mount(string $cid) // route
     {
-        Log::info('Component Organization/Contest/'.__CLASS__ . ' f/'. __FUNCTION__.':'.__LINE__. ' called');
+        Log::info('Component '. __CLASS__ . ' f:'. __FUNCTION__.' l:'.__LINE__. ' called');
         $this->contest = Contest::where('id', $cid)->first();
 
     }
@@ -40,7 +40,7 @@ class Listed extends Component
      */
     public function render()
     {
-        Log::info('Component Organization/Contest/'.__CLASS__ . ' f/'. __FUNCTION__.':'.__LINE__. ' called');
+        Log::info('Component '. __CLASS__ . ' f:'. __FUNCTION__.' l:'.__LINE__. ' called');
         return view('livewire.organization.contest.listed');
     }
 }

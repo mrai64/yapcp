@@ -31,14 +31,20 @@
         <p class="small">
             Begin Jury: {{$contest->day_3_jury_opening->format("Y-m-d") }} 
             End   Jury: {{$contest->day_4_jury_closing->format("Y-m-d") }} 
+            <br />
+            <br />
         </p>
-        <h3 class="fyk text-xl">{{ __("Section list")}}</h3>
+        <h3 class="fyk text-2xl">{{ __("Contest Sections list")}}</h3>
         <ul>
             @foreach( $contest->sections as $section)
             <li class="small">
-                #{{ $section->works->count() }} {{ __(" works participants") }} | {{$section->code}} | {{$section->name_en }} <br />
+                #{{ $section->works->count() }} {{ __(" works participants for") }} 
+                {{$section->code}}|{{$section->name_en }} <br />
                 <a href="{{ route('organization-contest-section-list', ['sid' => $section->id]) }}">
-                [ {{ __("Review") }} ]</a> <br /> <br />
+                    [ {{ __("Section works Review: OK | Warn") }} ]
+                </a> 
+                <br />
+                <br />
             </li>
             @endforeach
         </ul>
