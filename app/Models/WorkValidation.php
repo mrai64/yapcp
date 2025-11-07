@@ -3,7 +3,7 @@
  * (User) Work (manual) Validation (log)
  * Even if a work in a section should be validated for some rule
  * in an automatic way, some others are only human validation,
- * but why validate twice the same work?
+ * that table serve to avoid re-check works already validated.
  * 
  * - work_id
  * - federation_section_id 
@@ -19,9 +19,9 @@ use Illuminate\Support\Facades\Log;
 class WorkValidation extends Model
 {
     use SoftDeletes;
-    // primaryKey   id
-    // keyType      integer
-    // incrementing true
+    // protected $primaryKey 'id'        standard
+    // protected $keyType = unsigned int standard
+    // public $incrementing = true       standard
 
     protected $fillable = [
         // id 
@@ -44,6 +44,10 @@ class WorkValidation extends Model
     }
     
     // RELATIONSHIP 
+    
+    /**
+     * @return Work work_validation.work_id 1:1 works.id
+     */
     public function work() 
     {
         Log::info('Model '. __CLASS__ .' f/'.__FUNCTION__.':'.__LINE__.' called');
@@ -52,6 +56,9 @@ class WorkValidation extends Model
         return $work;        
     }
     
+    /**
+     * @return FederationSection work_validation.federation_section_id 1:1 federation_sections.id
+     */
     public function federation_section()
     {
         Log::info('Model '. __CLASS__ .' f/'.__FUNCTION__.':'.__LINE__.' called');

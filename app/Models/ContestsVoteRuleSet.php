@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Log;
 class ContestsVoteRuleSet extends Model
 {
     use HasFactory,SoftDeletes;
-    protected $primaryKey   = 'vote_rule';
+    protected $primaryKey   = 'vote_rule'; // standard name 'id'
     public    $incrementing = false;
     protected $keyType      = 'string';
     protected $fillable = [
@@ -29,7 +29,7 @@ class ContestsVoteRuleSet extends Model
 
     protected function casts()
     {
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        Log::info('Model ' . __CLASS__ .' f:'. __FUNCTION__.' l:' . __LINE__ . ' called');
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',

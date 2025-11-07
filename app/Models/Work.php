@@ -35,6 +35,7 @@ class Work extends Model
     use HasFactory, SoftDeletes;
 
     public const table_name = 'works';
+    // protected $primaryKey = 'id'; // standard name
     protected $keyType = 'string'; // pk uuid
     public $incrementing = false;
 
@@ -59,10 +60,11 @@ class Work extends Model
     public const valid_extensions = [
         'jpeg',
         'jpg',
-        'tiff',
-        'tif',
-        'avif',
-        'jfif',
+        'tiff', // future use
+        'tif', //  future use
+        'avif', // future use
+        'jfif', // future use
+        'webp', // future use
     ];
 
     // generate id when uuid

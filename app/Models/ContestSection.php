@@ -33,7 +33,7 @@ class ContestSection extends Model
     public const table_name = 'contest_sections';
 
     // pk is uuid, and don'need ++
-    protected $primaryKey = 'id';
+    // protected $primaryKey = 'id'; // standard name
     protected $keyType = 'string'; // char(36)
     public    $incrementing = false;
 
