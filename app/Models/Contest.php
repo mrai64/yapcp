@@ -103,43 +103,61 @@ class Contest extends Model
 
     
     /**
-     * 
+     * @return Organization contests.organization_id 1:1 organizations.id
      */
     public function organization()
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         $organization = $this->hasOne(Organization::class);
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' out');
         return $organization;
     }
     
     /**
-     * 
+     * @return ContestSection contests.id 1:N contest_sections.contest_id
      */
-    public function sections()
+    public function sections() : HasMany
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         $sections = $this->hasMany(ContestSection::class);
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' out');
         return $sections;
     }
 
     /**
-     * 
+     * @return ContestParticipant contests.id 1:N contest_participants.contest_id 
      */
-    public function participants()
+    public function participants() : HasMany
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
-        $participants = $this->hasMany(ContestParticipant::class);
+        $participants = $this->hasMany(ContestParticipant::class, 'contest_id', 'id');
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' out');
         return $participants;
+    }
+
+    /**
+     * @return Country contests.country_id 1:1 countries.id
+     */
+    public function country() : HasOne
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        $country = $this->hasOne(Country::class, 'id', 'country_id');
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' out ');
+        return $country;
+    }
+
+    /**
+     * @return ContestAward contests.id 1:N contest_awards.contest_id
+     */
+    public function contest_awards() : HasMany
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        $contest_awards_set = $this->hasMany(Country::class, '_contest_id', 'id');
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' out ');
+        return $contest_awards_set;
     }
 
     /**
      * 
      */
-    public function country()
-    {
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
-        $country = $this->hasOne(Country::class, 'id', 'country_id');
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' country: ' . json_encode($country));
-        return $country;
-    }
 }

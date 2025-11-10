@@ -81,6 +81,7 @@ class ContestSection extends Model
             'deleted_at' => 'datetime',
         ];
     }
+
     /**
      * IS_A_Valid_field
      *
@@ -114,6 +115,7 @@ class ContestSection extends Model
                 // deleted_at,
             ];
         }
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' out');
         return $section_array;
     }
 
@@ -130,12 +132,12 @@ class ContestSection extends Model
     }
 
     // RELATIONSHIPs
-    
+
     /**
      * @return Contest contest_sections.contest_id 1:1 contests.id
      * 
      */
-    public function contest()
+    public function contest() : BelongsTo
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         // belongsTo( class_parent::class, class_parent.id, class_child.parent_id)
@@ -147,24 +149,23 @@ class ContestSection extends Model
     /**
      * @return ContestWork contest_sections.id 1:N contest_works.section_id 
      */
-    public function works()
+    public function works() : HasMany
     {
-        Log::info('Model ' . __CLASS__ .' f:'. __FUNCTION__.' l:' . __LINE__ . ' called');
-        $works = $this->hasMany(ContestWork::class, 'section_id',                 'id');
-        //. . . . . . . . . . . . . . .contest_works.section_id   contest_sections.id
-        //Log::info('Model ' . __CLASS__ .' f:'. __FUNCTION__.' l:' . __LINE__ . ' sid:' . ($this->id));
-        Log::info('Model ' . __CLASS__ .' f:'. __FUNCTION__.' l:' . __LINE__ . ' works:' . json_encode($works));
-        return $works;
+        Log::info('Model ' . __CLASS__ .' f:'. __FUNCTION__.' l:' . __LINE__ .' called           in:'. $this->id);
+        $works_in_section = $this->hasMany(ContestWork::class, 'section_id',                 'id');
+        //. . . . . . . . . . . . . . . . . . . . contest_works.section_id   contest_sections.id
+        Log::info('Model ' . __CLASS__ .' f:'. __FUNCTION__.' l:' . __LINE__ .' out');
+        return $works_in_section;
     }
-
+    
     /**
      * @return FederationSection contest_sections.id 1:1 federation_sections.section_id
      */
-    public function federation_section()
+    public function federation_section() : HasOne
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         $federation_section = $this->hasOne(FederationSection::class);
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' federation_section:' . json_encode($federation_section) );
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' out' );
         return $federation_section;
     }
 }
