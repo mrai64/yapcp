@@ -14,14 +14,11 @@
 
 namespace App\Livewire\Organization\Contest;
 
-use App\Models\Contest;
 use App\Models\ContestSection;
-use App\Models\ContestWork;
+use App\Models\ContestWaiting;
 use App\Models\Work;
-use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -45,8 +42,8 @@ class Section extends Component
     {
         Log::info('Component '.__CLASS__.' f:'. __FUNCTION__.' l:'.__LINE__. ' called');
         // for headers
-        // ContestSection
-        $this->section = ContestSection::where('id', $sid)->first();
+        // ContestSection - don't change in pagination
+        $this->section = ContestSection::where('id', $sid )->first();
         Log::info('Component '.__CLASS__.' f:'. __FUNCTION__.' l:'.__LINE__. ' section:' . json_encode($this->section) );
 
     }
@@ -58,24 +55,46 @@ class Section extends Component
     public function render() : View
     {
         Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__. ' called ' );
-
         $section   = $this->section; 
-        $sectionId = $this->section->id; 
 
         // works that are present in contest_works w/section_id
+        // NOTE this is a *complete list* ignoring validated works and warning works
+        /*
         $userWorksSet = DB::table( 'works' )
             ->join( 'contest_works', function (JoinClause $join) {
                 $join->on( 'works.id', '=', 'contest_works.work_id' )
                 ->where( 'contest_works.section_id', '=', $this->section->id );
             })
             ->simplePaginate(12); // dozen as half camera roll
+         */
+        /* Same as previous, entire list
+        $userWorksSet = Work::select([ 'works.*', 'user_contacts.country_id', 'user_contacts.last_name', 'user_contacts.first_name'])
+            ->join('user_contacts', 'works.user_id', '=', 'user_contacts.user_id')
+            ->join('contest_works', 'works.id', '=', 'contest_works.work_id')
+            ->where('contest_works.section_id', '=', $this->section->id)
+            ->simplePaginate(12); // dozen as half camera roll
+         */
+        // already examined work_id set
+        $examinedWorksSet = DB::table('contest_waitings')
+            ->select('work_id')->where('section_id', $this->section->id)
+            ->union( DB::table('work_validations')->select('work_id') )
+            ->get();
+        // simplified array()
+        $examinedWorksIds = collect($examinedWorksSet)->pluck('work_id')->toArray();
+
+        $userWorksSet = DB::table('works')->select([ 'works.*', 'user_contacts.country_id', 'user_contacts.last_name', 'user_contacts.first_name'])
+            ->join('user_contacts', 'works.user_id', '=', 'user_contacts.user_id')
+            ->join('contest_works', 'works.id', '=', 'contest_works.work_id')
+            ->where('contest_works.section_id', '=', $this->section->id)
+            ->whereNotIn('work_id', $examinedWorksIds)
+            ->simplePaginate(12); // dozen as half camera roll
+
         Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' out: ' . json_encode($userWorksSet ) );
 
         //NO return view('livewire.organization.contest.section')->with([ 'user_works_set' => $this->user_works_set ]);
         // no snake_case but camelCase
         return view('livewire.organization.contest.section', [ 
             'userWorksSet' => $userWorksSet, 
-            'sectionId'    => $sectionId,
             'section'      => $section,
         ]);
     }
