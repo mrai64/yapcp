@@ -144,8 +144,8 @@ class ContestWork extends Model
     public function work()
     {
         Log::info('Model '. __CLASS__ .' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $work = $this->hasOne(Work::class, 'work_id',               'work_id');
-        //. . . . . . . . . . . . . . works.work_id    contest_works.work_id
+        $work = $this->hasOne(Work::class, 'id',               'work_id');
+        //. . . . . . . . . . . . . . works.id    contest_works.work_id
         Log::info('Model '. __CLASS__ .' f:'.__FUNCTION__.' l:'.__LINE__.' work:' . json_encode($work));
         return $work;
     }
