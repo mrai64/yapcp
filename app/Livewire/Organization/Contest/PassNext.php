@@ -29,6 +29,7 @@ class PassNext extends Component
     /**
      * 1. Before the show
      *
+     * wid is contest_works.work_id not contest_works.id
      */
     public function mount(string $wid) // route()
     {
