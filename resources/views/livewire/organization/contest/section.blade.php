@@ -71,7 +71,7 @@
             <!-- image infos -->
             <em>{{ __("Author:")}}</em>          {{$work->country_id}} | {{$work->last_name}}, {{$work->first_name}} <br />
             <em>{{ __("Intl Title:")}}</em>      {{$work->title_en}}<br />
-            <em>{{ __("Local Title:")}}</em>     {{($work->title_local) ? $work->title_local : '(&#8230;)'}}<br />
+            <em>{{ __("Local Title:")}}</em>     {{($work->title_local) ? $work->title_local : "..." }}<br />
             <em>{{ __("Reference Year:")}}</em>  {{$work->reference_year}}
             <em>{{ __("Short side:")}}</em>      {{$work->short_side}}
             <em>{{ __("Long side:")}}</em>       {{$work->long_side}}
