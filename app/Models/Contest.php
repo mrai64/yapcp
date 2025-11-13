@@ -31,22 +31,22 @@ class Contest extends Model
     public    $incrementing = false;//   uuid don't need ++
 
     protected $fillable = [
-        'id',
-        'country_id',
+        'id', //                 pk uuid
+        'country_id', //         fk countries.id 
         'name_en',
         'name_local',
         'lang_local',
-        'organization_id',
-        'contest_mark',
-        'contact_info',
-        'is_circuit',
-        // circuit_id
-        'federation_list',
-        'url_1_rule',
-        'url_2_concurrent_list',
-        'url_3_admit_n_award_list',
-        'url_4_catalogue',
-        // timezone
+        'organization_id', //    fk organizations.id
+        'contest_mark', //       path n file
+        'contact_info', //       text
+        'is_circuit', //         Y/N limited set
+        // circuit_id,  //       fk contests.id | NULL
+        'federation_list', //
+        'url_1_rule', //                web url
+        'url_2_concurrent_list',//      web url 
+        'url_3_admit_n_award_list', //  web url
+        'url_4_catalogue', //           web url
+        // timezone, //                 fk timezones.timezone
         'day_1_opening',
         'day_2_closing',
         'day_3_jury_opening',
@@ -55,9 +55,10 @@ class Contest extends Model
         'day_6_awards',
         'day_7_catalogues',
         'day_8_closing',
-        'award_ceremony_info',
-        'fee_info',
-        'vote_rule',
+        'award_ceremony_info', //
+        'fee_info', // 
+        'vote_rule', //                 fk contest_vote_rule_sets.vote_rule
+        // 'contest_vote_rule_id', //   fk contest_vote_rules.id
         // created_at
         // updated_at
         // deleted_at
@@ -90,8 +91,11 @@ class Contest extends Model
             'deleted_at' => 'datetime',
         ];
     }
+
+    // GETTERs
+
     /**
-     * GETTERs
+     * @return string name_en - contest name | ""
      */
     public static function get_name_en(string $contest_id) : string
     {
@@ -101,11 +105,25 @@ class Contest extends Model
         return (count($get_contest) == 0 ) ? '' : Str::of($get_contest[0]['name_en']);
     }
 
-    
+
+    // RELATIONSHIPs 
+
+
+    /**
+     * @return Country contests.country_id 1:1 countries.id
+     */
+    public function country() : HasOne
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        $country = $this->hasOne(Country::class, 'id', 'country_id');
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' out ');
+        return $country;
+    }
+
     /**
      * @return Organization contests.organization_id 1:1 organizations.id
      */
-    public function organization()
+    public function organization() : HasOne
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         $organization = $this->hasOne(Organization::class);
@@ -125,6 +143,28 @@ class Contest extends Model
     }
 
     /**
+     * @return ContestJuror contests.id 1:N contest_juries.contest_id
+     */
+    public function jury() : HasMany
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        $contest_jury_set = $this->hasMany(ContestJury::class);
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' out ');
+        return $contest_jury_set;
+    }
+
+    /**
+     * @return ContestAwards contests.id 1:N contest_awards.contest_id
+     */
+    public function contest_awards() : HasMany
+    {
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        $contest_awards_set = $this->hasMany(Country::class, 'contest_id', 'id');
+        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' out ');
+        return $contest_awards_set;
+    }
+
+    /**
      * @return ContestParticipant contests.id 1:N contest_participants.contest_id 
      */
     public function participants() : HasMany
@@ -135,29 +175,7 @@ class Contest extends Model
         return $participants;
     }
 
-    /**
-     * @return Country contests.country_id 1:1 countries.id
-     */
-    public function country() : HasOne
-    {
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
-        $country = $this->hasOne(Country::class, 'id', 'country_id');
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' out ');
-        return $country;
-    }
+    // contest_works
 
-    /**
-     * @return ContestAward contests.id 1:N contest_awards.contest_id
-     */
-    public function contest_awards() : HasMany
-    {
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
-        $contest_awards_set = $this->hasMany(Country::class, '_contest_id', 'id');
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' out ');
-        return $contest_awards_set;
-    }
-
-    /**
-     * 
-     */
+    // contest_votes
 }
