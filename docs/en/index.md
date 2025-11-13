@@ -1,11 +1,11 @@
 # yaPCP Documentation
 
-* [Intro](#intro)
+* [README FIRST](#intro)
 * [Platform users](#platform-users---contest-participants)
 
 ## Intro
 
-Here we have only a index. And language adopted is english,
+Here we have only *an index*. And language adopted is english,
 if you don't like automated translations check the
 [lang index](./index_lang.md).
 
@@ -52,3 +52,4 @@ if you don't like automated translations check the
 * PHP based
 * Git Doc repository
 * Git Dev repository
+* [Tech: Table list](./tech/dbschema.md)

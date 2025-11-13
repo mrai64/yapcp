@@ -1,6 +1,6 @@
 <?php
 /**
- * User dashboard
+ * User Personal dashboard
  */
 
 use App\Models\ContestJury;
@@ -10,72 +10,45 @@ use Illuminate\Support\Facades\Auth;
 
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+        <h2 class="fyk font-semibold text-2xl text-gray-800 leading-tight">
+            {{ __('Personal Dashboard') }}
         </h2>
     </x-slot>
 
-    <div class="py-4">
-        <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <a href="{{ route('user-contact-modify') }}">
-                    {{ __("Update your personal Contact info") }}
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <a href="{{ route('photo-box-list') }}">
-                    {{ __("Your Uffizi' Gallery") }}
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <!-- Open Contest list -->
-                    <a href="{{ route('contest-list') }}">
-                    {{ __("Contest List to participate") }}
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <a href="{{ route('organization-list') }}">
-                    {{ __("Organization List") }}
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <a href="{{ route('federation-list') }}">
-                    {{ __("Federation List") }}
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <h3 class="mb-4 sm:px-6 lg:px-8">
+            <a href="{{ route('user-contact-modify') }}">
+            [ {{ __("Update your personal Contact info") }} ]
+            </a>
+            . .
+            <a href="{{ route('photo-box-list') }}">
+            [ {{ __("Your Uffizi' Gallery") }} ]
+            </a>
+            . . 
+            <!-- Open Contest list -->
+            <a href="{{ route('contest-list') }}">
+            [ {{ __("Contest List Open to participate") }} ]
+            </a>
+            . .
+            <a href="{{ route('organization-list') }}">
+            [ {{ __("Organization List") }} ]
+            </a>
+            . .
+            <a href="{{ route('federation-list') }}">
+            [ {{ __("Federation List") }} ]
+            </a>
+            . .
+        </h3>
 
-    <div class_="pb-4">
-        <div class_="w-full sm:px-6 lg:px-8">
-            <p class="fyk text-xl">{{ __("Your roles in platform") }}</p>
+        <!-- user roles -->
+        <section name="user_roles" >
             <livewire:user.role.listed />
-        </div>
-    </div>
+        </section>
 
-    <div class_="pb-4">
-        <div class="w-full sm:px-6 lg:px-8">
+        <!-- juror in contest... -->
+        <section name="user_roles" class="mb-4 sm:px-6 lg:px-8 py-12">
             <livewire:contest.jury.listed />
-        </div>
+        </section>
     </div>
-
 
 </x-app-layout>

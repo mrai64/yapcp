@@ -13,22 +13,21 @@
     </div>
     @endif
 
+    <h3 class="fyk font-semibold text-2xl text-gray-800 leading-tight">{{ __("Your roles") }}</h3>
+
     <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
         <a href="{{ route('add-user-role-organization') }}">
         [ {{ __("Add a role in existing Organization") }} ]
         </a>
-    </div>
-    <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
+        &nbsp;.&nbsp;.&nbsp;
         <a href="{{ route('add-organization') }}">
             [ {{ __("Add Your Organization") }} ]
         </a>
-    </div>
-    <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
+        &nbsp;.&nbsp;.&nbsp;
         <a href="{{ route('add-user-role-federation') }}">
             [ {{ __("Add a role in existing Federation") }} ]
         </a>
-    </div>
-    <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
+        &nbsp;.&nbsp;.&nbsp;
         <a href="{{ route('add-federation') }}">
             [ {{ __("Add Your Federation") }} ]
         </a>
@@ -39,8 +38,7 @@
     <ul>
         @foreach($user_role_list as $role)
         <li class="my-2 p-4 font-medium">
-            <strong class="fyk text-xl">{{$role['role']}} </strong>
-            <br />
+            <strong class="fyk text-xl">{{$role['role']}} /<br /></strong>
 
             @if ($role['organization'])
             <strong class="fyk text-xl">

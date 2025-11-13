@@ -9,6 +9,7 @@
 ?>
 
 <div>
+    @if (count($juries))
     <h3 class="fyk text-2xl font-medium text-gray-900">
         {{ __("Your Juror timetable Theme / sections List") }} 
     </h3>
@@ -19,4 +20,5 @@
     </li>
     @endforeach
     </ul>
+    @endif
 </div>
