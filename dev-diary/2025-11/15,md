@@ -1,0 +1,9 @@
+# note for dinamic form
+
+c'è la cosa che le federazioni come la fiaf vogliono dei dati aggi7ntivi.
+Una delle cose che mi è venuta in mentre è che
+i form come le classi d3vono avere una forma di ereditarietà 
+quindi a partire da una defninizione di campi
+n9me label nome campo, tipo, suggerimenti
+accoppiarlo alla classe e per le classi derivate ricavare
+i campi dal parent class,.
