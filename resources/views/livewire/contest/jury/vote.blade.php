@@ -111,6 +111,12 @@ namespace App\Livewire\Contest\Jury;
         </table>
         @endif
         <!-- image -->
+        <div>
+            contest_id: {{ $unvoted_work_first->contest_id }} 
+            section_id: {{ $unvoted_work_first->section_id }}
+            work_id: {{ $unvoted_work_first->work_id }}
+            juror_id: {{ $juror_user_id }}
+        </div>
         <div style="max-width:90%;max-height:90%;background-color:#f0f0f0;border:10px solid #ccc;display:flex;justify-content: center;align-items: center;box-shadow: 0 0 10px rgba(0,0,0,0.2);">
             <img src="{{ asset('storage/contests') .'/'. $unvoted_work_first->contest_id .'/'. $unvoted_work_first->section_id .'/'. $unvoted_work_first->work_id .'.'. $unvoted_work_first->extension }}"
             style="max-width:100%;max-height:100%;object-fit:contain;border-radius:.5rem;"

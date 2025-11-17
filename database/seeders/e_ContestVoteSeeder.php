@@ -51,7 +51,7 @@ class e_ContestVoteSeeder extends Seeder
                         $already_voted = ContestVote::where('section_id', $section->id)
                             ->where('work_id',       $contest_work->work_id)
                             ->where('contest_id',    $contest->id)
-                            ->where('juror_user_id', $juror->id)->count();
+                            ->where('juror_user_id', $juror->user_contact_id)->count();
 
                         if ($already_voted) {
                             // $contest_work->delete();
@@ -66,7 +66,7 @@ class e_ContestVoteSeeder extends Seeder
                         // }
 
                         // assuming $contest->vote_rule == 'num:1..30' 
-                        $vote = rand(3,6)+rand(3,6)+rand(3,6)+rand(3,6)+rand(0,6)+rand(0,6);
+                        $vote = rand(0,1)+rand(0,2)+rand(0,6)+rand(3,6)+rand(3,6)+rand(3,6);
                         if ($vote > 30) {
                             $vote = 30;
                         }
@@ -75,7 +75,7 @@ class e_ContestVoteSeeder extends Seeder
                             'contest_id'    => $contest->id,
                             'section_id'    => $section->id,
                             'work_id'       => $contest_work->work_id,
-                            'juror_user_id' => $juror->id,
+                            'juror_user_id' => $juror->user_contact_id,
                             'vote'          => $vote,
                         ]);
 

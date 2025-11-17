@@ -46,36 +46,43 @@ class Vote extends Component
     {
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called');
         $this->contest_section_id = $sid;
+
         $this->juror_user_id      = Auth::id();
+
         $this->contest_section = ContestSection::where('id', $this->contest_section_id)->first();
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' contest_section: ' . json_encode( $this->contest_section) );
+
         $this->contest_id = $this->contest_section->contest_id;
         $this->contest = Contest::where('id', $this->contest_section->contest_id)->first();
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' contest_section: ' . json_encode( $this->contest_section) );
-
+        
         $this->vote_rule = $this->contest->vote_rule;
         switch ($this->vote_rule) {
             case 'num:1..10':
                 $this->valid_votes = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
                 break;
             case 'num:1..30':
-                $this->valid_votes = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10','11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22','23', '24', '25', '26', '27', '28', '29', '30'];
+                $this->valid_votes = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22','23', '24', '25', '26', '27', '28', '29', '30'];
                 break;
             case 'star:1..5':
                 $this->valid_votes = [ '⭐️', '⭐️⭐️', '⭐️⭐️⭐️', '⭐️⭐️⭐️⭐️', '⭐️⭐️⭐️⭐️⭐️' ];
                 break;
-            }
-
+        }
+        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' vote_rule: ' . json_encode( $this->vote_rule) );
+        
         $this->voted_works_id = ContestVote::voted_ids( $this->contest_id, $this->contest_section_id);
         if ($this->voted_works_id->count() > 0) {
             $this->unvoted_work_first = DB::table( ContestWork::table_name)->whereNotIn('work_id', $this->voted_works_id )->first();
-
+            
         } else {
+            // first vote 
             $this->unvoted_work_first = ContestWork::where('contest_id', $this->contest->id)->where('section_id', $this->contest_section->id)->first();
         }
+        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' unvoted_first: ' . json_encode( $this->unvoted_work_first) );
+        
         $this->vote = [];
-
     }
+
     /**
      * 2. Show it
      */

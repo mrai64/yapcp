@@ -25,20 +25,20 @@ class ContestJury extends Model
     protected $keyType = 'string'; // char(36)
     public    $incrementing = false;
 
-    // is_president
-    public const valid_YN = [
-        'Y',
-        'N',
-    ];
-
     protected $fillable = [
-        // id
+        // id                 contest_juries.id NOT juror user_id
         'section_id',
-        'user_contact_id',
+        'user_contact_id', // user_contacts.user_id juror
         'is_president',
         // created_at
         // updated_at
         // deleted_at
+    ];
+
+    // is_president
+    public const valid_YN = [
+        'Y',
+        'N',
     ];
 
     // pk is uuid
@@ -56,6 +56,7 @@ class ContestJury extends Model
             'deleted_at' => 'datetime',
         ];
     }
+
     /**
      * used in validation
      *
@@ -64,6 +65,7 @@ class ContestJury extends Model
     {
         return in_array( $juror->is_president, self::valid_YN, true);
     }
+
     /**
      * getter
      * juror list of section
@@ -78,6 +80,7 @@ class ContestJury extends Model
         }
         return $jury_list;
     }
+
     /**
      * count of
      */

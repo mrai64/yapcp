@@ -63,6 +63,7 @@ class ContestVote extends Model
     }
 
     // RELATIONSHIPs
+    
     public function contest()
     {
         Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
