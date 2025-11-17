@@ -23,21 +23,18 @@ class d_ParticipantSeeder extends Seeder
 {
     public $user;
     public $country = [
-        'ITA',
-        'ITA',
-        'ITA',
-        'ITA',
-        'ITA',
-        'FRA',
-        'VAT',
-        'AUS',
-        'AUT',
-        'CHN',
-        'CHN',
-        'CHN',
-        'CHN',
-        'CHN',
-        'IND'
+        'ROU',
+        'ROU',
+        'ROU',
+        'ROU',
+        'ROU',
+        'ROU',
+        'CHE',
+        'CHE',
+        'CHE',
+        'CHE',
+        'CHE',
+        'ITA'
     ];
     public $user_contact;
     public $first_name;
@@ -78,6 +75,7 @@ class d_ParticipantSeeder extends Seeder
             'whatsapp'   => '',
         ]);
         Log::info('Seeder '. __CLASS__ .' f:'. __FUNCTION__.' l:'. __LINE__ . ' user:' . json_encode($this->user_contact) );
+        echo "\nFor user: ". $this->user_contact->country_id .'|'. $this->user_contact->last_name .' '. $this->user_contact->first_name;
         echo ("\n".'Seeder '. __CLASS__ .' f:'. __FUNCTION__.' l:'. __LINE__ . ' user:' . json_encode($this->user_contact) );
         
         for ($i=0; $i < 48; $i++) {
@@ -114,7 +112,7 @@ class d_ParticipantSeeder extends Seeder
             echo ("\n\n".($i + 1).".\n".' work:' . json_encode($this->work) );
         }
         echo "\n";
-        echo "\nFor user: ". $this->last_name .' '. $this->first_name;
+        echo "\nFor user: ". $this->user_contact->country_id .'|'. $this->user_contact->last_name .' '. $this->user_contact->first_name;
         echo "\n";
     }
 }

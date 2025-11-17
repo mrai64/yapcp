@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
-class ContestChargerSeeder extends Seeder
+class e_ContestChargerSeeder extends Seeder
 {
     public $today;
     public $opened_contest;
@@ -59,6 +59,10 @@ class ContestChargerSeeder extends Seeder
         $this->opened_contest = Contest::where('day_3_jury_opening', '<=', $this->today)->where('day_4_jury_closing', '>=', $this->today )->inRandomOrder()->first();
         Log::info('Seeder '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' contest:'. json_encode($this->opened_contest) );
 
+        if ($this->opened_contest === NULL) {
+            echo "\n"."no open contest"."\n";
+            return;
+        }
         echo "\n"."{$this->opened_contest->name_en} \n";
 
         // 2. all section
@@ -101,6 +105,7 @@ class ContestChargerSeeder extends Seeder
                 Log::info('Seeder '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' out:'. json_encode($this->work_participant->user_id) );
                 continue;
             }
+            echo "\n";
 
             // new, he's /she's must be added
             $this->user_participant = ContestParticipant::create([
@@ -111,6 +116,7 @@ class ContestChargerSeeder extends Seeder
             Log::info('Seeder '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' new work_participant:'. json_encode($this->work_participant) );
 
             $i++;
+            echo "\n ". sprintf('%03d', $i).' '.$this->work_participant->country_id.' | '.$this->work_participant->last_name.' '.$this->work_participant->first_name;
             echo "\n ". sprintf('%03d', $i);
 
             foreach ($this->contest_section_list as $this->contest_section) {
@@ -156,6 +162,7 @@ class ContestChargerSeeder extends Seeder
             } // foreach
 
         } //  for i
+        echo "\n";
         echo "\n";
     } // run
 } // class
