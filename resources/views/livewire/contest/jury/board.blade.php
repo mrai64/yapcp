@@ -11,67 +11,75 @@
  * Section (list) > Board (list) > Board (single) Work > Jury Vote
  * 
  * 2025-11-02 add counter voted / total 
+ * 2025-11-18 dias now has its livewire component ...lazy
+ * and paginated 
  */
+
+use Illuminate\Support\Facades\Log;
 
 ?>
 
 <div>
     <div class="header">
         <p class="fyk text-2xl">{{ $contest->name_en         }} </p>
-        <p class="fyk text-xl" >{{ $contest_section->name_en }} </p>
+        <p class="fyk text-xl" >{{ $contestSections->name_en }} </p>
         <p class="fyk">
             {{ __("Jury window from: ") }}
             {{ $contest->day_3_jury_opening->format('Y-m-d') }}
             {{ __(" upto: ") }}
             {{ $contest->day_4_jury_closing->format('Y-m-d') }}
             | {{ __("Vote Status for that section: ") }}
-            [ {{ $voted_works->count() }} / {{ $participant_works->count() + $voted_works->count() }} ]
+            [ {{ count($votedWorks) }} voted over all {{ count($participantWorks) + count($votedWorks) }} ]
         </p>
     </div>
 
-    @if ($participant_works->count() > 0)
-    <p class="fyk text-xl">{{ __("Are Waiting Your Vote") }} 
-        <a href="{{ route('contest-jury-vote', ['sid' => $this->contest_section->id ]) }}">
-           [ {{ __("Start") }} ]
+    @if (count($participantWorks) > 0)
+    <h2 class="fyk text-2xl">{{ __("These (and more...) Are Waiting Your Vote") }} 
+        <a href="{{ route('contest-jury-vote', ['sid' => $contestSections->id ]) }}">
+        [ {{ __("Start") }} ]
         </a>
-    </p>
+    </h2>
         <!-- set of un - voted -->
-        @foreach ($participant_works as $contest_work)
-        <div style="float:left;width:300px !important;height:300px !important;background-color:#f0f0f0;border:10px solid #ccc;display:flex;justify-content: center;align-items: center;box-shadow: 0 0 10px rgba(0,0,0,0.2);margin-top:.5rem;margin-right:.5rem;">
-            <img src="{{ asset('storage/contests') .'/'. $contest_work->contest_id .'/'. $contest_work->section_id .'/'. $contest_work->work_id .'.'. $contest_work->extension }}" 
-            loading="lazy"
-            style="max-width:80%;max-height:80%;object-fit:contain;border-radius:.5rem;" 
-            />
-        </div>
+        @foreach ($participantWorks as $k => $imgdias)
+        <livewire:contest.jury.dias :imgdias="$imgdias"  lazy />
+
         @endforeach
     <br style="clear:both;" />
+    <hr />
+    @else
+    <h2 class="fyk text-2xl">
+        {{ __("All Voted Now") }} 
+    </h2>
+    <br style="clear:both;" />
+    <hr />
     @endif
-        
-    @if ($voted_works->count() > 0)
-        <!-- set of voted -->
-        <p class="fyk text-2xl">
-            {{ __("Already voted (but you can change it)") }}
-        </p>
-        @foreach ($voted_works as $contest_work)
-        <div style="float:left;width:300px;height:calc(300px + 2rem);display:block;text-center;background-color:#f0f0f0;margin-top:.5rem;margin-right:.5rem;">
-            <p style="float:left;" class="fyk text-xl z-50">{{ __("Assigned vote: ") }}<span class="text-black font-semibold">{{ $contest_work->vote }}</span></p>
-            <span class="inline-flex justify-end"><a href="{{ route('contest-jury-vote-mod', ['vid' => $contest_work->id ]) }}" >[ + / - ]</a></span>
-            <div style="width:300px !important;height:300px !important;background-color:#f0f0f0;border:10px solid #ccc;display:flex;justify-content: center;align-items: center;box-shadow: 0 0 10px rgba(0,0,0,0.2);">
-                <img src="{{ asset('storage/contests') .'/'. $contest_work->contest_id .'/'. $contest_work->section_id .'/'. $contest_work->work_id .'.'. $contest_work->work->extension }}" 
-                loading="lazy"
-                style="max-width:80%;max-height:80%;object-fit:contain;border-radius:.5rem;" 
-                />
-            </div>
-        </div>
+
+    @if (count($votedWorks) > 0)
+    <!-- set of voted -->
+    <h2 class="fyk text-2xl">
+        {{ __("Already voted (but you can change it) ") . count($votedWorks) }}
+    </h2>
+
+        @foreach ($votedWorks as $vid)
+        <livewire:contest.jury.voteddias :vid="($vid->id)"  lazy />
+
         @endforeach
     <br style="clear:both;" />
+    <div class="paginationDiv">
+        {{ $votedWorks->links() }}
+    </div>
+
+
     @else 
     <p class="fyk text-2xl">
         &hellip;<br />
         &hellip; 
-        <a href="{{ route('contest-jury-vote', ['sid' => $this->contest_section->id ]) }}">
+        <a href="{{ route('contest-jury-vote', ['sid' => $contestSections->id ]) }}">
             {{ __("Why Wait? Start Vote NOW!") }}
         </a>
     </p>
     @endif
+    @php 
+    Log::info('Blade completed ' . __FILE__ );
+    @endphp 
 </div>

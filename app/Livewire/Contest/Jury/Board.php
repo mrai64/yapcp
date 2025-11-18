@@ -26,21 +26,46 @@ use App\Models\UserContact;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
-use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
+use Livewire\WithPagination;
 
 class Board extends Component
 {
+    use WithPagination;
+
     public $juror_id;
     public $juror;
     public $contest_section_id;
     public $contest_section;
     public $contest;
 
+    public $contest_works;
     public $participant_works;
     public $voted_works;
     public $voted_ids;
     public $vote_rule;
+
+    /**
+     * check if a path/namefile has a twin path/300px_namefile 
+     * @return string miniature|original
+     */
+    public static function miniature(string $original_file) : string 
+    {
+        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called');
+        $last_slash_pos = strrpos($original_file, '/');
+        $path = substr($original_file, 0, $last_slash_pos + 1);
+        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' path:' . $path);
+        $name_file  = '300px_'.substr($original_file, $last_slash_pos + 1);
+        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' name:' . $name_file);
+        if (Storage::disk('public')->exists('contests/'.$path.$name_file) ) {
+            Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' found' );
+            return $path . $name_file;
+        }
+        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' not found' );
+        return $original_file;
+    }
 
     /**
      * 1. Before the show
@@ -63,31 +88,61 @@ class Board extends Component
         $this->vote_rule = $this->contest->vote_rule;
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' contest:' . json_encode( $this->contest ) );
 
-        // SET of voted - temporary set
-        // $this->voted_works = ContestWork::where('contest_id', $this->contest->id)->where('section_id', $this->contest_section->id)->orderBy('work_id')->get();
-        $this->voted_works = ContestVote::where('contest_id', $this->contest->id)->where('section_id', $this->contest_section->id)->orderByDesc('vote')->orderBy('work_id')->get();
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' voted_works:' . $this->voted_works->count() ); // json_encode( $this->voted_works ) );
-
-        $this->voted_ids = ContestVote::voted_ids( $this->contest->id, $this->contest_section->id);
+        // how that juror had voted
+        // $this->voted_ids = ContestVote::voted_ids( $this->contest->id, $this->contest_section->id);
+        $voted = ContestVote::select('id')->where('juror_user_id', $this->juror_id)->where('section_id', $sid)->where('contest_id', $this->contest_section->contest_id)->get();
+        $this->voted_ids = array_values( collect($voted)->toArray() );
         // Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' voted_ids:' . json_encode( $this->voted_ids ) );
 
-        // SET of un-voted
-        if ($this->voted_ids->count()) {
-            $this->participant_works = DB::table( ContestWork::table_name)->whereNotIn('work_id', $this->voted_ids )->get();
+        // SET of un-voted - limited to 24 
+        if (count($this->voted_ids)) {
+            $this->contest_works = DB::table( ContestWork::table_name)
+                ->select(['contest_id', 'section_id', 'work_id', 'extension'])
+                ->where('section_id',   $sid)
+                ->where('contest_id',   $this->contest_section->contest_id)
+                ->whereNotIn('work_id', $this->voted_ids )
+                ->limit(24)
+                ->get();
 
         } else {
-            $this->participant_works = ContestWork::where('contest_id', $this->contest->id)->where('section_id', $this->contest_section->id)->get();
+            $this->contest_works = ContestWork::where('contest_id', $this->contest->id)
+                ->where('section_id', $sid)
+                ->limit(24)
+                ->get(['contest_id', 'section_id', 'work_id', 'extension']);
+        }
+        $this->participant_works=[];
+        foreach($this->contest_works as $contest_work) {
+            $this->participant_works[] = self::miniature($contest_work->contest_id .'/'. $contest_work->section_id .'/'. $contest_work->work_id .'.'. $contest_work->extension);
         }
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' participant_works:' . json_encode( $this->participant_works ) );
 
     }
+
     /**
-     * 2. Show
+     * 2. pagination: index
+     * The set must be refreshed, so we need recreate here
      */
-    public function render()
+    public function render() : View
     {
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called');
-        return view('livewire.contest.jury.board');
+
+        // select contest_votes.id 
+        $votedWorks = DB::table( ContestVote::table_name )
+            ->select('id')
+            ->where('juror_user_id', $this->juror_id)
+            ->where('section_id',    $this->contest_section_id)
+            ->where('contest_id',    $this->contest->id)
+            ->orderByDesc('vote')
+            ->simplePaginate(12); // or 24 or 36
+        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' voted_works:' . json_encode($votedWorks) );
+
+        return view('livewire.contest.jury.board', [
+            'votedWorks'        => $votedWorks,
+            'contest'           => $this->contest,
+            'contestSections'   => $this->contest_section,
+            'contestWorks'      => $this->contest_works, 
+            'participantWorks'  => $this->participant_works,
+        ]);
     }
 
 }

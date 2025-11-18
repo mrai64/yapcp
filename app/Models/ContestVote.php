@@ -2,6 +2,7 @@
 /**
  * Contest Jury Votes
  * 
+ * 2025-11-18 table_name fix 
  * 
  */
 
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Log;
 class ContestVote extends Model
 {
     use SoftDeletes;
-    public const table_name = 'contest_vote';
+    public const table_name = 'contest_votes';
     // protected $primaryKey 'id'        standard
     // protected $keyType = unsigned int standard
     // public $incrementing = true       standard
@@ -33,7 +34,7 @@ class ContestVote extends Model
 
     protected function casts()
     {
-        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
+        // Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -45,10 +46,12 @@ class ContestVote extends Model
     public static function voted_ids(string $contest_id, string $section_id)
     {
         Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
-        $vote_ids = self::where('section_id', $section_id)->where('contest_id', $contest_id)->get(['work_id']);
+        $vote_ids = self::select(['work_id'])->where('section_id', $section_id)->where('contest_id', $contest_id)->get();
+        // Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' vote_ids:' . json_encode($vote_ids) );
 
-        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' vote_ids:' . json_encode($vote_ids) );
-        return $vote_ids;
+        $array_ids = array_values(collect($vote_ids->toArray()));
+        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' out count:' . count($array_ids) );
+        return $array_ids;
 
     }
 
