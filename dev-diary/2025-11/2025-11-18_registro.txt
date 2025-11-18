@@ -1,0 +1,343 @@
+
+[2025-11-18 19:26:48.996140] local.INFO: Model App\Models\User f/booted:62 called  
+[2025-11-18 19:26:49.022139] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-11-18 19:26:49.034049] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-11-18 19:26:49.167145] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-11-18 19:26:49.179994] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-11-18 19:26:49.354829] local.INFO: Component App\Livewire\Contest\Jury\Board f/mount:71 called  
+[2025-11-18 19:26:49.371036] local.INFO: Component App\Livewire\Contest\Jury\Board f/mount:74 juror_id:a15bab96-d275-4d45-ba99-e5df0a4bc11e  
+[2025-11-18 19:26:49.473387] local.INFO: Model App\Models\UserContact f/casts:58 called  
+[2025-11-18 19:26:49.485758] local.INFO: Model App\Models\UserContact f/casts:58 called  
+[2025-11-18 19:26:49.531896] local.INFO: Model App\Models\UserContact f/casts:58 called  
+[2025-11-18 19:26:49.545579] local.INFO: Model App\Models\UserContact f/casts:58 called  
+[2025-11-18 19:26:49.643751] local.INFO: Component App\Livewire\Contest\Jury\Board f/mount:77 juror:{"id":249,"user_id":"a15bab96-d275-4d45-ba99-e5df0a4bc11e","country_id":"ITA","first_name":"Rita","last_name":"Baio","nick_name":"","email":"rita.baio@athesis77.it","cellular":"","passport_photo":"ITA\/Baio\/Rita_a15bab96-d275-4d45-ba99-e5df0a4bc11e\/__passport_photo.jpg","lang_local":"it","timezone":"Europe\/Rome","address":"","address_line2":"","city":"","region":"","postal_code":"","website":"","facebook":"https:\/\/www.facebook.com\/rita.baio.568","x_twitter":"","instagram":"","whatsapp":"","created_at":"2025-11-17T15:57:29.000000Z","updated_at":"2025-11-17T18:09:43.000000Z","deleted_at":null}  
+[2025-11-18 19:26:49.745734] local.INFO: Model App\Models\ContestSection f/booted:69 called  
+[2025-11-18 19:26:49.878182] local.INFO: Component App\Livewire\Contest\Jury\Board f/mount:81 contest_section:{"id":"9b534e11-d7b8-4290-b282-5f0dfb717d57","contest_id":"e8ac5674-c3d1-4afa-adaf-a7d5ed82d292","code":"VR","under_patronage":"Y","federation_section_id":2,"name_en":"Affection. The bond that unites us.","name_local":"Affetto. Il legame che ci unisce.","rule_format":"jpg","rule_min":0,"rule_max":4,"rule_min_size":1024,"rule_max_size":2500,"rule_max_weight":6000,"rule_monochromatic":"N","created_at":"2025-10-01T07:04:00.000000Z","updated_at":"2025-10-26T09:30:28.000000Z","deleted_at":null}  
+[2025-11-18 19:26:50.176815] local.INFO: Component App\Livewire\Contest\Jury\Board f/mount:85 contest:{"id":"e8ac5674-c3d1-4afa-adaf-a7d5ed82d292","country_id":"ITA","name_en":"9th Tonino di Venanzio National Photo Contest","name_local":"9\u00b0 CFN Tonino Di Venanzio","lang_local":"it","organization_id":"82849c90-acb0-45d3-ac3b-b34bfbe6d1bb","contest_mark":null,"contact_info":"Associazione Culturale Tonino di Venanzio","is_circuit":"N","circuit_id":null,"federation_list":"FIAF[2025P7]","url_1_rule":"https:\/\/www.concorso.platio.it\/ohmasafoto\/divenanzio\/contest","url_2_concurrent_list":"https:\/\/www.concorso.platio.it\/ohmasafoto\/divenanzio\/contest","url_3_admit_n_award_list":"http:\/\/example.local\/3","url_4_catalogue":"https:\/\/www.concorso.platio.it\/ohmasafoto\/divenanzio\/contest","timezone":"Europe\/Rome","day_1_opening":"2025-09-28T07:00:00.000000Z","day_2_closing":"2025-11-22T22:59:00.000000Z","day_3_jury_opening":"2025-11-10T10:00:00.000000Z","day_4_jury_closing":"2025-11-22T18:00:00.000000Z","day_5_revelations":"2025-11-23T11:00:00.000000Z","day_6_awards":"2025-12-06T09:00:00.000000Z","day_7_catalogues":"2025-12-15T11:00:00.000000Z","day_8_closing":"2026-01-15T12:00:00.000000Z","award_ceremony_info":"sabato 6 dicembre 2025 \ne in piattaforma Zoom","fee_info":"24 \u20ac","vote_rule":"num:1..30","created_at":"2025-09-29T19:42:41.000000Z","updated_at":"2025-11-17T16:58:28.000000Z","deleted_at":null}  
+[2025-11-18 19:26:50.192220] local.INFO: Model App\Models\ContestVote voted_ids:47 called  
+[2025-11-18 19:26:54.317232] local.INFO: Model App\Models\ContestVote voted_ids:53 vote_ids count:576  
+[2025-11-18 19:26:54.617784] local.INFO: Component App\Livewire\Contest\Jury\Board f/mount:106 participant_works:[]  
+[2025-11-18 19:26:55.507541] local.INFO: Component App\Livewire\Contest\Jury\Board f/mount:115 voted_works:192  
+[2025-11-18 19:26:55.547245] local.INFO: Component App\Livewire\Contest\Jury\Board f/render:123 called  
+[2025-11-18 19:26:55.748661] local.INFO: Blade id 1155  
+[2025-11-18 19:26:55.759476] local.INFO: Blade id 1158  
+[2025-11-18 19:26:55.770259] local.INFO: Blade id 1161  
+[2025-11-18 19:26:55.781106] local.INFO: Blade id 1164  
+[2025-11-18 19:26:55.792750] local.INFO: Blade id 1167  
+[2025-11-18 19:26:55.803795] local.INFO: Blade id 1170  
+[2025-11-18 19:26:55.814777] local.INFO: Blade id 1173  
+[2025-11-18 19:26:55.825743] local.INFO: Blade id 1176  
+[2025-11-18 19:26:55.836700] local.INFO: Blade id 1179  
+[2025-11-18 19:26:55.847580] local.INFO: Blade id 1182  
+[2025-11-18 19:26:55.858645] local.INFO: Blade id 1185  
+[2025-11-18 19:26:55.870592] local.INFO: Blade id 1188  
+[2025-11-18 19:26:55.882176] local.INFO: Blade id 1191  
+[2025-11-18 19:26:55.893303] local.INFO: Blade id 1194  
+[2025-11-18 19:26:55.904270] local.INFO: Blade id 1197  
+[2025-11-18 19:26:55.915146] local.INFO: Blade id 1200  
+[2025-11-18 19:26:55.925541] local.INFO: Blade id 1203  
+[2025-11-18 19:26:55.936467] local.INFO: Blade id 1206  
+[2025-11-18 19:26:55.947061] local.INFO: Blade id 1209  
+[2025-11-18 19:26:55.957481] local.INFO: Blade id 1212  
+[2025-11-18 19:26:55.968445] local.INFO: Blade id 1215  
+[2025-11-18 19:26:55.978913] local.INFO: Blade id 1218  
+[2025-11-18 19:26:55.989466] local.INFO: Blade id 1221  
+[2025-11-18 19:26:56.000247] local.INFO: Blade id 1224  
+[2025-11-18 19:26:56.010879] local.INFO: Blade id 1227  
+[2025-11-18 19:26:56.021491] local.INFO: Blade id 1230  
+[2025-11-18 19:26:56.032499] local.INFO: Blade id 1233  
+[2025-11-18 19:26:56.043213] local.INFO: Blade id 1236  
+[2025-11-18 19:26:56.054483] local.INFO: Blade id 1239  
+[2025-11-18 19:26:56.067418] local.INFO: Blade id 1242  
+[2025-11-18 19:26:56.078110] local.INFO: Blade id 1245  
+[2025-11-18 19:26:56.088510] local.INFO: Blade id 1248  
+[2025-11-18 19:26:56.098892] local.INFO: Blade id 1251  
+[2025-11-18 19:26:56.109697] local.INFO: Blade id 1254  
+[2025-11-18 19:26:56.120063] local.INFO: Blade id 1257  
+[2025-11-18 19:26:56.130632] local.INFO: Blade id 1260  
+[2025-11-18 19:26:56.141338] local.INFO: Blade id 1263  
+[2025-11-18 19:26:56.151772] local.INFO: Blade id 1266  
+[2025-11-18 19:26:56.162146] local.INFO: Blade id 1269  
+[2025-11-18 19:26:56.172369] local.INFO: Blade id 1272  
+[2025-11-18 19:26:56.182833] local.INFO: Blade id 1275  
+[2025-11-18 19:26:56.193400] local.INFO: Blade id 1278  
+[2025-11-18 19:26:56.203659] local.INFO: Blade id 1281  
+[2025-11-18 19:26:56.214098] local.INFO: Blade id 1284  
+[2025-11-18 19:26:56.224433] local.INFO: Blade id 1287  
+[2025-11-18 19:26:56.234711] local.INFO: Blade id 1290  
+[2025-11-18 19:26:56.244912] local.INFO: Blade id 1293  
+[2025-11-18 19:26:56.256410] local.INFO: Blade id 1296  
+[2025-11-18 19:26:56.268972] local.INFO: Blade id 1299  
+[2025-11-18 19:26:56.280918] local.INFO: Blade id 1302  
+[2025-11-18 19:26:56.292376] local.INFO: Blade id 1305  
+[2025-11-18 19:26:56.302723] local.INFO: Blade id 1308  
+[2025-11-18 19:26:56.314303] local.INFO: Blade id 1311  
+[2025-11-18 19:26:56.324516] local.INFO: Blade id 1314  
+[2025-11-18 19:26:56.334875] local.INFO: Blade id 1317  
+[2025-11-18 19:26:56.345787] local.INFO: Blade id 1320  
+[2025-11-18 19:26:56.356264] local.INFO: Blade id 1323  
+[2025-11-18 19:26:56.366922] local.INFO: Blade id 1326  
+[2025-11-18 19:26:56.377440] local.INFO: Blade id 1329  
+[2025-11-18 19:26:56.388020] local.INFO: Blade id 1332  
+[2025-11-18 19:26:56.398390] local.INFO: Blade id 1335  
+[2025-11-18 19:26:56.408933] local.INFO: Blade id 1338  
+[2025-11-18 19:26:56.419237] local.INFO: Blade id 1341  
+[2025-11-18 19:26:56.429480] local.INFO: Blade id 1344  
+[2025-11-18 19:26:56.439803] local.INFO: Blade id 1347  
+[2025-11-18 19:26:56.450171] local.INFO: Blade id 1350  
+[2025-11-18 19:26:56.460437] local.INFO: Blade id 1353  
+[2025-11-18 19:26:56.470813] local.INFO: Blade id 1356  
+[2025-11-18 19:26:56.480961] local.INFO: Blade id 1359  
+[2025-11-18 19:26:56.491269] local.INFO: Blade id 1362  
+[2025-11-18 19:26:56.501611] local.INFO: Blade id 1365  
+[2025-11-18 19:26:56.512066] local.INFO: Blade id 1368  
+[2025-11-18 19:26:56.522792] local.INFO: Blade id 1371  
+[2025-11-18 19:26:56.532946] local.INFO: Blade id 1374  
+[2025-11-18 19:26:56.543590] local.INFO: Blade id 1377  
+[2025-11-18 19:26:56.554054] local.INFO: Blade id 1380  
+[2025-11-18 19:26:56.564158] local.INFO: Blade id 1383  
+[2025-11-18 19:26:56.574580] local.INFO: Blade id 1386  
+[2025-11-18 19:26:56.585017] local.INFO: Blade id 1389  
+[2025-11-18 19:26:56.595530] local.INFO: Blade id 1392  
+[2025-11-18 19:26:56.606118] local.INFO: Blade id 1395  
+[2025-11-18 19:26:56.616741] local.INFO: Blade id 1398  
+[2025-11-18 19:26:56.627301] local.INFO: Blade id 1401  
+[2025-11-18 19:26:56.638003] local.INFO: Blade id 1404  
+[2025-11-18 19:26:56.648645] local.INFO: Blade id 1407  
+[2025-11-18 19:26:56.658960] local.INFO: Blade id 1410  
+[2025-11-18 19:26:56.669865] local.INFO: Blade id 1413  
+[2025-11-18 19:26:56.681341] local.INFO: Blade id 1416  
+[2025-11-18 19:26:56.692275] local.INFO: Blade id 1419  
+[2025-11-18 19:26:56.703104] local.INFO: Blade id 1422  
+[2025-11-18 19:26:56.713891] local.INFO: Blade id 1425  
+[2025-11-18 19:26:56.724269] local.INFO: Blade id 1428  
+[2025-11-18 19:26:56.734889] local.INFO: Blade id 1431  
+[2025-11-18 19:26:56.745460] local.INFO: Blade id 1434  
+[2025-11-18 19:26:56.756052] local.INFO: Blade id 1437  
+[2025-11-18 19:26:56.766424] local.INFO: Blade id 1440  
+[2025-11-18 19:26:56.776977] local.INFO: Blade id 1443  
+[2025-11-18 19:26:56.787541] local.INFO: Blade id 1446  
+[2025-11-18 19:26:56.797898] local.INFO: Blade id 1449  
+[2025-11-18 19:26:56.809071] local.INFO: Blade id 1452  
+[2025-11-18 19:26:56.820381] local.INFO: Blade id 1455  
+[2025-11-18 19:26:56.831843] local.INFO: Blade id 1458  
+[2025-11-18 19:26:56.843262] local.INFO: Blade id 1461  
+[2025-11-18 19:26:56.854538] local.INFO: Blade id 1464  
+[2025-11-18 19:26:56.866299] local.INFO: Blade id 1467  
+[2025-11-18 19:26:56.878300] local.INFO: Blade id 1470  
+[2025-11-18 19:26:56.890099] local.INFO: Blade id 1473  
+[2025-11-18 19:26:56.900777] local.INFO: Blade id 1476  
+[2025-11-18 19:26:56.911440] local.INFO: Blade id 1479  
+[2025-11-18 19:26:56.922554] local.INFO: Blade id 1482  
+[2025-11-18 19:26:56.933181] local.INFO: Blade id 1485  
+[2025-11-18 19:26:56.943736] local.INFO: Blade id 1488  
+[2025-11-18 19:26:56.954526] local.INFO: Blade id 1491  
+[2025-11-18 19:26:56.965226] local.INFO: Blade id 1494  
+[2025-11-18 19:26:56.976106] local.INFO: Blade id 1497  
+[2025-11-18 19:26:56.987007] local.INFO: Blade id 1500  
+[2025-11-18 19:26:56.997707] local.INFO: Blade id 1503  
+[2025-11-18 19:26:57.008606] local.INFO: Blade id 1506  
+[2025-11-18 19:26:57.019536] local.INFO: Blade id 1509  
+[2025-11-18 19:26:57.030220] local.INFO: Blade id 1512  
+[2025-11-18 19:26:57.041194] local.INFO: Blade id 1515  
+[2025-11-18 19:26:57.052628] local.INFO: Blade id 1518  
+[2025-11-18 19:26:57.063737] local.INFO: Blade id 1521  
+[2025-11-18 19:26:57.075045] local.INFO: Blade id 1524  
+[2025-11-18 19:26:57.086281] local.INFO: Blade id 1527  
+[2025-11-18 19:26:57.097254] local.INFO: Blade id 1530  
+[2025-11-18 19:26:57.108127] local.INFO: Blade id 1533  
+[2025-11-18 19:26:57.119009] local.INFO: Blade id 1536  
+[2025-11-18 19:26:57.129678] local.INFO: Blade id 1539  
+[2025-11-18 19:26:57.140826] local.INFO: Blade id 1542  
+[2025-11-18 19:26:57.151672] local.INFO: Blade id 1545  
+[2025-11-18 19:26:57.162616] local.INFO: Blade id 1548  
+[2025-11-18 19:26:57.173470] local.INFO: Blade id 1551  
+[2025-11-18 19:26:57.183721] local.INFO: Blade id 1554  
+[2025-11-18 19:26:57.194205] local.INFO: Blade id 1557  
+[2025-11-18 19:26:57.205374] local.INFO: Blade id 1560  
+[2025-11-18 19:26:57.215662] local.INFO: Blade id 1563  
+[2025-11-18 19:26:57.226316] local.INFO: Blade id 1566  
+[2025-11-18 19:26:57.237439] local.INFO: Blade id 1569  
+[2025-11-18 19:26:57.247867] local.INFO: Blade id 1572  
+[2025-11-18 19:26:57.258236] local.INFO: Blade id 1575  
+[2025-11-18 19:26:57.268521] local.INFO: Blade id 1578  
+[2025-11-18 19:26:57.278761] local.INFO: Blade id 1581  
+[2025-11-18 19:26:57.289309] local.INFO: Blade id 1584  
+[2025-11-18 19:26:57.299944] local.INFO: Blade id 1587  
+[2025-11-18 19:26:57.310475] local.INFO: Blade id 1590  
+[2025-11-18 19:26:57.321503] local.INFO: Blade id 1593  
+[2025-11-18 19:26:57.332079] local.INFO: Blade id 1596  
+[2025-11-18 19:26:57.342627] local.INFO: Blade id 1599  
+[2025-11-18 19:26:57.353153] local.INFO: Blade id 1602  
+[2025-11-18 19:26:57.363568] local.INFO: Blade id 1605  
+[2025-11-18 19:26:57.374199] local.INFO: Blade id 1608  
+[2025-11-18 19:26:57.384620] local.INFO: Blade id 1611  
+[2025-11-18 19:26:57.395032] local.INFO: Blade id 1614  
+[2025-11-18 19:26:57.405765] local.INFO: Blade id 1617  
+[2025-11-18 19:26:57.416112] local.INFO: Blade id 1620  
+[2025-11-18 19:26:57.426321] local.INFO: Blade id 1623  
+[2025-11-18 19:26:57.436932] local.INFO: Blade id 1626  
+[2025-11-18 19:26:57.447409] local.INFO: Blade id 1629  
+[2025-11-18 19:26:57.457971] local.INFO: Blade id 1632  
+[2025-11-18 19:26:57.469141] local.INFO: Blade id 1635  
+[2025-11-18 19:26:57.480818] local.INFO: Blade id 1638  
+[2025-11-18 19:26:57.491809] local.INFO: Blade id 1641  
+[2025-11-18 19:26:57.502171] local.INFO: Blade id 1644  
+[2025-11-18 19:26:57.512788] local.INFO: Blade id 1647  
+[2025-11-18 19:26:57.523365] local.INFO: Blade id 1650  
+[2025-11-18 19:26:57.533941] local.INFO: Blade id 1653  
+[2025-11-18 19:26:57.544543] local.INFO: Blade id 1656  
+[2025-11-18 19:26:57.554958] local.INFO: Blade id 1659  
+[2025-11-18 19:26:57.565604] local.INFO: Blade id 1662  
+[2025-11-18 19:26:57.575994] local.INFO: Blade id 1665  
+[2025-11-18 19:26:57.586576] local.INFO: Blade id 1668  
+[2025-11-18 19:26:57.597211] local.INFO: Blade id 1671  
+[2025-11-18 19:26:57.607557] local.INFO: Blade id 1674  
+[2025-11-18 19:26:57.618160] local.INFO: Blade id 1677  
+[2025-11-18 19:26:57.628654] local.INFO: Blade id 1680  
+[2025-11-18 19:26:57.639149] local.INFO: Blade id 1683  
+[2025-11-18 19:26:57.650060] local.INFO: Blade id 1686  
+[2025-11-18 19:26:57.660562] local.INFO: Blade id 1689  
+[2025-11-18 19:26:57.671091] local.INFO: Blade id 1692  
+[2025-11-18 19:26:57.681631] local.INFO: Blade id 1695  
+[2025-11-18 19:26:57.692226] local.INFO: Blade id 1698  
+[2025-11-18 19:26:57.702783] local.INFO: Blade id 1701  
+[2025-11-18 19:26:57.713328] local.INFO: Blade id 1704  
+[2025-11-18 19:26:57.723951] local.INFO: Blade id 1707  
+[2025-11-18 19:26:57.734389] local.INFO: Blade id 1710  
+[2025-11-18 19:26:57.745055] local.INFO: Blade id 1713  
+[2025-11-18 19:26:57.755626] local.INFO: Blade id 1716  
+[2025-11-18 19:26:57.766000] local.INFO: Blade id 1719  
+[2025-11-18 19:26:57.776697] local.INFO: Blade id 1722  
+[2025-11-18 19:26:57.786992] local.INFO: Blade id 1725  
+[2025-11-18 19:26:57.797333] local.INFO: Blade id 1728  
+[2025-11-18 19:26:57.807945] local.INFO: Blade completed /Users/massimorainato/Sites/yapcp/storage/framework/views/86178f27387ed6deed7ecffc4dbef8c0.php  
+[2025-11-18 19:27:31.891093] local.INFO: Model App\Models\User f/booted:62 called  
+[2025-11-18 19:27:31.917240] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-11-18 19:27:31.929408] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-11-18 19:27:32.060814] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-11-18 19:27:32.073846] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-11-18 19:27:32.251385] local.INFO: Component App\Livewire\Contest\Jury\Board f/mount:71 called  
+[2025-11-18 19:27:32.267763] local.INFO: Component App\Livewire\Contest\Jury\Board f/mount:74 juror_id:a15bab96-d275-4d45-ba99-e5df0a4bc11e  
+[2025-11-18 19:27:32.374924] local.INFO: Model App\Models\UserContact f/casts:58 called  
+[2025-11-18 19:27:32.387381] local.INFO: Model App\Models\UserContact f/casts:58 called  
+[2025-11-18 19:27:32.435068] local.INFO: Model App\Models\UserContact f/casts:58 called  
+[2025-11-18 19:27:32.448864] local.INFO: Model App\Models\UserContact f/casts:58 called  
+[2025-11-18 19:27:32.549881] local.INFO: Component App\Livewire\Contest\Jury\Board f/mount:77 juror:{"id":249,"user_id":"a15bab96-d275-4d45-ba99-e5df0a4bc11e","country_id":"ITA","first_name":"Rita","last_name":"Baio","nick_name":"","email":"rita.baio@athesis77.it","cellular":"","passport_photo":"ITA\/Baio\/Rita_a15bab96-d275-4d45-ba99-e5df0a4bc11e\/__passport_photo.jpg","lang_local":"it","timezone":"Europe\/Rome","address":"","address_line2":"","city":"","region":"","postal_code":"","website":"","facebook":"https:\/\/www.facebook.com\/rita.baio.568","x_twitter":"","instagram":"","whatsapp":"","created_at":"2025-11-17T15:57:29.000000Z","updated_at":"2025-11-17T18:09:43.000000Z","deleted_at":null}  
+[2025-11-18 19:27:32.656057] local.INFO: Model App\Models\ContestSection f/booted:69 called  
+[2025-11-18 19:27:32.789861] local.INFO: Component App\Livewire\Contest\Jury\Board f/mount:81 contest_section:{"id":"9b534e11-d7b8-4290-b282-5f0dfb717d57","contest_id":"e8ac5674-c3d1-4afa-adaf-a7d5ed82d292","code":"VR","under_patronage":"Y","federation_section_id":2,"name_en":"Affection. The bond that unites us.","name_local":"Affetto. Il legame che ci unisce.","rule_format":"jpg","rule_min":0,"rule_max":4,"rule_min_size":1024,"rule_max_size":2500,"rule_max_weight":6000,"rule_monochromatic":"N","created_at":"2025-10-01T07:04:00.000000Z","updated_at":"2025-10-26T09:30:28.000000Z","deleted_at":null}  
+[2025-11-18 19:27:33.087040] local.INFO: Component App\Livewire\Contest\Jury\Board f/mount:85 contest:{"id":"e8ac5674-c3d1-4afa-adaf-a7d5ed82d292","country_id":"ITA","name_en":"9th Tonino di Venanzio National Photo Contest","name_local":"9\u00b0 CFN Tonino Di Venanzio","lang_local":"it","organization_id":"82849c90-acb0-45d3-ac3b-b34bfbe6d1bb","contest_mark":null,"contact_info":"Associazione Culturale Tonino di Venanzio","is_circuit":"N","circuit_id":null,"federation_list":"FIAF[2025P7]","url_1_rule":"https:\/\/www.concorso.platio.it\/ohmasafoto\/divenanzio\/contest","url_2_concurrent_list":"https:\/\/www.concorso.platio.it\/ohmasafoto\/divenanzio\/contest","url_3_admit_n_award_list":"http:\/\/example.local\/3","url_4_catalogue":"https:\/\/www.concorso.platio.it\/ohmasafoto\/divenanzio\/contest","timezone":"Europe\/Rome","day_1_opening":"2025-09-28T07:00:00.000000Z","day_2_closing":"2025-11-22T22:59:00.000000Z","day_3_jury_opening":"2025-11-10T10:00:00.000000Z","day_4_jury_closing":"2025-11-22T18:00:00.000000Z","day_5_revelations":"2025-11-23T11:00:00.000000Z","day_6_awards":"2025-12-06T09:00:00.000000Z","day_7_catalogues":"2025-12-15T11:00:00.000000Z","day_8_closing":"2026-01-15T12:00:00.000000Z","award_ceremony_info":"sabato 6 dicembre 2025 \ne in piattaforma Zoom","fee_info":"24 \u20ac","vote_rule":"num:1..30","created_at":"2025-09-29T19:42:41.000000Z","updated_at":"2025-11-17T16:58:28.000000Z","deleted_at":null}  
+[2025-11-18 19:27:33.102293] local.INFO: Model App\Models\ContestVote voted_ids:47 called  
+[2025-11-18 19:27:37.295196] local.INFO: Model App\Models\ContestVote voted_ids:53 vote_ids count:576  
+[2025-11-18 19:27:37.599657] local.INFO: Component App\Livewire\Contest\Jury\Board f/mount:106 participant_works:[]  
+[2025-11-18 19:27:38.517394] local.INFO: Component App\Livewire\Contest\Jury\Board f/mount:115 voted_works:192  
+[2025-11-18 19:27:38.557459] local.INFO: Component App\Livewire\Contest\Jury\Board f/render:123 called  
+[2025-11-18 19:27:38.767700] local.INFO: Blade id 1155  
+[2025-11-18 19:27:39.007051] local.INFO: Blade id 1158  
+[2025-11-18 19:27:39.200247] local.INFO: Blade id 1161  
+[2025-11-18 19:27:39.393161] local.INFO: Blade id 1164  
+[2025-11-18 19:27:39.593923] local.INFO: Blade id 1167  
+[2025-11-18 19:27:39.811957] local.INFO: Blade id 1170  
+[2025-11-18 19:27:40.003241] local.INFO: Blade id 1173  
+[2025-11-18 19:27:40.198409] local.INFO: Blade id 1176  
+[2025-11-18 19:27:40.394420] local.INFO: Blade id 1179  
+[2025-11-18 19:27:40.590806] local.INFO: Blade id 1182  
+[2025-11-18 19:27:40.791203] local.INFO: Blade id 1185  
+[2025-11-18 19:27:40.988413] local.INFO: Blade id 1188  
+[2025-11-18 19:27:41.184740] local.INFO: Blade id 1191  
+[2025-11-18 19:27:41.378324] local.INFO: Blade id 1194  
+[2025-11-18 19:27:41.575605] local.INFO: Blade id 1197  
+[2025-11-18 19:27:41.769488] local.INFO: Blade id 1200  
+[2025-11-18 19:27:41.966776] local.INFO: Blade id 1203  
+[2025-11-18 19:27:42.160125] local.INFO: Blade id 1206  
+[2025-11-18 19:27:42.353970] local.INFO: Blade id 1209  
+[2025-11-18 19:27:42.547849] local.INFO: Blade id 1212  
+[2025-11-18 19:27:42.744301] local.INFO: Blade id 1215  
+[2025-11-18 19:27:42.941682] local.INFO: Blade id 1218  
+[2025-11-18 19:27:43.142709] local.INFO: Blade id 1221  
+[2025-11-18 19:27:43.339725] local.INFO: Blade id 1224  
+[2025-11-18 19:27:43.535171] local.INFO: Blade id 1227  
+[2025-11-18 19:27:43.730886] local.INFO: Blade id 1230  
+[2025-11-18 19:27:43.923583] local.INFO: Blade id 1233  
+[2025-11-18 19:27:44.123988] local.INFO: Blade id 1236  
+[2025-11-18 19:27:44.327180] local.INFO: Blade id 1239  
+[2025-11-18 19:27:44.523652] local.INFO: Blade id 1242  
+[2025-11-18 19:27:44.718578] local.INFO: Blade id 1245  
+[2025-11-18 19:27:44.912759] local.INFO: Blade id 1248  
+[2025-11-18 19:27:45.108186] local.INFO: Blade id 1251  
+[2025-11-18 19:27:45.306406] local.INFO: Blade id 1254  
+[2025-11-18 19:27:45.504192] local.INFO: Blade id 1257  
+[2025-11-18 19:27:45.700691] local.INFO: Blade id 1260  
+[2025-11-18 19:27:45.894477] local.INFO: Blade id 1263  
+[2025-11-18 19:27:46.086918] local.INFO: Blade id 1266  
+[2025-11-18 19:27:46.280143] local.INFO: Blade id 1269  
+[2025-11-18 19:27:46.475219] local.INFO: Blade id 1272  
+[2025-11-18 19:27:46.673031] local.INFO: Blade id 1275  
+[2025-11-18 19:27:46.866866] local.INFO: Blade id 1278  
+[2025-11-18 19:27:47.061006] local.INFO: Blade id 1281  
+[2025-11-18 19:27:47.255486] local.INFO: Blade id 1284  
+[2025-11-18 19:27:47.452374] local.INFO: Blade id 1287  
+[2025-11-18 19:27:47.651733] local.INFO: Blade id 1290  
+[2025-11-18 19:27:47.851846] local.INFO: Blade id 1293  
+[2025-11-18 19:27:48.047921] local.INFO: Blade id 1296  
+[2025-11-18 19:27:48.242484] local.INFO: Blade id 1299  
+[2025-11-18 19:27:48.434847] local.INFO: Blade id 1302  
+[2025-11-18 19:27:48.628209] local.INFO: Blade id 1305  
+[2025-11-18 19:27:48.823181] local.INFO: Blade id 1308  
+[2025-11-18 19:27:49.022048] local.INFO: Blade id 1311  
+[2025-11-18 19:27:49.216038] local.INFO: Blade id 1314  
+[2025-11-18 19:27:49.406946] local.INFO: Blade id 1317  
+[2025-11-18 19:27:49.602605] local.INFO: Blade id 1320  
+[2025-11-18 19:27:49.798026] local.INFO: Blade id 1323  
+[2025-11-18 19:27:49.995477] local.INFO: Blade id 1326  
+[2025-11-18 19:27:50.193801] local.INFO: Blade id 1329  
+[2025-11-18 19:27:50.388528] local.INFO: Blade id 1332  
+[2025-11-18 19:27:50.582825] local.INFO: Blade id 1335  
+[2025-11-18 19:27:50.774916] local.INFO: Blade id 1338  
+[2025-11-18 19:27:50.970170] local.INFO: Blade id 1341  
+[2025-11-18 19:27:51.166336] local.INFO: Blade id 1344  
+[2025-11-18 19:27:51.365480] local.INFO: Blade id 1347  
+[2025-11-18 19:27:51.563721] local.INFO: Blade id 1350  
+[2025-11-18 19:27:51.758194] local.INFO: Blade id 1353  
+[2025-11-18 19:27:51.953586] local.INFO: Blade id 1356  
+[2025-11-18 19:27:52.153014] local.INFO: Blade id 1359  
+[2025-11-18 19:27:52.351869] local.INFO: Blade id 1362  
+[2025-11-18 19:27:52.549015] local.INFO: Blade id 1365  
+[2025-11-18 19:27:52.744097] local.INFO: Blade id 1368  
+[2025-11-18 19:27:52.937753] local.INFO: Blade id 1371  
+[2025-11-18 19:27:53.130672] local.INFO: Blade id 1374  
+[2025-11-18 19:27:53.325023] local.INFO: Blade id 1377  
+[2025-11-18 19:27:53.525668] local.INFO: Blade id 1380  
+[2025-11-18 19:27:53.736159] local.INFO: Blade id 1383  
+[2025-11-18 19:27:53.931143] local.INFO: Blade id 1386  
+[2025-11-18 19:27:54.126855] local.INFO: Blade id 1389  
+[2025-11-18 19:27:54.319674] local.INFO: Blade id 1392  
+[2025-11-18 19:27:54.513483] local.INFO: Blade id 1395  
+[2025-11-18 19:27:54.713306] local.INFO: Blade id 1398  
+[2025-11-18 19:27:54.909426] local.INFO: Blade id 1401  
+[2025-11-18 19:27:55.105210] local.INFO: Blade id 1404  
+[2025-11-18 19:27:55.298180] local.INFO: Blade id 1407  
+[2025-11-18 19:27:55.489872] local.INFO: Blade id 1410  
+[2025-11-18 19:27:55.686750] local.INFO: Blade id 1413  
+[2025-11-18 19:27:55.885802] local.INFO: Blade id 1416  
+[2025-11-18 19:27:56.082265] local.INFO: Blade id 1419  
+[2025-11-18 19:27:56.277747] local.INFO: Blade id 1422  
+[2025-11-18 19:27:56.469204] local.INFO: Blade id 1425  
+[2025-11-18 19:27:56.663039] local.INFO: Blade id 1428  
+[2025-11-18 19:27:56.858543] local.INFO: Blade id 1431  
+[2025-11-18 19:27:57.056251] local.INFO: Blade id 1434  
+[2025-11-18 19:27:57.252568] local.INFO: Blade id 1437  
+[2025-11-18 19:27:57.446919] local.INFO: Blade id 1440  
+[2025-11-18 19:27:57.640038] local.INFO: Blade id 1443  
+[2025-11-18 19:27:57.835854] local.INFO: Blade id 1446  
+[2025-11-18 19:27:58.030714] local.INFO: Blade id 1449  
+[2025-11-18 19:27:58.229558] local.INFO: Blade id 1452  
+[2025-11-18 19:27:58.423594] local.INFO: Blade id 1455  
+[2025-11-18 19:27:58.614507] local.INFO: Blade id 1458  
+[2025-11-18 19:27:58.807536] local.INFO: Blade id 1461  
+[2025-11-18 19:27:58.999674] local.INFO: Blade id 1464  
+[2025-11-18 19:27:59.194847] local.INFO: Blade id 1467  
+[2025-11-18 19:27:59.266680] local.ERROR: Maximum execution time of 30 seconds exceeded {"userId":"a15bab96-d275-4d45-ba99-e5df0a4bc11e","exception":"[object] (Symfony\\Component\\ErrorHandler\\Error\\FatalError(code: 0): Maximum execution time of 30 seconds exceeded at /Users/massimorainato/Sites/yapcp/vendor/laravel/framework/src/Illuminate/Collections/Collection.php:67)
+[stacktrace]
+#0 {main}
+"} 
