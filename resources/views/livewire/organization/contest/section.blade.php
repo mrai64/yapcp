@@ -34,7 +34,12 @@
                 #{{ $section_item->works->count() }} {{ __(" works participants") }} | {{$section_item->code}} | {{$section_item->name_en }} 
                 <br />
                 <a href="{{ route('organization-contest-section-list', ['sid' => $section_item->id])}}">
-                [{{ __("Review") }}]</a>
+                    [ {{ __("Review") }} ]
+                </a>
+                <a href="{{ route('contest-section-board', ['sid' => $contestSections->id ]) }}">
+                    [ {{ __("General Vote Board for that section") }} ]
+                </a>    
+
             </li>
             @endforeach
         </ul>

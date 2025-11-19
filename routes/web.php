@@ -81,6 +81,7 @@ Route::get(    '/contest/section/modify/{sid}', Contest\Section\Modify::class, [
 Route::get(    '/contest/section/modify/{sid}', Contest\Section\Modify::class, ['sid'] )->middleware(['auth', 'verified'])->name('modify-contest-section');
 Route::get(    '/contest/section/remove/{sid}', Contest\Section\Remove::class, ['sid'] )->middleware(['auth', 'verified'])->name('remove-contest-section');
 Route::delete( '/contest/section/remove/{sid}', Contest\Section\Remove::class, ['sid'] )->middleware(['auth', 'verified']);
+// See also 
 
 // Organization build contest /3 - Jury definition for every section [for Contest only]
 // App\Livewire\Contest\Jury
@@ -91,7 +92,7 @@ Route::get( '/contest/jury/board/{sid}', Contest\Jury\Board::class, ['sid'] )->m
 Route::get( '/contest/jury/vote/{sid}',  Contest\Jury\Vote::class,  ['sid'] )->middleware(['auth', 'verified'])->name('contest-jury-vote');
 Route::post('/contest/jury/vote/{sid}',  Contest\Jury\Vote::class,  ['sid'] )->middleware(['auth', 'verified']);
 Route::get( '/contest/jury/modify-vote/{vid}', Contest\Jury\VoteMod::class,  ['vid'] )->middleware(['auth', 'verified'])->name('contest-jury-vote-mod');
-// TODO vote again
+// TODO change Jury into Juror, jury is collective
 
 // Organization build Contest /4 - awards definition [for Contest n Circuit]
 // App\Livewire\Contest\Awards
@@ -107,3 +108,6 @@ Route::delete( '/contest/subscribe/remove/{pid}',     Contest\Subscribe\Remove::
 // App\Livewire\Contest\Participants
 Route::get( '/contest/participants/listed/{cid}', Contest\Participants\Listed::class, ['cid'])->middleware(['auth', 'verified'])->name('public-participant-list');
 Route::get( '/contest/participants/modify/{cid}', Contest\Participants\Modify::class, ['cid'])->middleware(['auth', 'verified'])->name('modify-participant-list');
+
+// Contest live - cumulative vote board
+Route::get(    '/contest/section/voteboard/{sid}', Contest\Section\Voteboard::class, ['sid'] )->middleware(['auth', 'verified'])->name('contest-section-board');
