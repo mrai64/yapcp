@@ -23,17 +23,17 @@ class Voteddias extends Component
      */
     public static function miniature(string $original_file) : string 
     {
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called');
+        // Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called');
         $last_slash_pos = strrpos($original_file, '/');
         $path = substr($original_file, 0, $last_slash_pos + 1);
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' path:' . $path);
+        // Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' path:' . $path);
         $name_file  = '300px_'.substr($original_file, $last_slash_pos + 1);
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' name:' . $name_file);
+        // Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' name:' . $name_file);
         if (Storage::disk('public')->exists('contests/'.$path.$name_file) ) {
             Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' found' );
             return $path . $name_file;
         }
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' not found' );
+        // Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' not found' );
         return $original_file;
     }
 

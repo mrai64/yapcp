@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Log;
             {{ __(" upto: ") }}
             {{ $contest->day_4_jury_closing->format('Y-m-d') }}
             | {{ __("Vote Status for that section: ") }}
-            [ {{ count($votedWorks) }} voted over all {{ count($participantWorks) + count($votedWorks) }} ]
+            [ {{ $votedCounter }} voted over all {{ $participantsCounter }} ]
         </p>
     </div>
 
@@ -57,7 +57,7 @@ use Illuminate\Support\Facades\Log;
     @if (count($votedWorks) > 0)
     <!-- set of voted -->
     <h2 class="fyk text-2xl">
-        {{ __("Already voted (but you can change it) ") . count($votedWorks) }}
+        {{ __("Already voted (but you can change it) ") . $votedCounter . ' / ' . $participantsCounter }}
     </h2>
 
         @foreach ($votedWorks as $vid)

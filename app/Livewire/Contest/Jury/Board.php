@@ -37,6 +37,7 @@ class Board extends Component
 
     public $juror_id;
     public $juror;
+
     public $contest_section_id;
     public $contest_section;
     public $contest;
@@ -46,6 +47,8 @@ class Board extends Component
     public $voted_works;
     public $voted_ids;
     public $vote_rule;
+    public $participants_counter;
+    public $voted_counter;
 
     /**
      * check if a path/namefile has a twin path/300px_namefile 
@@ -90,24 +93,29 @@ class Board extends Component
 
         // how that juror had voted
         // $this->voted_ids = ContestVote::voted_ids( $this->contest->id, $this->contest_section->id);
-        $voted = ContestVote::select('id')->where('juror_user_id', $this->juror_id)->where('section_id', $sid)->where('contest_id', $this->contest_section->contest_id)->get();
+        $voted = ContestVote::select('work_id')
+            ->where('juror_user_id', $this->juror_id)
+            ->where('section_id', $sid)
+            ->where('contest_id', $this->contest->id)
+            ->get();
         $this->voted_ids = array_values( collect($voted)->toArray() );
-        // Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' voted_ids:' . json_encode( $this->voted_ids ) );
-
-        // SET of un-voted - limited to 24 
+        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' voted_ids:' . json_encode( $this->voted_ids ) );
+        
+        // SET of un-voted - limited to 12
         if (count($this->voted_ids)) {
             $this->contest_works = DB::table( ContestWork::table_name)
-                ->select(['contest_id', 'section_id', 'work_id', 'extension'])
-                ->where('section_id',   $sid)
-                ->where('contest_id',   $this->contest_section->contest_id)
-                ->whereNotIn('work_id', $this->voted_ids )
-                ->limit(24)
-                ->get();
+                    ->select(['contest_id', 'section_id', 'work_id', 'extension'])
+                    ->where('section_id',   $sid)
+                    ->where('contest_id',   $this->contest->id)
+                    ->whereNotIn('work_id', $this->voted_ids )
+                    ->limit(12)
+                    ->get();
+            Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' contest_works:' . json_encode( $this->contest_works ) );
 
         } else {
             $this->contest_works = ContestWork::where('contest_id', $this->contest->id)
                 ->where('section_id', $sid)
-                ->limit(24)
+                ->limit(12)
                 ->get(['contest_id', 'section_id', 'work_id', 'extension']);
         }
         $this->participant_works=[];
@@ -115,6 +123,9 @@ class Board extends Component
             $this->participant_works[] = self::miniature($contest_work->contest_id .'/'. $contest_work->section_id .'/'. $contest_work->work_id .'.'. $contest_work->extension);
         }
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' participant_works:' . json_encode( $this->participant_works ) );
+
+        $this->participants_counter = ContestWork::where('section_id', $sid)
+            ->where('contest_id', $this->contest->id)->count();
 
     }
 
@@ -125,6 +136,7 @@ class Board extends Component
     public function render() : View
     {
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called');
+        $this->voted_counter = ContestVote::where('section_id', $this->contest_section_id )->where('juror_user_id', $this->juror_id)->count();
 
         // select contest_votes.id 
         $votedWorks = DB::table( ContestVote::table_name )
@@ -142,6 +154,8 @@ class Board extends Component
             'contestSections'   => $this->contest_section,
             'contestWorks'      => $this->contest_works, 
             'participantWorks'  => $this->participant_works,
+            'votedCounter'      => $this->voted_counter,
+            'participantsCounter' => $this->participants_counter,
         ]);
     }
 
