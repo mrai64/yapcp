@@ -100,7 +100,7 @@ class UserContact extends Model
         return $photo_box;
     }
     /**
-     * 
+     * @return string first name last name / country_id
      */
     public static function get_first_last_name(string $uid) : string
     {

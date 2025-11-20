@@ -1,4 +1,8 @@
 <?php
+/**
+ * auxiliary table
+ * - for user_roles
+ */
 
 namespace Database\Seeders;
 

@@ -1,24 +1,24 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use Illuminate\Support\Facades\Auth;
 use App\Livewire\Contest;
 use App\Livewire\Federation;
 use App\Livewire\Organization;
 use App\Livewire\User;
 use App\Livewire\Work;
-use App\Models\UserRole;
 
+// base 
 Route::view('/', 'welcome');
 Route::view('/credits', 'credits');
 
-Route::view('dashboard', 'dashboard')
+// user dashboard 
+Route::view('/user/dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+    ->name('dashboard'); // TODO will be user-dashboard
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])
-    ->name('profile');
+    ->name('profile'); // TODO will be user-profile
 
 require __DIR__.'/auth.php';
 // route > model NO
@@ -62,30 +62,30 @@ Route::get( '/dashboard/role/federation/add', User\Role\Federation\Add::class)->
 Route::get( '/dashboard/role/organization/add', User\Role\Organization\Add::class)->middleware(['auth', 'verified'])->name('add-user-role-organization');
 
 // App\Livewire\Work - (aka LiveWire\UserWork) parm user id passed via Auth::id()
-Route::get(   '/work/list',         Work\Listed::class         )->middleware(['auth', 'verified'])->name('photo-box-list');
-Route::get(   '/work/add',          Work\Add::class            )->middleware(['auth', 'verified'])->name('photo-box-add');
-Route::get(   '/work/modify/{wid}', Work\Modify::class, ['wid'])->middleware(['auth', 'verified'])->name('photo-box-modify');
-Route::get(   '/work/remove/{wid}', Work\Remove::class, ['wid'])->middleware(['auth', 'verified'])->name('delete-photo-box');
-Route::delete('/work/remove/{wid}', Work\Remove::class, ['wid'])->middleware(['auth', 'verified']);
+Route::get(   '/user/work/list',         Work\Listed::class         )->middleware(['auth', 'verified'])->name('photo-box-list');
+Route::get(   '/user/work/add',          Work\Add::class            )->middleware(['auth', 'verified'])->name('photo-box-add');
+Route::get(   '/user/work/modify/{wid}', Work\Modify::class, ['wid'])->middleware(['auth', 'verified'])->name('photo-box-modify');
+Route::get(   '/user/work/remove/{wid}', Work\Remove::class, ['wid'])->middleware(['auth', 'verified'])->name('delete-photo-box');
+Route::delete('/user/work/remove/{wid}', Work\Remove::class, ['wid'])->middleware(['auth', 'verified']);
 
 // Organization build Contest /1 - Main Card [for Contest n Circuit]
 // App\Livewire\Contest
-Route::get( '/contest/add/{oid}',       Contest\Add::class,       ['oid'])->middleware(['auth', 'verified'])->name('contest-add');
-Route::get( '/contest/modify/{cid}',    Contest\Modify::class,    ['cid'])->middleware(['auth', 'verified'])->name('modify-contest');
+Route::get( '/contest/build/add/{oid}',       Contest\Add::class,       ['oid'])->middleware(['auth', 'verified'])->name('contest-add');
+Route::get( '/contest/build/modify/{cid}',    Contest\Modify::class,    ['cid'])->middleware(['auth', 'verified'])->name('modify-contest');
 Route::get( '/contest/listed',          Contest\Listed::class            )->middleware(['auth', 'verified'])->name('contest-list');
 
 // Organization build Contest /2 - section in contest [for Contest n Circuit]
 // App\Livewire\Contest\Section
-Route::get(    '/contest/section/add/{cid}',    Contest\Section\Add::class, ['cid'] )->middleware(['auth', 'verified'])->name('contest-section-add');
-Route::get(    '/contest/section/modify/{sid}', Contest\Section\Modify::class, ['sid'] )->middleware(['auth', 'verified'])->name('modify-contest-section');
-Route::get(    '/contest/section/modify/{sid}', Contest\Section\Modify::class, ['sid'] )->middleware(['auth', 'verified'])->name('modify-contest-section');
-Route::get(    '/contest/section/remove/{sid}', Contest\Section\Remove::class, ['sid'] )->middleware(['auth', 'verified'])->name('remove-contest-section');
-Route::delete( '/contest/section/remove/{sid}', Contest\Section\Remove::class, ['sid'] )->middleware(['auth', 'verified']);
+Route::get(    '/contest/build/section/add/{cid}',    Contest\Section\Add::class, ['cid'] )->middleware(['auth', 'verified'])->name('contest-section-add');
+Route::get(    '/contest/build/section/modify/{sid}', Contest\Section\Modify::class, ['sid'] )->middleware(['auth', 'verified'])->name('modify-contest-section');
+Route::get(    '/contest/build/section/modify/{sid}', Contest\Section\Modify::class, ['sid'] )->middleware(['auth', 'verified'])->name('modify-contest-section');
+Route::get(    '/contest/build/section/remove/{sid}', Contest\Section\Remove::class, ['sid'] )->middleware(['auth', 'verified'])->name('remove-contest-section');
+Route::delete( '/contest/build/section/remove/{sid}', Contest\Section\Remove::class, ['sid'] )->middleware(['auth', 'verified']);
 // See also 
 
 // Organization build contest /3 - Jury definition for every section [for Contest only]
 // App\Livewire\Contest\Jury
-Route::get( '/contest/jury/add/{sid}',   Contest\Jury\Add::class,   ['sid'] )->middleware(['auth', 'verified'])->name('contest-jury-add');
+Route::get( '/contest/build/jury/add/{sid}',   Contest\Jury\Add::class,   ['sid'] )->middleware(['auth', 'verified'])->name('contest-jury-add');
 
 // Contest life - Juror Vote
 Route::get( '/contest/jury/board/{sid}', Contest\Jury\Board::class, ['sid'] )->middleware(['auth', 'verified'])->name('contest-jury-board');
@@ -96,7 +96,7 @@ Route::get( '/contest/jury/modify-vote/{vid}', Contest\Jury\VoteMod::class,  ['v
 
 // Organization build Contest /4 - awards definition [for Contest n Circuit]
 // App\Livewire\Contest\Awards
-Route::get( '/contest/award/add/{cid}', Contest\Award\Add::class, ['cid'] )->middleware(['auth', 'verified'])->name('contest-award-add');
+Route::get( '/contest/build/award/add/{cid}', Contest\Award\Add::class, ['cid'] )->middleware(['auth', 'verified'])->name('contest-award-add');
 
 // Contest live - Participant add work to contest section
 // App\Livewire\Contest\Subscribe - maybe also contest\work\add

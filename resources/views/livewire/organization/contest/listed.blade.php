@@ -33,16 +33,25 @@
             End   Jury: {{$contest->day_4_jury_closing->format("Y-m-d") }} 
             <br />
             <br />
-        </p>
-        <h3 class="fyk text-2xl">{{ __("Contest Sections list")}}</h3>
+        </p>        
+    </div>
+    <div>
+        <h3 class="fyk text-2xl mb-4">{{ __("Contest Sections list")}}</h3>
         <ul>
             @foreach( $contest->sections as $section)
-            <li class="small">
-                #{{ $section->works->count() }} {{ __(" works participants for") }} 
-                {{$section->code}}|{{$section->name_en }} <br />
+            <li class="small border rounded-md mb-4 px-4 py-2">
+                <span class="fyk text-2xl">{{$section->code}}|{{$section->name_en }} </span><br />
+                #{{ $section->works->count() }} {{ __(" works participants") }} <br />
+                {{ __("Before Jury works: ")}}
                 <a href="{{ route('organization-contest-section-list', ['sid' => $section->id]) }}">
                     [ {{ __("Section works Review: OK | Warn") }} ]
                 </a> 
+                <br />
+                {{ __("During and after Jury Works: ")}}
+                <a href="{{ route('contest-section-board', ['sid' => $section->id]) }}" target="_blank">
+                    [ {{ __("Contest Section Jury Vote Board")}} ]
+                </a>
+                <br />
                 <br />
                 <br />
             </li>

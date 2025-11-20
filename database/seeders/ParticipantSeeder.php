@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class d_ParticipantSeeder extends Seeder
+class ParticipantSeeder extends Seeder
 {
     public $user;
     public $country = [

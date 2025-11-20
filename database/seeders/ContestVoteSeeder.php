@@ -11,7 +11,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Log;
 
-class e_ContestVoteSeeder extends Seeder
+class ContestVoteSeeder extends Seeder
 {
 
     /**

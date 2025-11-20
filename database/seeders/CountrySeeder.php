@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * auxiliary table 
+ * - for user_contacts
+ * - for federations
+ * - for organizations
+ * - for contests
+ * 
+ */
 namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
