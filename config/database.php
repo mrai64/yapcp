@@ -51,7 +51,8 @@ return [
             // 'username' => env('DB_USERNAME', 'root'),
             // 'password' => env('DB_PASSWORD', ''),
             'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '8889'),
+            // 'port' => env('DB_PORT', '8889'), //  old MAMP parms
+            'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'pcpdb'),
             'username' => env('DB_USERNAME', 'Sql1515403'),
             'password' => env('DB_PASSWORD', '23o860s7no'),
