@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CountrySeeder::class,
          // LanglistSeeder::class,
-         // TimezonelistSeeder::class,
+            RegionSeeder::class,
+            TimezonesSeeder::class,
             FederationSeeder::class,
             FederationSectionSeeder::class,
          // OrganizationSeeder::class,

@@ -1,6 +1,8 @@
 <?php
 /**
- * auxiliary table for timezones
+ * Region means continent
+ * auxiliary table for php timezones
+ * 
  */
 namespace App\Models;
 
