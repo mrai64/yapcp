@@ -1,15 +1,17 @@
 <?php
 /**
+ * Contest main card Modify
  * 2025-09-18 input is contest_id 
+ * 2025-11-24 removed TimezoneList
+ * 
  */
 namespace App\Livewire\Contest;
 
 use App\Models\Contest;
 use App\Models\Country;
 use App\Models\LangList;
-use App\Models\TimezonesList;
+use App\Models\Timezone;
 use Livewire\Component;
-// use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 use Carbon\CarbonImmutable;
@@ -99,11 +101,10 @@ class Modify extends Component
         // $this->updated_at 
         // $this->deleted_at 
 
-        $countries = new Country();
+        $this->countries = Country::country_list_by_country();
 
-        $this->countries = $countries->allByCountry();
-
-        $this->timezone_list = TimezonesList::timezones_list;
+        $timezone_set = Timezone::select('id')->get();
+        $this->timezone_list  = array_values( collect($timezone_set)->toArray() );
 
         $this->lang_list = LangList::lang_list;
 
@@ -138,7 +139,7 @@ class Modify extends Component
             'url_2_concurrent_list'    => 'required|active_url|string|max:255',
             'url_3_admit_n_award_list' => 'required|active_url|string|max:255',
             'url_4_catalogue'          => 'required|active_url|string|max:255',
-            'timezone'                 => 'required|string',
+            'timezone'                 => 'required|exists:timezones,id',
             'day_1_opening'            => 'required|date|after_or_equal:today',
             'day_2_closing'            => 'required|date|after_or_equal:day_1_opening',
             'day_3_jury_opening'       => 'required|date|after_or_equal:day_2_closing',
@@ -192,13 +193,6 @@ class Modify extends Component
                             __("Must be already a registered circuit id, flagged as Circuit;")
                         );
                     }
-                }
-
-                if (!in_array( $this->timezone, TimezonesList::timezones_list )) {
-                    $validator->errors()->add(
-                        'timezone',
-                        __('Must be one of list')
-                    );
                 }
 
                 // insert here check for date limits

@@ -7,12 +7,12 @@ use App\Livewire\Organization;
 use App\Livewire\User;
 use App\Livewire\Work;
 
-// base 
+// base - no access  required
 Route::view('/', 'welcome');
 Route::view('/credits', 'credits');
 
 // user dashboard 
-Route::view('/user/dashboard', 'dashboard')
+Route::view('/dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('dashboard'); // TODO will be user-dashboard
 
@@ -71,7 +71,7 @@ Route::delete('/user/work/remove/{wid}', Work\Remove::class, ['wid'])->middlewar
 // Organization build Contest /1 - Main Card [for Contest n Circuit]
 // App\Livewire\Contest
 Route::get( '/contest/build/add/{oid}',       Contest\Add::class,       ['oid'])->middleware(['auth', 'verified'])->name('contest-add');
-Route::get( '/contest/build/modify/{cid}',    Contest\Modify::class,    ['cid'])->middleware(['auth', 'verified'])->name('modify-contest');
+Route::get( '/contest/modify/{cid}',    Contest\Modify::class,    ['cid'])->middleware(['auth', 'verified'])->name('modify-contest');
 Route::get( '/contest/listed',          Contest\Listed::class            )->middleware(['auth', 'verified'])->name('contest-list');
 
 // Organization build Contest /2 - section in contest [for Contest n Circuit]

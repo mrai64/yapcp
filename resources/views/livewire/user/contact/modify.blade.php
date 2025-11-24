@@ -121,6 +121,7 @@
             <div class="small">@error('lang_local') {{ $message }} @enderror</div>
         </div>
 
+        <!-- timezone -->
         <div class="mb-4">
             <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl" for="timezone">
                 {{ __('Timezone') }}
@@ -131,8 +132,8 @@
                 name="timezone" 
                 required="required"
                 >
-                @foreach ($timezone_list as $timezone_item)
-                <option value="{{ $timezone_item }}" {{ ($timezone_item == $timezone) ? 'selected' : '' }}> {{ $timezone_item }} </option>
+                @foreach ($timezone_list as $k => $timezone_item)
+                <option value="{{ $timezone_item['id'] }}" {{ ($timezone_item['id'] == $timezone) ? 'selected' : '' }}> {{ $timezone_item['id'] }} </option>
                 @endforeach
             </select>
             <div class="small">{{ __('As worldwide platform we need to manage correctly time.') }} {{ __('List is in alphabetically order A>Z') }}</div>

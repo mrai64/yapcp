@@ -1,6 +1,7 @@
 <?php
 /**
- * Contest Main Modify
+ * Contest Main card Modify
+ * 2025-11-24 modified timezone
  */
 
 use App\Models\ContestSection;
@@ -123,6 +124,7 @@ use App\Models\ContestSection;
             <x-input-error class="small" :messages="$errors->get('lang_local')" />
         </div>
 
+        <!-- timezone -->
         <div class="mb-4">
             <x-input-label for="timezone" :value="__('Timezone')" />
             <select
@@ -132,10 +134,9 @@ use App\Models\ContestSection;
                 {{ (true) ? 'required' : 'readonly' }}
                 >
                 @foreach ($timezone_list as $timezone_item)
-                <option value="{{ $timezone_item }}" {{ ($timezone_item == $timezone) ? 'selected' : '' }}> {{ $timezone_item }} </option>
+                <option value="{{ $timezone_item['id'] }}" {{ ($timezone_item['id'] == $timezone) ? 'selected' : '' }}> {{ $timezone_item['id'] }} </option>
                 @endforeach
             </select>
-            <div class="small">{{ __('When * marked, we need help to complete i18n. Help us.')}}</div>
             <x-input-error class="small" :messages="$errors->get('timezone')" />
         </div>
 
