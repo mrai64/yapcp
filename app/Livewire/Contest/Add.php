@@ -19,6 +19,7 @@ use App\Models\LangList;
 use App\Models\Organization;
 use App\Models\TimezonesList;
 use DateTimeImmutable;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Illuminate\Validation\Validator;
@@ -78,6 +79,7 @@ class Add extends Component
      */
     public function mount(string $oid) // organization_id as in route()
     {
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
         $this->contest_id      = Str::uuid();
         $this->organization    = Organization::where('id', $oid)->get()[0];
         $this->organization_id = $this->organization->id; // $oid
@@ -146,6 +148,7 @@ class Add extends Component
      */
     public function render()
     {
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
         return view('livewire.contest.add');
     }
 
@@ -159,6 +162,7 @@ class Add extends Component
      */
     public function rules()
     {
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
         return [
             // id           assigned, not in form
             'country_id'  => 'required|string|exists:countries,id',
@@ -197,6 +201,7 @@ class Add extends Component
      */
     public function after() : array
     {
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
         return [
             function (Validator $validator) {
                 // like validate but
@@ -232,6 +237,7 @@ class Add extends Component
      */
     public function saveNewContest()
     {
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
         $validated = $this->validate(); // apply rules
 
         // TODO pick from form all fields and put in update()
