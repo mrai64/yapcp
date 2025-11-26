@@ -2,7 +2,7 @@
 /**
  *
  * CLASS: app/Livewire/Contest/Jury/Vote.php
- * VIEW:  resources/views/livewire/contest/jury/vote.blade.php
+ * VIEW:  resources/views/livewire.juror.vote.blade.php
  *
  * Contest > section > Juror List > juror Vote
  * input: juror_id via Auth::id
@@ -12,7 +12,7 @@
  * - when set of un-voted work become empty warn: end of jury, back to dashboard
  *
  */
-namespace App\Livewire\Contest\Jury;
+namespace App\Livewire\Juror;
 
 use App\Models\Contest;
 use App\Models\ContestSection;
@@ -20,6 +20,7 @@ use App\Models\ContestVote;
 use App\Models\ContestWork;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
@@ -45,6 +46,8 @@ class Vote extends Component
     public function mount(string $sid) // route()
     {
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called');
+        Gate::authorize('jury-panels', $sid);
+
         $this->contest_section_id = $sid;
 
         $this->juror_user_id      = Auth::id();
@@ -89,7 +92,7 @@ class Vote extends Component
     public function render()
     {
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called');
-        return view('livewire.contest.jury.vote');
+        return view('');
     }
 
     /**

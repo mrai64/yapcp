@@ -27,6 +27,7 @@ class Section extends Component
 {
     use WithPagination;
 
+    public string $section_id;
     public $section;
     public $contest;
     public $contest_flag;
@@ -41,6 +42,8 @@ class Section extends Component
     public function mount(string $sid) // route()
     {
         Log::info('Component '.__CLASS__.' f:'. __FUNCTION__.' l:'.__LINE__. ' called');
+        $this->section_id = $sid; 
+        
         // for headers
         // ContestSection - don't change in pagination
         $this->section = ContestSection::where('id', $sid )->first();

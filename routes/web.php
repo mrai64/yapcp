@@ -6,6 +6,8 @@ use App\Livewire\Federation;
 use App\Livewire\Organization;
 use App\Livewire\User;
 use App\Livewire\Work;
+use App\Livewire\Juror;
+use App\Livewire\Jury;
 
 // base - no access  required
 Route::view('/', 'welcome');
@@ -87,13 +89,6 @@ Route::delete( '/contest/build/section/remove/{sid}', Contest\Section\Remove::cl
 // App\Livewire\Contest\Jury
 Route::get( '/contest/build/jury/add/{sid}',   Contest\Jury\Add::class,   ['sid'] )->middleware(['auth', 'verified'])->name('contest-jury-add');
 
-// Contest life - Juror Vote
-Route::get( '/contest/jury/board/{sid}', Contest\Jury\Board::class, ['sid'] )->middleware(['auth', 'verified'])->name('contest-jury-board');
-Route::get( '/contest/jury/vote/{sid}',  Contest\Jury\Vote::class,  ['sid'] )->middleware(['auth', 'verified'])->name('contest-jury-vote');
-Route::post('/contest/jury/vote/{sid}',  Contest\Jury\Vote::class,  ['sid'] )->middleware(['auth', 'verified']);
-Route::get( '/contest/jury/modify-vote/{vid}', Contest\Jury\VoteMod::class,  ['vid'] )->middleware(['auth', 'verified'])->name('contest-jury-vote-mod');
-// TODO change Jury into Juror, jury is collective
-
 // Organization build Contest /4 - awards definition [for Contest n Circuit]
 // App\Livewire\Contest\Awards
 Route::get( '/contest/build/award/add/{cid}', Contest\Award\Add::class, ['cid'] )->middleware(['auth', 'verified'])->name('contest-award-add');
@@ -109,5 +104,12 @@ Route::delete( '/contest/subscribe/remove/{pid}',     Contest\Subscribe\Remove::
 Route::get( '/contest/participants/listed/{cid}', Contest\Participants\Listed::class, ['cid'])->middleware(['auth', 'verified'])->name('public-participant-list');
 Route::get( '/contest/participants/modify/{cid}', Contest\Participants\Modify::class, ['cid'])->middleware(['auth', 'verified'])->name('modify-participant-list');
 
-// Contest live - cumulative vote board
-Route::get(    '/contest/section/voteboard/{sid}', Contest\Section\Voteboard::class, ['sid'] )->middleware(['auth', 'verified'])->name('contest-section-board');
+// Jury works
+// for jurors only
+Route::get( '/juror/section-board/{sid}', Juror\SectionBoard::class, ['sid'] )->middleware(['auth', 'verified'])->name('contest-jury-board');
+Route::get( '/juror/vote/{sid}',          Juror\Vote::class,  ['sid'] )->middleware(['auth', 'verified'])->name('contest-jury-vote');
+Route::post('/juror/vote/{sid}',          Juror\Vote::class,  ['sid'] )->middleware(['auth', 'verified']);
+Route::get( '/juror/review-vote/{vid}',   Juror\ReviewVote::class,  ['vid'] )->middleware(['auth', 'verified'])->name('contest-jury-vote-mod');
+
+// Contest live - cumulative vote board for a section
+Route::get( '/jury/section-board/{sid}', Jury\SectionBoard::class, ['sid'] )->middleware(['auth', 'verified'])->name('contest-section-board');

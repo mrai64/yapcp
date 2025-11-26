@@ -1,4 +1,12 @@
 <?php
+/**
+ * Component that show miniature of participant work
+ * with some info as vote assigned 
+ * and lnk to change vote
+ * 
+ * reserved for juror
+ * 
+ */
 
 use App\Livewire\Contest\Jury\Voteddias;
 

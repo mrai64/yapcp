@@ -14,6 +14,7 @@
 ?>
 
 <div>
+    <!-- contest header -->
     <div class="header mb-4">
         <h2 class="fyk text-2xl">{{$section->contest->country->flag_code}} | {{$section->contest->name_en }} </h2>
         <p class="small">
@@ -36,7 +37,7 @@
                 <a href="{{ route('organization-contest-section-list', ['sid' => $section_item->id])}}">
                     [ {{ __("Review") }} ]
                 </a>
-                <a href="{{ route('contest-section-board', ['sid' => $contestSections->id ]) }}">
+                <a href="{{ route('contest-section-board', ['sid' => $section->id ]) }}">
                     [ {{ __("General Vote Board for that section") }} ]
                 </a>    
 

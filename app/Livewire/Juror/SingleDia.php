@@ -2,12 +2,12 @@
 /**
  *
  */
-namespace App\Livewire\Contest\Jury;
+namespace App\Livewire\Juror;
 
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
-class Dias extends Component
+class SingleDia extends Component
 {
 
     public string $dias;
@@ -25,6 +25,6 @@ class Dias extends Component
 
     public function render()
     {
-        return view('livewire.contest.jury.dias');
+        return view('livewire.juror.single-dia');
     }
 }

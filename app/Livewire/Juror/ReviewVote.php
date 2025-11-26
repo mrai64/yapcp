@@ -2,13 +2,13 @@
 /**
  * Juror Vote modification 
  * CLASS: app/Livewire/Contest/Jury/VoteMod.php
- * VIEW:  resources/views/livewire/contest/jury/vote-mod.blade.php
+ * VIEW:  resources/views/livewire.juror.review-vote.blade.php
  * 
  * Change vote +1 -1 in vote_rule scale
  * 
  */
 
-namespace App\Livewire\Contest\Jury;
+namespace App\Livewire\Juror;
 
 use App\Models\ContestVote;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 
-class VoteMod extends Component
+class ReviewVote extends Component
 {
     public string $juror_user_id;
     public string $vote_id;
@@ -63,7 +63,7 @@ class VoteMod extends Component
     public function render()
     {
         Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called');
-        return view('livewire.contest.jury.vote-mod');
+        return view('');
     }
 
     // 3. Validation rules only 

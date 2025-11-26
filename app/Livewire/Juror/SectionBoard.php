@@ -1,22 +1,16 @@
 <?php
 /**
- * Contest Section Jury Board 
+ * Contest Section Juror Board 
  * List of work that are in contest for section, 
  * followed by works already voted
  * 
- * list (that)
- * CLASS: app/Livewire/Contest/Jury/Board.php
- * VIEW:  resources/views/livewire/contest/jury/board.blade.php
+ * reserved to juror 
  * 
- * single (next)
- * CLASS: app/Livewire/Contest/Jury/BoardWork.php
- * VIEW:  resources/views/livewire/contest/jury/board-work.blade.php
- *
  * juror_id == Auth::id()
  *
  */
 
-namespace App\Livewire\Contest\Jury;
+namespace App\Livewire\Juror;
 
 use App\Models\Contest;
 use App\Models\ContestSection;
@@ -27,11 +21,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Livewire\WithPagination;
 
-class Board extends Component
+class SectionBoard extends Component
 {
     use WithPagination;
 
@@ -56,17 +51,20 @@ class Board extends Component
      */
     public static function miniature(string $original_file) : string 
     {
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called');
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' called');
         $last_slash_pos = strrpos($original_file, '/');
         $path = substr($original_file, 0, $last_slash_pos + 1);
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' path:' . $path);
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' path:' . $path);
+
         $name_file  = '300px_'.substr($original_file, $last_slash_pos + 1);
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' name:' . $name_file);
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' name:' . $name_file);
+
         if (Storage::disk('public')->exists('contests/'.$path.$name_file) ) {
-            Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' found' );
+            Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' found' );
             return $path . $name_file;
         }
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' not found' );
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' not found' );
+
         return $original_file;
     }
 
@@ -75,21 +73,22 @@ class Board extends Component
      */
     public function mount(string $sid) // route()
     {
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called');
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' called');
+        Gate::authorize('jury-panels', $sid);
 
         $this->juror_id = Auth::id();
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' juror_id:' . $this->juror_id );
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' juror_id:' . $this->juror_id );
 
         $this->juror    = UserContact::where('user_id', $this->juror_id)->first();
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' juror:' . json_encode( $this->juror ) );
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' juror:' . json_encode( $this->juror ) );
 
         $this->contest_section_id = $sid;
         $this->contest_section = ContestSection::where('id', $this->contest_section_id)->first();
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' contest_section:' . json_encode( $this->contest_section ) );
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' contest_section:' . json_encode( $this->contest_section ) );
 
         $this->contest = Contest::where('id', $this->contest_section->contest_id)->first();
         $this->vote_rule = $this->contest->vote_rule;
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' contest:' . json_encode( $this->contest ) );
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' contest:' . json_encode( $this->contest ) );
 
         // how that juror had voted
         // $this->voted_ids = ContestVote::voted_ids( $this->contest->id, $this->contest_section->id);
@@ -99,7 +98,7 @@ class Board extends Component
             ->where('contest_id', $this->contest->id)
             ->get();
         $this->voted_ids = array_values( collect($voted)->toArray() );
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' voted_ids:' . json_encode( $this->voted_ids ) );
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' voted_ids:' . json_encode( $this->voted_ids ) );
         
         // SET of un-voted - limited to 12
         if (count($this->voted_ids)) {
@@ -110,7 +109,7 @@ class Board extends Component
                     ->whereNotIn('work_id', $this->voted_ids )
                     ->limit(12)
                     ->get();
-            Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' contest_works:' . json_encode( $this->contest_works ) );
+            Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' contest_works:' . json_encode( $this->contest_works ) );
 
         } else {
             $this->contest_works = ContestWork::where('contest_id', $this->contest->id)
@@ -122,7 +121,7 @@ class Board extends Component
         foreach($this->contest_works as $contest_work) {
             $this->participant_works[] = self::miniature($contest_work->contest_id .'/'. $contest_work->section_id .'/'. $contest_work->work_id .'.'. $contest_work->extension);
         }
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' participant_works:' . json_encode( $this->participant_works ) );
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' participant_works:' . json_encode( $this->participant_works ) );
 
         $this->participants_counter = ContestWork::where('section_id', $sid)
             ->where('contest_id', $this->contest->id)->count();
@@ -135,7 +134,7 @@ class Board extends Component
      */
     public function render() : View
     {
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called');
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' called');
         $this->voted_counter = ContestVote::where('section_id', $this->contest_section_id )->where('juror_user_id', $this->juror_id)->count();
 
         // select contest_votes.id 
@@ -146,9 +145,9 @@ class Board extends Component
             ->where('contest_id',    $this->contest->id)
             ->orderByDesc('vote')
             ->simplePaginate(12); // or 24 or 36
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' voted_works:' . json_encode($votedWorks) );
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' voted_works:' . json_encode($votedWorks) );
 
-        return view('livewire.contest.jury.board', [
+        return view('', [
             'votedWorks'        => $votedWorks,
             'contest'           => $this->contest,
             'contestSections'   => $this->contest_section,

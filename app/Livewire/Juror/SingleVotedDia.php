@@ -4,14 +4,14 @@
  * 
  */
 
-namespace App\Livewire\Contest\Jury;
+namespace App\Livewire\Juror;
 
 use App\Models\ContestVote;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
-class Voteddias extends Component
+class SingleVotedDia extends Component
 {
 
     public $vid;
@@ -52,6 +52,6 @@ class Voteddias extends Component
 
     public function render()
     {
-        return view('livewire.contest.jury.voteddias');
+        return view('livewire.juror.single-voted-dia');
     }
 }
