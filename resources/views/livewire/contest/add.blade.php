@@ -49,7 +49,7 @@ use App\Models\ContestSection;
     <hr />
     
     <p class="mb-4">{{ __('Well, Contest record is already created.') }}<br />
-        {{ __('If you interrupt compiling form, you can retrieve it in your Organization Daskboard.') }}
+        {{ __('If you interrupt compiling form, you can retrieve it in your Organization Dashboard.') }}
     </p>
     <p class="mb-4">
         {{ __('After that contest general definition, next step are: section list, jury definition, prize list definition.') }}
