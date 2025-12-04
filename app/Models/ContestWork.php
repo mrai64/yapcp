@@ -39,8 +39,8 @@ class ContestWork extends Model
 
     // is_admit
     public const valid_YN = [
-        'Y',
-        'N',
+        true,
+        false,
     ];
 
     // field list fillable in factory
@@ -51,8 +51,8 @@ class ContestWork extends Model
         'country_id', // char(3)
         'user_id', //    uuid fk
         'work_id', //    uuid fk
-        'is_admit', //   Y/N
-        'portfolio_sequence', // 0..255
+        'is_admit', //   true/false as boolean or 1/0 as unsignedTinyInteger
+        'portfolio_sequence', // 0..255 as unsignedTinyInteger
         // created_at
         // updated_at
         // deleted_at
