@@ -6,8 +6,13 @@
  * - for every juror how many voted
  * - sum of votes (no compensations)
  *
+ * Page used by the competition organization to review
+ * the jury's scoreboard, and to request a review of the
+ * score on a limited group of works to reduce the number
+ * and percentage of admitted works. When required.
+ * 
  */
-namespace App\Livewire\Jury;
+namespace App\Livewire\Organization\Contest;
 
 use App\Models\ContestSection;
 use App\Models\ContestVote;
@@ -19,12 +24,13 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Termwind\Components\Raw;
 
-class SectionBoard extends Component
+class JurySections extends Component
 {
     use WithPagination;
 
     public string $section_id;
     public        $contest_section;
+    public        $section;
     public string $contest_id;
     public        $total_work_participants; // too much
 
@@ -38,9 +44,8 @@ class SectionBoard extends Component
     {
         Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__.' l:'.__LINE__ . ' called');
         $this->section_id = $sid;
-
-        $this->contest_section = ContestSection::where('id', $this->section_id)->first();
-        $this->contest_id = $this->contest_section->contest_id;
+        $this->section = ContestSection::where('id', $sid)->first();
+        $this->contest_id = $this->section->contest_id;
 
         $this->total_work_participants = ContestWork::where('section_id', $this->section_id)->where('contest_id', $this->contest_id)->count();
     }
@@ -103,7 +108,7 @@ class SectionBoard extends Component
 
         */
 
-        return view('livewire.jury.section-board', [
+        return view('livewire.organization.contest.jury-sections', [
             'sectionResult' => $SectionResult
         ]);
     }

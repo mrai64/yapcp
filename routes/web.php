@@ -27,6 +27,9 @@ require __DIR__.'/auth.php';
 // Route::get('/federation', Federation::class);
 // route > component YES 
 
+// App\Livewire\User
+Route::get( '/user/contact/modify', User\Contact\Modify::class)->middleware(['auth', 'verified'])->name('user-contact-modify');
+
 // App\Livewire\Federation
 Route::get(   '/federation/add',          Federation\Add::class)->middleware(['auth', 'verified'])->name('add-federation');
 Route::get(   '/federation/list',         Federation\Listed::class)->middleware(['auth', 'verified'])->name('federation-list');
@@ -49,19 +52,33 @@ Route::get(   '/organization/remove/{id}',    Organization\Remove::class, ['id']
 Route::delete('/organization/remove/{id}',    Organization\Remove::class, ['id'])->middleware(['auth', 'verified']);
 Route::get(   '/organization/dashboard/{id}', Organization\Dashboard::class, ['id'])->middleware(['auth', 'verified'])->name('organization-dashboard');
 
-// App\Livewire\Organization\Contest
-Route::get( '/organization/contest/section_list/{cid}',  Organization\Contest\Listed::class,    ['cid'])->middleware(['auth', 'verified'])->name('organization-contest-list');
-Route::get( '/organization/contest/section_works/{sid}', Organization\Contest\Section::class,   ['sid'])->middleware(['auth', 'verified'])->name('organization-contest-section-list');
-Route::get( '/organization/contest/warn/{wid}',          Organization\Contest\WarnEmail::class, ['wid'])->middleware(['auth', 'verified'])->name('organization-contest-warn-email');
-Route::get( '/organization/contest/pass/{wid}',          Organization\Contest\PassNext::class,  ['wid'])->middleware(['auth', 'verified'])->name('organization-contest-pass-next');
-
-// App\Livewire\User
-Route::get( '/user/contact/modify', User\Contact\Modify::class)->middleware(['auth', 'verified'])->name('user-contact-modify');
-
 // App\Livewire\UserRole
 Route::get( '/dashboard/role',     User\Role\Listed::class)->middleware(['auth', 'verified'])->name('user-role-list');
 Route::get( '/dashboard/role/federation/add', User\Role\Federation\Add::class)->middleware(['auth', 'verified'])->name('add-user-role-federation');
 Route::get( '/dashboard/role/organization/add', User\Role\Organization\Add::class)->middleware(['auth', 'verified'])->name('add-user-role-organization');
+
+// Organization build Contest /1 - Main Card [for Contest n Circuit]
+// App\Livewire\Contest
+Route::get( '/contest/listed',          Contest\Listed::class            )->middleware(['auth', 'verified'])->name('contest-list');
+Route::get( '/contest/add/{oid}',       Contest\Add::class,       ['oid'])->middleware(['auth', 'verified'])->name('contest-add');
+Route::get( '/contest/modify/{cid}',    Contest\Modify::class,    ['cid'])->middleware(['auth', 'verified'])->name('modify-contest');
+
+// Organization build Contest /2 - section in contest [for Contest n Circuit]
+// App\Livewire\Contest\Section
+Route::get(    '/contest/section/add/{cid}',    Contest\Section\Add::class, ['cid'] )->middleware(['auth', 'verified'])->name('contest-section-add');
+Route::get(    '/contest/section/modify/{sid}', Contest\Section\Modify::class, ['sid'] )->middleware(['auth', 'verified'])->name('modify-contest-section');
+Route::get(    '/contest/section/modify/{sid}', Contest\Section\Modify::class, ['sid'] )->middleware(['auth', 'verified'])->name('modify-contest-section');
+Route::get(    '/contest/section/remove/{sid}', Contest\Section\Remove::class, ['sid'] )->middleware(['auth', 'verified'])->name('remove-contest-section');
+Route::delete( '/contest/section/remove/{sid}', Contest\Section\Remove::class, ['sid'] )->middleware(['auth', 'verified']);
+// See also 
+
+// Organization build contest /3 - Jury definition for every section [for Contest only]
+// App\Livewire\Contest\Jury
+Route::get( '/contest/jury/add/{sid}',   Contest\Jury\Add::class,   ['sid'] )->middleware(['auth', 'verified'])->name('contest-jury-add');
+
+// Organization build Contest /4 - awards definition [for Contest n Circuit]
+// App\Livewire\Contest\Awards
+Route::get( '/contest/award/add/{cid}', Contest\Award\Add::class, ['cid'] )->middleware(['auth', 'verified'])->name('contest-award-add');
 
 // App\Livewire\Work - (aka LiveWire\UserWork) parm user id passed via Auth::id()
 Route::get(   '/user/work/list',         Work\Listed::class         )->middleware(['auth', 'verified'])->name('photo-box-list');
@@ -69,29 +86,6 @@ Route::get(   '/user/work/add',          Work\Add::class            )->middlewar
 Route::get(   '/user/work/modify/{wid}', Work\Modify::class, ['wid'])->middleware(['auth', 'verified'])->name('photo-box-modify');
 Route::get(   '/user/work/remove/{wid}', Work\Remove::class, ['wid'])->middleware(['auth', 'verified'])->name('delete-photo-box');
 Route::delete('/user/work/remove/{wid}', Work\Remove::class, ['wid'])->middleware(['auth', 'verified']);
-
-// Organization build Contest /1 - Main Card [for Contest n Circuit]
-// App\Livewire\Contest
-Route::get( '/contest/build/add/{oid}',       Contest\Add::class,       ['oid'])->middleware(['auth', 'verified'])->name('contest-add');
-Route::get( '/contest/modify/{cid}',    Contest\Modify::class,    ['cid'])->middleware(['auth', 'verified'])->name('modify-contest');
-Route::get( '/contest/listed',          Contest\Listed::class            )->middleware(['auth', 'verified'])->name('contest-list');
-
-// Organization build Contest /2 - section in contest [for Contest n Circuit]
-// App\Livewire\Contest\Section
-Route::get(    '/contest/build/section/add/{cid}',    Contest\Section\Add::class, ['cid'] )->middleware(['auth', 'verified'])->name('contest-section-add');
-Route::get(    '/contest/build/section/modify/{sid}', Contest\Section\Modify::class, ['sid'] )->middleware(['auth', 'verified'])->name('modify-contest-section');
-Route::get(    '/contest/build/section/modify/{sid}', Contest\Section\Modify::class, ['sid'] )->middleware(['auth', 'verified'])->name('modify-contest-section');
-Route::get(    '/contest/build/section/remove/{sid}', Contest\Section\Remove::class, ['sid'] )->middleware(['auth', 'verified'])->name('remove-contest-section');
-Route::delete( '/contest/build/section/remove/{sid}', Contest\Section\Remove::class, ['sid'] )->middleware(['auth', 'verified']);
-// See also 
-
-// Organization build contest /3 - Jury definition for every section [for Contest only]
-// App\Livewire\Contest\Jury
-Route::get( '/contest/build/jury/add/{sid}',   Contest\Jury\Add::class,   ['sid'] )->middleware(['auth', 'verified'])->name('contest-jury-add');
-
-// Organization build Contest /4 - awards definition [for Contest n Circuit]
-// App\Livewire\Contest\Awards
-Route::get( '/contest/build/award/add/{cid}', Contest\Award\Add::class, ['cid'] )->middleware(['auth', 'verified'])->name('contest-award-add');
 
 // Contest live - Participant add work to contest section
 // App\Livewire\Contest\Subscribe - maybe also contest\work\add
@@ -111,5 +105,15 @@ Route::get( '/juror/vote/{sid}',          Juror\Vote::class,  ['sid'] )->middlew
 Route::post('/juror/vote/{sid}',          Juror\Vote::class,  ['sid'] )->middleware(['auth', 'verified']);
 Route::get( '/juror/review-vote/{vid}',   Juror\ReviewVote::class,  ['vid'] )->middleware(['auth', 'verified'])->name('contest-jury-vote-mod');
 
+// App\Livewire\Organization\Contest
+Route::get( '/organization/contest/section-list/{cid}',  Organization\Contest\SectionListed::class,    ['cid'])->middleware(['auth', 'verified'])->name('organization-contest-list');
+Route::get( '/organization/contest/section-review/{sid}', Organization\Contest\SectionReview::class,   ['sid'])->middleware(['auth', 'verified'])->name('organization-contest-section-list');
+Route::get( '/organization/contest/warn/{wid}',          Organization\Contest\WarnEmail::class, ['wid'])->middleware(['auth', 'verified'])->name('organization-contest-warn-email');
+Route::get( '/organization/contest/pass/{wid}',          Organization\Contest\PassNext::class,  ['wid'])->middleware(['auth', 'verified'])->name('organization-contest-pass-next');
+
 // Contest live - cumulative vote board for a section
-Route::get( '/jury/section-board/{sid}', Jury\SectionBoard::class, ['sid'] )->middleware(['auth', 'verified'])->name('contest-section-board');
+Route::get( '/organization/contest/section-jury/{sid}', Organization\Contest\JurySections::class, ['sid'] )->middleware(['auth', 'verified'])->name('contest-section-board');
+
+// Contest live - After jury first works set admit list
+Route::get( '/organization/contest/section-admission/{sid}',  Organization\Contest\SectionAdmission::class, ['sid'])->middleware(['auth', 'verified'])->name('organization-contest-admit');
+

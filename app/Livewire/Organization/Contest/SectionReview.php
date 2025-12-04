@@ -8,7 +8,7 @@
  * Sorry to see that every single image sucks 70 sec to be processed.
  *
  * CLASS: app/Livewire/Organization/Contest/Section.php
- * VIEW:  resources/views/livewire/organization.contest.section.blade.php
+ * VIEW:  resources/views/livewire.organization.contest.section-review.blade.php
  *
  */
 
@@ -23,7 +23,7 @@ use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class Section extends Component
+class SectionReview extends Component
 {
     use WithPagination;
 
@@ -94,9 +94,9 @@ class Section extends Component
 
         Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' out: ' . json_encode($userWorksSet ) );
 
-        //NO return view('livewire.organization.contest.section')->with([ 'user_works_set' => $this->user_works_set ]);
+        //NO return view('')->with([ 'user_works_set' => $this->user_works_set ]);
         // no snake_case but camelCase
-        return view('livewire.organization.contest.section', [ 
+        return view('', [ 
             'userWorksSet' => $userWorksSet, 
             'section'      => $section,
         ]);

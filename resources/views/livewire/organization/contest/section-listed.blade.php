@@ -36,7 +36,7 @@
         </p>        
     </div>
     <div>
-        <h3 class="fyk text-2xl mb-4">{{ __("Contest Sections list")}}</h3>
+        <h3 class="fyk text-2xl mb-4">{{ __("Contest Live Sections list")}}</h3>
         <ul>
             @foreach( $contest->sections as $section)
             <li class="small border rounded-md mb-4 px-4 py-2">

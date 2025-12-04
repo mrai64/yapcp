@@ -21,7 +21,7 @@ use App\Models\Contest;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
-class Listed extends Component
+class SectionListed extends Component
 {
     public $contest;
 
@@ -41,6 +41,6 @@ class Listed extends Component
     public function render()
     {
         Log::info('Component '. __CLASS__ . ' f:'. __FUNCTION__.' l:'.__LINE__. ' called');
-        return view('livewire.organization.contest.listed');
+        return view('livewire.organization.contest.section-listed');
     }
 }

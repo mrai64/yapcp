@@ -2,8 +2,8 @@
 /**
  * Contest Section - Work List - for Organization Review 
  * 
- * CLASS: app/Livewire/Organization/Contest/Section.php
- * VIEW:  resources/views/livewire/organization/contest/section.blade.php
+ * CLASS: app/Livewire/Organization/Contest/SectionBoard.php
+ * VIEW:  resources/views/livewire/organization/contest/section-board.blade.php
  *
  * Not all rules are automatic-able, i.e. if you ask to search
  * sign and mark, personal signature an mark on author' works,
