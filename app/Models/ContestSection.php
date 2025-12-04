@@ -123,8 +123,10 @@ class ContestSection extends Model
     {
         Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         try {
-            return self::whereNull('deleted_at')->where('contest_id', $contest_id)
-                ->orderBy('id')->first('id')['id'];
+            $first_section_id = self::where('contest_id', $contest_id)
+            ->orderBy('name_en')->first();
+            Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' 1st: ' . json_encode($first_section_id->id));
+            return $first_section_id->id;
         } catch (\Throwable $th) {
             Log::error(__FUNCTION__.' '.__LINE__ . 'in: contest_id:' . $contest_id . ' out: ' . $th->getMessage() );
             return '';
