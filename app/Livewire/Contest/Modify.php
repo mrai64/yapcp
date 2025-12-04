@@ -1,8 +1,13 @@
 <?php
 /**
- * Contest main card Modify
+ * Contest definition main card Modify
+ * 
  * 2025-09-18 input is contest_id 
  * 2025-11-24 removed TimezoneList
+ * 2025-11-04 add $today
+ * 
+ * TODO change is_circuit n circuit_id management
+ * TODO readonly form lock
  * 
  */
 namespace App\Livewire\Contest;
@@ -11,10 +16,10 @@ use App\Models\Contest;
 use App\Models\Country;
 use App\Models\LangList;
 use App\Models\Timezone;
+use Carbon\CarbonImmutable;
 use Livewire\Component;
 use Illuminate\Validation\Validator;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
-use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Log;
 
 class Modify extends Component
@@ -29,7 +34,7 @@ class Modify extends Component
     public $name_local;
     public $lang_local;
     public $organization_id; // uuid readonly
-    // public $contest_mark; // path n file for image file
+    // TODO public $contest_mark; // path n file for image file
     public $contact_info;
     public $is_circuit; // Y/N flag - circuit / contest
     public $circuit_id; // record uuid w/is_circuit Y
@@ -57,6 +62,8 @@ class Modify extends Component
     public $timezone_list = [];
     public $lang_list = [];
     public array $valid_is_circuit = ['Y', 'N']; // default 'N'
+    public $readonly_flag = false;
+    public $today;
 
     /**
      * 1. Before the show
@@ -65,28 +72,30 @@ class Modify extends Component
      */
     public function mount( string $cid) // named cid as in Route
     {
-        Log::info(__FUNCTION__.':'.__LINE__.' cid:'.$cid);
-        // form fields
+        Log::info('Component ' . __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called w/cid: ' .$cid);
         $this->contest                  = Contest::findOrFail($cid);
-        
         $this->id                       = $this->contest->id;
+        $this->today                    = CarbonImmutable::now()->toDateTimeString(); // Y-m-d\TH:i:s.u
+
+        // form fields
         $this->country_id               = $this->contest->country_id;
         $this->name_en                  = $this->contest->name_en;
         $this->name_local               = $this->contest->name_local;
         $this->lang_local               = $this->contest->lang_local;
         $this->organization_id          = $this->contest->organization_id;
-        // $this->contest_mark          = $this->contest->contest_mark;
+        //TODO $this->contest_mark          = $this->contest->contest_mark;
         $this->contact_info             = $this->contest->contact_info;
-        $this->is_circuit               = $this->contest->is_circuit;
-        $this->circuit_id               = $this->contest->circuit_id;
+        $this->is_circuit               = ($this->contest->is_circuit) ? $this->contest->is_circuit : 'N'; // TODO become 0/1 instead of N/Y
+        $this->circuit_id               = ($this->contest->circuit_id) ? $this->contest->circuit_id : '';
         $this->federation_list          = $this->contest->federation_list;
+
         $this->url_1_rule               = $this->contest->url_1_rule;
         $this->url_2_concurrent_list    = $this->contest->url_2_concurrent_list;
         $this->url_3_admit_n_award_list = $this->contest->url_3_admit_n_award_list;
         $this->url_4_catalogue          = $this->contest->url_4_catalogue;
         
         $this->timezone                 = $this->contest->timezone;
-        $this->day_1_opening            = $this->contest->day_1_opening->format('Y-m-d\TH:i:s');
+        $this->day_1_opening            = $this->contest->day_1_opening->format('Y-m-d\TH:i:s'); // missing usecond
         $this->day_2_closing            = $this->contest->day_2_closing->format('Y-m-d\TH:i:s');
         $this->day_3_jury_opening       = $this->contest->day_3_jury_opening->format('Y-m-d\TH:i:s');
         $this->day_4_jury_closing       = $this->contest->day_4_jury_closing->format('Y-m-d\TH:i:s');
@@ -101,28 +110,37 @@ class Modify extends Component
         // $this->updated_at 
         // $this->deleted_at 
 
+        Log::info('Component ' . __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' countries before ');
         $this->countries = Country::country_list_by_country();
-
+        Log::info('Component ' . __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' countries after ');
+        
         $timezone_set = Timezone::select('id')->get();
         $this->timezone_list  = array_values( collect($timezone_set)->toArray() );
-
+        Log::info('Component ' . __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' timezones after ');
+        
         $this->lang_list = LangList::lang_list;
+        $this->readonly_flag = false;
+        // $this->readonly_flag = ($today > $this->day_1_opening);
 
+        Log::info('Component ' . __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' out ');
     }
+
     /**
      * 2. The show
      */
     public function render()
     {
+        Log::info('Component ' . __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
         return view('livewire.contest.modify');
     }
+
     /**
      * 3. validate rules 1st round
      * Must be the same of Add.php
      */
     public function rules()
     {
-        Log::info(__FUNCTION__.':'.__LINE__);
+        Log::info('Component ' . __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
         return [
             // id           readonly
             'country_id'               => 'required|string|exists:countries,id',
@@ -164,7 +182,7 @@ class Modify extends Component
      */
     public function after() : array
     {
-        Log::info(__FUNCTION__.':'.__LINE__);
+        Log::info('Component ' . __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
         return [
             function (Validator $validator) {
                 // like validate but
@@ -216,8 +234,8 @@ class Modify extends Component
      */
     public function update_contest_main()
     {
-
-        Log::info(__FUNCTION__.':'.__LINE__.' day_1'.$this->day_1_opening);
+        Log::info('Component ' . __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
+        Log::info('Component ' . __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' day_1'.$this->day_1_opening);
     
         // apply rules() and after()
         $validated = $this->validate();
@@ -259,6 +277,7 @@ class Modify extends Component
 
         // $this->contest = Contest::save($validated);
 
+        Log::info('Component ' . __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' out');
         // redirect 
         return redirect()
           ->route('contest-section-add', ['cid' => $this->contest->id])

@@ -1,16 +1,28 @@
 <?php
 /**
- * Contest Main card Modify
+ * Contest definition Main card Modify
+ * 
+ * Definition of contest is a long process, so
+ * the modify panel allow organization to add 
+ * contest and circuit data in a comfortable way.
+ * other page for: Themes/sections, Jury composition, award list...
+ * 
  * 2025-11-24 modified timezone
+ * 2025-12-02 DEBUG for timeout error
+ * 2025-12-04 timeout fixed
+ * TODO header become a livewire component 
+ * TODO change is_circuit / circuit_id management
+ * 
  */
 
 use App\Models\ContestSection;
+use Illuminate\Support\Facades\Log;
 
 ?>
 
 <div>
     <!-- contest modify -->
-    <header>
+    <div class="header">
         <h2 class="fyk text-2xl">
             {{ __('Contest Main Form') }}
         </h2>
@@ -43,7 +55,7 @@ use App\Models\ContestSection;
             . .
             <span class="fyk text-xl">Works</span>
         </h3>
-    </header>
+    </div>
 
     <hr />
     
@@ -51,7 +63,8 @@ use App\Models\ContestSection;
         {{ __('If you interrupt compiling form, you can retrieve it in your Organization Dashboard.') }}
     </p>
     <p class="mb-4">
-        {{ __('After that contest main/general definition, next step are: section list, jury definition, prize list definition.') }}
+        {{ __('After that contest main/general definition, next step are: ') }}
+        {{ __('section list, jury definition, prize list definition.') }}
     </p>    
     <p class="mb-4"> 
         <a  href="/dashboard" rel="noopener noreferrer">
@@ -64,9 +77,11 @@ use App\Models\ContestSection;
 
     <hr />
 
+    <!-- contest definition form -->
     <form wire:submit="update_contest_main" class="mt-6 space-y-6">
         @csrf
 
+        <!-- contest name -->
         <div class="mb-4">
             <x-input-label for="name_en" :value="__('Contest Name')" />
             <input
@@ -74,11 +89,12 @@ use App\Models\ContestSection;
                 type="text"
                 wire:model.live.debounce.500ms="name_en"
                 value="{{ old('name_en') }}"
-                {{ (true) ? 'required' : 'readonly' }}
+                {{ ($readonly_flag) ? 'readonly' : 'required' }}
                 autofocus />
             <x-input-error class="small" :messages="$errors->get('name_en')" />
         </div>
 
+        <!-- contest name - non english local lang -->
         <div class="mb-4">
             <x-input-label for="name_local" :value="__('Contest Name Local Lang')" />
             <input
@@ -86,18 +102,19 @@ use App\Models\ContestSection;
                 type="text"
                 wire:model.live.debounce.500ms="name_local"
                 value="{{ old('name_local') }}"
-                {{ (true) ? '' : 'readonly' }}
+                {{ ($readonly_flag) ? 'readonly' : '' }}
                 />
             <x-input-error class="small" :messages="$errors->get('name_local')" />
         </div>
 
+        <!-- country -->
         <div class="mb-4">
             <x-input-label for="country_id" :value="__('Country')" />
             <select
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl"
                 wire:model.live.debounce.500ms="country_id"
                 name="country_id"
-                {{ (true) ? 'required' : 'readonly' }}
+                {{ ($readonly_flag) ? 'readonly' : 'required' }}
                 >
                 @foreach ($countries as $country)
                 <option value="{{ $country->id }}"
@@ -108,13 +125,14 @@ use App\Models\ContestSection;
             <x-input-error class="small" :messages="$errors->get('country_id')" />
         </div>
 
+        <!-- language other than english -->
         <div class="mb-4">
             <x-input-label for="lang_local" :value="__('Language code (for future use)')" />
             <select
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl"
                 wire:model.live.debounce.500ms="lang_local"
                 name="lang_local"
-                {{ (true) ? 'required' : 'readonly' }}
+                {{ ($readonly_flag) ? 'readonly' : 'required' }}
                 >
                 @foreach ($lang_list as $lang_code => $lang_lang)
                 <option value="{{ $lang_code }}" {{($lang_code == $lang_local) ? 'selected' : '' }} > {{ $lang_lang }}</option>
@@ -131,7 +149,7 @@ use App\Models\ContestSection;
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl"
                 wire:model.live.debounce.500ms="timezone"
                 name="timezone"
-                {{ (true) ? 'required' : 'readonly' }}
+                {{ ($readonly_flag) ? 'readonly' : 'required' }}
                 >
                 @foreach ($timezone_list as $timezone_item)
                 <option value="{{ $timezone_item['id'] }}" {{ ($timezone_item['id'] == $timezone) ? 'selected' : '' }}> {{ $timezone_item['id'] }} </option>
@@ -140,6 +158,7 @@ use App\Models\ContestSection;
             <x-input-error class="small" :messages="$errors->get('timezone')" />
         </div>
 
+        <!-- contest chairman contact info -->
         <div class="mb-4">
             <style>textarea {resize:vertical;}</style>
             <label class="block font-medium text-sm text-gray-700" for="contact_info">
@@ -153,6 +172,7 @@ use App\Models\ContestSection;
             <div class="small">@error('contact_info') {{ $message }} @enderror</div>
         </div>
 
+        <!-- flag: is a circuit -->
         <div class="mt-4 mb-4">
             <!-- TODO when circuit_id became a select remove the exposing of id -->
             <label class="block font-medium text-sm text-gray-700">
@@ -170,6 +190,7 @@ use App\Models\ContestSection;
             <x-input-error class="small" :messages="$errors->get('is_circuit')" />
         </div>
 
+        <!-- reserved for contest in circuit -->
         <div class="mb-4">
             <!-- TODO replace w/select -->
             <label class="block font-medium text-sm text-gray-700" for="circuit_id">
@@ -180,12 +201,13 @@ use App\Models\ContestSection;
                 type="text"
                 wire:model.live.debounce.500ms="circuit_id"
                 value="{{ old('circuit_id') }}"
-                {{ (true) ? '' : 'readonly' }}
+                {{ ($readonly_flag) ? 'readonly' : '' }}
                 />
-            <div class="small">{{ _("For contest-in-circuit paste here previously copied circuit id.") }}</div>
+            <div class="small">{{ __("For contest-in-circuit paste here previously copied circuit id.") }}</div>
             <x-input-error class="small" :messages="$errors->get('circuit_id')" />
         </div>
 
+        <!-- patronage id info-->
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="federation_list">
                 {{ __('Patronage / Sponsor Federation List') }}
@@ -195,12 +217,13 @@ use App\Models\ContestSection;
                 type="text"
                 wire:model.live.debounce.500ms="federation_list"
                 value="{{ old('federation_list') }}"
-                {{ (true) ? '' : 'readonly' }}
+                {{ ($readonly_flag) ? 'readonly' : '' }}
                 />
             <div class="small">{{ __("Insert comma separate federation codes.") }}</div>
             <x-input-error class="small" :messages="$errors->get('federation_list')" />
         </div>
 
+        <!-- web info: rule page web address -->
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="url_1_rule">
                 {{ __('Official Contest Rule url (with subscription link)') }}
@@ -214,6 +237,7 @@ use App\Models\ContestSection;
             <div class="small">@error('url_1_rule') {{ $message }} @enderror</div>
         </div>
 
+        <!-- web info: participant list -->
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="url_2_concurrent_list">
                 {{ __('Official Contest Participant List url') }}
@@ -227,6 +251,7 @@ use App\Models\ContestSection;
             <div class="small">@error('url_2_concurrent_list') {{ $message }} @enderror</div>
         </div>
 
+        <!-- web info: award list info -->
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="url_3_admit_n_award_list">
                 {{ __('Official Contest Result List url') }}
@@ -241,6 +266,7 @@ use App\Models\ContestSection;
             <div class="small">@error('url_3_admit_n_award_list') {{ $message }} @enderror</div>
         </div>
 
+        <!-- web info: contest catalogues info -->
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="url_4_catalogue">
                 {{ __('Official Contest Catalogues url') }}
@@ -254,6 +280,7 @@ use App\Models\ContestSection;
             <div class="small">@error('url_4_catalogue') {{ $message }} @enderror</div>
         </div>
 
+        <!-- web info: participation fee info -->
         <div class="mb-4">
             <style>textarea {resize:vertical;}</style>
             <label class="block font-medium text-sm text-gray-700" for="fee_info">
@@ -268,6 +295,7 @@ use App\Models\ContestSection;
             <div class="small">@error('fee_info') {{ $message }} @enderror</div>
         </div>
 
+        <!-- calendar dates: 1. opening participation contest -->
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="day_1_opening">
                 {{ __('Date (n time) opening Contest') }}
@@ -281,6 +309,7 @@ use App\Models\ContestSection;
             <div class="small">@error('day_1_opening') {{ $message }} @enderror</div>
         </div>
 
+        <!-- calendar dates: 2. closing participation contest -->
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="day_2_closing">
                 {{ __('End of participation Contest') }}
@@ -293,7 +322,9 @@ use App\Models\ContestSection;
                 >
             <div class="mb-4">{{ __('Must be not minor of previous date') }}</div>
             <div class="small">@error('day_2_closing') {{ $message }} @enderror</div>
+        </div>
 
+        <!-- calendar dates: 3. opening jury works -->
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="day_3_jury_opening">
                 {{ __('Begin of jury works') }}
@@ -308,6 +339,7 @@ use App\Models\ContestSection;
             <div class="small">@error('day_3_jury_opening') {{ $message }} @enderror</div>
         </div>
 
+        <!-- calendar dates: 4. closing jury works -->
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="day_4_jury_closing">
                 {{ __('End of jury works') }}
@@ -322,6 +354,7 @@ use App\Models\ContestSection;
             <div class="small">@error('day_4_jury_closing') {{ $message }} @enderror</div>
         </div>
 
+        <!-- calendar dates: 5. result published -->
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="day_5_revelations">
                 {{ __('Result communication') }}
@@ -336,6 +369,7 @@ use App\Models\ContestSection;
             <div class="small">@error('day_5_revelations') {{ $message }} @enderror</div>
         </div>
 
+        <!-- calendar dates: 6. award ceremony -->
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="day_6_awards">
                 {{ __("Award' Ceremony 1 Date") }}
@@ -350,6 +384,7 @@ use App\Models\ContestSection;
             <div class="small">@error('day_6_awards') {{ $message }} @enderror</div>
         </div>
 
+        <!-- award ceremony info -->
         <div class="mb-4">
             <style>textarea {resize:vertical;}</style>
             <label class="block font-medium text-sm text-gray-700" for="award_ceremony_info">
@@ -365,6 +400,7 @@ use App\Models\ContestSection;
             <div class="small">@error('award_ceremony_info') {{ $message }} @enderror</div>
         </div>
 
+        <!-- calendar dates: 7. catalog publication -->
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="day_7_catalogues">
                 {{ __('Catalogue publication, printed or online') }}
@@ -380,6 +416,7 @@ use App\Models\ContestSection;
             <div class="small">@error('day_7_catalogues') {{ $message }} @enderror</div>
         </div>
 
+        <!-- calendar dates: 8. end of prize send -->
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="day_8_closing">
                 {{ __('Deadline for award postal send to awarded') }}

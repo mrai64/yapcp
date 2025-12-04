@@ -28,7 +28,7 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasFactory, Notifiable, SoftDeletes;
 
     // used to show a version number
-    public const version = '2025.11.1 dev';
+    public const version = '2025.12.1 dev';
     public const table_name = 'users'; // MAYBE $this->table_name()
 
     /**
