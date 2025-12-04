@@ -33,7 +33,7 @@ class Country extends Model
     ];
 
     protected function casts(): array{
-        Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
+        // Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',

@@ -40,10 +40,10 @@ use App\Models\UserContact;
                 <li class="mb-2 p-4 border rounded-md">
                     <strong class="fyk text-2xl">{{$contest->name_en}}</strong><br />
                     <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
-                        [ {{ __("Contest Dashboard") }} ]
+                        [ {{ __("Contest Definition Dashboard") }} ]
                     </a>
                     <a href="{{ route('organization-contest-list', ['cid' => $contest->id ]) }}">
-                        [ {{ __("Contest Section List") }} ]
+                        [ {{ __("Contest Live Section List") }} ]
                     </a>
                 </li>
                 @endforeach

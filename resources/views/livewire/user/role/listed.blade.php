@@ -13,7 +13,7 @@
     </div>
     @endif
 
-    <h3 class="fyk font-semibold text-2xl text-gray-800 leading-tight">{{ __("Your roles") }}</h3>
+    <h3 class="fyk font-semibold text-2xl text-gray-800 leading-tight">{{ __("User dashboard / Your roles") }}</h3>
 
     <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
         <a href="{{ route('add-user-role-organization') }}">

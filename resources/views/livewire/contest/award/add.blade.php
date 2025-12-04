@@ -1,6 +1,6 @@
 <?php
 /**
- * Contest (Section) Award Add
+ * Contest Definition - Awards Add
  * 
  */
 
@@ -11,7 +11,8 @@ use App\Models\ContestSection;
 ?>
 
 <div>
-    <header>
+    <!-- page header -->
+    <div class="header">
         <h2 class="fyk text-2xl font-medium text-gray-900">
             {{ __('AWARDs LIST f/CONTEST ') }} {{ $contest->name_en }}
         </h2>
@@ -41,12 +42,12 @@ use App\Models\ContestSection;
             </a>
             
         </h3>
-    </header>
+    </div>
     <!-- contest info -->
     <div class="mb-4">
         @if($contest->is_circuit === 'Y')
         <p class="fyk text-2xl">
-            {{ __("It's a Circuit ans also circuit should have its Awards.") }}
+            {{ __("It's a Circuit, also circuit should have its Awards.") }}
         </p>
         @else
         <p class="fyk text-2xl">
@@ -57,7 +58,7 @@ use App\Models\ContestSection;
         @endif
         <p class="small py-6">
             <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
-                [ {{ __("Back to Main Contest Card")}} ]
+                [ {{ __("Back to main Contest Definition")}} ]
             </a>
         </p>
     </div>
