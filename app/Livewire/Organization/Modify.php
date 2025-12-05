@@ -1,6 +1,8 @@
 <?php
 /**
- * Organization\Modify
+ * Organization Definition Modify
+ * 
+ * 2025-12-05 review for Country::country_list_by_country and Log
  */
 namespace App\Livewire\Organization;
 
@@ -31,7 +33,7 @@ class Modify extends Component
      */
     public function mount(string $id) // as 'id' in route()
     {
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .'l :'. __LINE__ .' called');
         // $org = new Organization();
         // $this->organization = $org->findOrFail($id);
         $this->id           = $id;
@@ -40,7 +42,7 @@ class Modify extends Component
         $this->name         = $this->organization->name;
         $this->email        = $this->organization->email;
         $this->website      = $this->organization->website;
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($this));
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .'l :'. __LINE__ .' out:'.json_encode($this));
         // created_at
         // updated_at
         // deleted_at
@@ -51,9 +53,8 @@ class Modify extends Component
     */
     public function render()
     {
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        $country = new Country();
-        $this->countries = $country->allByCountry();
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .'l :'. __LINE__ .' called');
+        $this->countries = Country::country_list_by_country();
         
         return view('livewire.organization.modify');
     }
@@ -63,7 +64,7 @@ class Modify extends Component
     */
     public function rules()
     {
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .'l :'. __LINE__ .' called');
         return [
             // 'country_id' => 'required|string|uppercase|min:3|max:3',
             'country_id' => 'required|string|uppercase|min:3|exists:countries,id',
@@ -74,14 +75,16 @@ class Modify extends Component
     }
     
     /**
-     * 4. At last, Update?
+     * 4. At last, Update
     */
     public function update_organization()
     {
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .'l :'. __LINE__ .' called');
         $validated = $this->validate();
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' validate:'.json_encode($validated));
+
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .'l :'. __LINE__ .' validate:'.json_encode($validated));
         $this->organization->update($validated);
+
         // to list 
         return redirect()
             ->route('organization-list')

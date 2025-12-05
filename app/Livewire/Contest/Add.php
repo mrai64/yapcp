@@ -1,14 +1,17 @@
 <?php
 /**
- * Contest record
- *
- * upload contest mark logo
- * rules()
- *
+ * Contest Definition: first add
+ * After click on New contest, an empty rec is made, then 
+ * the organization member write contest name, and other infos.
  * WARNING: That module FIRST SAVE, then modify Contest record
  * and not as usual LAST SAVE record
  *
  * 2025-09-17 fee_info added
+ * 2025-12-04 review to support livewire header component
+ * 2025-12-05 refactor Country::country_list_by_country()
+ * 
+ * TODO change is_circuit from Y/N to 1/0 
+ * TODO change circuit_id from text to select list
  */
 
 namespace App\Livewire\Contest;
@@ -49,15 +52,18 @@ class Add extends Component
     public string $contest_mark; // path n fle
     public        $contest_image; // stored in 'contest' disk
     public string $contact_info; // address, email, cell, and so on
-    public string $is_circuit; // Y/N, not bool N when not Y
-    public string $circuit_id;
+    public string $is_circuit; // Y/N, TODO become boolean
+    public string $circuit_id; // required if...
     public string $federation_list; // maybe federations_lis
+
     public string $url_1_rule;
     public string $url_2_concurrent_list; // maybe url_2_concurrents_list
     public string $url_3_admit_n_award_list;
     public string $url_4_catalogue;
+   
     public        $timezone_list = [];
     public string $timezone;
+    
     public string $day_1_opening; // format iso datetime
     public string $day_2_closing;
     public string $day_3_jury_opening;
@@ -66,11 +72,12 @@ class Add extends Component
     public string $day_6_awards;
     public string $day_7_catalogues;
     public string $day_8_closing;
+    
     public string $award_ceremony_info; // location, date, online broadcast platform
+    public string $fee_info;
     // created_at assigned
     // updated_at assigned
     // deleted_at assigned
-    public string $fee_info;
 
     /**
      * Before the show
@@ -84,8 +91,7 @@ class Add extends Component
         $this->organization    = Organization::where('id', $oid)->get()[0];
         $this->organization_id = $this->organization->id; // $oid
 
-        $this->country    = new Country;
-        $this->countries  = $this->country->allByCountry();
+        $this->countries  = Country::country_list_by_country();
         $this->country_id = $this->organization->country_id;
 
         $this->timezone_list = TimezonesList::timezones_list;
@@ -175,11 +181,13 @@ class Add extends Component
             'is_circuit'      => 'required|string|uppercase|max:1', // in(['N','Y'])
             'circuit_id'      => 'nullable|string|exists:contests,id', //
             'federation_list' => 'string|max:255',
+
             'url_1_rule'               => 'required|string|max:255',
             'url_2_concurrent_list'    => 'required|string|max:255',
             'url_3_admit_n_award_list' => 'required|string|max:255',
             'url_4_catalogue'          => 'required|string|max:255',
-            'timezone'                 => 'required|string',
+
+            'timezone'            => 'required|string',
             'day_1_opening'       => 'required|date|after_or_equal:today',
             'day_2_closing'       => 'required|date|after_or_equal:day_1_opening',
             'day_3_jury_opening'  => 'required|date|after_or_equal:day_2_closing',
@@ -188,6 +196,7 @@ class Add extends Component
             'day_6_awards'        => 'required|date|after_or_equal:day_5_revelations',
             'day_7_catalogues'    => 'required|date|after_or_equal:day_6_awards',
             'day_8_closing'       => 'required|date|after_or_equal:day_7_catalogues',
+
             'award_ceremony_info' => 'required|string',
             'fee_info'            => 'required|string',
             // created_at

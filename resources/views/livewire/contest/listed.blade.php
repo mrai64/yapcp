@@ -1,14 +1,13 @@
 <?php
 /**
- * Open Contest list
+ * Open Contest - list
+ * Reserved for: contest participants
+ * 
+ * 2025-12-05 used relations ->country ->organization
  */
 
 // check all contest w/day_2_closing >= today
 // sorted by day_2_closing, country_id, contest_name, 
-
-use App\Models\Country;
-use App\Models\Organization;
-
 ?>
 
 <div>
@@ -32,9 +31,9 @@ use App\Models\Organization;
         <br />
         <hr />
         @foreach($contest_list as $contest)
-        <p class="fyk text-2xl">{{ Country::country_flag( $contest->country_id ) }} | {{$contest->name_en}}</p>
+        <p class="fyk text-2xl">{{ $contest->country->flag_code ) }} | {{$contest->name_en}}</p>
         <p class="fyk text-xl">{{ __("Closing date")}}: {{$contest->day_2_closing->format('Y-m-d')}}</p>
-        <p class="small">{{ __("Organized by")}}: {{ Organization::organization_name($contest->organization_id) }}</p>
+        <p class="small">{{ __("Organized by")}}: {{ $contest->organization->name }}</p>
         <p class="small">{{$contest->id}}</p>
         <p class="mb-4">
             <a  href="{{ route('public-participant-list', [ 'cid' => $contest->id ] ) }}" rel="noopener noreferrer">

@@ -1,9 +1,8 @@
 <?php
 /**
- * Organization CRUD: Create
- * - uuid
- * - country_id
- * TODO country_id Country esist:id
+ * Organization definition page
+ * 
+ * 2025-12-05 review for Country::country_list_by_country and Log
  */
 namespace App\Livewire\Organization;
 
@@ -28,8 +27,7 @@ class Add extends Component
      */
     public function render()
     {
-        $countries       = new Country();
-        $this->countries = $countries->allByCountry();
+        $this->countries = Country::country_list_by_country();
 
         return view('livewire.organization.add');
     }
@@ -39,12 +37,10 @@ class Add extends Component
     public function rules()
     {
         return [
-            // TODO Country::idValidate( string ) : bool
-            // https://laravel.com/docs/12.x/validation#available-validation-rules
-            'country_id' => 'required|string|uppercase|min:3|max:3',
-            'name' => 'required|string|min:3|max:255',
-            'email' => 'required|string|email|max:255',
-            'website' => 'string|url|max:255',
+            'country_id' => 'required|string|exists:countries,id',
+            'name'       => 'required|string|min:3|max:255',
+            'email'      => 'required|string|email|max:255',
+            'website'    => 'string|url|max:255',
         ];
     }
     /**

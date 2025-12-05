@@ -1,7 +1,10 @@
 <?php
 /**
+ * Federation definition Add data 
+ * 
  * 2025-08-30 update w/new columns country_id, contact, add Country
  * 2025-09-20 moved function in other order
+ * 2025-12-05 refactor for Country::country_list_by_country()
  * 
  */
 namespace App\Livewire\Federation;
@@ -10,7 +13,6 @@ use Livewire\Component;
 use App\Models\Federation;
 use App\Models\Country;
 use Illuminate\Support\Facades\Log;
-use Livewire\Attributes\Validate;
 
 class Add extends Component
 {
@@ -28,10 +30,9 @@ class Add extends Component
      */
     public function render()
     {
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' called');
-        $country = new Country();
-        $this->countries = $country->allByCountry();
-        
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
+        $this->countries = Country::country_list_by_country();
+
         return view('livewire.federation.add');
     }
     /** 
@@ -40,12 +41,12 @@ class Add extends Component
     */
     public function rules()
     {
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' called');
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
         return [
-            'id' => 'required|string|uppercase|min:3|max:10|unique:federations,id',
-            'name_en' => 'required|string|min:3|max:255',
-            'country_id' => 'required|string|uppercase|min:3|exists:countries,id',
-            'website' => 'string|active_url|max:255',
+            'id'           => 'required|string|uppercase|min:3|max:10|unique:federations,id',
+            'name_en'      => 'required|string|min:3|max:255',
+            'country_id'   => 'required|string|uppercase|min:3|exists:countries,id',
+            'website'      => 'string|active_url|max:255',
             'contact_info' => 'string',
         ];
     }
@@ -55,13 +56,12 @@ class Add extends Component
     */
     public function save_federation()
     {
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' called');
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' in');
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
         $validated = $this->validate();
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' validated:'.json_encode($validated) );
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' validated:'.json_encode($validated) );
         
         $fed = Federation::create($validated);
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' validated:'.json_encode($fed) );
+        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' validated:'.json_encode($fed) );
         
         return redirect()
           ->route('federation-list')

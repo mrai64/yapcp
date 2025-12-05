@@ -48,6 +48,8 @@ class Modify extends Component
         $this->website    = $this->federation['website'];
         $this->country_id = $this->federation['country_id'];
         $this->contact_info = $this->federation['contact_info'];
+        $this->countries = Country::country_list_by_country();
+        
     }
 
     /**
@@ -55,8 +57,6 @@ class Modify extends Component
      */
     public function render()
     {
-        $country = new Country();
-        $this->countries = $country->allByCountry();
 
         return view('livewire.federation.modify');
     }
