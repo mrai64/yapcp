@@ -1,6 +1,9 @@
 <?php
 /**
- * Contest (Section) Award Add (and list)
+ * Contest Definition for Section and Contest Award Add (and list)
+ * 
+ * 2025-12-05 review
+ * 
  */
 namespace App\Livewire\Contest\Award;
 
@@ -37,14 +40,18 @@ class Add extends Component
      */
     public function mount(string $cid) // named as in route()
     {
-        // other
+        Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' called');
+
         $this->contest_id = $cid;
         $this->contest = Contest::where('id', $this->contest_id)->get()[0];
         Log::info(__FUNCTION__ . ' ' . __LINE__ . $this->contest);
+   
         $this->contest_section_list = ContestSection::where('contest_id', $this->contest_id)->orderBy('code')->get();
         Log::info(__FUNCTION__ . ' ' . __LINE__ . $this->contest_section_list);
+
         $this->contest_award_list = ContestAward::where('contest_id', $this->contest_id)->orderBy('section_code')->orderBy('award_code')->get();
         Log::info(__FUNCTION__ . ' ' . __LINE__ . $this->contest_award_list);
+
         // new rec
         $this->section_code = '';
         $this->award_code = '';
@@ -53,44 +60,43 @@ class Add extends Component
         $this->winner_work_id = '';
         $this->winner_user_id = '';
         $this->winner_name = '';
-        Log::info(__FUNCTION__ . ' ' . __LINE__ . '');
+        Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' out');
     }
     /**
      * 2. Show to go
-    */
+     */
     public function render()
     {
-        Log::info(__FUNCTION__ . ' ' . __LINE__ . '');
+        Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' called');
         return view('livewire.contest.award.add');
     }
     /**
      * 3. Validate rules
-     * instead of a Validate comment 
-     * we use a validation array of array to manage "complex"
-     * validation for is_award field
-    */
+     * 
+     * TODO is_award from Y/N must become 1/0 true/false
+     * 
+     */
     public function rules()
     {
-        Log::info(__FUNCTION__ . ' ' . __LINE__ . '');
+        Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' called');
         return [
-            // 'contest_id' => [ 'required', 'string', 'exists:contests,id', ],
-            // 'section_id' => [ 'string', 'exists:contest_sections,id', ],
+            // contest_id not in form
+            // section_id if present must be one of section_id in contest_id with sectionIdRule() 
             'section_code' => [ 'string', 'uppercase', 'max:10', 'exists:contest_sections,code'],
             'award_code' => [ 'required', 'string', 'uppercase', 'max:10', ],
             'award_name' => [ 'required', 'string', 'max:255', ],
-            // 'is_award' => [ 'required', 'in:Y,N'],
             'is_award' => [ 'required', 'string', 'uppercase', 'max:1', new setYNRule],
-            // 'winner_work_id' => [ 'string', 'exists:works,id', ],
-            // 'winner_user_id' => [ 'string', 'exists:works,user_id', ],
-            // 'winner_user_name' => [ 'string', 'max:255', ],
+            // winner_work_id   not in form
+            // winner_user_id   not in form
+            // winner_user_name not in form
         ];
     }
     /**
      * 4. At last validate n insert
-    */
+     */
     public function add_contest_award()
     {
-        Log::info(__FUNCTION__ . ' ' . __LINE__ . '');
+        Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' called');
         $validated = $this->validate();
         // invariant fk integration
         $validated['contest_id'] = $this->contest_id;
