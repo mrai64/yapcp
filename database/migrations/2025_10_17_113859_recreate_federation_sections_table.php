@@ -19,7 +19,7 @@ return new class extends Migration
             $table->char('code', 10)->uppercase();
 
             $table->string('name_en')->index()->comment('official name in english');
-            $table->char('local_lang',2)->default('en')->comment('follow iso-3166 2 ascii lowercase');
+            $table->char('local_lang', 2)->default('en')->comment('follow iso-3166 2 ascii lowercase');
             $table->string('name_local')->default('')->comment('in local name');
             //
             $table->text('rule_definition')->nullable()->comment('synopsis from federal regulation docs');

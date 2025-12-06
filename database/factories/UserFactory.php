@@ -1,12 +1,13 @@
 <?php
+
 /**
- * User factory 
+ * User factory
  * Note: w/sql trigger is also user_contacts factory
- * 
+ *
  * 2025-08-31 id became uuid
  * 2025-11-04 changed name() w/firstName() + lastName() to avoid title as Mr. Dr. Col. etc
- * 
  */
+
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -25,18 +26,18 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $first    = fake()->firstName();
-        $last     = fake()->lastName();
-        $name     = $last .', '. $first;
-        $email    = str_ireplace(['"', ', ', '  ', ' ', '..'], ['', ' ', ' ', '.', '.'], strtolower($first.'.'.$last)).'@athesis77.it';
+        $first = fake()->firstName();
+        $last = fake()->lastName();
+        $name = $last.', '.$first;
+        $email = str_ireplace(['"', ', ', '  ', ' ', '..'], ['', ' ', ' ', '.', '.'], strtolower($first.'.'.$last)).'@athesis77.it';
         $password = Hash::make($email);
 
         return [
-            'name'              => $name,
-            'email'             => $email,
+            'name' => $name,
+            'email' => $email,
             'email_verified_at' => now(),
-            'password'          => $password,
-            'remember_token'    => Str::random(10),
+            'password' => $password,
+            'remember_token' => Str::random(10),
         ];
     }
 
@@ -49,6 +50,4 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
-
-
 }

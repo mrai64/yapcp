@@ -1,13 +1,14 @@
 <?php
+
 /**
  * THAT's NOT A TABLE BUT A SQL VIEW
  * see also
  * - https://www.reddit.com/r/laravel/comments/o0ban2/using_database_views_in_laravel/
  * - https://medium.com/@kevinsada05/using-sql-views-in-laravel-examples-and-best-practices-1b00cbcc8494
  * - https://laravel.com/docs/12.x/eloquent#table-names
- * 
+ *
  * WARNING: we must use pcp_ table prefix explicit.
- * 
+ *
  * 2025-10-18 even if works should be named user_works, there is no user_works table
  *            to apply a user_works_view, so renamed it to pcp_works_view for future refresh
  */
@@ -28,7 +29,7 @@ return new class extends Migration
         //     $table->id();
         //     $table->timestamps();
         // });
-        DB::statement("
+        DB::statement('
         CREATE VIEW pcp_works_view AS
         SELECT
             u.country_id,
@@ -47,7 +48,7 @@ return new class extends Migration
             1,
             2,
             3,
-            4");        
+            4');
 
     }
 
@@ -57,6 +58,6 @@ return new class extends Migration
     public function down(): void
     {
         // Schema::dropIfExists('user_works_views');
-        DB::statement("DROP VIEW pcp_works_view");
+        DB::statement('DROP VIEW pcp_works_view');
     }
 };

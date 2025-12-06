@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
@@ -11,7 +10,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement("CREATE VIEW pcp_organizations_view AS
+        DB::statement('CREATE VIEW pcp_organizations_view AS
             SELECT
                 org.name,
                 usr.last_name,
@@ -33,7 +32,7 @@ return new class extends Migration
                 AND rol.user_id = usr.user_id
             ORDER BY
                 1, 2, 3, 4
-        ");
+        ');
     }
 
     /**
@@ -41,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::statement("DROP VIEW pcp_organizations_view");
+        DB::statement('DROP VIEW pcp_organizations_view');
     }
 };

@@ -1,8 +1,8 @@
 <?php
+
 /**
- * Relation 1:1 
- * between contests.timezone and timezones.id 
- * 
+ * Relation 1:1
+ * between contests.timezone and timezones.id
  */
 
 use Illuminate\Database\Migrations\Migration;

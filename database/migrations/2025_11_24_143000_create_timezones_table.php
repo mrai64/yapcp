@@ -1,7 +1,8 @@
 <?php
+
 /**
  * maintain timezones value valid for php and used
- * 
+ *
  * region id should be related to an auxiliary table
  */
 use Illuminate\Database\Migrations\Migration;
@@ -15,7 +16,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        
+
         Schema::create('timezones', function (Blueprint $table) {
             // $table->id();
             $table->string('id', 40)->primary()->comment('valid for php_timezones');
@@ -24,7 +25,7 @@ return new class extends Migration
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->dateTime('deleted_at')->nullable();
-            // idxs 
+            // idxs
 
             // relations
             $table->foreign('region_id')->references('id')->on('regions');

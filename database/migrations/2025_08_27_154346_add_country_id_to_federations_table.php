@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('federations', function (Blueprint $table) {
             $table->string('country_id', 3)->nullable()
-            ->after('id')->comment('fk: country.id ALL UPPERCASE');
+                ->after('id')->comment('fk: country.id ALL UPPERCASE');
         });
     }
 

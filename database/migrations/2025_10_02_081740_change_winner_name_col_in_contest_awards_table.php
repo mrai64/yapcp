@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('contest_awards', function (Blueprint $table) {
             $table->dropColumn('winner_name'); // free text - nullable for not individual prizes
-            $table->string('winner_name')->after('winner_user_id')->default('')->comment('winner not in previous cols'); 
+            $table->string('winner_name')->after('winner_user_id')->default('')->comment('winner not in previous cols');
         });
     }
 

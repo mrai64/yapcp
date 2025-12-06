@@ -1,15 +1,15 @@
 <?php
+
 /**
- * Contest users participants 
- * 
+ * Contest users participants
+ *
  * 2025-10-10 created an auxiliary table contest_participants_fee_payment_completes_sets to manage
  *            previously value of valid_YN[]
- * 2025-10-11 add Gates n Policy 
- * 
+ * 2025-10-11 add Gates n Policy
  */
+
 namespace App\Models;
 
-use App\Models\UserContact;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -22,12 +22,11 @@ class ContestParticipant extends Model
 
     public const table_name = 'contest_participants';
 
-    // fee payment TODO 
+    // fee payment TODO
     public const valid_YN = [
         'Y',
         'N',
     ];
-    
 
     // field list fillable in factory
     protected $fillable = [
@@ -43,23 +42,24 @@ class ContestParticipant extends Model
     protected function casts()
     {
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
         ];
     }
+
     // GETTERS
     /**
-     * @param $contest_id - uuid fk contests.id
+     * @param  $contest_id  - uuid fk contests.id
      * @return array<string, string>
-     * 
      */
-    public static function get_participant_list(string $contest_id) : array
+    public static function get_participant_list(string $contest_id): array
     {
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $participant_list = [];
-        
+
         $participants = self::where('contest_id', $contest_id)->get();
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' found: '.count($participants));
         if (count($participants) < 1) {
@@ -67,12 +67,12 @@ class ContestParticipant extends Model
         }
 
         // array_fill
-        foreach($participants as $participant) {
+        foreach ($participants as $participant) {
             $user_contact = UserContact::where('user_id', $participant->user_id)->get()[0];
             $participant_list[] = [
                 // idx
                 'country_id' => $user_contact->country_id,
-                'last_name'  => $user_contact->last_name,
+                'last_name' => $user_contact->last_name,
                 'first_name' => $user_contact->first_name,
                 // payload
                 'fee_payment_completed' => $participant->fee_payment_completed,
@@ -80,11 +80,12 @@ class ContestParticipant extends Model
                 'contest_id' => $participant->contest_id,
             ];
         }
-        
+
         // sort array
         $participant_list = collect($participant_list)->sortBy(['country_id', 'last_name', 'first_name'])->toArray();
-        
+
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' exit participant_list:'.json_encode($participant_list));
+
         return $participant_list;
     }
 }

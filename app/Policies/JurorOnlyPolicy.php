@@ -1,8 +1,9 @@
 <?php
+
 /**
- * Restrict access to jury member 
- * 
+ * Restrict access to jury member
  */
+
 namespace App\Policies;
 
 use App\Models\ContestJury;
@@ -17,24 +18,20 @@ class JurorOnlyPolicy
      */
     public function __construct()
     {
-        Log::info('Policies '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
+        Log::info('Policies '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
     }
-    
-    /**
-     * @param string $section_id
-     * 
-     */
-    public function grant_access(string $section_id) : Response
+
+    public function grant_access(string $section_id): Response
     {
-        Log::info('Policies '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
+        Log::info('Policies '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $user_id = Auth::id();
         $access_granted = ContestJury::where('section_id', $section_id)->where('user_contact_id', $user_id)->count(); // 1 | 0
-        Log::info('Policies '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' res:' . $access_granted . ' for user:'. $user_id);
+        Log::info('Policies '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' res:'.$access_granted.' for user:'.$user_id);
 
         if ($access_granted > 0) {
             return Response::allow();
         }
 
-        return Response::deny( __("You can't") );
+        return Response::deny(__("You can't"));
     }
 }

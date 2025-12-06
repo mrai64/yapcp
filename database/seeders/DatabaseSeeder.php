@@ -1,11 +1,12 @@
 <?php
+
 /**
  * Database seeder
- * 
+ *
  * 2025-10-17 Class commented must be build
  *            or should remain commented
- * 
  */
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -19,24 +20,24 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CountrySeeder::class,
-         // LanglistSeeder::class,
+            // LanglistSeeder::class,
             RegionSeeder::class,
             TimezonesSeeder::class,
             FederationSeeder::class,
             FederationSectionSeeder::class,
-         // OrganizationSeeder::class,
+            // OrganizationSeeder::class,
             UserSeeder::class,
-         // UserContactSeeder::class,
+            // UserContactSeeder::class,
             UserRoleRoleSetSeeder::class,
-         // UserRoleSeeder::class,
+            // UserRoleSeeder::class,
             WorkSeeder::class,
             ContestsVoteRuleSetSeeder::class,
-         // ContestSeeder::class,
-         // ContestSectionSeeder::class,
-         // ContestJurySeeder::class,
-         // ContestAwardSeeder::class,
-         // ContestWorkSeeder::class,
-         // ContestParticipantSeeder::class,
-        ]);        
+            // ContestSeeder::class,
+            // ContestSectionSeeder::class,
+            // ContestJurySeeder::class,
+            // ContestAwardSeeder::class,
+            // ContestWorkSeeder::class,
+            // ContestParticipantSeeder::class,
+        ]);
     }
 }

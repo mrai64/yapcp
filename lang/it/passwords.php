@@ -17,6 +17,6 @@ return [
     'sent' => 'Vi abbiamo inviato un link per il reset della password via email.',
     'throttled' => 'Dovreste attendere prima di ritentare.',
     'token' => 'Questo gettone di convalida per cambiare la password non va bene.',
-    'user' => "Non abbiamo un utente registrato con questo indirizzo email.",
+    'user' => 'Non abbiamo un utente registrato con questo indirizzo email.',
 
 ];

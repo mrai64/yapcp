@@ -1,12 +1,11 @@
 <?php
+
 /**
- * 
- * 2025-10-17 
+ * 2025-10-17
  * Mysql don't regard about softDeletes record, so
- * when i need delete and reinsert a user_id, 
+ * when i need delete and reinsert a user_id,
  * should pick a "duplicate" even if no record was show
  * (but exists, deleted_at not NULL)
- * 
  */
 
 use Illuminate\Database\Migrations\Migration;

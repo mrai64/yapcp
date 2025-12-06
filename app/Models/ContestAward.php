@@ -1,14 +1,16 @@
 <?php
+
 /**
  * Contest Definition (section) Awards
  * - child of ContestSection (end not only)
  *   - child of Contest
- * 
+ *
  * uuid pk
  * is_award mean that some prize are A prize, i.e. valid for some federations distinctions, others are "simple" prize.
- * 
+ *
  * 2025-12-05 Log
  */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -21,9 +23,11 @@ class ContestAward extends Model
     use SoftDeletes;
 
     public const table_name = 'contest_awards';
+
     // protected $primaryKey = 'id' default
     protected $keyType = 'string'; // uuid
-    public    $incrementing = false;
+
+    public $incrementing = false;
 
     // field list
     protected $fillable = [
@@ -40,7 +44,7 @@ class ContestAward extends Model
         // created_at
         // updated_at
         // deleted_at
-    ]; 
+    ];
 
     // is_award as enum set
     // TODO change in true/false
@@ -50,8 +54,9 @@ class ContestAward extends Model
     ];
 
     // pk is uuid
-    public static function booted() {
-        Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' called');
+    public static function booted()
+    {
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         static::creating(function ($model) {
             $model->id = Str::uuid(); // uuid generator
         });
@@ -69,10 +74,11 @@ class ContestAward extends Model
 
     // VALIDATORS
 
-    public static function is_valid_is_award(ContestAward $award) : bool
+    public static function is_valid_is_award(ContestAward $award): bool
     {
-        Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' called');
-        return in_array( $award->is_award, self::valid_YN, true);
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+
+        return in_array($award->is_award, self::valid_YN, true);
     }
 
     // GETTERS

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Works participant to contest
  * relation between
@@ -7,7 +8,6 @@
  * - users
  *   - countries
  * - works
- * 
  */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -25,11 +25,11 @@ return new class extends Migration
 
             $table->foreignUuid('contest_id')->comment('fk: contests.id 1:N '); // uuid
             $table->foreignUuid('section_id')->comment('fk: contest_sections.id '); // uuid
-            $table->char('country_id',3)->comment('fk: user_contacts.country_id '); // uuid
+            $table->char('country_id', 3)->comment('fk: user_contacts.country_id '); // uuid
             $table->foreignUuid('user_id')->comment('fk: users.id '); // uuid
             $table->foreignUuid('work_id')->comment('fk: works.id '); // uuid
-        //  TODO portfolio_sequence
-            $table->char('is_admit', 1)->default('N')->comment('N/Y flag, Y=admission, N=participant only'); 
+            //  TODO portfolio_sequence
+            $table->char('is_admit', 1)->default('N')->comment('N/Y flag, Y=admission, N=participant only');
 
             // timetable
             $table->dateTime('created_at')->useCurrent();
@@ -38,8 +38,8 @@ return new class extends Migration
             // idxs
             $table->index(['contest_id', 'section_id', 'country_id', 'user_id', 'work_id', 'id'], 'contest_idx');
             $table->index(['contest_id', 'country_id', 'user_id', 'section_id', 'work_id', 'id'], 'catalogue_idx');
-            $table->index(['user_id', 'contest_id', 'section_id', 'work_id', 'id'],               'user_idx');
-        //  TODO $table->index(['user_id', 'contest_id', 'section_id', 'portfolio_sequence', 'work_id', 'id'], 'user_idx');
+            $table->index(['user_id', 'contest_id', 'section_id', 'work_id', 'id'], 'user_idx');
+            //  TODO $table->index(['user_id', 'contest_id', 'section_id', 'portfolio_sequence', 'work_id', 'id'], 'user_idx');
         });
     }
 

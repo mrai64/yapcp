@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('federation_sections', function (Blueprint $table) {
             $table->text('definition')->nullable()
-            ->after('name')->comment('extract from regulation doc');
+                ->after('name')->comment('extract from regulation doc');
         });
     }
 

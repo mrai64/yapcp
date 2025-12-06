@@ -1,7 +1,7 @@
 <?php
+
 /**
  * user for lazy livewire to load voted works
- * 
  */
 
 namespace App\Livewire\Juror;
@@ -13,37 +13,40 @@ use Livewire\Component;
 
 class SingleVotedDia extends Component
 {
-
     public $vid;
+
     public $contest_work;
 
     /**
-     * check if a path/namefile has a twin path/300px_namefile 
+     * check if a path/namefile has a twin path/300px_namefile
+     *
      * @return string miniature|original
      */
-    public static function miniature(string $original_file) : string 
+    public static function miniature(string $original_file): string
     {
         // Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called');
         $last_slash_pos = strrpos($original_file, '/');
         $path = substr($original_file, 0, $last_slash_pos + 1);
         // Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' path:' . $path);
-        $name_file  = '300px_'.substr($original_file, $last_slash_pos + 1);
+        $name_file = '300px_'.substr($original_file, $last_slash_pos + 1);
         // Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' name:' . $name_file);
-        if (Storage::disk('public')->exists('contests/'.$path.$name_file) ) {
-            Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' found' );
-            return $path . $name_file;
+        if (Storage::disk('public')->exists('contests/'.$path.$name_file)) {
+            Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' found');
+
+            return $path.$name_file;
         }
+
         // Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' not found' );
         return $original_file;
     }
 
-    public function mount( string $vid) // livewire voted_id
+    public function mount(string $vid) // livewire voted_id
     {
         $this->contest_work = ContestVote::where('id', $vid)->first();
     }
 
     /**
-     * @return string html  
+     * @return string html
      */
     public function placeholder()
     {

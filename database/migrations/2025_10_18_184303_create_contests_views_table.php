@@ -1,15 +1,13 @@
 <?php
+
 /**
  * That' not a table but a table VIEW
- * 
+ *
  * for: contests
  * need use pcp_ prefix
- * 
  */
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -18,7 +16,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement("
+        DB::statement('
             CREATE VIEW pcp_contests_view AS 
             SELECT
                 con.name_en AS contest_name,
@@ -43,14 +41,14 @@ return new class extends Migration
                 AND con.organization_id = uro.organization_id 
                 AND uro.user_id = uco.user_id
                 ORDER BY 3,7,6,5
-        ");
+        ');
     }
-        
+
     /**
      * Reverse the migrations.
-    */
+     */
     public function down(): void
     {
-        DB::statement("DROP VIEW pcp_contests_view");
+        DB::statement('DROP VIEW pcp_contests_view');
     }
 };

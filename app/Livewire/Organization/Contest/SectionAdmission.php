@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Multiple admission panel
  * After jury votes, after eventually revision of votes
@@ -11,8 +12,8 @@
  * no pagination, 3 juror x 30 vote 1..30 sum() range 3..90
  * no pagination, 5 juror x 30 vote 1..30 sum() range 5..150
  * for a text-list pagination is not required. usually vote are from 16..30 range  80..150 (seventyone)
- *
  */
+
 namespace App\Livewire\Organization\Contest;
 
 use App\Models\ContestSection;
@@ -26,11 +27,17 @@ class SectionAdmission extends Component
 {
     // vars
     public string $section_id;
+
     public ContestSection $section;
+
     public $total_participant_works;
+
     public $contest_works_board;
+
     public $vote_assigned_board;
+
     public $work_list;
+
     public $admitFrom;
 
     /**
@@ -39,8 +46,8 @@ class SectionAdmission extends Component
     public function mount(string $sid) // named as route()
     {
 
-        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called w/sid: '. $sid );
-        //TODO GATE organization only
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called w/sid: '.$sid);
+        // TODO GATE organization only
 
         $this->section_id = $sid;
         $this->section = ContestSection::where('id', $sid)->first();
@@ -56,7 +63,7 @@ class SectionAdmission extends Component
             ')
             ->where('section_id', $sid)
             ->groupBy('work_id');
-            // no get()
+        // no get()
         // Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' voteSubquery: '. json_encode($voteSubquery->get()) );
         // Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' voteSubquery: '. json_encode($voteSubquery->getQuery()) );
 
@@ -69,7 +76,7 @@ class SectionAdmission extends Component
                 RANK() OVER (ORDER BY vote_data.voted_sum DESC) AS rank_voted_sum,
                 ROUND( 10000 * RANK() OVER (ORDER BY vote_data.voted_sum DESC) / {$this->total_participant_works} ) as admission_percent
             ");
-            // no get()
+        // no get()
         // Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' boardVotesSubquery: '. json_encode($boardVotesSubquery) );
 
         // And last...
@@ -80,10 +87,10 @@ class SectionAdmission extends Component
             ->distinct()
             ->orderByDesc('board_votes.voted_sum')
             ->get();
-        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' vote_assigned_board: '. json_encode($this->vote_assigned_board) );
-        
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' vote_assigned_board: '.json_encode($this->vote_assigned_board));
+
         $this->work_list = $boardVotesSubquery->get();
-        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' work_list: '. json_encode($this->work_list) );
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' work_list: '.json_encode($this->work_list));
 
     }
 
@@ -92,7 +99,8 @@ class SectionAdmission extends Component
      */
     public function render()
     {
-        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called' );
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+
         return view('livewire.organization.contest.section-admission');
     }
 
@@ -103,28 +111,27 @@ class SectionAdmission extends Component
      */
     public function setAdminFromValue(string $admitFrom)
     {
-        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called' );
-        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' in: '. $admitFrom );
-        Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' work_list: '. json_encode($this->work_list) );
-        
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' in: '.$admitFrom);
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' work_list: '.json_encode($this->work_list));
+
         // 1. reset previous set for all
-        if ( ContestWork::where('section_id', $this->section_id)->where('is_admit', true)->count() ) {
+        if (ContestWork::where('section_id', $this->section_id)->where('is_admit', true)->count()) {
             $resettedWorks = ContestWork::where('section_id', $this->section_id)
-            ->where('is_admit', 1) 
-            ->update(['is_admit' => 0]); 
-            Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' resettedWorks: '. $resettedWorks );
+                ->where('is_admit', 1)
+                ->update(['is_admit' => 0]);
+            Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' resettedWorks: '.$resettedWorks);
         }
-        
+
         // 2. set for some - old style but
         foreach ($this->work_list as $value) {
             if ($value->voted_sum >= $admitFrom) {
                 $admitWork = ContestWork::where('section_id', $this->section_id)
-                ->where('work_id', $value->work_id)
-                ->update(['is_admit' => true ]);
-                Log::info('Component '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' admitWork: '. $admitWork );
+                    ->where('work_id', $value->work_id)
+                    ->update(['is_admit' => true]);
+                Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' admitWork: '.$admitWork);
             }
         }
-        
-    }
 
+    }
 }

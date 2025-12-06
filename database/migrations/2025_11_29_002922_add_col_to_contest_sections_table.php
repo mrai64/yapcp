@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::table('contest_sections', function (Blueprint $table) {
             $table->boolean('rule_raw_required')->default(false)
                 ->after('rule_monochromatic')
-                ->comment("0 == false; 1 == true");
+                ->comment('0 == false; 1 == true');
             $table->boolean('rule_only_one')->default(false)
                 ->after('rule_raw_required')
-                ->comment("0 = only one prize per section per person not required");
+                ->comment('0 = only one prize per section per person not required');
             // idx
         });
     }

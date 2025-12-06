@@ -20,7 +20,7 @@
         "fakerphp/faker": "^1.23",
         "laradumps/laradumps": "^4.0",
         "laravel/pail": "^1.2.2",
-        "laravel/pint": "^1.13",
+        "laravel/pint": "^1.26",
         "laravel/sail": "^1.41",
         "mmo/faker-images": "^0.9.1",
         "mockery/mockery": "^1.6",

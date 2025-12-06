@@ -1,13 +1,13 @@
 <?php
+
 /**
  * THAT's NOT A TABLE BUT A SQL VIEW
  * see also
  * - https://www.reddit.com/r/laravel/comments/o0ban2/using_database_views_in_laravel/
  * - https://medium.com/@kevinsada05/using-sql-views-in-laravel-examples-and-best-practices-1b00cbcc8494
  * - https://laravel.com/docs/12.x/eloquent#table-names
- * 
+ *
  * WARNING: we must use pcp_ table prefix explicit.
- * 
  */
 
 use Illuminate\Database\Migrations\Migration;
@@ -20,7 +20,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement("
+        DB::statement('
         CREATE VIEW pcp_contest_works_view AS
         SELECT
             c.name_en AS contest_name,
@@ -54,7 +54,7 @@ return new class extends Migration
             4,
             5,
             6
-        ");
+        ');
     }
 
     /**
@@ -62,6 +62,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::statement("DROP VIEW pcp_contest_works_view");
+        DB::statement('DROP VIEW pcp_contest_works_view');
     }
 };

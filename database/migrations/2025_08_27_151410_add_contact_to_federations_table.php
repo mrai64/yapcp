@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('federations', function (Blueprint $table) {
             $table->text('contact')->nullable()
-            ->after('website')->comment('postal address');
+                ->after('website')->comment('postal address');
         });
     }
 

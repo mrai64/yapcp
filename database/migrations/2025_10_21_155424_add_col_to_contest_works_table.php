@@ -18,10 +18,10 @@ return new class extends Migration
             $table->index(['user_id', 'contest_id', 'section_id', 'portfolio_sequence', 'work_id', 'id'], 'user_idx');
         });
     }
-    
+
     /**
      * Reverse the migrations.
-    */
+     */
     public function down(): void
     {
         Schema::table('contest_works', function (Blueprint $table) {

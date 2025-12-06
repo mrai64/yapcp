@@ -1,7 +1,7 @@
 <?php
+
 /**
  * Change column site from 5 to 10
- * 
  */
 
 use Illuminate\Database\Migrations\Migration;

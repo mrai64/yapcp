@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('user_roles', function (Blueprint $table) {
-            // fk 
+            // fk
             $table->string('role')->default('member')->change();
             $table->foreign('role')->references('status')->on('user_roles_role_set');
 

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * View for all contest all section all vote 
+ * View for all contest all section all vote
  */
 
 use Illuminate\Database\Migrations\Migration;
@@ -13,7 +14,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement("CREATE VIEW pcp_contest_vote_single_view AS
+        DB::statement('CREATE VIEW pcp_contest_vote_single_view AS
             SELECT
                 c.name_en AS contest_name,
                 cs.code,
@@ -46,7 +47,7 @@ return new class extends Migration
                 7,
                 8,
                 9
-        ");
+        ');
         DB::statement("CREATE VIEW pcp_contest_vote_group1_view AS
             SELECT
                 COUNT(*) AS vote_count,
@@ -78,8 +79,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::statement("DROP VIEW pcp_contest_vote_group1_view");
-        DB::statement("DROP VIEW pcp_contest_vote_single_view");
+        DB::statement('DROP VIEW pcp_contest_vote_group1_view');
+        DB::statement('DROP VIEW pcp_contest_vote_single_view');
     }
 };
-   

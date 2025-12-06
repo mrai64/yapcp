@@ -1,7 +1,5 @@
 <?php
-/**
- *
- */
+
 namespace App\Livewire\Juror;
 
 use Illuminate\Support\Facades\Log;
@@ -9,13 +7,12 @@ use Livewire\Component;
 
 class SingleDia extends Component
 {
-
     public string $dias;
 
     public function mount(string $imgdias) // livewire input
     {
-        Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' called w/input:' . $imgdias);
-        $this->dias = ( $imgdias );
+        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called w/input:'.$imgdias);
+        $this->dias = ($imgdias);
     }
 
     public function placeholder()

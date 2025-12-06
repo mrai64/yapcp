@@ -1,21 +1,24 @@
 <?php
+
 /**
  * 2025-07-28 add $id (readonly) for federation-section and other child tables
  * 2025-08-30 add country_id, contact
  * 2025-09-20 enlarge 6 > 10 code field
  * 2025-10-16 refactor for new federation table
  */
+
 namespace App\Livewire\Federation;
 
-use Livewire\Component;
-use App\Models\Federation;
 use App\Models\Country;
+use App\Models\Federation;
 use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Validate;
+use Livewire\Component;
 
 class Modify extends Component
 {
     public $federation;
+
     public $id;
 
     #[Validate('required|string|max:255')]
@@ -30,7 +33,7 @@ class Modify extends Component
     #[Validate('string')]
     public $contact_info;
 
-    //readonly
+    // readonly
     public $countries;
 
     /**
@@ -38,18 +41,18 @@ class Modify extends Component
      */
     public function mount(string $fid) // $fid as 'fid' in route()
     {
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' called');
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' fid'. $fid);
+        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' fid'.$fid);
         $this->federation = Federation::where('id', $fid)->get()[0];
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' found:'. json_encode($this->federation));
+        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' found:'.json_encode($this->federation));
 
-        $this->id         = $fid;
-        $this->name_en    = $this->federation['name_en'];
-        $this->website    = $this->federation['website'];
+        $this->id = $fid;
+        $this->name_en = $this->federation['name_en'];
+        $this->website = $this->federation['website'];
         $this->country_id = $this->federation['country_id'];
         $this->contact_info = $this->federation['contact_info'];
         $this->countries = Country::country_list_by_country();
-        
+
     }
 
     /**
@@ -62,7 +65,7 @@ class Modify extends Component
     }
 
     /**
-     * 3. validation rules 
+     * 3. validation rules
      */
 
     /**
@@ -70,7 +73,7 @@ class Modify extends Component
      */
     public function update_federation()
     {
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__. ' called');
+        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $validated = $this->validate();
 
         //
@@ -79,8 +82,6 @@ class Modify extends Component
         // to list
         return redirect()
             ->route('federation-list')
-            ->with('success', __('Federation data updated, thanks!') );
+            ->with('success', __('Federation data updated, thanks!'));
     }
-
-
 }

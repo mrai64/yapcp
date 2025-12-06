@@ -1,9 +1,9 @@
 <?php
+
 /**
  * Contest Jury Votes
- * 
- * 2025-11-18 table_name fix 
- * 
+ *
+ * 2025-11-18 table_name fix
  */
 
 namespace App\Models;
@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 class ContestVote extends Model
 {
     use SoftDeletes;
+
     public const table_name = 'contest_votes';
     // protected $primaryKey 'id'        standard
     // protected $keyType = unsigned int standard
@@ -42,66 +43,71 @@ class ContestVote extends Model
         ];
     }
 
-    // GETTERS 
+    // GETTERS
     public static function voted_ids(string $contest_id, string $section_id)
     {
-        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
+        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $vote_ids = self::select(['work_id'])->where('section_id', $section_id)->where('contest_id', $contest_id)->get();
         // Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' vote_ids:' . json_encode($vote_ids) );
 
         $array_ids = array_values(collect($vote_ids->toArray()));
-        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' out count:' . count($array_ids) );
+        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out count:'.count($array_ids));
+
         return $array_ids;
 
     }
 
     public static function section_vote_board(string $contest_id, string $section_id)
     {
-        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
+        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $vote_board = self::where('section_id', $section_id)->where('contest_id', $contest_id)->orderBy('vote', 'desc')->orderBy('updated_at', 'desc')->get(['work_id', 'vote', 'id']);
 
-        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' vote_board:' . json_encode($vote_board) );
+        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' vote_board:'.json_encode($vote_board));
+
         return $vote_board;
 
     }
 
     // RELATIONSHIPs
-    
+
     public function contest()
     {
-        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
-        $contest = $this->hasOne(Contest::class, 'id',             'contest_id');
+        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        $contest = $this->hasOne(Contest::class, 'id', 'contest_id');
         // . . . . . . . . . . . . . . . .contest.id  contest_works.contest_id
-        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' contest_section:' . json_encode($contest) );
+        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' contest_section:'.json_encode($contest));
+
         return $contest;
     }
 
     public function contest_section()
     {
-        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
-        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' section_id:' . json_encode($this->section_id));
-        $contest_section = $this->hasOne(ContestSection::class, 'id',             'section_id');
+        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' section_id:'.json_encode($this->section_id));
+        $contest_section = $this->hasOne(ContestSection::class, 'id', 'section_id');
         // . . . . . . . . . . . . . . .contest_sections.id  contest_works.section_id
-        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' contest_section:' . json_encode($contest_section));
+        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' contest_section:'.json_encode($contest_section));
+
         return $contest_section;
     }
 
-    public function work() 
+    public function work()
     {
-        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
+        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $work = $this->belongsTo(Work::class);
-        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' work:' . json_encode($work));
+        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' work:'.json_encode($work));
+
         return $work;
     }
-    
+
     public function user_contact()
     {
-        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' called');
-        $user_contact = $this->hasOne(UserContact::class, 'user_id',               'user_id');
+        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        $user_contact = $this->hasOne(UserContact::class, 'user_id', 'user_id');
         // . . . . . . . . . . . . . . . . . user_contacts.user_id    contest_works.user_id
-        Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' user_contact:' . json_encode($user_contact) );
+        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' user_contact:'.json_encode($user_contact));
+
         return $user_contact;
 
     }
-
 }

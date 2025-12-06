@@ -18,7 +18,7 @@ class ContestsVoteRuleSetFactory extends Factory
     {
         return [
             'vote_rule' => fake()->text(20),
-            'synopsis'  => fake()->sentence(35, true),
+            'synopsis' => fake()->sentence(35, true),
         ];
     }
 }

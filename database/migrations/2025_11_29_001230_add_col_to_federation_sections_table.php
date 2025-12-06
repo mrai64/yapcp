@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('federation_sections', function (Blueprint $table) {
             $table->boolean('only_one')->default(false)
                 ->after('raw_required')
-                ->comment("0 = only one prize per section per person not required");
+                ->comment('0 = only one prize per section per person not required');
             // idx
         });
     }

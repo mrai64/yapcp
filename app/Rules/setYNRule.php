@@ -1,9 +1,10 @@
 <?php
+
 /**
  * Basic and simplest set check rule for Y/N fields
  * preferred instead of a bool true/false
- * 
  */
+
 namespace App\Rules;
 
 use Closure;
@@ -29,10 +30,10 @@ class setYNRule implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         $in_val = Str::of($value);
-        Log::info(__FUNCTION__ . ' ' . __LINE__ . $attribute .':'. $in_val); 
-        if ( ! in_array( $in_val, self::valid_values) ) {
-            Log::alert(__FUNCTION__ . ' '. __LINE__ . 'received in input:' . $in_val );
-            $fail( "You must pass a valid value" );
+        Log::info(__FUNCTION__.' '.__LINE__.$attribute.':'.$in_val);
+        if (! in_array($in_val, self::valid_values)) {
+            Log::alert(__FUNCTION__.' '.__LINE__.'received in input:'.$in_val);
+            $fail('You must pass a valid value');
         }
     }
 }

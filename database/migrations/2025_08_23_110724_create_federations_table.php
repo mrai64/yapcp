@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('federations', function (Blueprint $table) {
             $table->id();
-            // TODO country_code 
+            // TODO country_code
             $table->string('code', 6)->index()->comment('all capitals');
             $table->string('name')->index();
             $table->string('website')->comment('Official federation web');

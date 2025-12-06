@@ -1,24 +1,27 @@
 <?php
+
 /**
  * Region means continent
  * auxiliary table for php timezones
- * 
  */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 
 class Region extends Model
 {
     use HasFactory,SoftDeletes;
+
     public const table_name = 'regions';
+
     // pk not bigint unsigned incremental
     // protected $primaryKey = 'id';
-    protected $keyType = 'string'; 
+    protected $keyType = 'string';
+
     public $incrementing = false;
 
     // field list
@@ -38,9 +41,9 @@ class Region extends Model
             'deleted_at' => 'datetime',
         ];
     }
-    
-    // getters 
-    
+
+    // getters
+
     // RELATIONSHIP
 
     /**
@@ -50,6 +53,7 @@ class Region extends Model
     {
         // Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__.' called');
         $timezones = $this->hasMany(Timezone::class);
+
         // Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__.' timezones:' . json_encode($timezones) );
         return $timezones;
     }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('work_id')->references('id')->on('works');
         });
     }
-    
+
     /**
      * Reverse the migrations.
      */

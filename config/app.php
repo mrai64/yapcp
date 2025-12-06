@@ -13,7 +13,7 @@ return [
     |
     */
 
-    //orig 'name' => env('APP_NAME', 'Laravel'),
+    // orig 'name' => env('APP_NAME', 'Laravel'),
     'name' => env('APP_NAME', 'yaPCP'),
 
     /*
@@ -27,7 +27,7 @@ return [
     |
     */
 
-    //orig 'env' => env('APP_ENV', 'production'),
+    // orig 'env' => env('APP_ENV', 'production'),
     'env' => env('APP_ENV', 'develop'),
 
     /*
@@ -41,7 +41,7 @@ return [
     |
     */
 
-    //orig 'debug' => (bool) env('APP_DEBUG', false),
+    // orig 'debug' => (bool) env('APP_DEBUG', false),
     'debug' => (bool) env('APP_DEBUG', true),
 
     /*
@@ -55,7 +55,7 @@ return [
     |
     */
 
-    //orig 'url' => env('APP_URL', 'http://localhost'),
+    // orig 'url' => env('APP_URL', 'http://localhost'),
     // 'url' => env('APP_URL', 'http://localhost:8000/yapcp'), // MAMP
     'url' => env('APP_URL', 'http://yapcp.test/'), // HeRD
 
@@ -70,7 +70,7 @@ return [
     |
     */
 
-    //orig 'timezone' => 'UTC',
+    // orig 'timezone' => 'UTC',
     'timezone' => 'Europe/Rome',
 
     /*
@@ -84,12 +84,12 @@ return [
     |
     */
 
-    //orig 'locale' => env('APP_LOCALE', 'en'),
+    // orig 'locale' => env('APP_LOCALE', 'en'),
     'locale' => env('APP_LOCALE', 'it'),
 
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
 
-    //orig 'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
+    // orig 'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
     'faker_locale' => env('APP_FAKER_LOCALE', 'it_IT'),
 
     /*

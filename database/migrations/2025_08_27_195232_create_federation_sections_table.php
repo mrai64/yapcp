@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('federation_sections', function (Blueprint $table) {
-            $table->id(); // 
+            $table->id(); //
             $table->foreignId('federation_id')->comment('fx: federation.id');
             $table->string('code', 5)->comment('as from federations regulation');
             $table->string('name');

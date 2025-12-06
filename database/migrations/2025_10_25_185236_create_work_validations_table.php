@@ -1,13 +1,14 @@
 <?php
+
 /**
  * (User) Work (manual) Validation (log)
  * Even if a work in a section should be validated for some rule
  * in an automatic way, some others are only human validation,
  * but why validate twice the same work?
- * 
+ *
  * - work_id
- * - federation_section_id 
- * - 
+ * - federation_section_id
+ * -
  */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -23,7 +24,7 @@ return new class extends Migration
         Schema::create('work_validations', function (Blueprint $table) {
             $table->id(); // standard
             $table->foreignUuid('work_id')->index()->comment('fk: works.id '); // uuid
-            $table->foreignId('federation_section_id')->comment('fk: federation_sections.id '); // 
+            $table->foreignId('federation_section_id')->comment('fk: federation_sections.id '); //
             // payload
             $table->foreignUuid('validator_user_id')->comment('fk: user_contacts.user_id '); // uuid
 

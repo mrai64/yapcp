@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 2025-08-27 add contact country_id
  * 2025-08-27 add contact field
@@ -8,26 +9,29 @@
  *            old 'code' field become id, string
  * Relationship 1:1 country_id
  */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 
 class Federation extends Model
 {
     use HasFactory, SoftDeletes;
+
     // TODO remove - protected string $table
     public const table_name = 'federations';
-    // pk it's not a bigint nor uuid
-    protected     $keyType  = 'string';
-    public    $incrementing = false;
 
-    protected $fillable =[
+    // pk it's not a bigint nor uuid
+    protected $keyType = 'string';
+
+    public $incrementing = false;
+
+    protected $fillable = [
         'id',
         'country_id', // fk countries.id
         'name_en',
@@ -41,8 +45,10 @@ class Federation extends Model
         // deleted_at
     ];
 
-    protected function casts(): array{
+    protected function casts(): array
+    {
         Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -59,28 +65,31 @@ class Federation extends Model
             ->orderBy('name_en', 'asc')
             ->orderBy('created_at', 'desc')
             ->get();
-        Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($f_list) );
+        Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($f_list));
+
         return $f_list;
     }
 
     // federation         = Federation::find('FIAP');
     // federation_country = Federation::find('FIAP')->country;
-    public function country() : HasOne
+    public function country(): HasOne
     {
         // Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in:'.json_encode($this) );
-        $country_ = $this->hasOne(Country::class, 'id',           'country_id');
+        Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in:'.json_encode($this));
+        $country_ = $this->hasOne(Country::class, 'id', 'country_id');
         // . . . . . . . . . . . . . . . countries.id   federation.country_id
-        Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($country_) );
+        Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($country_));
+
         return $country_;
     }
 
-    public function sections() : HasMany
+    public function sections(): HasMany
     {
         Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        $s_collection = $this->hasMany(FederationSection::class, 'federation_id',            'id');
+        $s_collection = $this->hasMany(FederationSection::class, 'federation_id', 'id');
         // . . . . . . . . . . . . . . . . . .federation_sections.federation_id   federations.id
-        Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($s_collection) );
+        Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($s_collection));
+
         return $s_collection;
     }
 }

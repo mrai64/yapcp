@@ -1,7 +1,8 @@
 <?php
+
 /**
  * Works is child table of users
- * 
+ *
  * use uuid()
  */
 use Illuminate\Database\Migrations\Migration;
@@ -38,7 +39,7 @@ return new class extends Migration
             $table->dateTime('deleted_at')->nullable();
 
             // idx rename
-            $table->index(['user_id','reference_year','title_en'], 'general_idx');
+            $table->index(['user_id', 'reference_year', 'title_en'], 'general_idx');
         });
     }
 

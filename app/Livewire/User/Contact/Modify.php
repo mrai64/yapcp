@@ -1,4 +1,5 @@
 <?php
+
 /**
  * user_contacts modify
  *
@@ -9,23 +10,20 @@
  * 2025-09-10: rename col lang into lang_local
  * 2025-09-28  fix
  * 2025-11-24  removed TimezonesList
- * 
  */
 
 namespace App\Livewire\User\Contact;
 
-use Livewire\Component;
 use App\Models\Country;
 use App\Models\LangList;
 use App\Models\Timezone;
 use App\Models\User;
 use App\Models\UserContact;
-// use Livewire\Attributes\Validate;
-use Illuminate\Validation\Rule;
-use Illuminate\Validation\Validator;
 use Illuminate\Support\Facades\Auth;
+// use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage; // passport_photo
+use Livewire\Component;
+// passport_photo
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 class Modify extends Component
@@ -36,45 +34,64 @@ class Modify extends Component
     // Country
     // country_id
     public string $country; //     readonly
+
     public $countries; //          readonly
 
     // User
     // user_id
     public User $user; //          readonly
+
     public $user_contact;
 
     public int $id; //             readonly user_contacts.id bigint unsigned
+
     public string $user_id; //     readonly users.id        string uuid
+
     public string $country_id; //           countries.id.   char
+
     public string $first_name;
+
     public string $last_name;
+
     public string $nick_name;
 
     public string $email;
+
     public string $email_old; // to assure that
 
     public string $cellular;
 
     public string $passport_photo;
+
     public $passport_photo_image; // readonly
 
     public string $address;
+
     public string $address_line2;
+
     public string $city;
+
     public string $region;
+
     public string $postal_code;
 
     public string $website;
+
     public string $facebook;
+
     public string $x_twitter;
+
     public string $instagram;
+
     public string $whatsapp;
 
     public string $lang_local;
-    public array  $lang_list = [];
+
+    public array $lang_list = [];
 
     public string $timezone;
-    public array  $timezone_list = [];
+
+    public array $timezone_list = [];
 
     /**
      * 1. Before the show
@@ -82,65 +99,65 @@ class Modify extends Component
     public function mount() // no 'uid' param in route()
     {
         // insert if missing
-        Log::info('Component ' . __CLASS__ . ' f:'. __FUNCTION__ . ' l:' . __LINE__ . ' Called id: '. Auth::id() );
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' Called id: '.Auth::id());
         $this->user_id = Auth::id();
 
         $this->countries = Country::country_list_by_country();
-        Log::info('Component ' . __CLASS__ . ' f:'. __FUNCTION__ . ' l:' . __LINE__ . ' countries: '. json_encode($this->countries) );
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' countries: '.json_encode($this->countries));
 
         // insert if missing
-        $this->user    = User::where('id', $this->user_id)->get()[0]; // ✅ $this->user['id'] ❌ $this->user->id;
-        if ( UserContact::where('user_id', $this->user_id)->count() == 0 ) {
-            Log::info(__FUNCTION__ . ' ' . __LINE__ . Auth::id() . 'zero found' );
+        $this->user = User::where('id', $this->user_id)->get()[0]; // ✅ $this->user['id'] ❌ $this->user->id;
+        if (UserContact::where('user_id', $this->user_id)->count() == 0) {
+            Log::info(__FUNCTION__.' '.__LINE__.Auth::id().'zero found');
             $this->user_contact = UserContact::create([
-                'user_id'    => $this->user['id'],
+                'user_id' => $this->user['id'],
                 'country_id' => 'ITA', // only a default
                 'first_name' => $this->user['name'],
-                'last_name'  => $this->user['name'],
-                'email'      => $this->user['email'],
+                'last_name' => $this->user['name'],
+                'email' => $this->user['email'],
             ]);
-            Log::info(__FUNCTION__ . ' ' . __LINE__ . ' new rec:' . $this->user_contact );
+            Log::info(__FUNCTION__.' '.__LINE__.' new rec:'.$this->user_contact);
         } else {
-            Log::info(__FUNCTION__ . ' ' . __LINE__ . ' found:' . $this->user_id );
+            Log::info(__FUNCTION__.' '.__LINE__.' found:'.$this->user_id);
         }
         // find again or find new (some fields should be null)
         $this->user_contact = UserContact::where('user_id', $this->user_id)->first();
-        Log::info('Component ' . __CLASS__ . ' f:'. __FUNCTION__ . ' l:' . __LINE__ . ' user_contact: '. json_encode($this->user_contact) );
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' user_contact: '.json_encode($this->user_contact));
 
-        $this->id             = $this->user_contact->id;
-        $this->user_id        = $this->user_contact->user_id;
-        $this->country_id     = $this->user_contact->country_id;
-        $this->first_name     = $this->user_contact->first_name;
-        $this->last_name      = $this->user_contact->last_name;
-        $this->nick_name      = (is_null($this->user_contact->nick_name)) ? '' : $this->user_contact->nick_name;
-        $this->email          = $this->user_contact->email;
-        $this->email_old      = $this->user_contact->email;
-        $this->cellular       = $this->user_contact->cellular;
+        $this->id = $this->user_contact->id;
+        $this->user_id = $this->user_contact->user_id;
+        $this->country_id = $this->user_contact->country_id;
+        $this->first_name = $this->user_contact->first_name;
+        $this->last_name = $this->user_contact->last_name;
+        $this->nick_name = (is_null($this->user_contact->nick_name)) ? '' : $this->user_contact->nick_name;
+        $this->email = $this->user_contact->email;
+        $this->email_old = $this->user_contact->email;
+        $this->cellular = $this->user_contact->cellular;
         //
         $this->passport_photo_image = null;
-        $photo_name           = $this->user_contact->passport_photo;
+        $photo_name = $this->user_contact->passport_photo;
         // $photo_name = str_ireplace('%20', ' ', $photo_name);
         // $photo_name = str_ireplace('+',   '',  $photo_name);
         $this->passport_photo = $photo_name; // img path, not in form
 
-        $this->address        = $this->user_contact->address;
-        $this->address_line2  = $this->user_contact->address_line2;
-        $this->city           = $this->user_contact->city;
-        $this->region         = $this->user_contact->region;
-        $this->postal_code    = $this->user_contact->postal_code;
+        $this->address = $this->user_contact->address;
+        $this->address_line2 = $this->user_contact->address_line2;
+        $this->city = $this->user_contact->city;
+        $this->region = $this->user_contact->region;
+        $this->postal_code = $this->user_contact->postal_code;
 
-        $this->lang_list      = LangList::lang_list;
-        $this->lang_local     = $this->user_contact->lang_local;
+        $this->lang_list = LangList::lang_list;
+        $this->lang_local = $this->user_contact->lang_local;
 
         $timezone_set = Timezone::select('id')->get();
-        $this->timezone_list  = array_values( collect($timezone_set)->toArray() );
-        $this->timezone       = $this->user_contact->timezone;
+        $this->timezone_list = array_values(collect($timezone_set)->toArray());
+        $this->timezone = $this->user_contact->timezone;
 
-        $this->website        = (is_null($this->user_contact->website))   ? '' : $this->user_contact->website;
-        $this->facebook       = (is_null($this->user_contact->facebook))  ? '' : $this->user_contact->facebook;
-        $this->x_twitter      = (is_null($this->user_contact->x_twitter)) ? '' : $this->user_contact->x_twitter;
-        $this->instagram      = (is_null($this->user_contact->instagram)) ? '' : $this->user_contact->instagram;
-        $this->whatsapp       = (is_null($this->user_contact->whatsapp))  ? '' : $this->user_contact->whatsapp;
+        $this->website = (is_null($this->user_contact->website)) ? '' : $this->user_contact->website;
+        $this->facebook = (is_null($this->user_contact->facebook)) ? '' : $this->user_contact->facebook;
+        $this->x_twitter = (is_null($this->user_contact->x_twitter)) ? '' : $this->user_contact->x_twitter;
+        $this->instagram = (is_null($this->user_contact->instagram)) ? '' : $this->user_contact->instagram;
+        $this->whatsapp = (is_null($this->user_contact->whatsapp)) ? '' : $this->user_contact->whatsapp;
     }
 
     /**
@@ -148,16 +165,19 @@ class Modify extends Component
      */
     public function render()
     {
-        Log::info('Component ' . __CLASS__ . ' f:'. __FUNCTION__ . ' l:' . __LINE__ . ' called' );
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
 
         // Log::info('Component ' . __CLASS__ . ' f:'. __FUNCTION__ . ' l:' . __LINE__ . ' tz:' . json_encode($this->timezone_list) );
         return view('livewire.user.contact.modify');
     }
+
     /**
      * 3. Only Validation rules 1 / 2
      */
-    public function rules() {
-        Log::info('Component ' . __CLASS__ . ' f:'. __FUNCTION__ . ' l:' . __LINE__ . ' called' );
+    public function rules()
+    {
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+
         return [
             'id' => 'required|exists:user_contacts,id',
             'user_id' => 'required|exists:users,id',
@@ -183,15 +203,16 @@ class Modify extends Component
             'timezone' => 'required|exists:timezones,id',
         ];
     }
+
     /**
      * 4. After the show,... update?
      */
     public function update_user_contact()
     {
-        Log::info('Component ' . __CLASS__ . ' f:'. __FUNCTION__ . ' l:' . __LINE__ . ' called' );
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         // apply the rules
         $validated = $this->validate();
-        Log::info('Component ' . __CLASS__ . ' f:'. __FUNCTION__ . ' l:' . __LINE__ . ' validated: ' . json_encode($validated) );
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' validated: '.json_encode($validated));
 
         // data integration
         $validated['email'] = $this->email_old;
@@ -199,24 +220,25 @@ class Modify extends Component
         $photo_path = $this->user_contact->photo_box();
 
         // see also: https://livewire.laravel.com/docs/uploads#storing-uploaded-files
-        $photo_name = $photo_path .  '/' . '__passport_photo.jpg';
+        $photo_name = $photo_path.'/'.'__passport_photo.jpg';
         $photo_name = str_ireplace(':', '-', $photo_name);
-        $photo_name = str_ireplace('+', '',  $photo_name);
+        $photo_name = str_ireplace('+', '', $photo_name);
         $photo_name = str_ireplace(' ', '-', $photo_name);
 
-        if ($this->passport_photo_image){
-            $this->passport_photo_image->storePubliclyAs( 'photos', $photo_name, 'public' );
+        if ($this->passport_photo_image) {
+            $this->passport_photo_image->storePubliclyAs('photos', $photo_name, 'public');
             $this->passport_photo = $photo_name;
             $validated['passport_photo'] = $photo_name;
         }
-        Log::info('Component ' . __CLASS__ . ' f:'. __FUNCTION__ . ' l:' . __LINE__ . ' validated: ' . json_encode($validated) );
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' validated: '.json_encode($validated));
 
-        $this->user_contact->update($validated );
-        Log::info('Component ' . __CLASS__ . ' f:'. __FUNCTION__ . ' l:' . __LINE__ . ' user_contact: ' . json_encode($this->user_contact) );
+        $this->user_contact->update($validated);
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' user_contact: '.json_encode($this->user_contact));
+
         //
         // back to dashboard
         return redirect()
-            ->route('dashboard', ['id' => $this->user_id ] )
+            ->route('dashboard', ['id' => $this->user_id])
             ->with('success', __('Your personal info has been updated, thanks!'));
     }
 }

@@ -1,12 +1,12 @@
 <?php
+
 /**
  * - uuid id
  * - factory yes, but
  * - softdelete yes
- * 
+ *
  * It's a id card for contest and
- * UH? A lot of fields? yes. We need it 
- * 
+ * UH? A lot of fields? yes. We need it
  */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -22,18 +22,18 @@ return new class extends Migration
         Schema::create('contests', function (Blueprint $table) {
             $table->uuid('id')->primary()
                 ->comment('uuid assigned'); // $table->id();
-            $table->string('country_id',3)->index()
+            $table->string('country_id', 3)->index()
                 ->comment('fk: countries.id');
             $table->string('name_en')->index();
             $table->string('name_local')->nullable()->index();
-            $table->string('organization_id',36)->index()
+            $table->string('organization_id', 36)->index()
                 ->comment('fk: organizations.id');
             $table->string('contest_mark')->nullable()
                 ->comment('The contest or organization passport photo - mark');
             $table->text('contact_info')
                 ->comment('contest headquarter, email and so on');
-            $table->char('is_circuit',1)->default('N')->comment('Y/N, N when not Y');
-            $table->string('circuit_id',36)->nullable()->index()
+            $table->char('is_circuit', 1)->default('N')->comment('Y/N, N when not Y');
+            $table->string('circuit_id', 36)->nullable()->index()
                 ->comment('null or a valid contest.id');
             $table->string('federation_list')->nullable()
                 ->comment('under patronage of federation code[]');
@@ -64,8 +64,8 @@ return new class extends Migration
             $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate()
                 ->comment('backup reserved');
             $table->dateTime('deleted_at')->nullable()
-                ->comment('softdelete reserved'); 
-            // 
+                ->comment('softdelete reserved');
+            //
             $table->index(['country_id', 'day_2_closing', 'name_en', 'created_at'], 'general_idx')
                 ->comment('for general list');
         });

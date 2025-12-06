@@ -22,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('user_contacts', function (Blueprint $table) {
-            // only for... 
+            // only for...
             $table->renameColumn('lang_local', 'lang');
         });
     }

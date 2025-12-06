@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('contest_works', function (Blueprint $table) {
-            $table->boolean('is_admit')->default(false)->comment("0 = not admit, admit otherwise")->change();
-            // idx 
+            $table->boolean('is_admit')->default(false)->comment('0 = not admit, admit otherwise')->change();
+            // idx
             $table->index(['section_id', 'is_admit', 'work_id'], 'admit_idx');
 
         });

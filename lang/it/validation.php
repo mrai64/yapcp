@@ -5,9 +5,7 @@ return [
      * aggiunti
      */
     'Add New' => 'Aggiungi nuovo',
-    
 
-    
     /*
     |--------------------------------------------------------------------------
     | Validation Language Lines

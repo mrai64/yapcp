@@ -1,7 +1,7 @@
 <?php
+
 /**
  * to reduce time consume for access in query
- * 
  */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

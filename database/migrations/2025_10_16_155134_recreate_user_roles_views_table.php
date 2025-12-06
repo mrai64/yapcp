@@ -1,17 +1,17 @@
 <?php
+
 /**
  * THAT's NOT A TABLE BUT A SQL VIEW
  * see also
  * - https://www.reddit.com/r/laravel/comments/o0ban2/using_database_views_in_laravel/
  * - https://medium.com/@kevinsada05/using-sql-views-in-laravel-examples-and-best-practices-1b00cbcc8494
  * - https://laravel.com/docs/12.x/eloquent#table-names
- * 
+ *
  * WARNING: we must use pcp_ table prefix explicit.
- * 
+ *
  * 2025-10-16 federations.name col become name_en
  */
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
@@ -22,7 +22,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement("DROP VIEW pcp_user_roles_view");
+        DB::statement('DROP VIEW pcp_user_roles_view');
         // exceeding blanks to make more readable
         DB::statement("
             CREATE VIEW pcp_user_roles_view AS
@@ -99,6 +99,6 @@ return new class extends Migration
     public function down(): void
     {
         // Schema::dropIfExists('user_roles_views');
-        DB::statement("DROP VIEW pcp_user_roles_view");
+        DB::statement('DROP VIEW pcp_user_roles_view');
     }
 };

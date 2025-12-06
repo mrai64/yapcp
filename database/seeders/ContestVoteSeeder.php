@@ -7,56 +7,54 @@ use App\Models\ContestJury;
 use App\Models\ContestSection;
 use App\Models\ContestVote;
 use App\Models\ContestWork;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Log;
 
 class ContestVoteSeeder extends Seeder
 {
-
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        echo "\n" . __CLASS__;
-        echo "\n" . "Find contest";
-        $contests_set =  Contest::all();
-        echo "\n". '§ contest #'. $contests_set->count();
+        echo "\n".__CLASS__;
+        echo "\n".'Find contest';
+        $contests_set = Contest::all();
+        echo "\n".'§ contest #'.$contests_set->count();
 
-        foreach($contests_set as $contest){
+        foreach ($contests_set as $contest) {
 
             echo "\n***********************************************************************************************************";
-            echo "\n*** Contest:" . $contest->name_en;
+            echo "\n*** Contest:".$contest->name_en;
             echo "\n***********************************************************************************************************";
 
             $sections_set = ContestSection::where('contest_id', $contest->id)->get();
-            echo "\n". '§ Section #:' . $sections_set->count(); 
+            echo "\n".'§ Section #:'.$sections_set->count();
 
-            foreach($sections_set as $section) {
+            foreach ($sections_set as $section) {
                 echo "\n\n***********************************************************************************************************";
-                echo "\nSection:" . $section->name_en;
+                echo "\nSection:".$section->name_en;
                 echo "\n***********************************************************************************************************";
 
                 $jurors_set = ContestJury::where('section_id', $section->id)->get();
-                echo "\n". '§ Jury members #: ' . $jurors_set->count();
-                
-                $contest_works_set = ContestWork::where('contest_id', $contest->id )->where('section_id', $section->id )->get();
-                echo "\n". '§ section_id:'.$section->id.' Work_set #: ' . $contest_works_set->count();
-                
-                foreach($contest_works_set as $contest_work){
+                echo "\n".'§ Jury members #: '.$jurors_set->count();
 
-                    foreach($jurors_set as $juror){
+                $contest_works_set = ContestWork::where('contest_id', $contest->id)->where('section_id', $section->id)->get();
+                echo "\n".'§ section_id:'.$section->id.' Work_set #: '.$contest_works_set->count();
+
+                foreach ($contest_works_set as $contest_work) {
+
+                    foreach ($jurors_set as $juror) {
 
                         $already_voted = ContestVote::where('section_id', $section->id)
-                            ->where('work_id',       $contest_work->work_id)
-                            ->where('contest_id',    $contest->id)
+                            ->where('work_id', $contest_work->work_id)
+                            ->where('contest_id', $contest->id)
                             ->where('juror_user_id', $juror->user_contact_id)->count();
 
                         if ($already_voted) {
                             // $contest_work->delete();
                             // echo ' DUP DEL';
                             echo ' .';
+
                             continue;
                         }
                         // assuming $contest->vote_rule == 'num:1..10'
@@ -65,21 +63,21 @@ class ContestVoteSeeder extends Seeder
                         //     $vote = 10;
                         // }
 
-                        // assuming $contest->vote_rule == 'num:1..30' 
-                        $vote = rand(0,1)+rand(0,2)+rand(0,6)+rand(3,6)+rand(3,6)+rand(3,6);
+                        // assuming $contest->vote_rule == 'num:1..30'
+                        $vote = rand(0, 1) + rand(0, 2) + rand(0, 6) + rand(3, 6) + rand(3, 6) + rand(3, 6);
                         if ($vote > 30) {
                             $vote = 30;
                         }
 
-                        $inserted  = ContestVote::create([
-                            'contest_id'    => $contest->id,
-                            'section_id'    => $section->id,
-                            'work_id'       => $contest_work->work_id,
+                        $inserted = ContestVote::create([
+                            'contest_id' => $contest->id,
+                            'section_id' => $section->id,
+                            'work_id' => $contest_work->work_id,
                             'juror_user_id' => $juror->user_contact_id,
-                            'vote'          => $vote,
+                            'vote' => $vote,
                         ]);
 
-                        echo ("\n".'Seeder '. __CLASS__ .' inserted '. $inserted->id . ' vote:'. $vote .' rec:'. json_encode($inserted) );
+                        echo "\n".'Seeder '.__CLASS__.' inserted '.$inserted->id.' vote:'.$vote.' rec:'.json_encode($inserted);
 
                     } // $jurors_set
                 } // contest_work_set

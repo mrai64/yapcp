@@ -1,17 +1,17 @@
 <?php
+
 /**
- * users 
+ * users
  * - relationship 1:1 w/user_contacts
  * - relationship 1:N w/user_roles
  * - relationship 1:N w/works (may become user_works)
  * - relationship 1:N w/contest_participants
  * - relationship 1:N w/contest_works
- * 
  */
+
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder

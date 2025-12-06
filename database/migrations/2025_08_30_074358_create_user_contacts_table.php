@@ -1,14 +1,14 @@
 <?php
+
 /**
  * user_contacts
  * child table of users
- * 
+ *
  * user is only for platform registration
  * user_contacts is for more data on user
  * don't need an uuid() as primary key
- * 
+ *
  * user_id should be also user_contacts pk
- * 
  */
 
 use Illuminate\Database\Migrations\Migration;
@@ -37,7 +37,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('region')->comment('country / area / town');
             $table->string('postal_code', 10)->comment('aka zip code');
-            // 
+            //
             $table->string('website')->nullable()->comment('url of personal site');
             $table->string('facebook')->nullable()->comment('url of personal page');
             $table->string('x_twitter')->nullable()->comment('url of personal page');

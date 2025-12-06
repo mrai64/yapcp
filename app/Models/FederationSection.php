@@ -1,4 +1,5 @@
 <?php
+
 /**
  * FederationSection
  * child of Federation
@@ -7,13 +8,12 @@
  * 2025-10-16 reformat
  * 2025-10-17 return id pk
  * 2025-10-21 relationship belongsTo
- *
  */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 
@@ -61,7 +61,7 @@ class FederationSection extends Model
         Log::info('Models '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         $federation = $this->belongsTo(Federation::class);
         // . . . . . . . . . . . . . . . . . . .federations.id  federation_sections.federation_id
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' federation:' . json_encode($federation) );
+        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' federation:'.json_encode($federation));
 
         return $federation;
     }

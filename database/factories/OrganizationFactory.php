@@ -1,8 +1,10 @@
 <?php
+
 /**
  * 2025-08-30 rename country_code in country_id
  *            country_id is fk countries.id
  */
+
 namespace Database\Factories;
 
 use App\Models\Country;
@@ -26,7 +28,7 @@ class OrganizationFactory extends Factory
             'country_id' => DB::table(Country::table_name)->pluck('id')->random(5)->first(),
             'name' => fake()->text(),
             'email' => fake()->email(),
-            'website' => fake()->url(), 
+            'website' => fake()->url(),
             //
             'created_at' => now(),
             'updated_at' => now(),

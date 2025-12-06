@@ -1,15 +1,17 @@
 <?php
+
 /**
  * Work should be considered
  * child of UserContact
- * 
+ *
  * works.id is uuid()
  */
+
 namespace Database\Factories;
 
+use App\Models\UserContact;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\UserContact;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Work>
@@ -31,7 +33,7 @@ class WorkFactory extends Factory
             'user_id' => $user_contact->user_id,
             'work_file' => fake()->imageUrl(1920, 1080, null, false, null, false, 'jpg'), // TODO correct it
             'extension' => 'jpg',
-            'reference_year' => date("Y"),
+            'reference_year' => date('Y'),
             'title_en' => fake()->text(120),
             'title_local' => '',
             'long_side' => 1920,

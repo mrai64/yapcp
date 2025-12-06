@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('countries', function (Blueprint $table) {
             $table->char('flag_code', 20)->nullable()
-            ->after('country')->comment('Unicode chars for country flag emoji');
+                ->after('country')->comment('Unicode chars for country flag emoji');
         });
     }
 

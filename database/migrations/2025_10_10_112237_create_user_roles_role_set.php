@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Limited vocabulary value set for
  * - field: role
  * - table: user_roles
- * 
+ *
  * WARNING: renamed later as user_roles_role_sets
- * 
  */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

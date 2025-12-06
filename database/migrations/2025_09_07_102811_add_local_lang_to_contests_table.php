@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('contests', function (Blueprint $table) {
             $table->string('lang_local', 8)->default('en')
-            ->after('name_local')->comment('dev: in LangList[]');
+                ->after('name_local')->comment('dev: in LangList[]');
         });
     }
 

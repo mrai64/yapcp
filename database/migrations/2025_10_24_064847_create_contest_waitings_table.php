@@ -1,9 +1,9 @@
 <?php
+
 /**
  * Contest Waiting
  * Works Parked away from contest
- * wait a moment: that work had a problem 
- * 
+ * wait a moment: that work had a problem
  */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

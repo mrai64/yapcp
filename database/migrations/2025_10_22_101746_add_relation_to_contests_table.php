@@ -1,8 +1,8 @@
 <?php
+
 /**
  * created auxiliary table contests_vote_role_set
- * make col and related to 
- * 
+ * make col and related to
  */
 
 use Illuminate\Database\Migrations\Migration;

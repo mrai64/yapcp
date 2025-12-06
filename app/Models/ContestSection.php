@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Contest Sections is a child table for Contest
  * pk uuid
@@ -10,21 +11,20 @@
  * and require a FederationSection access
  *
  * no factory, no seeder
- * 
- * 2025-10-26 add federation_section_id when under_patronage == Y
  *
+ * 2025-10-26 add federation_section_id when under_patronage == Y
  */
+
 namespace App\Models;
 
-use App\Models\Contest;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Support\Str; //  uuid booted()
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes; //  uuid booted()
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class ContestSection extends Model
 {
@@ -35,7 +35,8 @@ class ContestSection extends Model
     // pk is uuid, and don'need ++
     // protected $primaryKey = 'id'; // standard name
     protected $keyType = 'string'; // char(36)
-    public    $incrementing = false;
+
+    public $incrementing = false;
 
     // under_patronage
     public const valid_under_patronages = [
@@ -45,7 +46,7 @@ class ContestSection extends Model
 
     protected $fillable = [
         // id              uuid
-        'contest_id',//    
+        'contest_id', //
         'code', //         unique( contest_id + code )
         'under_patronage', // set Y/N or boolean or ?
         'name_en',
@@ -65,8 +66,9 @@ class ContestSection extends Model
     ];
 
     // pk is uuid
-    public static function booted() {
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+    public static function booted()
+    {
+        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         static::creating(function ($model) {
             $model->id = Str::uuid(); // uuid generator
         });
@@ -87,48 +89,52 @@ class ContestSection extends Model
      *
      * Check $section->under_patronage enum like
      */
-    public function is_a_valid_under_patronage(ContestSection $section) : bool
+    public function is_a_valid_under_patronage(ContestSection $section): bool
     {
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
-        return (in_array( $section->under_patronage, self::valid_under_patronages, true));
+        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+
+        return in_array($section->under_patronage, self::valid_under_patronages, true);
     }
 
     // GETTER
 
-    public function get_section_list( Contest $contest) : array
+    public function get_section_list(Contest $contest): array
     {
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         $section_list = self::whereNull('deleted_at')->where('contest_id', $contest->id)
             ->order_by('code')->orderBy('name_en')
             ->get(['id', 'code', 'name_en', 'name_local', 'under_patronage']);
         $section_array = [];
         foreach ($section_list as $section) {
             $section_array[] = [
-                'id'              => $section->id,
+                'id' => $section->id,
                 // contest_id
-                'code'            => $section->code,
+                'code' => $section->code,
                 'under_patronage' => $section->under_patronage,
-                'name_en'         => $section->name_en,
-                'name_local'      => $section->name_local,
+                'name_en' => $section->name_en,
+                'name_local' => $section->name_local,
                 // created_at,
                 // updated_at,
                 // deleted_at,
             ];
         }
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' out');
+        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out');
+
         return $section_array;
     }
 
-    public static function first_section_id(string $contest_id) : string
+    public static function first_section_id(string $contest_id): string
     {
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         try {
             $first_section_id = self::where('contest_id', $contest_id)
-            ->orderBy('name_en')->first();
-            Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' 1st: ' . json_encode($first_section_id->id));
+                ->orderBy('name_en')->first();
+            Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' 1st: '.json_encode($first_section_id->id));
+
             return $first_section_id->id;
         } catch (\Throwable $th) {
-            Log::error(__FUNCTION__.' '.__LINE__ . 'in: contest_id:' . $contest_id . ' out: ' . $th->getMessage() );
+            Log::error(__FUNCTION__.' '.__LINE__.'in: contest_id:'.$contest_id.' out: '.$th->getMessage());
+
             return '';
         }
     }
@@ -137,37 +143,39 @@ class ContestSection extends Model
 
     /**
      * @return Contest contest_sections.contest_id 1:1 contests.id
-     * 
      */
-    public function contest() : BelongsTo
+    public function contest(): BelongsTo
     {
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         // belongsTo( class_parent::class, class_parent.id, class_child.parent_id)
         $contest = $this->belongsTo(Contest::class);
+
         // . . . . . . . contests.id contest_sections.id
         return $contest;
     }
 
     /**
-     * @return ContestWork contest_sections.id 1:N contest_works.section_id 
+     * @return ContestWork contest_sections.id 1:N contest_works.section_id
      */
-    public function works() : HasMany
+    public function works(): HasMany
     {
-        Log::info('Model ' . __CLASS__ .' f:'. __FUNCTION__.' l:' . __LINE__ .' called           in:'. $this->id);
-        $works_in_section = $this->hasMany(ContestWork::class, 'section_id',                 'id');
-        //. . . . . . . . . . . . . . . . . . . . contest_works.section_id   contest_sections.id
-        Log::info('Model ' . __CLASS__ .' f:'. __FUNCTION__.' l:' . __LINE__ .' out');
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called           in:'.$this->id);
+        $works_in_section = $this->hasMany(ContestWork::class, 'section_id', 'id');
+        // . . . . . . . . . . . . . . . . . . . . contest_works.section_id   contest_sections.id
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out');
+
         return $works_in_section;
     }
-    
+
     /**
      * @return FederationSection contest_sections.id 1:1 federation_sections.section_id
      */
-    public function federation_section() : HasOne
+    public function federation_section(): HasOne
     {
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         $federation_section = $this->hasOne(FederationSection::class);
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' out' );
+        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out');
+
         return $federation_section;
     }
 }

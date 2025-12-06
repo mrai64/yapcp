@@ -1,12 +1,12 @@
 <?php
+
 /**
- * Fed creation table 
+ * Fed creation table
  * pk not id bigint autoincrement
- * 
+ *
  * Fed_secs creation table
  * child-of Fed table
  * relationship 1:N
- * 
  */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -21,10 +21,10 @@ return new class extends Migration
     {
         Schema::create('federations', function (Blueprint $table) {
             $table->char('id', 10)->uppercase()->primary()->comment('when code are equals add :country_id to both');
-            $table->char('country_id',3)->uppercase()->comment('follow iso-3166 3 ascii uppercase');
+            $table->char('country_id', 3)->uppercase()->comment('follow iso-3166 3 ascii uppercase');
             $table->string('name_en')->index()->comment('official name in english');
-            // 
-            $table->char('local_lang',2)->default('en')->comment('follow iso-3166 2 ascii lowercase');
+            //
+            $table->char('local_lang', 2)->default('en')->comment('follow iso-3166 2 ascii lowercase');
             $table->string('name_local')->default('');
             $table->string('timezone_id')->default('')->comment('reserved');
             $table->string('website')->default('')->comment('official website or fb info page');
@@ -33,7 +33,7 @@ return new class extends Migration
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->dateTime('deleted_at')->nullable();
-            // idx 
+            // idx
             $table->index(['country_id', 'id'], 'country_idx');
             $table->index(['country_id', 'name_en'], 'name_idx');
             // fk
@@ -45,7 +45,7 @@ return new class extends Migration
             $table->char('code', 10)->uppercase()->comment('w/federation_id make pk');
 
             $table->string('name_en')->index()->comment('official name in english');
-            $table->char('local_lang',2)->default('en')->comment('follow iso-3166 2 ascii lowercase');
+            $table->char('local_lang', 2)->default('en')->comment('follow iso-3166 2 ascii lowercase');
             $table->string('name_local')->default('')->comment('in local name');
             //
             $table->text('rule_definition')->nullable()->comment('synopsis from federal regulation docs');

@@ -1,10 +1,10 @@
 <?php
+
 /**
  * pk id but
  * unique (contest.id + code) <- should be pk
- * 
+ *
  * patronage means almost a federation sponsor
- * 
  */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

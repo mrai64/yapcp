@@ -1,8 +1,7 @@
 <?php
+
 /**
- * Add review col to contest_votes_table 
- * 
- * 
+ * Add review col to contest_votes_table
  */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -17,9 +16,9 @@ return new class extends Migration
     {
         Schema::table('contest_votes', function (Blueprint $table) {
             $table->boolean('review_required')->default(false)
-            ->after('vote')->comment("0 = not required");
+                ->after('vote')->comment('0 = not required');
             // idx
-            $table->index(['section_id','juror_user_id','review_required','work_id'], 'review_idx');
+            $table->index(['section_id', 'juror_user_id', 'review_required', 'work_id'], 'review_idx');
 
         });
     }

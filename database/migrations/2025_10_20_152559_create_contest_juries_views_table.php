@@ -1,7 +1,5 @@
 <?php
-/**
- * 
- */
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
@@ -12,7 +10,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement("CREATE VIEW pcp_contest_juries_view AS
+        DB::statement('CREATE VIEW pcp_contest_juries_view AS
             SELECT
                 con.name_en         AS contest_name_en,
                 sec.name_en         AS section_name_en,
@@ -36,7 +34,7 @@ return new class extends Migration
                 AND user_contact_id = user.user_id
 
             ORDER BY 1,2,3,4
-        ");
+        ');
     }
 
     /**
@@ -44,6 +42,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::statement("DROP VIEW pcp_contest_juries_view");
+        DB::statement('DROP VIEW pcp_contest_juries_view');
     }
 };

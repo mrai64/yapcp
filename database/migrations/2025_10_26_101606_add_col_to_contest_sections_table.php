@@ -1,13 +1,13 @@
 <?php
+
 /**
- * Needed a more strict relationship between 
- * contest_section when under patronage == Y 
- * and 
+ * Needed a more strict relationship between
+ * contest_section when under patronage == Y
+ * and
  * federation_section
- * even if contest is under more-tha-unique federation sponsorship 
+ * even if contest is under more-tha-unique federation sponsorship
  * only one of federation rules win over other and are used
- * as reference rule for contest section 
- * 
+ * as reference rule for contest section
  */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

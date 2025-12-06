@@ -1,17 +1,17 @@
 <?php
+
 /**
- * Contest (Section) Jury table 
+ * Contest (Section) Jury table
  * - child of Contest Section table
- *   - child of Contest table 
- * 
+ *   - child of Contest table
+ *
  * Parent also w/UserContact, w/User and w/UserRole
- * 
+ *
  * When a record is added to ContestJury
  *   a record must added if missing in
- *   - User 
+ *   - User
  *   - UserContact
- *   - UserRole 
- * 
+ *   - UserRole
  */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->uuid('id')->primary()->comment('uuid assigned'); // uuid
             $table->foreignUuid('section_id')->comment('fx: contest_section.id 1:N '); // uuid
             $table->foreignUuid('user_contact_id')->comment('fx: user_contact.user_id'); // uuid
-            $table->char('is_president', 1)->default('N')->comment('N/Y flag'); 
+            $table->char('is_president', 1)->default('N')->comment('N/Y flag');
             // timetable
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate();

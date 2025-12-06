@@ -1,9 +1,10 @@
 <?php
+
 /**
  * Auxiliary table to limit
  * users_roles.role col
- * 
- * 2025-10-18 
+ *
+ * 2025-10-18
  */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -23,7 +24,7 @@ return new class extends Migration
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->dateTime('deleted_at')->nullable();
-            // idx 
+            // idx
             $table->unique(['role', 'deleted_at']);
 
         });

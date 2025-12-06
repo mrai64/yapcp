@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('contest_sections', function (Blueprint $table) {
-            $table->char('rule_monochromatic', 1)->default('N')->comment("maybe boolean 0/N=false, 1/Y=true")->change();
+            $table->char('rule_monochromatic', 1)->default('N')->comment('maybe boolean 0/N=false, 1/Y=true')->change();
         });
     }
 

@@ -1,19 +1,17 @@
 <?php
+
 /**
  * THAT's NOT A TABLE BUT A SQL VIEW
  * see also
  * - https://www.reddit.com/r/laravel/comments/o0ban2/using_database_views_in_laravel/
  * - https://medium.com/@kevinsada05/using-sql-views-in-laravel-examples-and-best-practices-1b00cbcc8494
  * - https://laravel.com/docs/12.x/eloquent#table-names
- * 
+ *
  * WARNING: we must use pcp_ table prefix explicit.
- * 
  */
 
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -24,7 +22,7 @@ return new class extends Migration
     {
         // DB::statement("DROP VIEW pcp_contest_participants_view");
 
-        DB::statement("
+        DB::statement('
             CREATE VIEW pcp_contest_participants_view AS
             SELECT
                 con.name_en                AS contest_name,
@@ -48,7 +46,7 @@ return new class extends Migration
                 and usr.deleted_at is null
 
             ORDER BY 1, 2, 3, 4, 6
-        ");
+        ');
     }
 
     /**
@@ -56,7 +54,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        DB::statement("DROP VIEW pcp_contest_participants_view");
+        DB::statement('DROP VIEW pcp_contest_participants_view');
 
     }
 };

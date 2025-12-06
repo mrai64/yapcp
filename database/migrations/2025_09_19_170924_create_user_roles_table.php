@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('user_roles', function (Blueprint $table) {
             $table->id(); // bigint ok
             $table->ForeignUuid('user_id')->index()
-            ->comment('fk: users.id');
+                ->comment('fk: users.id');
             $table->string('role');
             //
             $table->foreignUuid('organization_id')->nullable()->index()
@@ -37,7 +37,7 @@ return new class extends Migration
             $table->dateTime('deleted_at')->nullable()
                 ->comment('softdelete reserved');
             //
-            $table->index(['user_id','organization_id','contest_id','federation_id','role_opening','id'], 'general_idx');
+            $table->index(['user_id', 'organization_id', 'contest_id', 'federation_id', 'role_opening', 'id'], 'general_idx');
         });
     }
 

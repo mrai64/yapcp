@@ -25,8 +25,8 @@ return new class extends Migration
             $table->dateTime('deleted_at')->nullable();
 
             // idxs
-            $table->unique(['contest_id', 'section_id', 'work_id', 'juror_user_id'], 'general_idx' );
-            $table->index(['contest_id', 'section_id', 'vote', 'work_id', 'juror_user_id'], 'vote_idx' );
+            $table->unique(['contest_id', 'section_id', 'work_id', 'juror_user_id'], 'general_idx');
+            $table->index(['contest_id', 'section_id', 'vote', 'work_id', 'juror_user_id'], 'vote_idx');
 
         });
     }

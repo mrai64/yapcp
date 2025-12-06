@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Contest - main table
  * must be father of seven
@@ -9,14 +10,14 @@
  *            into so named circuit. A circuit have a contest record without
  *            section and jury. A circuit record
  * 2025-10-22 Created an auxiliary table and add col vote_rule
- *
  */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -24,11 +25,13 @@ use Illuminate\Support\Str;
 class Contest extends Model
 {
     use HasFactory, SoftDeletes;
+
     public const table_name = 'contests';
 
     // uuid as pk
-    protected $keyType = 'string';//     uuid string(36)
-    public    $incrementing = false;//   uuid don't need ++
+    protected $keyType = 'string'; //     uuid string(36)
+
+    public $incrementing = false; //   uuid don't need ++
 
     protected $fillable = [
         'id', //                 pk uuid
@@ -43,7 +46,7 @@ class Contest extends Model
         // circuit_id,  //       fk contests.id | NULL
         'federation_list', //
         'url_1_rule', //                web url
-        'url_2_concurrent_list',//      web url
+        'url_2_concurrent_list', //      web url
         'url_3_admit_n_award_list', //  web url
         'url_4_catalogue', //           web url
         // timezone, //                 fk timezones.timezone
@@ -65,8 +68,9 @@ class Contest extends Model
     ];
 
     // uuid as pk
-    public static function booted() {
-        Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
+    public static function booted()
+    {
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         static::creating(function ($model) {
             $model->id = Str::uuid7(); // uuid generator
         });
@@ -76,14 +80,14 @@ class Contest extends Model
     {
         // Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
         return [
-            'day_1_opening'      => 'datetime',
-            'day_2_closing'      => 'datetime',
+            'day_1_opening' => 'datetime',
+            'day_2_closing' => 'datetime',
             'day_3_jury_opening' => 'datetime',
             'day_4_jury_closing' => 'datetime',
-            'day_5_revelations'   => 'datetime',
-            'day_6_awards'       => 'datetime',
-            'day_7_catalogues'   => 'datetime',
-            'day_8_closing'      => 'datetime',
+            'day_5_revelations' => 'datetime',
+            'day_6_awards' => 'datetime',
+            'day_7_catalogues' => 'datetime',
+            'day_8_closing' => 'datetime',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
@@ -94,15 +98,17 @@ class Contest extends Model
 
     /**
      * use: Contest::get_name_en(string $id)
+     *
      * @return string name_en - contest name | ""
      */
-    public static function get_name_en(string $contest_id) : string
+    public static function get_name_en(string $contest_id): string
     {
-        Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $inp_id = Str::of($contest_id);
         $get_contest = self::select('name_en')->where('id', $inp_id)->get();
-        Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' get: '. $get_contest);
-        return (count($get_contest) == 0 ) ? '' : Str::of($get_contest[0]['name_en']);
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' get: '.$get_contest);
+
+        return (count($get_contest) == 0) ? '' : Str::of($get_contest[0]['name_en']);
     }
 
     /**
@@ -113,7 +119,7 @@ class Contest extends Model
      */
     public static function get_circuit_list()
     {
-        Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $circuit_list = self::select('id', 'name_en')
             ->where('is_circuit', 'Y')
             ->orderBy('name_en')
@@ -122,73 +128,77 @@ class Contest extends Model
         return $circuit_list;
     }
 
-
-
     // RELATIONSHIPs
 
     /**
      * @return Country contests.country_id 1:1 countries.id
      */
-    public function country() : HasOne
+    public function country(): HasOne
     {
-        Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $country = $this->hasOne(Country::class, 'id', 'country_id');
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' out ');
+        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out ');
+
         return $country;
     }
 
     /**
      * @return Organization contests.organization_id 1:1 organizations.id
      */
-    public function organization() : HasOne
+    public function organization(): HasOne
     {
-        Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $organization = $this->hasOne(Organization::class);
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' out');
+        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out');
+
         return $organization;
     }
 
     /**
      * @return ContestSection contests.id 1:N contest_sections.contest_id
      */
-    public function sections() : HasMany
+    public function sections(): HasMany
     {
-        Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $sections = $this->hasMany(ContestSection::class);
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' out');
+        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out');
+
         return $sections;
     }
 
     /**
      * @return ContestJuror contests.id 1:N contest_juries.contest_id
      */
-    public function jury() : HasMany
+    public function jury(): HasMany
     {
-        Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $contest_jury_set = $this->hasMany(ContestJury::class);
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' out ');
+        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out ');
+
         return $contest_jury_set;
     }
 
     /**
      * @return ContestAwards contests.id 1:N contest_awards.contest_id
      */
-    public function contest_awards() : HasMany
+    public function contest_awards(): HasMany
     {
-        Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $contest_awards_set = $this->hasMany(Country::class, 'contest_id', 'id');
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' out ');
+        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out ');
+
         return $contest_awards_set;
     }
 
     /**
      * @return ContestParticipant contests.id 1:N contest_participants.contest_id
      */
-    public function participants() : HasMany
+    public function participants(): HasMany
     {
-        Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $participants = $this->hasMany(ContestParticipant::class, 'contest_id', 'id');
-        Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' out');
+        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out');
+
         return $participants;
     }
 

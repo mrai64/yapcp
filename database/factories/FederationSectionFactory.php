@@ -1,14 +1,16 @@
 <?php
+
 /**
  * FederationSection
  * child of Federation
  *
  * 2025-10-16 based on new table definition
  */
+
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Federation;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\FederationSection>
