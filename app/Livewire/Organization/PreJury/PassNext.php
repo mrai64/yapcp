@@ -4,10 +4,10 @@
  * Organization Contest Section Work Review Pass
  *
  * CLASS: app/Livewire/Organization/Contest/PassNext.php
- * VIEW:  resources/views/livewire/organization/contest/pass-next.blade.php
+ * VIEW:  resources/views/livewire.organization.pre-jury.pass-next.blade.php
  */
 
-namespace App\Livewire\Organization\Contest;
+namespace App\Livewire\Organization\PreJury;
 
 use App\Models\ContestWork;
 use App\Models\WorkValidation;
@@ -87,6 +87,6 @@ class PassNext extends Component
     {
         Log::info('Component Organization/Contest/'.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
 
-        return view('livewire.organization.contest.pass-next');
+        return view('');
     }
 }

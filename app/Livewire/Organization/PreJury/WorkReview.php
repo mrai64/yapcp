@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Organization Contest Section - Work Review
  * Here the works are under first judgment, organization must
@@ -14,10 +13,10 @@
  * warning_work  0 / not 0
  *
  * CLASS: app/Livewire/Organization/Contest/Work.php
- * VIEW:  resources/views/livewire/organization/contest/work.blade.php
+ * VIEW:  resources/views/livewire.organization.pre-jury.work-review.blade.php
  */
 
-namespace App\Livewire\Organization\Contest;
+namespace App\Livewire\Organization\PreJury;
 
 use App\Models\ContestWaiting;
 use App\Models\ContestWork;
@@ -25,7 +24,7 @@ use App\Models\WorkValidation;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
-class Work extends Component
+class WorkReview extends Component
 {
     public $contest_work;
 
@@ -74,11 +73,13 @@ class Work extends Component
         if ($this->reviewed_work || $this->warning_work) {
             Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' SKIP');
 
-            return view('livewire.organization.contest.work-2'); // empty display hidden
+            //return view('-2'); // empty display hidden
+            return view('livewire.organization.pre-jury.section-review-work-hidden'); // empty display hidden
         }
 
         Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' SHOW');
 
-        return view('livewire.organization.contest.work');
+        // return view('');
+        return view('livewire.organization.pre-jury.section-review-work-show');
     }
 }

@@ -9,10 +9,10 @@
  * Sorry to see that every single image sucks 70 sec to be processed.
  *
  * CLASS: app/Livewire/Organization/Contest/Section.php
- * VIEW:  resources/views/livewire.organization.contest.section-review.blade.php
+ * VIEW:  resources/views/livewire.organization.pre-jury.section-review.blade.php
  */
 
-namespace App\Livewire\Organization\Contest;
+namespace App\Livewire\Organization\PreJury;
 
 use App\Models\ContestSection;
 use App\Models\Work;

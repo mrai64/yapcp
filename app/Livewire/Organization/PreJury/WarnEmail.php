@@ -7,7 +7,7 @@
  * VIEW:  resources/views/livewire/organization/contest/pass-next.blade.php
  */
 
-namespace App\Livewire\Organization\Contest;
+namespace App\Livewire\Organization\PreJury;
 
 use App\Models\ContestWaiting;
 use App\Models\ContestWork;
@@ -45,7 +45,7 @@ class WarnEmail extends Component
     {
         Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
 
-        return view('livewire.organization.contest.warn-email');
+        return view('livewire.organization.pre-jury.warn-email');
     }
 
     /**

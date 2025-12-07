@@ -17,7 +17,7 @@
  * for
  */
 
-namespace App\Livewire\Organization\Contest;
+namespace App\Livewire\Organization\PreJury;
 
 use App\Models\Contest;
 use Illuminate\Support\Facades\Log;
@@ -44,6 +44,6 @@ class SectionListed extends Component
     {
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
 
-        return view('livewire.organization.contest.section-listed');
+        return view('livewire.organization.pre-jury.section-listed');
     }
 }

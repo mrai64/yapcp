@@ -106,13 +106,13 @@ Route::post('/juror/vote/{sid}', Juror\Vote::class, ['sid'])->middleware(['auth'
 Route::get('/juror/review-vote/{vid}', Juror\ReviewVote::class, ['vid'])->middleware(['auth', 'verified'])->name('contest-jury-vote-mod');
 
 // App\Livewire\Organization\Contest
-Route::get('/organization/contest/section-list/{cid}', Organization\Contest\SectionListed::class, ['cid'])->middleware(['auth', 'verified'])->name('organization-contest-list');
-Route::get('/organization/contest/section-review/{sid}', Organization\Contest\SectionReview::class, ['sid'])->middleware(['auth', 'verified'])->name('organization-contest-section-list');
-Route::get('/organization/contest/warn/{wid}', Organization\Contest\WarnEmail::class, ['wid'])->middleware(['auth', 'verified'])->name('organization-contest-warn-email');
-Route::get('/organization/contest/pass/{wid}', Organization\Contest\PassNext::class, ['wid'])->middleware(['auth', 'verified'])->name('organization-contest-pass-next');
+Route::get('/organization/contest/pre-jury/section-list/{cid}', Organization\PreJury\SectionListed::class, ['cid'])->middleware(['auth', 'verified'])->name('organization-contest-list');
+Route::get('/organization/contest/pre-jury/section-review/{sid}', Organization\PreJury\SectionReview::class, ['sid'])->middleware(['auth', 'verified'])->name('organization-contest-section-list');
+Route::get('/organization/contest/pre-jury/warn/{wid}', Organization\PreJury\WarnEmail::class, ['wid'])->middleware(['auth', 'verified'])->name('organization-contest-warn-email');
+Route::get('/organization/contest/pre-jury/pass/{wid}', Organization\PreJury\PassNext::class, ['wid'])->middleware(['auth', 'verified'])->name('organization-contest-pass-next');
 
 // Contest live - cumulative vote board for a section
-Route::get('/organization/contest/section-jury/{sid}', Organization\Contest\JurySections::class, ['sid'])->middleware(['auth', 'verified'])->name('contest-section-board');
+Route::get('/organization/contest/admit/section-board/{sid}', Organization\Admit\SectionBoard::class, ['sid'])->middleware(['auth', 'verified'])->name('contest-section-board');
 
 // Contest live - After jury first works set admit list
-Route::get('/organization/contest/section-admission/{sid}', Organization\Contest\SectionAdmission::class, ['sid'])->middleware(['auth', 'verified'])->name('organization-contest-admit');
+Route::get('/organization/contest/admit/section-admission/{sid}', Organization\Admit\SectionAdmission::class, ['sid'])->middleware(['auth', 'verified'])->name('organization-contest-admit');

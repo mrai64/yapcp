@@ -13,7 +13,7 @@
  * and percentage of admitted works. When required.
  */
 
-namespace App\Livewire\Organization\Contest;
+namespace App\Livewire\Organization\Admit;
 
 use App\Models\ContestSection;
 use App\Models\ContestVote;
@@ -24,7 +24,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Termwind\Components\Raw;
 
-class JurySections extends Component
+class BeforeFinal extends Component
 {
     use WithPagination;
 
@@ -107,7 +107,7 @@ class JurySections extends Component
 
         */
 
-        return view('livewire.organization.contest.jury-sections', [
+        return view('livewire.organization.admit.before-final', [
             'sectionResult' => $SectionResult,
         ]);
     }
