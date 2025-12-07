@@ -1,0 +1,361 @@
+[2025-12-04 11:02:42.481306] local.INFO: Model App\Models\User f/booted:62 called  
+[2025-12-04 11:02:42.500370] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 11:02:42.514103] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 11:02:42.521103] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 11:02:42.522402] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 11:02:42.525124] local.INFO: Component App\Livewire\Contest\Modify f:mount l:69 called w/cid: 6ed4133d-c0e7-4b83-9dc5-79f27c921340  
+[2025-12-04 11:02:42.531185] local.INFO: Component App\Livewire\Contest\Modify f:mount l:105 countries before   
+[2025-12-04 11:02:42.532417] local.INFO: Model App\Models\Country f:country_list_by_country l:59 called  
+[2025-12-04 11:02:42.533871] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.535145] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.542615] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.543828] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.544970] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.546219] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.548006] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.549275] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.550598] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.552344] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.553718] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.555184] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.557397] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.563393] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.564603] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.566116] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.567551] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.569066] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.571106] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.572499] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.573934] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.575339] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.576834] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.578225] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.579712] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.581196] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.582924] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.584475] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.586003] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.587678] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.589313] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.590864] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.596058] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.597690] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.599411] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.601216] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.602935] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.604663] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.606617] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.608593] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.610447] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.612366] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.614429] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.616359] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.618259] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.620299] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.622238] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.624225] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.631992] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.634555] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.638918] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.641132] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.643552] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.645766] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.648027] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.650426] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.652730] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.655084] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.660705] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.663263] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.665976] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.668370] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.671013] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.673530] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.675983] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.678623] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.681094] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.683685] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.686225] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.688936] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.695019] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.698037] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.700756] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.703561] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.706276] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.709252] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.712058] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.716137] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.718985] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.722231] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.728290] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.731586] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.734878] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.737973] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.741095] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.744421] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.747553] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.750893] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.754060] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.757392] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.763926] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.767559] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.770965] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.774440] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.777881] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.781645] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.785095] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.788601] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.795371] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.799181] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.802649] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.806555] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.810260] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.813888] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.817797] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.821426] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.828217] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.832449] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.836193] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.839935] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.844225] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.848008] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.852031] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.855943] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.863088] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.867516] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.871869] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.876074] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.880086] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.884219] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.888437] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.896029] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.900414] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.904657] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.909187] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.913675] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.917679] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.922259] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.929778] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.934687] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.942530] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.947851] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.952340] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.957104] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.964748] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.969348] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.974283] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.979220] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.983973] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.988639] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:42.996345] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.001362] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.006000] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.011177] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.015917] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.020982] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.029335] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.034523] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.039860] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.045149] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.050085] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.054828] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.060166] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.064935] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.070234] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.075408] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.080381] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.085176] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.090451] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.095632] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.100594] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.105815] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.110706] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.115505] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.120747] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.126147] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.130954] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.135925] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.140769] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.145829] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.151149] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.156241] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.161239] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.166128] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.171254] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.176068] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.181068] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.186476] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.191435] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.196606] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.201531] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.206342] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.211577] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.216414] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.221618] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.226816] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.231757] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.236595] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.241879] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.246984] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.251945] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.257079] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.261998] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.267052] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.271933] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.276886] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.281800] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.287276] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.292211] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.297059] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.302296] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.307518] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.312551] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.317631] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.322585] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.327637] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.332629] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.337797] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.342746] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.347572] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.352771] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.358030] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.363120] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.367868] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.373096] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.377999] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.383282] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.388086] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.393342] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.398814] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.403603] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.408518] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.413577] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.419385] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.424275] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.429272] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.434398] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.439609] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.444766] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.449722] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.454797] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.459702] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.465007] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.470030] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.475091] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.480269] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.485177] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.490188] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.495252] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.500145] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.505483] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.510407] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.515432] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.520263] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.525262] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.530133] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.535099] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.540269] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.545376] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.550398] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.555340] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.560326] local.INFO: Model App\Models\Country f:casts l:36 called  
+[2025-12-04 11:02:43.565604] local.INFO: Component App\Livewire\Contest\Modify f:mount l:107 countries after   
+[2025-12-04 11:02:43.591683] local.INFO: Component App\Livewire\Contest\Modify f:mount l:111 timezones after   
+[2025-12-04 11:02:43.593351] local.INFO: Component App\Livewire\Contest\Modify f:mount l:114 out   
+[2025-12-04 11:02:43.598837] local.INFO: Component App\Livewire\Contest\Modify f:render l:122 called  
+[2025-12-04 11:02:43.644992] local.INFO: Model App\Models\ContestSection f/first_section_id:124 called  
+[2025-12-04 11:02:43.646552] local.INFO: Model App\Models\ContestSection f/booted:69 called  
+[2025-12-04 11:02:43.654734] local.INFO: Model App\Models\ContestSection f/first_section_id:128 1st: {"id":"7c0801f1-bf03-4625-a676-74452beb6af1","contest_id":"6ed4133d-c0e7-4b83-9dc5-79f27c921340","code":"CL","under_patronage":"Y","federation_section_id":6,"name_en":"Open C","name_local":"Tema Libero Colore","rule_format":"jpg","rule_min":0,"rule_max":4,"rule_min_size":0,"rule_max_size":2500,"rule_max_weight":6000,"rule_monochromatic":"N","rule_raw_required":0,"rule_only_one":0,"created_at":"2025-10-01T12:56:13.000000Z","updated_at":"2025-10-26T09:28:25.000000Z","deleted_at":null}  
+[2025-12-04 11:02:43.658921] local.INFO: Model App\Models\ContestSection f/first_section_id:129 1st: "7c0801f1-bf03-4625-a676-74452beb6af1"  
+[2025-12-04 11:02:43.664529] local.INFO: Model App\Models\ContestSection f/first_section_id:124 called  
+[2025-12-04 11:02:43.671376] local.INFO: Model App\Models\ContestSection f/first_section_id:128 1st: {"id":"7c0801f1-bf03-4625-a676-74452beb6af1","contest_id":"6ed4133d-c0e7-4b83-9dc5-79f27c921340","code":"CL","under_patronage":"Y","federation_section_id":6,"name_en":"Open C","name_local":"Tema Libero Colore","rule_format":"jpg","rule_min":0,"rule_max":4,"rule_min_size":0,"rule_max_size":2500,"rule_max_weight":6000,"rule_monochromatic":"N","rule_raw_required":0,"rule_only_one":0,"created_at":"2025-10-01T12:56:13.000000Z","updated_at":"2025-10-26T09:28:25.000000Z","deleted_at":null}  
+[2025-12-04 11:02:43.675684] local.INFO: Model App\Models\ContestSection f/first_section_id:129 1st: "7c0801f1-bf03-4625-a676-74452beb6af1"  
+[2025-12-04 15:00:42.875155] local.INFO: Model App\Models\User f/booted:62 called  
+[2025-12-04 15:00:42.928711] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 15:00:42.930546] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 15:00:42.938195] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 15:00:43.072048] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 15:00:47.255111] local.INFO: Model App\Models\User f/booted:62 called  
+[2025-12-04 15:00:47.260994] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 15:00:47.273792] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 15:00:47.292293] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 15:00:47.294938] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 15:00:47.300964] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 15:00:47.304716] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 15:00:47.306352] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 15:00:47.308592] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:47.310201] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:47.319691] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:47.321917] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:47.324113] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:47.326414] local.INFO: Models App\Models\Federation casts:45 called  
+[2025-12-04 15:00:47.328053] local.INFO: Models App\Models\Federation casts:45 called  
+[2025-12-04 15:00:47.334893] local.INFO: Models App\Models\Federation casts:45 called  
+[2025-12-04 15:00:47.336674] local.INFO: Models App\Models\Federation casts:45 called  
+[2025-12-04 15:00:47.338497] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:47.342199] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:47.343952] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:47.345697] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:47.348445] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:47.350143] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:47.353441] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:47.355804] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:47.357213] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:47.358643] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:47.360538] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:47.361525] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:47.365526] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:47.369449] local.INFO: Component App\Livewire\Contest\Jury\Listed f/mount:33 called  
+[2025-12-04 15:00:47.370514] local.INFO: Component App\Livewire\Contest\Jury\Listed f/mount:36 juror_user_id:"8421337c-7f08-4d6a-a97d-8914d18f4046"  
+[2025-12-04 15:00:47.372294] local.INFO: Model App\Models\UserContact f/casts:58 called  
+[2025-12-04 15:00:47.373894] local.INFO: Model App\Models\UserContact f/casts:58 called  
+[2025-12-04 15:00:47.378299] local.INFO: Model App\Models\UserContact f/casts:58 called  
+[2025-12-04 15:00:47.379406] local.INFO: Model App\Models\UserContact f/casts:58 called  
+[2025-12-04 15:00:47.382201] local.INFO: Component App\Livewire\Contest\Jury\Listed f/mount:39 juror:{"id":251,"user_id":"8421337c-7f08-4d6a-a97d-8914d18f4046","country_id":"ITA","first_name":"Raffaella","last_name":"Sabbatini","nick_name":"","email":"raffaella.sabbatini@athesis77.it","cellular":"","passport_photo":"ITA\/Sabbatini\/Raffaella_8421337c-7f08-4d6a-a97d-8914d18f4046\/__passport_photo.jpg","lang_local":"en","timezone":"Europe\/Rome","address":"","address_line2":"","city":"","region":"","postal_code":"","website":"","facebook":"https:\/\/www.facebook.com\/raffaella.sabbatini.7","x_twitter":"","instagram":"","whatsapp":"","created_at":"2025-11-17T15:59:21.000000Z","updated_at":"2025-11-17T16:04:14.000000Z","deleted_at":null}  
+[2025-12-04 15:00:47.385069] local.INFO: Model App\Models\UserContact f/juries:179 called  
+[2025-12-04 15:00:47.389528] local.INFO: Model App\Models\UserContact f/juries:181 juries:{}  
+[2025-12-04 15:00:47.405565] local.INFO: Component App\Livewire\Contest\Jury\Listed f/mount:42 juries:[]  
+[2025-12-04 15:00:47.410192] local.INFO: Component App\Livewire\Contest\Jury\Listed f/render:50 called  
+[2025-12-04 15:00:49.411373] local.INFO: Model App\Models\User f/booted:62 called  
+[2025-12-04 15:00:49.415452] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 15:00:49.435729] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 15:00:49.445306] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 15:00:49.447672] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 15:00:49.453327] local.INFO: Component App\Livewire\Organization\Dashboard f:mount l:31 called  
+[2025-12-04 15:00:49.455653] local.INFO: Component App\Livewire\Organization\Dashboard f:mount l:33 id:4f392e69-d534-46ca-acf8-e6e05b88955d  
+[2025-12-04 15:00:49.461612] local.INFO: Component App\Livewire\Organization\Dashboard f:mount l:35 organization:{"id":"4f392e69-d534-46ca-acf8-e6e05b88955d","country_id":"ITA","name":"Associazione Culturale Ricreativa Fotoclub Lucis Imago BFI"}  
+[2025-12-04 15:00:49.463328] local.INFO: Component App\Livewire\Organization\Dashboard f:mount l:37 id:4f392e69-d534-46ca-acf8-e6e05b88955d  
+[2025-12-04 15:00:49.471564] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:49.474100] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:49.479252] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:49.481761] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:49.484664] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:00:49.490450] local.INFO: Component App\Livewire\Organization\Dashboard f:render l:47 called  
+[2025-12-04 15:00:49.497121] local.INFO: Model App\Models\UserContact f/get_first_last_name:107 called  
+[2025-12-04 15:00:49.500978] local.INFO: Model App\Models\UserContact f/casts:58 called  
+[2025-12-04 15:00:49.503423] local.INFO: Model App\Models\UserContact f/casts:58 called  
+[2025-12-04 15:00:49.511230] local.INFO: Model App\Models\UserContact f/casts:58 called  
+[2025-12-04 15:00:49.513461] local.INFO: Model App\Models\UserContact f/casts:58 called  
+[2025-12-04 15:00:49.516249] local.INFO: Model App\Models\UserContact f/get_first_last_name:107 called  
+[2025-12-04 15:00:49.518883] local.INFO: Model App\Models\UserContact f/casts:58 called  
+[2025-12-04 15:00:49.523378] local.INFO: Model App\Models\UserContact f/casts:58 called  
+[2025-12-04 15:00:49.525621] local.INFO: Model App\Models\UserContact f/casts:58 called  
+[2025-12-04 15:00:49.529338] local.INFO: Model App\Models\UserRole f/casts:38 called  
+[2025-12-04 15:01:01.335177] local.INFO: Model App\Models\User f/booted:62 called  
+[2025-12-04 15:01:01.341338] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 15:01:01.371693] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 15:01:01.378511] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 15:01:01.381266] local.INFO: Model App\Models\User f/casts:75 called  
+[2025-12-04 15:01:01.388672] local.INFO: Component App\Livewire\Contest\Modify f:mount l:69 called w/cid: 6ed4133d-c0e7-4b83-9dc5-79f27c921340  
+[2025-12-04 15:01:01.394310] local.INFO: Component App\Livewire\Contest\Modify f:mount l:105 countries before   
+[2025-12-04 15:01:01.399719] local.INFO: Model App\Models\Country f:country_list_by_country l:59 called  
+[2025-12-04 15:01:01.419707] local.INFO: Component App\Livewire\Contest\Modify f:mount l:107 countries after   
+[2025-12-04 15:01:01.438520] local.INFO: Component App\Livewire\Contest\Modify f:mount l:111 timezones after   
+[2025-12-04 15:01:01.440487] local.INFO: Component App\Livewire\Contest\Modify f:mount l:114 out   
+[2025-12-04 15:01:01.446609] local.INFO: Component App\Livewire\Contest\Modify f:render l:122 called  
+[2025-12-04 15:01:01.478534] local.INFO: Model App\Models\ContestSection f/first_section_id:124 called  
+[2025-12-04 15:01:01.479934] local.INFO: Model App\Models\ContestSection f/booted:69 called  
+[2025-12-04 15:01:01.487254] local.INFO: Model App\Models\ContestSection f/first_section_id:128 1st: {"id":"7c0801f1-bf03-4625-a676-74452beb6af1","contest_id":"6ed4133d-c0e7-4b83-9dc5-79f27c921340","code":"CL","under_patronage":"Y","federation_section_id":6,"name_en":"Open C","name_local":"Tema Libero Colore","rule_format":"jpg","rule_min":0,"rule_max":4,"rule_min_size":0,"rule_max_size":2500,"rule_max_weight":6000,"rule_monochromatic":"N","rule_raw_required":0,"rule_only_one":0,"created_at":"2025-10-01T12:56:13.000000Z","updated_at":"2025-10-26T09:28:25.000000Z","deleted_at":null}  
+[2025-12-04 15:01:01.489790] local.INFO: Model App\Models\ContestSection f/first_section_id:129 1st: "7c0801f1-bf03-4625-a676-74452beb6af1"  
+[2025-12-04 15:01:01.494966] local.INFO: Model App\Models\ContestSection f/first_section_id:124 called  
+[2025-12-04 15:01:01.509116] local.INFO: Model App\Models\ContestSection f/first_section_id:128 1st: {"id":"7c0801f1-bf03-4625-a676-74452beb6af1","contest_id":"6ed4133d-c0e7-4b83-9dc5-79f27c921340","code":"CL","under_patronage":"Y","federation_section_id":6,"name_en":"Open C","name_local":"Tema Libero Colore","rule_format":"jpg","rule_min":0,"rule_max":4,"rule_min_size":0,"rule_max_size":2500,"rule_max_weight":6000,"rule_monochromatic":"N","rule_raw_required":0,"rule_only_one":0,"created_at":"2025-10-01T12:56:13.000000Z","updated_at":"2025-10-26T09:28:25.000000Z","deleted_at":null}  
+[2025-12-04 15:01:01.513752] local.INFO: Model App\Models\ContestSection f/first_section_id:129 1st: "7c0801f1-bf03-4625-a676-74452beb6af1"  
