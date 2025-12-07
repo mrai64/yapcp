@@ -25,7 +25,7 @@
         <li class="small border p-1" style="width:48%;">
             {{$section_item->code}} {{$section_item->name_en }} __ #{{ $section_item->works->count() }} {{ __(" works") }}
             __ <a href="{{ route('organization-contest-section-list', ['sid' => $section_item->id])}}"> [ {{ __("Review") }} ] </a>
-            __ <a href="{{ route('contest-section-board', ['sid' => $section_item->id ]) }}"> [ {{ __("General Vote Board") }} ] </a>
+            __ <a href="{{ route('contest-before-final-jury', ['sid' => $section_item->id ]) }}"> [ {{ __("General Vote Board") }} ] </a>
         </li>
         @endforeach
     </ul>

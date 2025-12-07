@@ -48,7 +48,7 @@
                 </a> 
                 <br />
                 {{ __("During and after Jury Works: ")}}
-                <a href="{{ route('contest-section-board', ['sid' => $section->id]) }}" target="_blank">
+                <a href="{{ route('contest-before-final-jury', ['sid' => $section->id]) }}" target="_blank">
                     [ {{ __("Contest Section Jury Vote Board")}} ]
                 </a>
                 <br />

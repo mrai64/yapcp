@@ -112,7 +112,7 @@ Route::get('/organization/contest/pre-jury/warn/{wid}', Organization\PreJury\War
 Route::get('/organization/contest/pre-jury/pass/{wid}', Organization\PreJury\PassNext::class, ['wid'])->middleware(['auth', 'verified'])->name('organization-contest-pass-next');
 
 // Contest live - cumulative vote board for a section
-Route::get('/organization/contest/admit/section-board/{sid}', Organization\Admit\SectionBoard::class, ['sid'])->middleware(['auth', 'verified'])->name('contest-section-board');
+Route::get('/organization/contest/admit/before-final/{sid}', organization\Admit\BeforeFinal::class, ['sid'])->middleware(['auth', 'verified'])->name('contest-before-final-jury');
 
 // Contest live - After jury first works set admit list
 Route::get('/organization/contest/admit/section-admission/{sid}', Organization\Admit\SectionAdmission::class, ['sid'])->middleware(['auth', 'verified'])->name('organization-contest-admit');

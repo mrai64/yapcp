@@ -37,7 +37,7 @@
                 <a href="{{ route('organization-contest-section-list', ['sid' => $section_item->id])}}">
                     [ {{ __("Review") }} ]
                 </a>
-                <a href="{{ route('contest-section-board', ['sid' => $section->id ]) }}">
+                <a href="{{ route('contest-before-final-jury', ['sid' => $section->id ]) }}">
                     [ {{ __("General Vote Board for that section") }} ]
                 </a>    
 
