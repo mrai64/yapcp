@@ -1,19 +1,11 @@
 <?php
+
 /**
- * Organization Contest Section - Work Review
- * Here the works are under first judgment, organization must
+ * Contest live - Pre Jury - Work Review
+ *
+ * Here the works are under very-first judgment, organization must
  * review if works should be introduced to jury or appears
  * any trouble that be communicated to author.
- * Contest > section list > works list > work
- *
- * contest_works.id
- * contest_works.section_id
- * federation_section.id ?
- * reviewed_work 0 / not 0
- * warning_work  0 / not 0
- *
- * CLASS: app/Livewire/Organization/Contest/Work.php
- * VIEW:  resources/views/livewire.organization.pre-jury.work-review.blade.php
  */
 
 namespace App\Livewire\Organization\PreJury;
@@ -73,7 +65,7 @@ class WorkReview extends Component
         if ($this->reviewed_work || $this->warning_work) {
             Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' SKIP');
 
-            //return view('-2'); // empty display hidden
+            // return view('-2'); // empty display hidden
             return view('livewire.organization.pre-jury.section-review-work-hidden'); // empty display hidden
         }
 

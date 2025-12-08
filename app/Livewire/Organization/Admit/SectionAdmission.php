@@ -12,7 +12,6 @@
  * no pagination, 3 juror x 30 vote 1..30 sum() range 3..90
  * no pagination, 5 juror x 30 vote 1..30 sum() range 5..150
  * for a text-list pagination is not required. usually vote are from 16..30 range  80..150 (seventyone)
- * 
  */
 
 namespace App\Livewire\Organization\Admit;
