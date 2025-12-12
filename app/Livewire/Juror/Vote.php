@@ -84,7 +84,7 @@ class Vote extends Component
         Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' vote_rule: '.json_encode($this->vote_rule));
 
         $this->voted_works_id = ContestVote::voted_ids($this->contest_id, $this->contest_section_id);
-        if ($this->voted_works_id->count() > 0) {
+        if (count($this->voted_works_id) > 0) {
             $this->unvoted_work_first = DB::table(ContestWork::table_name)->whereNotIn('work_id', $this->voted_works_id)->first();
 
         } else {

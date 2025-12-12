@@ -19,7 +19,7 @@
 ?>
 <div>
     <!-- contest and section info -->
-    <livewire:contest.section.header :sid="$section_id" lazy /> 
+    <livewire:organization.section.header :cxsid="$section_id" lazy /> 
 
     <h2 class="fyk text-2xl"><strong> {{__("Contest pre-jury IN / OUT for: ")}} {{$section->code}} {{ $section->name_en }}</strong></h2>
     <div class="header mb-4">

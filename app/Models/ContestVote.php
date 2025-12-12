@@ -44,7 +44,7 @@ class ContestVote extends Model
     }
 
     // GETTERS
-    public static function voted_ids(string $contest_id, string $section_id)
+    public static function voted_ids(string $contest_id, string $section_id): array
     {
         Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $vote_ids = self::select(['work_id'])->where('section_id', $section_id)->where('contest_id', $contest_id)->get();

@@ -44,14 +44,13 @@
                 #{{ $section->works->count() }} {{ __(" works participants") }} <br />
                 {{ __("Before Jury works: ")}}
                 <a href="{{ route('organization-contest-section-list', ['sid' => $section->id]) }}">
-                    [ {{ __("Section works Review: OK | Warn") }} ]
+                    [ {{ __("Works Review") }} ]
                 </a> 
                 <br />
                 {{ __("During and after Jury Works: ")}}
                 <a href="{{ route('contest-before-final-jury', ['sid' => $section->id]) }}" target="_blank">
-                    [ {{ __("Contest Section Jury Vote Board")}} ]
+                    [ {{ __("Jury Votes Board")}} ]
                 </a>
-                <br />
                 <br />
                 <br />
             </li>

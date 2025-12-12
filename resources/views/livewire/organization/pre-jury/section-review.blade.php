@@ -14,14 +14,15 @@
 ?>
 
 <div>
-    <!-- contest header -->
+    <!-- contest and section info -->
+    <livewire:organization.section.header :cxsid="$section_id" lazy /> 
+
     <div class="header mb-4">
-        <h2 class="fyk text-2xl">{{$section->contest->country->flag_code}} | {{$section->contest->name_en }} </h2>
+        <h3 class="fyk text-xl">{{ __("Contest pre-jury IN / OUT")}}</h3>
         <p class="small">
             Begin Jury: {{$section->contest->day_3_jury_opening->format("Y-m-d") }} 
             End   Jury: {{$section->contest->day_4_jury_closing->format("Y-m-d") }} 
         </p>
-        <h3 class="fyk text-xl">{{ __("Contest pre-jury IN / OUT")}}</h3>
         <div class="header mb-4">
             {{ __("As member of organization, in that page you check in human way")}}
             {{ __("if these works can be pass to Jury work. ")}}<br />
@@ -29,22 +30,22 @@
             {{ __("For every img choice Ok/IN or KO/WARN.)")}}
         </div>
         <h3 class="fyk text-xl">{{ __("Section list")}}</h3>
-        <ul>
             @foreach( $section->contest->sections as $section_item)
-            <li class="small border inline-flex p-4" style="width:32%;">
-                #{{ $section_item->works->count() }} {{ __(" works participants") }} | {{$section_item->code}} | {{$section_item->name_en }} 
-                <br />
+            <div class="small border rounded-md inline p-4" style="float:left;max-width:32%;margin-inline-end:.5rem;">
+                <span class="fyk">{{$section_item->code}} | {{$section_item->name_en }}</span>
+                <br style="clear:both;" />
                 <a href="{{ route('organization-contest-section-list', ['sid' => $section_item->id])}}">
-                    [ {{ __("Review") }} ]
+                    [ {{ __("Works Preview") }} ]
                 </a>
+                <br style="clear:both;" />
                 <a href="{{ route('contest-before-final-jury', ['sid' => $section->id ]) }}">
-                    [ {{ __("General Vote Board for that section") }} ]
+                    [ {{ __("General Vote Board") }} ]
                 </a>    
-
-            </li>
+            </div>
             @endforeach
-        </ul>
     </div>
+    <br style="clear:both;" />
+    <hr />
 
     <!-- success -->
     @if (session('success'))

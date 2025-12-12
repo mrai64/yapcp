@@ -100,7 +100,7 @@ class SectionReview extends Component
 
         // NO return view('')->with([ 'user_works_set' => $this->user_works_set ]);
         // no snake_case but camelCase
-        return view('', [
+        return view('livewire.organization.pre-jury.section-review', [
             'userWorksSet' => $userWorksSet,
             'section' => $section,
         ]);

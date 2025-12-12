@@ -58,6 +58,8 @@ class SectionBoard extends Component
      * check if a path/namefile has a twin path/300px_namefile
      *
      * @return string miniature|original
+     *
+     * TODO in ContestWork Model
      */
     public static function miniature(string $original_file): string
     {

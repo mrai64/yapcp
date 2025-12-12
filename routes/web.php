@@ -89,14 +89,22 @@ Route::delete('/user/work/remove/{wid}', Work\Remove::class, ['wid'])->middlewar
 
 // Contest live - Participant add work to contest section
 // App\Livewire\Contest\Subscribe - maybe also contest\work\add
-Route::get('/contest/subscribe/{cid}', Contest\Subscribe::class, ['cid'])->middleware(['auth', 'verified'])->name('participate-contest');
-Route::get('/contest/subscribe/{cid}/work/{wid}', Contest\Subscribe::class, ['cid', 'wid'])->middleware(['auth', 'verified'])->name('add-work-contest');
-Route::delete('/contest/subscribe/remove/{pid}', Contest\Subscribe\Remove::class, ['pid'])->middleware(['auth', 'verified'])->name('remove-work-contest');
+Route::get('/user/contest/subscribe/{cid}', Contest\Subscribe::class, ['cid'])->middleware(['auth', 'verified'])->name('participate-contest');
+Route::get('/user/contest/subscribe/{cid}/work/{wid}', Contest\Subscribe::class, ['cid', 'wid'])->middleware(['auth', 'verified'])->name('add-work-contest');
+Route::delete('/user/contest/subscribe/remove/{pid}', Contest\Subscribe\Remove::class, ['pid'])->middleware(['auth', 'verified'])->name('remove-work-contest');
 
-// Contest live - Participant User list for Organization work of _fee payment completed_
-// App\Livewire\Contest\Participants
-Route::get('/contest/participants/listed/{cid}', Contest\Participants\Listed::class, ['cid'])->middleware(['auth', 'verified'])->name('public-participant-list');
-Route::get('/contest/participants/modify/{cid}', Contest\Participants\Modify::class, ['cid'])->middleware(['auth', 'verified'])->name('modify-participant-list');
+// Contest live - Organization contest dashboard 
+Route::get('/organization/contest/{cid}', Organization\ContestPanel::class, ['cid'])->middleware(['auth', 'verified'])->name('contest-live-dashboard');
+
+// Contest live - Organization review Participant User list _fee payment completed_
+Route::get('/organization/contest/participants/listed/{cid}', Contest\Participants\Listed::class, ['cid'])->middleware(['auth', 'verified'])->name('public-participant-list');
+Route::get('/organization/ contest/participants/modify/{cid}', Contest\Participants\Modify::class, ['cid'])->middleware(['auth', 'verified'])->name('modify-participant-list');
+
+// Contest live - organization works before jury works
+Route::get('/organization/contest/pre-jury/section-list/{cid}', Organization\PreJury\SectionListed::class, ['cid'])->middleware(['auth', 'verified'])->name('organization-contest-list');
+Route::get('/organization/contest/pre-jury/section-review/{sid}', Organization\PreJury\SectionReview::class, ['sid'])->middleware(['auth', 'verified'])->name('organization-contest-section-list');
+Route::get('/organization/contest/pre-jury/warn/{wid}', Organization\PreJury\WarnEmail::class, ['wid'])->middleware(['auth', 'verified'])->name('organization-contest-warn-email');
+Route::get('/organization/contest/pre-jury/pass/{wid}', Organization\PreJury\PassNext::class, ['wid'])->middleware(['auth', 'verified'])->name('organization-contest-pass-next');
 
 // Jury works
 // for jurors only
@@ -105,14 +113,13 @@ Route::get('/juror/vote/{sid}', Juror\Vote::class, ['sid'])->middleware(['auth',
 Route::post('/juror/vote/{sid}', Juror\Vote::class, ['sid'])->middleware(['auth', 'verified']);
 Route::get('/juror/review-vote/{vid}', Juror\ReviewVote::class, ['vid'])->middleware(['auth', 'verified'])->name('contest-jury-vote-mod');
 
-// App\Livewire\Organization\Contest
-Route::get('/organization/contest/pre-jury/section-list/{cid}', Organization\PreJury\SectionListed::class, ['cid'])->middleware(['auth', 'verified'])->name('organization-contest-list');
-Route::get('/organization/contest/pre-jury/section-review/{sid}', Organization\PreJury\SectionReview::class, ['sid'])->middleware(['auth', 'verified'])->name('organization-contest-section-list');
-Route::get('/organization/contest/pre-jury/warn/{wid}', Organization\PreJury\WarnEmail::class, ['wid'])->middleware(['auth', 'verified'])->name('organization-contest-warn-email');
-Route::get('/organization/contest/pre-jury/pass/{wid}', Organization\PreJury\PassNext::class, ['wid'])->middleware(['auth', 'verified'])->name('organization-contest-pass-next');
-
 // Contest live - cumulative vote board for a section
 Route::get('/organization/contest/admit/before-final/{sid}', organization\Admit\BeforeFinal::class, ['sid'])->middleware(['auth', 'verified'])->name('contest-before-final-jury');
 
 // Contest live - After jury first works set admit list
 Route::get('/organization/contest/admit/section-admission/{sid}', Organization\Admit\SectionAdmission::class, ['sid'])->middleware(['auth', 'verified'])->name('organization-contest-admit');
+
+// Contest live - during or after last Jury reunion
+Route::get('/organization/award-assign/section/{sid}', Organization\Award\SectionAssign::class, ['sid'])->middleware(['auth', 'verified'])->name('organization-award-section-assign');
+Route::get('/organization/award-assign/contest/{cid}', Organization\Award\ContestAssign::class, ['cid'])->middleware(['auth', 'verified'])->name('organization-award-contest-assign');
+Route::get('/organization/award-assign/jury-minute/{cid}', Organization\Award\MinuteDraft::class, ['cid'])->middleware(['auth', 'verified'])->name('organization-award-minute-draft');
