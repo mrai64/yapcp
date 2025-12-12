@@ -117,7 +117,7 @@ Route::get('/juror/review-vote/{vid}', Juror\ReviewVote::class, ['vid'])->middle
 Route::get('/organization/contest/admit/before-final/{sid}', organization\Admit\BeforeFinal::class, ['sid'])->middleware(['auth', 'verified'])->name('contest-before-final-jury');
 
 // Contest live - After jury first works set admit list
-Route::get('/organization/contest/admit/section-admission/{sid}', Organization\Admit\SectionAdmission::class, ['sid'])->middleware(['auth', 'verified'])->name('organization-contest-admit');
+Route::get('/organization/contest/admit/set-admit/{sid}', Organization\Admit\SetAdmit::class, ['sid'])->middleware(['auth', 'verified'])->name('organization-contest-admit');
 
 // Contest live - during or after last Jury reunion
 Route::get('/organization/award-assign/section/{sid}', Organization\Award\SectionAssign::class, ['sid'])->middleware(['auth', 'verified'])->name('organization-award-section-assign');

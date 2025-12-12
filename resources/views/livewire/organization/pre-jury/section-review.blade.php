@@ -19,30 +19,12 @@
 
     <div class="header mb-4">
         <h3 class="fyk text-xl">{{ __("Contest pre-jury IN / OUT")}}</h3>
-        <p class="small">
-            Begin Jury: {{$section->contest->day_3_jury_opening->format("Y-m-d") }} 
-            End   Jury: {{$section->contest->day_4_jury_closing->format("Y-m-d") }} 
-        </p>
         <div class="header mb-4">
             {{ __("As member of organization, in that page you check in human way")}}
             {{ __("if these works can be pass to Jury work. ")}}<br />
             {{ __("Or advice author that her/him work have a little trouble.")}}<br >
             {{ __("For every img choice Ok/IN or KO/WARN.)")}}
         </div>
-        <h3 class="fyk text-xl">{{ __("Section list")}}</h3>
-            @foreach( $section->contest->sections as $section_item)
-            <div class="small border rounded-md inline p-4" style="float:left;max-width:32%;margin-inline-end:.5rem;">
-                <span class="fyk">{{$section_item->code}} | {{$section_item->name_en }}</span>
-                <br style="clear:both;" />
-                <a href="{{ route('organization-contest-section-list', ['sid' => $section_item->id])}}">
-                    [ {{ __("Works Preview") }} ]
-                </a>
-                <br style="clear:both;" />
-                <a href="{{ route('contest-before-final-jury', ['sid' => $section->id ]) }}">
-                    [ {{ __("General Vote Board") }} ]
-                </a>    
-            </div>
-            @endforeach
     </div>
     <br style="clear:both;" />
     <hr />

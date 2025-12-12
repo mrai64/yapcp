@@ -2,13 +2,14 @@
 
 /**
  * Multiple admission panel
+ * 
  * After jury votes, after eventually revision of votes
  * that time to assign admit Y/N to participant works
  * Use /jury/section-board sql select without work_id
- *
+ * 
  * reserved organization
  * input: section_id
- *
+ * 
  * no pagination, 3 juror x 30 vote 1..30 sum() range 3..90
  * no pagination, 5 juror x 30 vote 1..30 sum() range 5..150
  * for a text-list pagination is not required. usually vote are from 16..30 range  80..150 (seventyone)
@@ -16,6 +17,7 @@
 
 namespace App\Livewire\Organization\Admit;
 
+use App\Models\Contest;
 use App\Models\ContestSection;
 use App\Models\ContestVote;
 use App\Models\ContestWork;
@@ -40,17 +42,19 @@ class SetAdmit extends Component
 
     public $admitFrom;
 
+    public $contest;
+
     /**
      * 1. Before the show
      */
     public function mount(string $sid) // named as route()
     {
-
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called w/sid: '.$sid);
         // TODO GATE organization only
 
         $this->section_id = $sid;
         $this->section = ContestSection::where('id', $sid)->first();
+        $this->contest = Contest::where('id', $this->section->contest_id)->first();
 
         $this->total_participant_works = ContestWork::where('section_id', $this->section_id)->count();
 

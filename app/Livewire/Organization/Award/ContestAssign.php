@@ -32,7 +32,11 @@ class ContestAssign extends Component
 
     public $incomplete_sections;
 
-    public $sections;
+    public $sections; // incomplete section 
+
+    public $contest_sections;
+
+    public $section_awards;
 
     /**
      * 1.
@@ -95,15 +99,22 @@ class ContestAssign extends Component
         }
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' sections: '.json_encode($this->sections));
 
-        // Qui invece va preparata la struttura per assegnare i premi di concorso.
+        $sectionAwards = ContestAward::where('contest_id', $this->contest_id)->where('section_code', '>' , '')->get();
+        $this->section_awards = $sectionAwards;
+
+        $this->contest_sections = ContestSection::where('contest_id', $this->contest_id)->get();
 
     }
-
+    
     /**
      * 2.
-     */
+    */
     public function render()
     {
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        $contestAwards = ContestAward::where('contest_id', $this->contest_id)->where('section_code', '')->orderBy('award_code')->get();
+        $this->contest_awards = $contestAwards;
+
         return view('livewire.organization.award.contest-assign');
     }
 }

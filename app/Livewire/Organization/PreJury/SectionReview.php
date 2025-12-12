@@ -94,6 +94,8 @@ class SectionReview extends Component
             ->join('contest_works', 'works.id', '=', 'contest_works.work_id')
             ->where('contest_works.section_id', '=', $this->section->id)
             ->whereNotIn('work_id', $examinedWorksIds)
+            ->orderBy('works.user_id')
+            ->orderBy('works.updated_at')
             ->simplePaginate(12); // dozen as half camera roll
 
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out: '.json_encode($userWorksSet));

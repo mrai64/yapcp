@@ -1,4 +1,5 @@
 <div>
+    <!-- organization list -->
     <a  href="{{ route('add-organization') }}" 
         class="float-end font-medium rounded-md mb-4 py-2"
         >

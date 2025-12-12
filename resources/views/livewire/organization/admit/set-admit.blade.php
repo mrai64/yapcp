@@ -1,10 +1,8 @@
 <?php 
 /**
  * SET Admit for a Contest Section 
- * reserved for organization members 
  * 
- * [CLASS:](/app/Livewire/Organization/Contest/SectionAdmission.php)
- * [VIEW:](/resources/views/livewire/organization/contest/section-admission.blade.php)
+ * Reserved for organization members 
  * 
  */
 ?>
@@ -12,12 +10,21 @@
 <div>
     <!-- contest header -->
     <div class="header mb-4">
-        <h2 class="fyk text-2xl">{{$section->contest->country->flag_code}} | {{$section->contest->name_en }} </h2>
+        <div class="fyk text-2xl">{{ $contest->country->flag_code }} | {{$contest->name_en}}</div>
+        <div class="small">Few contest info</div>
+        <hr />
+        <div class="p-4 border rounded-md">
+            [ 
+                <a href="{{route('contest-live-dashboard', ['cid' => $contest->id ])}}">
+                    {{__("Back to contest live panel")}} 
+                </a>
+            ]
+        </div>
         <br />
         <h3 class="fyk text-2xl"><strong>{{__("Contest SET ADMIT")}}</strong></h3>
         <br />
         <div class="mb-4">
-            {{ __("In that page as Contest Organizator you insert") }}
+            {{ __("In that page as Contest Organizer you insert") }}
             {{ __("the minimum sum vote to rise admit in contest, valid.") }}
         </div>
     </div>

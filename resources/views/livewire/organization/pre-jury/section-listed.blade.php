@@ -27,16 +27,22 @@
 
 <div>
     <div class="header">
-        <h2 class="fyk text-2xl">{{$contest->country->flag_code }} | {{ $contest->name_en}}</h2>
+        <div class="fyk text-2xl">{{ $contest->country->flag_code }} | {{$contest->name_en}}</div>
         <p class="small">
             Begin Jury: {{$contest->day_3_jury_opening->format("Y-m-d") }} 
             End   Jury: {{$contest->day_4_jury_closing->format("Y-m-d") }} 
-            <br />
-            <br />
-        </p>        
+        </p>
+        <hr />
+        <div class="p-4 border rounded-md">
+            [ 
+                <a href="{{route('contest-live-dashboard', ['cid' => $contest->id ])}}">
+                    {{__("Back to contest live panel")}} 
+                </a>
+            ]
+        </div>
     </div>
     <div>
-        <h3 class="fyk text-2xl mb-4">{{ __("Contest Live Sections list")}}</h3>
+        <h3 class="fyk text-2xl mb-4">{{ __("Pre-Jury Review & During-Jury Vote")}}</h3>
         <ul>
             @foreach( $contest->sections as $section)
             <li class="small border rounded-md mb-4 px-4 py-2">

@@ -22,10 +22,11 @@ class ContestPanel extends Component
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $this->contest_id = $cid;
         $this->contest = Contest::where('id', $this->contest_id)->first();
-
+        
         // TODO check membership here
-
+        
         $this->section_set = ContestSection::where('contest_id', $this->contest_id)->orderBy('code')->get();
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' section_set' . $this->section_set);
 
     }
 

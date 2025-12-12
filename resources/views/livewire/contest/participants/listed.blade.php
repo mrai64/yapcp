@@ -3,6 +3,7 @@
  * Contest (user) Participant list 1
  * Status readonly
  * 
+ * TODO move into /organization/participants
  */
 
 use App\Models\Country;
@@ -11,16 +12,26 @@ use App\Models\ContestWork;
 ?>
 
 <div>
-    <header>
-        <h2 class="fyk text-2xl font-medium text-gray-900">
-            {{ __('Participant List for Contest:') }}<br />
-            {{ $contest->name_en }}
-        </h2>
-    </header>
+    <div class="header">
+        <div class="fyk text-2xl">{{ $contest->country->flag_code }} | {{$contest->name_en}}</div>
+            <h2 class="fyk text-2xl font-medium text-gray-900">
+                {{ __('Participant List') }}
+            </h2>
+        <hr />
+        <div class="p-4 border rounded-md">
+            [ 
+                <a href="{{route('contest-live-dashboard', ['cid' => $contest->id ])}}">
+                    {{__("Back to contest live panel")}} 
+                </a>
+            ]
+        </div>
+    </div>
+
     @if (count($participant_list) < 1)
     <div>
         <h3 class="fyk text-2xl">{{ __("Waitin', but you should be the first") }}</h3>
     </div>
+
     @else
     <div class="my-4">
         <table class="data-table-container w-full">
@@ -60,5 +71,6 @@ use App\Models\ContestWork;
         </table>
     </div>
     <div class="small">{{__("-- End of list--")}}</div>
+
     @endif
 </div>

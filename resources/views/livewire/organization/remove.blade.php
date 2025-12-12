@@ -1,4 +1,5 @@
 <div>
+    <!-- organization CRUD - delete -->
     <p class="mb-4 font-medium">{{ __('LAST CALL. Are you SURE to delete that?')}} </p>
     <p class="mb-4">
         <a  href="{{ route('organization-list') }}"
