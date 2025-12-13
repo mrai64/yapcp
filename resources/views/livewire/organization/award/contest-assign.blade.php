@@ -19,20 +19,8 @@ use App\Models\ContestSection;
     </div>
     <livewire:organization.award.section-nav :cid="$contest_id" lazy />
     <hr />
-    contest: 
-    {{ json_encode($contest) }}
-    <hr />
-    all assigned: {{ $all_assigned }}
-    <hr />
-    award_assigned: 
-    {{ json_encode($award_assigned) }}
-    <hr />
-    incomplete_sections: 
-    {{ json_encode($incomplete_sections) }}
-    <hr />
-    sections: 
-    {{ json_encode($sections) }}
-    <hr />
+    <br />
+    <br />
     @if (count($incomplete_sections))
     <h3 class="fyk text-2xl">Complete Awards Assignment for:</h3>
         @foreach($sections as $section)
@@ -86,26 +74,27 @@ use App\Models\ContestSection;
             </tfoot>
         </table>
     </div>
+    <br />
+    <br />
 
     <!-- Section Prizes Board -->
     <div class="my-4">
         <table class="data-table-container w-auto">
             <thead>
                 <tr>
-                    @foreach($contest_sections as $section_thead)
+                    @foreach($contest_sections as $sectionHead)
                     <th scope="col" class="border md-rounded m-2">
-                        {{ $section_thead->code }}
-                        {{ $section_thead->name_en }}
+                        {{ $sectionHead->code }}
+                        {{ $sectionHead->name_en }}
                     </th>
                     @endforeach
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    @foreach($contest_sections as $section_tbody)
+                    @foreach($contest_sections as $sectionBody)
                     <td class="border md-rounded m-2">
-                        {{ $section_tbody->id }}
-                        <!-- livewire lazy -->
+                        <livewire:organization.award.contest-assigned-dia :sid="$sectionBody->id" lazy />
                     </td>
                     @endforeach
                 </tr>
