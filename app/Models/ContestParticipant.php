@@ -41,7 +41,7 @@ class ContestParticipant extends Model
 
     protected function casts()
     {
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
 
         return [
             'created_at' => 'datetime',
@@ -57,11 +57,11 @@ class ContestParticipant extends Model
      */
     public static function get_participant_list(string $contest_id): array
     {
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $participant_list = [];
 
         $participants = self::where('contest_id', $contest_id)->get();
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' found: '.count($participants));
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' found: '.count($participants));
         if (count($participants) < 1) {
             return $participant_list;
         }
@@ -84,7 +84,7 @@ class ContestParticipant extends Model
         // sort array
         $participant_list = collect($participant_list)->sortBy(['country_id', 'last_name', 'first_name'])->toArray();
 
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' exit participant_list:'.json_encode($participant_list));
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' exit participant_list:'.json_encode($participant_list));
 
         return $participant_list;
     }

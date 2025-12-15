@@ -57,7 +57,7 @@ class UserRole extends Model
         Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
 
         //
-        return  $user_role->organization_id xor (($user_role->contest_id) xor ($user_role->federation_id));
+        return $user_role->organization_id xor (($user_role->contest_id) xor ($user_role->federation_id));
     }
 
     public static function valid_roles()

@@ -1,13 +1,13 @@
 <?php
+
 /**
  * Contest live - That component prepare n show for a contest
  * a set of works awarded for a section, revealing some infos
  * as author name, and title of work
- * 
- * Reserved for organization members only 
- * 
- * 
+ *
+ * Reserved for organization members only
  */
+
 namespace App\Livewire\Organization\Award;
 
 use Illuminate\Support\Facades\DB;
@@ -17,10 +17,9 @@ use Livewire\Component;
 
 class ContestAssignedDia extends Component
 {
-    public string $section_id; 
+    public string $section_id;
 
     public $section_awarded;
-
 
     /**
      * check if a path/namefile has a twin path/300px_namefile
@@ -49,7 +48,7 @@ class ContestAssignedDia extends Component
         return $original_file;
     }
 
-    public function mount(string $sid) // livewire 
+    public function mount(string $sid) // livewire
     {
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $this->section_id = $sid;
@@ -75,7 +74,7 @@ class ContestAssignedDia extends Component
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
 
     }
-    
+
     public function render()
     {
         return view('livewire.organization.award.contest-assigned-dia');
