@@ -215,6 +215,6 @@ Route::get('/organization/award-assign/section/{sid}', Organization\Award\Sectio
 Route::get('/organization/award-assign/contest/{cid}', Organization\Award\ContestAssign::class, ['cid'])
     ->middleware(['auth', 'verified'])
     ->name('organization-award-contest-assign');
-Route::get('/organization/award-assign/jury-minute/{cid}', Organization\Award\MinuteDraft::class, ['cid'])
+Route::get('/organization/award-assign/jury-minute/{cid}', Organization\Minute\Draft::class, ['cid'])
     ->middleware(['auth', 'verified'])
     ->name('organization-award-minute-draft');

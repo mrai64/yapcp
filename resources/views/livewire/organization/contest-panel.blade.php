@@ -90,7 +90,11 @@
     <div class="p-4 border rounded-md">
         {{__("Jury Final meet - Contest Minute")}}
         <hr />
-        [ Jury send n receive ]
+        <div>
+            <a href="{{ route(''organization-award-minute-draft), ['cid' => $contest->id }}">
+                [ Jury send n receive ]
+            </a>
+        </div>
     </div>
     <div class="p-4 border rounded-md">
         {{__("After Jury works - List for Report Catalogue etc")}}
