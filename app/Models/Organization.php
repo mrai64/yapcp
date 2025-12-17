@@ -11,12 +11,14 @@
  *
  * 2025-08-30 rename country_code in country_id, fk countries.id
  * 2025-10-15 fix organization_name()
+ * 2025-12-17 add relationship country()
  */
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -35,11 +37,15 @@ class Organization extends Model
     public $incrementing = false; //   uuid don't need ++
 
     protected $fillable = [
+        // id uuid
         'country_id',
         'name',
         'email',
         'website',
         'contact',
+        // created_at datetime nullable
+        // updated_at datetime nullable
+        // deleted_at datetime nullable
     ];
 
     /**
@@ -91,5 +97,15 @@ class Organization extends Model
         Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' found:'.json_encode($organization));
 
         return $organization->name;
+    }
+
+    // RELATIONSHIP
+    public function country(): HasOne
+    {
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        $country = $this->hasOne(Country::class, 'id', 'country_id');
+        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out ');
+
+        return $country;
     }
 }

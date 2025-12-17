@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log; // Log::info
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str; //         pk uuid
 
 class ContestWork extends Model
@@ -84,12 +85,43 @@ class ContestWork extends Model
      * Miniature path+name
      * img:       name
      * miniature: 300px_name
-     */
     public function miniature(): string
     {
         Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
 
         return $this->contest_id.'/'.$this->section_id.'/300px_'.$this->work_id.$this->extension;
+    }
+     */
+
+    /**
+     * Check if a path/namefile has a twin path/300px_namefile, otherwise
+     * pass original file
+     *
+     * @return string miniature|original
+     *
+     * TODO id not found pass a [?] mark img
+     */
+    public function miniature(string $original_file = ''): string
+    {
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        if ($original_file === '') {
+            $original_file = $this->contest_id.'/'.$this->section_id.'/300px_'.$this->work_id.$this->extension;
+        }
+        $last_slash_pos = strrpos($original_file, '/');
+        $path = substr($original_file, 0, $last_slash_pos + 1);
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' path:'.$path);
+
+        $name_file = '300px_'.substr($original_file, $last_slash_pos + 1);
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' name:'.$name_file);
+
+        if (Storage::disk('public')->exists('contests/'.$path.$name_file)) {
+            Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' found');
+
+            return $path.$name_file;
+        }
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' not found');
+
+        return $original_file;
     }
 
     // public function get_participant_list_by_contest_id()

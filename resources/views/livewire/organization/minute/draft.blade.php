@@ -1,6 +1,7 @@
 <div class="fmono">
     <h2 class="fyk text-2xl"><strong>Minute draft</strong></h2>
-    <p class="small">Cut n paste on word-like app</p>
+    <p class="small">BELOW Cut n paste on word-like app</p>
+    <br /><br />
     <hr />
     <!-- header: contest data -->
     {{ __("Today, ")}}
@@ -10,7 +11,9 @@
         {{$contest->name_en}},
     </div>
     <!-- header: organizer infos -->
-    organized by ..., 
+    organized by 
+    {{$organization->country->flag_code}} 
+    {{$organization->name}}, <br />
 
     these ladies an gentleman are     gathered as a jury to examine:
     <hr />
@@ -57,14 +60,42 @@
         <hr />
         <br />
     @endforeach
-    ...
-    ...
 
+    <br />
+    and for the contest <br />
+    <div class="fyk text-2xl font-medium">
+        {{$contest->name_en}},
+    </div>
+        <ul>
+            @foreach ($contest_awards as $award)
+            <li>
+                {{$award->award_code}} 
+                {{$award->award_name}} <br />
+                @if (@$award->flag_code > '')
+                    {{$award->flag_code}} 
+                    {{$award->last_name}} 
+                    {{$award->first_name}}
+                    {{$award->title_en}}
+                @else
+                    {{$award->winner_name}} 
+                @endif
+                <br /><br />
+            </li>
+            @endforeach
+        </ul>
+
+        <hr />
+        <br />
+    <div class="fyk text-2xl font-medium">
+        {{ __("Juror signs")}},
+    </div>
+    @foreach ($juror_signs as $juror => $v)
+    <div class="fyk text-2xl font-medium w-full border md-rounded m-4 p-2">
+        {{$juror}}
+    </div>
+    <p class="small">&nbsp;</p>
+    @endforeach
     <hr /><br />
-    {{ json_encode($jury_members)}}
-    <hr />
-    {{ json_encode($sections)}}
-    <hr />
-    {{ json_encode($contest)}}
-    <hr />
+    <p class="small">ABOVE Cut n paste, on word-like app</p>
+    <br /><br />
 </div>
