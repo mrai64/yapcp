@@ -91,8 +91,8 @@
         {{__("Jury Final meet - Contest Minute")}}
         <hr />
         <div>
-            <a href="{{ route(''organization-award-minute-draft), ['cid' => $contest->id }}">
-                [ Jury send n receive ]
+            <a href="{{ route('organization-award-minute-draft', ['cid' => $contest->id]) }}">
+                [ Jury Minute - see n pdf ]
             </a>
         </div>
     </div>

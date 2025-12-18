@@ -1,13 +1,10 @@
 <?php
 
 /**
- * Build the draft of the jury minute
- *
- * WARN: this build a visual view, the real minute-maker is
- * instead into /app/http/controllers/juryminutedraft.php
+ * Build Jury Miniature at ending of jury works
  */
 
-namespace App\Livewire\Organization\Minute;
+namespace App\Http\Controllers;
 
 use App\Models\Contest;
 use App\Models\ContestAward;
@@ -18,62 +15,31 @@ use App\Models\Organization;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Livewire\Component;
+use Spatie\LaravelPdf\Facades\Pdf;
 
-class Draft extends Component
+class JuryMinuteDraft extends Controller
 {
-    public string $contest_id;
-
-    public $today_iso;
-
-    public $today_extended;
-
-    public $contest;
-
-    public $sections;
-
-    public $jury_members;
-
-    public $juror_signs;
-
-    public $organization;
-
-    // counters
-    public $works_participants_all;
-
-    public $authors_participant_all;
-
-    public $works_admitted;
-
-    public $authors_admitted;
-
-    // section awards
-    public $awards;
-
-    public $contest_awards;
-
-    public static function buildMinute(string $cid) // route
+    // build the draft of the jury minute
+    public function buildMinute(string $cid)
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called w/input: '.$cid);
-        ds('buildMinute: '.$cid);
 
+        Log::info('Controller '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called w/input: '.$cid);
         $contest_id = $cid;
         $contest = Contest::where('id', $contest_id)->firstOrFail();
-        ds($contest);
 
-        $today_iso = CarbonImmutable::now()->toDateString();
-        $today_extended = strtolower(CarbonImmutable::now()->format('l d F Y'));
+        $organization = Organization::where('id', $contest->organization_id)->first();
+
+        $today_iso = CarbonImmutable::now()->rawFormat('Y-m-d_H-i-s');
+        $today_extended = strtolower(CarbonImmutable::now()->format('l, d F Y'));
 
         $sections = ContestSection::where('contest_id', $contest_id)->get();
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' sections: '.json_encode($sections));
-
-        $organization = Organization::where('id', $contest->organization_id)->firstOrFail();
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' organization: '.json_encode($organization));
 
         $jury_members = [];
         $juror_signs = [];
         $works_participants_all = [];
         $authors_participant_all = [];
+        // ds('Controller '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' this: '.json_encode($this));
+
         foreach ($sections as $section) {
             // jury members
             $jury_members[$section->code] = ContestJury::select(['user_contacts.country_id', 'user_contacts.last_name', 'user_contacts.first_name', 'countries.flag_code'])
@@ -153,7 +119,9 @@ class Draft extends Component
             ->orderBy('contest_awards.award_code')
             ->get();
 
-        $pdf_save = 'minute-'.$today_iso.'.pdf';
+        // $pdf_save = 'storage/contests/'.$contest_id.'/jury-minute-'.$today_iso.'.pdf';
+        $pdf_save = 'jury-minute-'.$today_iso.'.pdf';
+
         $pdf_data = [
             'contest_id' => $contest_id,
             'today_iso' => $today_iso,
@@ -170,9 +138,19 @@ class Draft extends Component
             'awards' => $awards,
             'contest_awards' => $contest_awards,
         ];
-        // ds('pdf_data');
-        ds($pdf_data);
+        // ds('Controller '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' pdf_data: '.json_encode($pdf_data));
 
-        return view('livewire.organization.minute.draft', $pdf_data);
+        $chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+        // ds('Controller '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' pdf_data: '.json_encode($pdf_data));
+
+        return Pdf::view('livewire.organization.minute.draft', $pdf_data)
+            ->withBrowsershot(function ($browsershot) use ($chromePath) {
+                $browsershot->setChromePath($chromePath);
+                $browsershot->inlineCss();
+            })
+            ->format('A4')
+            ->name($pdf_save)
+            ->download();
+        // ->save($pdf_save);
     }
 }

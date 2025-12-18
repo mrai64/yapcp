@@ -1,5 +1,7 @@
 <?php
 
+// App\Http\Controllers
+use App\Http\Controllers\JuryMinuteDraft;
 use App\Livewire\Contest;
 use App\Livewire\Federation;
 use App\Livewire\Juror;
@@ -166,7 +168,7 @@ Route::get('/organization/contest/{cid}', Organization\ContestPanel::class, ['ci
 Route::get('/organization/contest/participants/listed/{cid}', Contest\Participants\Listed::class, ['cid'])
     ->middleware(['auth', 'verified'])
     ->name('public-participant-list');
-Route::get('/organization/ contest/participants/modify/{cid}', Contest\Participants\Modify::class, ['cid'])
+Route::get('/organization/contest/participants/modify/{cid}', Contest\Participants\Modify::class, ['cid'])
     ->middleware(['auth', 'verified'])
     ->name('modify-participant-list');
 
@@ -215,6 +217,11 @@ Route::get('/organization/award-assign/section/{sid}', Organization\Award\Sectio
 Route::get('/organization/award-assign/contest/{cid}', Organization\Award\ContestAssign::class, ['cid'])
     ->middleware(['auth', 'verified'])
     ->name('organization-award-contest-assign');
-Route::get('/organization/award-assign/jury-minute/{cid}', Organization\Minute\Draft::class, ['cid'])
+// Contest live - build the draft of the jury minute
+// need to point to buildMinute function instead of mount() n render()
+// Route::get('/organization/award-assign/jury-minute/{cid}', [Organization\Minute\Draft::class, // 'buildMinute' ], ['cid'])
+//     ->middleware(['auth', 'verified'])
+//     ->name('organization-award-minute-draft');
+Route::get('/organization/award-assign/jury-minute/{cid}', [JuryMinuteDraft::class, 'buildMinute'], ['cid'])
     ->middleware(['auth', 'verified'])
     ->name('organization-award-minute-draft');
