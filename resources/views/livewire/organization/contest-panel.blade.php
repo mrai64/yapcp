@@ -92,7 +92,7 @@
         <hr />
         <div>
             <a href="{{ route('organization-award-minute-draft', ['cid' => $contest->id]) }}">
-                [ Jury Minute - see n pdf ]
+                [ Jury Minute - download pdf ]
             </a>
         </div>
     </div>
