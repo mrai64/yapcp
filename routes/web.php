@@ -1,7 +1,6 @@
 <?php
 
-// App\Http\Controllers
-use App\Http\Controllers\JuryMinuteDraft;
+use App\Http\Controllers\Contest\JuryMinuteDraft;
 use App\Livewire\Contest;
 use App\Livewire\Federation;
 use App\Livewire\Juror;

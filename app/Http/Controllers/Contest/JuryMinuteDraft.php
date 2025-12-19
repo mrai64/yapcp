@@ -4,8 +4,9 @@
  * Build Jury Miniature at ending of jury works
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Contest;
 
+use App\Http\Controllers\Controller;
 use App\Models\Contest;
 use App\Models\ContestAward;
 use App\Models\ContestJury;
