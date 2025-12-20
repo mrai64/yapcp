@@ -217,10 +217,10 @@ Route::get('/organization/award-assign/contest/{cid}', Organization\Award\Contes
     ->middleware(['auth', 'verified'])
     ->name('organization-award-contest-assign');
 // Contest live - build the draft of the jury minute
-// need to point to buildMinute function instead of mount() n render()
-// Route::get('/organization/award-assign/jury-minute/{cid}', [Organization\Minute\Draft::class, // 'buildMinute' ], ['cid'])
-//     ->middleware(['auth', 'verified'])
-//     ->name('organization-award-minute-draft');
+
 Route::get('/organization/award-assign/jury-minute/{cid}', [JuryMinuteDraft::class, 'buildMinute'], ['cid'])
     ->middleware(['auth', 'verified'])
     ->name('organization-award-minute-draft');
+// Contest live - reports - no auth required - public access
+Route::get('/organization/reports/works-participant/{cid}', Organization\Reports\WorksParticipant::class, ['cid'])
+    ->name('organization-reports-works-participant');
