@@ -9,25 +9,29 @@ use App\Livewire\User;
 use App\Livewire\Work;
 use Illuminate\Support\Facades\Route;
 
+// Public pages
 Route::view('/', 'welcome');
 Route::view('/credits', 'credits');
 
-// user dashboard
-Route::view('/dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+// User CRUD
 Route::view('profile', 'profile')
     ->middleware(['auth'])
     ->name('profile');
-
+Route::view('/dashboard', 'dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+// USER Volt guest/auth routes
 require __DIR__.'/auth.php';
 
-// App\Livewire\User
+// UserContact CRUD 
+// C /user/contact/add is not needed - contact created at user registration
+// R /user/contact/list reserved for admin use only
 Route::get('/user/contact/modify', User\Contact\Modify::class)
     ->middleware(['auth', 'verified'])
     ->name('user-contact-modify');
+// D /user/contact/remove is not needed - contact removed at user deletion
 
-// App\Livewire\Federation
+// Federation CRUD
 Route::get('/federation/add', Federation\Add::class)
     ->middleware(['auth', 'verified'])
     ->name('add-federation');
@@ -43,7 +47,7 @@ Route::get('/federation/remove/{fid}', Federation\Remove::class, ['fid'])
 Route::delete('/federation/remove/{fid}', Federation\Remove::class, ['fid'])
     ->middleware(['auth', 'verified']);
 
-// App\Livewire\FederationSection
+// FederationSection CRUD
 Route::get('/federation/section/list/{fid}', Federation\Section\Listed::class, ['fid'])
     ->middleware(['auth', 'verified'])
     ->name('federation-section-list');

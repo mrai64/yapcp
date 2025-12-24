@@ -2,7 +2,7 @@
 
 ---
 
-- [📚 index](./index.md)
+- [📚 Index](./index.md)
 - [First visit?](#first-visit)
 - [First Section](#section-1)
 
@@ -10,17 +10,22 @@
 
 ## First Visit? What is yaPCP?
 
-Well, you are landed on the user docs of "yaPCP".  
-yapcp means "Yeah, another Photo Contes Platform" or,
-as i the first author prefer "yet, an Amazing Photo Contest Platform".
+Well, you are landed on "The User Docs of yaPCP".  
+What mean yapcp? Mean "Yeah, another Photo Contes Platform" or,
+as i -the first author- prefer "yet, an *Amazing* Photo Contest Platform".
 
-What you do in a photo contest platform:
+What you can do in PCP, a photo contest platform?
 
-- see the contest list and participate
+- see the contest list and easy participate to one or more
 - see the contest list and add your planned photo contest,
 
 and others like participate as Juror, or as collaborator
-for local transalations or develop.
+for local translations or develop.
+
+Our trademark reflect a podium with 1st 2nd 3th place.
+Because contest have winners.
+
+Now follow the [📚 Index](./index.md) link.
 
 ---
 

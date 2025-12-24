@@ -1,2 +1,4 @@
 - ## Get Started
     - [Overview](/{{route}}/{{version}}/overview)
+- ## User as Contest Participants
+    - [1. Registration](/{{route}}/{{version}}/users/registration)

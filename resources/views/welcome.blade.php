@@ -37,35 +37,50 @@
                         @endif
                     </header>
 
-                    <main class="mt-6">
-                        <p class="mb-4">Welcome to Photo Contest Platform, our mission is help you to have 
-                            a comfortable way to participate or organize Photo Contest everywhere you are.<br>
-                            As participants we offer you a work depot and the feature to subscribe some
-                            contest with few click possible: 1ts contest choice, 2nd works choice, 
-                            and there is no third to do.<br>
-                            As photo contest organizer we will offer you a comfortable platform from the beginning,
-                            helping you to build a rule contest following national and international 
-                            photo organization (i.e. FIAP) contest rules.
+                    <main class="mt-6 max-w-l mx-auto lg:mt-16 lg:max-w-4xl min-h-screen h-full">
+                        <p class="mb-4">Welcome to Photo Contest Platform, <br /> our mission is help you to have 
+                            a comfortable way to participate or organize Photo Contest everywhere you are. 
+                            <ul>
+                                <li>- As participant,<br> 
+                                    you can search and subscribe photo contest organized by 
+                                    national or international photo organization, hosted by yaPCP.
+                                    <br />But also you can leave your works in place if you plan
+                                    to participate on more contests hosted by yaPCP, your infos
+                                    are required only at first time, and you can change every time you need.</li>
+                                <li>- As photo contest organizer,<br> 
+                                    you can plan and manage in yaPCP your own photo contest, 
+                                    following national and international photo 
+                                    organization rules with the help of yaPCP.</li>
+                            </ul>
                         </p>
-                        <h2 class="fyk text-2xl text-center my-6">
+                        @auth
+                        <p class="fyk text-2xl text-center my-6">
+                            <a href="{{ url('/dashboard') }}">
+                                {{ __('Dashboard') }}
+                            </a>
+                        </p>
+                        @else
+                        <p class="h-10">&nbsp;</p>
+                        <p class="fyk text-2xl text-center my-6">
+                            <a href="{{ route('login') }}">
+                                {{ __('Log in') }}
+                            </a>
+                        </p>
+                            @if (Route::has('register'))
+                        <p class="h-10">&nbsp;</p>
+                        <p class="fyk text-2xl text-center my-6">
+                            <a href="{{ route('register') }}">
+                                {{ __('Register') }}
+                            </a>
+                        </p>
+                            @endif
+                        @endauth
+                        <p class="h-10">&nbsp;</p>
+                        <p class="fyk text-2xl text-center my-6">
                             <a href="{{ route('contest-list') }}">
-                                {{ __('Open Contest List') }}
+                                {{ __('The Open Contest List') }}
                             </a>
-                        </h2>
-                        <br />
-                        <br />
-                        <h2 class="fyk text-2xl text-center my-6">
-                            <a href="{{ route('organization-list') }}">
-                                {{ __('Organization List') }}
-                            </a>
-                        </h2>
-                        <br />
-                        <br />
-                        <h2 class="fyk text-2xl text-center my-6">
-                            <a href="{{ route('federation-list') }}">
-                                {{ __('Federation List') }}
-                            </a>
-                        </h2>
+                        </p>
 
                     </main>
 
