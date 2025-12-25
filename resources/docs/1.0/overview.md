@@ -25,6 +25,8 @@ for local translations or develop.
 Our trademark reflect a podium with 1st 2nd 3th place.
 Because contest have winners.
 
+![yaPCP mark](/docs/overview_favicon.png)
+
 Now follow the [📚 Index](./index.md) link.
 
 ---

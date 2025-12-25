@@ -1,7 +1,9 @@
 # User participants | Registration
 
----
+- [Registration](#registration)
+- [Recovery password](#recovery-password)
 
+---
 
 ## Registration to yaPCP
 
@@ -16,9 +18,9 @@ and may change from real use.
 
 Start from address <http://yapcp.test> you see
 
-![Splashscreeen image](./registration_img01.png)
+![Splashscreeen image](/docs/users/registration_img01.png)
 
-### Registration
+## Registration
 
 First we ask few infos, the minimum required to access
 next. A name, an email address, and we suggest a
@@ -26,14 +28,23 @@ long, strong password. For password we say the
 usual sysadmin recommendations: use some non-sense phrases
 joining 5-6 short words and with '-', i.e.
 dont-hack-my-yapcp-26-entry-pass-phrase 😁.
+Size matters, even for passwords.
 We can't recover your password anyway.
 
-![Registration entry form](./registration_img02.png)
+![Registration entry form](/docs/users/registration_img02.png)
 
 Check carefully all your data then an email will reach
 your box to verify it's a real and monitored address.
+It's also the key to enter in log in.
 
-![Registration filled form](./registration_img03.png)
+![Registration filled form](/docs/users/registration_img03.png)
 
-![Registration after form](./registration_img04.png)
+![Registration after form](/docs/users/registration_img04.png)
+
+---
+
+## Recovery password
+
+For a limited time yapcp generate an entry code and send
+the link to your e-mailbox.
 

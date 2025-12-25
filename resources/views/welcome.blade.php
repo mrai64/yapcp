@@ -13,13 +13,6 @@
 
         <!-- Styles -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <style>
-.fyk {font-family: 'Yanone Kaffeesatz', sans-serif;}
-.bg-blue {
-  --tw-bg-opacity: 1;
-  background-color:rgb(0 0 245 / var(--tw-bg-opacity, 1))
-}
-        </style>
     </head>
     <body class="antialiased font-sans">
         <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
@@ -79,6 +72,13 @@
                         <p class="fyk text-2xl text-center my-6">
                             <a href="{{ route('contest-list') }}">
                                 {{ __('The Open Contest List') }}
+                            </a>
+                        </p>
+
+                        <p class="h-10">&nbsp;</p>
+                        <p class="fyk text-2xl text-center my-6">
+                            <a href="{{ url('/docs') }}">
+                                {{ __('The Manual') }}
                             </a>
                         </p>
 
