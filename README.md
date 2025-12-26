@@ -8,9 +8,11 @@ yaPCP wanna be a web application which aims to help: photo contest
 participants, photo contest organizer and photo contest sponsors
 (i.e. international and national photographic organization)
 offering them a useful platform where all should found a useful place
-wherw show all the best.  
+where show all the best.  
 For yaPCP mark we adopt a stylized podium and the initial of Photo Contest Platform.  
 ![yaPCP logo](/dev-diary/2025-08/yaPCP_logo%20ver%202025-08-21%20massimo_120px.svg)
+
+That's a work in progress, so i adopt temporary something from Laravel project
 
 ## Contributing
 
