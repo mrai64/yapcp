@@ -1,0 +1,590 @@
+# DBML alla data del 26 dic 2025
+
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table "pcp_cache" {
+  "key" varchar(255) [pk, not null]
+  "value" mediumtext [not null]
+  "expiration" int [not null]
+}
+
+Table "pcp_cache_locks" {
+  "key" varchar(255) [pk, not null]
+  "owner" varchar(255) [not null]
+  "expiration" int [not null]
+}
+
+Table "pcp_contest_awards" {
+  "id" char(36) [pk, not null, note: 'uuid assigned']
+  "contest_id" char(36) [not null, note: 'fk: contests.id 1:N ']
+  "section_id" char(36) [default: NULL, note: 'fk: contest_section.id ']
+  "section_code" varchar(10) [default: NULL, note: 'from: section.id->code ']
+  "award_code" varchar(10) [not null, note: 'free but unique in contest']
+  "award_name" varchar(255) [not null, note: 'free']
+  "is_award" char(1) [not null, default: 'N', note: 'N/Y flag, Y=award prize, N=HM or other']
+  "winner_work_id" char(36) [default: NULL, note: 'fk: works.id ']
+  "winner_user_id" char(36) [default: NULL, note: 'fk: users.id user_contacts.user_id']
+  "winner_name" varchar(255) [not null, default: '', note: 'winner not in previous cols']
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "deleted_at" datetime [default: NULL]
+
+  Indexes {
+    (contest_id, award_code) [unique, name: "general_idx"]
+    (contest_id, section_code, award_code) [name: "secondary_idx"]
+    (contest_id, section_id, award_code, winner_work_id, winner_user_id, winner_name) [name: "view_idx"]
+    deleted_at [name: "pcp_contest_awards_deleted_at_index"]
+  }
+  Note: 'Contest awards contains both sections prizes and contest prizes (section code missing)'
+}
+
+Table "pcp_contest_juries" {
+  "id" char(36) [pk, not null, note: 'uuid assigned']
+  "section_id" char(36) [not null, note: 'fx: contest_section.id 1:N ']
+  "user_contact_id" char(36) [not null, note: 'fx: user_contact.user_id']
+  "is_president" char(1) [not null, default: 'N', note: 'N/Y flag']
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "deleted_at" datetime [default: NULL]
+
+  Indexes {
+    (section_id, user_contact_id) [unique, name: "general_idx"]
+    deleted_at [name: "pcp_contest_juries_deleted_at_index"]
+  }
+}
+
+Table "pcp_contest_participants" {
+  "id" bigint [pk, not null, increment]
+  "contest_id" char(36) [not null, note: 'fk: contests.id ']
+  "user_id" char(36) [not null, note: 'fk: user_contacts.user_id ']
+  "fee_payment_completed" char(1) [not null, default: 'N', note: 'N/Y flag']
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "deleted_at" datetime [default: NULL]
+
+  Indexes {
+    (contest_id, user_id) [name: "contest_idx"]
+    (user_id, contest_id) [name: "user_idx"]
+    fee_payment_completed [name: "pcp_contest_participants_fee_payment_completed_foreign"]
+    deleted_at [name: "pcp_contest_participants_deleted_at_index"]
+  }
+}
+
+Table "pcp_contest_participants_fee_payment_completed_sets" {
+  "status" char(1) [pk, not null]
+}
+
+Table "pcp_contest_sections" {
+  "id" char(36) [pk, not null, note: 'uuid assigned']
+  "contest_id" char(36) [not null, note: 'fx: contests.id 1:N ']
+  "code" varchar(10) [not null, note: 'as fk: federationSections.code']
+  "under_patronage" char(1) [not null, default: 'N', note: 'a Y/N col']
+  "federation_section_id" bigint [default: NULL, note: 'fk: federation_sections.id']
+  "name_en" varchar(255) [not null, note: 'international']
+  "name_local" varchar(255) [default: NULL, note: 'in local lang - see contests.lang_local']
+  "rule_format" varchar(255) [not null, default: 'jpg', note: 'list of permitted extension']
+  "rule_min" int [not null, default: '0', note: 'minimum works-per-section']
+  "rule_max" int [not null, default: '4', note: 'maximum works-per-section']
+  "rule_min_size" int [not null, default: '1024', note: 'minimum short_side px']
+  "rule_max_size" int [not null, default: '2500', note: 'maximum long_side px']
+  "rule_max_weight" int [not null, default: '6000', note: 'file weight in KB']
+  "rule_monochromatic" char(1) [not null, default: 'N', note: 'maybe boolean 0/N=false, 1/Y=true']
+  "rule_raw_required" tinyint(1) [not null, default: '0', note: '0 == false; 1 == true']
+  "rule_only_one" tinyint(1) [not null, default: '0', note: '0 = only one prize per section per person not required']
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "deleted_at" datetime [default: NULL]
+
+  Indexes {
+    (contest_id, code) [unique, name: "general_idx"]
+    (contest_id, name_en, deleted_at) [name: "name_idx"]
+    deleted_at [name: "pcp_contest_sections_deleted_at_index"]
+  }
+}
+
+Table "pcp_contest_votes" {
+  "id" bigint [pk, not null, increment]
+  "contest_id" char(36) [not null, note: 'fk: contests.id ']
+  "section_id" char(36) [not null, note: 'fk: contest_sections.id ']
+  "work_id" char(36) [not null, note: 'fk: works.id contest_works.work_id']
+  "juror_user_id" char(36) [not null, note: 'fk: user_contacts.user_id ']
+  "vote" varchar(255) [not null, note: 'see contests.vote_rule']
+  "review_required" tinyint(1) [not null, default: '0', note: '0 = not required']
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`, note: 'date of vote']
+  "deleted_at" datetime [default: NULL]
+
+  Indexes {
+    (contest_id, section_id, work_id, juror_user_id) [unique, name: "general_idx"]
+    (contest_id, section_id, vote, work_id, juror_user_id) [name: "vote_idx"]
+    contest_id [name: "pcp_contest_votes_contest_id_index"]
+    section_id [name: "pcp_contest_votes_section_id_index"]
+    work_id [name: "pcp_contest_votes_work_id_index"]
+    juror_user_id [name: "pcp_contest_votes_juror_user_id_index"]
+    vote [name: "pcp_contest_votes_vote_index"]
+    updated_at [name: "pcp_contest_votes_updated_at_index"]
+    (section_id, juror_user_id, review_required, work_id) [name: "review_idx"]
+    deleted_at [name: "pcp_contest_votes_deleted_at_index"]
+  }
+}
+
+Table "pcp_contest_waitings" {
+  "id" char(36) [pk, not null, note: 'uuid assigned']
+  "contest_id" char(36) [not null, note: 'fk: contests.id 1:N ']
+  "section_id" char(36) [not null, note: 'fk: contest_sections.id ']
+  "work_id" char(36) [not null, note: 'fk: works.id ']
+  "participant_user_id" char(36) [not null, note: 'fk: users.id ']
+  "portfolio_sequence" tinyint [not null, default: '0', note: 'valid also in section counter']
+  "organization_user_id" char(36) [not null, note: 'fk: users.id ']
+  "because" text [not null, note: 'why that work is out']
+  "email" varchar(255) [not null, note: 'for notification']
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "deleted_at" datetime [default: NULL]
+
+  Indexes {
+    (contest_id, section_id, work_id, portfolio_sequence, deleted_at) [name: "main_idx"]
+    work_id [name: "pcp_contest_waitings_work_id_index"]
+    deleted_at [name: "pcp_contest_waitings_deleted_at_index"]
+  }
+}
+
+Table "pcp_contest_works" {
+  "id" char(36) [pk, not null, note: 'uuid assigned']
+  "contest_id" char(36) [not null, note: 'fk: contests.id 1:N ']
+  "section_id" char(36) [not null, note: 'fk: contest_sections.id ']
+  "country_id" char(3) [not null, note: 'fk: user_contacts.country_id ']
+  "user_id" char(36) [not null, note: 'fk: users.id ']
+  "work_id" char(36) [not null, note: 'fk: works.id ']
+  "extension" varchar(6) [not null, default: 'jpg', note: 'to build file name']
+  "portfolio_sequence" tinyint [not null, default: '0', note: 'valid also in section counter']
+  "is_admit" tinyint(1) [not null, default: '0', note: '0 = not admit, admit otherwise']
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "deleted_at" datetime [default: NULL]
+
+  Indexes {
+    (user_id, contest_id, section_id, portfolio_sequence, work_id, deleted_at) [unique, name: "sequence_idx"]
+    (contest_id, section_id, country_id, user_id, work_id, id) [name: "contest_idx"]
+    (contest_id, country_id, user_id, section_id, work_id, id) [name: "catalogue_idx"]
+    country_id [name: "pcp_contest_works_country_id_foreign"]
+    section_id [name: "pcp_contest_works_section_id_foreign"]
+    (work_id, section_id, contest_id) [name: "contest_works_idx"]
+    (user_id, section_id, contest_id, portfolio_sequence) [name: "user_contests_idx"]
+    (section_id, is_admit, work_id) [name: "admit_idx"]
+    deleted_at [name: "pcp_contest_works_deleted_at_index"]
+  }
+}
+
+Table "pcp_contests" {
+  "id" char(36) [pk, not null, note: 'uuid assigned']
+  "country_id" varchar(3) [not null, note: 'fk: countries.id']
+  "name_en" varchar(255) [not null]
+  "name_local" varchar(255) [default: NULL]
+  "lang_local" varchar(8) [not null, default: 'en', note: 'dev: in LangList[]']
+  "organization_id" varchar(36) [not null, note: 'fk: organizations.id']
+  "contest_mark" varchar(255) [default: NULL, note: 'The contest or organization passport photo - mark']
+  "contact_info" text [not null, note: 'contest headquarter, email and so on']
+  "is_circuit" char(1) [not null, default: 'N', note: 'Y/N, N when not Y']
+  "circuit_id" varchar(36) [default: NULL, note: 'null or a valid contest.id']
+  "federation_list" varchar(255) [default: NULL, note: 'under patronage of federation code[]']
+  "url_1_rule" varchar(255) [default: NULL, note: 'how read english rules and subscribe link']
+  "url_2_concurrent_list" varchar(255) [default: NULL]
+  "url_3_admit_n_award_list" varchar(255) [default: NULL, note: 'only the result list, not a catalogue']
+  "url_4_catalogue" varchar(255) [default: NULL, note: 'catalogue download page']
+  "timezone" varchar(255) [not null, note: 'A MUST HAVE used for time math, must be a php valid timezone']
+  "day_1_opening" datetime [not null, note: 'Reveal the contest, opening for subscription']
+  "day_2_closing" datetime [not null, note: 'End of receive works']
+  "day_3_jury_opening" datetime [not null, note: 'Start of juror works']
+  "day_4_jury_closing" datetime [not null, note: 'End of juror works']
+  "day_5_revelations" datetime [not null, note: 'Publicly result communications']
+  "day_6_awards" datetime [not null, note: 'Award Ceremony']
+  "day_7_catalogues" datetime [not null, note: 'Publicly Catalogue publications']
+  "day_8_closing" datetime [not null, note: 'Closing date for award postal send']
+  "award_ceremony_info" text [note: 'Site and date, or link to broadcast platform']
+  "fee_info" text [note: 'only text description of fee for participation']
+  "vote_rule" varchar(255) [not null, default: 'num:1..10', note: 'related to limited set']
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`, note: 'backup reserved']
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`, note: 'backup reserved']
+  "deleted_at" datetime [default: NULL, note: 'softdelete reserved']
+
+  Indexes {
+    (country_id, day_2_closing, name_en, created_at) [name: "general_idx"]
+    country_id [name: "pcp_contests_country_id_index"]
+    name_en [name: "pcp_contests_name_en_index"]
+    name_local [name: "pcp_contests_name_local_index"]
+    organization_id [name: "pcp_contests_organization_id_index"]
+    circuit_id [name: "pcp_contests_circuit_id_index"]
+    day_6_awards [name: "pcp_contests_day_6_awards_index"]
+    vote_rule [name: "pcp_contests_vote_rule_foreign"]
+    timezone [name: "pcp_contests_timezone_foreign"]
+    deleted_at [name: "pcp_contests_deleted_at_index"]
+  }
+}
+
+Table "pcp_contests_vote_rule_sets" {
+  "vote_rule" varchar(255) [pk, not null]
+  "synopsis" text
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "deleted_at" datetime [default: NULL]
+
+  Indexes {
+    deleted_at [name: "pcp_contests_vote_rule_sets_deleted_at_index"]
+  }
+}
+
+Table "pcp_countries" {
+  "id" char(3) [pk, not null, note: 'iso-3166 alpha-3 UPPERCASE']
+  "country" varchar(255) [not null, note: 'en']
+  "flag_code" char(20) [default: NULL, note: 'Unicode chars for country flag emoji']
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "deleted_at" datetime [default: NULL]
+
+  Indexes {
+    country [name: "pcp_countries_country_index"]
+    deleted_at [name: "pcp_countries_deleted_at_index"]
+  }
+}
+
+Table "pcp_failed_jobs" {
+  "id" bigint [pk, not null, increment]
+  "uuid" varchar(255) [not null]
+  "connection" text [not null]
+  "queue" text [not null]
+  "payload" longtext [not null]
+  "exception" longtext [not null]
+  "failed_at" timestamp [not null, default: `CURRENT_TIMESTAMP`]
+
+  Indexes {
+    uuid [unique, name: "pcp_failed_jobs_uuid_unique"]
+  }
+}
+
+Table "pcp_federation_sections" {
+  "id" bigint [pk, not null, increment]
+  "federation_id" char(10) [not null]
+  "code" char(10) [not null]
+  "name_en" varchar(255) [not null, note: 'official name in english']
+  "local_lang" char(2) [not null, default: 'en', note: 'follow iso-3166 2 ascii lowercase']
+  "name_local" varchar(255) [not null, default: '', note: 'in local name']
+  "rule_definition" text [note: 'synopsis from federal regulation docs']
+  "file_formats" varchar(255) [not null, default: 'jpg,tif,raw,raf,nef,cr2', note: 'list of ext, comma separated']
+  "min_works" int [not null, default: '0', note: 'greater zero == portfolio']
+  "max_works" int [not null, default: '4']
+  "min_short_side" int [not null, default: '1080', note: 'px']
+  "max_long_side" int [not null, default: '2500', note: 'px']
+  "max_weight" int [not null, default: '6000000', note: 'Bytes']
+  "monochromatic_required" tinyint(1) [not null, default: '0', note: '0 == false, 1 == true']
+  "raw_required" tinyint(1) [not null, default: '0', note: '0 == false, 1 == true']
+  "only_one" tinyint(1) [not null, default: '0', note: '0 = only one prize per section per person not required']
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "deleted_at" datetime [default: NULL]
+
+  Indexes {
+    (federation_id, code, deleted_at) [unique, name: "pcp_federation_sections_federation_id_code_deleted_at_unique"]
+    name_en [name: "pcp_federation_sections_name_en_index"]
+    deleted_at [name: "pcp_federation_sections_deleted_at_index"]
+  }
+}
+
+Table "pcp_federations" {
+  "id" char(10) [pk, not null, note: 'when code are equals add :country_id to both']
+  "country_id" char(3) [not null, note: 'follow iso-3166 3 ascii uppercase']
+  "name_en" varchar(255) [not null, note: 'official name in english']
+  "local_lang" char(2) [not null, default: 'en', note: 'follow iso-3166 2 ascii lowercase']
+  "name_local" varchar(255) [not null, default: '']
+  "timezone_id" varchar(255) [not null, default: '', note: 'reserved']
+  "website" varchar(255) [not null, default: '', note: 'official website or fb info page']
+  "contact_info" text [not null, note: 'HQ address, email, and other infos']
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "deleted_at" datetime [default: NULL]
+
+  Indexes {
+    (country_id, id) [name: "country_idx"]
+    (country_id, name_en) [name: "name_idx"]
+    name_en [name: "pcp_federations_name_en_index"]
+    timezone_id [name: "pcp_federations_timezone_id_foreign"]
+    deleted_at [name: "pcp_federations_deleted_at_index"]
+  }
+}
+
+Table "pcp_job_batches" {
+  "id" varchar(255) [pk, not null]
+  "name" varchar(255) [not null]
+  "total_jobs" int [not null]
+  "pending_jobs" int [not null]
+  "failed_jobs" int [not null]
+  "failed_job_ids" longtext [not null]
+  "options" mediumtext
+  "cancelled_at" int [default: NULL]
+  "created_at" int [not null]
+  "finished_at" int [default: NULL]
+}
+
+Table "pcp_jobs" {
+  "id" bigint [pk, not null, increment]
+  "queue" varchar(255) [not null]
+  "payload" longtext [not null]
+  "attempts" tinyint [not null]
+  "reserved_at" int [default: NULL]
+  "available_at" int [not null]
+  "created_at" int [not null]
+
+  Indexes {
+    queue [name: "pcp_jobs_queue_index"]
+  }
+}
+
+Table "pcp_migrations" {
+  "id" int [pk, not null, increment]
+  "migration" varchar(255) [not null]
+  "batch" int [not null]
+}
+
+Table "pcp_organizations" {
+  "id" char(36) [pk, not null, note: 'uuid assigned']
+  "country_id" char(3) [not null]
+  "name" varchar(255) [not null]
+  "email" varchar(255) [not null, note: 'Should became verified']
+  "website" varchar(255) [default: NULL]
+  "contact" text [note: 'postal address']
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "deleted_at" datetime [default: NULL]
+
+  Indexes {
+    (email, deleted_at) [unique, name: "pcp_organizations_email_deleted_at_unique"]
+    (country_id, name, deleted_at) [name: "pcp_organizations_country_id_name_deleted_at_index"]
+    deleted_at [name: "pcp_organizations_deleted_at_index"]
+  }
+}
+
+Table "pcp_password_reset_tokens" {
+  "email" varchar(255) [pk, not null]
+  "token" varchar(255) [not null]
+  "created_at" datetime [default: NULL]
+}
+
+Table "pcp_regions" {
+  "id" varchar(40) [pk, not null, note: 'aux ']
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "deleted_at" datetime [default: NULL]
+
+  Indexes {
+    deleted_at [name: "pcp_regions_deleted_at_index"]
+  }
+}
+
+Table "pcp_sessions" {
+  "id" varchar(255) [pk, not null]
+  "user_id" char(36) [default: NULL, note: 'uuid']
+  "ip_address" varchar(45) [default: NULL]
+  "user_agent" text
+  "payload" longtext [not null]
+  "last_activity" int [not null]
+
+  Indexes {
+    user_id [name: "pcp_sessions_user_id_index"]
+    last_activity [name: "pcp_sessions_last_activity_index"]
+  }
+}
+
+Table "pcp_timezones" {
+  "id" varchar(40) [pk, not null, note: 'valid for php_timezones']
+  "region_id" varchar(20) [not null, note: 'fk regions.id']
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "deleted_at" datetime [default: NULL]
+
+  Indexes {
+    region_id [name: "pcp_timezones_region_id_index"]
+    deleted_at [name: "pcp_timezones_deleted_at_index"]
+  }
+}
+
+Table "pcp_user_contacts" {
+  "id" bigint [pk, not null, increment]
+  "user_id" char(36) [not null, note: 'fk: users.id uuid']
+  "country_id" char(3) [not null, note: 'fk: countries.id']
+  "first_name" varchar(255) [not null]
+  "last_name" varchar(255) [not null]
+  "nick_name" varchar(255) [default: NULL]
+  "email" varchar(255) [not null, note: 'same as users.email']
+  "cellular" varchar(20) [not null, default: '']
+  "passport_photo" varchar(255) [not null, default: 'anon.jpg']
+  "lang_local" char(5) [not null, default: 'en', note: 'for future use - html lang']
+  "timezone" varchar(40) [not null, default: 'Europe/Rome', note: 'for future use - php timezone for time math']
+  "address" varchar(255) [not null, default: '']
+  "address_line2" varchar(255) [not null, default: '']
+  "city" varchar(255) [not null, default: '']
+  "region" varchar(255) [not null, default: '']
+  "postal_code" varchar(10) [not null, default: '']
+  "website" varchar(255) [default: NULL, note: 'url of personal site']
+  "facebook" varchar(255) [default: NULL, note: 'url of personal page']
+  "x_twitter" varchar(255) [default: NULL, note: 'url of personal page']
+  "instagram" varchar(255) [default: NULL, note: 'url of personal page']
+  "whatsapp" varchar(255) [default: NULL, note: 'to chat into']
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "deleted_at" datetime [default: NULL]
+
+  Indexes {
+    (user_id, deleted_at) [unique, name: "user_id_idx"]
+    first_name [name: "pcp_user_contacts_first_name_index"]
+    last_name [name: "pcp_user_contacts_last_name_index"]
+    country_id [name: "pcp_user_contacts_country_id_foreign"]
+    timezone [name: "pcp_user_contacts_timezone_foreign"]
+    deleted_at [name: "pcp_user_contacts_deleted_at_index"]
+  }
+}
+
+Table "pcp_user_roles" {
+  "id" bigint [pk, not null, increment]
+  "user_id" char(36) [not null, note: 'fk: users.id']
+  "role" varchar(255) [not null, default: 'member']
+  "organization_id" char(36) [default: NULL, note: 'fk: organizations.id']
+  "contest_id" char(36) [default: NULL, note: 'fk: contests.id']
+  "federation_id" char(10) [default: NULL, note: 'fk to federations.id']
+  "role_opening" datetime [not null, default: `CURRENT_TIMESTAMP`, note: 'Start of role works - default today']
+  "role_closing" datetime [not null, default: '9999-12-31 23:59:59', note: 'End of role works default:future']
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`, note: 'backup reserved']
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`, note: 'backup reserved']
+  "deleted_at" datetime [default: NULL, note: 'softdelete reserved']
+
+  Indexes {
+    (user_id, organization_id, contest_id, federation_id, role_opening, id) [name: "general_idx"]
+    user_id [name: "pcp_user_roles_user_id_index"]
+    organization_id [name: "pcp_user_roles_organization_id_index"]
+    contest_id [name: "pcp_user_roles_contest_id_index"]
+    federation_id [name: "pcp_user_roles_federation_id_index"]
+    role_opening [name: "pcp_user_roles_role_opening_index"]
+    role [name: "pcp_user_roles_role_foreign"]
+    deleted_at [name: "pcp_user_roles_deleted_at_index"]
+  }
+}
+
+Table "pcp_user_roles_role_sets" {
+  "id" bigint [pk, not null, increment]
+  "role" varchar(25) [not null]
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "deleted_at" datetime [default: NULL]
+
+  Indexes {
+    (role, deleted_at) [unique, name: "pcp_user_roles_role_sets_status_deleted_at_unique"]
+    role [name: "pcp_user_roles_role_sets_status_index"]
+    deleted_at [name: "pcp_user_roles_role_sets_deleted_at_index"]
+  }
+}
+
+Table "pcp_users" {
+  "id" char(36) [pk, not null, note: 'uuid']
+  "name" varchar(255) [not null]
+  "email" varchar(255) [not null]
+  "email_verified_at" datetime [default: NULL]
+  "password" varchar(255) [not null]
+  "remember_token" varchar(100) [default: NULL]
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "deleted_at" datetime [default: NULL]
+
+  Indexes {
+    (email, deleted_at) [unique, name: "pcp_users_email_deleted_at_unique"]
+    name [name: "pcp_users_name_index"]
+    deleted_at [name: "pcp_users_deleted_at_index"]
+  }
+}
+
+Table "pcp_work_validations" {
+  "id" bigint [pk, not null, increment]
+  "work_id" char(36) [not null, note: 'fk: works.id ']
+  "federation_section_id" bigint [not null, note: 'fk: federation_sections.id ']
+  "validator_user_id" char(36) [not null, note: 'fk: user_contacts.user_id ']
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "deleted_at" datetime [default: NULL]
+
+  Indexes {
+    (work_id, federation_section_id, deleted_at) [unique, name: "general_idx"]
+    work_id [name: "pcp_work_validations_work_id_index"]
+    deleted_at [name: "pcp_work_validations_deleted_at_index"]
+  }
+}
+
+Table "pcp_works" {
+  "id" char(36) [pk, not null, note: 'uuid']
+  "user_id" char(36) [not null, note: 'fk: users.id']
+  "work_file" varchar(255) [not null, note: 'path n file']
+  "extension" varchar(6) [not null, note: 'lowercase']
+  "reference_year" char(4) [not null, note: 'default maybe YEAR(CURDATE())']
+  "title_en" varchar(255) [not null, note: 'english title']
+  "title_local" varchar(255) [not null, note: 'lang title']
+  "long_side" int [not null, note: 'pixel / cm']
+  "short_side" int [not null, note: 'pixel / cm']
+  "monochromatic" char(1) [not null, default: 'N', note: 'not bool but oldstyle uppercase | Y / N']
+  "created_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "updated_at" datetime [not null, default: `CURRENT_TIMESTAMP`]
+  "deleted_at" datetime [default: NULL]
+
+  Indexes {
+    (user_id, reference_year, title_en) [name: "general_idx"]
+    user_id [name: "pcp_works_user_id_index"]
+    deleted_at [name: "pcp_works_deleted_at_index"]
+    (user_id, id) [name: "fifth_idx"]
+  }
+}
+
+Ref "pcp_contest_awards_contest_id_foreign":"pcp_contests"."id" < "pcp_contest_awards"."contest_id"
+
+Ref "pcp_contest_juries_section_id_foreign":"pcp_contest_sections"."id" < "pcp_contest_juries"."section_id"
+
+Ref "pcp_contest_participants_contest_id_foreign":"pcp_contests"."id" < "pcp_contest_participants"."contest_id"
+
+Ref "pcp_contest_participants_fee_payment_completed_foreign":"pcp_contest_participants_fee_payment_completed_sets"."status" < "pcp_contest_participants"."fee_payment_completed"
+
+Ref "pcp_contest_participants_user_id_foreign":"pcp_user_contacts"."user_id" < "pcp_contest_participants"."user_id"
+
+Ref "pcp_contest_sections_contest_id_foreign":"pcp_contests"."id" < "pcp_contest_sections"."contest_id"
+
+Ref "pcp_contest_votes_contest_id_foreign":"pcp_contests"."id" < "pcp_contest_votes"."contest_id"
+
+Ref "pcp_contest_votes_juror_user_id_foreign":"pcp_user_contacts"."user_id" < "pcp_contest_votes"."juror_user_id"
+
+Ref "pcp_contest_votes_section_id_foreign":"pcp_contest_sections"."id" < "pcp_contest_votes"."section_id"
+
+Ref "pcp_contest_works_contest_id_foreign":"pcp_contests"."id" < "pcp_contest_works"."contest_id"
+
+Ref "pcp_contest_works_country_id_foreign":"pcp_countries"."id" < "pcp_contest_works"."country_id"
+
+Ref "pcp_contest_works_section_id_foreign":"pcp_contest_sections"."id" < "pcp_contest_works"."section_id"
+
+Ref "pcp_contest_works_user_id_foreign":"pcp_user_contacts"."user_id" < "pcp_contest_works"."user_id"
+
+Ref "pcp_contest_works_work_id_foreign":"pcp_works"."id" < "pcp_contest_works"."work_id"
+
+Ref "pcp_contests_country_id_foreign":"pcp_countries"."id" < "pcp_contests"."country_id"
+
+Ref "pcp_contests_timezone_foreign":"pcp_timezones"."id" < "pcp_contests"."timezone"
+
+Ref "pcp_contests_vote_rule_foreign":"pcp_contests_vote_rule_sets"."vote_rule" < "pcp_contests"."vote_rule"
+
+Ref "pcp_federation_sections_federation_id_foreign":"pcp_federations"."id" < "pcp_federation_sections"."federation_id"
+
+Ref "pcp_federations_country_id_foreign":"pcp_countries"."id" < "pcp_federations"."country_id"
+
+Ref "pcp_federations_timezone_id_foreign":"pcp_timezones"."id" < "pcp_federations"."timezone_id"
+
+Ref "pcp_organizations_country_id_foreign":"pcp_countries"."id" < "pcp_organizations"."country_id"
+
+Ref "pcp_timezones_region_id_foreign":"pcp_regions"."id" < "pcp_timezones"."region_id"
+
+Ref "pcp_user_contacts_timezone_foreign":"pcp_timezones"."id" < "pcp_user_contacts"."timezone"
+
+Ref "pcp_user_roles_role_foreign":"pcp_user_roles_role_sets"."role" < "pcp_user_roles"."role"
+
