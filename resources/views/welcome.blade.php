@@ -33,25 +33,30 @@
                     <main class="mt-6 max-w-l mx-auto lg:mt-16 lg:max-w-4xl min-h-screen h-full">
                         <p class="mb-4">Welcome to Photo Contest Platform, <br /> our mission is help you to have 
                             a comfortable way to participate or organize Photo Contest everywhere you are. 
+                            <br>
                             <ul>
                                 <li>- As participant,<br> 
                                     you can search and subscribe photo contest organized by 
                                     national or international photo organization, hosted by yaPCP.
                                     <br />But also you can leave your works in place if you plan
                                     to participate on more contests hosted by yaPCP, your infos
-                                    are required only at first time, and you can change every time you need.</li>
+                                    are required only at first time, and you can change every time you need.
+                                    <br>
+                                </li>
                                 <li>- As photo contest organizer,<br> 
                                     you can plan and manage in yaPCP your own photo contest, 
                                     following national and international photo 
                                     organization rules with the help of yaPCP.</li>
                             </ul>
                         </p>
+
                         @auth
                         <p class="fyk text-2xl text-center my-6">
                             <a href="{{ url('/dashboard') }}">
-                                {{ __('Dashboard') }}
+                                {{ __('Your Dashboard') }}
                             </a>
                         </p>
+
                         @else
                         <p class="h-10">&nbsp;</p>
                         <p class="fyk text-2xl text-center my-6">
@@ -68,6 +73,7 @@
                         </p>
                             @endif
                         @endauth
+
                         <p class="h-10">&nbsp;</p>
                         <p class="fyk text-2xl text-center my-6">
                             <a href="{{ route('contest-list') }}">

@@ -1,7 +1,7 @@
 # User participants | Registration
 
 - [Registration](#registration)
-- [Recovery password](#recovery-password)
+- [Login](#login)
 
 ---
 
@@ -43,8 +43,14 @@ It's also the key to enter in log in.
 
 ---
 
-## Recovery password
+## Login
 
-For a limited time yapcp generate an entry code and send
-the link to your e-mailbox.
+Data required: your email, your password.  
+Also available: link to reset password.
 
+![Login form](/docs/users/login_img01.png)
+
+
+## Next stop
+
+[Personal Dashboard](./dashboard.md)
