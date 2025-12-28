@@ -11,6 +11,7 @@
  * 2025-12-04 review to support livewire header component
  * 2025-12-05 refactor Country::country_list_by_country()
  *
+ * TODO substitute TmeZoneList with timezones access
  * TODO change is_circuit from Y/N to 1/0
  * TODO change circuit_id from text to select list
  */

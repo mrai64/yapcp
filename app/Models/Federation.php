@@ -23,7 +23,6 @@ class Federation extends Model
 {
     use HasFactory, SoftDeletes;
 
-    // TODO remove - protected string $table
     public const table_name = 'federations';
 
     // pk it's not a bigint nor uuid

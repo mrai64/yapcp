@@ -7,11 +7,13 @@
  * child of: user
  *
  * use passport_photo so yes: upload file
- * 2025-09-10: rename col lang into lang_local
- * 2025-09-28  fix
- * 2025-11-24  removed TimezonesList
+ * 2025-09-10 rename col lang into lang_local
+ * 2025-09-28 fix
+ * 2025-11-24 removed TimezonesList
+ * 
  */
 
+// blade <\Resource\Views\Livewire\User\Contact\Modify.Blade>
 namespace App\Livewire\User\Contact;
 
 use App\Models\Country;
@@ -106,7 +108,7 @@ class Modify extends Component
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' countries: '.json_encode($this->countries));
 
         // insert if missing
-        $this->user = User::where('id', $this->user_id)->get()[0]; // ✅ $this->user['id'] ❌ $this->user->id;
+        $this->user = User::where('id', $this->user_id)->first(); // ✅ $this->user['id'] ❌ $this->user->id;
         if (UserContact::where('user_id', $this->user_id)->count() == 0) {
             Log::info(__FUNCTION__.' '.__LINE__.Auth::id().'zero found');
             $this->user_contact = UserContact::create([

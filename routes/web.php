@@ -23,7 +23,7 @@ Route::view('/dashboard', 'dashboard')
 // USER Volt guest/auth routes
 require __DIR__.'/auth.php';
 
-// UserContact CRUD 
+// UserContact CRUD
 // C /user/contact/add is not needed - contact created at user registration
 // R /user/contact/list reserved for admin use only
 Route::get('/user/contact/modify', User\Contact\Modify::class)
