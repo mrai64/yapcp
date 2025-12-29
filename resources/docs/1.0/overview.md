@@ -3,23 +3,20 @@
 ---
 
 - [📚 Index](./index.md)
-- [First visit?](#first-visit)
-- [First Section](#section-1)
-
-<a name="first-visit"></a>
 
 ## First Visit? What is yaPCP?
 
 Well, you are landed on "The User Docs of yaPCP".  
-What mean yapcp? Mean "Yeah, another Photo Contes Platform" or,
-as i -the first author- prefer "yet, an *Amazing* Photo Contest Platform".
+What mean `Y A P C P`?  
+It's like [YMCA](https://en.wikipedia.org/wiki/YMCA)? [YAML](https://en.wikipedia.org/wiki/YAML)?  
+In My Humble words: "Yeah, an *Amazing* Photo Contest Platform".
 
-What you can do in PCP, a photo contest platform?
+What you can do in yaPCP, *a photo contest platform*?
 
-- see the contest list and easy participate to one or more
-- see the contest list and add your planned photo contest,
+- See the contest list and easy participate to one or more;
+- add and manage your planned photo contest, in a way compliant for some sponsor federation (but sorry, there are some works you do always, i.e. send prizes thru postal services) from contest rule definition thru jury vote and federation reports;
 
-and others like participate as Juror, or as collaborator
+and others like *participate as Juror*, or as collaborator
 for local translations or develop.
 
 Our trademark reflect a podium with 1st 2nd 3th place.
@@ -27,12 +24,6 @@ Because contest have winners.
 
 ![yaPCP mark](/docs/overview_favicon.png)
 
-Now follow the [📚 Index](./index.md) link.
-
 ---
 
-<a name="section-1"></a>
-
-## First Section
-
-Write something cool.. 🦊
+Now follow the [📚 Index](./index.md) link.

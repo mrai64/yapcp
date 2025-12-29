@@ -4,7 +4,7 @@
 
   - [Overview](/{{route}}/{{version}}/overview)
 
-- ## User as Contest Participants
+- ## You as Contest Participants
 
   - [1. Registration](/{{route}}/{{version}}/users/registration)  
   - [2. Login](/{{route}}/{{version}}/users/registration#login)

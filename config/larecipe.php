@@ -96,7 +96,7 @@ return [
 
     'search' => [
         'enabled' => false,
-        //def 'default' => 'algolia',
+        // def 'default' => 'algolia',
         'default' => 'internal',
         'engines' => [
             'internal' => [
@@ -122,7 +122,7 @@ return [
     */
 
     'ui' => [
-        //def 'code_theme' => 'dark', // or: light
+        // def 'code_theme' => 'dark', // or: light
         'code_theme' => 'light', // or: light
         'fav' => '',     // eg: fav.png
         'fa_v4_shims' => true, // Add FontAwesome v4 shims prevent BC break
