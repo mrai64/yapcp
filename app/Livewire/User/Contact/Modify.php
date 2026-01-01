@@ -10,10 +10,11 @@
  * 2025-09-10 rename col lang into lang_local
  * 2025-09-28 fix
  * 2025-11-24 removed TimezonesList
- * 
+ * 2025-12-28 review
  */
 
 // blade <\Resource\Views\Livewire\User\Contact\Modify.Blade>
+
 namespace App\Livewire\User\Contact;
 
 use App\Models\Country;
@@ -104,25 +105,10 @@ class Modify extends Component
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' Called id: '.Auth::id());
         $this->user_id = Auth::id();
 
-        $this->countries = Country::country_list_by_country();
+        // countries list, sorted by country name
+        $this->countries = Country::select('country')->orderBy('country')->get();
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' countries: '.json_encode($this->countries));
 
-        // insert if missing
-        $this->user = User::where('id', $this->user_id)->first(); // ✅ $this->user['id'] ❌ $this->user->id;
-        if (UserContact::where('user_id', $this->user_id)->count() == 0) {
-            Log::info(__FUNCTION__.' '.__LINE__.Auth::id().'zero found');
-            $this->user_contact = UserContact::create([
-                'user_id' => $this->user['id'],
-                'country_id' => 'ITA', // only a default
-                'first_name' => $this->user['name'],
-                'last_name' => $this->user['name'],
-                'email' => $this->user['email'],
-            ]);
-            Log::info(__FUNCTION__.' '.__LINE__.' new rec:'.$this->user_contact);
-        } else {
-            Log::info(__FUNCTION__.' '.__LINE__.' found:'.$this->user_id);
-        }
-        // find again or find new (some fields should be null)
         $this->user_contact = UserContact::where('user_id', $this->user_id)->first();
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' user_contact: '.json_encode($this->user_contact));
 
@@ -168,8 +154,10 @@ class Modify extends Component
     public function render()
     {
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        // countries list, sorted by country name
+        $this->countries = Country::select('country')->orderBy('country')->get();
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' countries: '.json_encode($this->countries));
 
-        // Log::info('Component ' . __CLASS__ . ' f:'. __FUNCTION__ . ' l:' . __LINE__ . ' tz:' . json_encode($this->timezone_list) );
         return view('livewire.user.contact.modify');
     }
 
@@ -212,6 +200,8 @@ class Modify extends Component
     public function update_user_contact()
     {
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        $this->user_contact = UserContact::where('user_id', $this->user_id)->first();
+
         // apply the rules
         $validated = $this->validate();
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' validated: '.json_encode($validated));
@@ -235,6 +225,7 @@ class Modify extends Component
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' validated: '.json_encode($validated));
 
         $this->user_contact->update($validated);
+        $this->user_contact->save();
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' user_contact: '.json_encode($this->user_contact));
 
         //

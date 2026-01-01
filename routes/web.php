@@ -25,10 +25,29 @@ require __DIR__.'/auth.php';
 
 // UserContact CRUD
 // C /user/contact/add is not needed - contact created at user registration
-// R /user/contact/list reserved for admin use only
+// R /user/contact/list
+Route::get('/user/contact/listed', User\Contact\Listed::class)
+    ->middleware(['auth', 'verified'])
+    ->name('user-contact-listed');
 Route::get('/user/contact/modify', User\Contact\Modify::class)
     ->middleware(['auth', 'verified'])
     ->name('user-contact-modify');
+Route::get('/user/contact/modify1/{uid?}', User\Contact\Modify1YouAre::class)
+    ->middleware(['auth', 'verified'])
+    ->name('user-contact-modify1');
+Route::get('/user/contact/modify2/{uid?}', User\Contact\Modify2PostAddress::class)
+    ->middleware(['auth', 'verified'])
+    ->name('user-contact-modify2');
+Route::get('/user/contact/modify3/{uid?}', User\Contact\Modify3Phones::class)
+    ->middleware(['auth', 'verified'])
+    ->name('user-contact-modify3');
+Route::get('/user/contact/modify4/{uid?}', User\Contact\Modify4Socials::class)
+    ->middleware(['auth', 'verified'])
+    ->name('user-contact-modify4');
+// Add federation required fields
+// Route::get('/user/contact/modify5/{fid}/{uid?}', User\Contact\Modify5Feds::class, ['fid', 'uid'])
+//     ->middleware(['auth', 'verified'])
+//     ->name('user-contact-modify5');
 // D /user/contact/remove is not needed - contact removed at user deletion
 
 // Federation CRUD

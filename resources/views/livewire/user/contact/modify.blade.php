@@ -1,13 +1,43 @@
 <div>
-    <h2 class="fyk mb-4">{{ __('Maintain updated your personal info') }}</h2>
-    <p class="small">It's our choice, we maintain user n password out of your personal information.</p>
+    <!-- header -->
+    <h2 class="fyk text-2xl mb-4">{{ __('Update your personal info') }}</h2>
+    <p class="small">{{ __("We use these info for your next Contest.")}} </p>
+    <hr class="my-4" />
+    <br />
+    <br />
+
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li class="alert alert-danger">{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+
+
+    <!-- nav bar here -->
 
     <form wire:submit="update_user_contact" enctype="multipart/form-data">
         @csrf
-
-        <div class="mb-4">
+        <!-- readonly -->
+        <div class="mb-4" data-yapcp="email">
+            <label class="block font-medium text-sm text-gray-700" for="email">
+                {{ __('yaPCP Verified Email') }} | 🔒
+            </label>
+            <input 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                type="email" name="email"
+                wire:model.live.debounce.500ms="email" 
+                readonly
+            />
+            <div class="small" id="cellularHelp">{{ __('Your email n password are key to entry.') }}</div>
+            <div class="small">@error('email') {{ $message }} @enderror</div>
+        </div>
+        <div class="mb-4" data-yapcp="user_id">
             <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="user_id">
-                {{ __('Internal code') }} | 🔒
+                {{ __('yaPCP assigned ID') }} | 🔒
             </label>
             <input 
                 class="text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -15,29 +45,15 @@
                 wire:model.fill="user_id"
                 readonly
                 />
-            <div class="small" id="cellularHelp">{{ __('As assigned id, that field must be readonly.') }}</div>
+            <div class="small" id="cellularHelp">{{ __("Your ID in yaPCP") }}</div>
             <div class="alert alert-danger small">@error('user_id') {{ $message }} @enderror</div>
         </div>
-
-        <div class="mb-4">
-            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="country_id">
-                {{ __('Country') }}
-            </label>
-            <select 
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                wire:model.live="country_id"
-                name="country_id" 
-                required="required"
-                >
-
-                @foreach ($countries as $country)
-                <option value="{{ trim($country->id) }}" {{ ($country->id === $country_id ) ? 'selected' : '' }}>{{ $country->country }}</option>
-                @endforeach
-            </select>
-            <div class="small">@error('country_id') {{ $message }} @enderror</div>
-        </div>
-
-        <div class="mb-4">
+        <br />
+        <hr class="my-4" />
+        <br />
+        <!-- 1st fieldset Name, last Name, country -->
+        <h3 class="fyk text-2xl mb-4">{{ __("🤵‍♀️ 🤵‍♂️ You are...") }}</h3>
+        <div class="mb-4" data-yapcp="first_name">
             <label class="block font-medium text-sm text-gray-700" for="first_name">
                 {{ __('First name') }}
             </label>
@@ -50,7 +66,7 @@
             <div class="small">@error('first_name') {{ $message }} @enderror</div>
         </div>
 
-        <div class="mb-4">
+        <div class="mb-4" data-yapcp="last_name">
             <label class="block font-medium text-sm text-gray-700" for="last_name">
                 {{ __('Last name') }}
             </label>
@@ -62,84 +78,24 @@
             />
             <div class="small">@error('last_name') {{ $message }} @enderror</div>
         </div>
-
-        <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="nick_name">
-                {{ __('Nickname') }}
-            </label>
-            <input 
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="nick_name"
-                wire:model.live.debounce.500ms="nick_name" 
-            />
-            <div class="small">@error('nick_name') {{ $message }} @enderror</div>
-        </div>
-
-        <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="email">
-                {{ __('Email') }} | 🔒
-            </label>
-            <input 
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="email" name="email"
-                wire:model.live.debounce.500ms="email" 
-                readonly
-            />
-            <div class="small" id="cellularHelp">{{ __('As your email is the key to enter here, that field must be readonly.') }}</div>
-            <div class="small">@error('email') {{ $message }} @enderror</div>
-        </div>
-
-        <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="cellular">
-                {{ __('Cellular international number') }}
-            </label>
-            <input 
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="tel" name="cellular"
-                wire:model.live.debounce.500ms="cellular" 
-                aria-describedby="cellularHelp"
-            />
-            <div class="small" id="cellularHelp">{{ __('Insert phone number even with international code, but without plus/+ or leading zeroes.') }}</div>
-            <div class="small">@error('cellular') {{ $message }} @enderror</div>
-        </div>
-
-        <div class="mb-4">
-            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="lang_local">
-                {{ __('Language code (for future use)') }}
-            </label>
-            <select 
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl" 
-                wire:model="lang_local"
-                name="lang_local" 
-                required="required
-                >
-                @foreach ($lang_list as $lang_code => $lang_lang)
-                <option value="{{ $lang_code }}" {{($lang_code == $lang_local) ? 'selected' : '' }} > {{ $lang_lang }}</option>
-                @endforeach
-            </select>
-            <div class="small">{{ __('When * marked, we need help to complete i18n. Help us.')}}</div>
-            <div class="small">@error('lang_local') {{ $message }} @enderror</div>
-        </div>
-
-        <!-- timezone -->
-        <div class="mb-4">
-            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl" for="timezone">
-                {{ __('Timezone') }}
+        <!-- From country -->
+        <div class="mb-4" data-yapcp="country_id">
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="country_id">
+                {{ __('From Country') }}
             </label>
             <select 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                wire:model="timezone"
-                name="timezone" 
+                wire:model.live="country_id"
+                name="country_id" 
                 required="required"
                 >
-                @foreach ($timezone_list as $k => $timezone_item)
-                <option value="{{ $timezone_item['id'] }}" {{ ($timezone_item['id'] == $timezone) ? 'selected' : '' }}> {{ $timezone_item['id'] }} </option>
+                @foreach ($countries as $country)
+                <option value="{{ trim($country->id) }}" {{ ($country->id === $country_id ) ? 'selected' : '' }}>{{ $country->country }}</option>
                 @endforeach
             </select>
-            <div class="small">{{ __('As worldwide platform we need to manage correctly time.') }} {{ __('List is in alphabetically order A>Z') }}</div>
-            <div class="small">@error('timezone') {{ $message }} @enderror</div>
+            <div class="small">@error('country_id') {{ $message }} @enderror</div>
         </div>
-
+        <!-- passport photo upload -->
         <div class="block mb-4">
             <label class="block font-medium text-sm text-gray-700" for="passport_photo_image">
                 {{ __('Passport Photo') }}
@@ -160,6 +116,19 @@
             <div class="small">@error('passport_photo_image') {{ $message }} @enderror</div>
         </div>
         <br style="clear:both;" />
+        <br />
+
+        <button type="submit" 
+            class="inline-flex items-center px-4 py-2 m-0 mt-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-3"
+            >
+            {{ __('Update') }}
+        </button>
+
+        <br />
+        <br />
+        <hr class="my-4" /> 
+        <h3 class="fyk text-2xl">{{ __("📨 International Posta address")}}</h3>
+        <p class="small mb-4">{{ __('Contest organizer need your postal address to send you the prizes if you win. Please be accurate.') }}</p>
         <div class="mt-4 mb-4">
             <label class="block font-medium text-sm text-gray-700" for="address">
                 {{ __('Address') }}
@@ -219,7 +188,10 @@
             />
             <div class="small">@error('postal_code') {{ $message }} @enderror</div>
         </div>
-
+        <br />
+        <hr class="my-4" />
+        <h3 class="fyk text-2xl mb-4">{{ __("💻💬 Other way to contact you")}}</h3>
+        <p class="small">{{ __("Facultative, sometimes useful")}}</p>
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="website">
                 {{ __('website') }}
@@ -279,6 +251,77 @@
             />
             <div class="small">@error('whatsapp') {{ $message }} @enderror</div>
         </div>
+
+        <br />
+        <hr class="my-4" />
+        <h3 class="fyk text-2xl mb-4">{{ __("🌍 Additional fields required from Federations")}}</h3>
+        <p class="small mb-4">{{ __('These fields are additional info required from important for correct localization of your account.') }}</p>
+
+        <!-- refactor-->  
+        <div class="mb-4" data-yapcp="nickname">
+            <label class="block font-medium text-sm text-gray-700" for="nick_name">
+                {{ __('Nickname') }}
+            </label>
+            <input 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                type="text" name="nick_name"
+                wire:model.live.debounce.500ms="nick_name" 
+            />
+            <div class="small">@error('nick_name') {{ $message }} @enderror</div>
+        </div>
+
+        <div class="mb-4">
+            <label class="block font-medium text-sm text-gray-700" for="cellular">
+                {{ __('Cellular international number') }}
+            </label>
+            <input 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                type="tel" name="cellular"
+                wire:model.live.debounce.500ms="cellular" 
+                aria-describedby="cellularHelp"
+            />
+            <div class="small" id="cellularHelp">{{ __('Insert phone number even with international code, but without plus/+ or leading zeroes.') }}</div>
+            <div class="small">@error('cellular') {{ $message }} @enderror</div>
+        </div>
+
+        <div class="mb-4">
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="lang_local">
+                {{ __('Language code (for future use)') }}
+            </label>
+            <select 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl" 
+                wire:model="lang_local"
+                name="lang_local" 
+                required="required
+                >
+                @foreach ($lang_list as $lang_code => $lang_lang)
+                <option value="{{ $lang_code }}" {{($lang_code == $lang_local) ? 'selected' : '' }} > {{ $lang_lang }}</option>
+                @endforeach
+            </select>
+            <div class="small">{{ __('When * marked, we need help to complete i18n. Help us.')}}</div>
+            <div class="small">@error('lang_local') {{ $message }} @enderror</div>
+        </div>
+
+        <!-- timezone -->
+        <div class="mb-4">
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl" for="timezone">
+                {{ __('Timezone') }}
+            </label>
+            <select 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                wire:model="timezone"
+                name="timezone" 
+                required="required"
+                >
+                @foreach ($timezone_list as $k => $timezone_item)
+                <option value="{{ $timezone_item['id'] }}" {{ ($timezone_item['id'] == $timezone) ? 'selected' : '' }}> {{ $timezone_item['id'] }} </option>
+                @endforeach
+            </select>
+            <div class="small">{{ __('As worldwide platform we need to manage correctly time.') }} {{ __('List is in alphabetically order A>Z') }}</div>
+            <div class="small">@error('timezone') {{ $message }} @enderror</div>
+        </div>
+
+
 
         @if ($errors->any())
             <div class="alert alert-danger">
