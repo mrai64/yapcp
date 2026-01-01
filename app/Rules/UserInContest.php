@@ -50,7 +50,7 @@ class UserInContest implements ValidationRule
             $check = ContestParticipant::where('contest_id', $this->contest_id)
                 ->where('user_id', $value)->count();
             if ($check === 0) {
-                $fail('🟥 Not found');
+                $fail('🟥 Not found', null);
             }
 
             Log::info('ValidationRule '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' ✅ ok found');
