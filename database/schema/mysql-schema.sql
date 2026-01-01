@@ -624,6 +624,27 @@ CREATE TABLE `pcp_user_contacts` (
   CONSTRAINT `pcp_user_contacts_timezone_foreign` FOREIGN KEY (`timezone`) REFERENCES `pcp_timezones` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`Sql1515403`@`localhost`*/ /*!50003 TRIGGER `update_user_email_on_contact_change` BEFORE UPDATE ON `pcp_user_contacts` FOR EACH ROW BEGIN
+                IF OLD.email <> NEW.email THEN
+                    UPDATE `pcp_users`
+                    SET `email` = NEW.email
+                    WHERE `email` = OLD.email;
+                END IF;
+            END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 DROP TABLE IF EXISTS `pcp_user_roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -1007,3 +1028,10 @@ INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (194,'2025_12_0
 INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (195,'2025_12_08_113533_add_idx_to_regions_table',110);
 INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (196,'2025_12_08_113617_add_idx_to_timezones_table',111);
 INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (198,'2025_12_12_160530_add_idx_fifth_to_works_table',112);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (202,'2025_12_26_174057_create_federation_additional_field_names_table',113);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (203,'2025_12_26_185529_create_federation_additionals_table',114);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (204,'2025_12_26_193012_add_idx_to_federation_additional_field_names_table',115);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (205,'2025_12_28_134139_add_trigger_to_user_contacts_table',116);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (206,'2025_12_29_140820_add_col_to_federation_additional_field_names_table',117);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (207,'2026_01_01_165513_remove_federation_additionals_table',118);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (208,'2026_01_01_165532_remove_federation_additionals_field_names_table',118);
