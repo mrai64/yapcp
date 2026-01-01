@@ -6,35 +6,12 @@
 
 ?>
 
-<div >
-    @if (session('success'))
-    <div class="float-end font-medium rounded-md px-4 py-2">
-        {{ session('success') }}
-    </div>
-    @endif
-
-    <h3 class="fyk font-semibold text-2xl text-gray-800 leading-tight">{{ __("User dashboard / Your roles") }}</h3>
-
-    <div class="inline-flex h-16 w-auto sm:px-6 lg:px-8">
-        <a href="{{ route('add-user-role-organization') }}">
-        [ {{ __("Add a role in existing Organization") }} ]
-        </a>
-        &nbsp;.&nbsp;.&nbsp;
-        <a href="{{ route('add-organization') }}">
-            [ {{ __("Add Your Organization") }} ]
-        </a>
-        &nbsp;.&nbsp;.&nbsp;
-        <a href="{{ route('add-user-role-federation') }}">
-            [ {{ __("Add a role in existing Federation") }} ]
-        </a>
-        &nbsp;.&nbsp;.&nbsp;
-        <a href="{{ route('add-federation') }}">
-            [ {{ __("Add Your Federation") }} ]
-        </a>
-    </div>
-
-    <hr />
+<div>
     @if (isset($user_role_list) && (count($user_role_list) > 0))
+    <h2 class="fyk font-semibold text-2xl text-gray-800 leading-tight">
+        {{ __("Your roles in") }}
+    </h2>
+    <hr />
     <ul>
         @foreach($user_role_list as $role)
         <li class="my-2 p-4 font-medium">
@@ -124,13 +101,15 @@
     <div class="border text-sm rounded-md px-4 py-2">
         {{ __('Please: for any variation, maintain updated your Roles data.') }}
     </div>
+
     @else
-    <div class="border text-xl rounded-md px-4 py-2">
-        {{ __('No role found in any organization, federation, contest, but you can add one, in case.') }}
+    <div class="border rounded-md px-4 py-2">
+        {{ __('No role found 4 you in any organization, federation, contest, but you can add one, in case.') }}
         <br />
         <strong>
-            {{ __("If it's your first entry, before any other op use Update your personal info.") }}
+            {{ __("First, Update your contact info.") }}
         </strong>
+        {{ __("Then update your role in organization, or insert organization or add works in your depot") }}
     </div>
     @endif
 </div>

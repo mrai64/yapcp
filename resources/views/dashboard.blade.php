@@ -14,32 +14,65 @@ use Illuminate\Support\Facades\Auth;
             {{ __('Personal Dashboard') }}
         </h2>
     </x-slot>
-
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        <h3 class="mb-4 sm:px-6 lg:px-8">
-            <a href="{{ route('user-contact-modify') }}">
-            [ {{ __("Update your personal Contact info") }} ]
+        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
+            <a href="{{ route('user-contact-modify1') }}">
+            [ {{ __("Your Contact info") }} ]
             </a>
-            . .
+        </div>
+        . .
+        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
             <a href="{{ route('photo-box-list') }}">
             [ {{ __("Your Uffizi' Gallery") }} ]
             </a>
-            . . 
+        </div>
+        . .
+        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
             <!-- Open Contest list -->
             <a href="{{ route('contest-list') }}">
-            [ {{ __("Contest List Open to participate") }} ]
+            [ {{ __("Contest Open ") }} ]
             </a>
-            . .
+        </div>
+        . .
+        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
             <a href="{{ route('organization-list') }}">
             [ {{ __("Organization List") }} ]
             </a>
-            . .
+        </div>
+        . .
+        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
             <a href="{{ route('federation-list') }}">
-            [ {{ __("Federation List") }} ]
+                [ {{ __("Federation List") }} ]
             </a>
-            . .
-        </h3>
-
+        </div>
+        . .
+        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
+            <a href="{{ route('add-user-role-organization') }}">
+            [ {{ __("Add in Organization") }} ]
+            </a>
+        </div>
+        . .
+        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
+            <a href="{{ route('add-organization') }}">
+                [ {{ __("Add New Organization") }} ]
+            </a>
+        </div>
+        . .
+        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
+            <a href="{{ route('add-user-role-federation') }}">
+                [ {{ __("Add in Federation") }} ]
+            </a>
+        </div>
+        . .
+        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
+            <a href="{{ route('add-federation') }}">
+                [ {{ __("Add New Federation") }} ]
+            </a>
+        </div>
+        . .
+        <br style="clear:both;" /> 
+        <hr class="my-4" />
+        
         <!-- user roles -->
         <section name="user_roles" >
             <livewire:user.role.listed />
