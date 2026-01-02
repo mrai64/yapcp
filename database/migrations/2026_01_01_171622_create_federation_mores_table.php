@@ -31,6 +31,9 @@ return new class extends Migration
             $table->string('field_default_value')
                 ->default('')
                 ->comment('empty string as default default value');
+            $table->string('field_suggest')
+                ->default('')
+                ->comment('message to explain what insert');
             // for incremental backup and softdelete
             $table->dateTime('created_at')->useCurrent(); // no timestamps
             $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate();
