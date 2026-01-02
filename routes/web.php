@@ -45,9 +45,10 @@ Route::get('/user/contact/modify4/{uid?}', User\Contact\Modify4Socials::class)
     ->middleware(['auth', 'verified'])
     ->name('user-contact-modify4');
 // Add federation required fields
-// Route::get('/user/contact/modify5/{fid}/{uid?}', User\Contact\Modify5Feds::class, ['fid', 'uid'])
-//     ->middleware(['auth', 'verified'])
-//     ->name('user-contact-modify5');
+// try https://yapcp.test/user/contact/modify5/FIAF/019b519e-129d-73d4-ba13-ba922a8aeb85
+Route::get('/user/contact/modify5/{fid}/{uid?}', User\Contact\Modify5Feds::class, ['fid', 'uid'])
+    ->middleware(['auth', 'verified'])
+    ->name('user-contact-modify5');
 // D /user/contact/remove is not needed - contact removed at user deletion
 
 // Federation CRUD
