@@ -33,16 +33,16 @@ sta un elemento "Struttura". VA USATO.
 
 ### Nuove note
 
-**Nuove note**: non vanno più inserite in questo file ma va aperta una
-richiesta nella [pagina](https://github.com/users/mrai64/projects/1) (privata) github dei progetti.
+**Nuove note**: Vista la novità del *progetto*, non vanno più inserite in questo file ma va aperta una
+richiesta issue nella [pagina](https://github.com/users/mrai64/projects/1) (privata) github dei progetti.
 usare un prefisso fix: per i problemi da sistemare, feat: per le cose da fare
 comprese le migliorie. Poche parole per dare un argomento e un \[id: aaaa-mm-gg.nn].
-C'è una colonna open id, va compilata con lo stessi id aaaa-mm-gg.nn dove
-nn è un progressivo che ogni giorno parte da 01. Colonna assegnata a, ovviamente a me per ora.
+C'è una colonna *open id*, va compilata con lo stessi id *aaaa-mm-gg.nn* dove
+nn è un progressivo sempre di 2 cifre che ogni giorno parte da 01. Colonna *assegnata a*, ovviamente a me per ora.
 Status Todo o in progress o Done. Done viene assegnato automaticamente quando vene chiusa la richiesta.
 
 **Branch**: La nuova nota può anche coincidere con l'apertura di un branch dedicato
-all'attività, farlo in previsione di uno sviluppo lungo e che può intralciare altre attività.
+all'attività, farlo in previsione di uno sviluppo lungo e che può intralciare altre attività. Per ora faccio una cosa alla volta e questo toglie l'esigenza...
 
 ## Indice generale
 
@@ -56,7 +56,7 @@ Php, laravel e livewire sono usati per avvantaggiarmi ma li sto imparando facend
 alcune funzioni realizzate potrebbero avere delle parti di laravel e livewire
 che le agevolano ma le devo imparare.
 
-Attività da ribaltare in Project.
+Attività da ribaltare in Project. Viene usato anche uno standard ABCDE:
 
 ## (A)(B) Alta priorità
 
