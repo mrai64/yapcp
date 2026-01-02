@@ -6,7 +6,7 @@
 
 namespace App\Livewire\User\Contact;
 
-use App\Models\FederationAdditionalFieldName;
+use App\Models\FederationMore;
 use App\Models\UserContact;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -92,18 +92,18 @@ class Modify4Socials extends Component
 
         $this->user_contact->save();
 
-            $firstFed = FederationAdditionalFieldName::orderBy('federation_id', 'asc')->first();
+        $firstFed = FederationMore::orderBy('federation_id', 'asc')->first();
 
-            // no additional fields at all
-            if ($firstFed === null) {
-                return redirect()
-                    ->with('success', __("'Personal pages updated successfully.'"))
-                    ->route('user-contact-modify1', ['uid' => $this->user_contact->user_id]);
-            }
-
-            // additional fields form for first federation id
+        // no additional fields at all
+        if ($firstFed === null) {
             return redirect()
                 ->with('success', __("'Personal pages updated successfully.'"))
-                ->route('user-contact-modify5', ['fid' => $firstFed->federation_id, 'uid' => $this->user_contact->user_id]);
+                ->route('user-contact-modify1', ['uid' => $this->user_contact->user_id]);
+        }
+
+        // additional fields form for first federation id
+        return redirect()
+            ->with('success', __("'Personal pages updated successfully.'"))
+            ->route('user-contact-modify5', ['fid' => $firstFed->federation_id, 'uid' => $this->user_contact->user_id]);
     }
 }

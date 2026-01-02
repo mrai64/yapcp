@@ -15,8 +15,6 @@ use App\Models\UserContactMore;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
-use function PHPUnit\Framework\isNull;
-
 class Modify5Feds extends Component
 {
     public string $federation_id;
@@ -24,6 +22,7 @@ class Modify5Feds extends Component
     public $federation;
 
     public string $user_contact_user_id;
+
     public $user_contact;
 
     public array $formData = [];
@@ -51,7 +50,7 @@ class Modify5Feds extends Component
             'field_validation_rules',
             'field_default_value',
             'field_suggest',
-            ])
+        ])
             ->where('federation_id', $this->federation_id)
             ->orderBy('field_label')->get();
 
@@ -80,15 +79,16 @@ class Modify5Feds extends Component
      *
      * As that are "more" user_contact data, all fields are
      * 'sometimes'
-     * 
+     *
      * @return void
      */
     public function rules()
     {
         $rules_array = [];
-        foreach($this->formField as $f){
-            $rules_array['formData.' . $f['field_name']] = 'sometimes|'.$f['field_validation_rules'];
+        foreach ($this->formField as $f) {
+            $rules_array['formData.'.$f['field_name']] = 'sometimes|'.$f['field_validation_rules'];
         }
+
         return $rules_array;
     }
 
@@ -96,9 +96,10 @@ class Modify5Feds extends Component
     public function attributes()
     {
         $attributes = [];
-        foreach($this->formField as $f){
-            $attributes['formData.' . $f['field_name']] = $f['field_label'];
+        foreach ($this->formField as $f) {
+            $attributes['formData.'.$f['field_name']] = $f['field_label'];
         }
+
         return $attributes;
     }
 
@@ -107,9 +108,9 @@ class Modify5Feds extends Component
      *
      * As all fields are not required, when a data is in
      * the input must be updated or created in user_contact_mores
-     * But to delete record in user_contact_mores ? 
+     * But to delete record in user_contact_mores ?
      * delete button for field? Or insert a default value?
-     * 
+     *
      * @return void
      */
     public function updateUserContactMore()
@@ -120,14 +121,14 @@ class Modify5Feds extends Component
         // not the best but... for few record acceptable
         foreach ($validated as $key => $value) {
             ds('KV: '.$key.' / '.$value);
-            foreach($this->formField as $field){
-                ds('check ff:'. $field['field_name']);
+            foreach ($this->formField as $field) {
+                ds('check ff:'.$field['field_name']);
                 if ($field['field_name'] === $key) {
-                    ds('for: '.$key.' val:'.$field['field_default_value'] .' vs. '. $value);
+                    ds('for: '.$key.' val:'.$field['field_default_value'].' vs. '.$value);
                     if ($field['field_default_value'] !== $value) {
                         $set = UserContactMore::updateOrCreate(
-                            [ 'user_contact_user_id' => $this->user_contact_user_id, 'federation_id' => $this->federation_id, 'field_name' => $key ],
-                            [ 'field_value' => $value ]
+                            ['user_contact_user_id' => $this->user_contact_user_id, 'federation_id' => $this->federation_id, 'field_name' => $key],
+                            ['field_value' => $value]
                         );
                     } else {
                         $set = UserContactMore::where('user_contact_user_id', $this->user_contact_user_id)->where('federation_id', $this->federation_id)->where('field_name', $key)->delete();
@@ -136,7 +137,7 @@ class Modify5Feds extends Component
             }
         }
 
-        session()->flash('success', __("Successful data updated"));
-        $this->resetErrorBag(); 
+        session()->flash('success', __('Successful data updated'));
+        $this->resetErrorBag();
     }
 }
