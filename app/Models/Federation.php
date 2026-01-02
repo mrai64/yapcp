@@ -15,7 +15,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 
@@ -69,14 +68,15 @@ class Federation extends Model
         return $f_list;
     }
 
+    // REALATIONSHIPS
+
     // federation         = Federation::find('FIAP');
     // federation_country = Federation::find('FIAP')->country;
-    public function country(): HasOne
+    public function country()
     {
         // Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in:'.json_encode($this));
-        $country_ = $this->hasOne(Country::class, 'id', 'country_id');
-        // . . . . . . . . . . . . . . . countries.id   federation.country_id
+        $country_ = $this->belongsTo(Country::class);
         Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($country_));
 
         return $country_;
