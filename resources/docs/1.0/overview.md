@@ -2,7 +2,7 @@
 
 ---
 
-- [📚 Index](./index.md)
+- [📚 Index](/{{route}}/{{version}}/index)
 
 ## First Visit? What is yaPCP?
 
@@ -24,6 +24,9 @@ Because contest have winners.
 
 ![yaPCP mark](/docs/overview_favicon.png)
 
+WARN: 💬 That docs are based on dev version so base address is <http://yapcp.test/>,  
+when i put "in production" the base address change.
+
 ---
 
-Now follow the [📚 Index](./index.md) link.
+First step: [Registration on yaPCP](/{{route}}/{{version}}/users/registration)
