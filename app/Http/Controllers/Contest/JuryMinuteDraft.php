@@ -2,6 +2,8 @@
 
 /**
  * Build Jury Miniature at ending of jury works
+ *
+ * scope: download A4 pdf
  */
 
 namespace App\Http\Controllers\Contest;
@@ -21,9 +23,8 @@ use Spatie\LaravelPdf\Facades\Pdf;
 class JuryMinuteDraft extends Controller
 {
     // build the draft of the jury minute
-    public function buildMinute(string $cid)
+    public function buildMinute(string $cid) // route
     {
-
         Log::info('Controller '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called w/input: '.$cid);
         $contest_id = $cid;
         $contest = Contest::where('id', $contest_id)->firstOrFail();
