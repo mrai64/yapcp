@@ -28,8 +28,6 @@ class Fiaf1Participants extends Controller
     /**
      * Undocumented function
      *
-     * @param string $cid
-     * @param string $fid
      * @return void
      */
     public function export(string $cid, string $fid) // route

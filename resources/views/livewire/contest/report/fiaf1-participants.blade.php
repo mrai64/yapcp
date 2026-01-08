@@ -23,8 +23,10 @@
             <td style="font-size:9px;font-weight:bold;">Autore email</td>
             <td style="font-size:9px;font-weight:bold;">onorificenza</td>
             <!-- for every section/theme -->
-            <td style="font-size:9px;font-weight:bold;">sezione 1 -partecipazione</td>
-            <td style="font-size:9px;font-weight:bold;">sezione 1 - numero opere ammesse</td>
+            @foreach ($contest->sections as $section)
+            <td style="font-size:9px;font-weight:bold;">Section {{$section->code}} - {{$section->name_en}} - Partecipazione </td>
+            <td style="font-size:9px;font-weight:bold;">Section {{$section->code}} - {{$section->name_en}} - Numero Ammissioni </td>
+            @endforeach 
             <!--/for every section/theme -->
         </tr>
         @foreach($excel_rows as $part)
@@ -40,10 +42,10 @@
             <td>{{$part['region']}}</td>
             <td><a href="mailto:{{$part['email']}}">{{$part['email']}}</a></td>
             <td>{{$part['fed_fiafDistinctions']}}</td>
-            <!-- for every section/theme -->
-            <td>sezione 1 -partecipazione</td>
-            <td>sezione 1 - numero opere ammesse</td>
-            <!--/for every section/theme -->
+            @foreach ($contest->sections as $section)
+            <td style="font-size:9px;font-weight:bold;text-align:center;"> {{$part['sez_'.$section->code.'_has']}}</td>
+            <td style="font-size:9px;font-weight:bold;text-align:center;"> {{$part['sez_'.$section->code.'_admit']}}</td>
+            @endforeach 
         </tr>
         @endforeach
         <tr>

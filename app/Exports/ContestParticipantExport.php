@@ -4,10 +4,7 @@ namespace App\Exports;
 
 use App\Models\Contest;
 use App\Models\ContestParticipant;
-use App\Models\ContestSection;
 use App\Models\FederationMore;
-use App\Models\UserContact;
-use App\Models\UserContactMore;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
@@ -36,7 +33,7 @@ class ContestParticipantExport implements FromView
         $this->federation_id = $fid;
 
         // 1. 2. pick contest n contest_sections
-        $this->contest = Contest::with(['sections' => function($q){
+        $this->contest = Contest::with(['sections' => function ($q) {
             $q->orderBy('code');
         }])->find($this->contest_id);
         $contest = $this->contest;
@@ -56,23 +53,23 @@ class ContestParticipantExport implements FromView
             ->where('contest_id', $this->contest_id)
             ->with([
                 'contact',
-                'works' => function($q) use ($cid){
-                    $q->whereHas('section', fn($s) => $s->where('contest_id', $cid))
+                'works' => function ($q) use ($cid) {
+                    $q->whereHas('section', fn ($s) => $s->where('contest_id', $cid))
                         ->select('id', 'user_id', 'section_id', 'is_admit');
                 },
                 'works.section:id,code',
-                'contactMores' => function($q) use ($fid) {
+                'contactMores' => function ($q) use ($fid) {
                     $q->where('federation_id', $fid);
-                }
+                },
             ])
             ->get()
             ->keyBy('user_id');
         ds('fparticipants for cid:'.$cid.' & fid:'.$fid);
         ds($this->participants);
 
-        // At last, the lego building bicks 
-        $this->excel_rows = $this->participants->map(function ($participant) use ($contest, $federation_mores) {
-            
+        // At last, the lego building bicks
+        $this->excel_rows = $this->participants->map(function ($participant) {
+
             // participants info - see view/blade
             $row = [
                 'user_id' => $participant->user_id,
@@ -89,13 +86,15 @@ class ContestParticipantExport implements FromView
             // --- Logica Query 3 (Conteggi e Ammissioni per Sezione) ---
             // Raggruppiamo le opere caricata per codice sezione
             $worksBySection = $participant->works->groupBy('section.code');
-            
+
             foreach ($this->contest->sections as $section) {
                 $works = $worksBySection->get($section->code, collect());
-                
-                $row["sez_{$section->code}_count"] = $works->count();
-                $row["sez_{$section->code}_admit"] = $works->sum('is_admit');
+
+                $row["sez_{$section->code}_has"] = $works->count() ? 'S' : 'N'; // Y/N in italian
+                $row["sez_{$section->code}_admit"] = $works->sum('is_admit') ? $works->sum('is_admit') : ''; // void when 0
             }
+            // $row["sez_{$section->code}_count"] = $works->count();
+            // $row["sez_{$section->code}_admit"] = $works->sum('is_admit');
 
             // --- Logica Query 4 (Dati Federazione con Default) ---
             // Mappiamo i valori custom dell'utente per accesso rapido
@@ -104,7 +103,7 @@ class ContestParticipantExport implements FromView
             foreach ($this->federation_mores as $field) {
                 // Logica COALESCE: se l'utente ha il valore, usa quello, altrimenti il default
                 $valore = $userValues->get($field->field_name, $field->field_default_value);
-                
+
                 $row["fed_{$field->field_name}"] = $valore;
             }
 

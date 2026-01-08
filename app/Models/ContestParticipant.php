@@ -136,6 +136,7 @@ class ContestParticipant extends Model
 
         return $user_contact_more;
     }
+
     public function contactMores()
     {
         //                       user_contact_mores.user_contact_user_id contest_participants.user_id
