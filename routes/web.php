@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Contest\JuryMinuteDraft;
+use App\Http\Controllers\Contest\Report\Fiaf1Participants;
+use App\Http\Controllers\ExcelUser;
 use App\Livewire\Contest;
 use App\Livewire\Federation;
 use App\Livewire\Juror;
@@ -240,11 +242,16 @@ Route::get('/organization/award-assign/section/{sid}', Organization\Award\Sectio
 Route::get('/organization/award-assign/contest/{cid}', Organization\Award\ContestAssign::class, ['cid'])
     ->middleware(['auth', 'verified'])
     ->name('organization-award-contest-assign');
-// Contest live - build the draft of the jury minute
 
+// Contest live - build the draft of the jury minute
 Route::get('/organization/award-assign/jury-minute/{cid}', [JuryMinuteDraft::class, 'buildMinute'], ['cid'])
     ->middleware(['auth', 'verified'])
     ->name('organization-award-minute-draft');
+
 // Contest live - reports - no auth required - public access
 Route::get('/organization/reports/works-participant/{cid}', Organization\Reports\WorksParticipant::class, ['cid'])
     ->name('organization-reports-works-participant');
+
+// EXCEL TEST
+Route::get('contest/export/{cid}/{fid}', [Fiaf1Participants::class, 'export'], ['cid', 'fid']);
+Route::get('users/export', [ExcelUser::class, 'export']);

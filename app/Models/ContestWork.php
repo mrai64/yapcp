@@ -154,7 +154,7 @@ class ContestWork extends Model
     public function contest()
     {
         Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $contest = $this->hasOne(Contest::class, 'id', 'contest_id');
+        $contest = $this->belongsTo(Contest::class);
         // . . . . . . . . . . . . . . . .contest.id  contest_works.contest_id
         Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' contest_section:'.json_encode($contest));
 
@@ -165,6 +165,17 @@ class ContestWork extends Model
      * @return ContestSection contest_works.section_id 1:1 contest_sections.id
      */
     public function contest_section()
+    {
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' section_id:'.json_encode($this->section_id));
+        $contest_section = $this->hasOne(ContestSection::class, 'id', 'section_id');
+        // . . . . . . . . . . . . . . .contest_sections.id  contest_works.section_id
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' contest_section:'.json_encode($contest_section));
+
+        return $contest_section;
+    }
+
+    public function section()
     {
         Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' section_id:'.json_encode($this->section_id));

@@ -1,11 +1,14 @@
 <?php
 
 /**
- * Contest users participants
+ * Contest (users) participants
  *
  * 2025-10-10 created an auxiliary table contest_participants_fee_payment_completes_sets to manage
  *            previously value of valid_YN[]
  * 2025-10-11 add Gates n Policy
+ * 2026-01-06 relationship review
+ * 1:1 contest_participants.contest_id > contests.id
+ * 1:1 contest_participants.user_id > user_contacts.user_id
  */
 
 namespace App\Models;
@@ -52,12 +55,15 @@ class ContestParticipant extends Model
 
     // GETTERS
     /**
+     * ...order by country, last, first name
+     *
      * @param  $contest_id  - uuid fk contests.id
      * @return array<string, string>
      */
     public static function get_participant_list(string $contest_id): array
     {
         Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        // ! USE RELATIONSHIP
         $participant_list = [];
 
         $participants = self::where('contest_id', $contest_id)->get();
@@ -87,5 +93,54 @@ class ContestParticipant extends Model
         Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' exit participant_list:'.json_encode($participant_list));
 
         return $participant_list;
+    }
+
+    // RELATIONSHIP
+
+    public function contest_works()
+    {
+        //                    contest_works.user_id contest_participants.user_id
+        $contest_works = $this->hasMany(ContestWork::class, 'user_id', 'user_id');
+
+        return $contest_works;
+    }
+
+    public function works()
+    {
+        //                    contest_works.user_id contest_participants.user_id
+        $contest_works = $this->hasMany(ContestWork::class, 'user_id', 'user_id');
+
+        return $contest_works;
+    }
+
+    public function user_contact()
+    {
+        //                     user_contacts.user_id contest_participants.user_id
+        $user_contact = $this->belongsTo(UserContact::class, 'user_id', 'user_id');
+
+        return $user_contact;
+    }
+
+    public function contact()
+    {
+        //                     user_contacts.user_id contest_participants.user_id
+        $user_contact = $this->belongsTo(UserContact::class, 'user_id', 'user_id');
+
+        return $user_contact;
+    }
+
+    public function user_contact_more()
+    {
+        //                       user_contact_mores.user_contact_user_id contest_participants.user_id
+        $user_contact_more = $this->hasMany(UserContactMore::class, 'user_contact_user_id', 'user_id');
+
+        return $user_contact_more;
+    }
+    public function contactMores()
+    {
+        //                       user_contact_mores.user_contact_user_id contest_participants.user_id
+        $user_contact_more = $this->hasMany(UserContactMore::class, 'user_contact_user_id', 'user_id');
+
+        return $user_contact_more;
     }
 }

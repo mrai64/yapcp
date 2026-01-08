@@ -10,6 +10,18 @@
  *            into so named circuit. A circuit have a contest record without
  *            section and jury. A circuit record
  * 2025-10-22 Created an auxiliary table and add col vote_rule
+ *
+ * relations
+ * 1:1 contests.country_id > countries.id
+ * 1:1 contests.organization_id > organizations.id
+ * N:1 contests.circuit_id > contests.id (with is_circuit == 1)
+ * 1:N contests.id < contest_awards.contest_id
+ * 1:N contests.id < contest_participants.contest_id
+ * 1:N contests.id < contest_sections.contest_id
+ * 1:N contests.id < contest_votes.contest_id
+ * 1:N contests.id < contest_waitings.contest_id
+ * 1:N contests.id < contest_works.contest_id
+ * 1:N contests.id < user_roles.contest_id
  */
 
 namespace App\Models;
@@ -133,10 +145,10 @@ class Contest extends Model
     /**
      * @return Country contests.country_id 1:1 countries.id
      */
-    public function country(): HasOne
+    public function country()
     {
         Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $country = $this->hasOne(Country::class, 'id', 'country_id');
+        $country = $this->belongsTo(Country::class);
         Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out ');
 
         return $country;
