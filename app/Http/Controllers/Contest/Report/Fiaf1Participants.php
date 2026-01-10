@@ -9,7 +9,7 @@
 
 namespace App\Http\Controllers\Contest\Report;
 
-use App\Exports\ContestParticipantExport;
+use App\Exports\Fiaf1ParticipantsExport;
 use App\Http\Controllers\Controller;
 use App\Models\Contest;
 use App\Models\Federation;
@@ -40,6 +40,6 @@ class Fiaf1Participants extends Controller
             abort(403);
         }
 
-        return Excel::download(new ContestParticipantExport($cid, $fid), 'fiaf_participants.xlsx');
+        return Excel::download(new Fiaf1ParticipantsExport($cid, $fid), 'fiaf_participants.xlsx');
     }
 }

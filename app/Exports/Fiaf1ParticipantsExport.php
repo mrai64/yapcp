@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Federation: FIAF
+ * Report : Partecipanti e Ammessi
+ */
+
 namespace App\Exports;
 
 use App\Models\Contest;
@@ -8,7 +13,7 @@ use App\Models\FederationMore;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
-class ContestParticipantExport implements FromView
+class Fiaf1ParticipantsExport implements FromView
 {
     // data to be passed to view
     protected string $contest_id;
