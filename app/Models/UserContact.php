@@ -154,32 +154,52 @@ class UserContact extends Model
 
     // RELATIONSHIP
 
+    /**
+     * Relation UserContact >> User
+     *
+     * @return User user_contacts.user_id users.id
+     */
     public function user()
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         $user = $this->belongsTo(User::class);
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' user:'.json_encode($user));
 
         return $user;
     }
 
-    // user_contact->country->country_flag
+    /**
+     * Relation UserContact >> Country
+     *
+     * @return Country user_contacts.country_id countries.id
+     *                 user_contact->country->country_flag
+     */
     public function country()
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         $country = $this->hasOne(Country::class, 'id', 'country_id');
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' country:'.json_encode($country));
 
         return $country;
     }
 
-    // user_contact->juries
+    /**
+     * Relation UserContact >> ContestJury 1:N
+     *
+     * @return ContestJury user_contacts.user_id contest_juries.user_contact_id
+     */
     public function juries()
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         $juries = $this->hasMany(ContestJury::class, 'user_contact_id', 'user_id');
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' juries:'.json_encode($juries));
 
         return $juries;
+    }
+
+    /**
+     * Relation userContact >> UserContactMore 1:N
+     *
+     * @return UserContactMore user_contacts.user_id user_contacts_more.user_id
+     */
+    public function contactMores()
+    {
+        $contactMores = $this->hasMany(UserContactMore::class, 'user_contact_user_id', 'user_id');
+
+        return $contactMores;
     }
 }

@@ -21,11 +21,11 @@
             <td style="font-size:9px;font-weight:bold;text-align:center;width:166px">Autore Città</td>
             <td style="font-size:9px;font-weight:bold;text-align:center;width:69px">Autore Provincia Indirizzo</td>
             <td style="font-size:9px;font-weight:bold;text-align:center;width:120px">Autore email</td>
-            <td style="font-size:9px;font-weight:bold;text-align:center;width: 120px;">onorificenza</td>
+            <td style="font-size:9px;font-weight:bold;text-align:center;width:120px">onorificenza</td>
             <!-- for every section/theme -->
             @foreach ($contest->sections as $section)
-            <td style="font-size:9px;font-weight:bold;text-align:center;width:120px;">  {{$section->name_en}} - Partecipazione - {{$section->code}}</td>
-            <td style="font-size:9px;font-weight:bold;text-align:center;width:120px;"> {{$section->name_en}} - Numero Ammissioni - {{$section->code}}</td>
+            <td style="font-size:9px;font-weight:bold;text-align:center;width:120px">  {{$section->name_en}} - Partecipazione - {{$section->code}}</td>
+            <td style="font-size:9px;font-weight:bold;text-align:center;width:120px"> {{$section->name_en}} - Numero Ammissioni - {{$section->code}}</td>
             @endforeach 
             <!--/for every section/theme -->
         </tr>

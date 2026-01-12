@@ -72,7 +72,7 @@ class Fiaf1ParticipantsExport implements FromView
         ds('fparticipants for cid:'.$cid.' & fid:'.$fid);
         ds($this->participants);
 
-        // At last, the lego building bicks
+        // At last, the lego building blocks
         $this->excel_rows = $this->participants->map(function ($participant) {
 
             // participants info - see view/blade

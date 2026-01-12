@@ -40,6 +40,6 @@ class Fiaf1Participants extends Controller
             abort(403);
         }
 
-        return Excel::download(new Fiaf1ParticipantsExport($cid, $fid), 'fiaf_participants.xlsx');
+        return Excel::download(new Fiaf1ParticipantsExport($cid, $fid), 'fiaf_partecipanti_ammissioni.xlsx');
     }
 }

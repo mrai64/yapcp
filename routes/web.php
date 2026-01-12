@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Contest\JuryMinuteDraft;
 use App\Http\Controllers\Contest\Report\Fiaf1Participants;
+use App\Http\Controllers\Contest\Report\Fiaf2WorksController;
 use App\Livewire\Contest;
 use App\Livewire\Federation;
 use App\Livewire\Juror;
@@ -253,5 +254,7 @@ Route::get('/organization/reports/works-participant/{cid}', Organization\Reports
 
 // EXCEL TEST
 Route::get('contest/export/{cid}/{fid}', [Fiaf1Participants::class, 'export'], ['cid', 'fid']);
-// FIAF report export - participants
+// FIAF report export - author participants
 Route::get('contest/export/FIAF1/{cid}/{fid}', [Fiaf1Participants::class, 'export'], ['cid', 'fid']);
+// FIAF report export - works participants
+Route::get('/contest/export/FIAF2/{cid}/{fid}', [Fiaf2WorksController::class, 'exportFiaf2Works'], ['cid', 'fid']);

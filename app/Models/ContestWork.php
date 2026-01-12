@@ -24,7 +24,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Log; // Log::info
+use Illuminate\Support\Facades\Log; // //dbg Log::info
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str; //         pk uuid
 
@@ -64,7 +64,6 @@ class ContestWork extends Model
     // pk uuid
     public static function booted()
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         static::creating(function ($model) {
             $model->id = Str::uuid7(); // uuid generator
         });
@@ -72,7 +71,6 @@ class ContestWork extends Model
 
     protected function casts()
     {
-        // Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__.' called');
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -81,17 +79,6 @@ class ContestWork extends Model
     }
 
     // GETTERS
-    /**
-     * Miniature path+name
-     * img:       name
-     * miniature: 300px_name
-    public function miniature(): string
-    {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-
-        return $this->contest_id.'/'.$this->section_id.'/300px_'.$this->work_id.$this->extension;
-    }
-     */
 
     /**
      * Check if a path/namefile has a twin path/300px_namefile, otherwise
@@ -103,23 +90,23 @@ class ContestWork extends Model
      */
     public function miniature(string $original_file = ''): string
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        // dbg Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         if ($original_file === '') {
             $original_file = $this->contest_id.'/'.$this->section_id.'/300px_'.$this->work_id.$this->extension;
         }
         $last_slash_pos = strrpos($original_file, '/');
         $path = substr($original_file, 0, $last_slash_pos + 1);
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' path:'.$path);
+        // dbg Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' path:'.$path);
 
         $name_file = '300px_'.substr($original_file, $last_slash_pos + 1);
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' name:'.$name_file);
+        // dbg Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' name:'.$name_file);
 
         if (Storage::disk('public')->exists('contests/'.$path.$name_file)) {
-            Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' found');
+            // dbg Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' found');
 
             return $path.$name_file;
         }
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' not found');
+        // dbg Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' not found');
 
         return $original_file;
     }
@@ -128,20 +115,21 @@ class ContestWork extends Model
     // public function get_contest_id_list_by_user_id()
     public static function count_works_for_section_user(string $section_id, string $user_id): string
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        // dbg Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $count = self::where('user_id', $user_id)->where('section_id', $section_id)->count();
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out:'.$count);
+        // dbg Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out:'.$count);
 
         return $count;
     }
 
     public static function get_user_for_contest_work(string $contest_id, string $work_id): string
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' in: 1:'.$contest_id.' 2:'.$work_id);
+        // dbg Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' in: 1:'.$contest_id.' 2:'.$work_id);
         $participant = self::where('contest_id', $contest_id)->where('work_id', $work_id)->get('id');
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out:'.$participant);
+        // dbg Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out:'.$participant);
+
         $participant_id = (count($participant)) ? $participant[0]['id'] : '';
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out:'.$participant_id);
+        // dbg Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out:'.$participant_id);
 
         return $participant_id;
     }
@@ -149,81 +137,102 @@ class ContestWork extends Model
     // RELATIONSHIP
 
     /**
-     * @return Contest works.contest_id 1:1 contests.id
+     * Undocumented function
+     *
+     * @return UserContact contest_works.user_id user_contacts.user_id
+     */
+    public function author()
+    {
+        $user_contact = $this->belongsTo(UserContact::class, 'user_id', 'user_id');
+
+        return $user_contact;
+    }
+
+    /**
+     * Relation ContestWork >> ContestAward
+     *
+     * @return ContestAward contest_works.work_id contest_awards.winner_work_id
+     *                      where contest_works.section_id = contest_awards.section_id
+     */
+    public function award()
+    {
+        $award_ = $this->hasMany(ContestAward::class, 'winner_work_id', 'work_id')
+            ->where('section_id', $this->section_id);
+
+        return $award_;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @return Contest contest_works.contest_id contests.id
      */
     public function contest()
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $contest = $this->belongsTo(Contest::class);
-        // . . . . . . . . . . . . . . . .contest.id  contest_works.contest_id
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' contest_section:'.json_encode($contest));
 
         return $contest;
     }
 
     /**
-     * @return ContestSection contest_works.section_id 1:1 contest_sections.id
+     * Undocumented function
+     *
+     * @return ContestSection contest_works.section_id contest_sections.id
      */
     public function contest_section()
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' section_id:'.json_encode($this->section_id));
-        $contest_section = $this->hasOne(ContestSection::class, 'id', 'section_id');
-        // . . . . . . . . . . . . . . .contest_sections.id  contest_works.section_id
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' contest_section:'.json_encode($contest_section));
+        $contest_section = $this->belongsTo(ContestSection::class, 'section_id');
 
         return $contest_section;
     }
 
+    /**
+     * Relation contest_works >> contest_sections
+     *
+     * @return ContestSection contest_works.section_id contest_sections.id
+     */
     public function section()
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' section_id:'.json_encode($this->section_id));
-        $contest_section = $this->hasOne(ContestSection::class, 'id', 'section_id');
-        // . . . . . . . . . . . . . . .contest_sections.id  contest_works.section_id
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' contest_section:'.json_encode($contest_section));
+        $contest_section = $this->belongsTo(ContestSection::class, 'section_id');
 
         return $contest_section;
     }
 
     /**
-     * @return Work works.work_id 1:1 contest_works.work_id
-     */
-    public function work()
-    {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $work = $this->hasOne(Work::class, 'id', 'work_id');
-        // . . . . . . . . . . . . . . works.id    contest_works.work_id
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' work:'.json_encode($work));
-
-        return $work;
-    }
-
-    /**
-     * @return UserContact works.user_id 1:1 user_contacts.user_id
+     * relation user_works >> user_contacts
+     *
+     * @return UserContact contest_works.user_id user_contacts.user_id (actually not pk)
      */
     public function user_contact()
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $user_contact = $this->hasOne(UserContact::class, 'user_id', 'user_id');
-        // . . . . . . . . . . . . . . . . . user_contacts.user_id    contest_works.user_id
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' user_contact:'.json_encode($user_contact));
 
         return $user_contact;
 
     }
 
     /**
-     * @return ContestVote works.work_id 1:1 contest_votes.work_id
+     * Relation contest_works>>contest_votes
+     * ! check how is used that relation
+     * ! 1 contest_works for 1 section id has one vote for every juror,
+     * ! so must be hasMany, not hasOne
+     *
+     * @return ContestVotes contest_works.work_id 1:1 contest_votes.work_id
      */
     public function contest_vote()
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $contest_votes = $this->hasOne(ContestVote::class, 'work_id', 'work_id');
-        // . . . . . . . . . . . . . . . . . .contest_votes.work_id    contest_works.work_id
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' user_contact:'.json_encode($contest_votes));
+        $contest_votes = $this->hasOne(ContestVote::class, 'work_id', 'work_id')
+            ->whereColumn();
 
         return $contest_votes;
 
+    }
+
+    // contest_works.work_id fk works.id
+    public function work()
+    {
+        $work = $this->belongsTo(Work::class, 'work_id');
+
+        return $work;
     }
 }
