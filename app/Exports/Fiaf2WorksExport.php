@@ -13,10 +13,13 @@ use App\Models\Contest;
 use App\Models\ContestWork;
 use App\Models\Federation;
 use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromView;
 
 class Fiaf2WorksExport implements FromView
 {
+    use Exportable;
+
     // data for view
     protected string $contestId; //    cid
 
@@ -35,7 +38,7 @@ class Fiaf2WorksExport implements FromView
      */
     public function __construct(string $cid, string $fid) // from controller
     {
-        set_time_limit(120);
+        // dbg set_time_limit(120);
         // zero trust
         if (Contest::where('id', $cid)->count() === 0) {
             abort(403);
@@ -62,7 +65,7 @@ class Fiaf2WorksExport implements FromView
             ->with([
                 'section', //                     contest_work->section
                 'work', //                        contest_work->work
-                'author' => function ($query) { //contest_work->author
+                'author' => function ($query) { // contest_work->author
                     $query->select('user_id', 'first_name', 'last_name', 'country_id');
                 },
                 'author.contactMores' => function ($query) use ($fid) {
@@ -84,7 +87,6 @@ class Fiaf2WorksExport implements FromView
             ->orderBy('contest_works.portfolio_sequence')
             // select only fields from contest_works to avoid field name misunderstand
             ->select('contest_works.*', 'contest_awards.award_name AS award_title', 'user_contacts.last_name AS last_name', 'user_contacts.first_name AS first_name')
-            ->limit(36) // dbg
             ->get();
 
         // at last building map
@@ -125,7 +127,7 @@ class Fiaf2WorksExport implements FromView
      */
     public function view(): View
     {
-        set_time_limit(120);
+        // dbg set_time_limit(120);
 
         return view('livewire.contest.report.fiaf2-works', [
             'contest' => $this->contest,
