@@ -11,14 +11,12 @@ class Fiaf2WorksReadyNotification extends Notification
 {
     use Queueable;
 
-    protected string $filename;
-
     /**
      * Create a new notification instance.
      */
-    public function __construct($filename)
+    public function __construct(protected string $filename)
     {
-        $this->filename = $filename;
+        //
     }
 
     /**
@@ -37,12 +35,15 @@ class Fiaf2WorksReadyNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         // download
-        $downloadUrl = Storage::disk('public')->url('contest/'.$this->filename);
+        // $downloadUrl = Storage::disk('public')->url('contests/'.$this->filename);
+        $downloadUrl = asset('contests/'.$this->filename);
 
         return (new MailMessage)
             ->line('Work Done. Your waited report is ready to download.')
+            ->line('Named: FIAF Foto Partecipanti ed Esiti.')
             ->action('Download report', $downloadUrl)
             ->line('The file will remain available even after downloading.')
+            ->line('This URL address is to be considered personal and confidential and should not be distributed.')
             ->line('Thank you for using our application!');
     }
 

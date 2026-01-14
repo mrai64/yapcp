@@ -30,8 +30,7 @@ class Fiaf2WorksExportJob implements ShouldQueue
         protected string $fid,
         protected string $filename,
         protected string $userId
-    ) 
-    {
+    ) {
         // all is in definition
     }
 
@@ -42,17 +41,18 @@ class Fiaf2WorksExportJob implements ShouldQueue
     {
         // prevent dir not found
         $directory = dirname($this->filename);
-        if (!Storage::disk('public')->exists($directory)) {
+        if (! Storage::disk('public')->exists($directory)) {
             Storage::disk('public')->makeDirectory($directory);
         }
 
+        // build
         Excel::store(
             new Fiaf2WorksExport($this->cid, $this->fid),
             'contests/'.$this->filename,
             'public'
         );
 
-        // notify work done
+        // And... here we go! It's finished.
         $user = User::find($this->userId);
         if ($user) {
             $user->notify(new Fiaf2WorksReadyNotification($this->filename));

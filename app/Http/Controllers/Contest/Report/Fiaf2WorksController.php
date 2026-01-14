@@ -34,7 +34,8 @@ class Fiaf2WorksController extends Controller
          * Direct download
          *
         return Excel::download(new Fiaf2WorksExport($cid, $fid), 'fiaf_foto_partecipanti_ed_esiti.xlsx');
-         */
+         *
+         **/
 
         /**
          * Call job to do
