@@ -11,9 +11,10 @@ namespace App\Http\Controllers\Contest\Report;
 
 use App\Exports\Fiaf2WorksExport;
 use App\Http\Controllers\Controller;
-use App\Jobs\ExportFiaf2WorksJob;
+use App\Jobs\Fiaf2WorksExportJob;
 use App\Models\Contest;
 use App\Models\Federation;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class Fiaf2WorksController extends Controller
@@ -37,21 +38,23 @@ class Fiaf2WorksController extends Controller
 
         /**
          * Call job to do
+         * filename contains also path w/contest_id
          */
-        $filename = 'fiaf_foto_partecipanti_ed_esiti_ver_'.now()->timestamp.'.xlsx';
+        $filename = $cid.'/report/'.'fiaf_foto_partecipanti_ed_esiti_ver_'.now()->timestamp.'.xlsx';
         ds($filename.' is running');
 
         // dispatch job with named arguments
-        ExportFiaf2WorksJob::dispatch(
+        Fiaf2WorksExportJob::dispatch(
             cid: $cid,
             fid: $fid,
-            filename: $filename
+            filename: $filename,
+            userId: Auth::id()
         );
 
         ds($filename.' is ready');
 
         // job asked
         return back()
-            ->with('status', __('Report Fiaf2Works is running, '));
+            ->with('status', __('Writing the Report(s). Check your email for notification in a few minutes.'));
     }
 }

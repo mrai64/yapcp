@@ -2,6 +2,18 @@
     <div class="fyk text-2xl">{{ $contest->country->flag_code }} | {{$contest->name_en}}</div>
     <div class="small">Few contest info</div>
     <hr />
+    <!-- success -->
+    @if (session('success'))
+    <div class="float-end font-medium rounded-md px-4 py-2">
+        {{ session('success') }}
+    </div>
+    @endif
+    <!-- status -->
+    @if (session('status'))
+    <div class="float-end font-medium rounded-md px-4 py-2">
+        {{ session('status') }}
+    </div>
+    @endif
     <div class="p-4 border rounded-md">
         [ 
             <a href="{{route('contest-live-dashboard', ['cid' => $contest->id ])}}">
@@ -100,7 +112,10 @@
         {{__("After Jury works - List for Report Catalogue etc")}}
         <hr />
         [ Contest list participant / admit ] <br />
-        [ contest list award list ]
+        <a href="{{ route('contest-report-fiaf2', ['cid' => $contest->id, 'fid' => 'FIAF' ]) }}">
+            [ FIAF Work Result and award XLSL ]
+        </a>
+        
     </div>
     <div class="p-4 border rounded-md">
         {{ __("Send Results to participants") }}

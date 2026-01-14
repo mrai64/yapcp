@@ -9,15 +9,18 @@
 namespace App\Jobs;
 
 use App\Exports\Fiaf2WorksExport;
+use App\Models\User;
+use App\Notifications\Fiaf2WorksReadyNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
-class ExportFiaf2WorksJob implements ShouldQueue
+class Fiaf2WorksExportJob implements ShouldQueue
 {
     use Queueable;
 
-    public $timeout = 300; // 300 sec - 5 min
+    public $timeout = 450; // 450 sec - 7:30 min
 
     /**
      * Create a new job instance.
@@ -25,22 +28,35 @@ class ExportFiaf2WorksJob implements ShouldQueue
     public function __construct(
         protected string $cid,
         protected string $fid,
-        protected string $filename
-    ) {}
+        protected string $filename,
+        protected string $userId
+    ) 
+    {
+        // all is in definition
+    }
 
     /**
      * Execute the job.
      */
     public function handle(): void
     {
-        // notify work in progress
+        // prevent dir not found
+        $directory = dirname($this->filename);
+        if (!Storage::disk('public')->exists($directory)) {
+            Storage::disk('public')->makeDirectory($directory);
+        }
 
         Excel::store(
             new Fiaf2WorksExport($this->cid, $this->fid),
-            'contests/'.$this->cid.'/report/'.$this->filename,
+            'contests/'.$this->filename,
             'public'
         );
 
         // notify work done
+        $user = User::find($this->userId);
+        if ($user) {
+            $user->notify(new Fiaf2WorksReadyNotification($this->filename));
+        }
+
     }
 }
