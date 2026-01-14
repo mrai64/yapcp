@@ -111,7 +111,10 @@
     <div class="p-4 border rounded-md">
         {{__("After Jury works - List for Report Catalogue etc")}}
         <hr />
-        [ Contest list participant / admit ] <br />
+        <a href="{{ route('contest-report-fiaf1', ['cid' => $contest->id, 'fid' => 'FIAF' ]) }}">
+            [ FIAF Participant w/Section XLSL ]
+        </a>
+        <br />
         <a href="{{ route('contest-report-fiaf2', ['cid' => $contest->id, 'fid' => 'FIAF' ]) }}">
             [ FIAF Work Result and award XLSL ]
         </a>

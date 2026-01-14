@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Contest\JuryMinuteDraft;
-use App\Http\Controllers\Contest\Report\Fiaf1Participants;
+use App\Http\Controllers\Contest\Report\Fiaf1ParticipantsController;
 use App\Http\Controllers\Contest\Report\Fiaf2WorksController;
 use App\Livewire\Contest;
 use App\Livewire\Federation;
@@ -252,9 +252,17 @@ Route::get('/organization/award-assign/jury-minute/{cid}', [JuryMinuteDraft::cla
 Route::get('/organization/reports/works-participant/{cid}', Organization\Reports\WorksParticipant::class, ['cid'])
     ->name('organization-reports-works-participant');
 
+//
 // FIAF report export - author participants
-Route::get('/contest/export/FIAF1/{cid}/{fid}', [Fiaf1Participants::class, 'export'], ['cid', 'fid']);
+Route::get('/contest/export/FIAF1/{cid}/{fid}',
+    [Fiaf1ParticipantsController::class, 'exportFiaf1Participants'],
+    ['cid', 'fid'])
+    ->middleware(['auth', 'verified'])
+    ->name('contest-report-fiaf1');
+//
 // FIAF report export - works participants - job
-Route::get('/contest/export/FIAF2/{cid}/{fid}', [Fiaf2WorksController::class, 'exportFiaf2Works'], ['cid', 'fid'])
+Route::get('/contest/export/FIAF2/{cid}/{fid}',
+    [Fiaf2WorksController::class, 'exportFiaf2Works'],
+    ['cid', 'fid'])
     ->middleware(['auth', 'verified'])
     ->name('contest-report-fiaf2');
