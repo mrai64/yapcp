@@ -254,15 +254,19 @@ Route::get('/organization/reports/works-participant/{cid}', Organization\Reports
 
 //
 // FIAF report export - author participants
-Route::get('/contest/export/FIAF1/{cid}/{fid}',
+Route::get(
+    '/contest/export/FIAF1/{cid}/{fid}',
     [Fiaf1ParticipantsController::class, 'exportFiaf1Participants'],
-    ['cid', 'fid'])
+    ['cid', 'fid']
+    )
     ->middleware(['auth', 'verified'])
     ->name('contest-report-fiaf1');
 //
 // FIAF report export - works participants - job
-Route::get('/contest/export/FIAF2/{cid}/{fid}',
+Route::get(
+    '/contest/export/FIAF2/{cid}/{fid}',
     [Fiaf2WorksController::class, 'exportFiaf2Works'],
-    ['cid', 'fid'])
+    ['cid', 'fid']
+    )
     ->middleware(['auth', 'verified'])
     ->name('contest-report-fiaf2');
