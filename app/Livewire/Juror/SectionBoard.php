@@ -115,7 +115,7 @@ class SectionBoard extends Component
 
         // SET of un-voted - limited to 12
         if (count($this->voted_ids)) {
-            $this->contest_works = DB::table(ContestWork::table_name)
+            $this->contest_works = DB::table(ContestWork::TABLENAME)
                 ->select(['contest_id', 'section_id', 'work_id', 'extension'])
                 ->where('section_id', $sid)
                 ->where('contest_id', $this->contest->id)
@@ -151,7 +151,7 @@ class SectionBoard extends Component
         $this->voted_counter = ContestVote::where('section_id', $this->contest_section_id)->where('juror_user_id', $this->juror_id)->count();
 
         // select contest_votes.id
-        $votedWorks = DB::table(ContestVote::table_name)
+        $votedWorks = DB::table(ContestVote::TABLENAME)
             ->select('id')
             ->where('juror_user_id', $this->juror_id)
             ->where('section_id', $this->contest_section_id)

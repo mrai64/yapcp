@@ -19,9 +19,9 @@ class UserContactFactory extends Factory
      */
     public function definition(): array
     {
-        $user = DB::table(User::table_name)
+        $user = DB::table(User::TABLENAME)
             ->select('id', 'email', 'name')->whereNull('deleted_at')->inRandomOrder()->first();
-        $country = DB::table(Country::table_name)
+        $country = DB::table(Country::TABLENAME)
             ->select('id')->whereNull('deleted_at')->inRandomOrder()->first();
 
         return [

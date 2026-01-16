@@ -27,7 +27,7 @@ class FederationFactory extends Factory
 
         return [
             'id' => fake()->regexify('[A-Z]{6}'), // check howto build random but from 3 to 6 chars
-            'country_id' => DB::table(Country::table_name)->pluck('id')->random(5)->first(),
+            'country_id' => DB::table(Country::TABLENAME)->pluck('id')->random(5)->first(),
             'name_en' => fake()->text(),
             // local_lang
             // timezone_id

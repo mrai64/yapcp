@@ -85,7 +85,7 @@ class Vote extends Component
 
         $this->voted_works_id = ContestVote::voted_ids($this->contest_id, $this->contest_section_id);
         if (count($this->voted_works_id) > 0) {
-            $this->unvoted_work_first = DB::table(ContestWork::table_name)->whereNotIn('work_id', $this->voted_works_id)->first();
+            $this->unvoted_work_first = DB::table(ContestWork::TABLENAME)->whereNotIn('work_id', $this->voted_works_id)->first();
 
         } else {
             // first vote

@@ -26,7 +26,7 @@ class UserRoleFactory extends Factory
      */
     public function definition(): array
     {
-        $user = DB::table(User::table_name)
+        $user = DB::table(User::TABLENAME)
             ->select('id')->whereNull('deleted_at')->inRandomOrder()->first();
         $role = array_rand(UserRole::valid_roles);
         $organization_id = '';
@@ -35,17 +35,17 @@ class UserRoleFactory extends Factory
         $which = rand(1, 3);
         switch ($which) {
             case '1':
-                $organization_id = DB::table(Organization::table_name)
+                $organization_id = DB::table(Organization::TABLENAME)
                     ->select('id')->whereNull('deleted_at')->inRandomOrder()->first();
                 break;
 
             case '2':
-                $contest_id = DB::table(Contest::table_name)
+                $contest_id = DB::table(Contest::TABLENAME)
                     ->select('id')->whereNull('deleted_at')->inRandomOrder()->first();
                 break;
 
             default:
-                $federation_id = DB::table(Federation::table_name)
+                $federation_id = DB::table(Federation::TABLENAME)
                     ->select('id')->whereNull('deleted_at')->inRandomOrder()->first();
                 break;
         }

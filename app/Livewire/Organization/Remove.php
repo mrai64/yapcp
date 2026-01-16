@@ -40,7 +40,7 @@ class Remove extends Component
         $this->email = $this->organization->email;
         $this->website = $this->organization->website;
 
-        $this->country = DB::table(Country::table_name)
+        $this->country = DB::table(Country::TABLENAME)
             ->whereNull('deleted_at')
             ->where('id', $this->country_id)
             ->pluck('id');

@@ -63,7 +63,7 @@ class BeforeFinal extends Component
             'total_participant_works' => $this->total_work_participants,
         ];
 
-        $subquery = DB::table(ContestVote::table_name)
+        $subquery = DB::table(ContestVote::TABLENAME)
             ->select(
                 DB::raw('COUNT(*) AS vote_received'),
                 DB::raw('SUM(vote) AS voted_sum'),

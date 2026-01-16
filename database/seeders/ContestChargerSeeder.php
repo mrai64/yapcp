@@ -82,7 +82,7 @@ class ContestChargerSeeder extends Seeder
         Log::info('Seeder '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' section_list:'.json_encode($this->contest_section_list));
 
         // 4. user_id in user_roles
-        $this->user_in_user_role = DB::table(UserRole::table_name)->get('user_id');
+        $this->user_in_user_role = DB::table(UserRole::TABLENAME)->get('user_id');
         Log::info('Seeder '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' user_role_in:'.json_encode($this->user_in_user_role));
 
         // from collection to array - old way
@@ -104,7 +104,7 @@ class ContestChargerSeeder extends Seeder
         for ($i = 0; $i < 24;) {
 
             // Random user
-            // $this->work_participant = DB::table( UserContact::table_name)
+            // $this->work_participant = DB::table( UserContact::TABLENAME)
             //     ->select('user_contacts.*')
             //     ->orderBy(DB::raw('RAND()'))
             //     ->take(5)
@@ -139,8 +139,8 @@ class ContestChargerSeeder extends Seeder
                 for ($j = 1; $j <= $this->contest_section->rule_max;) {
 
                     // picked casually from works table
-                    // $this->work = DB::table(Work::table_name)
-                    //     ->select(Work::table_name.'.*')
+                    // $this->work = DB::table(Work::TABLENAME)
+                    //     ->select(Work::TABLENAME.'.*')
                     //     ->orderBy(DB::raw('RAND()'))
                     //     ->take(5)->first();
                     $this->work = Work::whereNull('deleted_at')->inRandomOrder()->first();

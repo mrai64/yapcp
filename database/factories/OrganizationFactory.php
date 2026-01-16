@@ -25,7 +25,7 @@ class OrganizationFactory extends Factory
     {
         return [
             // uuid
-            'country_id' => DB::table(Country::table_name)->pluck('id')->random(5)->first(),
+            'country_id' => DB::table(Country::TABLENAME)->pluck('id')->random(5)->first(),
             'name' => fake()->text(),
             'email' => fake()->email(),
             'website' => fake()->url(),
