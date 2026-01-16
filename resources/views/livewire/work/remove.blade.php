@@ -12,7 +12,7 @@
     <a  href="{{ route('photo-box-list') }}" 
         class="float-end font-medium rounded-md mb-4 py-2"
         >
-        [ {{ __('Your beautiful Gallery') }} ]
+        [ {{ __('Back to Gallery') }} ]
     </a>
 
     <hr />
@@ -30,7 +30,7 @@
                 {{ __('Your work') }}
             </label>
 
-            <img src="{{ asset('storage/photos') .'/'.$work_file }}" 
+            <img src="{{ asset('storage/photos') .'/'.$workFile }}" 
                 style="float: left;" class="block w-48 me-3" />
 
         </div>
@@ -38,72 +38,73 @@
 
         <!-- english title -->
         <div class="mt-4 mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="title_en">
+            <label class="block font-medium text-sm text-gray-700" for="titleEnglish">
                 {{ __('Work title, in international english language') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="title_en"
-                wire:model.fill="title_en" 
+                type="text" name="titleEnglish"
+                wire:model.fill="titleEnglish" 
                 readonly
             />
         </div>
 
+        <!-- TODO remove field-->
         <!-- local title -->
         <div class="mt-4 mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="title_local">
+            <label class="block font-medium text-sm text-gray-700" for="titleLocal">
                 {{ __('Work title, in your local language') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="title_local"
-                wire:model.fill="title_local" 
+                type="text" name="titleLocal"
+                wire:model.fill="titleLocal" 
                 readonly
             />
         </div>
 
-        <!-- reference_year -->
+        <!-- referenceYear -->
         <div class="mt-4 mb-4 block" style="width:23%;float:left;">
-            <label class="block font-medium text-sm text-gray-700" for="reference_year">
+            <label class="block font-medium text-sm text-gray-700" for="referenceYear">
                 {{ __('Reference year') }} 
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-48" 
-                type="text" name="reference_year"
-                wire:model.fill="reference_year" 
+                type="text" name="referenceYear"
+                wire:model.fill="referenceYear" 
                 readonly
             />
         </div>
 
         <!-- Long side readonly -->
         <div class="mt-4 mb-4 block" style="width:23%;float:left;">
-            <label class="block font-medium text-sm text-gray-700" for="long_side">
-                {{ __('Long side') }} | 🔒
+            <label class="block font-medium text-sm text-gray-700" for="longSide">
+                {{ __('Long side') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-48" 
-                type="text" name="long_side"
-                wire:model.fill="long_side" 
+                type="text" name="longSide"
+                wire:model.fill="longSide" 
                 readonly
             />
         </div>
 
         <!-- Short side readonly -->
         <div class="mt-4 mb-4 block" style="width:23%;float:left;">
-            <label class="block font-medium text-sm text-gray-700" for="short_side">
+            <label class="block font-medium text-sm text-gray-700" for="shortSide">
                 {{ __('Short side') }} 
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-48" 
-                type="text" name="short_side"
-                wire:model.fill="short_side" 
+                type="text" name="shortSide"
+                wire:model.fill="shortSide" 
                 readonly
             />
         </div>
 
         <!-- Extension readonly -->
         <div class="mt-4 mb-4 block" style="width:23%;float:left;">
-            <label class="block font-medium text-sm text-gray-700" for="short_side">
+            <label class="block font-medium text-sm text-gray-700" for="shortSide">
                 {{ __('Extension') }} 
             </label>
             <input 

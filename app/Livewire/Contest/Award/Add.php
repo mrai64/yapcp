@@ -101,7 +101,7 @@ class Add extends Component
             'section_code' => ['string', 'uppercase', 'max:10', 'exists:contest_sections,code'],
             'award_code' => ['required', 'string', 'uppercase', 'max:10'],
             'award_name' => ['required', 'string', 'max:255'],
-            'is_award' => ['required', 'string', 'uppercase', 'max:1', new setYNRule],
+            'is_award' => ['required', 'string', 'uppercase', 'max:1', new setYNRule()],
             // winner_work_id   not in form
             // winner_user_id   not in form
             // winner_user_name not in form

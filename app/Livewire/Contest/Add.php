@@ -149,7 +149,7 @@ class Add extends Component
         $this->award_ceremony_info = '';
         $this->fee_info = '';
 
-        $this->contest = new Contest;
+        $this->contest = new Contest();
         $this->contest->id = $this->contest_id;
         $this->contest->organization_id = $this->organization_id; // $oid
         $this->contest->country_id = $this->country_id;

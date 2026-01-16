@@ -88,13 +88,13 @@ class ContestAwardAssign extends Component
                 'string',
                 'required',
                 'max:10',
-                new UserInContest,
+                new UserInContest(),
             ],
             // 2nd
             'winner_user_id' => [
                 'string',
                 'max:36',
-                new UserInContest,
+                new UserInContest(),
             ],
             'winner_name' => [
                 'string',

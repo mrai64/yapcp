@@ -18,20 +18,20 @@ class Remove extends Component
     //
     public $work_id;
 
-    public $user_id;
+    public $userId;
 
-    public $work_file;
+    public $workFile;
 
     #[Validate('string|max:255')]
-    public $title_en;
+    public $titleEnglish;
 
-    public $title_local;
+    public $titleLocal;
 
-    public $reference_year;
+    public $referenceYear;
 
-    public $long_side;
+    public $longSide;
 
-    public $short_side;
+    public $shortSide;
 
     public $extension;
 
@@ -49,14 +49,14 @@ class Remove extends Component
 
         $this->work_id = $this->work->id;
         // TODO check user_id
-        $this->user_id = $this->work->user_id;
+        $this->userId = $this->work->user_id;
 
-        $this->work_file = $this->work->work_file;
-        $this->title_en = $this->work->title_en;
-        $this->title_local = $this->work->title_local;
-        $this->reference_year = $this->work->reference_year;
-        $this->long_side = $this->work->long_side;
-        $this->short_side = $this->work->short_side;
+        $this->workFile = $this->work->work_file;
+        $this->titleEnglish = $this->work->title_en;
+        $this->titleLocal = $this->work->title_local;
+        $this->referenceYear = $this->work->reference_year;
+        $this->longSide = $this->work->long_side;
+        $this->shortSide = $this->work->short_side;
         $this->extension = $this->work->extension;
     }
 
@@ -78,7 +78,7 @@ class Remove extends Component
     {
         $this->validate();
 
-        $work = new Work;
+        $work = new Work();
         $work->findOrFail($this->work_id)->delete();
 
         // back to list

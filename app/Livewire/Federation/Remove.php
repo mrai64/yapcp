@@ -2,6 +2,7 @@
 
 /**
  * 2025-08-30 Only show in read-only, add country_id and contact
+ * 2025-01-16 refactorize for PSR-12
  */
 
 namespace App\Livewire\Federation;
@@ -25,7 +26,7 @@ class Remove extends Component
 
     public $website = '';
 
-    public $country_id = '';
+    public $countryId = '';
 
     public $country;
 
@@ -33,23 +34,21 @@ class Remove extends Component
 
     public function mount(int $id)
     {
-        $fed = new Federation;
+        $fed = new Federation();
         $this->federation = $fed->findOrFail($id);
+
         $this->name = $this->federation->name;
         $this->code = $this->federation->code;
         $this->website = $this->federation->website;
-        $this->country_id = $this->federation->country_id;
+        $this->countryId = $this->federation->country_id ?? '';
         $this->contact = $this->federation->contact;
-        $this->country = DB::table(Country::TABLENAME)
-            ->whereNull('deleted_at')
-            ->where('id', $this->country_id)
-            ->pluck('id');
+        $this->country = Country::where('id', $this->countryId)->exists() ? $this->countryId : '';
     }
 
     public function delete()
     {
         $this->validate();
-        $fed = new Federation;
+        $fed = new Federation();
         $fed->findOrFail($this->id)->delete();
 
         // to list

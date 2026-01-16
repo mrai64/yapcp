@@ -258,7 +258,7 @@ Route::get(
     '/contest/export/FIAF1/{cid}/{fid}',
     [Fiaf1ParticipantsController::class, 'exportFiaf1Participants'],
     ['cid', 'fid']
-    )
+)
     ->middleware(['auth', 'verified'])
     ->name('contest-report-fiaf1');
 //
@@ -267,6 +267,6 @@ Route::get(
     '/contest/export/FIAF2/{cid}/{fid}',
     [Fiaf2WorksController::class, 'exportFiaf2Works'],
     ['cid', 'fid']
-    )
+)
     ->middleware(['auth', 'verified'])
     ->name('contest-report-fiaf2');

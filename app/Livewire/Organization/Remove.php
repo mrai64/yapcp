@@ -32,7 +32,7 @@ class Remove extends Component
 
     public function mount(string $id) // id as in route()
     {
-        $org = new Organization;
+        $org = new Organization();
         $this->organization = $org->findOrFail($id);
         $this->id = $this->organization->id; // uuid
         $this->country_id = $this->organization->country_id;
@@ -73,7 +73,7 @@ class Remove extends Component
     {
         $this->validate();
 
-        $org = new Organization;
+        $org = new Organization();
         $org->findOrFail($this->id)->delete();
 
         // back to list

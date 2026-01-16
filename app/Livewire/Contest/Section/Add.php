@@ -120,7 +120,7 @@ class Add extends Component
         Log::info(__FUNCTION__.' validated: '.serialize($validated));
 
         $validated['contest_id'] = $this->contest_id;
-        $section = new ContestSection;
+        $section = new ContestSection();
         $section->create($validated);
 
         return redirect()

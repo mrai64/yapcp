@@ -38,8 +38,7 @@ class Add extends Component
     public function mount(string $fid) // fid as in route()
     {
         Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        $federation = new Federation;
-        $federation->findOrFail($fid);
+        $federation = Federation::findOrFail($fid);
 
         $this->federation_id = $fid;
         $this->code = '';

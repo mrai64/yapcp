@@ -158,7 +158,7 @@ class Add extends Component
             $juror_contact = UserContact::where('email', $validated['email'])->get()[0];
             Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' user_contact: '.json_encode($juror_contact));
 
-            $juror = new User; // empty
+            $juror = new User(); // empty
             $juror->id = $juror_contact['user_id'];
             Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' user: '.json_encode($juror));
         }

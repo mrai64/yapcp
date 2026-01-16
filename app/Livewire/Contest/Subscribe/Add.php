@@ -75,12 +75,12 @@ class Add extends Component
             'section_id' => [
                 'string',
                 'exists:contest_sections,id',
-                new ContestSectionRule,
+                new ContestSectionRule(),
             ],
             'work_id' => [
                 'string',
                 'exists:works,id',
-                new ContestSectionRule,
+                new ContestSectionRule(),
             ],
             'user_id' => 'string|exists:users,id',
             'contest_id' => 'string|exists:contests,id',
