@@ -46,6 +46,7 @@ CREATE TABLE `pcp_contest_awards` (
   KEY `secondary_idx` (`contest_id`,`section_code`,`award_code`),
   KEY `view_idx` (`contest_id`,`section_id`,`award_code`,`winner_work_id`,`winner_user_id`,`winner_name`),
   KEY `pcp_contest_awards_deleted_at_index` (`deleted_at`),
+  KEY `sixth_idx` (`winner_work_id`,`section_id`,`contest_id`),
   CONSTRAINT `pcp_contest_awards_contest_id_foreign` FOREIGN KEY (`contest_id`) REFERENCES `pcp_contests` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Contest awards contains both sections prizes and contest prizes (section code missing)';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -403,6 +404,27 @@ CREATE TABLE `pcp_failed_jobs` (
   UNIQUE KEY `pcp_failed_jobs_uuid_unique` (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `pcp_federation_mores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pcp_federation_mores` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `federation_id` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk federations',
+  `field_name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'lowercase',
+  `field_label` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'label for the field',
+  `field_validation_rules` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'string|max:255' COMMENT 'string or function(), validation rules for the field, nullable if none',
+  `field_default_value` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'empty string as default default value',
+  `field_suggest` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'message to explain what insert',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `alt_primary_idx` (`federation_id`,`field_name`),
+  KEY `backup_idx` (`updated_at`),
+  KEY `soft_delete_idx` (`deleted_at`),
+  CONSTRAINT `pcp_federation_mores_federation_id_foreign` FOREIGN KEY (`federation_id`) REFERENCES `pcp_federations` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `pcp_federation_sections`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -584,6 +606,28 @@ CREATE TABLE `pcp_timezones` (
   KEY `pcp_timezones_region_id_index` (`region_id`),
   KEY `pcp_timezones_deleted_at_index` (`deleted_at`),
   CONSTRAINT `pcp_timezones_region_id_foreign` FOREIGN KEY (`region_id`) REFERENCES `pcp_regions` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `pcp_user_contact_mores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pcp_user_contact_mores` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `user_contact_user_id` varchar(36) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk for user_contact id',
+  `federation_id` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk federations',
+  `field_name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk federation_mores',
+  `field_value` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'following rules when updated',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `alt_primary_idx` (`user_contact_user_id`,`federation_id`,`field_name`),
+  KEY `backup_idx` (`updated_at`),
+  KEY `soft_delete_idx` (`deleted_at`),
+  KEY `pcp_user_contact_mores_federation_id_field_name_foreign` (`federation_id`,`field_name`),
+  CONSTRAINT `pcp_user_contact_mores_federation_id_field_name_foreign` FOREIGN KEY (`federation_id`, `field_name`) REFERENCES `pcp_federation_mores` (`federation_id`, `field_name`),
+  CONSTRAINT `pcp_user_contact_mores_federation_id_foreign` FOREIGN KEY (`federation_id`) REFERENCES `pcp_federations` (`id`),
+  CONSTRAINT `pcp_user_contact_mores_user_contact_user_id_foreign` FOREIGN KEY (`user_contact_user_id`) REFERENCES `pcp_user_contacts` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `pcp_user_contacts`;
@@ -1035,3 +1079,6 @@ INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (205,'2025_12_2
 INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (206,'2025_12_29_140820_add_col_to_federation_additional_field_names_table',117);
 INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (207,'2026_01_01_165513_remove_federation_additionals_table',118);
 INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (208,'2026_01_01_165532_remove_federation_additionals_field_names_table',118);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (214,'2026_01_01_171622_create_federation_mores_table',119);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (215,'2026_01_01_174854_create_user_contact_mores_table',119);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (217,'2026_01_12_211855_add_idx_to_contest_awards_table',120);
