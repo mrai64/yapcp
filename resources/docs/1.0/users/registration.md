@@ -53,4 +53,4 @@ Also available: link to reset password.
 
 ## Next stop
 
-[Personal Dashboard](./dashboard.md)
+[Personal Dashboard](/{{route}}/{{version}}/users/dashboard)
