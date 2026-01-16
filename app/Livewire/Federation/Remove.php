@@ -9,7 +9,6 @@ namespace App\Livewire\Federation;
 
 use App\Models\Country;
 use App\Models\Federation;
-use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 

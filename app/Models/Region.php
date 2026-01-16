@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Log;
 
 class Region extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     public const TABLENAME = 'regions';
 

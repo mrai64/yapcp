@@ -32,7 +32,8 @@ use Illuminate\Support\Str; // uuid booted()
 class Work extends Model
 {
     /** @use HasFactory<\Database\Factories\WorkFactory> */
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     public const TABLENAME = 'works';
 

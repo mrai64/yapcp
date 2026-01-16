@@ -9,6 +9,6 @@ class ExcelUser extends Controller
 {
     public function export()
     {
-        return Excel::download(new UserExport, 'users.xlsx');
+        return Excel::download(new UserExport(), 'users.xlsx');
     }
 }

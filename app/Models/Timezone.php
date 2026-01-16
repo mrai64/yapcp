@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Log;
 
 class Timezone extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     public const TABLENAME = 'timezones'; // real tablename should have a db prefix
 

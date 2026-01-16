@@ -49,7 +49,7 @@ class LoginDone extends Notification
         $subject = (string) env('APP_NAME').' security alert for '.$this->user->email;
         Log::debug(__CLASS__.' '.__FUNCTION__.' subject:'.$subject);
 
-        $mail_msg = (new MailMessage)
+        $mail_msg = (new MailMessage())
             ->subject($subject)
             ->line($this->user['name'].", we'd like to confirm some recent activity on your account.")
             ->line("If this activity is your own, or a co-worker's, then you can simply ignore this email.")

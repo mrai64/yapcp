@@ -26,7 +26,8 @@ use Illuminate\Support\Str;
 
 class Organization extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     // use env('DB_TABLE_PREFIX') .
     public const TABLENAME = 'organizations';

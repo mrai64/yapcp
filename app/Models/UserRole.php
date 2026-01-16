@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Log;
 
 class UserRole extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     //
     public const TABLENAME = 'user_roles';

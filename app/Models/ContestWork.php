@@ -31,7 +31,8 @@ use Illuminate\Support\Str; //         pk uuid
 class ContestWork extends Model
 {
     //
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     public const TABLENAME = 'contest_works';
 

@@ -38,7 +38,7 @@ class Fiaf2WorksReadyNotification extends Notification
         // $downloadUrl = Storage::disk('public')->url('contests/'.$this->filename);
         $downloadUrl = asset('contests/'.$this->filename);
 
-        return (new MailMessage)
+        return (new MailMessage())
             ->line('Work Done. Your waited report is ready to download.')
             ->line('Named: FIAF Foto Partecipanti ed Esiti.')
             ->action('Download report', $downloadUrl)

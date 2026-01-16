@@ -15,7 +15,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class FederationMore extends Model
 {
     //
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     public const TABLENAME = 'federation_mores';
 

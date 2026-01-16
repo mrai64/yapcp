@@ -16,7 +16,8 @@ use Illuminate\Support\Str;
 
 class ContestWaiting extends Model
 {
-    use Notifiable,SoftDeletes;
+    use Notifiable;
+    use SoftDeletes;
 
     // protected $primaryKey= 'id';
     protected $keyType = 'string';

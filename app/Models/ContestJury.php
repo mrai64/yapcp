@@ -20,7 +20,8 @@ use Illuminate\Support\Str; // uuid booted()
 
 class ContestJury extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     public const TABLENAME = 'contest_juries';
 

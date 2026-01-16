@@ -20,7 +20,8 @@ use Illuminate\Support\Facades\Log;
 
 class Federation extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     public const TABLENAME = 'federations';
 

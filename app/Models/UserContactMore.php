@@ -18,7 +18,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UserContactMore extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     public const TABLENAME = 'user_contact_mores';
 

@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Log;
 
 class ContestWarning extends Notification
 {
-    use Notifiable,Queueable;
+    use Notifiable;
+    use Queueable;
 
     public $contest_waiting;
 
@@ -78,7 +79,7 @@ class ContestWarning extends Notification
         Log::info('Notification '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         $subject = env('APP_NAME').' about your work "'.$this->work->title_en.'"';
 
-        $mail_message = (new MailMessage)
+        $mail_message = (new MailMessage())
             ->subject($subject)
             ->line($this->participant_user->first_name.', ')
             ->line('unfortunately your work titled ['.$this->work->title_en."], \nparticipating to our contest [".$this->contest->name_en."], \nseem have a little problem during a human check, and now it's temporary excluded from contest.")

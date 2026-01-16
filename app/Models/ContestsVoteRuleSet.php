@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Log;
 
 class ContestsVoteRuleSet extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory;
+    use SoftDeletes;
 
     protected $primaryKey = 'vote_rule'; // standard name 'id'
 
