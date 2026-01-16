@@ -25,7 +25,7 @@ class ContestAssign extends Component
 
     public $contest;
 
-    public $contest_awards;
+    public $contestAwardsSet;
 
     public $award_assigned;
 
@@ -145,7 +145,7 @@ class ContestAssign extends Component
             ->orderBy('user_contacts.first_name') // equivalent to order by 4
             ->get();
 
-        // $this->contest_awards : see render()
+        // $this->contestAwardsSet : see render()
     }
 
     /**
@@ -170,7 +170,7 @@ class ContestAssign extends Component
             ->where('contest_awards.contest_id', $this->contest_id)
             ->orderBy('contest_awards.award_code')
             ->get();
-        $this->contest_awards = $contestAwards;
+        $this->contestAwardsSet = $contestAwards;
 
         return view('livewire.organization.award.contest-assign');
     }

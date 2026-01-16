@@ -29,17 +29,17 @@ class Listed extends Component
 
     public User $user;
 
-    public $user_role;
+    public $userRole;
 
     public Organization $organization_list;
 
-    public Contest $contest_list;
+    public Contest $contestList;
 
-    public Federation $federation_list;
+    public Federation $federationList;
 
-    public $user_role_list = [];
+    public $userRoleList = [];
 
-    public $sorted_user_role_list = [];
+    public $sortedUserRoleList = [];
 
     /**
      * 1. before the show
@@ -61,7 +61,7 @@ class Listed extends Component
             ->get();
 
         foreach ($this->user_role as $role) {
-            $this->user_role_list[] = [
+            $this->userRoleList[] = [
                 'id' => $role->id_max,
                 'role' => $role->role,
                 'organization_id' => ($role->organization_id > '') ? $role->organization_id : '',
@@ -69,15 +69,15 @@ class Listed extends Component
                 'federation_id' => ($role->federation_id > '') ? $role->federation_id : '',
                 'federation' => ($role->federation_id > '') ? Federation::where('id', $role->federation_id)->get('name_en')[0]['name_en'] : '',
                 'contest_id' => ($role->contest_id > '') ? $role->contest_id : '',
-                'contest' => ($role->contest_id > '') ? Contest::get_name_en($role->contest_id) : '',
+                'contest' => ($role->contest_id > '') ? Contest::getNameEn($role->contest_id) : '',
                 'start' => UserRole::where('id', $role->id_max)->get('role_opening')[0]['role_opening']->format('Y-m-d'),
                 'end' => UserRole::where('id', $role->id_max)->get('role_closing')[0]['role_closing']->format('Y-m-d'),
             ];
         }
 
         //
-        $this->sorted_user_role_list = collect($this->user_role_list)->sortBy('federation')->sortBy('organization')->sortBy('contest')->sortBy('role')->toArray();
-        $this->user_role_list = $this->sorted_user_role_list;
+        $this->sortedUserRoleList = collect($this->userRoleList)->sortBy('federation')->sortBy('organization')->sortBy('contest')->sortBy('role')->toArray();
+        $this->userRoleList = $this->sortedUserRoleList;
 
     }
 
@@ -86,6 +86,7 @@ class Listed extends Component
      */
     public function render()
     {
+
         return view('livewire.user.role.listed');
     }
 }

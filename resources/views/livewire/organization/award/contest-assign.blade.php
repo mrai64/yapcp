@@ -43,7 +43,7 @@ use App\Models\ContestSection;
                 </tr>
             </thead>
             <tbody>
-            @foreach($contest_awards as $award)
+            @foreach($contestAwardsSet as $award)
                 <tr>
                     <td class="border md-rounded m-2 text-center">
                         {{ $award->award_code }}<br />

@@ -7,13 +7,13 @@
 ?>
 
 <div>
-    @if (isset($user_role_list) && (count($user_role_list) > 0))
+    @if (isset($userRoleList) && (count($userRoleList) > 0))
     <h2 class="fyk font-semibold text-2xl text-gray-800 leading-tight">
         {{ __("Your roles in") }}
     </h2>
     <hr />
     <ul>
-        @foreach($user_role_list as $role)
+        @foreach($userRoleList as $role)
         <li class="my-2 p-4 font-medium">
             <strong class="fyk text-xl">{{$role['role']}} /<br /></strong>
 
