@@ -20,7 +20,7 @@ class UserRole extends Model
     use HasFactory, SoftDeletes;
 
     //
-    public const table_name = 'user_roles';
+    public const TABLENAME = 'user_roles';
 
     // no factory and seeders, not now
     protected $fillable = [

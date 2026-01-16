@@ -22,7 +22,7 @@ class Federation extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public const table_name = 'federations';
+    public const TABLENAME = 'federations';
 
     // pk it's not a bigint nor uuid
     protected $keyType = 'string';

@@ -16,7 +16,7 @@ class ContestVote extends Model
 {
     use SoftDeletes;
 
-    public const table_name = 'contest_votes';
+    public const TABLENAME = 'contest_votes';
     // protected $primaryKey 'id'        standard
     // protected $keyType = unsigned int standard
     // public $incrementing = true       standard

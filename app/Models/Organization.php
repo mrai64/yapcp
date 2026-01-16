@@ -29,7 +29,7 @@ class Organization extends Model
     use HasFactory, SoftDeletes;
 
     // use env('DB_TABLE_PREFIX') .
-    public const table_name = 'organizations';
+    public const TABLENAME = 'organizations';
 
     // id is uuid
     protected $keyType = 'string'; //     uuid string(36)

@@ -17,7 +17,7 @@ class FederationMore extends Model
     //
     use HasFactory, SoftDeletes;
 
-    public const table_name = 'federation_mores';
+    public const TABLENAME = 'federation_mores';
 
     protected $fillable = [
         // id

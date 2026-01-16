@@ -30,7 +30,7 @@ class User extends Authenticatable implements MustVerifyEmail
     // used to show a version number
     public const version = '2025.12.1 dev';
 
-    public const table_name = 'users'; // MAYBE $this->table_name()
+    public const TABLENAME = 'users'; // MAYBE $this->table_name()
 
     /**
      * The attributes that are mass assignable.

@@ -27,7 +27,7 @@ class Country extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public const table_name = 'countries';
+    public const TABLENAME = 'countries';
 
     // protected $primaryKey = 'id'; default
     protected $keyType = 'string';

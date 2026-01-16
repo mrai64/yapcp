@@ -33,7 +33,7 @@ class ContestWork extends Model
     //
     use HasFactory, SoftDeletes;
 
-    public const table_name = 'contest_works';
+    public const TABLENAME = 'contest_works';
 
     // pk uuid
     protected $keyType = 'string';

@@ -23,7 +23,7 @@ class ContestParticipant extends Model
     //
     use HasFactory, SoftDeletes;
 
-    public const table_name = 'contest_participants';
+    public const TABLENAME = 'contest_participants';
 
     // fee payment TODO
     public const valid_YN = [

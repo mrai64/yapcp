@@ -22,7 +22,7 @@ class UserContact extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public const table_name = 'user_contacts';
+    public const TABLENAME = 'user_contacts';
 
     // attributes mass assignable in factory and seeder
     protected $fillable = [

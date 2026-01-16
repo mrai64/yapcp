@@ -22,7 +22,7 @@ class ContestJury extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public const table_name = 'contest_juries';
+    public const TABLENAME = 'contest_juries';
 
     // uuid as pk, don't need ++
     protected $keyType = 'string'; // char(36)

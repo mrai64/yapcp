@@ -22,7 +22,7 @@ class ContestAward extends Model
 {
     use SoftDeletes;
 
-    public const table_name = 'contest_awards';
+    public const TABLENAME = 'contest_awards';
 
     // protected $primaryKey = 'id' default
     protected $keyType = 'string'; // uuid

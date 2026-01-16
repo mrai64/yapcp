@@ -20,7 +20,7 @@ class UserContactMore extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public const table_name = 'user_contact_mores';
+    public const TABLENAME = 'user_contact_mores';
 
     // standard id
     protected $fillable = [

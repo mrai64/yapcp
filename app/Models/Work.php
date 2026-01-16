@@ -34,7 +34,7 @@ class Work extends Model
     /** @use HasFactory<\Database\Factories\WorkFactory> */
     use HasFactory, SoftDeletes;
 
-    public const table_name = 'works';
+    public const TABLENAME = 'works';
 
     // protected $primaryKey = 'id'; // standard name
     protected $keyType = 'string'; // pk uuid

@@ -16,7 +16,7 @@ class Region extends Model
 {
     use HasFactory,SoftDeletes;
 
-    public const table_name = 'regions';
+    public const TABLENAME = 'regions';
 
     // pk not bigint unsigned incremental
     // protected $primaryKey = 'id';

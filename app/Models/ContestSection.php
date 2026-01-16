@@ -30,7 +30,7 @@ class ContestSection extends Model
 {
     use HasFactory,SoftDeletes;
 
-    public const table_name = 'contest_sections';
+    public const TABLENAME = 'contest_sections';
 
     // pk is uuid, and don'need ++
     // protected $primaryKey = 'id'; // standard name

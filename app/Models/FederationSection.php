@@ -21,7 +21,7 @@ class FederationSection extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public const table_name = 'federation_sections';
+    public const TABLENAME = 'federation_sections';
 
     protected $fillable = [
         // id

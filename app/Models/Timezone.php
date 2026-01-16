@@ -17,7 +17,7 @@ class Timezone extends Model
 {
     use HasFactory,SoftDeletes;
 
-    public const table_name = 'timezones'; // real tablename should have a db prefix
+    public const TABLENAME = 'timezones'; // real tablename should have a db prefix
 
     // pk not bigint unsigned incremental
     protected $primaryKey = 'id';
