@@ -1,18 +1,24 @@
 <?php
 
 /**
- * Contest Sections is a child table for Contest
- * pk uuid
- * fk contests.id uuid
- * under_patronage is a enum-like and boolean-like
- * value: Y, otherwise: N.
- * code: free code, but when under_patronage == 'Y'
- * a check for federation_section_list should be done
- * and require a FederationSection access
+ * Contest are made by theme and section
+ * to apply, and should be valid for federation
+ * distinctions management or not. Here we have
+ * also some specific rules for section i.e.
+ * min/max works (usually min 0 max 4, but for
+ * reportage n portfolio should be min 4 max 12),
+ * long n short side pixel size,
+ * if requested monochromatic,
+ * if RAW file should be requested etc.
+ *
+ * related to contests
+ * related to contest_works
+ * related to contest_awards
  *
  * no factory, no seeder
  *
  * 2025-10-26 add federation_section_id when under_patronage == Y
+ * 2026-01-17 PSR-12 and relation functions and
  */
 
 namespace App\Models;
@@ -33,45 +39,46 @@ class ContestSection extends Model
 
     public const TABLENAME = 'contest_sections';
 
-    // pk is uuid, and don'need ++
-    // protected $primaryKey = 'id'; // standard name
-    protected $keyType = 'string'; // char(36)
+    // primary key
+    protected $primaryKey = 'id'; //  default but
+    protected $keyType = 'string'; // uuid char(36)
+    public $incrementing = false; //  with no increment
 
-    public $incrementing = false;
-
-    // under_patronage
-    public const valid_under_patronages = [
-        'Y',
-        'N',
-    ];
-
+    // table field list
     protected $fillable = [
-        // id              uuid
-        'contest_id', //
-        'code', //         unique( contest_id + code )
-        'under_patronage', // set Y/N or boolean or ?
+        'id', //                     pk uuid
+        'contest_id', //             fk contests.id
+        'code', //                   unique( contest_id + code )
+        'under_patronage', //        a Y/N instead boolean
+        'federation_section_id', //  fk federation_sections.id
         'name_en',
         'name_local',
-        // rule_format - they have default values
-        // rule_min
-        // rule_max
-        // rule_min_size
-        // rule_max_size
-        // rule_max_weight
-        // rule_monochromatic
-        // TODO rule_raw
-        // created_at
-        // updated_at
-        // deleted_at
+        'rule_format', //            list of extension file
+        'rule_min', //               int # of works
+        'rule_max', //               int
+        'rule_min_size', //          int px size
+        'rule_max_size', //
+        'rule_max_weight', //        int MB
+        'rule_monochromatic', //     a Y/N instead boolean
+        'rule_raw_required', //      a Y/N instead boolean
+        'rule_only_one', //          a Y/N instead boolean
+        // created_at                reserved
+        // updated_at                reserved
+        // deleted_at                reserved
+    ];
 
+    // check Y/N fields
+    private const VALID_YN = [
+        'N', // 0 false
+        'Y', // 1 true
     ];
 
     // pk is uuid
     public static function booted()
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        //dbg Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         static::creating(function ($model) {
-            $model->id = Str::uuid(); // uuid generator
+            $model->id = Str::uuid();
         });
     }
 
@@ -85,98 +92,91 @@ class ContestSection extends Model
         ];
     }
 
-    /**
-     * IS_A_Valid_field
-     *
-     * Check $section->under_patronage enum like
-     */
-    public function is_a_valid_under_patronage(ContestSection $section): bool
+    // Validators
+    // was: is_a_valid_under_patronage
+    public static function checkUnderPatronage(ContestSection $section): bool
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        return in_array(
+            needle: $section->under_patronage,
+            haystack: self::VALID_YN,
+            strict: true
+        );
+    }
 
-        return in_array($section->under_patronage, self::valid_under_patronages, true);
+    public static function checkMonochromatic(ContestSection $section): bool
+    {
+        return in_array(
+            needle: $section->rule_monochromatic,
+            haystack: self::VALID_YN,
+            strict: true
+        );
+    }
+
+    public static function checkRawRequired(ContestSection $section): bool
+    {
+        return in_array(
+            needle: $section->rule_raw_required,
+            haystack: self::VALID_YN,
+            strict: true
+        );
+    }
+
+    public static function checkOnlyOne(ContestSection $section): bool
+    {
+        return in_array(
+            needle: $section->rule_only_one,
+            haystack: self::VALID_YN,
+            strict: true
+        );
     }
 
     // GETTER
 
-    public function get_section_list(Contest $contest): array
-    {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        $section_list = self::whereNull('deleted_at')->where('contest_id', $contest->id)
-            ->order_by('code')->orderBy('name_en')
-            ->get(['id', 'code', 'name_en', 'name_local', 'under_patronage']);
-        $section_array = [];
-        foreach ($section_list as $section) {
-            $section_array[] = [
-                'id' => $section->id,
-                // contest_id
-                'code' => $section->code,
-                'under_patronage' => $section->under_patronage,
-                'name_en' => $section->name_en,
-                'name_local' => $section->name_local,
-                // created_at,
-                // updated_at,
-                // deleted_at,
-            ];
-        }
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out');
+    // was: get_section_list() - removed as unused function
 
-        return $section_array;
-    }
-
-    public static function first_section_id(string $contest_id): string
+    // was: first_section_id()
+    public static function firstContestSectionId(string $contestId): string
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         try {
-            $first_section_id = self::where('contest_id', $contest_id)
+            $firstContestSectionId = self::where('contest_id', $contestId)
                 ->orderBy('name_en')->first();
-            Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' 1st: '.json_encode($first_section_id->id));
 
-            return $first_section_id->id;
+            return $firstContestSectionId->id ?? '';
         } catch (\Throwable $th) {
-            Log::error(__FUNCTION__.' '.__LINE__.'in: contest_id:'.$contest_id.' out: '.$th->getMessage());
+            Log::error(__FUNCTION__.' '.__LINE__.' in: contestId:'.$contestId.' out: '.$th->getMessage());
 
             return '';
         }
     }
 
-    // RELATIONSHIPs
+    // RELATIONSHIP
 
-    /**
-     * @return Contest contest_sections.contest_id 1:1 contests.id
-     */
+    // contest_sections.contest_id > contests.id
     public function contest(): BelongsTo
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        // belongsTo( class_parent::class, class_parent.id, class_child.parent_id)
         $contest = $this->belongsTo(Contest::class);
 
-        // . . . . . . . contests.id contest_sections.id
         return $contest;
     }
 
-    /**
-     * @return ContestWork contest_sections.id 1:N contest_works.section_id
-     */
+    // contest_sections.id << contest_works.section_id
     public function works(): HasMany
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called           in:'.$this->id);
-        $works_in_section = $this->hasMany(ContestWork::class, 'section_id', 'id');
-        // . . . . . . . . . . . . . . . . . . . . contest_works.section_id   contest_sections.id
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out');
+        $worksInSection = $this->hasMany(ContestWork::class, 'section_id', 'id');
 
-        return $works_in_section;
+        return $worksInSection;
     }
 
-    /**
-     * @return FederationSection contest_sections.id 1:1 federation_sections.section_id
-     */
-    public function federation_section(): HasOne
+    // was: federation_section()
+    // contest_sections.federation_section_id > federation_sections.id
+    public function federationSection(): HasOne
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        $federation_section = $this->hasOne(FederationSection::class);
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out');
+        $federationSection = $this->hasOne(
+            related: FederationSection::class,
+            foreignKey: 'id',
+            localKey: 'federation_section_id'
+        );
 
-        return $federation_section;
+        return $federationSection;
     }
 }

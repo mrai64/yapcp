@@ -157,7 +157,7 @@ class Contest extends Model
     {
         Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $country = $this->belongsTo(Country::class);
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out ');
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out');
 
         return $country;
     }
@@ -169,33 +169,9 @@ class Contest extends Model
     {
         Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $organization = $this->belongsTo(Organization::class);
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out');
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out');
 
         return $organization;
-    }
-
-    /**
-     * @return ContestSection contests.id 1:N contest_sections.contest_id
-     */
-    public function sections()
-    {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $sections = $this->hasMany(ContestSection::class);
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out');
-
-        return $sections;
-    }
-
-    /**
-     * @return ContestJuror contests.id 1:N contest_juries.contest_id
-     */
-    public function jury()
-    {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $contestJurySet = $this->hasMany(ContestJury::class);
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out ');
-
-        return $contestJurySet;
     }
 
     /**
@@ -208,6 +184,18 @@ class Contest extends Model
         Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out ');
 
         return $contestAwardsSet;
+    }
+
+    /**
+     * @return ContestJuror contests.id 1:N contest_juries.contest_id
+     */
+    public function jury()
+    {
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        $contestJurySet = $this->hasMany(ContestJury::class);
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out');
+
+        return $contestJurySet;
     }
 
     /**
@@ -226,6 +214,55 @@ class Contest extends Model
         return $participants;
     }
 
+    /**
+     * @return ContestSection contests.id 1:N contest_sections.contest_id
+     */
+    public function sections()
+    {
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        $sections = $this->hasMany(ContestSection::class);
+        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out');
+
+        return $sections;
+    }
+
+    //
+    // contest_votes
+    public function contestVotes()
+    {
+        $contestVotes = $this->hasMany(
+            related: ContestVote::class,
+            foreignKey: 'contest_id',
+            localKey: 'id'
+        );
+
+        return $contestVotes;
+    }
+
+    // contest_waitings.contest_id contests.id
+    public function contestWaitings()
+    {
+        $contestWaitings = $this->hasMany(
+            related: ContestWaiting::class,
+            foreignKey: 'contest_id',
+            localKey: 'id'
+        );
+
+        return $contestWaitings;
+    }
+
+    // contest_waitings.contest_id contests.id
+    public function waitings()
+    {
+        $contestWaitings = $this->hasMany(
+            related: ContestWaiting::class,
+            foreignKey: 'contest_id',
+            localKey: 'id'
+        );
+
+        return $contestWaitings;
+    }
+
     // contest_works
     public function contestWorks()
     {
@@ -238,5 +275,16 @@ class Contest extends Model
         return $contestWorksSet;
     }
 
-    // contest_votes
+    // user_contests.contest_id contests.id
+    public function userRoles()
+    {
+        $userRoles = $this->hasMany(
+            related: UserRole::class,
+            foreignKey: 'contest_id',
+            localKey: 'id'
+        );
+
+        return $userRoles;
+    }
+
 }

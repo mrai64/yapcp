@@ -24,7 +24,7 @@ use App\Models\ContestSection;
                 <span class="fyk text-xl">Sections</span>
             </a>
             . .
-            <a href="{{ route('contest-jury-add', ['sid' => ContestSection::first_section_id( $contest->id )] ); }}">
+            <a href="{{ route('contest-jury-add', ['sid' => ContestSection::firstContestSectionId( $contest->id )] ); }}">
                 <span class="fyk text-2xl">Jury</span>
             </a>
             . .

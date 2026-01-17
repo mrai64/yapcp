@@ -2,9 +2,16 @@
 
 /**
  * Organization Contest Section Work Review Pass
+ * When a work is reviewed and obtain a go!, is translated
+ * from user depot to contest depot, then return back to work list, so
+ * Go, Next Up!
  *
  * CLASS: app/Livewire/Organization/Contest/PassNext.php
  * VIEW:  resources/views/livewire.organization.pre-jury.pass-next.blade.php
+ *
+ * 2026-01-17 PSR-12
+ *
+ * TODO Probably that's a wrong way to do the right job. Should be Service?
  */
 
 namespace App\Livewire\Organization\PreJury;
@@ -20,73 +27,61 @@ class PassNext extends Component
 {
     public $contest;
 
-    public $contest_work;
+    public $contestWork;
 
-    public $contest_section;
+    public $contestSection;
 
     public $work;
 
-    public string $file_from;
+    public string $fileFromWork;
 
-    public string $file_to;
+    public string $fileToContest;
 
-    public $work_validation = [];
+    // public $work_validation = []; unused
 
     /**
-     * 1. Before the show
+     * 1. Before the show - no: do the job
      *
      * wid is contest_works.work_id not contest_works.id
      */
     public function mount(string $wid) // route()
     {
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        $this->contest_work = ContestWork::where('work_id', $wid)->first();
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' wid:'.json_encode($wid));
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' contest_work:'.json_encode($this->contest_work));
-
-        $this->contest_section = $this->contest_work->contest_section;
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' contest_section:'.json_encode($this->contest_section));
-
-        $this->contest = $this->contest_work->contest;
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' contest_section:'.json_encode($this->contest));
-
-        $this->work = $this->contest_work->work;
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' work:'.json_encode($this->work));
-
-        // from: photos/country_id/last_name/first_name_user_id/work_id.work.extension
-        //   to: contests/contest_id/section_id/work_id.work.extension anon
+        $this->contestWork = ContestWork::where('work_id', $wid)->first();
+        $this->contestSection = $this->contestWork->contest_section;
+        $this->contest = $this->contestWork->contest;
+        $this->work = $this->contestWork->work;
+        //
+        //  from: photos/country_id/last_name/first_name_user_id/work_id.work.extension
+        //    to: contests/contest_id/section_id/work_id.work.extension anon
         // where: in public disk
-        $this->file_from = 'photos/'.$this->work->work_file;
-        $this->file_to = 'contests/'.$this->contest_section->contest_id.'/'.$this->contest_section->id.'/'.$this->work->id.'.'.$this->work->extension;
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' file_from:'.json_encode($this->file_from));
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' file_to:'.json_encode($this->file_to));
-
-        $copy_result = Storage::disk('public')->copy($this->file_from, $this->file_to);
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' copy result:'.json_encode($copy_result));
-
-        // save validation rec only if $this->contest_section->federation_section_id is NOT NULL
-        if (($this->contest_section->under_patronage == 'N') || (is_null($this->contest_section->federation_section_id))) {
+        $this->fileFromWork = 'photos/'.$this->work->work_file;
+        $this->fileToContest = 'contests/'.$this->contestSection->contest_id
+            .'/'.$this->contestSection->id
+            .'/'.$this->work->id.'.'.$this->work->extension;
+        $copyResult = Storage::disk('public')->copy($this->fileFromWork, $this->fileToContest);
+        // save validation rec only if $this->contestSection->federation_section_id is NOT NULL
+        if (($this->contestSection->under_patronage === 'N') || (is_null($this->contestSection->federation_section_id))) {
             return;
         }
 
-        $inserted = WorkValidation::updateOrCreate(
+        $insertedResult = WorkValidation::updateOrCreate(
             [
                 'work_id' => $this->work->id,
-                'federation_section_id' => $this->contest_section->federation_section_id,
+                'federation_section_id' => $this->contestSection->federation_section_id,
             ],
             ['validator_user_id' => Auth::id()]
         );
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' validation_insert:'.json_encode($inserted));
-
     }
 
     /**
-     * 2. Show, but here we U turn
+     * 2. Show, no here we U turn
      */
     public function render()
     {
         Log::info('Component Organization/Contest/'.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
 
+        session()->flash('message', __("Done."));
         return view('');
+        // try return back()->with('success', __('Done.'));
     }
 }

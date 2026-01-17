@@ -29,7 +29,7 @@
             @endforeach 
             <!--/for every section/theme -->
         </tr>
-        @foreach($excel_rows as $part)
+        @foreach($excelRows as $part)
         <tr>
             <td style="font-size:9px;font-weight:bold;text-align:center;">{{$contest->federation_list}}</td>
             <td>{{$part['fed_cardId']}}</td>

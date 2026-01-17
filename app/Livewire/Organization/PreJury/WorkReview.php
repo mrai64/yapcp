@@ -6,6 +6,8 @@
  * Here the works are under very-first judgment, organization must
  * review if works should be introduced to jury or appears
  * any trouble that be communicated to author.
+ *
+ * 2026-01-17 PSR-12
  */
 
 namespace App\Livewire\Organization\PreJury;
@@ -13,45 +15,36 @@ namespace App\Livewire\Organization\PreJury;
 use App\Models\ContestWaiting;
 use App\Models\ContestWork;
 use App\Models\WorkValidation;
-use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class WorkReview extends Component
 {
-    public $contest_work;
+    public $contestWork;
 
-    public $contest_section;
+    public $contestSection;
 
     public $work;
 
-    public $reviewed_work; // counter
+    public int $reviewedWorkCount; // counter
 
-    public $warning_work; //  counter
+    public int $warningWorkCount; //  counter
 
     /**
      * 1. Before the show (if)
      */
     public function mount(string $wid) // livewire work_id
     {
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        $this->contest_work = ContestWork::where('id', $wid)->first();
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' contest_work:'.json_encode($this->contest_work));
+        $this->contestWork = ContestWork::where('id', $wid)->first();
 
-        $this->contest_section = $this->contest_work->contest_section;
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' contest_work:'.json_encode($this->contest_section));
+        $this->contestSection = $this->contestWork->contest_section;
 
-        $this->work = $this->contest_work->work;
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' work:'.json_encode($this->work));
+        $this->work = $this->contestWork->work;
 
-        $this->reviewed_work = WorkValidation::where('work_id', $this->work->id)->where('federation_section_id', $this->contest_section->federation_section_id)->count();
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' work_id:'.json_encode($this->work->id));
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' Fed_sec_id:'.json_encode($this->contest_section->federation_section_id));
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' reviewed_work:'.($this->reviewed_work));
-        if ($this->reviewed_work) {
-            $this->warning_work = false;
+        $this->reviewedWorkCount = WorkValidation::where('work_id', $this->work->id)->where('federation_section_id', $this->contestSection->federation_section_id)->count();
+        if ($this->reviewedWorkCount) {
+            $this->warningWorkCount = 0;
         } else {
-            $this->warning_work = ContestWaiting::where('work_id', $this->work->id)->count();
-            Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' warning_work:'.($this->warning_work));
+            $this->warningWorkCount = ContestWaiting::where('work_id', $this->work->id)->count();
         }
 
     }
@@ -61,17 +54,10 @@ class WorkReview extends Component
      */
     public function render()
     {
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        if ($this->reviewed_work || $this->warning_work) {
-            Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' SKIP');
-
-            // return view('-2'); // empty display hidden
+        if ($this->reviewedWorkCount || $this->warningWorkCount) {
             return view('livewire.organization.pre-jury.section-review-work-hidden'); // empty display hidden
         }
 
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' SHOW');
-
-        // return view('');
         return view('livewire.organization.pre-jury.section-review-work-show');
     }
 }

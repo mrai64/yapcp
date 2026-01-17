@@ -22,14 +22,14 @@ class Fiaf1ParticipantsExport implements FromView
 
     protected $contest;
 
-    protected $federation_mores;
+    protected $FederationMores;
 
-    protected $participants;
+    protected $contestParticipants;
 
-    protected $excel_rows;
+    protected $excelRows;
 
     // 1st: construct pick param then fill data for
-    // ! Add federation_id, then build a function for every federation
+    // ! Add federation_id ✅, then 🚧 build a function for every federation
     // ! public function __construct(string $cid, ?string $fid)
     public function __construct(string $cid, string $fid)
     {
@@ -46,15 +46,15 @@ class Fiaf1ParticipantsExport implements FromView
         ds($this->contest);
 
         // 3. more fields - which
-        $this->federation_mores = FederationMore::where('federation_id', $this->federation_id)
+        $this->FederationMores = FederationMore::where('federation_id', $this->federation_id)
             ->orderBy('field_name')
             ->get();
-        ds('federation_mores for:'.$fid);
-        ds($this->federation_mores);
-        $federation_mores = $this->federation_mores;
+        ds('FederationMores for:'.$fid);
+        ds($this->FederationMores);
+        $FederationMores = $this->FederationMores;
 
         // the fab 4. eager loaders
-        $this->participants = ContestParticipant::query()
+        $this->contestParticipants = ContestParticipant::query()
             ->where('contest_id', $this->contest_id)
             ->with([
                 'contact',
@@ -69,11 +69,11 @@ class Fiaf1ParticipantsExport implements FromView
             ])
             ->get()
             ->keyBy('user_id');
-        ds('fparticipants for cid:'.$cid.' & fid:'.$fid);
-        ds($this->participants);
+        ds('fcontestParticipants for cid:'.$cid.' & fid:'.$fid);
+        ds($this->contestParticipants);
 
         // At last, the lego building blocks
-        $this->excel_rows = $this->participants->map(function ($participant) {
+        $this->excelRows = $this->contestParticipants->map(function ($participant) {
 
             // participants info - see view/blade
             $row = [
@@ -105,7 +105,7 @@ class Fiaf1ParticipantsExport implements FromView
             // Mappiamo i valori custom dell'utente per accesso rapido
             $userValues = $participant->contactMores->pluck('field_value', 'field_name');
 
-            foreach ($this->federation_mores as $field) {
+            foreach ($this->FederationMores as $field) {
                 // Logica COALESCE: se l'utente ha il valore, usa quello, altrimenti il default
                 $valore = $userValues->get($field->field_name, $field->field_default_value);
 
@@ -115,7 +115,7 @@ class Fiaf1ParticipantsExport implements FromView
             return $row;
         });
 
-        ds($this->excel_rows);
+        ds($this->excelRows);
     }
 
     // 2nd: fill the view and export
@@ -125,7 +125,7 @@ class Fiaf1ParticipantsExport implements FromView
 
         return view('livewire.contest.report.fiaf1-participants', [
             'contest' => $this->contest,
-            'excel_rows' => $this->excel_rows,
+            'excelRows' => $this->excelRows,
         ]);
     }
 }

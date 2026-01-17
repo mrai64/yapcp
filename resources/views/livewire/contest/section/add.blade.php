@@ -21,8 +21,8 @@ use App\Models\ContestSection;
             <a href="{{ route('contest-section-add', ['cid' => $contest->id]) }}">
                 <span class="fyk text-2xl">Sections</span>
             </a>
-            @if (ContestSection::first_section_id( $contest->id ) > '')
-            <a href="{{ route('contest-jury-add', ['sid' => ContestSection::first_section_id( $contest->id ) ] ) }}">
+            @if (ContestSection::firstContestSectionId( $contest->id ) > '')
+            <a href="{{ route('contest-jury-add', ['sid' => ContestSection::firstContestSectionId( $contest->id ) ] ) }}">
                 <span class="fyk text-xl">Jury</span>
             </a>
             @else

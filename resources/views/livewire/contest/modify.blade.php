@@ -35,8 +35,8 @@ use Illuminate\Support\Facades\Log;
                 <span class="fyk text-xl">Sections</span>
             </a>
             . .
-            @if(ContestSection::first_section_id( $contest->id ) > '')
-            <a href="{{ route('contest-jury-add', ['sid' => ContestSection::first_section_id( $contest->id )] ); }}">
+            @if(ContestSection::firstContestSectionId( $contest->id ) > '')
+            <a href="{{ route('contest-jury-add', ['sid' => ContestSection::firstContestSectionId( $contest->id )] ); }}">
                 <span class="fyk text-xl">Jury</span>
             </a>
             @else
