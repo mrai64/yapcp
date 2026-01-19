@@ -89,7 +89,7 @@ class Add extends Component
 
         // juror user_id list
         $this->juror_list = [];
-        if ((int) ContestJury::count_juror($sid) > 0) {
+        if ((int) ContestJury::jurorCount($sid) > 0) {
             $this->juror_list = ContestJury::where('section_id', $sid)->get('user_contact_id');
         }
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' contest_section_list: '.json_encode($this->contest_section_list));

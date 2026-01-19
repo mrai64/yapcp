@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Log;
         <!-- Contest work list w/counter only -->
         <div class="fyk text-xl">{{__("Your counter:")}}
         @foreach($contest_section_list as $section)
-        <p class="inline-flex small">[ {{$section->code}} your:{{ ContestWork::count_works_for_section_user($section->id, $user_id) }} / {{$section->rule_max}}]</p>
+        <p class="inline-flex small">[ {{$section->code}} your:{{ ContestWork::sectionWorksCounter($section->id, $user_id) }} / {{$section->rule_max}}]</p>
         @endforeach
         </div>
 
@@ -88,7 +88,7 @@ use Illuminate\Support\Facades\Log;
             <tr><td colspan="3"><p class="small">&nbsp;</p></td></tr>
             <!-- work eligible --> 
             @foreach($work_list as $work)
-                @if( ContestWork::get_user_for_contest_work($contest_id, $work->id) === '')
+                @if( ContestWork::userWorksCounter($contest_id, $work->id) === '')
                 <tr class="border my-4">
                     <td scope="row" class="text-center" align="center">
                         @livewire('contest.subscribe.add', ['data_json' => json_encode(['contest_id' => $contest->id, 'work_id' => $work->id, 'contest_section_list' => $contest_section_list ]) ])

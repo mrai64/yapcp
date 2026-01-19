@@ -98,7 +98,7 @@ use Illuminate\Support\Facades\Gate;
                     </td>
                     <td class="small kbd" nowrap>
                         @foreach($contest_section_list as $section)
-                        [{{$section->code}}: {{ ContestWork::count_works_for_section_user($section->id, $participant['user_id']) }} / {{$section->rule_max}}] 
+                        [{{$section->code}}: {{ ContestWork::sectionWorksCounter($section->id, $participant['user_id']) }} / {{$section->rule_max}}] 
                         &nbsp;
                         @endforeach
                     </td>

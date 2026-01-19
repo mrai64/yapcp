@@ -1,7 +1,13 @@
 <?php
 
 /**
- * Contest (users) participants
+ * ContestParticipants is related to: users. For works in contest
+ * see ContestWorks. It stores only the info, updated from
+ * Organization, of fee payment completed, a Stop/Go flag for the
+ * day before jury works.
+ *
+ * related to Contest
+ * related to UserContact
  *
  * 2025-10-10 created an auxiliary table contest_participants_fee_payment_completes_sets to manage
  *            previously value of valid_YN[]
@@ -9,6 +15,9 @@
  * 2026-01-06 relationship review
  * 1:1 contest_participants.contest_id > contests.id
  * 1:1 contest_participants.user_id > user_contacts.user_id
+ *
+ * 2026-01-17 PSR-12 instead of snake_case everywhere
+ *
  */
 
 namespace App\Models;
@@ -16,37 +25,36 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Log; // Log::info
+use Illuminate\Support\Facades\Log;
 
 class ContestParticipant extends Model
 {
-    //
     use HasFactory;
     use SoftDeletes;
 
     public const TABLENAME = 'contest_participants';
 
-    // fee payment TODO
-    public const valid_YN = [
-        'Y',
-        'N',
+    // default id unsigned bigint autoincrement
+
+    // no boolean
+    private const VALID_YN = [
+        'N', // 0 false
+        'Y', // 1 true
     ];
 
     // field list fillable in factory
     protected $fillable = [
-        // id - unsigned bigint autoincrement assigned
-        'contest_id', //            uuid fk
-        'user_id', //               uuid fk
-        'fee_payment_completed', // in auxiliary table user_participants_fee_payment_completes_sets Y/N
-        // created_at
-        // updated_at
-        // deleted_at
+        'id', //                     pk unsigned bigint a+
+        'contest_id', //             fk contests.id
+        'user_id', //                fk user_contacts.user_id
+        'fee_payment_completed', //  Y/N
+        // created_at                reserved
+        // updated_at                reserved
+        // deleted_at                reserved
     ];
 
     protected function casts()
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -55,94 +63,104 @@ class ContestParticipant extends Model
     }
 
     // GETTERS
+
+    // was: get_participant_list
     /**
-     * ...order by country, last, first name
+     * Contest user Participant list (complete, no paginated),
+     * sorted by country, last_name, first_name
      *
-     * @param  $contest_id  - uuid fk contests.id
-     * @return array<string, string>
+     * @param string $contestId
+     * @return array
      */
-    public static function get_participant_list(string $contest_id): array
+    public static function contestParticipantsArray(string $contestId): array
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        // ! USE RELATIONSHIP
-        $participant_list = [];
-
-        $participants = self::where('contest_id', $contest_id)->get();
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' found: '.count($participants));
-        if (count($participants) < 1) {
-            return $participant_list;
+        //dbg Log::infoLog::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        if (Contest::exists($contestId) === false) {
+            return [];
         }
 
-        // array_fill
-        foreach ($participants as $participant) {
-            $user_contact = UserContact::where('user_id', $participant->user_id)->get()[0];
-            $participant_list[] = [
-                // idx
-                'country_id' => $user_contact->country_id,
-                'last_name' => $user_contact->last_name,
-                'first_name' => $user_contact->first_name,
-                // payload
-                'fee_payment_completed' => $participant->fee_payment_completed,
-                'user_id' => $participant->user_id,
-                'contest_id' => $participant->contest_id,
-            ];
-        }
-
+        $results = ContestParticipant::query()
+            ->leftJoin('pcp_user_contacts', 'pcp_contest_participants.user_id', '=', 'pcp_user_contacts.user_id')
+            ->where('contest_id', 'e8ac5674-c3d1-4afa-adaf-a7d5ed82d292')
+            ->select([
+                'pcp_user_contacts.country_id',
+                'pcp_user_contacts.last_name',
+                'pcp_user_contacts.first_name',
+                'pcp_user_contacts.user_id',
+                'pcp_contest_participants.fee_payment_completed'
+            ])
+            ->orderBy('pcp_user_contacts.country_id')
+            ->orderBy('pcp_user_contacts.last_name')
+            ->orderBy('pcp_user_contacts.first_name')
+            ->orderBy('pcp_user_contacts.user_id')
+            ->get();
         // sort array
-        $participant_list = collect($participant_list)->sortBy(['country_id', 'last_name', 'first_name'])->toArray();
+        $contestParticipantsArray = collect($results)->sortBy(['country_id', 'last_name', 'first_name'])->toArray();
 
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' exit participant_list:'.json_encode($participant_list));
+        //dbg Log::infoLog::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' exit contestParticipantsArray:'.json_encode($contestParticipantsArray));
 
-        return $participant_list;
+        return $contestParticipantsArray;
     }
 
     // RELATIONSHIP
 
-    public function contest_works()
-    {
-        //                    contest_works.user_id contest_participants.user_id
-        $contest_works = $this->hasMany(ContestWork::class, 'user_id', 'user_id');
 
-        return $contest_works;
+    public function contest()
+    {
+        $contest = $this->belongsTo(
+            related: Contest::class,
+            foreignKey: 'id',
+            ownerKey: 'contest_id'
+        );
+        return $contest;
+    }
+
+    // was: contest_works
+    public function contestWorks()
+    {
+        $contestWorks = $this->hasMany(ContestWork::class, 'user_id', 'user_id');
+
+        return $contestWorks;
     }
 
     public function works()
     {
-        //                    contest_works.user_id contest_participants.user_id
-        $contest_works = $this->hasMany(ContestWork::class, 'user_id', 'user_id');
+        $contestWorks = $this->hasMany(ContestWork::class, 'user_id', 'user_id');
 
-        return $contest_works;
+        return $contestWorks;
     }
 
-    public function user_contact()
+    // was: user_contact
+    public function userContact()
     {
-        //                     user_contacts.user_id contest_participants.user_id
-        $user_contact = $this->belongsTo(UserContact::class, 'user_id', 'user_id');
+        $userContact = $this->belongsTo(UserContact::class, 'user_id', 'user_id');
 
-        return $user_contact;
+        return $userContact;
     }
 
+    // doubled as used in query as contact
     public function contact()
     {
         //                     user_contacts.user_id contest_participants.user_id
-        $user_contact = $this->belongsTo(UserContact::class, 'user_id', 'user_id');
+        $userContact = $this->belongsTo(UserContact::class, 'user_id', 'user_id');
 
-        return $user_contact;
+        return $userContact;
     }
 
-    public function user_contact_more()
+    // was: user_contact_more
+    public function userContactMores()
     {
         //                       user_contact_mores.user_contact_user_id contest_participants.user_id
-        $user_contact_more = $this->hasMany(UserContactMore::class, 'user_contact_user_id', 'user_id');
+        $userContactMores = $this->hasMany(UserContactMore::class, 'user_contact_user_id', 'user_id');
 
-        return $user_contact_more;
+        return $userContactMores;
     }
 
     public function contactMores()
     {
         //                       user_contact_mores.user_contact_user_id contest_participants.user_id
-        $user_contact_more = $this->hasMany(UserContactMore::class, 'user_contact_user_id', 'user_id');
+        $userContactMores = $this->hasMany(UserContactMore::class, 'user_contact_user_id', 'user_id');
 
-        return $user_contact_more;
+        return $userContactMores;
     }
 }

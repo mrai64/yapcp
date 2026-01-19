@@ -1,7 +1,8 @@
 <?php
 
 /**
- * auxiliary table to limit contests.vote_rule values
+ * Contest Vote Rule Set is a lookup table
+ * for contests.vote_rule
  *
  * Don't add nor delete record from auxiliary table before made
  * change in ContestVoteRuleRule that decide if vote are valid
@@ -13,19 +14,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Log;
 
 class ContestsVoteRuleSet extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
-    protected $primaryKey = 'vote_rule'; // standard name 'id'
+    public const TABLENAME = 'contests_vote_rule_sets';
 
-    public $incrementing = false;
+    // primary key
+    protected $primaryKey = 'vote_rule'; //  default 'id'
+    protected $keyType = 'string'; // uuid char(36)
+    public $incrementing = false; //  with no increment
 
-    protected $keyType = 'string';
-
+    // field list
     protected $fillable = [
         'vote_role',
         // created_at
@@ -35,8 +37,6 @@ class ContestsVoteRuleSet extends Model
 
     protected function casts()
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -47,7 +47,15 @@ class ContestsVoteRuleSet extends Model
     // GETTER
 
     // RELATIONSHIP
-
-    // contests_vote_rule_set.vote_rule <-- 1:1 --> contests.vote_rule
+    // contests_vote_rule_sets.vote_rule > contests.vote_rule
+    public function contestVoteRule()
+    {
+        $cvr = $this->hasMany(
+            related: Contest::class,
+            foreignKey: 'vote_rule',
+            localKey: 'vote_rule'
+        );
+        return $cvr;
+    }
 
 }

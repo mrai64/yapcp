@@ -1,10 +1,8 @@
 <?php
 
 /**
- * Contest - main table
- * must be father of seven
- * use uuid
- * related of Organization
+ * Contest - main table with some info on contest like name,
+ * calendar dates, federation
  *
  * 2025-09-17 In the photo contest organization some contest are grouped
  *            into so named circuit. A circuit have a contest record without
@@ -23,6 +21,7 @@
  * 1:N contests.id < contest_waitings.contest_id
  * 1:N contests.id < contest_works.contest_id
  * 1:N contests.id < user_roles.contest_id
+ *
  */
 
 namespace App\Models;
@@ -39,7 +38,7 @@ class Contest extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public const TABLENAME = 'contests'; // was: table_name
+    public const TABLENAME = 'contests'; // was: table_name but also Contest()->getTable()
 
     // uuid as pk
     protected $keyType = 'string'; //     uuid string(36)
@@ -48,7 +47,6 @@ class Contest extends Model
 
     protected $fillable = [
         'id', //                 pk uuid
-        // contest 'name'
         'country_id', //         fk countries.id
         'name_en',
         'federation_list', // TODO build validation rule
@@ -57,27 +55,28 @@ class Contest extends Model
         'contest_mark', //       path n file
         'timezone', //                  fk timezones.timezone
         'organization_id', //    fk organizations.id
-        // circuit part
+
         'is_circuit', //         Y/N limited set
         'circuit_id',  //        fk contests.id | NULL
-        //
+
         'url_1_rule', //                web url
         'url_2_concurrent_list', //     web url
         'url_3_admit_n_award_list', //  web url
         'url_4_catalogue', //           web url
-        'day_1_opening',
-        'day_2_closing',
-        'day_3_jury_opening',
-        'day_4_jury_closing',
-        'day_5_revelations',
-        'day_6_awards',
-        'day_7_catalogues',
-        'day_8_closing',
-        // info block
+
+        'day_1_opening', //
+        'day_2_closing', //
+        'day_3_jury_opening', //
+        'day_4_jury_closing', //
+        'day_5_revelations', //
+        'day_6_awards', //
+        'day_7_catalogues', //
+        'day_8_closing', //
+
         'contact_info', //       text
         'award_ceremony_info', //
         'fee_info', //
-        // jury block
+
         'vote_rule', //                 fk contest_vote_rule_sets.vote_rule
         // 'contest_vote_rule_id', //   fk contest_vote_rules.id
 

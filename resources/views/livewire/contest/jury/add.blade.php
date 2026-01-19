@@ -84,7 +84,7 @@ use App\Models\ContestSection;
                     </td>
                     <td valign="top">{{ $contest_section->name_en}}<br />{{ $contest_section->name_local}}</td>
                     <td valign="top">
-                        {{ ContestJury::count_juror( (string) $contest_section->id ); }}
+                        {{ ContestJury::jurorCount( (string) $contest_section->id ); }}
                         <br />
                         <a href="{{ route('contest-jury-add', ['sid' => $contest_section->id] ) }}"
                         >

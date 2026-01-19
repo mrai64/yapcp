@@ -37,7 +37,7 @@ class Listed extends Component
 
         $this->contest_section_list = ContestSection::where('contest_id', $cid)->get();
 
-        $this->participant_list = ContestParticipant::get_participant_list($cid);
+        $this->participant_list = ContestParticipant::contestParticipantsArray($cid);
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' participant_list:'.json_encode($this->participant_list));
 
     }

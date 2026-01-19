@@ -4,6 +4,13 @@
  * Contest Waiting
  * Works Parked away from contest
  * wait a moment: that work had a problem
+ *
+ * related to contests
+ * related to contest_sections
+ * related to user_contacts
+ *
+ * 2026-01-18 PSR-12
+ *
  */
 
 namespace App\Models;
@@ -11,7 +18,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class ContestWaiting extends Model
@@ -19,21 +25,24 @@ class ContestWaiting extends Model
     use Notifiable;
     use SoftDeletes;
 
-    // protected $primaryKey= 'id';
-    protected $keyType = 'string';
+    public const TABLENAME = 'contest_waitings';
 
-    public $incrementing = false;
+    // primary key
+    protected $primaryKey = 'id'; //  default but
+    protected $keyType = 'string'; // uuid char(36)
+    public $incrementing = false; //  with no increment
 
+    // field list
     protected $fillable = [
-        // id
-        'contest_id', //           uuid fk
-        'section_id', //           uuid fk
-        'participant_user_id', //  uuid fk
-        'work_id', //              uuid fk
-        'portfolio_sequence', //   0..255
-        'email',
-        'because', //              text
-        'organization_user_id', // uuid fk
+        'id', //                   pk uuid
+        'contest_id', //           fk contests.id
+        'section_id', //           fk contest_sections.id
+        'participant_user_id', //  fk user_contacts.user_id
+        'work_id', //              fk contest_works.work_id
+        'portfolio_sequence', //   1..contest_sections.rule_max
+        'email', //
+        'because', //
+        'organization_user_id', // fk user_contacts.user_id
         // created_at
         // updated_at
         // deleted_at
@@ -42,7 +51,6 @@ class ContestWaiting extends Model
     // pk uuid
     public static function booted()
     {
-        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         static::creating(function ($model) {
             $model->id = Str::uuid7(); // uuid generator
         });
@@ -50,8 +58,6 @@ class ContestWaiting extends Model
 
     protected function casts()
     {
-        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -59,45 +65,40 @@ class ContestWaiting extends Model
         ];
     }
 
-    // RELATIONSHIPs
+    // RELATIONSHIPS
 
     public function contest()
     {
-        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $contest = $this->hasOne(Contest::class, 'id', 'contest_id');
-        // . . . . . . . . . . . . . . . contests.id   contest_waitings.contest_id
-        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' contest:'.json_encode($contest));
-
         return $contest;
     }
 
     public function section()
     {
-        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $section = $this->hasOne(ContestSection::class, 'id', 'section_id');
-        // . . . . . . . . . . . . . . .contest:sections.id   contest_waitings.section_id
-        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' section:'.json_encode($section));
-
         return $section;
     }
 
     public function work()
     {
-        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $work = $this->hasOne(Work::class, 'id', 'work_id');
-        // . . . . . . . . . . . . . .works.id   contest_waitings.work_id
-        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' section:'.json_encode($work));
-
         return $work;
     }
 
-    public function participant_user()
+    // was: participant_user
+    public function participantUser()
     {
-        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        $participant_user = $this->hasOne(UserContact::class, 'user_id', 'participant_user_id');
-        // . . . . . . . . . . . . . . . . . . . user_contacts.user_id   contest_waitings.participant_user_id
-        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' section:'.json_encode($participant_user));
+        $participant = $this->hasOne(UserContact::class, 'user_id', 'participant_user_id');
+        return $participant;
+    }
 
-        return $participant_user;
+    public function organizationExaminer()
+    {
+        $userContact = $this->belongsTo(
+            related: UserContact::class,
+            foreignKey: 'user_id',
+            ownerKey: 'organization_user_id'
+        );
+        return $userContact;
     }
 }
