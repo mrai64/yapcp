@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Contest - main table with some info on contest like name,
+ * Contest - *main table* with some info on contest like name,
  * calendar dates, federation
  *
  * 2025-09-17 In the photo contest organization some contest are grouped
@@ -10,17 +10,18 @@
  * 2025-10-22 Created an auxiliary table and add col vote_rule
  * 2026-01-15 refactor for PSR-12 function n variables in camelCase
  *
- * relations
- * 1:1 contests.country_id > countries.id
- * 1:1 contests.organization_id > organizations.id
- * N:1 contests.circuit_id > contests.id (with is_circuit == 1)
- * 1:N contests.id < contest_awards.contest_id
- * 1:N contests.id < contest_participants.contest_id
- * 1:N contests.id < contest_sections.contest_id
- * 1:N contests.id < contest_votes.contest_id
- * 1:N contests.id < contest_waitings.contest_id
- * 1:N contests.id < contest_works.contest_id
- * 1:N contests.id < user_roles.contest_id
+ * related to ✅ Country
+ * related to ❌ Federation (it's a federationId:patronageCode list)
+ * related to ✅ Timezone
+ * related to ✅ Organization
+ * related to 🚧 Contest (for circuit)
+ * related to ✅ ContestAward
+ * related to ✅ ContestParticipant
+ * related to ✅ ContestSection
+ * related to ✅ ContestVote
+ * related to ✅ ContestWaiting
+ * related to ✅ ContestWork
+ * related to ✅ UserRole
  *
  */
 
@@ -30,7 +31,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class Contest extends Model
@@ -46,57 +46,52 @@ class Contest extends Model
     public $incrementing = false; //   uuid don't need ++
 
     protected $fillable = [
-        'id', //                 pk uuid
-        'country_id', //         fk countries.id
-        'name_en',
-        'federation_list', // TODO build validation rule
-        'name_local', // TODO remove field
-        'lang_local', // TODO remove field
-        'contest_mark', //       path n file
-        'timezone', //                  fk timezones.timezone
-        'organization_id', //    fk organizations.id
-
-        'is_circuit', //         Y/N limited set
-        'circuit_id',  //        fk contests.id | NULL
-
+        'id', //                        pk uuid
+        'country_id', //                fk countries.id
+        'name_en', //                   TODO become title
+        'name_local', //                TODO remove field
+        'lang_local', //                TODO remove field
+        'organization_id', //           fk organizations.id
+        'contest_mark', //              path n file
+        'contact_info', //              free text
+        'is_circuit', //                0/1 N/Y limited set
+        'circuit_id',  //               fk contests.id | NULL
+        'federation_list', //           TODO build validation rule
         'url_1_rule', //                web url
         'url_2_concurrent_list', //     web url
         'url_3_admit_n_award_list', //  web url
         'url_4_catalogue', //           web url
+        'timezone', //                  fk timezones.timezone
+        'day_1_opening', //             datetime yyyy-mm-dd hh.mm UTC
+        'day_2_closing', //             datetime yyyy-mm-dd hh.mm UTC
+        'day_3_jury_opening', //        datetime yyyy-mm-dd hh.mm UTC
+        'day_4_jury_closing', //        datetime yyyy-mm-dd hh.mm UTC
+        'day_5_revelations', //         datetime yyyy-mm-dd hh.mm UTC
+        'day_6_awards', //              datetime yyyy-mm-dd hh.mm UTC
+        'day_7_catalogues', //          datetime yyyy-mm-dd hh.mm UTC
+        'day_8_closing', //             datetime yyyy-mm-dd hh.mm UTC
 
-        'day_1_opening', //
-        'day_2_closing', //
-        'day_3_jury_opening', //
-        'day_4_jury_closing', //
-        'day_5_revelations', //
-        'day_6_awards', //
-        'day_7_catalogues', //
-        'day_8_closing', //
-
-        'contact_info', //       text
-        'award_ceremony_info', //
-        'fee_info', //
+        'award_ceremony_info', //       free text
+        'fee_info', //                  free text
 
         'vote_rule', //                 fk contest_vote_rule_sets.vote_rule
         // 'contest_vote_rule_id', //   fk contest_vote_rules.id
 
-        // created_at
-        // updated_at
-        // deleted_at
+        // created_at                   reserved
+        // updated_at                   reserved
+        // deleted_at                   reserved
     ];
 
     // uuid as pk
     public static function booted()
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         static::creating(function ($model) {
-            $model->id = Str::uuid7(); // uuid generator
+            $model->id = Str::uuid7();
         });
     }
 
     protected function casts()
     {
-        // Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ .' called');
         return [
             'day_1_opening' => 'datetime',
             'day_2_closing' => 'datetime',
@@ -114,115 +109,129 @@ class Contest extends Model
 
     // GETTERs
 
-    /**
-     * use: Contest::getNameEn(string $id)
-     *
-     * @return string name_en - contest name | ""
-     */
     public static function getNameEn(string $contestId): string
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $inpId = Str::of($contestId);
-        $getContest = self::select('name_en')->where('id', $inpId)->get();
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' get: '.$getContest);
+        $getContest = self::find($contestId);
 
-        return (count($getContest) == 0) ? '' : Str::of($getContest[0]['name_en']);
+        return $getContest->name_en ?? '';
     }
 
     /**
-     * Used to fill blade.
-     * Use: Contest::get_circuit_list()
-     *
-     * @return array [id, name_en] selection w/is_circuit Y/1/true
-     *
-    public static function get_circuit_list()
+     * Set of ordered contests w/is_circuit 1/Y, named circuits.
+     * Warn: circuit set, not contest-in-circuit set
+     */
+    public static function getCircuitSet()
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $circuit_list = self::select('id', 'name_en')
+        $circuitSet = self::select('id', 'name_en')
             ->where('is_circuit', 'Y')
             ->orderBy('name_en')
             ->get();
 
-        return $circuit_list;
+        return $circuitSet ?? [];
     }
-     */
+
+    // for validation?
+    public function contestIsInCircuit(): bool
+    {
+        $isIn = ($this->circuit_id !== null);
+        return $isIn;
+    }
+
+    // fr validation?
+    public function isACircuit(): bool
+    {
+        return ($this->is_circuit === 'Y');
+    }
+
+
+    // for circuit: get contest in circuit
+    public function getContests()
+    {
+        $contestSet = $this->hasMany(
+            related: static::class,
+            foreignKey: 'circuit_id',
+            localKey: 'id'
+        );
+
+        return $contestSet;
+    }
 
     // RELATIONSHIPs
 
-    /**
-     * @return Country contests.country_id 1:1 countries.id
-     */
+    // contests.country_id > countries.id
     public function country()
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $country = $this->belongsTo(Country::class);
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out');
 
         return $country;
     }
 
-    /**
-     * @return Organization contests.organization_id 1:1 organizations.id
-     */
+    // federation list
+
+    // contests.timezone > timezones.timezone
+    public function timezone()
+    {
+        $tz = $this->belongsTo(
+            related: Timezone::class,
+            foreignKey: 'id',
+            ownerKey: 'timezone'
+        );
+
+        return $tz;
+    }
+
+    // contests.organization_id > organizations.id
     public function organization()
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $organization = $this->belongsTo(Organization::class);
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out');
 
         return $organization;
     }
 
-    /**
-     * @return ContestAwards contests.id 1:N contest_awards.contest_id
-     */
-    public function contestAwards(): HasMany
+    // valid for is_circuit 'Y'
+    public function contestInCircuit()
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $contestAwardsSet = $this->hasMany(related: Country::class, foreignKey: 'contest_id', localKey: 'id');
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out ');
+        $contests = $this->hasMany(
+            related: static::class,
+            foreignKey: 'id',
+            localKey: 'circuit_id'
+        );
+
+        return $contests;
+    }
+
+    // contest_juries.section_id > contest_sections.id > contests.id
+
+    // contest_awards.contest_id > contests.id
+    public function contestAwards()
+    {
+        $contestAwardsSet = $this->hasMany(
+            related: ContestAward::class,
+            foreignKey: 'contest_id',
+            localKey: 'id'
+        );
 
         return $contestAwardsSet;
     }
 
-    /**
-     * @return ContestJuror contests.id 1:N contest_juries.contest_id
-     */
-    public function jury()
-    {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $contestJurySet = $this->hasMany(ContestJury::class);
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out');
-
-        return $contestJurySet;
-    }
-
-    /**
-     * @return ContestParticipant contests.id 1:N contest_participants.contest_id
-     */
+    // contest_participants.contest_id > contests.id
     public function participants(): HasMany
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $participants = $this->hasMany(
             related: ContestParticipant::class,
             foreignKey: 'contest_id',
             localKey: 'id'
         );
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out');
 
         return $participants;
     }
 
-    /**
-     * @return ContestSection contests.id 1:N contest_sections.contest_id
-     */
+    // contest_sections.contest_id > contests.id
     public function sections()
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $sections = $this->hasMany(ContestSection::class);
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out');
+        $sec = $this->hasMany(ContestSection::class);
 
-        return $sections;
+        return $sec;
     }
 
     //
@@ -284,6 +293,33 @@ class Contest extends Model
         );
 
         return $userRoles;
+    }
+
+    /**
+     * For contest in circuit, self-referencing relation
+     *
+     * contests.circuit_id > contests.id
+     */
+    public function circuit()
+    {
+        $circuitId = $this->belongsTo(
+            related: static::class,
+            foreignKey: 'circuit_id',
+            ownerKey: 'id'
+        );
+
+        return $circuitId;
+    }
+
+    public function contestsInCircuit()
+    {
+        $contests = $this->hasMany(
+            related: static::class,
+            foreignKey: 'circuit_id',
+            localKey: 'id'
+        );
+
+        return $contests;
     }
 
 }
