@@ -1,18 +1,14 @@
 <?php
 
 /**
- * Contest Definition (section) Awards
- * - child of ContestSection (end not only)
- *   - child of Contest
+ * ContestAward define the award list for section(s),
+ * and contest, using a filled/empty section_code.
  *
- * uuid pk
  * is_award mean that some prize are A prize, i.e. valid for some federations distinctions, others are "simple" prize.
  *
  * 2025-12-05 Log
  * 2026-01-17 PSR-12
  *
- * ContestAward define the award list for section(s),
- * and contest, using a filled/empty section_code.
  * related to Contest
  * related to ContestSection
  * related to ContestWork
@@ -43,7 +39,7 @@ class ContestAward extends Model
         // id             pk uuid
         'contest_id', //  fk contests.id
         'section_id', //  fk contest_sections.id
-        'section_code', //   contest_sections.code
+        'section_code', //   contest_sections.code w/section_id
         'award_code', //     sortable code first - major, last - minor
         'award_name', //
         'is_award', //       Prize <> HM
