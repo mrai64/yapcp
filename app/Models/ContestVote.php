@@ -2,7 +2,7 @@
 
 /**
  * Contest Jury Votes, section by section, work by work
- * 
+ *
  * related to Contest
  * related to ContestSection
  * related to Work

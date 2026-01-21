@@ -58,7 +58,7 @@ class Add extends Component
 
     public string $lang_local; // LangList[]
 
-    public $lang_list = [];
+    public $langSet = [];
 
     public string $organization_id; // organizations.id
 
@@ -128,7 +128,7 @@ class Add extends Component
         $this->name_en = 'Contest name';
         $this->name_local = 'Contest name';
 
-        $this->lang_list = LangList::lang_list;
+        $this->langSet = LangList::LANGCODES;
         $this->lang_local = 'en';
         $this->is_circuit = 'N';
 
@@ -204,7 +204,7 @@ class Add extends Component
             'country_id' => 'required|string|exists:countries,id',
             'name_en' => 'required|string',
             'name_local' => 'required|string',
-            'lang_local' => 'required|string', // in(LangList::lang_list)
+            'lang_local' => 'required|string', // in(LangList::LANGCODES)
             // organization_id by uri,   not in form
             // contest_mark
             'contact_info' => 'required|string',

@@ -76,7 +76,7 @@ class Organization extends Model
      *   - created_at (to avoid dup, theoretically not but in real world)
      * & exclusion for deleted_at
      */
-    public static function listed_by_country_id_name()
+    public static function countryIdSorted()
     {
         Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $organizations = DB::table('organizations')

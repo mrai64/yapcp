@@ -90,7 +90,7 @@ class Modify extends Component
 
     public string $lang_local;
 
-    public array $lang_list = [];
+    public array $langSet = [];
 
     public string $timezone;
 
@@ -134,7 +134,7 @@ class Modify extends Component
         $this->region = $this->user_contact->region;
         $this->postal_code = $this->user_contact->postal_code;
 
-        $this->lang_list = LangList::lang_list;
+        $this->langSet = LangList::LANGCODES;
         $this->lang_local = $this->user_contact->lang_local;
 
         $timezone_set = Timezone::select('id')->get();

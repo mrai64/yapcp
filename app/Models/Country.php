@@ -3,7 +3,7 @@
 /**
  * Countries w/flag
  * lookup table
- * 
+ *
  * related to UserContact
  * related to Federation
  * related to Organization

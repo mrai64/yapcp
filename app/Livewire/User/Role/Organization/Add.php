@@ -37,7 +37,7 @@ class Add extends Component
     {
         $this->user_id = Auth::id();
         $this->role_list = UserRolesRoleSet::valid_roles(); // it's an []
-        $this->organization_list = Organization::listed_by_country_id_name(); // country_id, name
+        $this->organization_list = Organization::countryIdSorted(); // country_id, name
 
     }
 

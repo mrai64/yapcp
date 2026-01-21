@@ -67,7 +67,7 @@ class ContestWaiting extends Model
         ];
     }
 
-    // GETTER 
+    // GETTER
 
     // RELATIONSHIPS
 

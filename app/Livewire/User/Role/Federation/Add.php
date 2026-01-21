@@ -38,7 +38,7 @@ class Add extends Component
         Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $this->user_id = Auth::id();
         $this->role_list = UserRolesRoleSet::valid_roles(); // []
-        $this->federation_list = Federation::listed_by_country_id_name();
+        $this->federation_list = Federation::countryIdSorted();
     }
 
     /**

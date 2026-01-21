@@ -1,6 +1,20 @@
 <?php
 
 /**
+ * Federation are the organization that define rules for well
+ * conducted photographic contest and need report to manage some
+ * distinctions based on contest results.
+ * As key is acronym based, some federation had
+ * the same code, in that case a suffix must be added
+ * i.e. FAF:AND Federation Andorrana de Fotografia
+ *      FAF:ARG Federation Argentina de Fotografia
+ *
+ * related to Country
+ * related to FederationSection
+ * related to FederationMore
+ * related to userContactMore
+ * related to UserRole
+ *
  * 2025-08-27 add contact country_id
  * 2025-08-27 add contact field
  * 2025-09-20 add 4 char to code
@@ -8,6 +22,8 @@
  * 2025-10-16 table changes - v.2
  *            old 'code' field become id, string
  * Relationship 1:1 country_id
+ * 2026-01-21 PSR-12
+ *
  */
 
 namespace App\Models;
@@ -25,29 +41,27 @@ class Federation extends Model
 
     public const TABLENAME = 'federations';
 
-    // pk it's not a bigint nor uuid
-    protected $keyType = 'string';
-
-    public $incrementing = false;
+    // primary key
+    protected $primaryKey = 'id'; //  default but
+    protected $keyType = 'string'; // char(10) uppercase
+    public $incrementing = false; //  with no increment
 
     protected $fillable = [
-        'id',
-        'country_id', // fk countries.id
-        'name_en',
-        'local_lang',
-        'name_local',
-        'timezone_id',
-        'website',
-        'contact_info',
-        // created_at
-        // updated_at
-        // deleted_at
+        'id', //            pk char(10)
+        'country_id', //    fk countries.id
+        'name_en', //       english
+        'local_lang', //    TODO future use for RTL
+        'name_local', //    based on local_lang
+        'timezone_id', //   fk timezones.id
+        'website', //       official
+        'contact_info', //  text address, tel etc
+        // created_at       reserved
+        // updated_at       reserved
+        // deleted_at       reserved
     ];
 
     protected function casts(): array
     {
-        Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -55,41 +69,68 @@ class Federation extends Model
         ];
     }
 
-    // GETTER
-    public static function listed_by_country_id_name()
+    // GETTERS
+
+    // was : listed_by_country_id_name
+    public static function countryIdSorted()
     {
-        Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        $f_list = self::select()
+        $federationSet = self::select()
             ->orderBy('country_id', 'asc')
             ->orderBy('name_en', 'asc')
             ->orderBy('created_at', 'desc')
             ->get();
-        Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($f_list));
-
-        return $f_list;
+        // log
+        return $federationSet;
     }
 
     // REALATIONSHIPS
 
-    // federation         = Federation::find('FIAP');
-    // federation_country = Federation::find('FIAP')->country;
+    // federations.country_id > countries.id
     public function country()
     {
-        // Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in:'.json_encode($this));
-        $country_ = $this->belongsTo(Country::class);
-        Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($country_));
-
-        return $country_;
+        $country = $this->belongsTo(Country::class);
+        // log
+        return $country;
     }
 
+    // federations.id > federation_sections.federation_id
     public function sections(): HasMany
     {
-        Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        $s_collection = $this->hasMany(FederationSection::class, 'federation_id', 'id');
-        // . . . . . . . . . . . . . . . . . .federation_sections.federation_id   federations.id
-        Log::info('Models '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($s_collection));
-
-        return $s_collection;
+        $federationSectionsSet = $this->hasMany(FederationSection::class, 'federation_id', 'id');
+        // log
+        return $federationSectionsSet;
     }
+
+    // federations.id > federation_mores.federation_id
+    public function moreFedFields()
+    {
+        $moreFields = $this->hasMany(FederationMore::class, 'federation_id', 'id');
+        // log
+        return $moreFields;
+    }
+
+    // federations.id > user_contact_mores.federation_id
+    public function moreUserFields()
+    {
+        $moreFields = $this->hasMany(
+            related: UserContactMore::class,
+            foreignKey: 'federation_id',
+            localKey: 'id'
+        );
+        // log
+        return $moreFields;
+    }
+
+    // federations.id > user_role.federation_id
+    public function userRoles()
+    {
+        $userRoles = $this->hasMany(
+            related: UserRole::class,
+            foreignKey: 'federation_id',
+            localKey: 'id'
+        );
+        // log
+        return $userRoles;
+    }
+
 }

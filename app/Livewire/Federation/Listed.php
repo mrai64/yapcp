@@ -20,7 +20,7 @@ class Listed extends Component
     public function mount() // no parm
     {
         Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        $this->federation_list = Federation::listed_by_country_id_name();
+        $this->federation_list = Federation::countryIdSorted();
         Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($this->federation_list));
     }
 

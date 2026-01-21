@@ -134,7 +134,7 @@ use Illuminate\Support\Facades\Log;
                 name="lang_local"
                 {{ ($readonly_flag) ? 'readonly' : 'required' }}
                 >
-                @foreach ($lang_list as $lang_code => $lang_lang)
+                @foreach ($langSet as $lang_code => $lang_lang)
                 <option value="{{ $lang_code }}" {{($lang_code == $lang_local) ? 'selected' : '' }} > {{ $lang_lang }}</option>
                 @endforeach
             </select>

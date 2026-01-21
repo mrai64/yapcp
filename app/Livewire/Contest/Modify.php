@@ -87,7 +87,7 @@ class Modify extends Component
 
     public $timezone_list = [];
 
-    public $lang_list = [];
+    public $langSet = [];
 
     public array $valid_is_circuit = ['Y', 'N']; // default 'N'
 
@@ -148,7 +148,7 @@ class Modify extends Component
         $this->timezone_list = array_values(collect($timezone_set)->toArray());
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' timezones after ');
 
-        $this->lang_list = LangList::lang_list;
+        $this->langSet = LangList::LANGCODES;
         $this->readonly_flag = false;
         // $this->readonly_flag = ($today > $this->day_1_opening);
 
@@ -178,7 +178,7 @@ class Modify extends Component
             'country_id' => 'required|string|exists:countries,id',
             'name_en' => 'required|string',
             'name_local' => 'required|string',
-            'lang_local' => 'required|string', // in(LangList::lang_list)
+            'lang_local' => 'required|string', // in(LangList::LANGCODES)
             // organization_id readonly
             // contest_mark TODO
             'contact_info' => 'required|string',

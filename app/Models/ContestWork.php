@@ -82,7 +82,7 @@ class ContestWork extends Model
      */
     public function miniature(string $originalFileName = ''): string
     {
-        // default for contest based on 
+        // default for contest based on
         if ($originalFileName === '') {
             $originalFileName = $this->contest_id.'/'.$this->section_id.'/300px_'.$this->work_id.$this->extension;
         }

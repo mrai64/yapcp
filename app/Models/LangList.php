@@ -1,8 +1,9 @@
 <?php
 
 /**
- * English is base
- * but not the only
+ * Translation lang in platform UI
+ *
+ * Note: not table based
  * see also <https://www.w3.org/International/questions/qa-html-language-declarations>
  */
 
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class LangList extends Model
 {
-    public const lang_list = [
+    public const LANGCODES = [
         'en' => 'English',   // also fallback language
         'it' => 'Italian *', // \*: incomplete '/resources/lang/it.json'
         // incomplete list
@@ -20,7 +21,7 @@ class LangList extends Model
     ];
 
     // use dir="auto"
-    public const rtl_lang_list = [
+    public const RTLLANGCODES = [
         'ar', // Arabic
         'he', // Hebrew
         // incomplete list
@@ -28,26 +29,26 @@ class LangList extends Model
 
     public function __construct()
     {
-        return self::lang_list;
+        return self::LANGCODES;
     }
 
     /**
-     * @param  string  $lang_code  a language code
+     * @param  string  $langCode  a language code
      * @return bool true if lang code is in the list
      */
-    public function is_lang(string $lang_code): bool
+    public function isLang(string $langCode): bool
     {
-        return array_key_exists(strtolower($lang_code), self::lang_list);
+        return array_key_exists(strtolower($langCode), self::LANGCODES);
     }
 
     /**
-     * @param  string  $lang_code  a language code
+     * @param  string  $langCode  a language code
      * @return string ''|'rtl'
      */
-    public function is_rtl(string $lang_code): string
+    public function isRtl(string $langCode): string
     {
-        $lang_code = strtolower($lang_code);
+        $langCode = strtolower($langCode);
 
-        return (in_array($lang_code, self::rtl_lang_list)) ? 'rtl' : '';
+        return (in_array($langCode, self::RTLLANGCODES)) ? 'rtl' : '';
     }
 }

@@ -26,7 +26,7 @@
  * TODO refactor to reduce duplicate function
  * TODO manage local datetime, timezone to UTC
  * TODO manage UTC, Timezone to local datetime
- * 
+ *
  */
 
 namespace App\Models;
@@ -44,10 +44,10 @@ class Contest extends Model
 
     public const TABLENAME = 'contests'; // was: table_name but also Contest()->getTable()
 
-    // uuid as pk
-    protected $keyType = 'string'; //     uuid string(36)
-
-    public $incrementing = false; //   uuid don't need ++
+    // primary key
+    protected $primaryKey = 'id'; //  default but
+    protected $keyType = 'string'; // uuid char(36)
+    public $incrementing = false; //  with no increment
 
     protected $fillable = [
         'id', //                        pk uuid
