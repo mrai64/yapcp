@@ -11,7 +11,7 @@
  * 2026-01-15 refactor for PSR-12 function n variables in camelCase
  *
  * related to ✅ Country
- * related to ❌ Federation (it's a federationId:patronageCode list)
+ * related to ❌ Federation (it's a federationId[patronageCode] list)
  * related to ✅ Timezone
  * related to ✅ Organization
  * related to 🚧 Contest (for circuit)
@@ -23,6 +23,10 @@
  * related to ✅ ContestWork
  * related to ✅ UserRole
  *
+ * TODO refactor to reduce duplicate function
+ * TODO manage local datetime, timezone to UTC
+ * TODO manage UTC, Timezone to local datetime
+ * 
  */
 
 namespace App\Models;

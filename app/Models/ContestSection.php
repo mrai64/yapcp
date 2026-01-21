@@ -11,11 +11,9 @@
  * if requested monochromatic,
  * if RAW file should be requested etc.
  *
- * related to contests
- * related to contest_works
- * related to contest_awards
- *
- * no factory, no seeder
+ * related to Contest
+ * related to ContestWork
+ * related to ContestAward
  *
  * 2025-10-26 add federation_section_id when under_patronage == Y
  * 2026-01-17 PSR-12 and relation functions and

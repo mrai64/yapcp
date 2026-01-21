@@ -3,7 +3,7 @@
 /**
  * Organization definition page
  *
- * 2025-12-05 review for Country::country_list_by_country and Log
+ * 2025-12-05 review for Country::countriesSorted and Log
  */
 
 namespace App\Livewire\Organization;
@@ -33,7 +33,7 @@ class Add extends Component
      */
     public function render()
     {
-        $this->countries = Country::country_list_by_country();
+        $this->countries = Country::countriesSorted();
 
         return view('livewire.organization.add');
     }

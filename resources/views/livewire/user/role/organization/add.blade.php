@@ -60,7 +60,7 @@ use App\Models\Country;
                 required="required"
                 >
                 @foreach ($organization_list as $organization_item)
-                <option value="{{ $organization_item->id }}" {{ ($organization_item->id == $organization_id) ? 'selected' : '' }}> {{ Country::country_flag( $organization_item->country_id ) }} | {{ $organization_item->name }}</option>
+                <option value="{{ $organization_item->id }}" {{ ($organization_item->id == $organization_id) ? 'selected' : '' }}> {{ Country::countryFlag( $organization_item->country_id ) }} | {{ $organization_item->name }}</option>
                 @endforeach
             </select>
             <div class="small">

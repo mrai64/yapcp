@@ -60,7 +60,7 @@ use App\Models\ContestSection;
             {{ ($contest->is_circuit === 'Y') ? 'Circuit: ' : 'Contest: '; }}
             {{ $contest->name_en }}
         </p>
-        <p class="fyk text-xl">Country: {{ Country::country_name( $contest->country_id ) }} </p>
+        <p class="fyk text-xl">Country: {{ Country::countryName( $contest->country_id ) }} </p>
         <p class="small">Closing date: {{ $contest->day_2_closing->format('Y-m-d') }} </p>
         <p class="small py-6">
             <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">

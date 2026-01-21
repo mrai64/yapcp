@@ -51,7 +51,7 @@ use App\Models\ContestSection;
         <p class="fyk text-2xl">
             {{ __('Contest: ') }} {{ $contest->name_en }}
         </p>
-        <p class="fyk text-xl">Country: {{ Country::country_name( $contest->country_id ) }} </p>
+        <p class="fyk text-xl">Country: {{ Country::countryName( $contest->country_id ) }} </p>
         <p class="small">Closing date: {{ $contest->day_2_closing->format('Y-m-d') }} </p>
         @endif
         <p class="flex-inline small py-6">
@@ -119,7 +119,7 @@ use App\Models\ContestSection;
                     <td scope="row">{{ UserContact::get_email( $juror->user_contact_id ) }}</td>
                     <td>{{ UserContact::get_first_name( $juror->user_contact_id ) }}</td>
                     <td>{{ UserContact::get_last_name( $juror->user_contact_id ) }}</td>
-                    <td>{{ Country::country_name( UserContact::get_country_id( $juror->user_contact_id ) ) }}</td>
+                    <td>{{ Country::countryName( UserContact::get_country_id( $juror->user_contact_id ) ) }}</td>
                     <td>
                         {{ $juror->id }}
                     </td>

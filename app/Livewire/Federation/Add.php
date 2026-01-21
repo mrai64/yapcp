@@ -5,7 +5,7 @@
  *
  * 2025-08-30 update w/new columns country_id, contact, add Country
  * 2025-09-20 moved function in other order
- * 2025-12-05 refactor for Country::country_list_by_country()
+ * 2025-12-05 refactor for Country::countriesSorted()
  */
 
 namespace App\Livewire\Federation;
@@ -36,7 +36,7 @@ class Add extends Component
     public function render()
     {
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $this->countries = Country::country_list_by_country();
+        $this->countries = Country::countriesSorted();
 
         return view('livewire.federation.add');
     }

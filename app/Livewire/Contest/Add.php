@@ -9,7 +9,7 @@
  *
  * 2025-09-17 fee_info added
  * 2025-12-04 review to support livewire header component
- * 2025-12-05 refactor Country::country_list_by_country()
+ * 2025-12-05 refactor Country::countriesSorted()
  *
  * TODO substitute TmeZoneList with timezones access
  * TODO change is_circuit from Y/N to 1/0
@@ -119,7 +119,7 @@ class Add extends Component
         $this->organization = Organization::where('id', $oid)->get()[0];
         $this->organization_id = $this->organization->id; // $oid
 
-        $this->countries = Country::country_list_by_country();
+        $this->countries = Country::countriesSorted();
         $this->country_id = $this->organization->country_id;
 
         $this->timezone_list = TimezonesList::timezones_list;

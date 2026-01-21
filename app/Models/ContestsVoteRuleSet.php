@@ -1,10 +1,13 @@
 <?php
 
 /**
- * Contest Vote Rule Set is a lookup table
+ * Contests Vote Rule Set is a lookup table
  * for contests.vote_rule
+ * Contests, not Contest, for rule Table+Field+Set
  *
- * Don't add nor delete record from auxiliary table before made
+ * related to Contest
+ *
+ * Don't add nor delete record from that table before made
  * change in ContestVoteRuleRule that decide if vote are valid
  * based on vote_rule value
  */

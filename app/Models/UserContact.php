@@ -171,7 +171,7 @@ class UserContact extends Model
      * Relation UserContact >> Country
      *
      * @return Country user_contacts.country_id countries.id
-     *                 user_contact->country->country_flag
+     *                 user_contact->country->countryFlag
      */
     public function country()
     {

@@ -18,7 +18,7 @@ return new class () extends Migration {
                     'first_name',
                     'user_id'
                 ],
-                name: 'country_name_idx'
+                name: 'countryName_idx'
             );
         });
     }
@@ -29,7 +29,7 @@ return new class () extends Migration {
     public function down(): void
     {
         Schema::table('user_contacts', function (Blueprint $table) {
-            $table->dropIndex('country_name_idx');
+            $table->dropIndex('countryName_idx');
         });
     }
 };

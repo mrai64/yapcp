@@ -51,7 +51,7 @@ class Modify extends Component
         $this->website = $this->federation['website'];
         $this->country_id = $this->federation['country_id'];
         $this->contact_info = $this->federation['contact_info'];
-        $this->countries = Country::country_list_by_country();
+        $this->countries = Country::countriesSorted();
 
     }
 

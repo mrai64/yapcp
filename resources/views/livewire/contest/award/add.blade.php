@@ -53,7 +53,7 @@ use App\Models\ContestSection;
         <p class="fyk text-2xl">
             {{ ($contest->is_circuit === 'Y') ? __('Circuit: ') : __('Contest: ') }} {{ $contest->name_en }}
         </p>
-        <p class="fyk text-xl">Country: {{ Country::country_name( $contest->country_id ) }} </p>
+        <p class="fyk text-xl">Country: {{ Country::countryName( $contest->country_id ) }} </p>
         <p class="small">Closing date: {{ $contest->day_2_closing->format('Y-m-d') }} </p>
         @endif
         <p class="small py-6">

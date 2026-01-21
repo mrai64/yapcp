@@ -3,7 +3,7 @@
 /**
  * Organization Definition Modify
  *
- * 2025-12-05 review for Country::country_list_by_country and Log
+ * 2025-12-05 review for Country::countriesSorted and Log
  */
 
 namespace App\Livewire\Organization;
@@ -60,7 +60,7 @@ class Modify extends Component
     public function render()
     {
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.'l :'.__LINE__.' called');
-        $this->countries = Country::country_list_by_country();
+        $this->countries = Country::countriesSorted();
 
         return view('livewire.organization.modify');
     }

@@ -141,7 +141,7 @@ class Modify extends Component
         // $this->deleted_at
 
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' countries before ');
-        $this->countries = Country::country_list_by_country();
+        $this->countries = Country::countriesSorted();
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' countries after ');
 
         $timezone_set = Timezone::select('id')->get();

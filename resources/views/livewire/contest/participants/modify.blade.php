@@ -73,7 +73,7 @@ use Illuminate\Support\Facades\Gate;
             @foreach($participant_list as $key => $participant)
                 <tr class="border py-2">
                     <td scope="row" class="fyk text-xl">
-                        {{ Country::country_flag($participant['country_id']) }}
+                        {{ Country::countryFlag($participant['country_id']) }}
                         {{ $participant['country_id'] }}
                     </td>
                     <td class="fyk text-2xl">

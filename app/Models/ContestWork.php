@@ -1,19 +1,20 @@
 <?php
 
 /**
- * Contest Works reunite all works participating to contest for any section
+ * Contest Works reunite all works participating to all section of all contests,
  * and register a is_admit Y/N result. Prizes and HM are in contest Awards.
  *
- * related to contests
- * related to contest_sections
- * related to countries
- * related to user_contacts
- * related to works
- * related to contest_waitings?
- * related to contest_votes?
- * related to contest_awards?
+ * related to Contest
+ * related to ContestSection
+ * related to Country
+ * related to userContact
+ * related to Work
+ * related to ContestWaiting
+ * related to ContestVote
+ * related to ContestAward
  *
  * 2025-10-21 Added portfolio_sequence, 0..255
+ * 2026-01-21 PSR-12
  */
 
 namespace App\Models;
@@ -81,34 +82,27 @@ class ContestWork extends Model
      */
     public function miniature(string $originalFileName = ''): string
     {
-        // dbg Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        // default for contest based on 
         if ($originalFileName === '') {
             $originalFileName = $this->contest_id.'/'.$this->section_id.'/300px_'.$this->work_id.$this->extension;
         }
         $lastSlashPos = strrpos($originalFileName, '/');
         $path = substr($originalFileName, 0, $lastSlashPos + 1);
-        // dbg Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' path:'.$path);
-
         $miniatureFileName = '300px_'.substr($originalFileName, $lastSlashPos + 1);
-        // dbg Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' name:'.$miniatureFileName);
 
         if (Storage::disk('public')->exists('contests/'.$path.$miniatureFileName)) {
             // dbg Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' found');
 
             return $path.$miniatureFileName;
         }
-        // dbg Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' not found');
-
+        // otherwise
         return $originalFileName;
     }
 
     // was: count_works_for_section_user
     public static function sectionWorksCounter(string $sectionId, string $userId): string
     {
-        // dbg Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $count = self::where('user_id', $userId)->where('section_id', $sectionId)->count();
-        // dbg Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out:'.$count);
-
         return $count;
     }
 
@@ -116,17 +110,42 @@ class ContestWork extends Model
     public static function userWorksCounter(string $contestId, string $workId): string
     {
         $participant = self::where('contest_id', $contestId)->where('work_id', $workId)->get('id');
+        // log
         $participantId = (count($participant)) ? $participant[0]['id'] : '';
+        // log
         return $participantId;
     }
 
     // RELATIONSHIP
 
-    /**
-     * Undocumented function
-     *
-     * @return UserContact contest_works.user_id user_contacts.user_id
-     */
+    // contest_works.contest_id > contests.id
+    public function contest()
+    {
+        $contest = $this->belongsTo(Contest::class);
+        // log
+        return $contest;
+    }
+
+    // was: contest_section
+    // contest_works.section_id > contest_sections.id
+    public function contestSection()
+    {
+        $section = $this->belongsTo(ContestSection::class, 'section_id');
+        // log
+        return $section;
+    }
+
+    // contest_works.country_id > user_contacts.country_id
+    // contest_works.country_id > countries.id
+    public function country()
+    {
+        $country = $this->belongsTo(Country::class, 'id', 'country_id');
+        // log
+        return $country;
+    }
+
+    // participant user
+    // contest_works.user_id > user_contacts.user_id
     public function author()
     {
         $userContact = $this->belongsTo(UserContact::class, 'user_id', 'user_id');
@@ -134,43 +153,15 @@ class ContestWork extends Model
         return $userContact;
     }
 
-    /**
-     * Relation ContestWork >> ContestAward
-     *
-     * @return ContestAward contest_works.work_id contest_awards.winner_work_id
-     *                      where contest_works.section_id = contest_awards.section_id
-     */
+    // contest_works.work_id > works.id
+    // contest_works.work_id > contest_awards.winner_work_id
+    // w/contest_works.section_id = contest_awards.section_id
     public function award()
     {
         $awardReceived = $this->hasMany(ContestAward::class, 'winner_work_id', 'work_id')
             ->where('section_id', $this->section_id);
 
         return $awardReceived;
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @return Contest contest_works.contest_id contests.id
-     */
-    public function contest()
-    {
-        $contest = $this->belongsTo(Contest::class);
-
-        return $contest;
-    }
-
-    /**
-     * Undocumented function
-     *
-     * @return ContestSection contest_works.section_id contest_sections.id
-     */
-    // was: contest_section
-    public function contestSection()
-    {
-        $section = $this->belongsTo(ContestSection::class, 'section_id');
-
-        return $section;
     }
 
     /**

@@ -1,9 +1,16 @@
 <?php
 
 /**
- * Contest Jury Votes
+ * Contest Jury Votes, section by section, work by work
+ * 
+ * related to Contest
+ * related to ContestSection
+ * related to Work
+ * related to ContestWork
+ * related to UserContact
  *
  * 2025-11-18 table_name fix
+ * 2026-01-20 PSR-12
  */
 
 namespace App\Models;
@@ -55,14 +62,14 @@ class ContestVote extends Model
      */
     public static function votedIds(string $contestId, string $sectionId): array
     {
-        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        $vote_ids = self::select(['work_id'])->where('section_id', $sectionId)->where('contest_id', $contestId)->get();
-        // Log::info('Model '. __CLASS__ .' '.__FUNCTION__.':'.__LINE__.' vote_ids:' . json_encode($vote_ids) );
+        $voteIds = self::select(['work_id'])
+            ->where('section_id', $sectionId)
+            ->where('contest_id', $contestId)
+            ->get();
 
-        $array_ids = array_values(collect($vote_ids->toArray()));
-        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out count:'.count($array_ids));
+        $arrayIds = array_values(collect($voteIds)->toArray());
 
-        return $array_ids;
+        return $arrayIds;
 
     }
 

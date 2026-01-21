@@ -7,7 +7,7 @@
  * then insert into
  *
  * 2025-10-14 Set user_role begin n ending at 00:00 and 23:59
- * 2025-12-05 review Log n Country::country_list_by_country()
+ * 2025-12-05 review Log n Country::countriesSorted()
  */
 
 namespace App\Livewire\Contest\Jury;
@@ -85,7 +85,7 @@ class Add extends Component
         $this->contest_section_list = ContestSection::where('contest_id', $this->contest_id)->get();
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' contest_section_list: '.$this->contest_section_list);
 
-        $this->countries = Country::country_list_by_country();
+        $this->countries = Country::countriesSorted();
 
         // juror user_id list
         $this->juror_list = [];
