@@ -1,11 +1,15 @@
 <?php
 
 /**
- * UserRoles is child of Users
+ * Users in platform should be: contest participant,
+ * organization members, or federation members, or admin...
  *
  * 2025-10-10 created an auxiliary table user_roles_role_set to manage
  *            previously value of valid_roles[]
  * 2025-10-18 user_roles had a 1:1: relationship w/user_roles_role_sets
+ * 2026-01-22 PSR-12
+ *
+ * TODO evaluate column 'type' ('contest', 'federation', 'organization' )
  */
 
 namespace App\Models;
@@ -20,25 +24,28 @@ class UserRole extends Model
     use HasFactory;
     use SoftDeletes;
 
-    //
     public const TABLENAME = 'user_roles';
 
-    // no factory and seeders, not now
+    // protected $primaryKey 'id'        standard
+    // protected $keyType = unsigned int standard
+    // public $incrementing = true       standard
+
     protected $fillable = [
-        // 'id',
-        'user_id', //         a uuid from users.id
-        'role', //            in auxiliary table user_roles_role_sets
-        'organization_id', // a uuid from organizations.id | NULL
-        'contest_id', //      a uuid from contests.id | NULL
-        'federation_id', //   a uuid from federations.id | NULL
-        'role_opening', //    datetime
-        'role_closing', //    datetime >= role_opening
+        'id', //               pk bigint autoincrement
+        'user_id', //          fk user_contacts.user_id users.id
+        'role', //             fk user_roles_role_sets.role
+        'organization_id', //  fk organizations.id  nullable
+        'contest_id', //       fk contests.id       nullable
+        'federation_id', //    fk federations.id    nullable
+        'role_opening', //     datetime
+        'role_closing', //     datetime >= role_opening
+        // created_at          reserved
+        // updated_at          reserved
+        // deleted_at          reserved
     ];
 
     protected function casts()
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-
         return [
             'role_opening' => 'datetime',
             'role_closing' => 'datetime',
@@ -48,74 +55,69 @@ class UserRole extends Model
         ];
     }
 
-    /**
-     * Complex validation, a field of 3 and only 1, not 0, not 2.
-     * call it XOR
-     * TODO build a UserRoleRule rule
-     */
-    public function only_one_role(UserRole $user_role): bool
+    // was: only_one_role
+    // Only one, not 0, 2 or 3
+    public function onlyOneRole(UserRole $userRole): bool
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-
-        //
-        return $user_role->organization_id xor (($user_role->contest_id) xor ($user_role->federation_id));
+        $present  = ($userRole->organization_id === null) ? 0 : 1;
+        $present += ($userRole->contest_id      === null) ? 0 : 1;
+        $present += ($userRole->federation_id   === null) ? 0 : 1;
+        // log
+        return ($present === 1);
     }
 
-    public static function valid_roles()
+    // was: valid_roles
+    public static function validRoles()
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        $valid = UserRolesRoleSet::valid_roles();
-
+        $valid = UserRolesRoleSet::validRoles();
+        // log
         return $valid;
     }
 
     // RELATIONS
 
-    public function user_contact()
+    // ws: user_contact
+    public function userContact()
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        $user_contact = $this->belongsTo(UserContact::class, 'user_id', 'user_id');
-        // . . . . . . . . . . . . . . . . . . . user_contacts.user_id   user_roles.user_id
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' user_contact:'.json_encode($user_contact));
-
-        return $user_contact;
-        // return $this->belongsTo(UserContact::class, 'user_id', 'user_id');
+        $userContact = $this->belongsTo(
+            UserContact::class,
+            'user_id',
+            'user_id'
+        );
+        // log
+        return $userContact;
     }
 
     public function federation()
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        if (is_null($this->federation_id)) {
-            return null;
-        }
-        $federation = $this->belongsTo(Federation::class, 'id', 'federation_id');
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' federation:'.json_encode($federation));
-
+        $federation = $this->belongsTo(
+            Federation::class,
+            'id',
+            'federation_id'
+        );
+        // log
         return $federation;
     }
 
     public function organization()
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        if (is_null($this->organization_id)) {
-            return null;
-        }
-        $organization = $this->belongsTo(Organization::class, 'id', 'organization_id');
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' organization:'.json_encode($organization));
-
+        $organization = $this->belongsTo(
+            Organization::class,
+            'id',
+            'organization_id'
+        );
+        // log
         return $organization;
     }
 
     public function contest()
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        if (is_null($this->contest_id)) {
-            return null;
-        }
-        $contest = $this->belongsTo(Contest::class, 'contest_id', 'id');
-        // . . . . . . . . . . . . . . . . user_roles.contest_id    contests.id
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' contest:'.json_encode($contest));
-
+        $contest = $this->belongsTo(
+            Contest::class,
+            'contest_id',
+            'id'
+        );
+        // log
         return $contest;
     }
 }

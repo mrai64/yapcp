@@ -59,15 +59,15 @@ class PassNext extends Component
             .'/'.$this->contestSection->id
             .'/'.$this->work->id.'.'.$this->work->extension;
         $copyResult = Storage::disk('public')->copy($this->fileFromWork, $this->fileToContest);
-        // save validation rec only if $this->contestSection->federation_section_id is NOT NULL
-        if (($this->contestSection->under_patronage === 'N') || (is_null($this->contestSection->federation_section_id))) {
+        // save validation rec only if $this->contestSection->federationSection_id is NOT NULL
+        if (($this->contestSection->under_patronage === 'N') || (is_null($this->contestSection->federationSection_id))) {
             return;
         }
 
         $insertedResult = WorkValidation::updateOrCreate(
             [
                 'work_id' => $this->work->id,
-                'federation_section_id' => $this->contestSection->federation_section_id,
+                'federation_section_id' => $this->contestSection->federationSection_id,
             ],
             ['validator_user_id' => Auth::id()]
         );

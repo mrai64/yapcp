@@ -118,7 +118,7 @@ class Add extends Component
         Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' validated:'.json_encode($validated));
 
         $validated['extension'] = Str::lower(pathinfo($this->work_image->getClientOriginalName(), PATHINFO_EXTENSION));
-        if (! in_array($validated['extension'], Work::valid_extensions)) {
+        if (! in_array($validated['extension'], Work::VALIDEXT)) {
             $validated['extension'] = 'jpg';
         }
         // construct from work_image for work_file

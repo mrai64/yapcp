@@ -28,7 +28,7 @@ class UserRoleFactory extends Factory
     {
         $user = DB::table(User::TABLENAME)
             ->select('id')->whereNull('deleted_at')->inRandomOrder()->first();
-        $role = array_rand(UserRole::valid_roles);
+        $role = array_rand(UserRole::validRoles);
         $organization_id = '';
         $contest_id = '';
         $federation_id = '';
@@ -53,7 +53,7 @@ class UserRoleFactory extends Factory
         return [
             // id
             'user_id' => $user->id,
-            'role' => UserRole::valid_roles[$role],
+            'role' => UserRole::validRoles[$role],
             'organization_id' => ($organization_id === '') ? null : $organization_id->id, // uuid
             'contest_id' => ($contest_id === '') ? null : $contest_id->id, //     uuid
             'federation_id' => ($federation_id === '') ? null : $federation_id->id, //  id

@@ -40,7 +40,7 @@ class WorkReview extends Component
 
         $this->work = $this->contestWork->work;
 
-        $this->reviewedWorkCount = WorkValidation::where('work_id', $this->work->id)->where('federation_section_id', $this->contestSection->federation_section_id)->count();
+        $this->reviewedWorkCount = WorkValidation::where('work_id', $this->work->id)->where('federation_section_id', $this->contestSection->federationSection_id)->count();
         if ($this->reviewedWorkCount) {
             $this->warningWorkCount = 0;
         } else {

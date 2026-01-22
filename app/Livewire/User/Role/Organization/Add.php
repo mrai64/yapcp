@@ -36,7 +36,7 @@ class Add extends Component
     public function mount() // no id for user_id
     {
         $this->user_id = Auth::id();
-        $this->role_list = UserRolesRoleSet::valid_roles(); // it's an []
+        $this->role_list = UserRolesRoleSet::validRoles(); // it's an []
         $this->organization_list = Organization::countryIdSorted(); // country_id, name
 
     }

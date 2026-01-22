@@ -1,33 +1,21 @@
 <?php
 
 /**
- * Works, but should be named UserWorks
+ * Works are the works, the photos, that users upload and use for
+ * contests.
  * TODO refactor as UserWork
  *
- * - id //        uuid
- * - user_id //   fk users & user_contacts
- * - work_file // path and namefile
- * - extension
- * - reference_year
- * - title_en
- * - title_local
- * - long_side
- * - short_side
- * - monochromatic
- * - created_at
- * - updated_at
- * - deleted_at
+ * 2026-01-22 PSR-12
  *
- * TODO missing field for: raw_required / raw_present
  */
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes; // users.id and
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str; // uuid booted()
+use Illuminate\Support\Str;
 
 class Work extends Model
 {
@@ -37,30 +25,31 @@ class Work extends Model
 
     public const TABLENAME = 'works';
 
-    // protected $primaryKey = 'id'; // standard name
-    protected $keyType = 'string'; // pk uuid
-
-    public $incrementing = false;
+    // primary key
+    protected $primaryKey = 'id'; //  default but
+    protected $keyType = 'string'; // uuid char(36)
+    public $incrementing = false; //  with no increment
 
     protected $fillable = [
-        // id
-        'user_id',
-        'work_file',
-        'extension',
-        'reference_year',
-        'title_en',
-        'title_local',
-        'long_side',
-        'short_side',
-        'monochromatic',
-        // TODO raw_?
-        // created_at
-        // updated_at
-        // deleted_at
+        'id', //            pk
+        'user_id', //       fk user_contacts.user_id, users.id
+        'work_file', //     path+filename+extension
+        'extension', //     extension
+        'reference_year',// a FIAF requirements
+        'title_en', //      photo title
+        'title_local', //   same in lang <> 'en'
+        'long_side', //     file side pixel
+        'short_side', //    file side pixel
+        'monochromatic', // 'N' (colour) / 'Y' (monochromathic)
+        // TODO instead insert a raw related flag, use work_raws
+        // created_at       reserved
+        // updated_at       reserved
+        // deleted_at       reserved
     ];
 
     // to check file extension
-    public const valid_extensions = [
+    // was: valid_extensions
+    public const VALIDEXT = [
         'jpeg',
         'jpg',
         'tiff', // future use
@@ -80,7 +69,6 @@ class Work extends Model
 
     protected function casts(): array
     {
-        // Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -91,31 +79,28 @@ class Work extends Model
     // GETTER
 
     /**
-     * Miniature path+name
-     * img name miniature 300px_name
+     * add '300px_' as prefix to works.work_file
      */
     public function miniature(): string
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        $last_slash = strrpos($this->work_file, '/');
-
-        return substr($this->work_file, 0, $last_slash).'/300px_'.substr($this->work_file, $last_slash + 1, 50);
+        $lastSlash = strrpos($this->work_file, '/');
+        $miniature = substr($this->work_file, 0, $lastSlash).'/300px_'.substr($this->work_file, $lastSlash + 1, 50);
+        // log
+        return $miniature;
     }
 
     // RELATIONSHIP
 
-    /**
-     * $work->user_contact
-     *
-     * @return UserContact works.user_id 1:1 user_contacts.user_id
-     */
-    public function user_contact()
+    // works.user_id > user_contacts.user_id
+    // was: user_contact
+    public function userContact()
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        $user_contact = $this->belongsTo(UserContact::class, 'user_id', 'user_id');
-        // . . . . . . . . . . . . . . . . . . .user_contacts.user_id  works.user_id
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' user_contact:'.json_encode($user_contact));
-
-        return $user_contact;
+        $userContact = $this->belongsTo(
+            UserContact::class,
+            'user_id',
+            'user_id'
+        );
+        // log
+        return $userContact;
     }
 }

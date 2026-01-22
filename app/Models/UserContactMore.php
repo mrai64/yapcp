@@ -1,13 +1,15 @@
 <?php
 
 /**
- * User contacts maintain a min set of values that are
- * required in all contest, but for every
- * sponsor federation they require some fields
- * i.e. card_id that should have anyone a different
- * definition.
+ * Some field are common to all contest, but some contest
+ * because are sponsored from a national o inernational Federation
+ * for federation requirements needs "One More Field(s)".
+ * i.e. card_id for FIAP, GPU, PSA etc.
  *
  * That's a KV table to maintain that "more fields"
+ *
+ * 2026-01-22 PSR-12
+ *
  */
 
 namespace App\Models;
@@ -25,14 +27,14 @@ class UserContactMore extends Model
 
     // standard id
     protected $fillable = [
-        // id
+        'id', //                   pk bigint autoincrement
         'user_contact_user_id', // TODO user_contacts.id
-        'federation_id',
-        'field_name',
-        'field_value',
-        // created_at
-        // updated_at
-        // deleted_at
+        'federation_id', //        fk federations.id federation_mores.federation_id
+        'field_name', //           fk                federation_mores.field_name
+        'field_value', //          text
+        // created_at              reserved
+        // updated_at              reserved
+        // deleted_at              reserved
     ];
 
     protected function casts()
@@ -47,4 +49,29 @@ class UserContactMore extends Model
     // GETTERS
 
     // RELATIONSHIP
+
+    // user_contact_mores.user_contact_user_id > user_contacts.user_id
+    public function userContact()
+    {
+        $uc = $this->belongsTo(
+            related: userContact::class,
+            foreignKey: 'user_id',
+            ownerKey: 'user_contact_user_id'
+        );
+        // log
+        return $uc;
+    }
+
+    // user_contact_mores.federation_id > federations.id
+    public function federation()
+    {
+        $federation = $this->belongsTo(
+            related: Federation::class,
+            foreignKey: 'id',
+            ownerKey: 'federation_id'
+        );
+        // log
+        return $federation;
+    }
+
 }
