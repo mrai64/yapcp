@@ -64,7 +64,7 @@ use App\Models\UserContact;
             <ul>
                 @foreach($user_role_list as $user_role)
                 <li class="fyk mb-4 p-4 border rounded-md">
-                    <strong class="fyk text-xl">{{ UserContact::get_first_last_name( $user_role->user_id ) }}, {{$user_role->role}}</strong>
+                    <strong class="fyk text-xl">{{ UserContact::getFirstLastName( $user_role->user_id ) }}, {{$user_role->role}}</strong>
                 </li>
                 @endforeach
             </ul>

@@ -100,7 +100,7 @@ class Add extends Component
         // integration from mount()
         $validated['contest_id'] = $this->contest_id;
         $validated['user_id'] = $this->user_id;
-        $validated['country_id'] = UserContact::get_country_id($this->user_id);
+        $validated['country_id'] = UserContact::getCountryId($this->user_id);
 
         if ($validated['portfolio_sequence'] == 0) {
             $validated['portfolio_sequence'] = ContestWork::where('section_id', $validated['section_id'])->where('user_id', $this->user_id)->count();

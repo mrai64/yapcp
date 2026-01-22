@@ -86,7 +86,7 @@ class Modify1YouAre extends Component
         // passport photo upload
         if (! is_null($this->passport_photo_image)) {
             // stored as...
-            $passport_photo_name = $this->user_contact->photo_box();
+            $passport_photo_name = $this->user_contact->photoBox();
             $passport_photo_name = str_ireplace(':', '-', $passport_photo_name);
             $passport_photo_name = str_ireplace('+', '', $passport_photo_name);
             $passport_photo_name = str_ireplace(' ', '-', $passport_photo_name);

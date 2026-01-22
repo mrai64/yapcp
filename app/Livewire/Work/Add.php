@@ -63,7 +63,7 @@ class Add extends Component
         Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         $this->id = Str::uuid(); // no
         $this->user_id = Auth::id();
-        $this->photo_box = UserContact::get_photo_box($this->user_id);
+        $this->photoBox = UserContact::getPhotoBox($this->user_id);
         $this->extension = '';
         $this->reference_year = date('Y');
         $this->title_en = '';
@@ -134,7 +134,7 @@ class Add extends Component
         $validated['id'] = $this->work->id;
         Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' validated:'.json_encode($validated));
 
-        $validated['work_file'] = $this->photo_box.'/'.$validated['id'].'.'.$validated['extension'];
+        $validated['work_file'] = $this->photoBox.'/'.$validated['id'].'.'.$validated['extension'];
         Log::info(__FUNCTION__.' '.__LINE__.' '.$validated['work_file']);
         $this->work_image->storePubliclyAs('photos', $validated['work_file'], 'public');
         $validated['work_image'] = '';
@@ -158,10 +158,10 @@ class Add extends Component
             $resized->scale(height: 300);
         }
 
-        $resized_filename = $this->photo_box.'/'.$validated['id'].'_300_.'.$validated['extension'];
+        $resized_filename = $this->photoBox.'/'.$validated['id'].'_300_.'.$validated['extension'];
         Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' resize_file: '.$resized_filename);
 
-        // NO $path_resized = Storage::putFileAs('photos', new File($this->photo_box . '/' . $validated['id'] . '_300_.' . $validated['extension']), $validated['id'] . '_300_.' . $validated['extension'] );
+        // NO $path_resized = Storage::putFileAs('photos', new File($this->photoBox . '/' . $validated['id'] . '_300_.' . $validated['extension']), $validated['id'] . '_300_.' . $validated['extension'] );
         //    put non va, putFile putFileAs funzionano con file che arrivano dal form
 
         $resized_encoded = (string) $resized->encode(new JpegEncoder(quality: 90)); // quality 0..100

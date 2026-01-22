@@ -26,7 +26,7 @@ class WorkFactory extends Factory
     public function definition(): array
     {
         $user_contact = UserContact::all()->random(5)->first();
-        $photo_box = $user_contact->photo_box();
+        $photo_box = $user_contact->photoBox();
 
         return [
             'id' => Str::uuid(),

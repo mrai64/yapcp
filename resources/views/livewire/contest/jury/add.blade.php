@@ -116,10 +116,10 @@ use App\Models\ContestSection;
                 @if (count($juror_list) > 0)
                 @foreach($juror_list as $juror)
                 <tr class="my-4 border">
-                    <td scope="row">{{ UserContact::get_email( $juror->user_contact_id ) }}</td>
-                    <td>{{ UserContact::get_first_name( $juror->user_contact_id ) }}</td>
-                    <td>{{ UserContact::get_last_name( $juror->user_contact_id ) }}</td>
-                    <td>{{ Country::countryName( UserContact::get_country_id( $juror->user_contact_id ) ) }}</td>
+                    <td scope="row">{{ UserContact::getEmail( $juror->user_contact_id ) }}</td>
+                    <td>{{ UserContact::getFirstName( $juror->user_contact_id ) }}</td>
+                    <td>{{ UserContact::getLastName( $juror->user_contact_id ) }}</td>
+                    <td>{{ Country::countryName( UserContact::getCountryId( $juror->user_contact_id ) ) }}</td>
                     <td>
                         {{ $juror->id }}
                     </td>

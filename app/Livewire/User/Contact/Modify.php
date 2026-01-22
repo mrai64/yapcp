@@ -209,7 +209,7 @@ class Modify extends Component
         // data integration
         $validated['email'] = $this->email_old;
         // where is him/her photo_box?
-        $photo_path = $this->user_contact->photo_box();
+        $photo_path = $this->user_contact->photoBox();
 
         // see also: https://livewire.laravel.com/docs/uploads#storing-uploaded-files
         $photo_name = $photo_path.'/'.'__passport_photo.jpg';
