@@ -34,7 +34,7 @@
                     </main>
 
                     <footer class="py-16 text-center text-sm text-black dark:text-white/70">
-                        {{ config('app.name') }} v{{ App\Models\User::version }}
+                        {{ config('app.name') }} v{{ App\Models\User::APPVERSION }}
                     </footer>
                 </div>
             </div>

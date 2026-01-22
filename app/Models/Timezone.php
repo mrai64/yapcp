@@ -1,9 +1,13 @@
 <?php
 
 /**
- * For auxiliary table timezones and
- * contain valid php timezone value instead of
- * it replace array timezones_list from model TimezonesList
+ * Timezone is alternative to php function
+ *
+ * related to Contest
+ * related to UserContact
+ * related to Federation
+ *
+ * 2026-01-21 PSR12
  */
 
 namespace App\Models;
@@ -20,25 +24,22 @@ class Timezone extends Model
 
     public const TABLENAME = 'timezones'; // real tablename should have a db prefix
 
-    // pk not bigint unsigned incremental
-    protected $primaryKey = 'id';
-
-    protected $keyType = 'string';
-
-    public $incrementing = false;
+    // primary key
+    protected $primaryKey = 'id'; //  default but
+    protected $keyType = 'string'; // char(40)
+    public $incrementing = false; //  with no increment
 
     // fields list
     protected $fillable = [
-        'id',
-        'region_id',
-        // created_at,
-        // updated_at,
-        // deleted_at,
+        'id', //           pk
+        'region_id', //    fk regions.id
+        // created_at,     reserved
+        // updated_at,     reserved
+        // deleted_at,     reserved
     ];
 
     public function casts()
     {
-        // Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__.' called');
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -52,10 +53,46 @@ class Timezone extends Model
 
     public function region()
     {
-        // Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__.' called');
         $region = $this->hasOne(Region::class);
-
-        // Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__.' region:' . json_encode($region) );
+        // log
         return $region;
     }
+
+    // timezones.id > contests.timezones.id
+    public function contests()
+    {
+        $contests = $this->hasMany(
+            related: Contest::class,
+            foreignKey: 'timezone_id',
+            localKey: 'id'
+        );
+        // log
+        return $contests;
+    }
+
+
+    public function federations()
+    {
+        $fed = $this->hasMany(
+            related: Federation::class,
+            foreignKey: 'timezone_id',
+            localKey: 'id'
+        );
+        // log
+        return $fed;
+    }
+
+    public function userContacts()
+    {
+        $fed = $this->hasMany(
+            related: UserContact::class,
+            foreignKey: 'timezone_id',
+            localKey: 'id'
+        );
+        // log
+        return $fed;
+    }
+
+
+
 }

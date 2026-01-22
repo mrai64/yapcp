@@ -50,7 +50,7 @@
                     </main>
 
                     <footer class="py-16 text-center text-sm text-black dark:text-white/70">
-                        v{{ App\Models\User::version }}
+                        v{{ App\Models\User::APPVERSION }}
                     </footer>
                 </div>
             </div>

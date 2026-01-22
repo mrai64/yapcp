@@ -1,8 +1,12 @@
 <?php
 
 /**
- * Region means continent
- * auxiliary table for php timezones
+ * Lookup table for timezone regions
+ *
+ * related to Timezone
+ *
+ * TODO remove table as php has own function
+ *
  */
 
 namespace App\Models;
@@ -19,23 +23,21 @@ class Region extends Model
 
     public const TABLENAME = 'regions';
 
-    // pk not bigint unsigned incremental
-    // protected $primaryKey = 'id';
-    protected $keyType = 'string';
-
-    public $incrementing = false;
+    // primary key
+    protected $primaryKey = 'id'; //  default but
+    protected $keyType = 'string'; // char(10) uppercase
+    public $incrementing = false; //  with no increment
 
     // field list
     protected $fillable = [
-        'id',
-        // created_at,
-        // updated_at,
-        // deleted_at,
+        'id', //         pk
+        // created_at,   reserved
+        // updated_at,   reserved
+        // deleted_at,   reserved
     ];
 
     public function casts()
     {
-        // Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__.' called');
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -52,10 +54,8 @@ class Region extends Model
      */
     public function timezones()
     {
-        // Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__.' called');
         $timezones = $this->hasMany(Timezone::class);
-
-        // Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__.' timezones:' . json_encode($timezones) );
+        // log
         return $timezones;
     }
 }

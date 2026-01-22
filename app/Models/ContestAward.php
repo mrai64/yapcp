@@ -30,7 +30,7 @@ class ContestAward extends Model
     public const TABLENAME = 'contest_awards';
 
     // primary key
-    protected $primaryKey = 'id'; //  default but
+    protected $primaryKey = 'id'; //  default, but 'real' pk is contest_id.award_code
     protected $keyType = 'string'; // uuid char(36)
     public $incrementing = false; //  with no increment
 
@@ -40,8 +40,8 @@ class ContestAward extends Model
         'contest_id', //  fk contests.id
         'section_id', //  fk contest_sections.id
         'section_code', //   contest_sections.code w/section_id
-        'award_code', //     sortable code first - major, last - minor
-        'award_name', //
+        'award_code', //     unique in contest sortable code first - major, last - minor
+        'award_name', //     text
         'is_award', //       Prize <> HM
         'winner_work_id', // nullable
         'winner_user_id', // nullable

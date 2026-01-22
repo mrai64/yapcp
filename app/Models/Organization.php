@@ -4,14 +4,15 @@
  * Organization | Organisation
  * They are Contest organizer
  *
- * uuid
- * hasFactory
- * softDelete
- * verifyEmail(?)
+ * related to Country
+ * related to Contest
+ * related to UserContact
  *
  * 2025-08-30 rename country_code in country_id, fk countries.id
  * 2025-10-15 fix organization_name()
  * 2025-12-17 add relationship country()
+ * 2026-01-21 PSR-12
+ *
  */
 
 namespace App\Models;
@@ -29,33 +30,30 @@ class Organization extends Model
     use HasFactory;
     use SoftDeletes;
 
-    // use env('DB_TABLE_PREFIX') .
     public const TABLENAME = 'organizations';
 
-    // id is uuid
-    protected $keyType = 'string'; //     uuid string(36)
-
-    public $incrementing = false; //   uuid don't need ++
+    // primary key
+    protected $primaryKey = 'id'; //  default but
+    protected $keyType = 'string'; // uuid char(36)
+    public $incrementing = false; //  with no increment
 
     protected $fillable = [
-        // id uuid
-        'country_id',
-        'name',
-        'email',
-        'website',
-        'contact',
-        // created_at datetime nullable
-        // updated_at datetime nullable
-        // deleted_at datetime nullable
+        'id', //           pk uuid
+        'country_id', //   fk countries.id
+        'name', //         text
+        'email', //        text
+        'website', //      url official site
+        'contact', //      secretary info
+        // created_at      reserved
+        // updated_at      reserved
+        // deleted_at      reserved
     ];
 
-    /**
-     * uuid
-     */
+    // uuid as pk
     public static function booted()
     {
         static::creating(function ($model) {
-            $model->id = Str::uuid(); // uuid generator
+            $model->id = Str::uuid();
         });
     }
 
@@ -69,6 +67,7 @@ class Organization extends Model
     }
 
     // GETTERS
+
     /**
      * Sorted by
      *   - country_id
@@ -78,7 +77,6 @@ class Organization extends Model
      */
     public static function countryIdSorted()
     {
-        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $organizations = DB::table('organizations')
             ->select('id', 'country_id', 'name', 'email', 'website')
             ->whereNull('deleted_at')
@@ -86,27 +84,51 @@ class Organization extends Model
             ->orderBy('name', 'asc')
             ->orderBy('created_at', 'desc')
             ->get();
-        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' found:'.json_encode($organizations));
-
+        // log
         return $organizations;
     }
 
-    public static function organization_name(string $organization_id): string
+    // was: organization_name
+    public static function organizationName(string $orgId): string
     {
-        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in:'.$organization_id);
-        $organization = self::where('id', $organization_id)->first();
-        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' found:'.json_encode($organization));
-
+        $organization = self::where('id', $orgId)->first();
+        // log
         return $organization->name;
     }
 
     // RELATIONSHIP
+
+    // organizations.country_id > countries.id
     public function country(): HasOne
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $country = $this->hasOne(Country::class, 'id', 'country_id');
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out ');
-
+        // log
         return $country;
     }
+
+    // organizations.id > contests.organization_id
+    public function contests()
+    {
+        $contests = $this->hasMany(
+            related: Contest::class,
+            foreignKey: 'organization_id',
+            localKey: 'id'
+        );
+        // log
+        return $contests;
+    }
+
+    // organizations.id > user_roles.organization_id
+    public function userRoles()
+    {
+
+        $userRoles = $this->hasMany(
+            related: UserRole::class,
+            foreignKey: 'organization_id',
+            localKey: 'id'
+        );
+        // log
+        return $userRoles;
+    }
+
 }

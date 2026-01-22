@@ -69,6 +69,4 @@ class FederationMore extends Model
         // log
         return $moreFields;
     }
-
-
 }
