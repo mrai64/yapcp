@@ -48,16 +48,19 @@ class Modify2PostAddress extends Component
         }
 
         $this->user_contact = UserContact::where('user_id', $uid)->first();
+        ds($this->user_contact);
+
         // form fields
-        $this->first_name = $this->user_contact->first_name;
-        $this->last_name = $this->user_contact->last_name;
+        $this->first_name = $this->user_contact->first_name; // name
+        $this->last_name = $this->user_contact->last_name; //   surname
+
         $this->country_id = ($this->user_contact->country_id ?? '***');
-        $this->country = ($this->user_contact->country ?? null);
+        $this->country = $this->user_contact->country; //       nationality
 
         $this->address = $this->user_contact->address ?? 'insert address';
         $this->address_line2 = $this->user_contact->address_line2 ?? '';
-        $this->city = $this->user_contact->city ?? '';
-        $this->region = $this->user_contact->region ?? '';
+        $this->city = $this->user_contact->city ?? ''; //       municipality
+        $this->region = $this->user_contact->region ?? ''; //   
         $this->postal_code = $this->user_contact->postal_code ?? '';
     }
 

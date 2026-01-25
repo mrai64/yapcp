@@ -263,9 +263,9 @@ class UserContact extends Model
     public function country()
     {
         $country = $this->belongsTo(
-            related: Country::class,
-            foreignKey: 'id',
-            ownerKey: 'country_id'
+            related: Country::class, //   countries.
+            foreignKey: 'country_id', //  user_contacts.country_id
+            ownerKey: 'id' //             countries.id
         );
         return $country;
     }

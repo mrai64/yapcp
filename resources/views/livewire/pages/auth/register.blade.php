@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * Register to yaPCP app 
+ * - create users record
+ * - thru mysql trigger create also user_contacts record
+ *
+ * 2026-01-24 add email confirmation. First communicate channel.
+ *
+ */
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
@@ -12,19 +19,23 @@ use function Livewire\Volt\state;
 
 layout('layouts.guest');
 
+// default initial state - five form fields
 state([
-    'name' => '',
+    'name' => '', 
     'email' => '',
+    'email_confirmation' => '',
     'password' => '',
     'password_confirmation' => ''
 ]);
 
+// validation 
 rules([
     'name' => ['required', 'string', 'max:255'],
-    'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+    'email' => ['required', 'string', 'confirmed', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
     'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
 ]);
 
+// function as a var
 $register = function () {
     $validated = $this->validate();
 
@@ -43,7 +54,7 @@ $register = function () {
     <form wire:submit="register">
         <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" :value="__('Surname, Name')" />
             <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" name="name" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
@@ -51,8 +62,19 @@ $register = function () {
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
+            <x-text-input wire:model="email" id="email" class="block mt-1 w-full"
+                            type="email" 
+                            name="email" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        </div>
+
+        <!-- Conformation Email Address -->
+        <div class="mt-4">
+            <x-input-label for="email_confirmation" :value="__('Confirm Email')" />
+            <x-text-input wire:model="email_confirmation" id="email_confirmation" class="block mt-1 w-full" 
+                            type="email" 
+                            name="email_confirmation" required autocomplete="new-username" />
+            <x-input-error :messages="$errors->get('email_confirmation')" class="mt-2" />
         </div>
 
         <!-- Password -->

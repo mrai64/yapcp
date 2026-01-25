@@ -165,20 +165,23 @@ class Contest extends Model
     // contests.country_id > countries.id
     public function country()
     {
-        $country = $this->belongsTo(Country::class);
+        $country = $this->belongsTo(
+            Country::class,
+            'id',
+            'country_id');
 
         return $country;
     }
 
     // federation list
 
-    // contests.timezone > timezones.timezone
+    // contests.timezone > timezones.id
     public function timezone()
     {
         $tz = $this->belongsTo(
-            related: Timezone::class,
-            foreignKey: 'id',
-            ownerKey: 'timezone'
+            related: Timezone::class, // timezones
+            foreignKey: 'id', //         timezones.id
+            ownerKey: 'timezone' //      contests.timezone
         );
 
         return $tz;
@@ -301,26 +304,33 @@ class Contest extends Model
 
     /**
      * For contest in circuit, self-referencing relation
+     * to find circuit record over contest
      *
      * contests.circuit_id > contests.id
      */
     public function circuit()
     {
         $circuitId = $this->belongsTo(
-            related: static::class,
-            foreignKey: 'circuit_id',
-            ownerKey: 'id'
+            related: static::class, //    contests
+            foreignKey: 'circuit_id', //  contests.circuit_id
+            ownerKey: 'id' //             contests.id
         );
 
         return $circuitId;
     }
 
+    /**
+     * For contest in circuit, from circuit
+     * to find contest under / circuit
+     *
+     * @return void
+     */
     public function contestsInCircuit()
     {
         $contests = $this->hasMany(
-            related: static::class,
-            foreignKey: 'circuit_id',
-            localKey: 'id'
+            related: static::class, //    contests
+            foreignKey: 'id', //          contests.id
+            localKey: 'circuit_id' //     contests.circuit_id
         );
 
         return $contests;

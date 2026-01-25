@@ -120,7 +120,6 @@ class ContestJury extends Model
     // contest_juries.section_id > contest_sections.id
     public function contestSection()
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         $section = $this->belongsTo(ContestSection::class);
 
         return $section;
@@ -130,9 +129,9 @@ class ContestJury extends Model
     public function userContact()
     {
         $contact = $this->belongsTo(
-            related: UserContact::class,
-            foreignKey: 'user_id',
-            ownerKey: 'user_contact_id'
+            related: UserContact::class, //   user_contacts
+            foreignKey: 'user_contact_id', // contest_juries.user_contact_id
+            ownerKey: 'user_id' //            user_contacts.user_id
         );
 
         return $contact;
