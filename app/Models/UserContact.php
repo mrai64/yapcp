@@ -22,6 +22,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class UserContact extends Model
 {
@@ -74,6 +75,8 @@ class UserContact extends Model
     public function photoBox(): string
     {
 
+        /*
+         * was
         $pb = $this->country_id.'/'
         .$this->last_name.'/'
         .$this->first_name.'_'
@@ -82,6 +85,13 @@ class UserContact extends Model
         $pb = str_ireplace(':', '-', $pb);
         $pb = str_ireplace('+', '', $pb);
         $pb = str_ireplace(' ', '-', $pb);
+         * 
+         */
+
+        $pb  = $this->country_id . '/';
+        $pb .= Str::slug($this->last_name) . '/';
+        $pb .= Str::slug($this->first_name) . '_';
+        $pb .= $this->user_id;
 
         return $pb;
     }

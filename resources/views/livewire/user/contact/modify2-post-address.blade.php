@@ -33,7 +33,7 @@
         {{$country->flag_code}} | {{ $last_name}}, {{ $first_name }}
     </div>
     <h3 class="fyk text-xl mb-4"><em>{{ __("Where do you live...")}}</em></h3>    
-    <form wire:submit="update_user_post_address">
+    <form wire:submit="updateUserContact2nd">
         @csrf
 
         
@@ -51,15 +51,15 @@
         </div>
 
         <div class="mb-4">
-            <label class="fyk block font-medium text-2xl text-gray-700" for="address_line2">
+            <label class="fyk block font-medium text-2xl text-gray-700" for="addressLine2">
                 {{ __('Address 2nd line') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="address_line2"
-                wire:model.live.debounce.500ms="address_line2" 
+                type="text" name="addressLine2"
+                wire:model.live.debounce.500ms="addressLine2" 
             />
-            <div class="text-white bg-red-600 small">@error('address_line2') {{ $message }} @enderror</div>
+            <div class="text-white bg-red-600 small">@error('addressLine2') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -87,15 +87,15 @@
         </div>
 
         <div class="mb-4">
-            <label class="fyk block font-medium text-2xl text-gray-700" for="postal_code">
+            <label class="fyk block font-medium text-2xl text-gray-700" for="postalCode">
                 {{ __('Postal code') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-48" 
-                type="text" name="postal_code"
-                wire:model.live.debounce.500ms="postal_code" 
+                type="text" name="postalCode"
+                wire:model.live.debounce.500ms="postalCode" 
             />
-            <div class="text-white bg-red-600 small">@error('postal_code') {{ $message }} @enderror</div>
+            <div class="text-white bg-red-600 small">@error('postalCode') {{ $message }} @enderror</div>
         </div>
         <br style="clear:both;" />
         <br />

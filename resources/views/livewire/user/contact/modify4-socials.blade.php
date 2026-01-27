@@ -30,11 +30,11 @@
 
     <!-- nav bar here -->
     <div class="fyk block font-medium text-2xl text-gray-700 mb-4">
-        {{$country->flag_code}} | {{ $last_name}}, {{ $first_name }}
+        {{$country->flag_code}} | {{ $lastName}}, {{ $firstName }}
     </div>
     <h3 class="fyk text-xl mb-4"><em>{{ __("Where do you live...")}}</em></h3>    
 
-    <form wire:submit="update_user_socials">
+    <form wire:submit="updateUserContact4th">
         @csrf
 
         <p class="small mb-4">{{ __('For future use.') }}</p>
@@ -64,15 +64,15 @@
         </div>
 
         <div class="mb-4">
-            <label class="fyk block font-medium text-2xl text-gray-700" for="x_twitter">
+            <label class="fyk block font-medium text-2xl text-gray-700" for="exTwitter">
                 {{ __('Personal X page | facultative') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="x_twitter"
-                wire:model.live.debounce.500ms="x_twitter" 
+                type="text" name="exTwitter"
+                wire:model.live.debounce.500ms="exTwitter" 
             />
-            <div class="text-white bg-red-600 small">@error('x_twitter') {{ $message }} @enderror</div>
+            <div class="text-white bg-red-600 small">@error('exTwitter') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">

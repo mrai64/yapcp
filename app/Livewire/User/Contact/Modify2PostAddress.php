@@ -13,7 +13,7 @@ use Livewire\Component;
 
 class Modify2PostAddress extends Component
 {
-    public $user_contact;
+    public $userContact;
 
     public $country;
 
@@ -26,13 +26,13 @@ class Modify2PostAddress extends Component
 
     public string $address;
 
-    public string $address_line2;
+    public string $addressLine2;
 
     public string $city;
 
     public string $region;
 
-    public string $postal_code;
+    public string $postalCode;
 
     // 1. mount
     public function mount(?string $uid = '')
@@ -47,21 +47,21 @@ class Modify2PostAddress extends Component
             abort(403, 'Unauthorized action.');
         }
 
-        $this->user_contact = UserContact::where('user_id', $uid)->first();
-        ds($this->user_contact);
+        $this->userContact = UserContact::where('user_id', $uid)->first();
+        ds($this->userContact);
 
         // form fields
-        $this->first_name = $this->user_contact->first_name; // name
-        $this->last_name = $this->user_contact->last_name; //   surname
+        $this->first_name = $this->userContact->first_name; // name
+        $this->last_name = $this->userContact->last_name; //   surname
 
-        $this->country_id = ($this->user_contact->country_id ?? '***');
-        $this->country = $this->user_contact->country; //       nationality
+        $this->country_id = ($this->userContact->country_id ?? '***');
+        $this->country = $this->userContact->country; //       nationality
 
-        $this->address = $this->user_contact->address ?? 'insert address';
-        $this->address_line2 = $this->user_contact->address_line2 ?? '';
-        $this->city = $this->user_contact->city ?? ''; //       municipality
-        $this->region = $this->user_contact->region ?? ''; //   
-        $this->postal_code = $this->user_contact->postal_code ?? '';
+        $this->address = $this->userContact->address ?? 'insert address';
+        $this->addressLine2 = $this->userContact->addressLine2 ?? '';
+        $this->city = $this->userContact->city ?? ''; //       municipality
+        $this->region = $this->userContact->region ?? ''; //
+        $this->postalCode = $this->userContact->postal_code ?? '';
     }
 
     // 2. render
@@ -75,28 +75,29 @@ class Modify2PostAddress extends Component
     {
         return [
             'address' => 'required|string|max:255',
-            'address_line2' => 'nullable|string|max:255',
+            'addressLine2' => 'nullable|string|max:255',
             'city' => 'required|string|max:100',
             'region' => 'nullable|string|max:100',
-            'postal_code' => 'required|string|max:10',
+            'postalCode' => 'required|string|max:10',
         ];
     }
 
     // 4. save
-    public function update_user_post_address()
+    // was: update_user_post_address
+    public function updateUserContact2nd()
     {
-        $this->validate();
+        $validated = $this->validate();
 
-        $this->user_contact->address = $this->address;
-        $this->user_contact->address_line2 = $this->address_line2;
-        $this->user_contact->city = $this->city;
-        $this->user_contact->region = $this->region;
-        $this->user_contact->postal_code = $this->postal_code;
+        $this->userContact->address = $validated['address'];
+        $this->userContact->address_line2 = $validated['addressLine2'];
+        $this->userContact->city = $validated['city'];
+        $this->userContact->region = $validated['region'];
+        $this->userContact->postal_code = $validated['postalCode'];
 
-        $this->user_contact->save();
+        $this->userContact->save();
 
         return redirect()
             ->with('success', __("'Postal address updated successfully.'"))
-            ->route('user-contact-modify3', ['uid' => $this->user_contact->user_id]);
+            ->route('user-contact-modify3', ['uid' => $this->userContact->user_id]);
     }
 }

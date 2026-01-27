@@ -2,6 +2,8 @@
 
 /**
  * UserContact modify 3 - cellular sms whatsapp
+ * 
+ * TODO see also `composer require propaganistas/laravel-phone`
  */
 
 namespace App\Livewire\User\Contact;
@@ -12,16 +14,16 @@ use Livewire\Component;
 
 class Modify3Phones extends Component
 {
-    public $user_contact;
+    public $userContact;
 
     public $country;
 
     // fields
-    public string $first_name;
+    public string $firstName;
 
-    public string $last_name;
+    public string $lastName;
 
-    public string $country_id;
+    public string $countryId;
 
     public string $cellular;
 
@@ -40,15 +42,15 @@ class Modify3Phones extends Component
             abort(403, 'Unauthorized action.');
         }
 
-        $this->user_contact = UserContact::where('user_id', $uid)->first();
+        $this->userContact = UserContact::where('user_id', $uid)->first();
         // form fields
-        $this->first_name = $this->user_contact->first_name;
-        $this->last_name = $this->user_contact->last_name;
-        $this->country_id = ($this->user_contact->country_id ?? '***');
-        $this->country = ($this->user_contact->country ?? null);
+        $this->firstName = $this->userContact->firstName;
+        $this->lastName = $this->userContact->last_name;
+        $this->countryId = ($this->userContact->country_id ?? '***');
+        $this->country = ($this->userContact->country ?? null);
 
-        $this->cellular = $this->user_contact->cellular ?? '';
-        $this->whatsapp = $this->user_contact->whatsapp ?? 'https://wa.me/';
+        $this->cellular = $this->userContact->cellular ?? '';
+        $this->whatsapp = $this->userContact->whatsapp ?? 'https://wa.me/';
 
     }
 
@@ -68,16 +70,17 @@ class Modify3Phones extends Component
     }
 
     // 4. update
-    public function update_user_phones()
+    // was: update_user_phones
+    public function updateUserContact3rd()
     {
-        $this->user_contact->cellular = $this->cellular;
-        $this->user_contact->whatsapp = $this->whatsapp;
+        $this->userContact->cellular = $this->cellular;
+        $this->userContact->whatsapp = $this->whatsapp;
 
-        $this->user_contact->save();
+        $this->userContact->save();
 
         return redirect()
             ->with('success', __("'Cellular and Whatsapp updated successfully.'"))
-            ->route('user-contact-modify4', ['uid' => $this->user_contact->user_id]);
+            ->route('user-contact-modify4', ['uid' => $this->userContact->user_id]);
 
     }
 }

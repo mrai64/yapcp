@@ -168,7 +168,8 @@ class Contest extends Model
         $country = $this->belongsTo(
             Country::class,
             'id',
-            'country_id');
+            'country_id'
+        );
 
         return $country;
     }

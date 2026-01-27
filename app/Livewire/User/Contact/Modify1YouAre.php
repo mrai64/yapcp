@@ -3,6 +3,8 @@
 /**
  * userContact modify 1 - personal data
  * Should be used form admin and user to modify personal data
+ *
+ * 2026-01-25 When name == surname and a comma is in the between
  */
 
 namespace App\Livewire\User\Contact;
@@ -17,19 +19,20 @@ class Modify1YouAre extends Component
 {
     use WithFileUploads;
 
-    public $user_contact;
-
-    public string $first_name;
-
-    public string $last_name;
-
-    public string $country_id;
+    public $userContact;
 
     public $countries;
 
-    public string $passport_photo;
+    // form fields
+    public string $firstName;
 
-    public $passport_photo_image;
+    public string $lastName;
+
+    public string $countryId;
+
+    public string $passportPhoto;
+
+    public $passportPhotoImage;
 
     // 1. mount
     public function mount(?string $uid = '')
@@ -43,17 +46,24 @@ class Modify1YouAre extends Component
         if ($uid != Auth::id()) {
             abort(403, 'Unauthorized action.');
         }
-        $this->user_contact = UserContact::where('user_id', $uid)->first();
+        $this->userContact = UserContact::where('user_id', $uid)->first();
         // form fields
-        $this->first_name = $this->user_contact->first_name;
-        $this->last_name = $this->user_contact->last_name;
-        $this->country_id = ($this->user_contact->country_id ?? '***');
+        $this->firstName = $this->userContact->first_name;
+        $this->lastName = $this->userContact->last_name;
+        // first time modify, when Surname, Name
+        if (($this->firstName == $this->lastName) && (stripos($this->lastName, ',') > 0)) {
+            [$this->lastName, $this->firstName] = explode(',', $this->lastName);
+            $this->lastName = trim($this->lastName);
+            $this->firstName = trim($this->firstName);
+        }
+
+        $this->countryId = ($this->userContact->country_id ?? '***');
 
         $this->countries = Country::select(['id', 'country', 'flag_code'])->orderBy('country')->get();
 
-        $this->passport_photo = $this->user_contact->passport_photo ?? '';
+        $this->passportPhoto = $this->userContact->passport_photo ?? '';
 
-        $this->passport_photo_image = null;
+        $this->passportPhotoImage = null;
     }
 
     // 2. render
@@ -66,41 +76,44 @@ class Modify1YouAre extends Component
     protected function rules()
     {
         return [
-            'first_name' => 'required|string|min:2|max:255',
-            'last_name' => 'required|string|min:2|max:255',
-            'country_id' => 'required|string|uppercase|min:3|exists:countries,id',
-            'passport_photo' => 'nullable|string|max:255',
-            'passport_photo_image' => 'nullable|image|mimes:jpg|max:2048',
+            'firstName' => 'required|string|min:2|max:255',
+            'lastName' => 'required|string|min:2|max:255',
+            'countryId' => 'required|string|exists:countries,id',
+            'passportPhoto' => 'nullable|string|max:255',
+            'passportPhotoImage' => 'nullable|image|mimes:jpg|max:2048',
         ];
     }
 
     // 4. update
-    public function update_user_contact()
+    // was: update_user_contact
+    public function updateUserContact1st()
     {
-        $this->validate();
+        $validated = $this->validate();
 
-        $this->user_contact->first_name = $this->first_name;
-        $this->user_contact->last_name = $this->last_name;
-        $this->user_contact->country_id = $this->country_id;
+        $this->userContact->first_name = $validated['firstName'];
+        $this->userContact->last_name = $validated['lastName'];
+        $this->userContact->country_id = $validated['countryId'];
 
         // passport photo upload
-        if (! is_null($this->passport_photo_image)) {
+        if (! is_null($this->passportPhotoImage)) {
             // stored as...
-            $passport_photo_name = $this->user_contact->photoBox();
-            $passport_photo_name = str_ireplace(':', '-', $passport_photo_name);
-            $passport_photo_name = str_ireplace('+', '', $passport_photo_name);
-            $passport_photo_name = str_ireplace(' ', '-', $passport_photo_name);
-            $passport_photo_name .= '/__passport.photo.jpg';
+            $passportPhotoFilename = $this->userContact->photoBox();
+            $passportPhotoFilename = str_ireplace(':', '-', $passportPhotoFilename);
+            $passportPhotoFilename = str_ireplace('+', '', $passportPhotoFilename);
+            $passportPhotoFilename = str_ireplace(' ', '-', $passportPhotoFilename);
+            $passportPhotoFilename .= '/__passport.photo.jpg';
+
             // stored in...
-            $this->passport_photo_image->storeAs('photos', $passport_photo_name, 'public');
-            $this->user_contact->passport_photo = $passport_photo_name;
+            $this->passportPhotoImage->storeAs('photos', $passportPhotoFilename, 'public');
+
+            $this->userContact->passport_photo = $passportPhotoFilename;
         }
 
-        $this->user_contact->save();
+        $this->userContact->save();
 
         return redirect()
             ->with('success', __("'Name, Country n Pass photo updated successfully.'"))
-            ->route('user-contact-modify2', ['uid' => $this->user_contact->user_id]);
+            ->route('user-contact-modify2', ['uid' => $this->userContact->user_id]);
 
     }
 }

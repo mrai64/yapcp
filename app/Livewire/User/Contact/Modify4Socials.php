@@ -13,22 +13,22 @@ use Livewire\Component;
 
 class Modify4Socials extends Component
 {
-    public $user_contact;
+    public $userContact;
 
     public $country;
 
-    public string $first_name;
+    public string $firstName;
 
-    public string $last_name;
+    public string $lastName;
 
-    public string $country_id;
+    public string $countryId;
 
     // form fields
     public string $website;
 
     public string $facebook;
 
-    public string $x_twitter;
+    public string $exTwitter;
 
     public string $linkedin;
 
@@ -47,18 +47,18 @@ class Modify4Socials extends Component
             abort(403, 'Unauthorized action.');
         }
 
-        $this->user_contact = UserContact::where('user_id', $uid)->first();
+        $this->userContact = UserContact::where('user_id', $uid)->first();
         // form fields
-        $this->first_name = $this->user_contact->first_name;
-        $this->last_name = $this->user_contact->last_name;
-        $this->country_id = ($this->user_contact->country_id ?? '***');
-        $this->country = ($this->user_contact->country ?? null);
+        $this->firstName = $this->userContact->first_name;
+        $this->lastName = $this->userContact->last_name;
+        $this->countryId = ($this->userContact->country_id ?? '***');
+        $this->country = ($this->userContact->country ?? null);
 
-        $this->website = $this->user_contact->website ?? '';
-        $this->facebook = $this->user_contact->facebook ?? '';
-        $this->x_twitter = $this->user_contact->x_twitter ?? '';
-        // $this->linkedin = $this->user_contact->linkedin ?? '';
-        $this->instagram = $this->user_contact->instagram ?? '';
+        $this->website = $this->userContact->website ?? '';
+        $this->facebook = $this->userContact->facebook ?? '';
+        $this->exTwitter = $this->userContact->x_twitter ?? '';
+        // $this->linkedin = $this->userContact->linkedin ?? '';
+        $this->instagram = $this->userContact->instagram ?? '';
     }
 
     // 2. render
@@ -73,24 +73,25 @@ class Modify4Socials extends Component
         return [
             'website' => 'nullable|string|active_url|max:100',
             'facebook' => 'nullable|string|active_url|max:100',
-            'x_twitter' => 'nullable|string|active_url|max:100',
+            'exTwitter' => 'nullable|string|active_url|max:100',
             // 'linkedin' => 'nullable|string|active_url|max:100',
             'instagram' => 'nullable|string|active_url|max:100',
         ];
     }
 
     // 4. update
-    public function update_user_socials()
+    // was: update_user_socials
+    public function updateUserContact4th()
     {
-        $this->validate();
+        $validated = $this->validate();
 
-        $this->user_contact->website = $this->website;
-        $this->user_contact->facebook = $this->facebook;
-        $this->user_contact->x_twitter = $this->x_twitter;
-        // $this->user_contact->linkedin = $this->linkedin;
-        $this->user_contact->instagram = $this->instagram;
+        $this->userContact->website = $validate['website'];
+        $this->userContact->facebook = $validated['facebook'];
+        $this->userContact->x_twitter = $validated['exTwitter'];
+        // $this->userContact->linkedin = $validated['linkedin'];
+        $this->userContact->instagram = $this->instagram;
 
-        $this->user_contact->save();
+        $this->userContact->save();
 
         $firstFed = FederationMore::orderBy('federation_id', 'asc')->first();
 
@@ -98,12 +99,12 @@ class Modify4Socials extends Component
         if ($firstFed === null) {
             return redirect()
                 ->with('success', __("'Personal pages updated successfully.'"))
-                ->route('user-contact-modify1', ['uid' => $this->user_contact->user_id]);
+                ->route('user-contact-modify1', ['uid' => $this->userContact->user_id]);
         }
 
         // additional fields form for first federation id
         return redirect()
             ->with('success', __("'Personal pages updated successfully.'"))
-            ->route('user-contact-modify5', ['fid' => $firstFed->federation_id, 'uid' => $this->user_contact->user_id]);
+            ->route('user-contact-modify5', ['fid' => $firstFed->federation_id, 'uid' => $this->userContact->user_id]);
     }
 }

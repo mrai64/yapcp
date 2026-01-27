@@ -109,8 +109,8 @@ class ContestParticipant extends Model
     {
         $contest = $this->belongsTo(
             related: Contest::class,
-            foreignKey: 'id',
-            ownerKey: 'contest_id'
+            foreignKey: 'contest_id', //  contest_participants.contest_id
+            ownerKey: 'id' //             contests.id
         );
         return $contest;
     }
@@ -118,14 +118,22 @@ class ContestParticipant extends Model
     // was: contest_works
     public function contestWorks()
     {
-        $contestWorks = $this->hasMany(ContestWork::class, 'user_id', 'user_id');
+        $contestWorks = $this->hasMany(
+            ContestWork::class, //
+            'user_id', //           contests.user_id
+            'user_id' //            contest_works.user_id
+        );
 
         return $contestWorks;
     }
 
     public function works()
     {
-        $contestWorks = $this->hasMany(ContestWork::class, 'user_id', 'user_id');
+        $contestWorks = $this->hasMany(
+            ContestWork::class,
+            'user_id',
+            'user_id'
+        );
 
         return $contestWorks;
     }
@@ -133,7 +141,11 @@ class ContestParticipant extends Model
     // was: user_contact
     public function userContact()
     {
-        $userContact = $this->belongsTo(UserContact::class, 'user_id', 'user_id');
+        $userContact = $this->belongsTo(
+            UserContact::class,
+            'user_id',
+            'user_id'
+        );
 
         return $userContact;
     }
@@ -142,7 +154,11 @@ class ContestParticipant extends Model
     public function contact()
     {
         //                     user_contacts.user_id contest_participants.user_id
-        $userContact = $this->belongsTo(UserContact::class, 'user_id', 'user_id');
+        $userContact = $this->belongsTo(
+            UserContact::class,
+            'user_id',
+            'user_id'
+        );
 
         return $userContact;
     }
@@ -151,7 +167,11 @@ class ContestParticipant extends Model
     public function userContactMores()
     {
         //                       user_contact_mores.user_contact_user_id contest_participants.user_id
-        $userContactMores = $this->hasMany(UserContactMore::class, 'user_contact_user_id', 'user_id');
+        $userContactMores = $this->hasMany(
+            UserContactMore::class,
+            'user_id', //              contest_participants.user_id
+            'user_contact_user_id' //  user_contact_mores.user_contact_user_id
+        );
 
         return $userContactMores;
     }
@@ -159,7 +179,11 @@ class ContestParticipant extends Model
     public function contactMores()
     {
         //                       user_contact_mores.user_contact_user_id contest_participants.user_id
-        $userContactMores = $this->hasMany(UserContactMore::class, 'user_contact_user_id', 'user_id');
+        $userContactMores = $this->hasMany(
+            UserContactMore::class,
+            'user_id',
+            'user_contact_user_id'
+        );
 
         return $userContactMores;
     }

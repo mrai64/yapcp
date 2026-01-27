@@ -30,11 +30,11 @@
 
     <!-- nav bar here -->
     <div class="fyk block font-medium text-2xl text-gray-700 mb-4">
-        {{$country->flag_code}} | {{ $last_name}}, {{ $first_name }}
+        {{$country->flag_code}} | {{ $lastName}}, {{ $firstName }}
     </div>
     <h3 class="fyk text-xl mb-4"><em>{{ __("Phone Numbers...")}}</em></h3>    
 
-    <form wire:submit="update_user_phones">
+    <form wire:submit="updateUserContact3rd">
         @csrf
 
         <p class="small mb-4">{{ __('Please provide at least one phone number where we can reach you ')}} <strong>{{ __('only if necessary.') }}</strong></p>
