@@ -16,26 +16,33 @@ digital world.
 *WARN:* images are reflecting development version
 and may change from real use.
 
-Start from address <http://yapcp.test> you see
+Start from address <https://yapcp.test> you see the
+welcome page, then link for log in, or Register, the
+open contests and a link to that manual. Log in
+and register link are also in top-end of browser.
 
 ![Splashscreeen image](/docs/users/registration_img01.png)
 
 ## Registration
 
-First we ask few infos, the minimum required to access
-next. A name, an email address, and we suggest a
-long, strong password. For password we say the
+We require data asked from all the contests form,
+starting from a name, an email address, and a
+password. Pay attention to e-mail address because
+a message is sended to check email address and s
+with password your unique entry key.
+
+For a good password we say the
 usual sysadmin recommendations: use some non-sense phrases
 joining 5-6 short words and with '-', i.e.
-dont-hack-my-yapcp-26-entry-pass-phrase 😁.
-Size matters, even for passwords.
-We can't recover your password anyway.
+*dont-hack-my-yapcp-26-entry-pass-phrase* 😁.
+Size matters, specially for passwords.
+We can't recover your password anyway, and you
+and solely you are responsible etc.
 
 ![Registration entry form](/docs/users/registration_img02.png)
 
-Check carefully all your data then an email will reach
-your box to verify it's a real and monitored address.
-It's also the key to enter in log in.
+Check carefully all your data before submit, as usual.  
+First field is labeled Surname, Name. Plz use the comma to separate surname and name, i.e. Hill, Benny. That and email field became the seed of your Contact cards.
 
 ![Registration filled form](/docs/users/registration_img03.png)
 
@@ -49,7 +56,6 @@ Data required: your email, your password.
 Also available: link to reset password.
 
 ![Login form](/docs/users/login_img01.png)
-
 
 ## Next stop
 
