@@ -1,0 +1,39 @@
+name: Auto Bump Version
+
+on:
+  push:
+    branches:
+      - main  # Si attiva solo quando invii modifiche al ramo main
+
+jobs:
+  bump-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5' # Usa la tua versione di PHP
+
+      - name: Install Dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Create .env file
+        run: cp .env.example .env
+
+      - name: Generate App Key
+        run: php artisan key:generate
+
+      - name: Run Version Bump
+        run: php artisan app:release
+
+      - name: Commit and Push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: bump version [skip ci]"
+          file_pattern: 'storage/app/private/version.json'
