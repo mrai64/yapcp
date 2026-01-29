@@ -31,22 +31,32 @@
                     </header>
 
                     <main class="mt-6 max-w-l mx-auto lg:mt-16 lg:max-w-4xl min-h-screen h-full">
-                        <p class="mb-4">Welcome to Photo Contest Platform, <br /> our mission is help you to have 
-                            a comfortable way to participate or organize Photo Contest everywhere you are. 
-                            <br>
+                        <p class="mb-4">Welcome to Photo Contest Platform, <br />
+                            <em>our mission</em> is help <strong>you</strong> to have
+                            a comfortable way to participate or organize Photo Contest everywhere you are.
+                            <br />
+                            <br />
                             <ul>
-                                <li>- As participant,<br> 
+                                <li>- As participant,<br /> 
                                     you can search and subscribe photo contest organized by 
                                     national or international photo organization, hosted by yaPCP.
-                                    <br />But also you can leave your works in place if you plan
+                                    <br /><em>But also</em> you can leave your works in place if you plan
                                     to participate on more contests hosted by yaPCP, your infos
                                     are required only at first time, and you can change every time you need.
-                                    <br>
+                                    Change your home after registration? No problem: your data is updated
+                                    in every report that contest organizer run, after your modify.
+                                    <br />
+                                    <br />
                                 </li>
-                                <li>- As photo contest organizer,<br> 
+                                <li>- As photo contest organizer,<br /> 
                                     you can plan and manage in yaPCP your own photo contest, 
                                     following national and international photo 
-                                    organization rules with the help of yaPCP.</li>
+                                    organization rules with the help of yaPCP.
+                                    If you plan to propose your contest for a Federation
+                                    Patronage, we guide you step by step in a compliant path.
+                                    <br />
+                                    <br />
+                                </li>
                             </ul>
                         </p>
 
@@ -90,8 +100,8 @@
 
                     </main>
 
-                    <footer class="py-16 text-center text-sm text-black dark:text-white/70">
-                        yaPCP v{{ App\Models\User::APPVERSION }}
+                    <footer class="py-16 text-center text-sm text-black dark:text-white/70 text-muted">
+                        &copy; {{ date('Y')}} - {{ config('app.name') }} - version {{ $appVersion }} guest
                     </footer>
                 </div>
             </div>
