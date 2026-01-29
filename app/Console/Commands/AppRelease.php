@@ -15,7 +15,7 @@ class AppRelease extends Command
     {
         $fileName = 'version.json';
         $year = date('Y');
-        $month = date('n'); // Mese senza zeri iniziali (1-12)
+        $month = date('n'); // m: mese con zeri iniziali 01-12 | n: Mese senza zeri iniziali (1-12)
 
         // Carica i dati esistenti o crea default
         if (Storage::disk('local')->exists($fileName)) {
