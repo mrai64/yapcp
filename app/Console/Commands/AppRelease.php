@@ -39,7 +39,7 @@ class AppRelease extends Command
         // Salva nel file storage/app/version.json
         Storage::disk('local')->put($fileName, json_encode($data, JSON_PRETTY_PRINT));
         $path = storage_path('app/' . $fileName);
-        
+
         $this->info("🇮🇹 Versione aggiornata con successo: " . $data['full']);
     }
 }
