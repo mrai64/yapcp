@@ -9,7 +9,7 @@ class AppRelease extends Command
 {
     // Questo definisce come chiamerai il comando
     protected $signature = 'app:release';
-    protected $description = 'Aggiorna la versione del progetto (YYYY.MM.Patch)';
+    protected $description = '🇮🇹 Aggiorna la versione del progetto (YYYY.MM.Patch)';
 
     public function handle()
     {
@@ -40,7 +40,6 @@ class AppRelease extends Command
         Storage::disk('local')->put($fileName, json_encode($data, JSON_PRETTY_PRINT));
         $path = storage_path('app/' . $fileName);
         
-        $this->info("Versione aggiornata con successo: " . $data['full']);
-        $this->info("Il file si trova qui: " . $path);
+        $this->info("🇮🇹 Versione aggiornata con successo: " . $data['full']);
     }
 }
