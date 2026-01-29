@@ -4,6 +4,13 @@
  * That component manage a dynamic form based on fields definition
  * tabled in federation_mores
  * TODO put default value in placeholder field, and real value in field wire:
+ *
+ * Note: some var names seems not PSR-12 compliant but i.e.
+ * field_name is direct from table query so i need mantain it
+ * named field_name instead of fieldName,
+ *
+ * @see /resources/views/livewire/user/contact/modify5-feds.blade.php
+ *
  */
 
 namespace App\Livewire\User\Contact;
@@ -17,30 +24,39 @@ use Livewire\Component;
 
 class Modify5Feds extends Component
 {
-    public string $federation_id;
+    public string $federationId;
 
     public $federation;
 
-    public string $user_contact_user_id;
+    public string $userId;
 
-    public $user_contact;
+    public $userContact;
 
     public array $formData = [];
 
     public $fieldDefinitions;
 
-    public array $formField = [];
+    public array $formFieldSet = [];
 
     // 1. mount()
+    /**
+     * Mount pick and prepare datas for view, with 2 params
+     * first is federation id, second should be a user contact id
+     * but if missing is assumed logged user contact id.
+     *
+     * @param string $fid
+     * @param string|null $uid
+     * @return void
+     */
     public function mount(string $fid, ?string $uid = '') // route()
     {
         // 1. check input
-        $this->federation_id = $fid;
+        $this->federationId = $fid;
         $this->federation = Federation::findOrFail($fid);
 
         $uid = ($uid === '') ? Auth::id() : $uid;
-        $this->user_contact_user_id = $uid;
-        $this->user_contact = UserContact::where('user_id', $this->user_contact_user_id)->get();
+        $this->userId = $uid;
+        $this->userContact = UserContact::where('user_id', $this->userId)->get();
 
         // full list
         $this->fieldDefinitions = FederationMore::select([
@@ -51,10 +67,11 @@ class Modify5Feds extends Component
             'field_default_value',
             'field_suggest',
         ])
-            ->where('federation_id', $this->federation_id)
-            ->orderBy('field_label')->get();
+            ->where('federation_id', $this->federationId)
+            ->orderBy('field_label')
+            ->get();
 
-        // default values | user values
+        // default values | user values for user id
         foreach ($this->fieldDefinitions as $definition) {
             $value = UserContactMore::select('field_value')
                 ->where('user_contact_user_id', $uid)
@@ -65,7 +82,10 @@ class Modify5Feds extends Component
         }
 
         // maintain array, not collection
-        $this->formField = array_values(collect($this->fieldDefinitions)->toArray());
+        // here array keys
+        ds($this->fieldDefinitions);
+        $this->formFieldSet = array_values(collect($this->fieldDefinitions)->toArray());
+        ds($this->formFieldSet);
     }
 
     // 2. render()
@@ -84,20 +104,20 @@ class Modify5Feds extends Component
      */
     public function rules()
     {
-        $rules_array = [];
-        foreach ($this->formField as $f) {
-            $rules_array['formData.'.$f['field_name']] = 'sometimes|'.$f['field_validation_rules'];
+        $rulesSet = [];
+        foreach ($this->formFieldSet as $f) {
+            $rulesSet['formData.'.$f['fieldName']] = 'sometimes|'.$f['field_validation_rules'];
         }
 
-        return $rules_array;
+        return $rulesSet;
     }
 
     // 4. validation attributes
     public function attributes()
     {
         $attributes = [];
-        foreach ($this->formField as $f) {
-            $attributes['formData.'.$f['field_name']] = $f['field_label'];
+        foreach ($this->formFieldSet as $f) {
+            $attributes['formData.'.$f['fieldName']] = $f['field_label'];
         }
 
         return $attributes;
@@ -117,21 +137,23 @@ class Modify5Feds extends Component
     {
         ds(__FUNCTION__);
         $validated = $this->validate();
-        $validated = $validated['formData'];
         // not the best but... for few record acceptable
-        foreach ($validated as $key => $value) {
+        foreach ($validated['formData'] as $key => $value) {
             ds('KV: '.$key.' / '.$value);
-            foreach ($this->formField as $field) {
-                ds('check ff:'.$field['field_name']);
-                if ($field['field_name'] === $key) {
+            foreach ($this->formFieldSet as $field) {
+                ds('check ff:'.$field['fieldName']);
+                if ($field['fieldName'] === $key) {
                     ds('for: '.$key.' val:'.$field['field_default_value'].' vs. '.$value);
                     if ($field['field_default_value'] !== $value) {
                         $set = UserContactMore::updateOrCreate(
-                            ['user_contact_user_id' => $this->user_contact_user_id, 'federation_id' => $this->federation_id, 'field_name' => $key],
+                            ['user_contact_user_id' => $this->userId, 'federation_id' => $this->federationId, 'field_name' => $key],
                             ['field_value' => $value]
                         );
                     } else {
-                        $set = UserContactMore::where('user_contact_user_id', $this->user_contact_user_id)->where('federation_id', $this->federation_id)->where('field_name', $key)->delete();
+                        $set = UserContactMore::where('user_contact_user_id', $this->userId)
+                            ->where('federation_id', $this->federationId)
+                            ->where('field_name', $key)
+                            ->delete();
                     }
                 }
             }

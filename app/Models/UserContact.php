@@ -85,7 +85,7 @@ class UserContact extends Model
         $pb = str_ireplace(':', '-', $pb);
         $pb = str_ireplace('+', '', $pb);
         $pb = str_ireplace(' ', '-', $pb);
-         * 
+         *
          */
 
         $pb  = $this->country_id . '/';
