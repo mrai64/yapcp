@@ -77,6 +77,13 @@
             "dont-discover": []
         }
     },
+    "authors": [
+        {
+            "name": "Massimo Rainato",
+            "email": "massimo.rainato@gmail.com",
+            "role": "Developer (1st)"
+        }
+    ],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
