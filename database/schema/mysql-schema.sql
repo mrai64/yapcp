@@ -47,6 +47,8 @@ CREATE TABLE `pcp_contest_awards` (
   KEY `view_idx` (`contest_id`,`section_id`,`award_code`,`winner_work_id`,`winner_user_id`,`winner_name`),
   KEY `pcp_contest_awards_deleted_at_index` (`deleted_at`),
   KEY `sixth_idx` (`winner_work_id`,`section_id`,`contest_id`),
+  KEY `winner_user_id_idx` (`winner_user_id`),
+  KEY `winner_work_id_idx` (`winner_work_id`),
   CONSTRAINT `pcp_contest_awards_contest_id_foreign` FOREIGN KEY (`contest_id`) REFERENCES `pcp_contests` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Contest awards contains both sections prizes and contest prizes (section code missing)';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -238,7 +240,9 @@ CREATE TABLE `pcp_contest_waitings` (
   PRIMARY KEY (`id`),
   KEY `main_idx` (`contest_id`,`section_id`,`work_id`,`portfolio_sequence`,`deleted_at`),
   KEY `pcp_contest_waitings_work_id_index` (`work_id`),
-  KEY `pcp_contest_waitings_deleted_at_index` (`deleted_at`)
+  KEY `pcp_contest_waitings_deleted_at_index` (`deleted_at`),
+  KEY `participant_idx` (`participant_user_id`),
+  KEY `organization_idx` (`organization_user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `pcp_contest_works`;
@@ -304,11 +308,14 @@ CREATE TABLE `pcp_contests` (
   `name_local` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `lang_local` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'en' COMMENT 'dev: in LangList[]',
   `organization_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: organizations.id',
-  `contest_mark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'The contest or organization passport photo - mark',
-  `contact_info` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'contest headquarter, email and so on',
   `is_circuit` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N' COMMENT 'Y/N, N when not Y',
   `circuit_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'null or a valid contest.id',
   `federation_list` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'under patronage of federation code[]',
+  `contest_mark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'The contest or organization passport photo - mark',
+  `contact_info` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'contest headquarter, email and so on',
+  `award_ceremony_info` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT 'Site and date, or link to broadcast platform',
+  `fee_info` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT 'only text description of fee for participation',
+  `vote_rule` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'num:1..10' COMMENT 'related to limited set',
   `url_1_rule` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'how read english rules and subscribe link',
   `url_2_concurrent_list` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `url_3_admit_n_award_list` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'only the result list, not a catalogue',
@@ -322,9 +329,6 @@ CREATE TABLE `pcp_contests` (
   `day_6_awards` datetime NOT NULL COMMENT 'Award Ceremony',
   `day_7_catalogues` datetime NOT NULL COMMENT 'Publicly Catalogue publications',
   `day_8_closing` datetime NOT NULL COMMENT 'Closing date for award postal send',
-  `award_ceremony_info` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT 'Site and date, or link to broadcast platform',
-  `fee_info` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci COMMENT 'only text description of fee for participation',
-  `vote_rule` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'num:1..10' COMMENT 'related to limited set',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'backup reserved',
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'backup reserved',
   `deleted_at` datetime DEFAULT NULL COMMENT 'softdelete reserved',
@@ -662,9 +666,9 @@ CREATE TABLE `pcp_user_contacts` (
   UNIQUE KEY `user_id_idx` (`user_id`,`deleted_at`),
   KEY `pcp_user_contacts_first_name_index` (`first_name`),
   KEY `pcp_user_contacts_last_name_index` (`last_name`),
-  KEY `pcp_user_contacts_country_id_foreign` (`country_id`),
   KEY `pcp_user_contacts_timezone_foreign` (`timezone`),
   KEY `pcp_user_contacts_deleted_at_index` (`deleted_at`),
+  KEY `country_name_idx` (`country_id`,`last_name`,`first_name`,`user_id`),
   CONSTRAINT `pcp_user_contacts_timezone_foreign` FOREIGN KEY (`timezone`) REFERENCES `pcp_timezones` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -673,17 +677,17 @@ CREATE TABLE `pcp_user_contacts` (
 /*!50003 SET @saved_col_connection = @@collation_connection */ ;
 /*!50003 SET character_set_client  = utf8mb4 */ ;
 /*!50003 SET character_set_results = utf8mb4 */ ;
-/*!50003 SET collation_connection  = utf8mb4_unicode_ci */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 /*!50003 CREATE*/ /*!50017 DEFINER=`Sql1515403`@`localhost`*/ /*!50003 TRIGGER `update_user_email_on_contact_change` BEFORE UPDATE ON `pcp_user_contacts` FOR EACH ROW BEGIN
-                IF OLD.email <> NEW.email THEN
-                    UPDATE `pcp_users`
-                    SET `email` = NEW.email
-                    WHERE `email` = OLD.email;
-                END IF;
-            END */;;
+    IF OLD.email <> NEW.email THEN
+        UPDATE `pcp_users`
+        SET `email` = NEW.email
+        WHERE `email` = OLD.email;
+    END IF;
+END */;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -761,7 +765,7 @@ CREATE TABLE `pcp_users` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `pcp_users_email_deleted_at_unique` (`email`,`deleted_at`),
+  UNIQUE KEY `pcp_users_email_unique` (`email`),
   KEY `pcp_users_name_index` (`name`),
   KEY `pcp_users_deleted_at_index` (`deleted_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1082,3 +1086,7 @@ INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (208,'2026_01_0
 INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (214,'2026_01_01_171622_create_federation_mores_table',119);
 INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (215,'2026_01_01_174854_create_user_contact_mores_table',119);
 INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (217,'2026_01_12_211855_add_idx_to_contest_awards_table',120);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (219,'2026_01_17_193728_add_idx_to_user_contacts_table',121);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (220,'2026_01_20_185836_mod_idx_in_users_table',122);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (222,'2026_01_22_095610_add_idx_to_contest_awards_table',123);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (223,'2026_01_22_131802_add_idx_to_contest_waitings_table',124);
