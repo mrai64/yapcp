@@ -18,6 +18,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
@@ -67,6 +68,7 @@ use Illuminate\Support\Str;
 
 final class ContestAward extends Model
 {
+    use HasUuids;
     use SoftDeletes;
 
     public const TABLENAME = 'contest_awards';

@@ -14,6 +14,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable; // uuid booted()
@@ -82,11 +83,9 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
+    use HasUuids;
     use Notifiable;
     use SoftDeletes;
-
-    // used to show a version number
-    public const APPVERSION = '2025.12.1 dev';
 
     public const TABLENAME = 'users'; // MAYBE $this->table_name()
 

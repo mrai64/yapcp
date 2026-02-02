@@ -17,6 +17,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
@@ -65,6 +67,7 @@ use Illuminate\Support\Str;
 class ContestWaiting extends Model
 {
     use Notifiable;
+    use HasUuids;
     use SoftDeletes;
 
     public const TABLENAME = 'contest_waitings';
