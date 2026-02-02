@@ -19,6 +19,39 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * @property int $id
+ * @property string $contest_id fk: contests.id
+ * @property string $section_id fk: contest_sections.id
+ * @property string $work_id fk: works.id contest_works.work_id
+ * @property string $juror_user_id fk: user_contacts.user_id
+ * @property string $vote see contests.vote_rule
+ * @property int $review_required 0 = not required
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at date of vote
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Contest|null $contest
+ * @property-read \App\Models\ContestSection|null $contestSection
+ * @property-read \App\Models\UserContact|null $userContact
+ * @property-read \App\Models\Work|null $work
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote whereContestId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote whereJurorUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote whereReviewRequired($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote whereSectionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote whereVote($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote whereWorkId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote withoutTrashed()
+ * @mixin \Eloquent
+ */
 class ContestVote extends Model
 {
     use SoftDeletes;

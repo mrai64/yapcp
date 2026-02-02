@@ -24,6 +24,90 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
+/**
+ * @property int $id
+ * @property string $user_id fk: users.id uuid
+ * @property string $country_id fk: countries.id
+ * @property string $first_name
+ * @property string $last_name
+ * @property string|null $nick_name
+ * @property string $email same as users.email
+ * @property string $cellular
+ * @property string $passport_photo
+ * @property string $lang_local for future use - html lang
+ * @property string $timezone for future use - php timezone for time math
+ * @property string $address
+ * @property string $address_line2
+ * @property string $city
+ * @property string $region
+ * @property string $postal_code
+ * @property string|null $website url of personal site
+ * @property string|null $facebook url of personal page
+ * @property string|null $x_twitter url of personal page
+ * @property string|null $instagram url of personal page
+ * @property string|null $whatsapp to chat into
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserContactMore> $contactMores
+ * @property-read int|null $contact_mores_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestAward> $contestAwards
+ * @property-read int|null $contest_awards_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestJury> $contestJurors
+ * @property-read int|null $contest_jurors_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestParticipant> $contestParticipants
+ * @property-read int|null $contest_participants_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestVote> $contestVotesJuror
+ * @property-read int|null $contest_votes_juror_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestWaiting> $contestWaitingOrganizations
+ * @property-read int|null $contest_waiting_organizations_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestWaiting> $contestWaitingParticipants
+ * @property-read int|null $contest_waiting_participants_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestWork> $contestWorks
+ * @property-read int|null $contest_works_count
+ * @property-read \App\Models\Country|null $country
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestJury> $juries
+ * @property-read int|null $juries_count
+ * @property-read \App\Models\User|null $user
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $userRoles
+ * @property-read int|null $user_roles_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Work> $userWorks
+ * @property-read int|null $user_works_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\WorkValidation> $workValidators
+ * @property-read int|null $work_validators_count
+ * @method static \Database\Factories\UserContactFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereAddressLine2($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereCellular($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereFacebook($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereFirstName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereInstagram($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereLangLocal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereLastName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereNickName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact wherePassportPhoto($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact wherePostalCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereRegion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereTimezone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereWebsite($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereWhatsapp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereXTwitter($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact withoutTrashed()
+ * @mixin \Eloquent
+ */
 class UserContact extends Model
 {
     use HasFactory;

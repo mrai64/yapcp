@@ -15,6 +15,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TimezonesList newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TimezonesList newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TimezonesList query()
+ * @mixin \Eloquent
+ */
 class TimezonesList extends Model
 {
     // region/city - sort A to Z

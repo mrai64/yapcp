@@ -23,6 +23,45 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
+/**
+ * @property string $id uuid assigned
+ * @property string $contest_id fk: contests.id 1:N
+ * @property string|null $section_id fk: contest_section.id
+ * @property string|null $section_code from: section.id->code
+ * @property string $award_code free but unique in contest
+ * @property string $award_name free
+ * @property string $is_award N/Y flag, Y=award prize, N=HM or other
+ * @property string|null $winner_work_id fk: works.id
+ * @property string|null $winner_user_id fk: users.id user_contacts.user_id
+ * @property string $winner_name winner not in previous cols
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Contest $contest
+ * @property-read \App\Models\ContestSection|null $section
+ * @property-read \App\Models\UserContact|null $userContact
+ * @property-read \App\Models\Work|null $work
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereAwardCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereAwardName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereContestId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereIsAward($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereSectionCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereSectionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereWinnerName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereWinnerUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereWinnerWorkId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward withoutTrashed()
+ * @mixin \Eloquent
+ */
 class ContestAward extends Model
 {
     use SoftDeletes;

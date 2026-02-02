@@ -17,6 +17,38 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property int $id
+ * @property string $federation_id fk federations
+ * @property string $field_name lowercase
+ * @property string $field_label label for the field
+ * @property string $field_validation_rules string or function(), validation rules for the field, nullable if none
+ * @property string $field_default_value empty string as default default value
+ * @property string $field_suggest message to explain what insert
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Federation|null $federation
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserContactMore> $userMores
+ * @property-read int|null $user_mores_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore whereFederationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore whereFieldDefaultValue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore whereFieldLabel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore whereFieldName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore whereFieldSuggest($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore whereFieldValidationRules($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore withoutTrashed()
+ * @mixin \Eloquent
+ */
 class FederationMore extends Model
 {
     //

@@ -20,6 +20,31 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
+/**
+ * @property string $id uuid assigned
+ * @property string $section_id fx: contest_section.id 1:N
+ * @property string $user_contact_id fx: user_contact.user_id
+ * @property string $is_president N/Y flag
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\ContestSection|null $contestSection
+ * @property-read \App\Models\UserContact|null $userContact
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereIsPresident($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereSectionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereUserContactId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury withoutTrashed()
+ * @mixin \Eloquent
+ */
 class ContestJury extends Model
 {
     use HasFactory;

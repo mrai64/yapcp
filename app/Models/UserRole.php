@@ -19,6 +19,42 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * @property int $id
+ * @property string $user_id fk: users.id
+ * @property string $role
+ * @property string|null $organization_id fk: organizations.id
+ * @property string|null $contest_id fk: contests.id
+ * @property string|null $federation_id fk to federations.id
+ * @property \Illuminate\Support\Carbon $role_opening Start of role works - default today
+ * @property \Illuminate\Support\Carbon $role_closing End of role works default:future
+ * @property \Illuminate\Support\Carbon $created_at backup reserved
+ * @property \Illuminate\Support\Carbon $updated_at backup reserved
+ * @property \Illuminate\Support\Carbon|null $deleted_at softdelete reserved
+ * @property-read \App\Models\Contest|null $contest
+ * @property-read \App\Models\Federation|null $federation
+ * @property-read \App\Models\Organization|null $organization
+ * @property-read \App\Models\UserContact|null $userContact
+ * @method static \Database\Factories\UserRoleFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRole newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRole newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRole onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRole query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRole whereContestId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRole whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRole whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRole whereFederationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRole whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRole whereOrganizationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRole whereRole($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRole whereRoleClosing($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRole whereRoleOpening($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRole whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRole whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRole withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRole withoutTrashed()
+ * @mixin \Eloquent
+ */
 class UserRole extends Model
 {
     use HasFactory;

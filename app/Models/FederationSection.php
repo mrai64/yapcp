@@ -24,6 +24,55 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * @property int $id
+ * @property string $federation_id
+ * @property string $code
+ * @property string $name_en official name in english
+ * @property string $local_lang follow iso-3166 2 ascii lowercase
+ * @property string $name_local in local name
+ * @property string|null $rule_definition synopsis from federal regulation docs
+ * @property string $file_formats list of ext, comma separated
+ * @property int $min_works greater zero == portfolio
+ * @property int $max_works
+ * @property int $min_short_side px
+ * @property int $max_long_side px
+ * @property int $max_weight Bytes
+ * @property int $monochromatic_required 0 == false, 1 == true
+ * @property int $raw_required 0 == false, 1 == true
+ * @property int $only_one 0 = only one prize per section per person not required
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Federation $federation
+ * @method static \Database\Factories\FederationSectionFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereFederationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereFileFormats($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereLocalLang($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereMaxLongSide($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereMaxWeight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereMaxWorks($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereMinShortSide($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereMinWorks($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereMonochromaticRequired($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereNameEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereNameLocal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereOnlyOne($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereRawRequired($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereRuleDefinition($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection withoutTrashed()
+ * @mixin \Eloquent
+ */
 class FederationSection extends Model
 {
     use HasFactory;

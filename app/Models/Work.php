@@ -17,6 +17,43 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
+/**
+ * @property string $id uuid
+ * @property string $user_id fk: users.id
+ * @property string $work_file path n file
+ * @property string $extension lowercase
+ * @property string $reference_year default maybe YEAR(CURDATE())
+ * @property string $title_en english title
+ * @property string $title_local lang title
+ * @property int $long_side pixel / cm
+ * @property int $short_side pixel / cm
+ * @property string $monochromatic not bool but oldstyle uppercase | Y / N
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\UserContact|null $userContact
+ * @method static \Database\Factories\WorkFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Work newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Work newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Work onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Work query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Work whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Work whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Work whereExtension($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Work whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Work whereLongSide($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Work whereMonochromatic($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Work whereReferenceYear($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Work whereShortSide($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Work whereTitleEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Work whereTitleLocal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Work whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Work whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Work whereWorkFile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Work withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Work withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Work extends Model
 {
     /** @use HasFactory<\Database\Factories\WorkFactory> */

@@ -22,6 +22,46 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 
+/**
+ * @property string $id uuid assigned
+ * @property string $contest_id fk: contests.id 1:N
+ * @property string $section_id fk: contest_sections.id
+ * @property string $work_id fk: works.id
+ * @property string $participant_user_id fk: users.id
+ * @property int $portfolio_sequence valid also in section counter
+ * @property string $organization_user_id fk: users.id
+ * @property string $because why that work is out
+ * @property string $email for notification
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Contest|null $contest
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read int|null $notifications_count
+ * @property-read \App\Models\UserContact|null $organizationExaminer
+ * @property-read \App\Models\UserContact|null $participantUser
+ * @property-read \App\Models\ContestSection|null $section
+ * @property-read \App\Models\Work|null $work
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting whereBecause($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting whereContestId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting whereOrganizationUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting whereParticipantUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting wherePortfolioSequence($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting whereSectionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting whereWorkId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting withoutTrashed()
+ * @mixin \Eloquent
+ */
 class ContestWaiting extends Model
 {
     use Notifiable;

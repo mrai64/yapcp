@@ -13,6 +13,25 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * @property int $id
+ * @property string $role
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleSet newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleSet newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleSet onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleSet query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleSet whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleSet whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleSet whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleSet whereRole($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleSet whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleSet withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleSet withoutTrashed()
+ * @mixin \Eloquent
+ */
 class UserRolesRoleSet extends Model
 {
     use SoftDeletes;

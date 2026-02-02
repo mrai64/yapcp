@@ -25,6 +25,39 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
+/**
+ * @property string $id uuid assigned
+ * @property string $country_id
+ * @property string $name
+ * @property string $email Should became verified
+ * @property string|null $website
+ * @property string|null $contact postal address
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Contest> $contests
+ * @property-read int|null $contests_count
+ * @property-read \App\Models\Country|null $country
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $userRoles
+ * @property-read int|null $user_roles_count
+ * @method static \Database\Factories\OrganizationFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereContact($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization whereWebsite($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Organization extends Model
 {
     use HasFactory;

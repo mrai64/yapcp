@@ -26,6 +26,48 @@ use Illuminate\Support\Facades\Log; // //dbg Log::info
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str; //         pk uuid
 
+/**
+ * @property string $id uuid assigned
+ * @property string $contest_id fk: contests.id 1:N
+ * @property string $section_id fk: contest_sections.id
+ * @property string $country_id fk: user_contacts.country_id
+ * @property string $user_id fk: users.id
+ * @property string $work_id fk: works.id
+ * @property string $extension to build file name
+ * @property int $portfolio_sequence valid also in section counter
+ * @property int $is_admit 0 = not admit, admit otherwise
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\UserContact $author
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestAward> $award
+ * @property-read int|null $award_count
+ * @property-read \App\Models\Contest $contest
+ * @property-read \App\Models\ContestSection $contestSection
+ * @property-read \App\Models\Country|null $country
+ * @property-read \App\Models\ContestSection $section
+ * @property-read \App\Models\UserContact|null $userContact
+ * @property-read \App\Models\Work $work
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereContestId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereExtension($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereIsAdmit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork wherePortfolioSequence($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereSectionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereWorkId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork withoutTrashed()
+ * @mixin \Eloquent
+ */
 class ContestWork extends Model
 {
     //

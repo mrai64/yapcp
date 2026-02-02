@@ -30,6 +30,57 @@ use Illuminate\Database\Eloquent\SoftDeletes; //  uuid booted()
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
+/**
+ * @property string $id uuid assigned
+ * @property string $contest_id fx: contests.id 1:N
+ * @property string $code as fk: federationSections.code
+ * @property string $under_patronage a Y/N col
+ * @property int|null $federation_section_id fk: federation_sections.id
+ * @property string $name_en international
+ * @property string|null $name_local in local lang - see contests.lang_local
+ * @property string $rule_format list of permitted extension
+ * @property int $rule_min minimum works-per-section
+ * @property int $rule_max maximum works-per-section
+ * @property int $rule_min_size minimum short_side px
+ * @property int $rule_max_size maximum long_side px
+ * @property int $rule_max_weight file weight in KB
+ * @property string $rule_monochromatic maybe boolean 0/N=false, 1/Y=true
+ * @property int $rule_raw_required 0 == false; 1 == true
+ * @property int $rule_only_one 0 = only one prize per section per person not required
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Contest $contest
+ * @property-read \App\Models\FederationSection|null $federationSection
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestWork> $works
+ * @property-read int|null $works_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereContestId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereFederationSectionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereNameEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereNameLocal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereRuleFormat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereRuleMax($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereRuleMaxSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereRuleMaxWeight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereRuleMin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereRuleMinSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereRuleMonochromatic($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereRuleOnlyOne($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereRuleRawRequired($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereUnderPatronage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection withoutTrashed()
+ * @mixin \Eloquent
+ */
 class ContestSection extends Model
 {
     use HasFactory;

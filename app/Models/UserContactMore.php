@@ -18,6 +18,33 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property int $id
+ * @property string $user_contact_user_id fk for user_contact id
+ * @property string $federation_id fk federations
+ * @property string $field_name fk federation_mores
+ * @property string $field_value following rules when updated
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Federation|null $federation
+ * @property-read \App\Models\UserContact|null $userContact
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore whereFederationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore whereFieldName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore whereFieldValue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore whereUserContactUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore withoutTrashed()
+ * @mixin \Eloquent
+ */
 class UserContactMore extends Model
 {
     use HasFactory;

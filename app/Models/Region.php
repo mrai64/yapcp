@@ -16,6 +16,26 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * @property string $id aux
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Timezone> $timezones
+ * @property-read int|null $timezones_count
+ * @method static \Database\Factories\RegionFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Region newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Region newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Region onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Region query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Region whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Region whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Region whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Region whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Region withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Region withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Region extends Model
 {
     use HasFactory;

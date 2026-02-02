@@ -34,6 +34,47 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * @property string $id when code are equals add :country_id to both
+ * @property string $country_id follow iso-3166 3 ascii uppercase
+ * @property string $name_en official name in english
+ * @property string $local_lang follow iso-3166 2 ascii lowercase
+ * @property string $name_local
+ * @property string $timezone_id reserved
+ * @property string $website official website or fb info page
+ * @property string $contact_info HQ address, email, and other infos
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Country $country
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\FederationMore> $moreFedFields
+ * @property-read int|null $more_fed_fields_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserContactMore> $moreUserFields
+ * @property-read int|null $more_user_fields_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\FederationSection> $sections
+ * @property-read int|null $sections_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $userRoles
+ * @property-read int|null $user_roles_count
+ * @method static \Database\Factories\FederationFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Federation newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Federation newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Federation onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Federation query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Federation whereContactInfo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Federation whereCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Federation whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Federation whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Federation whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Federation whereLocalLang($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Federation whereNameEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Federation whereNameLocal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Federation whereTimezoneId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Federation whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Federation whereWebsite($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Federation withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Federation withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Federation extends Model
 {
     use HasFactory;

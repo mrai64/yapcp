@@ -17,6 +17,33 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * @property string $id valid for php_timezones
+ * @property string $region_id fk regions.id
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Contest> $contests
+ * @property-read int|null $contests_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Federation> $federations
+ * @property-read int|null $federations_count
+ * @property-read \App\Models\Region|null $region
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserContact> $userContacts
+ * @property-read int|null $user_contacts_count
+ * @method static \Database\Factories\TimezoneFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Timezone newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Timezone newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Timezone onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Timezone query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Timezone whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Timezone whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Timezone whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Timezone whereRegionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Timezone whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Timezone withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Timezone withoutTrashed()
+ * @mixin \Eloquent
+ */
 class Timezone extends Model
 {
     use HasFactory;

@@ -37,7 +37,99 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
-class Contest extends Model
+/**
+ * @property string $id uuid assigned
+ * @property string $country_id fk: countries.id
+ * @property string $name_en
+ * @property string|null $name_local
+ * @property string $lang_local dev: in LangList[]
+ * @property string $organization_id fk: organizations.id
+ * @property string $is_circuit Y/N, N when not Y
+ * @property string|null $circuit_id null or a valid contest.id
+ * @property string|null $federation_list under patronage of federation code[]
+ * @property string|null $contest_mark The contest or organization passport photo - mark
+ * @property string $contact_info contest headquarter, email and so on
+ * @property string|null $award_ceremony_info Site and date, or link to broadcast platform
+ * @property string|null $fee_info only text description of fee for participation
+ * @property string $vote_rule related to limited set
+ * @property string|null $url_1_rule how read english rules and subscribe link
+ * @property string|null $url_2_concurrent_list
+ * @property string|null $url_3_admit_n_award_list only the result list, not a catalogue
+ * @property string|null $url_4_catalogue catalogue download page
+ * @property \App\Models\Timezone|null $timezone A MUST HAVE used for time math, must be a php valid timezone
+ * @property \Illuminate\Support\Carbon $day_1_opening Reveal the contest, opening for subscription
+ * @property \Illuminate\Support\Carbon $day_2_closing End of receive works
+ * @property \Illuminate\Support\Carbon $day_3_jury_opening Start of juror works
+ * @property \Illuminate\Support\Carbon $day_4_jury_closing End of juror works
+ * @property \Illuminate\Support\Carbon $day_5_revelations Publicly result communications
+ * @property \Illuminate\Support\Carbon $day_6_awards Award Ceremony
+ * @property \Illuminate\Support\Carbon $day_7_catalogues Publicly Catalogue publications
+ * @property \Illuminate\Support\Carbon $day_8_closing Closing date for award postal send
+ * @property \Illuminate\Support\Carbon $created_at backup reserved
+ * @property \Illuminate\Support\Carbon $updated_at backup reserved
+ * @property \Illuminate\Support\Carbon|null $deleted_at softdelete reserved
+ * @property-read Contest|null $circuit
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestAward> $contestAwards
+ * @property-read int|null $contest_awards_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Contest> $contestInCircuit
+ * @property-read int|null $contest_in_circuit_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestVote> $contestVotes
+ * @property-read int|null $contest_votes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestWaiting> $contestWaitings
+ * @property-read int|null $contest_waitings_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestWork> $contestWorks
+ * @property-read int|null $contest_works_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Contest> $contestsInCircuit
+ * @property-read int|null $contests_in_circuit_count
+ * @property-read \App\Models\Country|null $country
+ * @property-read \App\Models\Organization|null $organization
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestParticipant> $participants
+ * @property-read int|null $participants_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestSection> $sections
+ * @property-read int|null $sections_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $userRoles
+ * @property-read int|null $user_roles_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestWaiting> $waitings
+ * @property-read int|null $waitings_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereAwardCeremonyInfo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereCircuitId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereContactInfo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereContestMark($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereCountryId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereDay1Opening($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereDay2Closing($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereDay3JuryOpening($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereDay4JuryClosing($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereDay5Revelations($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereDay6Awards($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereDay7Catalogues($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereDay8Closing($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereFederationList($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereFeeInfo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereIsCircuit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereLangLocal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereNameEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereNameLocal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereOrganizationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereTimezone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereUrl1Rule($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereUrl2ConcurrentList($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereUrl3AdmitNAwardList($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereUrl4Catalogue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereVoteRule($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest withoutTrashed()
+ * @mixin \Eloquent
+ */
+final class Contest extends Model
 {
     use HasFactory;
     use SoftDeletes;

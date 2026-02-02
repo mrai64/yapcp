@@ -27,6 +27,40 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * @property int $id
+ * @property string $contest_id fk: contests.id
+ * @property string $user_id fk: user_contacts.user_id
+ * @property string $fee_payment_completed N/Y flag
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\UserContact $contact
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserContactMore> $contactMores
+ * @property-read int|null $contact_mores_count
+ * @property-read \App\Models\Contest $contest
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestWork> $contestWorks
+ * @property-read int|null $contest_works_count
+ * @property-read \App\Models\UserContact $userContact
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserContactMore> $userContactMores
+ * @property-read int|null $user_contact_mores_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestWork> $works
+ * @property-read int|null $works_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestParticipant newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestParticipant newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestParticipant onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestParticipant query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestParticipant whereContestId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestParticipant whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestParticipant whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestParticipant whereFeePaymentCompleted($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestParticipant whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestParticipant whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestParticipant whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestParticipant withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestParticipant withoutTrashed()
+ * @mixin \Eloquent
+ */
 class ContestParticipant extends Model
 {
     use HasFactory;

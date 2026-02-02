@@ -11,6 +11,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LangList newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LangList newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|LangList query()
+ * @mixin \Eloquent
+ */
 class LangList extends Model
 {
     public const LANGCODES = [
