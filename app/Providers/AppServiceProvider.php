@@ -3,7 +3,7 @@
 /**
  * 2025-10-11 Add first gates 'contest-participants-update'
  * 2025-11-26 Add 'juror-only' gate
- * 2026-01-29 Add 'version' in footer 
+ * 2026-01-29 Add 'version' in footer
  */
 
 namespace App\Providers;
@@ -35,7 +35,7 @@ class AppServiceProvider extends ServiceProvider
             $version = '0.0.0';
             // storage/app/private
             if (Storage::disk('local')->exists('version.json')) {
-                $registered = json_decode(Storage::disk('local')->get('version.json'), true );
+                $registered = json_decode(Storage::disk('local')->get('version.json'), true);
                 $version = $registered['full'] ?? '0.0.0';
             }
 
