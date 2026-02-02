@@ -13,12 +13,16 @@ use App\Models\FederationMore;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
-class Fiaf1ParticipantsExport implements FromView
+/**
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Section[] $sections
+ */
+
+final class Fiaf1ParticipantsExport implements FromView
 {
     // data to be passed to view
-    protected string $contest_id;
+    protected string $contestId;
 
-    protected string $federation_id;
+    protected string $federationId;
 
     protected $contest;
 
@@ -29,24 +33,24 @@ class Fiaf1ParticipantsExport implements FromView
     protected $excelRows;
 
     // 1st: construct pick param then fill data for
-    // ! Add federation_id ✅, then 🚧 build a function for every federation
+    // ! Add federationId ✅, then 🚧 build a function for every federation
     // ! public function __construct(string $cid, ?string $fid)
     public function __construct(string $cid, string $fid)
     {
         ds(__CLASS__.' f:'.__FUNCTION__.' cid:'.$cid.' fid:'.$fid);
-        $this->contest_id = $cid;
-        $this->federation_id = $fid;
+        $this->contestId = $cid;
+        $this->federationId = $fid;
 
         // 1. 2. pick contest n contest_sections
         $this->contest = Contest::with(['sections' => function ($q) {
             $q->orderBy('code');
-        }])->find($this->contest_id);
+        }])->find($this->contestId);
         $contest = $this->contest;
         ds('contest for cid:'.$cid);
         ds($this->contest);
 
         // 3. more fields - which
-        $this->FederationMores = FederationMore::where('federation_id', $this->federation_id)
+        $this->FederationMores = FederationMore::where('federation_id', $this->federationId)
             ->orderBy('field_name')
             ->get();
         ds('FederationMores for:'.$fid);
@@ -55,7 +59,7 @@ class Fiaf1ParticipantsExport implements FromView
 
         // the fab 4. eager loaders
         $this->contestParticipants = ContestParticipant::query()
-            ->where('contest_id', $this->contest_id)
+            ->where('contest_id', $this->contestId)
             ->with([
                 'contact',
                 'works' => function ($q) use ($cid) {

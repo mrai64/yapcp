@@ -6,6 +6,7 @@
 
 namespace App\Livewire\User\Contact;
 
+use App\Models\Country;
 use App\Models\FederationMore;
 use App\Models\UserContact;
 use Illuminate\Support\Facades\Auth;
@@ -13,9 +14,9 @@ use Livewire\Component;
 
 class Modify4Socials extends Component
 {
-    public $userContact;
+    public UserContact $userContact;
 
-    public $country;
+    public Country $country;
 
     public string $firstName;
 
@@ -85,7 +86,7 @@ class Modify4Socials extends Component
     {
         $validated = $this->validate();
 
-        $this->userContact->website = $validate['website'];
+        $this->userContact->website = $validated['website'];
         $this->userContact->facebook = $validated['facebook'];
         $this->userContact->x_twitter = $validated['exTwitter'];
         // $this->userContact->linkedin = $validated['linkedin'];

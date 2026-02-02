@@ -31,6 +31,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -129,9 +130,12 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest withoutTrashed()
  * @mixin \Eloquent
  */
-final class Contest extends Model
+
+
+class Contest extends Model
 {
     use HasFactory;
+    use HasUuids;
     use SoftDeletes;
 
     public const TABLENAME = 'contests'; // was: table_name but also Contest()->getTable()
@@ -303,7 +307,7 @@ final class Contest extends Model
     // contest_juries.section_id > contest_sections.id > contests.id
 
     // contest_awards.contest_id > contests.id
-    public function contestAwards()
+    public function contestAwards(): HasMany
     {
         $contestAwardsSet = $this->hasMany(
             related: ContestAward::class,
@@ -327,7 +331,14 @@ final class Contest extends Model
     }
 
     // contest_sections.contest_id > contests.id
-    public function sections()
+    public function contestSections(): HasMany
+    {
+        $sec = $this->hasMany(ContestSection::class);
+
+        return $sec;
+    }
+
+    public function sections(): HasMany
     {
         $sec = $this->hasMany(ContestSection::class);
 

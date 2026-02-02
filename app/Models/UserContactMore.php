@@ -81,7 +81,7 @@ class UserContactMore extends Model
     public function userContact()
     {
         $uc = $this->belongsTo(
-            related: userContact::class,
+            related: UserContact::class,
             foreignKey: 'user_id',
             ownerKey: 'user_contact_user_id'
         );

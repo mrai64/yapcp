@@ -21,6 +21,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log; // //dbg Log::info
 use Illuminate\Support\Facades\Storage;
@@ -188,7 +189,7 @@ class ContestWork extends Model
 
     // participant user
     // contest_works.user_id > user_contacts.user_id
-    public function author()
+    public function author(): BelongsTo
     {
         $userContact = $this->belongsTo(UserContact::class, 'user_id', 'user_id');
 
@@ -233,7 +234,7 @@ class ContestWork extends Model
 
 
     // contest_works.work_id fk works.id
-    public function work()
+    public function work(): BelongsTo
     {
         $work = $this->belongsTo(Work::class, 'work_id');
 

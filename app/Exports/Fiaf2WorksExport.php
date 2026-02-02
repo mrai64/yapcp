@@ -31,10 +31,16 @@ class Fiaf2WorksExport implements FromView
 
     protected $partecipazioni;
 
-    protected $reportData;
+    protected array $reportData;
 
     /**
      * Fill array for view
+     */
+    /**
+     * instance Constructor
+     *
+     * @param string $cid contest id
+     * @param string $fid federation id
      */
     public function __construct(string $cid, string $fid) // from controller
     {

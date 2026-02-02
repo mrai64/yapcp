@@ -24,6 +24,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 
@@ -150,7 +151,7 @@ class ContestParticipant extends Model
     }
 
     // was: contest_works
-    public function contestWorks()
+    public function contestWorks(): HasMany
     {
         $contestWorks = $this->hasMany(
             ContestWork::class, //
@@ -161,7 +162,7 @@ class ContestParticipant extends Model
         return $contestWorks;
     }
 
-    public function works()
+    public function works(): HasMany
     {
         $contestWorks = $this->hasMany(
             ContestWork::class,
