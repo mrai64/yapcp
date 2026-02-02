@@ -77,7 +77,7 @@ class ContestWarning extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         Log::info('Notification '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        $subject = env('APP_NAME').' about your work "'.$this->work->title_en.'"';
+        $subject = config('app.name').' about your work "'.$this->work->title_en.'"';
 
         $mail_message = (new MailMessage())
             ->subject($subject)

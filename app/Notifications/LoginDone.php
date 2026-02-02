@@ -46,7 +46,7 @@ class LoginDone extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         Log::info('Notification '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        $subject = (string) env('APP_NAME').' security alert for '.$this->user->email;
+        $subject = (string) config('app.name').' security alert for '.$this->user->email;
         Log::debug(__CLASS__.' '.__FUNCTION__.' subject:'.$subject);
 
         $mail_msg = (new MailMessage())
