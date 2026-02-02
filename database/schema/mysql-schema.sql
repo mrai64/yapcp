@@ -252,7 +252,7 @@ CREATE TABLE `pcp_contest_works` (
   `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'uuid assigned',
   `contest_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: contests.id 1:N ',
   `section_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: contest_sections.id ',
-  `country_id` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: user_contacts.country_id ',
+  `country_id` char(3) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL COMMENT 'fk: user_contacts.country_id ',
   `user_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: users.id ',
   `work_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: works.id ',
   `extension` varchar(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'jpg' COMMENT 'to build file name',
@@ -272,7 +272,6 @@ CREATE TABLE `pcp_contest_works` (
   KEY `admit_idx` (`section_id`,`is_admit`,`work_id`),
   KEY `pcp_contest_works_deleted_at_index` (`deleted_at`),
   CONSTRAINT `pcp_contest_works_contest_id_foreign` FOREIGN KEY (`contest_id`) REFERENCES `pcp_contests` (`id`),
-  CONSTRAINT `pcp_contest_works_country_id_foreign` FOREIGN KEY (`country_id`) REFERENCES `pcp_countries` (`id`),
   CONSTRAINT `pcp_contest_works_section_id_foreign` FOREIGN KEY (`section_id`) REFERENCES `pcp_contest_sections` (`id`),
   CONSTRAINT `pcp_contest_works_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `pcp_user_contacts` (`user_id`),
   CONSTRAINT `pcp_contest_works_work_id_foreign` FOREIGN KEY (`work_id`) REFERENCES `pcp_works` (`id`)
@@ -303,7 +302,7 @@ DROP TABLE IF EXISTS `pcp_contests`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pcp_contests` (
   `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'uuid assigned',
-  `country_id` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: countries.id',
+  `country_id` char(3) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL COMMENT 'fk: countries.id',
   `name_en` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `name_local` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `lang_local` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'en' COMMENT 'dev: in LangList[]',
@@ -343,7 +342,6 @@ CREATE TABLE `pcp_contests` (
   KEY `pcp_contests_vote_rule_foreign` (`vote_rule`),
   KEY `pcp_contests_timezone_foreign` (`timezone`),
   KEY `pcp_contests_deleted_at_index` (`deleted_at`),
-  CONSTRAINT `pcp_contests_country_id_foreign` FOREIGN KEY (`country_id`) REFERENCES `pcp_countries` (`id`),
   CONSTRAINT `pcp_contests_timezone_foreign` FOREIGN KEY (`timezone`) REFERENCES `pcp_timezones` (`id`),
   CONSTRAINT `pcp_contests_vote_rule_foreign` FOREIGN KEY (`vote_rule`) REFERENCES `pcp_contests_vote_rule_sets` (`vote_rule`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -382,7 +380,7 @@ DROP TABLE IF EXISTS `pcp_countries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pcp_countries` (
-  `id` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'iso-3166 alpha-3 UPPERCASE',
+  `id` char(3) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL COMMENT 'uppercase',
   `country` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'en',
   `flag_code` char(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Unicode chars for country flag emoji',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -464,7 +462,7 @@ DROP TABLE IF EXISTS `pcp_federations`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pcp_federations` (
   `id` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'when code are equals add :country_id to both',
-  `country_id` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'follow iso-3166 3 ascii uppercase',
+  `country_id` char(3) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL COMMENT 'follow iso-3166 3 ascii uppercase',
   `name_en` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'official name in english',
   `local_lang` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'en' COMMENT 'follow iso-3166 2 ascii lowercase',
   `name_local` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
@@ -480,7 +478,6 @@ CREATE TABLE `pcp_federations` (
   KEY `pcp_federations_name_en_index` (`name_en`),
   KEY `pcp_federations_timezone_id_foreign` (`timezone_id`),
   KEY `pcp_federations_deleted_at_index` (`deleted_at`),
-  CONSTRAINT `pcp_federations_country_id_foreign` FOREIGN KEY (`country_id`) REFERENCES `pcp_countries` (`id`),
   CONSTRAINT `pcp_federations_timezone_id_foreign` FOREIGN KEY (`timezone_id`) REFERENCES `pcp_timezones` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -531,7 +528,7 @@ DROP TABLE IF EXISTS `pcp_organizations`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pcp_organizations` (
   `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'uuid assigned',
-  `country_id` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country_id` char(3) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Should became verified',
   `website` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -542,8 +539,7 @@ CREATE TABLE `pcp_organizations` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `pcp_organizations_email_deleted_at_unique` (`email`,`deleted_at`),
   KEY `pcp_organizations_country_id_name_deleted_at_index` (`country_id`,`name`,`deleted_at`),
-  KEY `pcp_organizations_deleted_at_index` (`deleted_at`),
-  CONSTRAINT `pcp_organizations_country_id_foreign` FOREIGN KEY (`country_id`) REFERENCES `pcp_countries` (`id`)
+  KEY `pcp_organizations_deleted_at_index` (`deleted_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `pcp_organizations_view`;
