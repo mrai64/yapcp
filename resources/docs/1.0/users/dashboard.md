@@ -10,7 +10,11 @@
 
 In that space we reunite all you can do in yaPCP.  
 The dashboard content may change over time, depending on what you want to do.  
-Are you a member of an existing organization? Add yourself in the organization role list, or Add your photographic organization. Then you have a link for [Organization Dashboard]((/{{route}}/{{version}}/organizations/dashboard.md)).
+Are you a member of an existing organization?  
+Add yourself in the organization role list, or  
+Add your photographic organization.  
+Then you have in your dashboard a link for
+[Organization Dashboard]((/{{route}}/{{version}}/organizations/dashboard.md)).
 Are you a member of an existing Federation? Contact us
 to enter in Federation roles, with the authority to check
 contest that your federation sponsorship.
@@ -20,6 +24,7 @@ contest that your federation sponsorship.
 In yaPcp we maintain separate access data w/email n password
 from all your personal infos, so after first login we suggest you
 to open and update immediately your personal info contact data.
+When you want change password it's in another page.
 
 That form require the data that we share with contest organizer, and
 sponsor federation, data you usually need to reinsert every, every
