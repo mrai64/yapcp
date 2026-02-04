@@ -28,15 +28,15 @@ DROP TABLE IF EXISTS `pcp_contest_awards`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pcp_contest_awards` (
-  `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'uuid assigned',
-  `contest_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: contests.id 1:N ',
-  `section_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'fk: contest_section.id ',
+  `id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL COMMENT 'uuid assigned',
+  `contest_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+  `section_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci DEFAULT NULL,
   `section_code` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'from: section.id->code ',
   `award_code` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'free but unique in contest',
   `award_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'free',
   `is_award` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N' COMMENT 'N/Y flag, Y=award prize, N=HM or other',
-  `winner_work_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'fk: works.id ',
-  `winner_user_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'fk: users.id user_contacts.user_id',
+  `winner_work_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci DEFAULT NULL,
+  `winner_user_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci DEFAULT NULL,
   `winner_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'winner not in previous cols',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -56,9 +56,9 @@ DROP TABLE IF EXISTS `pcp_contest_juries`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pcp_contest_juries` (
-  `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'uuid assigned',
-  `section_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fx: contest_section.id 1:N ',
-  `user_contact_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fx: user_contact.user_id',
+  `id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL COMMENT 'uuid assigned',
+  `section_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+  `user_contact_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
   `is_president` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N' COMMENT 'N/Y flag',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -90,8 +90,8 @@ DROP TABLE IF EXISTS `pcp_contest_participants`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pcp_contest_participants` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `contest_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: contests.id ',
-  `user_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: user_contacts.user_id ',
+  `contest_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+  `user_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
   `fee_payment_completed` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N' COMMENT 'N/Y flag',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -133,8 +133,8 @@ DROP TABLE IF EXISTS `pcp_contest_sections`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pcp_contest_sections` (
-  `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'uuid assigned',
-  `contest_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fx: contests.id 1:N ',
+  `id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+  `contest_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
   `code` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'as fk: federationSections.code',
   `under_patronage` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'N' COMMENT 'a Y/N col',
   `federation_section_id` bigint unsigned DEFAULT NULL COMMENT 'fk: federation_sections.id',
@@ -196,10 +196,10 @@ DROP TABLE IF EXISTS `pcp_contest_votes`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pcp_contest_votes` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `contest_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: contests.id ',
-  `section_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: contest_sections.id ',
-  `work_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: works.id contest_works.work_id',
-  `juror_user_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: user_contacts.user_id ',
+  `contest_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+  `section_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+  `work_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+  `juror_user_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
   `vote` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'see contests.vote_rule',
   `review_required` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 = not required',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -225,13 +225,13 @@ DROP TABLE IF EXISTS `pcp_contest_waitings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pcp_contest_waitings` (
-  `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'uuid assigned',
-  `contest_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: contests.id 1:N ',
-  `section_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: contest_sections.id ',
-  `work_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: works.id ',
-  `participant_user_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: users.id ',
+  `id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+  `contest_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+  `section_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+  `work_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+  `participant_user_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
   `portfolio_sequence` tinyint unsigned NOT NULL DEFAULT '0' COMMENT 'valid also in section counter',
-  `organization_user_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: users.id ',
+  `organization_user_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
   `because` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'why that work is out',
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'for notification',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -249,12 +249,12 @@ DROP TABLE IF EXISTS `pcp_contest_works`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pcp_contest_works` (
-  `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'uuid assigned',
-  `contest_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: contests.id 1:N ',
-  `section_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: contest_sections.id ',
+  `id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+  `contest_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+  `section_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
   `country_id` char(3) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL COMMENT 'fk: user_contacts.country_id ',
-  `user_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: users.id ',
-  `work_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: works.id ',
+  `user_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+  `work_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
   `extension` varchar(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'jpg' COMMENT 'to build file name',
   `portfolio_sequence` tinyint unsigned NOT NULL DEFAULT '0' COMMENT 'valid also in section counter',
   `is_admit` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0 = not admit, admit otherwise',
@@ -301,7 +301,7 @@ DROP TABLE IF EXISTS `pcp_contests`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pcp_contests` (
-  `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'uuid assigned',
+  `id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
   `country_id` char(3) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL COMMENT 'fk: countries.id',
   `name_en` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `name_local` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -527,7 +527,7 @@ DROP TABLE IF EXISTS `pcp_organizations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pcp_organizations` (
-  `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'uuid assigned',
+  `id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
   `country_id` char(3) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'Should became verified',
@@ -583,7 +583,7 @@ DROP TABLE IF EXISTS `pcp_sessions`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pcp_sessions` (
   `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'uuid',
+  `user_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci DEFAULT NULL,
   `ip_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_agent` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -624,10 +624,7 @@ CREATE TABLE `pcp_user_contact_mores` (
   UNIQUE KEY `alt_primary_idx` (`user_contact_user_id`,`federation_id`,`field_name`),
   KEY `backup_idx` (`updated_at`),
   KEY `soft_delete_idx` (`deleted_at`),
-  KEY `pcp_user_contact_mores_federation_id_field_name_foreign` (`federation_id`,`field_name`),
-  CONSTRAINT `pcp_user_contact_mores_federation_id_field_name_foreign` FOREIGN KEY (`federation_id`, `field_name`) REFERENCES `pcp_federation_mores` (`federation_id`, `field_name`),
-  CONSTRAINT `pcp_user_contact_mores_federation_id_foreign` FOREIGN KEY (`federation_id`) REFERENCES `pcp_federations` (`id`),
-  CONSTRAINT `pcp_user_contact_mores_user_contact_user_id_foreign` FOREIGN KEY (`user_contact_user_id`) REFERENCES `pcp_user_contacts` (`user_id`)
+  KEY `pcp_user_contact_mores_federation_id_field_name_foreign` (`federation_id`,`field_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `pcp_user_contacts`;
@@ -635,8 +632,8 @@ DROP TABLE IF EXISTS `pcp_user_contacts`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pcp_user_contacts` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: users.id uuid',
-  `country_id` char(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: countries.id',
+  `user_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+  `country_id` char(3) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL COMMENT 'fk: countries.id',
   `first_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `nick_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -694,10 +691,10 @@ DROP TABLE IF EXISTS `pcp_user_roles`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pcp_user_roles` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: users.id',
+  `user_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
   `role` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'member',
-  `organization_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'fk: organizations.id',
-  `contest_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'fk: contests.id',
+  `organization_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci DEFAULT NULL,
+  `contest_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci DEFAULT NULL,
   `federation_id` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'fk to federations.id',
   `role_opening` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Start of role works - default today',
   `role_closing` datetime NOT NULL DEFAULT '9999-12-31 23:59:59' COMMENT 'End of role works default:future',
@@ -751,7 +748,7 @@ DROP TABLE IF EXISTS `pcp_users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pcp_users` (
-  `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'uuid',
+  `id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` datetime DEFAULT NULL,
@@ -786,9 +783,9 @@ DROP TABLE IF EXISTS `pcp_work_validations`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pcp_work_validations` (
   `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `work_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: works.id ',
+  `work_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
   `federation_section_id` bigint unsigned NOT NULL COMMENT 'fk: federation_sections.id ',
-  `validator_user_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: user_contacts.user_id ',
+  `validator_user_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `deleted_at` datetime DEFAULT NULL,
@@ -802,8 +799,8 @@ DROP TABLE IF EXISTS `pcp_works`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pcp_works` (
-  `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'uuid',
-  `user_id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'fk: users.id',
+  `id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
+  `user_id` char(36) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL,
   `work_file` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'path n file',
   `extension` varchar(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'lowercase',
   `reference_year` char(4) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'default maybe YEAR(CURDATE())',
@@ -1086,3 +1083,56 @@ INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (219,'2026_01_1
 INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (220,'2026_01_20_185836_mod_idx_in_users_table',122);
 INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (222,'2026_01_22_095610_add_idx_to_contest_awards_table',123);
 INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (223,'2026_01_22_131802_add_idx_to_contest_waitings_table',124);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (225,'2026_02_04_092702_create_cache_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (226,'2026_02_04_092702_create_cache_locks_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (227,'2026_02_04_092702_create_contest_awards_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (228,'2026_02_04_092702_create_contest_juries_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (229,'2026_02_04_092702_create_contest_participants_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (230,'2026_02_04_092702_create_contest_participants_fee_payment_completed_sets_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (231,'2026_02_04_092702_create_contest_sections_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (232,'2026_02_04_092702_create_contest_votes_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (233,'2026_02_04_092702_create_contest_waitings_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (234,'2026_02_04_092702_create_contest_works_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (235,'2026_02_04_092702_create_contests_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (236,'2026_02_04_092702_create_contests_vote_rule_sets_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (237,'2026_02_04_092702_create_countries_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (238,'2026_02_04_092702_create_failed_jobs_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (239,'2026_02_04_092702_create_federation_mores_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (240,'2026_02_04_092702_create_federation_sections_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (241,'2026_02_04_092702_create_federations_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (242,'2026_02_04_092702_create_job_batches_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (243,'2026_02_04_092702_create_jobs_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (244,'2026_02_04_092702_create_organizations_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (245,'2026_02_04_092702_create_password_reset_tokens_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (246,'2026_02_04_092702_create_regions_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (247,'2026_02_04_092702_create_sessions_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (248,'2026_02_04_092702_create_timezones_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (249,'2026_02_04_092702_create_user_contact_mores_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (250,'2026_02_04_092702_create_user_contacts_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (251,'2026_02_04_092702_create_user_roles_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (252,'2026_02_04_092702_create_user_roles_role_sets_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (253,'2026_02_04_092702_create_users_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (254,'2026_02_04_092702_create_work_validations_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (255,'2026_02_04_092702_create_works_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (256,'2026_02_04_092703_create_contest_juries_view_view',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (257,'2026_02_04_092703_create_contest_participants_view_view',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (258,'2026_02_04_092703_create_contest_vote_group1_view_view',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (259,'2026_02_04_092703_create_contest_vote_single_view_view',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (260,'2026_02_04_092703_create_contest_works_view_view',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (261,'2026_02_04_092703_create_contests_view_view',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (262,'2026_02_04_092703_create_organizations_view_view',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (263,'2026_02_04_092703_create_user_roles_view_view',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (264,'2026_02_04_092703_create_works_view_view',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (265,'2026_02_04_092705_add_foreign_keys_to_contest_awards_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (266,'2026_02_04_092705_add_foreign_keys_to_contest_juries_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (267,'2026_02_04_092705_add_foreign_keys_to_contest_participants_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (268,'2026_02_04_092705_add_foreign_keys_to_contest_sections_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (269,'2026_02_04_092705_add_foreign_keys_to_contest_votes_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (270,'2026_02_04_092705_add_foreign_keys_to_contest_works_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (271,'2026_02_04_092705_add_foreign_keys_to_contests_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (272,'2026_02_04_092705_add_foreign_keys_to_federation_mores_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (273,'2026_02_04_092705_add_foreign_keys_to_federation_sections_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (274,'2026_02_04_092705_add_foreign_keys_to_federations_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (275,'2026_02_04_092705_add_foreign_keys_to_timezones_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (276,'2026_02_04_092705_add_foreign_keys_to_user_contacts_table',0);
+INSERT INTO `pcp_migrations` (`id`, `migration`, `batch`) VALUES (277,'2026_02_04_092705_add_foreign_keys_to_user_roles_table',0);
