@@ -110,7 +110,7 @@ class ContestParticipant extends Model
     public static function contestParticipantsArray(string $contestId): array
     {
         //dbg Log::infoLog::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        if (Contest::exists($contestId) === false) {
+        if (!Contest::where('id', $contestId)->exists()) {
             return [];
         }
 

@@ -5,6 +5,8 @@
  *
  * WARN: this build a visual view, the real minute-maker is
  * instead into /app/http/controllers/juryminutedraft.php
+ *
+ * @see </resources/views/livewire/organization/minute/draft.blade.php>
  */
 
 namespace App\Livewire\Organization\Minute;
@@ -43,9 +45,9 @@ class Draft extends Component
 
     public $authors_participant_all;
 
-    public $works_admitted;
+    public array $admittedWorksCounter = [];
 
-    public $authors_admitted;
+    public $admittedAuthorsCounters;
 
     // section awards
     public $awards;
@@ -74,6 +76,9 @@ class Draft extends Component
         $juror_signs = [];
         $works_participants_all = [];
         $authors_participant_all = [];
+        $admittedWorksCounter = [];
+        $admittedAuthorsCounters = [];
+        $awards = [];
         foreach ($sections as $section) {
             // jury members
             $jury_members[$section->code] = ContestJury::select(['user_contacts.country_id', 'user_contacts.last_name', 'user_contacts.first_name', 'countries.flag_code'])
@@ -101,14 +106,14 @@ class Draft extends Component
                 ->distinct('user_id')
                 ->count('user_id');
 
-            // works_admitted
-            $works_admitted[$section->code] = ContestWork::where('contest_id', $contest_id)
+            // admittedWorksCounter
+            $admittedWorksCounter[$section->code] = ContestWork::where('contest_id', $contest_id)
                 ->where('section_id', $section->id)
                 ->where('is_admit', 1)
                 ->count();
 
             // authors participant
-            $authors_admitted[$section->code] = DB::table('contest_works')
+            $admittedAuthorsCounters[$section->code] = DB::table('contest_works')
                 ->where('contest_id', $contest_id)
                 ->where('section_id', $section->id)
                 ->where('is_admit', 1)
@@ -165,8 +170,8 @@ class Draft extends Component
             'organization' => $organization,
             'works_participants_all' => $works_participants_all,
             'authors_participant_all' => $authors_participant_all,
-            'works_admitted' => $works_admitted,
-            'authors_admitted' => $authors_admitted,
+            'admittedWorksCounter' => $admittedWorksCounter,
+            'admittedAuthorsCounters' => $admittedAuthorsCounters,
             'awards' => $awards,
             'contest_awards' => $contest_awards,
         ];

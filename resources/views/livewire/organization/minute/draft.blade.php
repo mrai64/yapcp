@@ -2531,9 +2531,9 @@ select {
         authors <br />
         had admitted 
         <strong>
-            {{$works_admitted[$section->code]}} 
+            {{$admittedWorksCounter[$section->code]}} 
             works from 
-            {{$authors_admitted[$section->code]}}
+            {{$admittedAuthorsCounters[$section->code]}}
             authors <br />
         </strong>
         and assign these prizes:<br />

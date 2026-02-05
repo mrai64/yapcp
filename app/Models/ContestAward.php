@@ -160,14 +160,14 @@ final class ContestAward extends Model
     public function work()
     {
         $work = $this->belongsTo(Work::class, 'winner_work_id', 'id');
-        return $work ?? '';
+        return $work;
     }
 
     // contest_awards.winner_user_id > user_contacts.user_id
     public function userContact()
     {
         $userContact = $this->belongsTo(UserContact::class, 'winner_user_id', 'user_id');
-        return $userContact ?? '';
+        return $userContact;
     }
 
 }

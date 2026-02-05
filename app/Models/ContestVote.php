@@ -77,6 +77,7 @@ class ContestVote extends Model
     protected function casts()
     {
         return [
+            'id' => 'integer',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
@@ -106,7 +107,8 @@ class ContestVote extends Model
 
     }
 
-    public static function section_vote_board(string $contestId, string $sectionId)
+    // was: section_vote_board
+    public static function sectionVoteBoard(string $contestId, string $sectionId)
     {
         Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $vote_board = self::where('section_id', $sectionId)->where('contest_id', $contestId)->orderBy('vote', 'desc')->orderBy('updated_at', 'desc')->get(['work_id', 'vote', 'id']);

@@ -20,7 +20,7 @@
         </p>
     </header>
 
-    <form wire:submit="update_federation_section">
+    <form wire:submit="updateFederationSection">
         @csrf
         
         <div class="mb-4">

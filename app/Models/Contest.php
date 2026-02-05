@@ -194,24 +194,31 @@ class Contest extends Model
     {
         return [
             'id' => 'string',
-            'country_id' => 'string',
             'name_en' => 'string',
-            'name_local' => 'string',
-            'lang_local' => 'string',
-            'organization_id' => 'string',
+
             'is_circuit' => 'string',
             'circuit_id' => 'string',
+
+            'country_id' => 'string',
+            'lang_local' => 'string',
+            'timezone' => 'string',
+
+            'name_local' => 'string',
+            'organization_id' => 'string',
+
             'federation_list' => 'string',
             'contest_mark' => 'string',
             'contact_info' => 'string',
+
             'award_ceremony_info' => 'string',
             'fee_info' => 'string',
+
             'vote_rule' => 'string',
+
             'url_1_rule' => 'string',
             'url_2_concurrent_list' => 'string',
             'url_3_admit_n_award_list' => 'string',
             'url_4_catalogue' => 'string',
-            'timezone' => 'string',
             'day_1_opening' => 'datetime',
             'day_2_closing' => 'datetime',
             'day_3_jury_opening' => 'datetime',
@@ -246,7 +253,7 @@ class Contest extends Model
             ->orderBy('name_en')
             ->get();
 
-        return $circuitSet ?? [];
+        return $circuitSet;
     }
 
     // for validation?

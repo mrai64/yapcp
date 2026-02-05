@@ -40,6 +40,9 @@ class JuryMinuteDraft extends Controller
         $juror_signs = [];
         $works_participants_all = [];
         $authors_participant_all = [];
+        $works_admitted = [];
+        $authors_admitted = [];
+        $awards = [];
         // ds('Controller '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' this: '.json_encode($this));
 
         foreach ($sections as $section) {

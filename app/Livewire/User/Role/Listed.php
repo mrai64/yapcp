@@ -29,7 +29,7 @@ class Listed extends Component
 
     public User $user;
 
-    public $userRole;
+    public $userRoleSet;
 
     public Organization $organization_list;
 
@@ -48,7 +48,7 @@ class Listed extends Component
     {
         $this->uid = Auth::id();
         $this->user = User::findOrFail($this->uid);
-        $this->user_role = UserRole::select(DB::raw('max(id) AS `id_max` '), 'role', 'organization_id', 'federation_id', 'contest_id')
+        $this->userRoleSet = UserRole::select(DB::raw('max(id) AS `id_max` '), 'role', 'organization_id', 'federation_id', 'contest_id')
             ->where('user_id', $this->uid)
             ->groupBy('organization_id')
             ->groupBy('federation_id')
@@ -60,7 +60,7 @@ class Listed extends Component
             ->orderBy('role')
             ->get();
 
-        foreach ($this->user_role as $role) {
+        foreach ($this->userRoleSet as $role) {
             $this->userRoleList[] = [
                 'id' => $role->id_max,
                 'role' => $role->role,

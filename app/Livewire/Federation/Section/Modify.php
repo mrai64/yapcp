@@ -10,7 +10,6 @@ namespace App\Livewire\Federation\Section;
 
 use App\Models\Federation;
 use App\Models\FederationSection;
-use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -33,9 +32,11 @@ class Modify extends Component
      */
     public function mount(string $fid, string $sid) // as in route()
     {
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        ds('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' called');
         $this->federation = Federation::findOrFail($fid);
-        $this->section = FederationSection::where('federation_id', $fid)->where('code', $sid)->first();
+        $this->section = FederationSection::where('federation_id', $fid)
+            ->where('code', $sid)
+            ->first();
         // not found? not modify
         if (! isset($this->section->code)) {
             abort(404);
@@ -52,7 +53,7 @@ class Modify extends Component
      */
     public function render()
     {
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        ds('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' called');
 
         return view('livewire.federation.section.modify');
     }
@@ -62,7 +63,7 @@ class Modify extends Component
      */
     public function rules()
     {
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        ds('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' called');
 
         return [
             // federation_id readonly
@@ -70,24 +71,23 @@ class Modify extends Component
             'name_en' => 'required|string|max:255',
             'rule_definition' => 'string',
         ];
-
     }
 
     /**
      * After the show
      */
-    public function update_federation_section()
+    public function updateFederationSection()
     {
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        ds('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' called');
         $validated = $this->validate();
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' validated:'.json_encode($validated));
+        ds('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' validated:' . json_encode($validated));
 
         $this->section->update($validated);
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($this->section));
+        ds('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' out:' . json_encode($this->section));
 
         // to list
         return redirect()
-            ->route('federation-section-list', ['fid' => $this->sec->federation_id])
+            ->route('federation-section-list', ['fid' => $this->section->federation_id])
             ->with('success', __('Federation Section data updated, thanks!'));
     }
 }

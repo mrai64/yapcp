@@ -23,7 +23,7 @@
     </a>
     <br style="clear:both;" />
 
-    <form wire:submit="save_photo_box" enctype="multipart/form-data">
+    <form wire:submit="saveUserWorkPhoto" enctype="multipart/form-data">
         @csrf
 
         <!-- work -->

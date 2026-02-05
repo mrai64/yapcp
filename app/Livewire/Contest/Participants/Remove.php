@@ -34,7 +34,7 @@ class Remove extends Component
         if (isset($data->fee_payment_completed)) {
             $this->fee_payment_completed = $data->fee_payment_completed;
         } else {
-            $this->data->fee_payment_completed =
+            $data->fee_payment_completed =
             ContestParticipant::where('user_id', $this->participant_id)
                 ->where('contest_id', $this->contest_id)
                 ->get('fee_payment_completed')[0]['fee_payment_completed'];

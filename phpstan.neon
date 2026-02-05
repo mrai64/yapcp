@@ -9,7 +9,7 @@ parameters:
 
     # Level 0  is the basic level
     # Level 10 is the highest level
-    level: 0
+    level: 1
 
 #    ignoreErrors:
 #        - '#PHPDoc tag @var#'

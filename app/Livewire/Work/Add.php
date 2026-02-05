@@ -6,8 +6,9 @@
  * - adopted by user_contact table
  *
  * 2025-09-27 reformat rules()
- * 2025-10-19 rewrite partially the last function save_photo_box
+ * 2025-10-19 rewrite partially the last function saveUserWorkPhoto
  *            add intervention package
+ * TODO PSR-12 - form fields are in snake_case as db columns
  */
 
 namespace App\Livewire\Work;
@@ -38,10 +39,12 @@ class Add extends Component
 
     public string $user_id;
 
-    public string $photo_box; // user folder
+    public string $photoBox; // user folder
 
+    // the image file
     public $work_image = null; // max: 64MB, enough?
 
+    // the generated filename of uploaded file
     public string $work_file;
 
     public string $extension;
@@ -108,7 +111,7 @@ class Add extends Component
      * update record w/file name
      * build a 300px miniature
      */
-    public function save_photo_box()
+    public function saveUserWorkPhoto()
     {
         Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         $validated = $this->validate();
@@ -130,8 +133,12 @@ class Add extends Component
         $validated['work_file'] = 'anon.jpg';
 
         // 1. insert and give uuid
+        // was: with snake_case fields $this->work = Work::create($validated);
         $this->work = Work::create($validated);
-        $validated['id'] = $this->work->id;
+
+
+
+        $validated['id'] = $this->work->id; // uuid assigned
         Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' validated:'.json_encode($validated));
 
         $validated['work_file'] = $this->photoBox.'/'.$validated['id'].'.'.$validated['extension'];
