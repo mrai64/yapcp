@@ -3,8 +3,8 @@
 /**
  * one of federation regulation is the
  * section - theme definition
- * for contest sections 
- * 
+ * for contest sections
+ *
  */
 
 use Illuminate\Database\Migrations\Migration;
