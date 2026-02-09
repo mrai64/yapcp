@@ -21,7 +21,7 @@ return new class () extends Migration {
             $table->dateTime('deleted_at')->nullable()->index();
 
             $table->foreign(['region_id'])->references(['id'])->on('regions')
-                ->onUpdate('no action')->onDelete('no action');
+                ->onUpdate('restrict')->onDelete('restrict');
 
             $table->comment('deadline time management must have');
         });

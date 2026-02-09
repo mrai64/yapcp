@@ -33,7 +33,7 @@ return new class () extends Migration {
             $table->index(['country_id', 'name'], 'country_name_idx');
 
             $table->foreign(['country_id'])->references(['id'])->on('countries')
-                ->onUpdate('no action')->onDelete('no action');
+                ->onUpdate('restrict')->onDelete('restrict');
 
             $table->comment('who organize contests');
         });
