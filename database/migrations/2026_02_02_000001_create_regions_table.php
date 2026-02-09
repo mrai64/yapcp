@@ -4,18 +4,20 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
         Schema::create('regions', function (Blueprint $table) {
-            $table->string('id', 40)->primary()->comment('aux ');
+            $table->char('id', 12)->charset('ascii')->collation('ascii_general_ci')->primary();
+
             $table->dateTime('created_at')->useCurrent();
-            $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent();
+            $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent()->index();
             $table->dateTime('deleted_at')->nullable()->index();
+
+            $table->comment('timezones lookup table');
         });
     }
 
