@@ -20,7 +20,10 @@ return new class () extends Migration {
             $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent()->index();
             $table->dateTime('deleted_at')->nullable()->index();
 
-            $table->comment('deadline must have');
+            $table->foreign(['region_id'])->references(['id'])->on('regions')
+                ->onUpdate('no action')->onDelete('no action');
+
+            $table->comment('deadline time management must have');
         });
     }
 
