@@ -45,7 +45,7 @@ return new class () extends Migration {
             $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent()->index();
             $table->dateTime('deleted_at')->nullable()->index();
             // idx
-            $table->index(['contest_id', 'section_id', 'work_id', 'portfolio_sequence', 'deleted_at'], 'general_idx');
+            $table->index(['contest_id', 'section_id', 'user_work_id', 'portfolio_sequence', 'deleted_at'], 'general_idx');
             // fk
             $table->foreign(['contest_id'])->references(['id'])->on('contests')
                 ->onUpdate('restrict')->onDelete('restrict');

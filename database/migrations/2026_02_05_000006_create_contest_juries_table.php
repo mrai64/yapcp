@@ -30,7 +30,7 @@ return new class () extends Migration {
             // fk
             $table->foreign(['contest_id'])->references(['id'])->on('contests')
                 ->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['section_id'])->references(['id'])->on('contest_sections')
+            $table->foreign(['section_id'], 'contest_section_fk')->references(['id'])->on('contest_sections')
                 ->onUpdate('restrict')->onDelete('restrict');
             $table->foreign(['user_id'])->references(['id'])->on('user_contacts')
                 ->onUpdate('restrict')->onDelete('restrict');

@@ -32,7 +32,8 @@ return new class () extends Migration {
 
             // TODO convert to boolean 0/1
             $table->char('is_circuit', 1)->default('N')->comment('Y/N, N when not Y');
-            $table->string('circuit_id', 36)->nullable()->index()->comment('null or a valid contest.id');
+            $table->string('circuit_id', 36)->charset('ascii')->collation('ascii_general_ci')
+                ->nullable()->index()->comment('null or a valid contest.id');
 
             $table->string('federation_list')->nullable()->comment('under patronage of federation code[]');
             $table->string('contest_mark')->nullable()->comment('The contest or organization passport photo - mark');
@@ -50,7 +51,8 @@ return new class () extends Migration {
                 ->comment('only the result list, not a catalogue');
             $table->string('url_4_catalogue')->nullable()->comment('catalogue download page');
 
-            $table->string('timezone_id')->index('timezone_idx')->comment('fk: timezones.id');
+            $table->string('timezone_id')->charset('ascii')->collation('ascii_general_ci')
+                ->index('timezone_idx')->comment('fk: timezones.id');
             $table->dateTime('day_1_opening')->comment('T1 Reveal the contest, opening for subscription');
             $table->dateTime('day_2_closing')->comment('T2 >= T1 End of receive works');
             $table->dateTime('day_3_jury_opening')->comment('T3 > T2 Start of juror works');
@@ -74,9 +76,7 @@ return new class () extends Migration {
                 ->onUpdate('restrict')->onDelete('restrict');
             $table->foreign(['vote_rule'])->references(['vote_rule'])->on('contests_vote_rule_sets')
                 ->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['vote_rule'])->references(['vote_rule'])->on('contests_vote_rule_sets')
-                ->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['timezones_id'])->references(['id'])->on('timezones')
+            $table->foreign(['timezone_id'])->references(['id'])->on('timezones')
                 ->onUpdate('restrict')->onDelete('restrict');
             //
         });

@@ -25,19 +25,20 @@ return new class () extends Migration {
             $table->string('field_name', 20)->charset('ascii')->collation('ascii_general_ci')
                 ->comment('fk federation_mores');
             $table->string('field_value')->default('')->comment('following rules when updated');
-
+            //
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate()->index();
             $table->dateTime('deleted_at')->nullable()->index();
-
-            $table->unique(['user_contact_user_id', 'federation_id', 'field_name'], 'alt_primary_idx');
-            $table->index(['federation_id', 'field_name'], 'pcp_user_contact_mores_federation_id_field_name_foreign');
-
+            // idx
+            $table->unique(['user_id', 'federation_id', 'field_name'], 'alt_primary_idx');
+            $table->index(['federation_id', 'field_name'], 'federation_idx');
+            // fk
             $table->foreign(['user_id'])->references(['id'])->on('user_contacts')
                 ->onUpdate('restrict')->onDelete('restrict');
             $table->foreign(['federation_id', 'field_name'])->references(['federation_id', 'field_name'])
                 ->on('federation_mores')->onUpdate('restrict')->onDelete('restrict');
             //
+            $table->comment('additional values for user_contacts based on federation_mores');
         });
     }
 

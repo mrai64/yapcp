@@ -28,8 +28,8 @@ return new class () extends Migration {
 
             $table->char('lang_local', 5)->charset('ascii')->collation('ascii_general_ci')
                 ->default('en')->comment('xx_YY - for future use in html lang');
-            $table->string('timezone_id', 40)->default('Europe/Rome')->index()
-                ->comment('fk: timezones.id');
+            $table->string('timezone_id', 40)->charset('ascii')->collation('ascii_general_ci')
+                ->default('Europe/Rome')->index()->comment('fk: timezones.id');
 
             // postal
             // name see up

@@ -22,8 +22,8 @@ return new class () extends Migration {
             $table->char('local_lang', 5)->charset('ascii')->collation('ascii_general_ci')
                 ->default('en')->comment('follow iso-3166 2 ascii lowercase');
             $table->string('name_local')->default('')->comment('when differ from official english');
-            $table->string('timezone_id')->default('')
-                ->index('pcp_federations_timezone_id_foreign')->comment('HQ address');
+            $table->string('timezone_id')->charset('ascii')->collation('ascii_general_ci')
+                ->default('')->index('pcp_federations_timezone_id_foreign')->comment('HQ address');
 
             $table->text('contact_info')->comment('HQ address, email, and other infos');
 

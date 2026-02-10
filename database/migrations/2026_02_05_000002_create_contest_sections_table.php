@@ -11,7 +11,8 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('contest_sections', function (Blueprint $table) {
-            $table->uuid('id')->primary()->comment('real pk contest_id n code');
+            $table->uuid('id')->charset('ascii')->collation('ascii_general_ci')
+                ->primary()->comment('real pk contest_id n code');
             $table->char('contest_id', 36)->charset('ascii')->collation('ascii_general_ci')
                 ->index()->comment('fk: contests.id');
             $table->string('code', 10)->charset('ascii')->collation('ascii_general_ci')
