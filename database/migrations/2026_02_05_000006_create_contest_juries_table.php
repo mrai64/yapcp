@@ -34,6 +34,8 @@ return new class () extends Migration {
                 ->onUpdate('restrict')->onDelete('restrict');
             $table->foreign(['user_id'])->references(['id'])->on('user_contacts')
                 ->onUpdate('restrict')->onDelete('restrict');
+            //
+            $table->comment('juror contest section list');
         });
     }
 
