@@ -20,8 +20,10 @@ return new class () extends Migration {
             $table->char('user_id', 36)->charset('ascii')->collation('ascii_general_ci')
                 ->comment('fk for user_contact id');
 
-            $table->string('federation_id', 10)->comment('fk federations n federation_mores');
-            $table->string('field_name', 20)->comment('fk federation_mores');
+            $table->string('federation_id', 10)->charset('ascii')->collation('ascii_general_ci')
+                ->comment('fk federation_mores');
+            $table->string('field_name', 20)->charset('ascii')->collation('ascii_general_ci')
+                ->comment('fk federation_mores');
             $table->string('field_value')->default('')->comment('following rules when updated');
 
             $table->dateTime('created_at')->useCurrent();
