@@ -2,7 +2,7 @@
 
 /**
  * Contest Juror vote board
- * 
+ *
  */
 
 use Illuminate\Database\Migrations\Migration;

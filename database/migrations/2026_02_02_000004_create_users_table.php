@@ -15,17 +15,18 @@ return new class () extends Migration {
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->charset('ascii')->collation('ascii_general_ci')->primary()->comment('lowercase uuid');
-            $table->string('name')->index()
-                ->comment('surname, name - not used for access');
+            $table->string('name')->index()->comment('surname, name - not used for access');
             $table->string('email')->unique();
             $table->dateTime('email_verified_at')->nullable();
-            $table->string('password');
+            //
+            $table->string('password')->comment('hashed obv');
             $table->rememberToken();
+            //
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent()->index();
             $table->dateTime('deleted_at')->nullable()->index();
 
-            $table->comment('for platform access only - other user info un user_contacts');
+            $table->comment('aka passwords table - for platform access only - other user info un user_contacts');
         });
     }
 

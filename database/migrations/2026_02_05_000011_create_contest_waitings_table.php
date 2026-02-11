@@ -6,7 +6,7 @@
  * are not compliant to contest requirements.
  * So it's a "parking" table how works are
  * waiting for some response from author
- * 
+ *
  */
 
 use Illuminate\Database\Migrations\Migration;

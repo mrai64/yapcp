@@ -1,10 +1,10 @@
 <?php
 
 /**
- * define the awards list for every section and 
+ * define the awards list for every section and
  * without section code, for the contest
  *
- * 
+ *
  *
  */
 
