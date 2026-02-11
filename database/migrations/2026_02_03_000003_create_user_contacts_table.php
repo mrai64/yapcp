@@ -13,7 +13,8 @@ return new class () extends Migration {
         Schema::create('user_contacts', function (Blueprint $table) {
             $table->uuid('id')->charset('ascii')->collation('ascii_general_ci')->primary()
                 ->comment('aligned to users.id');
-            $table->char('user_id', 36)->charset('ascii')->collation('ascii_general_ci')->comment('fk users.id');
+            $table->char('user_id', 36)->charset('ascii')->collation('ascii_general_ci')
+                ->index()->comment('fk users.id');
 
             $table->char('country_id', 3)->charset('ascii')->collation('ascii_general_ci')
                 ->comment('fk: countries.id');
@@ -50,16 +51,20 @@ return new class () extends Migration {
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent()->index();
             $table->dateTime('deleted_at')->nullable()->index();
-
-            $table->index(['country_id', 'last_name', 'first_name', 'user_id'], 'country_name_idx');
-
-            $table->foreign(['country_id'])->references(['id'])->on('countries')
+            // idx
+            $table->index(['country_id', 'last_name', 'first_name', 'user_id'], 'general_idx');
+            // fk
+            $table->foreign(['country_id'], 'user_contacts_fk1')->references(['id'])->on('countries')
                 ->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['timezone_id'])->references(['id'])->on('timezones')
+            $table->foreign(['timezone_id'], 'user_contacts_fk2')->references(['id'])->on('timezones')
                 ->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['user_id'])->references(['id'])->on('users')
+
+            $table->foreign('user_id', 'user_contacts_fk3')->references('id')->on('users')
+                ->onUpdate('cascade')->onDelete('cascade');
+
+            $table->foreign(['id'], 'user_contacts_fk4')->references(['id'])->on('users')
                 ->onUpdate('cascade')->onDelete('restrict');
-            $table->foreign(['id'])->references(['id'])->on('users')
+            $table->foreign(['email'], 'user_contacts_fk5')->references(['email'])->on('users')
                 ->onUpdate('cascade')->onDelete('restrict');
 
             $table->comment('the real users info table');

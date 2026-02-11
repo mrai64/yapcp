@@ -29,7 +29,7 @@ return new class () extends Migration {
             $table->id();
 
             $table->char('context_type', 10)->charset('ascii')->collation('ascii_general_ci')
-                ->unique('context_type_idx')->comment('the real pk');
+                ->unique()->comment('the real pk');
 
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent()->index();

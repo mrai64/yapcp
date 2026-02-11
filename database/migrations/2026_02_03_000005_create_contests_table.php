@@ -32,8 +32,8 @@ return new class () extends Migration {
 
             // TODO convert to boolean 0/1
             $table->char('is_circuit', 1)->default('N')->comment('Y/N, N when not Y');
-            $table->string('circuit_id', 36)->charset('ascii')->collation('ascii_general_ci')
-                ->nullable()->index()->comment('null or a valid contest.id');
+            $table->char('circuit_id', 36)->charset('ascii')->collation('ascii_general_ci')
+                ->nullable()->index()->comment('null or self fk: contests.id');
 
             $table->string('federation_list')->nullable()->comment('under patronage of federation code[]');
             $table->string('contest_mark')->nullable()->comment('The contest or organization passport photo - mark');
@@ -65,18 +65,18 @@ return new class () extends Migration {
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate()->index();
             $table->dateTime('deleted_at')->nullable()->index();
-
+            //
             $table->index(['country_id', 'day_2_closing', 'name_en', 'created_at'], 'general_idx');
-
-            $table->foreign(['country_id'])->references(['id'])->on('countries')
+            //
+            $table->foreign(['country_id'], 'contest_fk1')->references(['id'])->on('countries')
                 ->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['organization_id'])->references(['id'])->on('organizations')
+            $table->foreign(['organization_id'], 'contest_fk2')->references(['id'])->on('organizations')
                 ->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['circuit_id'])->references(['id'])->on('contests')
+            $table->foreign(['circuit_id'], 'contest_fk3')->references(['id'])->on('contests')
                 ->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['vote_rule'])->references(['vote_rule'])->on('contests_vote_rule_sets')
+            $table->foreign(['vote_rule'], 'contest_fk4')->references(['vote_rule'])->on('contests_vote_rule_sets')
                 ->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['timezone_id'])->references(['id'])->on('timezones')
+            $table->foreign(['timezone_id'], 'contest_fk5')->references(['id'])->on('timezones')
                 ->onUpdate('restrict')->onDelete('restrict');
             //
         });
