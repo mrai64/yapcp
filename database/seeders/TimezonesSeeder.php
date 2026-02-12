@@ -1,7 +1,7 @@
 <?php
 
 /**
- * must be runned after RegionSeeder
+ * run RegionSeeder before that
  */
 
 namespace Database\Seeders;

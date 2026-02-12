@@ -23,7 +23,7 @@ return new class () extends Migration {
             $table->foreign(['region_id'])->references(['id'])->on('regions')
                 ->onUpdate('restrict')->onDelete('restrict');
 
-            $table->comment('deadline time management must have');
+            $table->comment('correspond to php_timezone version 2025.3');
         });
     }
 
