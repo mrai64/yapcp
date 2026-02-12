@@ -1,11 +1,12 @@
 <?php
 
 /**
- * Build app version 
- * - make version as yyyy.mm.n 
+ * Build app version
+ * - make version as yyyy.mm.n
  * - register in storage app/version.json
- * 
+ *
  */
+
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;

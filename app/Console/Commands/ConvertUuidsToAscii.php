@@ -6,7 +6,7 @@
  * - find fields char(36) (uuid are)
  * - generate sql alter
  * - execute alter after confirm
- * 
+ *
  */
 
 namespace App\Console\Commands;
