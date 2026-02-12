@@ -6,6 +6,8 @@
  *
  * 2025-08-31 id became uuid
  * 2025-11-04 changed name() w/firstName() + lastName() to avoid title as Mr. Dr. Col. etc
+ * 2026-02-11 added variable name as permitted by php 8.5
+ * 
  */
 
 namespace Database\Factories;
@@ -28,8 +30,12 @@ class UserFactory extends Factory
     {
         $first = fake()->firstName();
         $last = fake()->lastName();
-        $name = $last.', '.$first;
-        $email = str_ireplace(['"', ', ', '  ', ' ', '..'], ['', ' ', ' ', '.', '.'], strtolower($first.'.'.$last)).'@athesis77.it';
+        $name = $last . ', ' . $first;
+        $email = str_ireplace(
+            search: ['"', ', ', '  ', ' ', '..'],
+            replace: ['', ' ', ' ', '.', '.'],
+            subject: strtolower($first . '.' . $last)
+        ) . '@athesis77.it'; // real domain to check mail sending
         $password = Hash::make($email);
 
         return [
