@@ -7,7 +7,7 @@
  *
  * user_id as uuid() should be primary key also for user_contact
  * 2025-09-03 photo_box where store user works and passport_photo
- * 2025-09-10 add timezone and lang_local (for search: local_lang)
+ * 2025-09-10 add timezone_id and lang_local (for search: local_lang)
  * 2025-09-21 add getter functions
  * 2025-10-26 add relationship w/country
  * 2026-01-22 PSR-12
@@ -18,6 +18,8 @@
 
 namespace App\Models;
 
+use App\Casts\Country3Id;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -35,7 +37,7 @@ use Illuminate\Support\Str;
  * @property string $cellular
  * @property string $passport_photo
  * @property string $lang_local for future use - html lang
- * @property string $timezone for future use - php timezone for time math
+ * @property string $timezone_id for future use - php timezone for time math
  * @property string $address
  * @property string $address_line2
  * @property string $city
@@ -111,20 +113,21 @@ use Illuminate\Support\Str;
 class UserContact extends Model
 {
     use HasFactory;
+    use HasUuids;
     use SoftDeletes;
 
     public const TABLENAME = 'user_contacts';
 
     // attributes mass assignable in factory and seeder
     protected $fillable = [
-        'id', //               pk bigint autoincrement
-        'user_id', //          fk users.id
-        'country_id', //       fk countries.id
+        'id', //               uuid
+        'user_id', //          fk users.id uuid
+        'country_id', //       fk countries.id CHAR3UPPER
         'first_name', //       text
         'last_name', //        text
         'nick_name', //        text
         'email', //            synchro users.email
-        'cellular', //         w/international prefix
+        'cellular', //         E.164 format w/international prefix
         'passport_photo', //   small jpg in /photo_box/__passport_photo.jpg
         'address', //          postal first line
         'address_line2', //    postal
@@ -132,7 +135,7 @@ class UserContact extends Model
         'region', //           postal
         'postal_code', //      postal
         'lang_local', //       reserved TODO future use
-        'timezone', //         TODO timezone_id fk timezones.id
+        'timezone_id', //      fk timezones.id
         'website', //          url
         'facebook', //         url
         'x_twitter', //        url
@@ -146,6 +149,31 @@ class UserContact extends Model
     protected function casts()
     {
         return [
+            'id' => 'string',
+            'user_id' => 'string',
+            'country_id' => Country3Id::class,
+            //
+            'first_name' => 'string',
+            'last_name' => 'string',
+            'nick_name' => 'string',
+            'email' => 'string',
+            'cellular' => 'string',
+            'passport_photo' => 'string',
+            //
+            'address' => 'string',
+            'address_line2' => 'string',
+            'city' => 'string',
+            'region' => 'string',
+            'postal_code' => 'string',
+            'lang_local' => 'string',
+            'timezone_id' => 'string',
+            //
+            'website' => 'string',
+            'facebook' => 'string',
+            'x_twitter' => 'string',
+            'instagram' => 'string',
+            'whatsapp' => 'string',
+            //
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
@@ -154,28 +182,16 @@ class UserContact extends Model
 
     /**
      * @return the string used to store works and passport_photo
+     * Note: user_id to avoid homonymity
      */
     // was: photo_box
     public function photoBox(): string
     {
-
-        /*
-         * was
-        $pb = $this->country_id.'/'
-        .$this->last_name.'/'
-        .$this->first_name.'_'
-        .$this->user_id; // substr( $this->id, 0, 4);
-
-        $pb = str_ireplace(':', '-', $pb);
-        $pb = str_ireplace('+', '', $pb);
-        $pb = str_ireplace(' ', '-', $pb);
-         *
-         */
-
-        $pb  = $this->country_id . '/';
-        $pb .= Str::slug($this->last_name) . '/';
-        $pb .= Str::slug($this->first_name) . '_';
-        $pb .= $this->user_id;
+        // ITA/Verdi/Giuseppe_12345678-1234-1234-1234-123456789012
+        $pb = Str::upper($this->country_id) . '/'
+            . Str::slug($this->last_name) . '/'
+            . Str::slug($this->first_name) . '_'
+            . Str::lower($this->user_id);
 
         return $pb;
     }
@@ -188,13 +204,12 @@ class UserContact extends Model
     // was: get_photo_box
     public static function getPhotoBox(string $uid): string
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         $uc = self::where('user_id', $uid)->firstOrFail();
         // compose pb
-        $photoBox = $uc->country_id.'/'.$uc->last_name.'/'.$uc->first_name.'_'.$uc->user_id;
-        $photoBox = str_ireplace(':', '-', $photoBox);
-        $photoBox = str_ireplace('+', '', $photoBox);
-        $photoBox = str_ireplace(' ', '-', $photoBox);
+        $photoBox = Str::upper($uc->country_id) . '/'
+            . Str::slug($uc->last_name) . '/'
+            . Str::slug($uc->first_name) . '_'
+            . Str::lower($uc->user_id);
 
         return $photoBox;
     }
@@ -426,4 +441,6 @@ class UserContact extends Model
         // log
         return $uwSet;
     }
+
+    //
 }

@@ -15,6 +15,7 @@ class UserContactSeeder extends Seeder
     public function run(): void
     {
         // UserContact::factory()->create();
+        // fill missing user_contacts
         $user_list = User::all();
         foreach ($user_list as $user) {
             Log::info('Seeder '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' SRC id:'.$user->id.' name:'.$user->name);
@@ -30,10 +31,12 @@ class UserContactSeeder extends Seeder
                 'last_name' => $user->name,
                 'email' => $user->email,
                 'country_id' => '',
+                'cellular' => fake()->e164PhoneNumber(),
                 'created_at' => $user->created_at,
                 'updated_at' => $user->updated_at,
                 'deleted_at' => $user->deleted_at,
             ]);
         }
+
     }
 }
