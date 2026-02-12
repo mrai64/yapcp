@@ -3,8 +3,9 @@
 /**
  * TODO lookup table must be
  * managed only from admin users
- * 
+ *
  */
+
 namespace App\Policies;
 
 use App\Models\Country;
