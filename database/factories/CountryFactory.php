@@ -19,6 +19,7 @@ class CountryFactory extends Factory
         return [
             'id' => fake()->regexify('[A-Z]{3}'),
             'country' => fake()->text(),
+            'lang_code' => '[a-z]{2}_[A-Z]{2}',
         ];
     }
 }

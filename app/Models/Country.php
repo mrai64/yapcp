@@ -16,6 +16,7 @@
  * 2025-09-29 add getter function
  * 2025-12-04 completed unicode flag manual fills
  * 2026-01-21 PSR-12
+ * 2026-02-12 add 3 fields
  */
 
 namespace App\Models;
@@ -69,9 +70,12 @@ class Country extends Model
     public $incrementing = false; //  with no increment
 
     protected $fillable = [
-        'id', //         uppercase char(3)
+        'id', //         uppercase char(3) Char3Id
         'country', //    english
-        'flag_code', //  unicode 🇺🇳
+        'flag_code', //  unicode flag emoji 🇺🇳
+        'lang_code',
+        'locale',
+        'calling_code',
         // created_at    reserved
         // updated_at    reserved
         // deleted_at    reserved
@@ -80,6 +84,12 @@ class Country extends Model
     protected function casts(): array
     {
         return [
+            'id' => 'string',
+            'country' => 'string',
+            'flag_code' => 'string',
+            'lang_code' => 'string',
+            'locale' => 'string',
+            'calling_code' => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
@@ -97,17 +107,17 @@ class Country extends Model
     }
 
     // was: country_name
-    public static function countryName(string $country_id): string
+    public static function countryName(string $countryId): string
     {
-        $country = self::where('id', $country_id)->get()[0];
+        $country = self::where('id', $countryId)->get()[0];
         // log
-        return $country->country.' /'.$country->flag_code;
+        return $country->country . ' /' . $country->flag_code;
     }
 
     // was: country_flag
-    public static function countryFlag(string $country_id): string
+    public static function countryFlag(string $countryId): string
     {
-        $flag = self::where('id', $country_id)->get('flag_code')[0];
+        $flag = self::where('id', $countryId)->get('flag_code')[0];
         // log
         return (is_null($flag['flag_code'])) ? '🏳️' : $flag['flag_code'];
     }
@@ -116,29 +126,29 @@ class Country extends Model
 
     public function contest(): BelongsToMany
     {
-        $contest_set = $this->belongsToMany(Contest::class);
+        $contestSet = $this->belongsToMany(Contest::class);
         // log
-        return $contest_set;
+        return $contestSet;
     }
 
     public function federation(): BelongsToMany
     {
-        $federation_set = $this->belongsToMany(Federation::class);
+        $federationSet = $this->belongsToMany(Federation::class);
         // log
-        return $federation_set;
+        return $federationSet;
     }
 
     public function organization(): BelongsToMany
     {
-        $organization_set = $this->belongsToMany(Organization::class);
+        $organizationSet = $this->belongsToMany(Organization::class);
         // log
-        return $organization_set;
+        return $organizationSet;
     }
 
-    public function user_contact(): BelongsToMany
+    public function userContacts(): BelongsToMany
     {
-        $user_contact_set = $this->belongsToMany(UserContact::class);
+        $userContactSet = $this->belongsToMany(UserContact::class);
         // log
-        return $user_contact_set;
+        return $userContactSet;
     }
 }
