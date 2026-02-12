@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Command added to convert uuid w/character:utf8mb4 in character:ascii
+ * one use only
+ * - find fields char(36) (uuid are)
+ * - generate sql alter
+ * - execute alter after confirm
+ * 
+ */
+
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
