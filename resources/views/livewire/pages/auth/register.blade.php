@@ -5,6 +5,8 @@
  * - thru mysql trigger create also user_contacts record
  *
  * 2026-01-24 add email confirmation. First communicate channel.
+ * 2026-02-12 removed creation of user_contacts thru an sql trigger
+ *            now user_contacts creation is under email verification
  *
  */
 use App\Models\User;
@@ -38,7 +40,7 @@ rules([
 // function as a var
 $register = function () {
     $validated = $this->validate();
-
+    // from clear to hashed
     $validated['password'] = Hash::make($validated['password']);
 
     event(new Registered($user = User::create($validated)));

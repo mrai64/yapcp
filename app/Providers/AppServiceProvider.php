@@ -8,6 +8,10 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use App\Models\UserContact;
+use App\Observers\UserContactObserver;
+use App\Observers\UserObserver;
 use App\Policies\ContestPaymentChangePolicy;
 use App\Policies\JurorOnlyPolicy;
 use Illuminate\Support\Facades\Gate;
@@ -45,5 +49,9 @@ class AppServiceProvider extends ServiceProvider
         // Gate Policy
         Gate::define('contest-participants-update', [ContestPaymentChangePolicy::class, 'update']);
         Gate::define('jury-panels', [JurorOnlyPolicy::class, 'grant_access']);
+
+        // Observers
+        User::observe(UserObserver::class);
+        UserContact::observe(UserContactObserver::class);
     }
 }
