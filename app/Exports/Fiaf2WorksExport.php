@@ -3,7 +3,7 @@
 /**
  * Excel Export Report generate
  *
- * federation: FIAF Italian photographic societes federation Federazione Italiana Associazioni Fotografiche
+ * federation: FIAF Italian photographic societies federation | Federazione Italiana Associazioni Fotografiche
  * report: Foto partecipanti ed esiti
  */
 
@@ -29,7 +29,7 @@ class Fiaf2WorksExport implements FromView
 
     protected $contest;
 
-    protected $partecipazioni;
+    protected $participantWorks;
 
     protected array $reportData;
 
@@ -44,7 +44,6 @@ class Fiaf2WorksExport implements FromView
      */
     public function __construct(string $cid, string $fid) // from controller
     {
-        // dbg set_time_limit(120);
         // zero trust
         if (Contest::where('id', $cid)->count() === 0) {
             abort(403);
@@ -65,21 +64,22 @@ class Fiaf2WorksExport implements FromView
         }])->find($cid);
 
         // pick works participation and results
-        $partecipazioni = ContestWork::query()
+        $participantWorks = ContestWork::query()
             ->where('contest_works.contest_id', $cid)
             // Carichiamo tutte le relazioni necessarie (Eager Loading)
             ->with([
                 'section', //                     contest_work->section
                 'work', //                        contest_work->work
                 'author' => function ($query) { // contest_work->author
-                    $query->select('user_id', 'first_name', 'last_name', 'country_id');
+                    $query->select('id', 'first_name', 'last_name', 'country_id');
+                    // was: $query->select('user_id', 'first_name', 'last_name', 'country_id');
                 },
                 'author.contactMores' => function ($query) use ($fid) {
                     $query->where('federation_id', $fid);
                 },
             ])
             // join and sorted by
-            ->join('user_contacts', 'contest_works.user_id', '=', 'user_contacts.user_id')
+            ->join('user_contacts', 'contest_works.user_id', '=', 'user_contacts.id') // was: 'user_contacts.user_id')
             ->join('contest_sections', 'contest_works.section_id', '=', 'contest_sections.id')
             ->join('works', 'contest_works.work_id', '=', 'works.id')
             // awards
@@ -96,7 +96,7 @@ class Fiaf2WorksExport implements FromView
             ->get();
 
         // at last building map
-        $reportData = $partecipazioni->map(function ($row) {
+        $reportData = $participantWorks->map(function ($row) {
 
             // user_contact_more
             $mores = $row->author->contactMores ?? collect([]);  // data, or empty array

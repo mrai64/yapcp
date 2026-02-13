@@ -26,18 +26,18 @@ final class Fiaf1ParticipantsExport implements FromView
 
     protected $contest;
 
-    protected $FederationMores;
+    protected $federationMores;
 
     protected $contestParticipants;
 
     protected $excelRows;
 
     // 1st: construct pick param then fill data for
-    // ! Add federationId ✅, then 🚧 build a function for every federation
-    // ! public function __construct(string $cid, ?string $fid)
+    // TODO havying federationId in input, when more than a federationId is in contests.federation_list todo build a "loop_on" federatonId.
+    // TODO Check for federationId == '' (no federation sponsor)
     public function __construct(string $cid, string $fid)
     {
-        ds(__CLASS__.' f:'.__FUNCTION__.' cid:'.$cid.' fid:'.$fid);
+        ds(__CLASS__ . ' f:' . __FUNCTION__ . ' cid:' . $cid . ' fid:' . $fid);
         $this->contestId = $cid;
         $this->federationId = $fid;
 
@@ -46,16 +46,16 @@ final class Fiaf1ParticipantsExport implements FromView
             $q->orderBy('code');
         }])->find($this->contestId);
         $contest = $this->contest;
-        ds('contest for cid:'.$cid);
+        ds('contest for cid:' . $cid);
         ds($this->contest);
 
         // 3. more fields - which
-        $this->FederationMores = FederationMore::where('federation_id', $this->federationId)
+        $this->federationMores = FederationMore::where('federation_id', $this->federationId)
             ->orderBy('field_name')
             ->get();
-        ds('FederationMores for:'.$fid);
-        ds($this->FederationMores);
-        $FederationMores = $this->FederationMores;
+        ds('federationMores for:' . $fid);
+        ds($this->federationMores);
+        $federationMores = $this->federationMores;
 
         // the fab 4. eager loaders
         $this->contestParticipants = ContestParticipant::query()
@@ -73,7 +73,7 @@ final class Fiaf1ParticipantsExport implements FromView
             ])
             ->get()
             ->keyBy('user_id');
-        ds('fcontestParticipants for cid:'.$cid.' & fid:'.$fid);
+        ds('contestParticipants for cid:' . $cid . ' & fid:' . $fid);
         ds($this->contestParticipants);
 
         // At last, the lego building blocks
@@ -92,28 +92,26 @@ final class Fiaf1ParticipantsExport implements FromView
                 // ... others
             ];
 
-            // --- Logica Query 3 (Conteggi e Ammissioni per Sezione) ---
-            // Raggruppiamo le opere caricata per codice sezione
+            // number and admission number  / section
             $worksBySection = $participant->works->groupBy('section.code');
 
             foreach ($this->contest->sections as $section) {
                 $works = $worksBySection->get($section->code, collect());
 
-                $row["sez_{$section->code}_has"] = $works->count() ? 'S' : 'N'; // Y/N in italian
+                $row["sez_{$section->code}_has"] = $works->count() ? 'S' : 'N'; // Y/N in italian 0 not participant >0 yes
                 $row["sez_{$section->code}_admit"] = $works->sum('is_admit') ? $works->sum('is_admit') : ''; // void when 0
             }
             // $row["sez_{$section->code}_count"] = $works->count();
             // $row["sez_{$section->code}_admit"] = $works->sum('is_admit');
 
-            // --- Logica Query 4 (Dati Federazione con Default) ---
-            // Mappiamo i valori custom dell'utente per accesso rapido
+            // add federationMore fields
             $userValues = $participant->contactMores->pluck('field_value', 'field_name');
 
-            foreach ($this->FederationMores as $field) {
-                // Logica COALESCE: se l'utente ha il valore, usa quello, altrimenti il default
-                $valore = $userValues->get($field->field_name, $field->field_default_value);
+            foreach ($this->federationMores as $field) {
+                // Set users value over default value
+                $val = $userValues->get($field->field_name, $field->field_default_value);
 
-                $row["fed_{$field->field_name}"] = $valore;
+                $row["fed_{$field->field_name}"] = $val;
             }
 
             return $row;
@@ -125,7 +123,7 @@ final class Fiaf1ParticipantsExport implements FromView
     // 2nd: fill the view and export
     public function view(): View
     {
-        ds(__CLASS__.' f:'.__FUNCTION__);
+        ds(__CLASS__ . ' f:' . __FUNCTION__);
 
         return view('livewire.contest.report.fiaf1-participants', [
             'contest' => $this->contest,

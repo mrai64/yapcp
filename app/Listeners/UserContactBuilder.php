@@ -51,7 +51,7 @@ class UserContactBuilder
                 $firstName = $user->name;
             }
             UserContact::create([
-                'user_id' => $user->id,
+                'id' => $user->id, // was: 'user_id' => $user->id,
                 'email'   => $user->email,
                 'first_name'    => $firstName,
                 'last_name'    => $lastName,
