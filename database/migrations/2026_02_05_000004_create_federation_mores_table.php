@@ -25,6 +25,10 @@ return new class () extends Migration {
         Schema::create('federation_mores', function (Blueprint $table) {
             $table->id()->comment('the real pk is federation_id + field_name');
 
+            $table->char('referenced_table', 40)
+                ->charset('ascii')->collation('ascii_general_ci')
+                ->unique()->comment('real pk - lowercase');
+
             $table->string('federation_id', 10)->charset('ascii')->collation('ascii_general_ci')
                 ->comment('fk federations.id');
             $table->string('field_name', 20)->charset('ascii')->collation('ascii_general_ci')
@@ -41,6 +45,9 @@ return new class () extends Migration {
 
             $table->unique(['federation_id', 'field_name'], 'alt_primary_idx');
 
+            $table->foreign(['referenced_table'], 'reference_fk')
+                ->references(['referenced_table'])->on('federation_mores_referenced_tables')
+                ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign(['federation_id'])->references(['id'])->on('federations')
                 ->onUpdate('restrict')->onDelete('restrict');
             //
