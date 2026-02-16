@@ -54,7 +54,7 @@ use Illuminate\Support\Facades\Gate;
             <span class="fyk text-xl">Works</span>
         </h3>
     </header>
-    @if (count($participant_list) < 1)
+    @if (count($participantSet) < 1)
     <div>
         <h3 class="fyk text-2xl">{{ __("Waitin', but 🏁 you should be the first") }}</h3>
     </div>
@@ -70,7 +70,7 @@ use Illuminate\Support\Facades\Gate;
                 </tr>
             </thead>
             <tbody>
-            @foreach($participant_list as $key => $participant)
+            @foreach($participantSet as $key => $participant)
                 <tr class="border py-2">
                     <td scope="row" class="fyk text-xl">
                         {{ Country::countryFlag($participant['country_id']) }}
@@ -82,7 +82,7 @@ use Illuminate\Support\Facades\Gate;
                     <td>
                         @if( ($participant['fee_payment_completed'] === 'N') )
                             @can('contest-participants-update', ContestParticipant::where('user_id', $participant['user_id'])->get()[0] )
-                                @livewire('contest.participants.complete',  ['data_json' => json_encode(['contest_id' => $contest->id, 'participant_id' => $participant['user_id'], 'fee_payment_completed' => $participant['fee_payment_completed'] ] ) ] )
+                                @livewire('contest.participants.complete',  ['dataJson' => json_encode(['contestId' => $contest->id, 'participantId' => $participant['user_id'], 'feePaymentCompleted' => $participant['fee_payment_completed'] ] ) ] )
                             @endcan
                             @cannot('contest-participants-update', ContestParticipant::where('user_id', $participant['user_id'])->get()[0] )
                                 {{ __("🟨 Waiting payment receipt") }}
@@ -97,7 +97,7 @@ use Illuminate\Support\Facades\Gate;
                         @endif
                     </td>
                     <td class="small kbd" nowrap>
-                        @foreach($contest_section_list as $section)
+                        @foreach($contestSectionSet as $section)
                         [{{$section->code}}: {{ ContestWork::sectionWorksCounter($section->id, $participant['user_id']) }} / {{$section->rule_max}}] 
                         &nbsp;
                         @endforeach

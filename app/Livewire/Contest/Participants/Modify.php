@@ -13,18 +13,17 @@ namespace App\Livewire\Contest\Participants;
 use App\Models\Contest;
 use App\Models\ContestParticipant;
 use App\Models\ContestSection;
-use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class Modify extends Component
 {
-    public string $contest_id;
+    public string $contestId;
 
     public $contest;
 
-    public $contest_section_list;
+    public $contestSectionSet;
 
-    public $participant_list;
+    public $participantSet;
 
     public $user_contact;
 
@@ -35,19 +34,18 @@ class Modify extends Component
      */
     public function mount(string $cid) // see route()
     {
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        $this->participant_list = [];
-        $this->contest_id = $cid;
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' this:'.json_encode($this));
+        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' called');
+        $this->participantSet = [];
+        $this->contestId = $cid;
+        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' this:' . json_encode($this));
 
-        $this->contest = Contest::where('id', $cid)->get()[0];
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' contest:'.json_encode($this->contest));
+        $this->contest = Contest::where('id', $cid)->first(); // was: ->get()[0];
+        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' contest:' . json_encode($this->contest));
 
-        $this->contest_section_list = ContestSection::where('contest_id', $cid)->get();
+        $this->contestSectionSet = ContestSection::where('contest_id', $cid)->get();
 
-        $this->participant_list = ContestParticipant::contestParticipantsArray($cid);
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' participant_list:'.json_encode($this->participant_list));
-
+        $this->participantSet = ContestParticipant::contestParticipantsArray($cid);
+        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' participantSet:' . json_encode($this->participantSet));
     }
 
     /**
@@ -55,10 +53,10 @@ class Modify extends Component
      */
     public function render()
     {
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' §§ this:'.json_encode($this));
+        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' called');
+        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' §§ this:' . json_encode($this));
 
-        return view('livewire.contest.participants.modify');
+        return view('livewire . contest . participants . modify');
     }
 
     /**
@@ -66,16 +64,14 @@ class Modify extends Component
      */
     public function rules()
     {
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-
+        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' called');
     }
 
     /**
      * 4. do the job
      */
-    public function update_contest_participant()
+    public function updateContestParticipant()
     {
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-
+        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' called');
     }
 }

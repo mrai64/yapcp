@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Gate;
 ?>
 
 <div>
-    <form wire:submit.prevent="payment_completed">
+    <form wire:submit.prevent="participantPaymentCompleted">
         @csrf
         <input type="hidden" wire:fill="contest_id" name="contest_id"
             value="{{ $contest_id }}" readonly />
@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Gate;
         <input type="hidden" wire:fill="participant_id" name="participant_id"
             value="{{ $participant_id }}" readonly />
 
-        <div class="small">{{ ($fee_payment_completed === 'Y') ? __("✅ Payment completed") : __("🟨 Waiting payment receive") }}</div>
+        <div class="small">{{ ($feePaymentCompleted === 'Y') ? __("✅ Payment completed") : __("🟨 Waiting payment receive") }}</div>
 
         @foreach ($errors->all() as $message)
         <div class="small">{{$message}}</div>
