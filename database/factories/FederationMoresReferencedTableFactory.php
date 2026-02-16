@@ -17,7 +17,7 @@ class FederationMoresReferencedTableFactory extends Factory
     public function definition(): array
     {
         return [
-            'referenced_table' => fake()->text(40);
+            'referenced_table' => fake()->text(40),
         ];
     }
 }
