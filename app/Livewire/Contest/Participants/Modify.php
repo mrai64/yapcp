@@ -56,7 +56,7 @@ class Modify extends Component
         ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' called');
         ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' §§ this:' . json_encode($this));
 
-        return view('livewire . contest . participants . modify');
+        return view('livewire.contest.participants.modify');
     }
 
     /**

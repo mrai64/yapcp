@@ -48,9 +48,9 @@ class Listed extends Component
     {
         ds('Component ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' called');
         if ($this->juries->count() == 0) {
-            return view('livewire . contest . jury . listed-none');
+            return view('livewire.contest.jury.listed-none');
         }
 
-        return view('livewire . contest . jury . listed');
+        return view('livewire.contest.jury.listed');
     }
 }

@@ -50,7 +50,7 @@ class Complete extends Component
     {
         ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' called');
 
-        return view('livewire . contest . participants . complete');
+        return view('livewire.contest.participants.complete');
     }
 
     /**

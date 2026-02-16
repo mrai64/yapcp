@@ -25,8 +25,8 @@ class Remove extends Component
      */
     public function mount(string $data_json) // @livewire
     {
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in:'.$data_json);
+        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' called');
+        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' in:' . $data_json);
         $data = json_decode($data_json);
         $this->contest_id = $data->contest_id;
         $this->participant_id = $data->participant_id;
@@ -40,7 +40,7 @@ class Remove extends Component
                 ->get('fee_payment_completed')[0]['fee_payment_completed'];
         }
 
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($this));
+        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' out:' . json_encode($this));
 
     }
 
@@ -49,7 +49,7 @@ class Remove extends Component
      */
     public function render()
     {
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' called');
 
         return view('livewire.contest.participants.remove');
     }
@@ -59,7 +59,7 @@ class Remove extends Component
      */
     public function rules()
     {
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' called');
 
         return [];
     }
@@ -69,14 +69,14 @@ class Remove extends Component
      */
     public function payment_waiting()
     {
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' this:'.json_encode($this));
+        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' called');
+        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' this:' . json_encode($this));
         $participant = ContestParticipant::where('user_id', $this->participant_id)->where('contest_id', $this->contest_id)->get()[0];
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' this:'.json_encode($participant));
+        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' this:' . json_encode($participant));
         $participant->fee_payment_completed = 'N';
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' this:'.json_encode($participant));
+        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' this:' . json_encode($participant));
         $participant->save();
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' exit:');
+        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' exit:');
 
         //
         return redirect()

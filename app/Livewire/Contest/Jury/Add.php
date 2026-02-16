@@ -106,7 +106,7 @@ class Add extends Component
     {
         ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
 
-        return view('livewire . contest . jury . add');
+        return view('livewire.contest.jury.add');
     }
 
     /**
