@@ -35,7 +35,7 @@ class Add extends Component
 
     public $section;
 
-    public string $contest_id;
+    public string $contestId;
 
     public $contest;
 
@@ -184,7 +184,7 @@ class Add extends Component
                 'role_opening' => $this->juryWorkStart,
                 'role_closing' => $this->juryWorkEnd,
             ]);
-            ds('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ' ' . __LINE__ . ' juror: ' . $juror_role);
+            ds('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ' ' . __LINE__ . ' juror: ' . $jurorUserRole);
 
         }
         ds('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ' ' . __LINE__ . ' user->id: ' . $juror->id);
