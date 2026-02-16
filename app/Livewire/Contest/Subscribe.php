@@ -3,11 +3,17 @@
 /**
  * Contest Work Participation Add / 1
  * special name: Contest Subscribe
+ * With that part user-participant after choice contest
+ * add in contest for any section her/him user_works.
+ *
+ * TODO 1. check user_works instead works
+ * TODO 2. as is every works should participate only in one section (but it's only a rule, maybe other contest rule that admit a work in more than unique section-theme)
  *
  * 2025-10-18 First part of subscribe: show contest
  *            section list and works list
  *            read only because next step is
  *            is another blade and another controller
+ * 2026-02-13 PSR-12 *work in progress*
  */
 
 namespace App\Livewire\Contest;
@@ -15,7 +21,7 @@ namespace App\Livewire\Contest;
 use App\Models\Contest;
 use App\Models\ContestSection;
 use App\Models\ContestWork;
-use App\Models\Work;
+use App\Models\UserWork;
 use DateTimeImmutable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -24,45 +30,47 @@ use Livewire\Component;
 class Subscribe extends Component
 {
     //
-    public $user_id;
+    public $userId;
 
-    public $contest_id;
+    public $contestId;
 
     public DateTimeImmutable $today;
 
-    public $work_list;
+    public $userWorkSet;
 
     public $contest_participant;
 
     public $contest_participant_list;
 
-    public $contest_section_list;
+    public $contestSectionSet;
 
-    public $contest_work_list;
+    public $contestWorkSet;
 
     public $contest;
 
-    public $country_id;
+    public $countryId;
 
-    public $section_id; // to leave
+    public $sectionId; // to leave
 
-    public $work_id; //    to leave
+    public $workId; //    to leave
 
     /**
      * 1. Before the show
      */
     public function mount(string $cid) // cid from route()
     {
-        $this->user_id = Auth::id();
-        $this->contest_id = $cid;
+        $this->userId = Auth::id();
+        $this->contestId = $cid;
 
-        $this->work_list = Work::where('user_id', $this->user_id)->get();
-        if (count($this->work_list) < 1) {
+        $this->userWorkSet = UserWork::where('user_id', $this->userId)->get();
+        if (count($this->userWorkSet) < 1) {
             // no work to participate
-            Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' work_list:'.json_encode($this->work_list));
+            Log::info('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__
+                . ' work_list:' . json_encode($this->userWorkSet));
             abort(404);
         }
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' work_list:'.json_encode($this->work_list));
+        Log::info('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__
+            . ' work_list:' . json_encode($this->userWorkSet));
 
         $this->today = new DateTimeImmutable('now');
         $this->contest = Contest::where('id', $cid)
@@ -75,19 +83,19 @@ class Subscribe extends Component
         }
         Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' contest:'.json_encode($this->contest));
 
-        $this->contest_section_list = ContestSection::where('contest_id', $cid)->get();
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' contest:'.json_encode($this->contest_section_list));
+        $this->contestSectionSet = ContestSection::where('contest_id', $cid)->get();
+        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' contest:'.json_encode($this->contestSectionSet));
 
-        $this->section_id = '';
-        $this->work_id = '';
+        $this->sectionId = '';
+        $this->workId = '';
 
-        $this->contest_work_list = ContestWork::where('user_id', $this->user_id)
+        $this->contestWorkSet = ContestWork::where('user_id', $this->userId)
             ->where('contest_id', $cid)
             ->orderBy('section_id')
             ->orderBy('portfolio_sequence')
             ->orderBy('work_id')
             ->get();
-        // Log::info('Component ' . __CLASS__.' '.__FUNCTION__.':'.__LINE__.' contest_work_list:'.json_encode($this->contest_work_list));
+        // Log::info('Component ' . __CLASS__.' '.__FUNCTION__.':'.__LINE__.' contestWorkSet:'.json_encode($this->contestWorkSet));
         Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($this));
 
     }

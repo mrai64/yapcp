@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Log;
         <p class="fyk text-xl">{{__("Closing date:")}} {{$contest->day_2_closing->format("Y-m-d") }}</p>
 
         <!-- Contest section list w/counter -->
-        @foreach($contest_section_list as $section)
+        @foreach($contestSectionSet as $section)
         <p class="small">[  {{$section->code}} {{($section->rule_min > 0) ? "Portfolio min:".$section->rule_min : "" }} max:{{$section->rule_max}} short_side:{{$section->rule_min_size}}  long_side:{{$section->rule_max_size}}  mono:{{($section->rule_monochromatic === 'Y') ? 'Y' : 'N' }}  raw:{{($section->rule_raw === 'Y') ? 'Y' : 'N' }}  ]</p>
         @endforeach
 
@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Log;
 
         <!-- Contest work list w/counter only -->
         <div class="fyk text-xl">{{__("Your counter:")}}
-        @foreach($contest_section_list as $section)
+        @foreach($contestSectionSet as $section)
         <p class="inline-flex small">[ {{$section->code}} your:{{ ContestWork::sectionWorksCounter($section->id, $user_id) }} / {{$section->rule_max}}]</p>
         @endforeach
         </div>
@@ -59,7 +59,7 @@ use Illuminate\Support\Facades\Log;
         <tbody>
             <!-- work in contest --> 
             <tr class="border my-4">
-            @foreach($contest_work_list as $contest_work)
+            @foreach($contestWorkSet as $contest_work)
             <tr class="border my-4">
                 <td scope="row" class="text-center" align="center">
                     @livewire('contest.subscribe.remove', ['pid' => $contest_work->id ])
@@ -91,7 +91,7 @@ use Illuminate\Support\Facades\Log;
                 @if( ContestWork::userWorksCounter($contest_id, $work->id) === '')
                 <tr class="border my-4">
                     <td scope="row" class="text-center" align="center">
-                        @livewire('contest.subscribe.add', ['data_json' => json_encode(['contest_id' => $contest->id, 'work_id' => $work->id, 'contest_section_list' => $contest_section_list ]) ])
+                        @livewire('contest.subscribe.add', ['data_json' => json_encode(['contest_id' => $contest->id, 'work_id' => $work->id, 'contestSectionSet' => $contestSectionSet ]) ])
                     </td>
                     <td>
                         <!-- td work miniature TODO shadow img -->
