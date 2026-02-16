@@ -10,7 +10,7 @@ namespace Database\Seeders;
 use App\Models\UserRolesRoleSet;
 use Illuminate\Database\Seeder;
 
-class UserRoleRoleSetSeeder extends Seeder
+class UserRolesRoleSetSeeder extends Seeder
 {
     /**
      * Run the database seeds.

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\UserRoleRoleSet>
  */
-class UserRoleRoleSetFactory extends Factory
+class UserRolesRoleSetFactory extends Factory
 {
     /**
      * Define the model's default state.
