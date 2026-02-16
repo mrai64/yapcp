@@ -39,7 +39,6 @@ class Listed extends Component
 
         $this->juries = $this->juror->juries;
         ds('Component ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' juries:' . json_encode($this->juries));
-
     }
 
     /**
