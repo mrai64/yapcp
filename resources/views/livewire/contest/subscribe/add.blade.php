@@ -1,31 +1,31 @@
 <?php
 /**
  * add a work in a contest/section
- * - work_id
- * - contest_id > contest_section_list
+ * - userWorkId
+ * - contest_id > contestSectionSet
  * arr_participant > insert in contest_participants
  *
  */
 
 ?>
-<form wire:submit.prevent="add_work_to_contest">
+<form wire:submit.prevent="addUserWorkToContest">
     @csrf
 
-    <input name="work_id" wire:model="work_id" type="hidden"
-        value="{{$work_id}}" readonly />
+    <input name="userWorkId" wire:model="userWorkId" type="hidden"
+        value="{{$userWorkId}}" readonly />
     <div>
         <select name="section_id" wire:model.defer="section_id"
             required="required"
             class="inline-flex items-center border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block px-4 py-2 mt-4 w-auto max-w-7xl"
             >
             <option value="">--</option>
-            @foreach($contest_section_list as $section)
+            @foreach($contestSectionSet as $section)
             <option value="{{$section->id}}">{{$section->code}}</option>
             @endforeach
         </select>
         <!-- portfolio sequence -->
         <input type="number" 
-            name="portfolio_sequence" wire:model.defer="portfolio_sequence" 
+            name="portfolioSequence" wire:model.defer="portfolioSequence" 
             min="0" max="255"
             class="inline-flex items-center border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-4 py-2 mt-4 w-12"
             />

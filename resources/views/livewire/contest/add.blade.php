@@ -79,7 +79,7 @@ use App\Models\ContestSection;
                 value="{{ old('name_en') }}"
                 required="required" 
                 />
-            <div class="small">@error('name_en') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('name_en') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -93,7 +93,7 @@ use App\Models\ContestSection;
                 value="{{ old('name_local') }}"
                 required="required" 
                 />
-            <div class="small">@error('name_local') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('name_local') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -111,7 +111,7 @@ use App\Models\ContestSection;
                 <option value="{{ $country->id }}">{{ $country->country }}</option>
                 @endforeach
             </select>
-            <div class="small">@error('country_id') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('country_id') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -129,7 +129,7 @@ use App\Models\ContestSection;
                 @endforeach
             </select>
             <div class="small">{{ __('When * marked, we need help to complete i18n. Help us.')}}</div>
-            <div class="small">@error('lang_local') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('lang_local') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -147,7 +147,7 @@ use App\Models\ContestSection;
                 @endforeach
             </select>
             <div class="small">{{ __('As worldwide platform we need to manage correctly time.') }} {{ __('List is in alphabetically order A>Z') }}</div>
-            <div class="small">@error('timezone') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('timezone') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -160,7 +160,7 @@ use App\Models\ContestSection;
                 type="text" name="contact_info"
                 wire:model="contact_info"
             >{{ old('contact_info') }}</textarea>
-            <div class="small">@error('contact_info') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('contact_info') {{ $message }} @enderror</div>
         </div>
 
         <div class="mt-4 mb-4">
@@ -175,7 +175,7 @@ use App\Models\ContestSection;
                 <input type="radio" name="is_circuit" id="" value="N" checked />
                 {{ __("That's a CONTEST, NOT a Circuit") }}
             </label>
-            <div class="small">@error('is_circuit') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('is_circuit') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -190,7 +190,7 @@ use App\Models\ContestSection;
                 value="{{ old('circuit_id') }}"
                 />
             <div class="small">{{ __("Leave empty if previous field was 'no'. If it's a contest in circuit, insert circuit id previously registered") }}</div>
-            <div class="small">@error('circuit_id') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('circuit_id') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -220,7 +220,7 @@ use App\Models\ContestSection;
                 value="{{ old('url_1_rule') }}"
                 required="required"
                 >
-            <div class="small">@error('url_1_rule') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('url_1_rule') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -233,7 +233,7 @@ use App\Models\ContestSection;
                 type="text" name="url_2_concurrent_list" 
                 value="{{ old('url_2_concurrent_list') }}"
                 >
-            <div class="small">@error('url_2_concurrent_list') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('url_2_concurrent_list') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -247,7 +247,7 @@ use App\Models\ContestSection;
                 value="{{ old('url_3_admit_n_award') }}"
                 required="required"
                 >
-            <div class="small">@error('url_3_admit_n_award') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('url_3_admit_n_award') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -260,7 +260,7 @@ use App\Models\ContestSection;
                 type="text" name="url_4_catalogue" 
                 value="{{ old('url_4_catalogue') }}"
                 >
-            <div class="small">@error('url_4_catalogue') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('url_4_catalogue') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -274,7 +274,7 @@ use App\Models\ContestSection;
                 wire:model="fee_info"
             >{{ old('fee_info') }}</textarea>
             <div class="small">{{ __('Only for info, and replied in Rules pdf. Even for free fee.') }}</div>
-            <div class="small">@error('fee_info') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('fee_info') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -289,7 +289,7 @@ use App\Models\ContestSection;
                 required="required"
                 >
             <div class="mb-4">{{ __('Date format must be a sortable iso datetime: yyyy-mm-dd hh:mm:ss') }}</div>
-            <div class="small">@error('day_1_opening') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('day_1_opening') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -304,7 +304,7 @@ use App\Models\ContestSection;
                 required="required"
                 >
             <div class="mb-4">{{ __('Must be not minor of previous date') }}</div>
-            <div class="small">@error('day_2_closing') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('day_2_closing') {{ $message }} @enderror</div>
 
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="day_3_jury_opening">
@@ -318,7 +318,7 @@ use App\Models\ContestSection;
                 required="required"
                 >
             <div class="mb-4">{{ __('Must be not minor of previous date') }}</div>
-            <div class="small">@error('day_3_jury_opening') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('day_3_jury_opening') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -333,7 +333,7 @@ use App\Models\ContestSection;
                 required="required"
                 >
             <div class="mb-4">{{ __('Must be not minor of previous date') }}</div>
-            <div class="small">@error('day_4_jury_closing') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('day_4_jury_closing') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -348,7 +348,7 @@ use App\Models\ContestSection;
                 required="required"
                 >
             <div class="mb-4">{{ __('Must be not minor of previous date') }}</div>
-            <div class="small">@error('day_5_revelations') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('day_5_revelations') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -363,7 +363,7 @@ use App\Models\ContestSection;
                 required="required"
                 >
             <div class="mb-4">{{ __('Must be not minor of previous date') }}</div>
-            <div class="small">@error('day_6_awards') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('day_6_awards') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -378,7 +378,7 @@ use App\Models\ContestSection;
                 required="required"
             >{{ old('award_ceremony_info') }}</textarea>
             <div class="small">Location, date and time and/or Broadcast platform </div>
-            <div class="small">@error('award_ceremony_info') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('award_ceremony_info') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -393,7 +393,7 @@ use App\Models\ContestSection;
                 required="required"
                 >
             <div class="mb-4">{{ __('Must be not minor of previous date') }}</div>
-            <div class="small">@error('day_7_catalogues') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('day_7_catalogues') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -408,7 +408,7 @@ use App\Models\ContestSection;
                 required="required"
                 >
             <div class="mb-4">{{ __('Must be not minor of previous date') }}</div>
-            <div class="small">@error('day_8_closing') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('day_8_closing') {{ $message }} @enderror</div>
         </div>
 
         <button type="submit" 

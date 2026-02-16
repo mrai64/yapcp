@@ -15,7 +15,7 @@ use Livewire\Component;
 class Section extends Component
 {
     // input
-    public string $data_json;
+    public string $dataJson;
 
     public $data;
 
@@ -30,10 +30,10 @@ class Section extends Component
     /**
      * 1. Before the show
      */
-    public function mount(string $data_json) // @livewire
+    public function mount(string $dataJson) // @livewire
     {
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called data_json:'.$data_json);
-        $this->data = json_decode($data_json);
+        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called dataJson:'.$dataJson);
+        $this->data = json_decode($dataJson);
 
         $this->contest_section = ContestSection::where('id', $this->data->section_it)->first();
 

@@ -9,18 +9,18 @@ use Illuminate\Support\Facades\Gate;
 ?>
 
 <div>
-    <form wire:submit.prevent="payment_waiting">
+    <form wire:submit.prevent="paymentWaiting">
         @csrf
-        <input type="hidden" wire:fill="contest_id" name="contest_id"
-            value="{{ $contest_id }}" readonly />
+        <input type="hidden" wire:fill="contestId" name="contestId"
+            value="{{ $contestId }}" readonly />
 
-        <input type="hidden" wire:fill="participant_id" name="participant_id"
-            value="{{ $participant_id }}" readonly />
+        <input type="hidden" wire:fill="participantId" name="participantId"
+            value="{{ $participantId }}" readonly />
 
-        <div class="small">{{ ($fee_payment_completed === 'Y') ? __("✅ Payment completed") : __("🟨 Waiting payment receive") }}</div>
+        <div class="small">{{ ($feePaymentCompleted === 'Y') ? __("✅ Payment completed") : __("🟨 Waiting payment receive") }}</div>
 
         @foreach ($errors->all() as $message)
-        <div class="small">{{$message}}</div>
+        <div class="alert alert-danger small">{{$message}}</div>
         @endforeach
 
         <button type="submit"

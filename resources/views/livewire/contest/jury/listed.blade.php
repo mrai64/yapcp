@@ -16,7 +16,7 @@
     <ul>
     @foreach($juries as $jury)
     <li>
-        @livewire('contest.jury.section', ['data_json' => json_encode(['section_it' => $jury->section_id])]) 
+        @livewire('contest.jury.section', ['dataJson' => json_encode(['section_it' => $jury->section_id])]) 
     </li>
     @endforeach
     </ul>

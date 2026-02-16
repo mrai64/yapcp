@@ -89,7 +89,7 @@ use Illuminate\Support\Facades\Gate;
                             @endcan
                         @else
                             @can('contest-participants-update', ContestParticipant::where('user_id', $participant['user_id'])->get()[0] )
-                                @livewire('contest.participants.remove',  ['data_json' => json_encode(['contest_id' => $contest->id, 'participant_id' => $participant['user_id'], 'fee_payment_completed' => $participant['fee_payment_completed'] ] ) ] )
+                                @livewire('contest.participants.remove',  ['dataJson' => json_encode(['contestId' => $contest->id, 'participantId' => $participant['user_id'], 'feePaymentCompleted' => $participant['fee_payment_completed'] ] ) ] )
                             @endcan
                             @cannot('contest-participants-update', ContestParticipant::where('user_id', $participant['user_id'])->get()[0] )
                                 {{ __("✅ Completed") }}

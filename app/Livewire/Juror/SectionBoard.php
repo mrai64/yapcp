@@ -30,55 +30,56 @@ class SectionBoard extends Component
 {
     use WithPagination;
 
-    public $juror_id;
+    public string $jurorId;
 
-    public $juror;
+    public UserContact $juror;
 
-    public $contest_section_id;
+    public $contestSectionId;
 
-    public $contest_section;
+    public ContestSection $contestSection;
 
-    public $contest;
+    public Contest $contest;
 
-    public $contest_works;
+    public $paginatedContestWorkSet;
 
-    public $participant_works;
+    public $participantWorkSet;
 
-    public $voted_works;
+    public $votedWorks;
 
-    public $voted_ids;
+    public $contestVoteIdSet;
 
-    public $vote_rule;
+    public $contestVoteRule;
 
-    public $participants_counter;
+    public $participantsCounter;
 
-    public $voted_counter;
+    public $votedCounter;
 
     /**
      * check if a path/namefile has a twin path/300px_namefile
+     * otherwise return original path/namefile
      *
      * @return string miniature|original
      *
      * TODO in ContestWork Model
      */
-    public static function miniature(string $original_file): string
+    public static function miniature(string $originalPathName): string
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $last_slash_pos = strrpos($original_file, '/');
-        $path = substr($original_file, 0, $last_slash_pos + 1);
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' path:'.$path);
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        $lastSlashPosition = strrpos($originalPathName, '/');
+        $originalPath = substr($originalPathName, 0, $lastSlashPosition + 1);
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' path:' . $originalPath);
 
-        $name_file = '300px_'.substr($original_file, $last_slash_pos + 1);
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' name:'.$name_file);
+        $miniatureName = '300px_' . substr($originalPathName, $lastSlashPosition + 1);
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' name:' . $miniatureName);
 
-        if (Storage::disk('public')->exists('contests/'.$path.$name_file)) {
-            Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' found');
+        if (Storage::disk('public')->exists('contests/' . $originalPath . $miniatureName)) {
+            ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' found');
 
-            return $path.$name_file;
+            return $originalPath . $miniatureName;
         }
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' not found');
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' not found');
 
-        return $original_file;
+        return $originalPathName;
     }
 
     /**
@@ -86,57 +87,57 @@ class SectionBoard extends Component
      */
     public function mount(string $sid) // route()
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         Gate::authorize('jury-panels', $sid);
 
-        $this->juror_id = Auth::id();
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' juror_id:'.$this->juror_id);
+        $this->jurorId = Auth::id();
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' juror_id:' . $this->jurorId);
 
-        $this->juror = UserContact::where('user_id', $this->juror_id)->first();
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' juror:'.json_encode($this->juror));
+        $this->juror = UserContact::where('user_id', $this->jurorId)->first();
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' juror:' . json_encode($this->juror));
 
-        $this->contest_section_id = $sid;
-        $this->contest_section = ContestSection::where('id', $this->contest_section_id)->first();
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' contest_section:'.json_encode($this->contest_section));
+        $this->contestSectionId = $sid;
+        $this->contestSection = ContestSection::where('id', $this->contestSectionId)->first();
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' contestSection:' . json_encode($this->contestSection));
 
-        $this->contest = Contest::where('id', $this->contest_section->contest_id)->first();
-        $this->vote_rule = $this->contest->vote_rule;
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' contest:'.json_encode($this->contest));
+        $this->contest = Contest::where('id', $this->contestSection->contest_id)->first();
+        $this->contestVoteRule = $this->contest->vote_rule;
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' contest:' . json_encode($this->contest));
 
         // how that juror had voted
-        // $this->voted_ids = ContestVote::voted_ids( $this->contest->id, $this->contest_section->id);
+        // $this->contestVoteIdSet = ContestVote::contestVoteIdSet( $this->contest->id, $this->contestSection->id);
         $voted = ContestVote::select('work_id')
-            ->where('juror_user_id', $this->juror_id)
+            ->where('juror_user_id', $this->jurorId)
             ->where('section_id', $sid)
             ->where('contest_id', $this->contest->id)
             ->get();
-        $this->voted_ids = array_values(collect($voted)->toArray());
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' voted_ids:'.json_encode($this->voted_ids));
+        $this->contestVoteIdSet = array_values(collect($voted)->toArray());
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' contestVoteIdSet:' . json_encode($this->contestVoteIdSet));
 
         // SET of un-voted - limited to 12
-        if (count($this->voted_ids)) {
-            $this->contest_works = DB::table(ContestWork::TABLENAME)
+        if (count($this->contestVoteIdSet)) {
+            $this->paginatedContestWorkSet = DB::table(ContestWork::TABLENAME)
                 ->select(['contest_id', 'section_id', 'work_id', 'extension'])
                 ->where('section_id', $sid)
                 ->where('contest_id', $this->contest->id)
-                ->whereNotIn('work_id', $this->voted_ids)
+                ->whereNotIn('work_id', $this->contestVoteIdSet)
                 ->limit(12)
                 ->get();
-            Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' contest_works:'.json_encode($this->contest_works));
+            ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' paginatedContestWorkSet:' . json_encode($this->paginatedContestWorkSet));
 
         } else {
-            $this->contest_works = ContestWork::where('contest_id', $this->contest->id)
+            $this->paginatedContestWorkSet = ContestWork::where('contest_id', $this->contest->id)
                 ->where('section_id', $sid)
                 ->limit(12)
                 ->get(['contest_id', 'section_id', 'work_id', 'extension']);
         }
-        $this->participant_works = [];
-        foreach ($this->contest_works as $contest_work) {
-            $this->participant_works[] = self::miniature($contest_work->contest_id.'/'.$contest_work->section_id.'/'.$contest_work->work_id.'.'.$contest_work->extension);
+        $this->participantWorkSet = [];
+        foreach ($this->paginatedContestWorkSet as $contestWork) {
+            $this->participantWorkSet[] = self::miniature($contestWork->contest_id . '/' . $contestWork->section_id . '/' . $contestWork->work_id . '.' . $contestWork->extension);
         }
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' participant_works:'.json_encode($this->participant_works));
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' participantWorkSet:' . json_encode($this->participantWorkSet));
 
-        $this->participants_counter = ContestWork::where('section_id', $sid)
+        $this->participantsCounter = ContestWork::where('section_id', $sid)
             ->where('contest_id', $this->contest->id)->count();
 
     }
@@ -147,27 +148,27 @@ class SectionBoard extends Component
      */
     public function render(): View
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $this->voted_counter = ContestVote::where('section_id', $this->contest_section_id)->where('juror_user_id', $this->juror_id)->count();
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        $this->votedCounter = ContestVote::where('section_id', $this->contestSectionId)->where('juror_user_id', $this->jurorId)->count();
 
-        // select contest_votes.id
+        // select contest_votes . id
         $votedWorks = DB::table(ContestVote::TABLENAME)
             ->select('id')
-            ->where('juror_user_id', $this->juror_id)
-            ->where('section_id', $this->contest_section_id)
+            ->where('juror_user_id', $this->jurorId)
+            ->where('section_id', $this->contestSectionId)
             ->where('contest_id', $this->contest->id)
             ->orderByDesc('vote')
             ->simplePaginate(12); // or 24 or 36
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' voted_works:'.json_encode($votedWorks));
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' votedWorks:' . json_encode($votedWorks));
 
         return view('', [
             'votedWorks' => $votedWorks,
             'contest' => $this->contest,
-            'contestSections' => $this->contest_section,
-            'contestWorks' => $this->contest_works,
-            'participantWorks' => $this->participant_works,
-            'votedCounter' => $this->voted_counter,
-            'participantsCounter' => $this->participants_counter,
+            'contestSections' => $this->contestSection,
+            'contestWorks' => $this->paginatedContestWorkSet,
+            'participantWorks' => $this->participantWorkSet,
+            'votedCounter' => $this->votedCounter,
+            'participantsCounter' => $this->participantsCounter,
         ]);
     }
 }

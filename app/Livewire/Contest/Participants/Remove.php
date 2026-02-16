@@ -7,36 +7,35 @@
 namespace App\Livewire\Contest\Participants;
 
 use App\Models\ContestParticipant;
-use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class Remove extends Component
 {
-    public string $contest_id;
+    public string $contestId;
 
-    public string $participant_id;
+    public string $participantId;
 
-    public string $fee_payment_completed;
+    public string $feePaymentCompleted;
 
     public $participant;
 
     /**
      * 1. Before the Show
      */
-    public function mount(string $data_json) // @livewire
+    public function mount(string $dataJson) // @livewire
     {
         ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' called');
-        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' in:' . $data_json);
-        $data = json_decode($data_json);
-        $this->contest_id = $data->contest_id;
-        $this->participant_id = $data->participant_id;
+        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' in:' . $dataJson);
+        $data = json_decode($dataJson);
+        $this->contestId = $data->contestId;
+        $this->participantId = $data->participantId;
 
-        if (isset($data->fee_payment_completed)) {
-            $this->fee_payment_completed = $data->fee_payment_completed;
+        if (isset($data->feePaymentCompleted)) {
+            $this->feePaymentCompleted = $data->feePaymentCompleted;
         } else {
-            $data->fee_payment_completed =
-            ContestParticipant::where('user_id', $this->participant_id)
-                ->where('contest_id', $this->contest_id)
+            $data->feePaymentCompleted =
+            ContestParticipant::where('user_id', $this->participantId)
+                ->where('contest_id', $this->contestId)
                 ->get('fee_payment_completed')[0]['fee_payment_completed'];
         }
 
@@ -67,19 +66,15 @@ class Remove extends Component
     /**
      * 4. Do your job, Bob
      */
-    public function payment_waiting()
+    public function paymentWaiting()
     {
         ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' called');
         ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' this:' . json_encode($this));
-        $participant = ContestParticipant::where('user_id', $this->participant_id)->where('contest_id', $this->contest_id)->get()[0];
-        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' this:' . json_encode($participant));
-        $participant->fee_payment_completed = 'N';
-        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' this:' . json_encode($participant));
-        $participant->save();
-        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' exit:');
-
+        $participantUpdated = ContestParticipant::where('user_id', $this->participantId)
+            ->where('contest_id', $this->contestId)
+            ->update(['fee_payment_completed' => 'N']);
         //
         return redirect()
-            ->route('modify-participant-list', ['cid' => $this->contest_id]);
+            ->route('modify-participant-list', ['cid' => $this->contestId]);
     }
 }

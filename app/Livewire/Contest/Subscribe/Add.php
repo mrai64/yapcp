@@ -14,43 +14,44 @@ use App\Models\ContestWork;
 use App\Models\UserContact;
 use App\Rules\ContestSectionRule;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class Add extends Component
 {
     public $work;
 
-    public $contest_section_list;
+    public $contestSectionSet;
 
     public $section;
 
-    public $contest_id;
+    public $contestId;
 
-    public $section_id;
+    public $sectionId;
 
-    public $user_id;
+    public $userId;
 
-    public $work_id;
+    public $userWorkId;
 
-    public $portfolio_sequence;
+    public $portfolioSequence;
 
-    public $work_in_contest;
+    public $userWorkInContest;
 
     /**
      * 1. Before the show
      */
-    public function mount(string $data_json) //
+    public function mount(string $dataJson) // livewire contest.subscribe.add
     {
-        Log::info('Component Contest/Subscribe/'.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in:'.$data_json);
-        $data = json_decode($data_json);
+        ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':'
+            . __LINE__ . ' in:' . $dataJson);
+        $data = json_decode($dataJson);
 
-        $this->work_id = $data->work_id;
-        $this->contest_id = $data->contest_id;
+        $this->userWorkId = $data->workId;
+        $this->contestId = $data->contestId;
         // section_id - form field
-        $this->user_id = Auth::id(); // even $work->user_id
-        $this->contest_section_list = $data->contest_section_list;
-        Log::info('Component Contest/Subscribe/'.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($this));
+        $this->userId = Auth::id(); // even $work->user_id
+        $this->contestSectionSet = $data->contestSectionSet;
+        ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':'
+            . __LINE__ . ' out:' . json_encode($this));
     }
 
     /**
@@ -58,7 +59,8 @@ class Add extends Component
      */
     public function render()
     {
-        Log::info('Component Contest/Subscribe/'.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in:'.json_encode($this));
+        ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':'
+            . __LINE__ . ' in:' . json_encode($this));
 
         return view('livewire.contest.subscribe.add');
     }
@@ -68,60 +70,78 @@ class Add extends Component
      */
     public function rules()
     {
-        Log::info('Component Contest/Subscribe/'.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in:'.json_encode($this));
+        ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':'
+            . __LINE__ . ' in:' . json_encode($this));
 
         return [
-            // first section_id, then work_id according w/ContesSectionRule
-            'section_id' => [
+            // first section_id, then userWorkId according w/ContesSectionRule
+            'sectionId' => [
                 'string',
                 'exists:contest_sections,id',
                 new ContestSectionRule(),
             ],
-            'work_id' => [
+            'userWorkId' => [
                 'string',
                 'exists:works,id',
                 new ContestSectionRule(),
             ],
-            'user_id' => 'string|exists:users,id',
-            'contest_id' => 'string|exists:contests,id',
-            'portfolio_sequence' => 'integer|min:0|max:255',
+            'userId' => 'string|exists:users,id',
+            'contestId' => 'string|exists:contests,id',
+            'portfolioSequence' => 'integer|min:0|max:255',
         ];
     }
 
     /**
      * 4. Add
      */
-    public function add_work_to_contest()
+    public function addUserWorkToContest()
     {
-        Log::info('Component Contest/Subscribe/'.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in:'.json_encode($this));
+        ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':'
+            . __LINE__ . ' in:' . json_encode($this));
         $validated = $this->validate();
-        Log::info('Component Contest/Subscribe/'.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' validated'.json_encode($validated));
+        ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':'
+            . __LINE__ . ' validated' . json_encode($validated));
 
         // integration from mount()
-        $validated['contest_id'] = $this->contest_id;
-        $validated['user_id'] = $this->user_id;
-        $validated['country_id'] = UserContact::getCountryId($this->user_id);
+        $validated['contest_id'] = $this->contestId;
+        $validated['user_id'] = $this->userId;
+        $validated['country_id'] = UserContact::getCountryId($this->userId);
+        $userContact = UserContact::where('id', $this->userid)->first();
 
-        if ($validated['portfolio_sequence'] == 0) {
-            $validated['portfolio_sequence'] = ContestWork::where('section_id', $validated['section_id'])->where('user_id', $this->user_id)->count();
-            $validated['portfolio_sequence'] += 1;
+        if ($validated['portfolioSequence'] == 0) {
+            $validated['portfolioSequence'] = ContestWork::where('section_id', $validated['section_id'])->where('user_id', $this->userId)->count();
+            $validated['portfolioSequence'] += 1;
         }
-        Log::info('Component Contest/Subscribe/'.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' validated'.json_encode($validated));
+        ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' validated' . json_encode($validated));
 
-        $this->work_in_contest = ContestWork::create($validated);
-        Log::info('Component Contest/Subscribe/'.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($this->work_in_contest));
+        $this->userWorkInContest = ContestWork::create([
+            // id assigned
+            'contest_id' => $this->contestId,
+            'section_id' => $validated['sectionId'],
+            'country_id' => $userContact->country_id,
+            'user_id' => $userContact->id,
+            'work_id' => $validated['userWorkId'],
+            'is_admit' => false,
+            'portfolio_sequence' => $validated['portfolioSequence'],
+        ]);
+        ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' out:' . json_encode($this->userWorkInContest));
 
         // check user_participant then add if missing
-        $user_participant = ContestParticipant::where('contest_id', $validated['contest_id'])->where('user_id', $validated['user_id'])->count();
-        if ($user_participant == 0) {
-            //
-            Log::info('Component Contest/Subscribe/'.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' add user');
-            ContestParticipant::create($validated);
+        if (
+            ContestParticipant::where('contest_id', $this->contestId)
+                ->where('user_id', $userContact->id)->doesntExist()
+        ) {
+            ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' add user');
+            ContestParticipant::create([
+                // id assigned,
+                'contest_id' => $this->contestId,
+                'user_id' => $userContact->id,
+                // fee_payment_completed assigned
+            ]);
         }
 
         return redirect()
-            ->route('participate-contest', ['cid' => $this->contest_id])
+            ->route('participate-contest', ['cid' => $this->contestId])
             ->with('success', __('Work added, Great!'));
-
     }
 }

@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Gate;
         <div class="small">{{ ($feePaymentCompleted === 'Y') ? __("✅ Payment completed") : __("🟨 Waiting payment receive") }}</div>
 
         @foreach ($errors->all() as $message)
-        <div class="small">{{$message}}</div>
+        <div class="alert alert-danger small">{{$message}}</div>
         @endforeach
 
         <button type="submit"
