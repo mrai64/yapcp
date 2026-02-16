@@ -1,6 +1,9 @@
 <?php 
 /**
  * Contest (Section) Jury Add
+ * 
+ * Add a juror to jury set for contest section-theme
+ * TODO review for circuit (bugged)
  */
 
 use App\Models\ContestJury;
@@ -77,7 +80,7 @@ use App\Models\ContestSection;
                 </tr>
             </thead>
             <tbody>
-                @foreach($contest_section_list as $contest_section)
+                @foreach($contestSectionSet as $contest_section)
                 <tr class="border">
                     <td scope="row"> "{{ $contest_section->code }}"<br />
                     {{ ($contest_section->under_patronage === 'Y') ? "under patronage" : "free of patronage" }}
@@ -113,8 +116,8 @@ use App\Models\ContestSection;
                 </tr>
             </thead>
             <tbody>
-                @if (count($juror_list) > 0)
-                @foreach($juror_list as $juror)
+                @if (count($jurySet) > 0)
+                @foreach($jurySet as $juror)
                 <tr class="my-4 border">
                     <td scope="row">{{ UserContact::getEmail( $juror->user_contact_id ) }}</td>
                     <td>{{ UserContact::getFirstName( $juror->user_contact_id ) }}</td>
@@ -130,7 +133,7 @@ use App\Models\ContestSection;
                     <td colspan="5">&nbsp;</td>
                 </tr>
                 <!-- finally the form -->
-                <form wire:submit="add_contest_juror">
+                <form wire:submit="addContestJuror">
                     @csrf
                     <tr>
                     <td scope="row">
@@ -151,49 +154,49 @@ use App\Models\ContestSection;
                     <td>
                         <!-- first name -->
                         <div class="mb-4">
-                            <label for="first_name"
+                            <label for="jurorFirstName"
                                 class="block font-medium text-sm text-gray-700">
                                 {{ __('First name') }}
                             </label>
-                            <input type="text" name="first_name"
-                                wire:model.live.debounce.500ms="first_name" 
+                            <input type="text" name="jurorFirstName"
+                                wire:model.live.debounce.500ms="jurorFirstName" 
                                 required="required" 
                             class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
                             />
-                            <div class="small">@error('first_name') {{ $message }} @enderror</div>
+                            <div class="small">@error('jurorFirstName') {{ $message }} @enderror</div>
                         </div>
                     </td>
                     <td>
                         <!-- last name -->
                         <div class="mb-4">
-                            <label class="block font-medium text-sm text-gray-700" for="last_name">
+                            <label class="block font-medium text-sm text-gray-700" for="jurorLastName">
                                 {{ __('Last name') }}
                             </label>
                             <input 
                                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                                type="text" name="last_name"
-                                wire:model.live.debounce.500ms="last_name" 
+                                type="text" name="jurorLastName"
+                                wire:model.live.debounce.500ms="jurorLastName" 
                                 required="required" 
                             />
-                            <div class="small">@error('last_name') {{ $message }} @enderror</div>
+                            <div class="small">@error('jurorLastName') {{ $message }} @enderror</div>
                         </div>
                     </td>
                     <td>
                         <div class="mb-4">
-                            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="country_id">
+                            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="countryId">
                                 {{ __('Country') }}
                             </label>
                             <select 
                                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                                wire:model.live="country_id"
-                                name="country_id" 
+                                wire:model.live="countryId"
+                                name="countryId" 
                                 required="required"
                                 >
                                 @foreach ($countries as $country)
-                                <option value="{{ trim($country->id) }}" {{ ($country->id === $country_id ) ? 'selected' : '' }}>{{ $country->country }}</option>
+                                <option value="{{ trim($country->id) }}" {{ ($country->id === $countryId ) ? 'selected' : '' }}>{{ $country->country }}</option>
                                 @endforeach
                             </select>
-                            <div class="small">@error('country_id') {{ $message }} @enderror</div>
+                            <div class="small">@error('countryId') {{ $message }} @enderror</div>
                         </div>
                     </td>
                     <td>
