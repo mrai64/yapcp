@@ -128,6 +128,8 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereVoteRule($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest withoutTrashed()
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestSection> $contestSections
+ * @property-read int|null $contest_sections_count
  * @mixin \Eloquent
  */
 

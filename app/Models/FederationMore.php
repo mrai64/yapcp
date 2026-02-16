@@ -47,6 +47,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore withoutTrashed()
+ * @method static \Database\Factories\FederationMoreFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 class FederationMore extends Model

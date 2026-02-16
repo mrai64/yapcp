@@ -38,12 +38,10 @@ use Illuminate\Support\Str;
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- *
  * @property-read \App\Models\Contest $contest
  * @property-read \App\Models\ContestSection|null $section
  * @property-read \App\Models\UserContact|null $userContact
  * @property-read \App\Models\Work|null $work
- *
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward onlyTrashed()

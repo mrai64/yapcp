@@ -8,6 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
+/**
+ * @property-read \App\Models\UserContact|null $userContact
+ * @method static \Database\Factories\UserWorkFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork withoutTrashed()
+ * @mixin \Eloquent
+ */
 class UserWork extends Model
 {
     /** @use HasFactory<\Database\Factories\UserWorkFactory> */

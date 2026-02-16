@@ -82,7 +82,7 @@ class ContestParticipant extends Model
         'id', //                     pk unsigned bigint a+
         'contest_id', //             fk contests.id
         'user_id', //                fk user_contacts.user_id
-        'fee_payment_completed', //  Y/N
+        'fee_payment_completed', //  Y/N become 1/0
         // created_at                reserved
         // updated_at                reserved
         // deleted_at                reserved

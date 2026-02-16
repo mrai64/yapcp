@@ -3,8 +3,8 @@
 /**
  * Contest Subscribe ADD validation rule
  *
- * Give from mixed $value a section_id and a work_id,
- * then check if work_id respect all rules coded in
+ * Give from mixed $value a section_id and a userWorkId,
+ * then check if userWorkId respect all rules coded in
  * section_id
  *
  * source: https://www.youtube.com/watch?v=TXYCtTfouPg
@@ -32,7 +32,7 @@ class ContestSectionRule implements ValidationRule
     #[Session(key: 'section_json')]
     public $section_json;
 
-    public $work_id;
+    public $userWorkId;
 
     public $work;
 
@@ -54,11 +54,11 @@ class ContestSectionRule implements ValidationRule
             session()->put('section_json', $this->section_json);
         }
 
-        // work_id follow
-        if ($attribute === 'work_id') {
+        // userWorkId follow
+        if ($attribute === 'userWorkId') {
             $this->section = json_decode(session()->get('section_json'));
             Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' section:'.json_encode($this->section));
-            $this->work_id = $value;
+            $this->userWorkId = $value;
             $this->work = Work::where('id', $value)->get()[0];
             Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' work:'.json_encode($this->work));
 

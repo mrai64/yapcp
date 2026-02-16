@@ -108,6 +108,7 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereXTwitter($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact withoutTrashed()
+ * @property string $timezone for future use - php timezone for time math
  * @mixin \Eloquent
  */
 class UserContact extends Model

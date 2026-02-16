@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Log; // //dbg Log::info
+use Illuminate\Support\Facades\Log; // //dbg ds
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str; //         pk uuid
 
@@ -136,7 +136,7 @@ class ContestWork extends Model
         $miniatureFileName = '300px_'.substr($originalFileName, $lastSlashPos + 1);
 
         if (Storage::disk('public')->exists('contests/'.$path.$miniatureFileName)) {
-            // dbg Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' found');
+            // dbg ds('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' found');
 
             return $path.$miniatureFileName;
         }

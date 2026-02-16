@@ -55,6 +55,8 @@ use Illuminate\Support\Facades\Log;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Country whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Country withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Country withoutTrashed()
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserContact> $userContacts
+ * @property-read int|null $user_contacts_count
  * @mixin \Eloquent
  */
 class Country extends Model
