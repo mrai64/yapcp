@@ -19,14 +19,14 @@
 ?>
 <div>
     <!-- contest and section info -->
-    <livewire:organization.section.header :cxsid="$section_id" lazy /> 
+    <livewire:organization.section.header :cxsid="$sectionId" lazy /> 
 
     <h2 class="fyk text-2xl"><strong> {{__("Contest pre-jury IN / OUT for: ")}} {{$section->code}} {{ $section->name_en }}</strong></h2>
     <div class="header mb-4">
-        {{ __("As member of organization, in that page you check in human way")}}
-        {{ __("if these works can be pass to Jury work. ")}}<br />
+        {{ __("As member of contest organizer, in that page you must check in human way")}}
+        {{ __("if these works, everyone, can be pass to Jury work. ")}}<br />
         {{ __("Or advice author that her/him work have a little trouble.")}}<br >
-        {{ __("For every img choice Ok/IN or KO/WARN.)")}}
+        {{ __("For every img choice Ok/IN or KO/WARN.")}}
     </div>
 
     <!-- sectionResult nav page -->
@@ -46,13 +46,12 @@
       ask review 
       <input type="checkbox" name="askreview" id="" />
     </div>
-    <!-- livewire:contest.section.votedcard :sid="$section_id" lazy / -->
+    <!-- livewire:contest.section.votedcard :sid="$sectionId" lazy / -->
     @endforeach
 
     <!-- sectionResult nav page -->
     <div class="paginationDiv">
       {{ $sectionResult->links() }}
     </div>
-
 
   </div>

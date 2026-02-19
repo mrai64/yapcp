@@ -11,7 +11,6 @@ namespace App\Livewire\Organization;
 use App\Models\Contest;
 use App\Models\Organization;
 use App\Models\UserRole;
-use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class Dashboard extends Component
@@ -31,13 +30,13 @@ class Dashboard extends Component
      */
     public function mount(string $id) // as in route/web.php
     {
-        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         $this->id = $id;
-        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' id:' . $this->id);
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' id:' . $this->id);
         $this->organization = Organization::where('id', $id)->get(['id', 'country_id', 'name'])[0];
-        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' organization:' . json_encode($this->organization));
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' organization:' . json_encode($this->organization));
 
-        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' id:' . $this->id);
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' id:' . $this->id);
         $this->organizationMembersRolesSet = UserRole::where('organization_id', $id)
             ->orderBy('role')
             ->orderBy('updated_at')
@@ -53,7 +52,7 @@ class Dashboard extends Component
      */
     public function render()
     {
-        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
 
         return view('livewire.organization.dashboard');
     }
