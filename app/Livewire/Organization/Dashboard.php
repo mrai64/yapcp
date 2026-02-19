@@ -20,9 +20,9 @@ class Dashboard extends Component
 
     public $organization;
 
-    public $user_role_list;
+    public $organizationMembersRolesSet;
 
-    public $contest_list;
+    public $contestSet;
 
     public $user;
 
@@ -31,15 +31,20 @@ class Dashboard extends Component
      */
     public function mount(string $id) // as in route/web.php
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         $this->id = $id;
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' id:'.$this->id);
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' id:' . $this->id);
         $this->organization = Organization::where('id', $id)->get(['id', 'country_id', 'name'])[0];
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' organization:'.json_encode($this->organization));
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' organization:' . json_encode($this->organization));
 
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' id:'.$this->id);
-        $this->user_role_list = UserRole::where('organization_id', $id)->orderBy('role')->orderBy('updated_at')->get(['id', 'user_id', 'role', 'role_opening', 'role_closing']);
-        $this->contest_list = Contest::where('organization_id', $id)->orderBy('updated_at')->get(['id', 'name_en', 'day_2_closing']);
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' id:' . $this->id);
+        $this->organizationMembersRolesSet = UserRole::where('organization_id', $id)
+            ->orderBy('role')
+            ->orderBy('updated_at')
+            ->get(['id', 'user_id', 'role', 'role_opening', 'role_closing']);
+        $this->contestSet = Contest::where('organization_id', $id)
+            ->orderBy('updated_at')
+            ->get(['id', 'name_en', 'day_2_closing']);
 
     }
 
@@ -48,7 +53,7 @@ class Dashboard extends Component
      */
     public function render()
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
 
         return view('livewire.organization.dashboard');
     }

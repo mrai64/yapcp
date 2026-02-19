@@ -30,13 +30,13 @@ use App\Models\UserContact;
         </h3>
 
         <!-- contest list -->
-        <section name="contest_list" class="mb-4 w-full sm:px-6 lg:px-8">
+        <section name="contestSet" class="mb-4 w-full sm:px-6 lg:px-8">
             <p class="fyk font-semibold text-2xl text-gray-800 leading-tight">
                 {{ __("Contest list") }}
             </p>
-            @if (count($contest_list) > 0)
+            @if (count($contestSet) > 0)
             <ul>
-                @foreach($contest_list as $contest)
+                @foreach($contestSet as $contest)
                 <li class="mb-2 p-4 border rounded-md">
                     <strong class="fyk text-2xl">{{$contest->name_en}}</strong><br />
                     <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
@@ -62,9 +62,12 @@ use App\Models\UserContact;
                 {{ __("Members list") }}
             </p>
             <ul>
-                @foreach($user_role_list as $user_role)
+                @foreach($organizationMembersRolesSet as $userRole)
                 <li class="fyk mb-4 p-4 border rounded-md">
-                    <strong class="fyk text-xl">{{ UserContact::getFirstLastName( $user_role->user_id ) }}, {{$user_role->role}}</strong>
+                    <strong class="fyk text-xl">
+                        {{$userRole->userContact->country_id }}
+                        {{$userRole->userContact->first_name}}{{$userRole->userContact->last_name }},
+                        {{$userRole->role}}</strong>
                 </li>
                 @endforeach
             </ul>
