@@ -14,18 +14,18 @@ use Livewire\Component;
 
 class Listed extends Component
 {
-    public string $user_id;
+    public string $userId;
 
-    public $user_contact;
+    public $userContact;
 
     public $country;
 
     public function mount()
     {
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $this->user_id = Auth::id();
-        $this->user_contact = UserContact::where('user_id', $this->user_id)->first();
-        $this->country = Country::where('id', $this->user_contact->country_id)->first();
+        $this->userId = Auth::id();
+        $this->userContact = UserContact::where('id', $this->userId)->first();
+        $this->country = Country::where('id', $this->userContact->country_id)->first();
     }
 
     public function render()

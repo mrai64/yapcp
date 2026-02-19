@@ -7,19 +7,18 @@
     <br />
 
     @if ($errors->any())
-    <div class="alert alert-danger">
+    <div>
         <ul>
             @foreach ($errors->all() as $error)
-                <li class="alert alert-danger">{{ $error }}</li>
+                <li class="alert alert-danger small">{{ $error }}</li>
             @endforeach
         </ul>
     </div>
     @endif
 
-
     <!-- nav bar here -->
 
-    <form wire:submit="update_user_contact" enctype="multipart/form-data">
+    <form wire:submit="updateUserContact" enctype="multipart/form-data">
         @csrf
         <!-- readonly -->
         <div class="mb-4" data-yapcp="email">
@@ -35,85 +34,85 @@
             <div class="small" id="cellularHelp">{{ __('Your email n password are key to entry.') }}</div>
             <div class="small">@error('email') {{ $message }} @enderror</div>
         </div>
-        <div class="mb-4" data-yapcp="user_id">
-            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="user_id">
+        <div class="mb-4" data-yapcp="userId">
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="userId">
                 {{ __('yaPCP assigned ID') }} | 🔒
             </label>
             <input 
                 class="text-sm border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="user_id" 
-                wire:model.fill="user_id"
+                type="text" name="userId" 
+                wire:model.fill="userId"
                 readonly
                 />
             <div class="small" id="cellularHelp">{{ __("Your ID in yaPCP") }}</div>
-            <div class="alert alert-danger small">@error('user_id') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('userId') {{ $message }} @enderror</div>
         </div>
         <br />
         <hr class="my-4" />
         <br />
         <!-- 1st fieldset Name, last Name, country -->
         <h3 class="fyk text-2xl mb-4">{{ __("🤵‍♀️ 🤵‍♂️ You are...") }}</h3>
-        <div class="mb-4" data-yapcp="first_name">
-            <label class="block font-medium text-sm text-gray-700" for="first_name">
+        <div class="mb-4" data-yapcp="firstName">
+            <label class="block font-medium text-sm text-gray-700" for="firstName">
                 {{ __('First name') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="first_name"
-                wire:model.live.debounce.500ms="first_name" 
+                type="text" name="firstName"
+                wire:model.live.debounce.500ms="firstName" 
                 required="required" 
             />
-            <div class="small">@error('first_name') {{ $message }} @enderror</div>
+            <div class="small">@error('firstName') {{ $message }} @enderror</div>
         </div>
 
-        <div class="mb-4" data-yapcp="last_name">
-            <label class="block font-medium text-sm text-gray-700" for="last_name">
+        <div class="mb-4" data-yapcp="lastName">
+            <label class="block font-medium text-sm text-gray-700" for="lastName">
                 {{ __('Last name') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="last_name"
-                wire:model.live.debounce.500ms="last_name" 
+                type="text" name="lastName"
+                wire:model.live.debounce.500ms="lastName" 
                 required="required" 
             />
-            <div class="small">@error('last_name') {{ $message }} @enderror</div>
+            <div class="small">@error('lastName') {{ $message }} @enderror</div>
         </div>
         <!-- From country -->
-        <div class="mb-4" data-yapcp="country_id">
-            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="country_id">
+        <div class="mb-4" data-yapcp="countryId">
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="countryId">
                 {{ __('From Country') }}
             </label>
             <select 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                wire:model.live="country_id"
-                name="country_id" 
+                wire:model.live="countryId"
+                name="countryId" 
                 required="required"
                 >
                 @foreach ($countries as $country)
-                <option value="{{ trim($country->id) }}" {{ ($country->id === $country_id ) ? 'selected' : '' }}>{{ $country->country }}</option>
+                <option value="{{ trim($country->id) }}" {{ ($country->id === $countryId ) ? 'selected' : '' }}>{{ $country->country }}</option>
                 @endforeach
             </select>
-            <div class="small">@error('country_id') {{ $message }} @enderror</div>
+            <div class="small">@error('countryId') {{ $message }} @enderror</div>
         </div>
         <!-- passport photo upload -->
         <div class="block mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="passport_photo_image">
+            <label class="block font-medium text-sm text-gray-700" for="passportPhotoImage">
                 {{ __('Passport Photo') }}
             </label>
-            @if ($passport_photo_image)
-            <img src="{{ $passport_photo_image->temporaryUrl() }}" style="float: left;" class="block w-48 me-3" />
+            @if ($passportPhotoImage)
+            <img src="{{ $passportPhotoImage->temporaryUrl() }}" style="float: left;" class="block w-48 me-3" />
             @else
             <img src="{{ asset('storage/photos') . '/' . $passport_photo }}" alt="" style="float: left;" class="block w-48 me-3">
             @endif
             <input 
             class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1" 
             type="file" accept="image/jpeg"
-            name="passport_photo_image" wire:model="passport_photo_image"
+            name="passportPhotoImage" wire:model="passportPhotoImage"
             aria-describedby="photoHelp"
             />
-            <div wire:loading wire:target="passport_photo_image">Uploading...</div>
+            <div wire:loading wire:target="passportPhotoImage">Uploading...</div>
             <div class="small" id="photoHelp">{{ __('Jpg only, Better 480px w 640px h max 2 MBi') }}</div>
-            <div class="small">@error('passport_photo_image') {{ $message }} @enderror</div>
+            <div class="small">@error('passportPhotoImage') {{ $message }} @enderror</div>
         </div>
         <br style="clear:both;" />
         <br />
@@ -142,15 +141,15 @@
         </div>
 
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="address_line2">
+            <label class="block font-medium text-sm text-gray-700" for="address2ndLine">
                 {{ __('Address 2nd line') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="address_line2"
-                wire:model.live.debounce.500ms="address_line2" 
+                type="text" name="address2ndLine"
+                wire:model.live.debounce.500ms="address2ndLine" 
             />
-            <div class="small">@error('address_line2') {{ $message }} @enderror</div>
+            <div class="small">@error('address2ndLine') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -178,15 +177,15 @@
         </div>
 
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="postal_code">
+            <label class="block font-medium text-sm text-gray-700" for="postalCode">
                 {{ __('Postal code') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-48" 
-                type="text" name="postal_code"
-                wire:model.live.debounce.500ms="postal_code" 
+                type="text" name="postalCode"
+                wire:model.live.debounce.500ms="postalCode" 
             />
-            <div class="small">@error('postal_code') {{ $message }} @enderror</div>
+            <div class="small">@error('postalCode') {{ $message }} @enderror</div>
         </div>
         <br />
         <hr class="my-4" />
@@ -217,15 +216,15 @@
         </div>
 
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="x_twitter">
+            <label class="block font-medium text-sm text-gray-700" for="exTwitter">
                 {{ __('X was Twitter') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="x_twitter"
-                wire:model.live.debounce.500ms="x_twitter" 
+                type="text" name="exTwitter"
+                wire:model.live.debounce.500ms="exTwitter" 
             />
-            <div class="small">@error('x_twitter') {{ $message }} @enderror</div>
+            <div class="small">@error('exTwitter') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -285,40 +284,40 @@
         </div>
 
         <div class="mb-4">
-            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="lang_local">
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="localLang">
                 {{ __('Language code (for future use)') }}
             </label>
             <select 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl" 
-                wire:model="lang_local"
-                name="lang_local" 
+                wire:model="localLang"
+                name="localLang" 
                 required="required
                 >
                 @foreach ($langSet as $lang_code => $lang_lang)
-                <option value="{{ $lang_code }}" {{($lang_code == $lang_local) ? 'selected' : '' }} > {{ $lang_lang }}</option>
+                <option value="{{ $lang_code }}" {{($lang_code == $localLang) ? 'selected' : '' }} > {{ $lang_lang }}</option>
                 @endforeach
             </select>
             <div class="small">{{ __('When * marked, we need help to complete i18n. Help us.')}}</div>
-            <div class="small">@error('lang_local') {{ $message }} @enderror</div>
+            <div class="small">@error('localLang') {{ $message }} @enderror</div>
         </div>
 
         <!-- timezone -->
         <div class="mb-4">
-            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl" for="timezone">
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl" for="localTimezone">
                 {{ __('Timezone') }}
             </label>
             <select 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                wire:model="timezone"
-                name="timezone" 
+                wire:model="localTimezone"
+                name="localTimezone" 
                 required="required"
                 >
-                @foreach ($timezone_list as $k => $timezone_item)
-                <option value="{{ $timezone_item['id'] }}" {{ ($timezone_item['id'] == $timezone) ? 'selected' : '' }}> {{ $timezone_item['id'] }} </option>
+                @foreach ($timezoneList as $k => $tzItem)
+                <option value="{{ $tzItem['id'] }}" {{ ($tzItem['id'] == $timezone) ? 'selected' : '' }}> {{ $tzItem['id'] }} </option>
                 @endforeach
             </select>
             <div class="small">{{ __('As worldwide platform we need to manage correctly time.') }} {{ __('List is in alphabetically order A>Z') }}</div>
-            <div class="small">@error('timezone') {{ $message }} @enderror</div>
+            <div class="small">@error('localTimezone') {{ $message }} @enderror</div>
         </div>
 
 
