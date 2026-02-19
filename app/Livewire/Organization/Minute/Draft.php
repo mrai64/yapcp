@@ -24,97 +24,97 @@ use Livewire\Component;
 
 class Draft extends Component
 {
-    public string $contest_id;
+    public string $contestId;
 
-    public $today_iso;
+    public $todayIsoFormat;
 
-    public $today_extended;
+    public $todayExtendedFormat;
 
     public $contest;
 
     public $sections;
 
-    public $jury_members;
+    public $juryMemberSet;
 
-    public $juror_signs;
+    public $jurorSignSet;
 
     public $organization;
 
-    // counters
-    public $works_participants_all;
+    // counters by section_code
+    public array $allWorksCounter;
 
-    public $authors_participant_all;
+    public array $allParticipantsCounter;
 
     public array $admittedWorksCounter = [];
 
-    public $admittedAuthorsCounters;
+    public array $admittedAuthorsCounters;
 
     // section awards
     public $awards;
 
-    public $contest_awards;
+    public $contestAwardSet;
 
     public static function buildMinute(string $cid) // route
     {
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called w/input: '.$cid);
         ds('buildMinute: '.$cid);
 
-        $contest_id = $cid;
-        $contest = Contest::where('id', $contest_id)->firstOrFail();
+        $contestId = $cid;
+        $contest = Contest::where('id', $contestId)->firstOrFail();
         ds($contest);
 
-        $today_iso = CarbonImmutable::now()->toDateString();
-        $today_extended = strtolower(CarbonImmutable::now()->format('l d F Y'));
+        $todayIsoFormat = CarbonImmutable::now()->toDateString();
+        $todayExtendedFormat = strtolower(CarbonImmutable::now()->format('l d F Y'));
 
-        $sections = ContestSection::where('contest_id', $contest_id)->get();
+        $sections = ContestSection::where('contest_id', $contestId)->get();
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' sections: '.json_encode($sections));
 
         $organization = Organization::where('id', $contest->organization_id)->firstOrFail();
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' organization: '.json_encode($organization));
 
-        $jury_members = [];
-        $juror_signs = [];
-        $works_participants_all = [];
-        $authors_participant_all = [];
+        $juryMemberSet = [];
+        $jurorSignSet = [];
+        $allWorksCounter = [];
+        $allParticipantsCounter = [];
         $admittedWorksCounter = [];
         $admittedAuthorsCounters = [];
         $awards = [];
         foreach ($sections as $section) {
             // jury members
-            $jury_members[$section->code] = ContestJury::select(['user_contacts.country_id', 'user_contacts.last_name', 'user_contacts.first_name', 'countries.flag_code'])
-                ->leftJoin('user_contacts', 'user_contacts.user_id', '=', 'contest_juries.user_contact_id')
+            $juryMemberSet[$section->code] = ContestJury::select(['user_contacts.country_id', 'user_contacts.last_name', 'user_contacts.first_name', 'countries.flag_code'])
+                ->leftJoin('user_contacts', 'user_contacts.id', '=', 'contest_juries.user_contact_id')
                 ->leftJoin('countries', 'user_contacts.country_id', '=', 'countries.id')
                 ->where('section_id', $section->id)
                 ->get();
 
             // juror signs
-            foreach ($jury_members[$section->code] as $juror) {
+            foreach ($juryMemberSet[$section->code] as $juror) {
                 $jn = $juror->last_name.', '.$juror->first_name;
-                $juror_signs[$jn] = true;
+                $jurorSignSet[$jn] = true;
             }
-            ksort($juror_signs, SORT_STRING);
-            reset($juror_signs);
+            ksort($jurorSignSet, SORT_STRING);
+            reset($jurorSignSet);
 
-            // works_participants_all
-            $works_participants_all[$section->code] = ContestWork::where('contest_id', $contest_id)
+            // allWorksCounter
+            $allWorksCounter[$section->code] = ContestWork::where('contest_id', $contestId)
                 ->where('section_id', $section->id)->count();
 
             // authors participant all
-            $authors_participant_all[$section->code] = DB::table('contest_works')
-                ->where('contest_id', $contest_id)
+            $allParticipantsCounter[$section->code] = DB::table('contest_works')
+                ->where('contest_id', $contestId)
                 ->where('section_id', $section->id)
                 ->distinct('user_id')
                 ->count('user_id');
 
             // admittedWorksCounter
-            $admittedWorksCounter[$section->code] = ContestWork::where('contest_id', $contest_id)
+            $admittedWorksCounter[$section->code] = ContestWork::where('contest_id', $contestId)
                 ->where('section_id', $section->id)
                 ->where('is_admit', 1)
                 ->count();
 
             // authors participant
             $admittedAuthorsCounters[$section->code] = DB::table('contest_works')
-                ->where('contest_id', $contest_id)
+                ->where('contest_id', $contestId)
                 ->where('section_id', $section->id)
                 ->where('is_admit', 1)
                 ->distinct('user_id')
@@ -132,52 +132,52 @@ class Draft extends Component
                     'works.title_en',
                     'works.work_file',
                 ])
-                ->leftJoin('user_contacts', 'contest_awards.winner_user_id', '=', 'user_contacts.user_id')
+                ->leftJoin('user_contacts', 'contest_awards.winner_user_id', '=', 'user_contacts.id')
                 ->leftJoin('countries', 'user_contacts.country_id', '=', 'countries.id')
                 ->leftJoin('works', 'contest_awards.winner_work_id', '=', 'works.id')
-                ->where('contest_awards.contest_id', $contest_id)
+                ->where('contest_awards.contest_id', $contestId)
                 ->where('contest_awards.section_id', $section->id)
                 ->orderBy('contest_awards.award_code')
                 ->get();
 
         }
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' jury_mem: '.json_encode($jury_members));
+        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' jury_mem: '.json_encode($juryMemberSet));
 
         // should be only winner_name without winner_user_id
-        $contest_awards = ContestAward::select(
+        $contestAwardSet = ContestAward::select(
             'contest_awards.*',
             'countries.flag_code',
             DB::raw("COALESCE(pcp_user_contacts.country_id, '') AS country_id"),
             DB::raw("COALESCE(pcp_user_contacts.last_name, '') AS last_name"),
             DB::raw("COALESCE(pcp_user_contacts.first_name, '') AS first_name")
         )
-            ->leftJoin('user_contacts', 'user_contacts.user_id', '=', 'contest_awards.winner_user_id')
+            ->leftJoin('user_contacts', 'user_contacts.id', '=', 'contest_awards.winner_user_id')
             ->leftJoin('countries', 'user_contacts.country_id', '=', 'countries.id')
             ->whereNull('contest_awards.section_id')
-            ->where('contest_awards.contest_id', $contest_id)
+            ->where('contest_awards.contest_id', $contestId)
             ->orderBy('contest_awards.award_code')
             ->get();
 
-        $pdf_save = 'minute-'.$today_iso.'.pdf';
-        $pdf_data = [
-            'contest_id' => $contest_id,
-            'today_iso' => $today_iso,
-            'today_extended' => $today_extended,
+        $pdfFileName = 'minute-'.$todayIsoFormat.'.pdf';
+        $pdfDataSet = [
+            'contest_id' => $contestId,
+            'todayIsoFormat' => $todayIsoFormat,
+            'todayExtendedFormat' => $todayExtendedFormat,
             'contest' => $contest,
             'sections' => $sections,
-            'jury_members' => $jury_members,
-            'juror_signs' => $juror_signs,
+            'juryMemberSet' => $juryMemberSet,
+            'jurorSignSet' => $jurorSignSet,
             'organization' => $organization,
-            'works_participants_all' => $works_participants_all,
-            'authors_participant_all' => $authors_participant_all,
+            'allWorksCounter' => $allWorksCounter,
+            'allParticipantsCounter' => $allParticipantsCounter,
             'admittedWorksCounter' => $admittedWorksCounter,
             'admittedAuthorsCounters' => $admittedAuthorsCounters,
             'awards' => $awards,
-            'contest_awards' => $contest_awards,
+            'contestAwardSet' => $contestAwardSet,
         ];
-        // ds('pdf_data');
-        ds($pdf_data);
+        // ds('pdfDataSet');
+        ds($pdfDataSet);
 
-        return view('livewire.organization.minute.draft', $pdf_data);
+        return view('livewire.organization.minute.draft', $pdfDataSet);
     }
 }

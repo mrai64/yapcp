@@ -2488,16 +2488,17 @@ select {
 
         </style>
     </head>
-    <body class="font-sans antialiased">
-            <!-- Page Content -->
-            <main style="margin-left:5rem;margin-right:8rem;">
+
+  <body class="font-sans antialiased">
+  <!-- Page Content -->
+    <main style="margin-left:5rem;margin-right:8rem;">
 <div>
     <h2 class="fyk text-2xl"><strong>Minute draft</strong></h2>
     <p class="small">BELOW Cut n paste on word-like app</p>
     <br /><br />
     <hr />
     <!-- header: contest data -->
-    {{ __("Today, ")}}{{ $today_extended }} ,<br>
+    {{ __("Today, ")}}{{ $todayExtendedFormat }} ,<br>
     {{ __("for the contest named:")}}<br />
     <div class="fyk text-2xl font-medium">
         {{$contest->name_en}},
@@ -2515,7 +2516,7 @@ select {
     @foreach($sections as $section)
         <div class="small">Jury for: <strong>{{$section->name_en}} {{$section->code}}</strong></div>
         <ul>
-            @foreach($jury_members[$section->code] as $juror)
+            @foreach($juryMemberSet[$section->code] as $juror)
             <li>
                 {{$juror->flag_code}}
                 {{$juror->country_id}} | 
@@ -2524,19 +2525,13 @@ select {
             </li>
             @endforeach
         </ul>
-        to examine 
-        {{$works_participants_all[$section->code]}} 
-        works from 
-        {{$authors_participant_all[$section->code]}}
+        to examine {{$allWorksCounter[$section->code]}} 
+        works from {{$allParticipantsCounter[$section->code]}}
+        authors,<br />
+        had admitted <strong> {{$admittedWorksCounter[$section->code]}}  </strong>
+        works from <strong> {{$admittedAuthorsCounters[$section->code]}} </strong>
         authors <br />
-        had admitted 
-        <strong>
-            {{$admittedWorksCounter[$section->code]}} 
-            works from 
-            {{$admittedAuthorsCounters[$section->code]}}
-            authors <br />
-        </strong>
-        and assign these prizes:<br />
+        <strong>and assign these prizes:</strong><br />
         <ul>
             @foreach ($awards[$section->code] as $award)
             <li>
@@ -2560,7 +2555,7 @@ select {
         {{$contest->name_en}},
     </div>
         <ul>
-            @foreach ($contest_awards as $award)
+            @foreach ($contestAwardSet as $award)
             <li class="fyk text-2xl font-medium">
                 <!-- {{$award->award_code}} -->
                 <strong>{{$award->award_name}} <br /></strong>
@@ -2591,7 +2586,7 @@ select {
     organized by 
     {{$organization->country->flag_code}} 
     {{$organization->name}}  <br />
-    @foreach ($juror_signs as $juror => $v)
+    @foreach ($jurorSignSet as $juror => $v)
     <div class="fyk text-2xl font-medium w-full border md-rounded m-4 p-2">
         {{$juror}}
     </div>
@@ -2601,6 +2596,6 @@ select {
     <p class="small">ABOVE Cut n paste, on word-like app</p>
     <br /><br />
 </div>
-            </main>
-    </body>
+    </main>
+  </body>
 </html>
