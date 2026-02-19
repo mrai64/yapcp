@@ -27,7 +27,7 @@
             <th>Award Assigned</th>
         </thead>
         <tbody>
-        @foreach($section_works[$section->id] as $work)
+        @foreach($sectionWorks[$section->id] as $work)
             <tr class="{{ $loop->even ? 'row-even' : 'row-odd' }}"">
                 <td nowrap>
                     {{$work->flag_code}} {{$work->country_id}}

@@ -14,29 +14,28 @@ use Livewire\Component;
 
 class WorksParticipant extends Component
 {
-    public $contest_id;
+    public $contestId;
 
     public $contest;
 
     public $sections;
 
-    public $section_works;
+    public $sectionWorks;
 
     public function mount($cid) // route param
     {
-        $this->contest_id = $cid;
-        $this->contest = Contest::find($this->contest_id);
+        $this->contestId = $cid;
+        $this->contest = Contest::find($this->contestId);
 
-        $this->sections = ContestSection::where('contest_id', $this->contest_id)
+        $this->sections = ContestSection::where('contest_id', $this->contestId)
             ->orderBy('created_at', 'asc')
             ->get();
 
-        $this->section_works = [];
+        $this->sectionWorks = [];
         foreach ($this->sections as $section) {
-
             $works = DB::table('contest_works')
-                // LEFT JOIN user_contacts on (contest_works.user_id = user_contacts.user_id)
-                ->leftJoin('user_contacts', 'contest_works.user_id', '=', 'user_contacts.user_id')
+                // LEFT JOIN user_contacts on (contest_works.user_id = user_contacts.id)
+                ->leftJoin('user_contacts', 'contest_works.user_id', '=', 'user_contacts.id')
 
                 // LEFT JOIN works on (contest_works.work_id = works.id)
                 ->leftJoin('works', 'contest_works.work_id', '=', 'works.id')
@@ -72,9 +71,8 @@ class WorksParticipant extends Component
 
                 ->get();
 
-            $this->section_works[$section->id] = $works;
+            $this->sectionWorks[$section->id] = $works;
         }
-
     }
 
     public function render()

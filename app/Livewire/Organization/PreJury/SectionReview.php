@@ -17,7 +17,6 @@ namespace App\Livewire\Organization\PreJury;
 use App\Models\ContestSection;
 use App\Models\Work;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -45,13 +44,13 @@ class SectionReview extends Component
      */
     public function mount(string $sid) // route()
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         $this->section_id = $sid;
 
         // for headers
         // ContestSection - don't change in pagination
         $this->section = ContestSection::where('id', $sid)->first();
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' section:'.json_encode($this->section));
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' section:' . json_encode($this->section));
 
     }
 
@@ -61,7 +60,7 @@ class SectionReview extends Component
      */
     public function render(): View
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called ');
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called ');
         $section = $this->section;
 
         // works that are present in contest_works w/section_id
@@ -76,7 +75,7 @@ class SectionReview extends Component
          */
         /* Same as previous, entire list
         $userWorksSet = Work::select([ 'works.*', 'user_contacts.country_id', 'user_contacts.last_name', 'user_contacts.first_name'])
-            ->join('user_contacts', 'works.user_id', '=', 'user_contacts.user_id')
+            ->join('user_contacts', 'works.user_id', '=', 'user_contacts.id')
             ->join('contest_works', 'works.id', '=', 'contest_works.work_id')
             ->where('contest_works.section_id', '=', $this->section->id)
             ->simplePaginate(12); // dozen as half camera roll
@@ -90,7 +89,7 @@ class SectionReview extends Component
         $examinedWorksIds = collect($examinedWorksSet)->pluck('work_id')->toArray();
 
         $userWorksSet = DB::table('works')->select(['works.*', 'user_contacts.country_id', 'user_contacts.last_name', 'user_contacts.first_name'])
-            ->join('user_contacts', 'works.user_id', '=', 'user_contacts.user_id')
+            ->join('user_contacts', 'works.user_id', '=', 'user_contacts.id')
             ->join('contest_works', 'works.id', '=', 'contest_works.work_id')
             ->where('contest_works.section_id', '=', $this->section->id)
             ->whereNotIn('work_id', $examinedWorksIds)
@@ -98,7 +97,7 @@ class SectionReview extends Component
             ->orderBy('works.updated_at')
             ->simplePaginate(12); // dozen as half camera roll
 
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out: '.json_encode($userWorksSet));
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' out: ' . json_encode($userWorksSet));
 
         // NO return view('')->with([ 'user_works_set' => $this->user_works_set ]);
         // no snake_case but camelCase
