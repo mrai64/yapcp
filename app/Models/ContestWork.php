@@ -124,6 +124,7 @@ class ContestWork extends Model
      *
      * @return string miniature|original
      *
+     * TODO static?
      */
     public function miniature(string $originalFileName = ''): string
     {

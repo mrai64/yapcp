@@ -34,6 +34,7 @@ class SectionBoard extends Component
     public UserContact $juror;
 
     public $contestSectionId;
+    public $contestId;
 
     public ContestSection $contestSection;
 
@@ -92,7 +93,7 @@ class SectionBoard extends Component
         $this->jurorId = Auth::id();
         ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' juror_id:' . $this->jurorId);
 
-        $this->juror = UserContact::where('user_id', $this->jurorId)->first();
+        $this->juror = UserContact::where('id', $this->jurorId)->first();
         ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' juror:' . json_encode($this->juror));
 
         $this->contestSectionId = $sid;
@@ -101,26 +102,27 @@ class SectionBoard extends Component
 
         $this->contest = Contest::where('id', $this->contestSection->contest_id)->first();
         $this->contestVoteRule = $this->contest->vote_rule;
+        $this->contestId = $this->contest->id;
         ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' contest:' . json_encode($this->contest));
 
         // how that juror had voted
         // $this->contestVoteIdSet = ContestVote::contestVoteIdSet( $this->contest->id, $this->contestSection->id);
         $voted = ContestVote::select('work_id')
             ->where('juror_user_id', $this->jurorId)
-            ->where('section_id', $sid)
-            ->where('contest_id', $this->contest->id)
+            ->where('section_id', $this->contestSectionId)
+            ->where('contest_id', $this->contestId)
             ->get();
         $this->contestVoteIdSet = array_values(collect($voted)->toArray());
         ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' contestVoteIdSet:' . json_encode($this->contestVoteIdSet));
 
-        // SET of un-voted - limited to 12
+        // SET of un-voted - limited to 6
         if (count($this->contestVoteIdSet)) {
             $this->paginatedContestWorkSet = DB::table(ContestWork::TABLENAME)
                 ->select(['contest_id', 'section_id', 'work_id', 'extension'])
                 ->where('section_id', $sid)
                 ->where('contest_id', $this->contest->id)
                 ->whereNotIn('work_id', $this->contestVoteIdSet)
-                ->limit(12)
+                ->limit(6)
                 ->get();
             ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' paginatedContestWorkSet:' . json_encode($this->paginatedContestWorkSet));
 
@@ -132,7 +134,10 @@ class SectionBoard extends Component
         }
         $this->participantWorkSet = [];
         foreach ($this->paginatedContestWorkSet as $contestWork) {
-            $this->participantWorkSet[] = self::miniature($contestWork->contest_id . '/' . $contestWork->section_id . '/' . $contestWork->work_id . '.' . $contestWork->extension);
+            $this->participantWorkSet[] = self::miniature(
+                $contestWork->contest_id . '/' . $contestWork->section_id
+                . '/' . $contestWork->work_id . '.' . $contestWork->extension
+            );
         }
         ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' participantWorkSet:' . json_encode($this->participantWorkSet));
 

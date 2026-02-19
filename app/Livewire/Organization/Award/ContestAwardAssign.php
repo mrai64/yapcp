@@ -12,32 +12,31 @@ namespace App\Livewire\Organization\Award;
 use App\Models\ContestAward;
 use App\Rules\UserInContest;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class ContestAwardAssign extends Component
 {
-    public $contest_id;
+    public $contestId;
 
-    public $award_code;
+    public $awardCode;
 
-    public $contest_award;
+    public $contestAward;
 
-    public $awarded_peoples;
+    public $awardedPeoples;
 
     // form fields
-    public $winner_user_id = '';
+    public $winnerUserId = '';
 
-    public $winner_name = '';
+    public $winnerName = '';
 
     public function mount(string $ciac) // livewire contest uuid '+' award_code
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         // uuid+award_code
-        [$this->contest_id, $this->award_code] = explode(' ', $ciac);
+        [$this->contestId, $this->awardCode] = explode(' ', $ciac);
         // first check
-        $this->contest_award = ContestAward::where('contest_id', $this->contest_id)
-            ->where('award_code', $this->award_code)->first();
+        $this->contestAward = ContestAward::where('contest_id', $this->contestId)
+            ->where('award_code', $this->awardCode)->first();
 
         /**
          * Count for # prizes and list names
@@ -45,23 +44,23 @@ class ContestAwardAssign extends Component
          *
          * Note: using selectRaw we must prefix table name in it but not everywhere
          */
-        $this->awarded_peoples = DB::table('user_contacts')
+        $this->awardedPeoples = DB::table('user_contacts')
             ->selectRaw('
                 count(pcp_user_contacts.id) as n_prizes,
                 pcp_user_contacts.country_id,
                 pcp_user_contacts.last_name,
                 pcp_user_contacts.first_name,
                 pcp_countries.flag_code,
-                pcp_user_contacts.user_id
+                pcp_user_contacts.id
             ')
             ->leftJoin('countries', 'user_contacts.country_id', '=', 'countries.id')
-            ->leftJoin('contest_awards', 'user_contacts.user_id', '=', 'contest_awards.winner_user_id')
-            ->where('contest_awards.contest_id', $this->contest_id)
+            ->leftJoin('contest_awards', 'user_contacts.id', '=', 'contest_awards.winner_user_id')
+            ->where('contest_awards.contest_id', $this->contestId)
             ->groupBy(
                 'user_contacts.country_id',
                 'user_contacts.last_name',
                 'user_contacts.first_name',
-                'user_contacts.user_id'
+                'user_contacts.id'
             )
             ->orderByDesc('n_prizes') // equivalent to order by 1 DESC
             ->orderBy('user_contacts.country_id') // equivalent to order by 2
@@ -73,65 +72,65 @@ class ContestAwardAssign extends Component
 
     public function render()
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
 
         return view('livewire.organization.award.contest-award-assign');
     }
 
     public function rules()
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
 
         return [
             // 1st
-            'award_code' => [
+            'awardCode' => [
                 'string',
                 'required',
                 'max:10',
                 new UserInContest(),
             ],
             // 2nd
-            'winner_user_id' => [
+            'winnerUserId' => [
                 'string',
                 'max:36',
                 new UserInContest(),
             ],
-            'winner_name' => [
+            'winnerName' => [
                 'string',
                 'max:255',
-                'required_without:winner_user_id',
+                'required_without:winnerUserId',
             ],
         ];
     }
 
-    public function assign_contest_award()
+    public function assignContestAward()
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         $validated = $this->validate();
 
         // integration from mount()
-        $validated['contest_id'] = $this->contest_id;
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' validated: '.json_encode($validated));
+        $validated['contestId'] = $this->contestId;
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' validated: ' . json_encode($validated));
+
         // update 1
-        if ($validated['winner_name']) {
-            $AssignedAward = ContestAward::where('contest_id', $this->contest_id)
-                ->where('award_code', $validated['award_code'])
-                ->update(['winner_name' => $validated['winner_name']]);
-            Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' assigned 1: '.json_encode($AssignedAward));
+        if ($validated['winnerName']) {
+            $assignedAward = ContestAward::where('contest_id', $this->contestId)
+                ->where('award_code', $validated['awardCode'])
+                ->update(['winner_name' => $validated['winnerName']]);
+            ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' assigned 1: ' . json_encode($assignedAward));
         }
         // update 2
-        if ($validated['winner_user_id']) {
-            $AssignedAward = ContestAward::where('contest_id', $this->contest_id)
-                ->where('award_code', $validated['award_code'])->first();
-            Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' assigned 2: '.json_encode($AssignedAward));
-            $AssignedAward->winner_user_id = $validated['winner_user_id'];
-            $AssignedAward->save();
-            Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' assigned 2: '.json_encode($AssignedAward));
+        if ($validated['winnerUserId']) {
+            $assignedAward = ContestAward::where('contest_id', $this->contestId)
+                ->where('award_code', $validated['awardCode'])->first();
+            ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' assigned 2: ' . json_encode($assignedAward));
+            $assignedAward->winner_user_id = $validated['winnerUserId'];
+            $assignedAward->save();
+            ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' assigned 2: ' . json_encode($assignedAward));
         }
 
         return redirect()
-            ->route('organization-award-contest-assign', ['cid' => $this->contest_id])
+            ->route('organization-award-contest-assign', ['cid' => $this->contestId])
             ->with('success', __('Yes! Great!'));
     }
 }

@@ -17,9 +17,9 @@ use Livewire\Component;
 
 class ContestAssignedDia extends Component
 {
-    public string $section_id;
+    public string $sectionId;
 
-    public $section_awarded;
+    public $sectionAwarded;
 
     /**
      * check if a path/namefile has a twin path/300px_namefile
@@ -51,11 +51,11 @@ class ContestAssignedDia extends Component
     public function mount(string $sid) // livewire
     {
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $this->section_id = $sid;
+        $this->sectionId = $sid;
 
-        $this->section_awarded = DB::table('works')
+        $this->sectionAwarded = DB::table('works')
             ->leftJoin('contest_awards', 'works.id', '=', 'contest_awards.winner_work_id')
-            ->leftJoin('user_contacts', 'contest_awards.winner_user_id', '=', 'user_contacts.user_id')
+            ->leftJoin('user_contacts', 'contest_awards.winner_user_id', '=', 'user_contacts.id')
             ->leftJoin('countries', 'user_contacts.country_id', '=', 'countries.id')
             ->select(
                 'contest_awards.award_code',
@@ -68,7 +68,7 @@ class ContestAssignedDia extends Component
                 'works.reference_year',
                 'works.work_file'
             )
-            ->where('contest_awards.section_id', $this->section_id)
+            ->where('contest_awards.section_id', $this->sectionId)
             ->orderBy('contest_awards.award_code')
             ->get();
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');

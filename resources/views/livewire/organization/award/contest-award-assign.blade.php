@@ -1,23 +1,23 @@
 <div>
-    <form wire:submit="assign_contest_award">
+    <form wire:submit="assignContestAward">
         @csrf
 
-        <input name="contest_id" 
+        <input name="contestId" 
             type="hidden"
-            wire:model="contest_id" 
-            value="{{$contest_id}}" readonly />
-        <input name="award_code" 
+            wire:model="contestId" 
+            value="{{$contestId}}" readonly />
+        <input name="awardCode" 
             type="hidden"
-            wire:model="award_code" 
-            value="{{$award_code}}" readonly />
+            wire:model="awardCode" 
+            value="{{$awardCode}}" readonly />
 
         <select 
             class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-            wire:model.live="winner_user_id"
-            name="winner_user_id" 
+            wire:model.live="winnerUserId"
+            name="winnerUserId" 
             >
             <option value="">-- choice participant from list OR type in next field</option>
-            @foreach ($awarded_peoples as $winner)
+            @foreach ($awardedPeoples as $winner)
             <option value="{{$winner->user_id}}"><code> {{ $winner->flag_code }} {{ $winner->country_id }} {{ $winner->last_name }}, {{ $winner->first_name }} </code></option>
             @endforeach
         </select>
@@ -27,13 +27,13 @@
         <input 
             class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
             type="text" 
-            wire:model="winner_name" 
-            name="winner_name" 
+            wire:model="winnerName" 
+            name="winnerName" 
             />
         <div class="small">{{ __("Leave empty if previous field was used.") }}</div>
 
         @foreach ($errors->all() as $message)
-        <div class="small">{{$message}}</div>
+        <div class="alert alert-danger small">{{$message}}</div>
         @endforeach
 
         <x-secondary-button type="submit">

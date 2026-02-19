@@ -17,13 +17,13 @@ use App\Models\ContestSection;
     <div class="header h2 fyk text-2xl">
         {{ __("Contest Award Assignment Page") }}
     </div>
-    <livewire:organization.award.section-nav :cid="$contest_id" lazy />
+    <livewire:organization.award.section-nav :cid="$contestId" lazy />
     <hr />
     <br />
     <br />
-    @if (count($incomplete_sections))
-    <h3 class="fyk text-2xl">Complete Awards Assignment for:</h3>
-        @foreach($sections as $section)
+    @if (count($incompleteAwardsSection))
+    <h3 class="fyk text-2xl">{{__("Complete Awards Assignment for:")}}</h3>
+        @foreach($incompleteSectionSet as $section)
         <a href="{{ route('organization-award-section-assign', [ 'sid' => $section->id ] ) }}">
             [ {{ $section->code}} | {{ $section->name_en }} ]
         </a>
@@ -51,7 +51,7 @@ use App\Models\ContestSection;
                     </td>
                     <td class="border md-rounded m-2">
                     @if ($award->winner_work_id)
-                        <livewire:organization.award.section-assigned-dia :wid="($contest_id.'/'.$section_id.'/300px_'.$award->winner_work_id.'.jpg')" lazy />
+                        <livewire:organization.award.section-assigned-dia :wid="($contestId.'/'.$section_id.'/300px_'.$award->winner_work_id.'.jpg')" lazy />
                     @elseif ($award->winner_user_id) 
                         <span class="fyk text-xl font-medium">
                             {{$award->flag_code}}
@@ -63,7 +63,7 @@ use App\Models\ContestSection;
                             {{$award->winner_name}}
                         </span>
                     @else
-                        <livewire:organization.award.contest-award-assign :ciac="$contest_id.' '.$award->award_code" lazy />
+                        <livewire:organization.award.contest-award-assign :ciac="$contestId.' '.$award->award_code" lazy />
                     @endif
                     </td>
                 </tr>
@@ -85,20 +85,21 @@ use App\Models\ContestSection;
         <table class="table-auto w-full">
             <thead>
                 <tr>
-                    <th>Prizes Won</th>
-                    <th>From</th>
-                    <th>Last, First Name</th>
+                    <th>{{__("Awards Won")}}</th>
+                    <th>{{__("From")}}</th>
+                    <th>{{__("Last, First Name")}}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td colspan="3">
                         <p class="small">
-                            {{ __("WARN: That prizes won is a 'records counter', where every record value is 1. 1 for HM, 1 for Gold medal.")}}
+                            {{ __("WARN: Awards Won is a 'records counter' only.")}}
+                            {{ __("Sum prizes and HM.")}}
                         </p>
                     </td>
                 </tr>
-                @foreach ($awarded_peoples as $winner)
+                @foreach ($awardedParticipantSet as $winner)
                     <tr>
                         <td>{{ $winner->n_prizes }}</td>
                         <td>
@@ -121,7 +122,7 @@ use App\Models\ContestSection;
         <table class="data-table-container w-auto">
             <thead>
                 <tr>
-                    @foreach($contest_sections as $sectionHead)
+                    @foreach($contestSectionSet as $sectionHead)
                     <th scope="col" class="border md-rounded m-2">
                         {{ $sectionHead->code }}
                         {{ $sectionHead->name_en }}
@@ -131,7 +132,7 @@ use App\Models\ContestSection;
             </thead>
             <tbody>
                 <tr>
-                    @foreach($contest_sections as $sectionBody)
+                    @foreach($contestSectionSet as $sectionBody)
                     <td class="border md-rounded m-2">
                         <livewire:organization.award.contest-assigned-dia :sid="$sectionBody->id" lazy />
                     </td>
