@@ -331,7 +331,7 @@ app/Livewire/User/Contact/Modify.php: ✅
   234:             ->route('dashboard', ['id' => $this->user_id])
   235              ->with('success', __('Your personal info has been updated, thanks!'));
 
-app/Livewire/User/Contact/Modify1YouAre.php:
+app/Livewire/User/Contact/Modify1YouAre.php: ✅
    48          }
    49:         $this->userContact = UserContact::where('user_id', $uid)->first();
    50          // form fields
@@ -340,7 +340,7 @@ app/Livewire/User/Contact/Modify1YouAre.php:
   116:             ->route('user-contact-modify2', ['uid' => $this->userContact->user_id]);
   117  
 
-app/Livewire/User/Contact/Modify2PostAddress.php:
+app/Livewire/User/Contact/Modify2PostAddress.php: ✅
    49  
    50:         $this->userContact = UserContact::where('user_id', $uid)->first();
    51          ds($this->userContact);
@@ -349,7 +349,7 @@ app/Livewire/User/Contact/Modify2PostAddress.php:
   101:             ->route('user-contact-modify3', ['uid' => $this->userContact->user_id]);
   102      }
 
-app/Livewire/User/Contact/Modify3Phones.php:
+app/Livewire/User/Contact/Modify3Phones.php: ✅
   44  
   45:         $this->userContact = UserContact::where('user_id', $uid)->first();
   46          // form fields
@@ -358,7 +358,7 @@ app/Livewire/User/Contact/Modify3Phones.php:
   83:             ->route('user-contact-modify4', ['uid' => $this->userContact->user_id]);
   84  
 
-app/Livewire/User/Contact/Modify4Socials.php:
+app/Livewire/User/Contact/Modify4Socials.php: ✅
    50  
    51:         $this->userContact = UserContact::where('user_id', $uid)->first();
    52          // form fields
@@ -371,12 +371,12 @@ app/Livewire/User/Contact/Modify4Socials.php:
   109:             ->route('user-contact-modify5', ['fid' => $firstFed->federation_id, 'uid' => $this->userContact->user_id]);
   110      }
 
-app/Livewire/User/Contact/Modify5Feds.php:
+app/Livewire/User/Contact/Modify5Feds.php: ✅
   58          $this->userId = $uid;
   59:         $this->userContact = UserContact::where('user_id', $this->userId)->get();
   60  
 
-app/Livewire/User/Role/Listed.php:
+app/Livewire/User/Role/Listed.php: ✅
    6   *
    7:  * must have user_id
    8   * <livewire:user.role.listed :uid="" >
@@ -385,7 +385,7 @@ app/Livewire/User/Role/Listed.php:
   52:             ->where('user_id', $this->uid)
   53              ->groupBy('organization_id')
 
-app/Livewire/User/Role/Federation/Add.php:
+app/Livewire/User/Role/Federation/Add.php: ✅
   20  
   21:     public string $user_id;
   22  
@@ -399,7 +399,7 @@ app/Livewire/User/Role/Federation/Add.php:
   78:         Log::info(__FUNCTION__.' '.__LINE__.' '.$validated['user_id']);
   79          Log::info(__FUNCTION__.' '.__LINE__.' '.$validated['role']);
 
-app/Livewire/User/Role/Organization/Add.php:
+app/Livewire/User/Role/Organization/Add.php: ✅
   20  
   21:     public string $user_id;
   22  
@@ -415,7 +415,7 @@ app/Livewire/User/Role/Organization/Add.php:
   73:         // Log::info(__FUNCTION__. ' ' . __LINE__ . ' ' . $validated['user_id']);
   74          // Log::info(__FUNCTION__. ' ' . __LINE__ . ' ' . $validated['role']);
 
-app/Livewire/Work/Add.php:
+app/Livewire/Work/Add.php: ✅
    39  
    40:     public string $user_id;
    41  
@@ -433,7 +433,7 @@ app/Livewire/Work/Add.php:
   120:         $validated['user_id'] = $this->user_id;
   121          Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' validated:'.json_encode($validated));
 
-app/Livewire/Work/Listed.php:
+app/Livewire/Work/Listed.php: ✅
   12  {
   13:     public $user_id = null;
   14  
