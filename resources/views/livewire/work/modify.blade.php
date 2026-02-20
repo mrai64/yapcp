@@ -16,7 +16,7 @@
         [ {{ __('Your beautiful Gallery') }} ]
     </a>
 
-    <a href="{{ route( 'delete-photo-box', [ 'wid' => $work_id ] ) }}">[Rem]</a>
+    <a href="{{ route( 'delete-photo-box', [ 'wid' => $workId ] ) }}">[Rem]</a>
 
     <hr />
     <br style="clear:both;" />
@@ -24,8 +24,8 @@
     <form wire:submit="update" >
         @csrf
 
-        <!-- work_id -->
-        <!-- user_id -->
+        <!-- workId -->
+        <!-- userId -->
 
         <!-- work readonly -->
         <div class="block mt-4 mb-4">
@@ -33,7 +33,7 @@
                 {{ __('Your work') }} | 🔒
             </label>
 
-            <img src="{{ asset('storage/photos') . '/' . $work_file }}" 
+            <img src="{{ asset('storage/photos') . '/' . $workFileName }}" 
                 style="float: left;" class="block w-48 me-3" />
 
         </div>
@@ -41,87 +41,87 @@
 
         <!-- english title -->
         <div class="mt-4 mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="title_en">
+            <label class="block font-medium text-sm text-gray-700" for="titleEnglish">
                 {{ __('Work title, in international english language') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="title_en"
-                wire:model.live.debounce.1500ms="title_en" 
+                type="text" name="titleEnglish"
+                wire:model.live.debounce.1500ms="titleEnglish" 
                 required="required"
                 aria-describedby="photoHelp"
             />
             <div class="small" id="photoHelp">{{ __('Remember: Some contest not allow work w/title "Untitled", your title work should appear [and 🤞🏻 we hope 4 u] in contest catalogue.') }}</div>
-            <div class="small">@error('title_en') {{ $message }} @enderror</div>
+            <div class="small">@error('titleEnglish') {{ $message }} @enderror</div>
         </div>
 
         <!-- local title -->
         <div class="mt-4 mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="title_local">
+            <label class="block font-medium text-sm text-gray-700" for="titleLocal">
                 {{ __('Work title, in your local language') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="title_local"
-                wire:model.live.debounce.500ms="title_local" 
+                type="text" name="titleLocal"
+                wire:model.live.debounce.500ms="titleLocal" 
                 aria-describedby="photoHelp2"
             />
             <div class="small" id="photoHelp2">{{ __('Remember: Some contest not allow work w/title "Untitled", also translated in your language words.') }}</div>
-            <div class="small">@error('title_local') {{ $message }} @enderror</div>
+            <div class="small">@error('titleLocal') {{ $message }} @enderror</div>
         </div>
 
-        <!-- reference_year -->
+        <!-- referenceYear -->
         <div class="mt-4 mb-4 block" style="width:23%;float:left;">
-            <label class="block font-medium text-sm text-gray-700" for="reference_year">
+            <label class="block font-medium text-sm text-gray-700" for="referenceYear">
                 {{ __('Reference year') }} 
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-48" 
-                type="text" name="reference_year"
-                wire:model.live.debounce.500ms="reference_year" 
+                type="text" name="referenceYear"
+                wire:model.live.debounce.500ms="referenceYear" 
                 aria-describedby="refYearHelp"
                 placeholder="yyyy"
                 required="required"
             />
             <div class="small" id="refYearHelp">{{ __('Year in 4 digit form, from 1826 upto present year.') }}</div>
-            <div class="small">@error('reference_year') {{ $message }} @enderror</div>
+            <div class="small">@error('referenceYear') {{ $message }} @enderror</div>
         </div>
 
         <!-- Long side readonly -->
         <div class="mt-4 mb-4 block" style="width:23%;float:left;">
-            <label class="block font-medium text-sm text-gray-700" for="long_side">
+            <label class="block font-medium text-sm text-gray-700" for="longSide">
                 {{ __('Long side') }} | 🔒
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-48" 
-                type="text" name="long_side"
-                wire:model.live.debounce.500ms="long_side" 
+                type="text" name="longSide"
+                wire:model.live.debounce.500ms="longSide" 
                 aria-describedby="longsideHelp"
                 readonly
             />
             <div class="small" id="longsideHelp">{{ __('Read only.') }}</div>
-            <div class="small">@error('long_side') {{ $message }} @enderror</div>
+            <div class="small">@error('longSide') {{ $message }} @enderror</div>
         </div>
 
         <!-- Short side readonly -->
         <div class="mt-4 mb-4 block" style="width:23%;float:left;">
-            <label class="block font-medium text-sm text-gray-700" for="short_side">
+            <label class="block font-medium text-sm text-gray-700" for="shortSide">
                 {{ __('Short side') }} | 🔒
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-48" 
-                type="text" name="short_side"
-                wire:model.live.debounce.500ms="short_side" 
+                type="text" name="shortSide"
+                wire:model.live.debounce.500ms="shortSide" 
                 aria-describedby="shortsideHelp"
                 readonly
             />
             <div class="small" id="shortsideHelp">{{ __('Read only.') }}</div>
-            <div class="small">@error('short_side') {{ $message }} @enderror</div>
+            <div class="small">@error('shortSide') {{ $message }} @enderror</div>
         </div>
 
         <!-- Extension readonly -->
         <div class="mt-4 mb-4 block" style="width:23%;float:left;">
-            <label class="block font-medium text-sm text-gray-700" for="short_side">
+            <label class="block font-medium text-sm text-gray-700" for="shortSide">
                 {{ __('Extension') }} | 🔒
             </label>
             <input 

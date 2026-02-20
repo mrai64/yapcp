@@ -18,25 +18,25 @@ class Modify extends Component
 
     public Work $work;
 
-    public UserContact $user_contact;
+    public UserContact $userContact;
 
-    public string $work_id; // uuid
+    public string $workId; // uuid
 
-    public string $user_id; // uuid
+    public string $userId; // uuid
 
-    public string $work_file;
+    public string $workFileName;
 
-    public string $title_en;
+    public string $titleEnglish;
 
-    public string $title_local;
+    public string $titleLocal;
 
-    public string $long_side;
+    public string $longSide;
 
-    public string $short_side;
+    public string $shortSide;
 
     public string $extension;
 
-    public string $reference_year;
+    public string $referenceYear;
 
     public $image = []; // list($width, $height, $type, $attr)
 
@@ -45,21 +45,21 @@ class Modify extends Component
     public function mount(string $wid) // see route()
     {
 
-        $this->user_id = Auth::id();
-        $this->user_contact = UserContact::where('user_id', Auth::id())->get()[0];
+        $this->userId = Auth::id();
+        $this->userContact = UserContact::where('id', Auth::id())->get()[0];
         $this->work = Work::findOrFail($wid);
         // and now form fields
-        $this->work_id = $this->work->id;
-        $this->work_file = $this->work->work_file;
-        $this->title_en = $this->work->title_en;
-        $this->title_local = $this->work->title_local;
+        $this->workId = $this->work->id;
+        $this->workFileName = $this->work->work_file;
+        $this->titleEnglish = $this->work->title_en;
+        $this->titleLocal = $this->work->title_local;
         // workaround __DIR__ from here to storage
         $this->basedir = str_ireplace('/app/Livewire/Work', '/public/storage/photos', __DIR__);
-        $image = getimagesize($this->basedir.'/'.$this->work_file);
-        $this->long_side = ($image[0] >= $image[1]) ? $image[0] : $image[1];
-        $this->short_side = ($image[0] <= $image[1]) ? $image[0] : $image[1];
+        $image = getimagesize($this->basedir.'/'.$this->workFileName);
+        $this->longSide = ($image[0] >= $image[1]) ? $image[0] : $image[1];
+        $this->shortSide = ($image[0] <= $image[1]) ? $image[0] : $image[1];
         $this->extension = str_ireplace('image/', '', $image['mime']);
-        $this->reference_year = $this->work->reference_year;
+        $this->referenceYear = $this->work->reference_year;
 
     }
 
@@ -73,13 +73,13 @@ class Modify extends Component
      */
     public function update()
     {
-        $this->work = Work::findOrFail($this->work_id);
-        $this->work->title_en = $this->title_en;
-        $this->work->title_local = $this->title_local;
-        $this->work->long_side = $this->long_side;
-        $this->work->short_side = $this->short_side;
+        $this->work = Work::findOrFail($this->workId);
+        $this->work->title_en = $this->titleEnglish;
+        $this->work->title_local = $this->titleLocal;
+        $this->work->long_side = $this->longSide;
+        $this->work->short_side = $this->shortSide;
         $this->work->extension = $this->extension;
-        $this->work->reference_year = $this->reference_year;
+        $this->work->reference_year = $this->referenceYear;
         if ($this->work->reference_year < '1826') {
             $this->work->reference_year = date('Y');
         }
