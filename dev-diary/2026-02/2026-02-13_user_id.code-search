@@ -156,12 +156,12 @@ app/Livewire/Juror/SectionBoard.php: ✅
   95:         $this->juror = UserContact::where('user_id', $this->juror_id)->first();
   96          Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' juror:'.json_encode($this->juror));
 
-app/Livewire/Organization/Dashboard.php: 🚧
+app/Livewire/Organization/Dashboard.php: ✅
   40          Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' id:'.$this->id);
   41:         $this->user_role_list = UserRole::where('organization_id', $id)->orderBy('role')->orderBy('updated_at')->get(['id', 'user_id', 'role', 'role_opening', 'role_closing']);
   42          $this->contest_list = Contest::where('organization_id', $id)->orderBy('updated_at')->get(['id', 'name_en', 'day_2_closing']);
 
-app/Livewire/Organization/Admit/BeforeFinal.php:
+app/Livewire/Organization/Admit/BeforeFinal.php: ⏩
    95                              pcp_contest_votes.work_id,
    96:                             pcp_works.user_id,
    97                              pcp_works.work_file,
@@ -170,7 +170,7 @@ app/Livewire/Organization/Admit/BeforeFinal.php:
   102:             ->groupBy('contest_votes.work_id', 'works.user_id', 'works.work_file', 'works.title_en')
   103              ->orderByDesc('total_vote')
 
-app/Livewire/Organization/Award/ContestAssign.php:
+app/Livewire/Organization/Award/ContestAssign.php: ✅
   130                  pcp_countries.flag_code,
   131:                 pcp_user_contacts.user_id
   132              ')
@@ -190,12 +190,12 @@ app/Livewire/Organization/Award/ContestAssign.php:
   186:             'winner_user_id' => 'string|exists:contest_participants,user_id', // TODO build a validation rule() to check 'AND contest_id', simple exists seems too large
   187              'winner_name' => 'string|max:255',
 
-app/Livewire/Organization/Award/ContestAssignedDia.php:
+app/Livewire/Organization/Award/ContestAssignedDia.php: ✅
   57              ->leftJoin('contest_awards', 'works.id', '=', 'contest_awards.winner_work_id')
   58:             ->leftJoin('user_contacts', 'contest_awards.winner_user_id', '=', 'user_contacts.user_id')
   59              ->leftJoin('countries', 'user_contacts.country_id', '=', 'countries.id')
 
-app/Livewire/Organization/Award/ContestAwardAssign.php:
+app/Livewire/Organization/Award/ContestAwardAssign.php: ✅
   54                  pcp_countries.flag_code,
   55:                 pcp_user_contacts.user_id
   56              ')
@@ -207,7 +207,7 @@ app/Livewire/Organization/Award/ContestAwardAssign.php:
   64:                 'user_contacts.user_id'
   65              )
 
-app/Livewire/Organization/Award/SectionAssign.php:
+app/Livewire/Organization/Award/SectionAssign.php: ⏩
   66          $admittedWorks_set = DB::table('contest_works')
   67:             ->select(['contest_works.work_id', 'contest_works.section_id', 'contest_works.contest_id', 'contest_works.extension', 'contest_works.user_id'])
   68              ->leftJoin('contest_awards', function ($join) {
@@ -216,7 +216,7 @@ app/Livewire/Organization/Award/SectionAssign.php:
   76:             ->orderBy('user_id')
   77              ->orderBy('work_id')
 
-app/Livewire/Organization/Award/SectionAssignDia.php:
+app/Livewire/Organization/Award/SectionAssignDia.php: ⏩
   19  
   20:     public $user_id;
   21  
@@ -232,7 +232,7 @@ app/Livewire/Organization/Award/SectionAssignDia.php:
   82:             ->update(['winner_work_id' => $this->work_id, 'winner_user_id' => $this->user_id]);
   83          Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' assign: '.json_encode($assign));
 
-app/Livewire/Organization/Award/SectionAssignedDia.php:
+app/Livewire/Organization/Award/SectionAssignedDia.php: ⏩
   18  
   19:     public $user_id;
   20  
@@ -241,7 +241,7 @@ app/Livewire/Organization/Award/SectionAssignedDia.php:
   33:         $this->user_id = ContestWork::select('user_id')->where('id', $this->work_id)->first();
   34  
 
-app/Livewire/Organization/Minute/Draft.php:
+app/Livewire/Organization/Minute/Draft.php: ✅
    84              $jury_members[$section->code] = ContestJury::select(['user_contacts.country_id', 'user_contacts.last_name', 'user_contacts.first_name', 'countries.flag_code'])
    85:                 ->leftJoin('user_contacts', 'user_contacts.user_id', '=', 'contest_juries.user_contact_id')
    86                  ->leftJoin('countries', 'user_contacts.country_id', '=', 'countries.id')
@@ -264,7 +264,7 @@ app/Livewire/Organization/Minute/Draft.php:
   154:             ->leftJoin('user_contacts', 'user_contacts.user_id', '=', 'contest_awards.winner_user_id')
   155              ->leftJoin('countries', 'user_contacts.country_id', '=', 'countries.id')
 
-app/Livewire/Organization/PreJury/SectionReview.php:
+app/Livewire/Organization/PreJury/SectionReview.php: ✅
   78          $userWorksSet = Work::select([ 'works.*', 'user_contacts.country_id', 'user_contacts.last_name', 'user_contacts.first_name'])
   79:             ->join('user_contacts', 'works.user_id', '=', 'user_contacts.user_id')
   80              ->join('contest_works', 'works.id', '=', 'contest_works.work_id')
@@ -277,18 +277,18 @@ app/Livewire/Organization/PreJury/SectionReview.php:
   97:             ->orderBy('works.user_id')
   98              ->orderBy('works.updated_at')
 
-app/Livewire/Organization/PreJury/WarnEmail.php:
+app/Livewire/Organization/PreJury/WarnEmail.php: ⏩
   74          $validated['section_id'] = $this->contest_work->section_id;
   75:         $validated['participant_user_id'] = $this->contest_work->user_id;
   76          $validated['work_id'] = $this->contest_work->work_id;
 
-app/Livewire/Organization/Reports/WorksParticipant.php:
+app/Livewire/Organization/Reports/WorksParticipant.php: ✅
   37              $works = DB::table('contest_works')
   38:                 // LEFT JOIN user_contacts on (contest_works.user_id = user_contacts.user_id)
   39:                 ->leftJoin('user_contacts', 'contest_works.user_id', '=', 'user_contacts.user_id')
   40  
 
-app/Livewire/User/Contact/Listed.php:
+app/Livewire/User/Contact/Listed.php: ✅
   16  {
   17:     public string $user_id;
   18  
@@ -298,7 +298,7 @@ app/Livewire/User/Contact/Listed.php:
   27:         $this->user_contact = UserContact::where('user_id', $this->user_id)->first();
   28          $this->country = Country::where('id', $this->user_contact->country_id)->first();
 
-app/Livewire/User/Contact/Modify.php:
+app/Livewire/User/Contact/Modify.php: ✅
    43      // User
    44:     // user_id
    45      public User $user; //          readonly
@@ -1239,7 +1239,7 @@ storage/framework/views/a32dbc0823891da6697f9a31c0bdd10d.php:
   56:             <div class="alert alert-danger small"><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__errorArgs = ['user_id'];
   57  $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 
-storage/framework/views/bee13cd69f5f59031038a5d342cc19fb.php:
+storage/framework/views/bee13cd69f5f59031038a5d342cc19fb.php: ⏩
   25          <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $contest_section_list; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $section): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
   26:         <p class="inline-flex small">[ <?php echo e($section->code); ?> your:<?php echo e(ContestWork::sectionWorksCounter($section->id, $user_id)); ?> / <?php echo e($section->rule_max); ?>]</p>
   27          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?><?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if ENDBLOCK]><![endif]--><?php endif; ?>

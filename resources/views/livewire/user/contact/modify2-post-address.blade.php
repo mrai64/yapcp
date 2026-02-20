@@ -30,13 +30,11 @@
 
     <!-- nav bar here -->
     <div class="fyk block font-medium text-2xl text-gray-700 mb-4">
-        {{$country->flag_code}} | {{ $last_name}}, {{ $first_name }}
+        {{$country->flag_code}} | {{ $lastName}}, {{ $firstName }}
     </div>
     <h3 class="fyk text-xl mb-4"><em>{{ __("Where do you live...")}}</em></h3>    
     <form wire:submit="updateUserContact2nd">
         @csrf
-
-        
         <p class="small mb-4">{{ __('Contest organizer need your postal address to send you the prizes if you win. Please be accurate.') }}</p>
         <div class="mt-4 mb-4">
             <label class="fyk block font-medium text-2xl text-gray-700" for="address">

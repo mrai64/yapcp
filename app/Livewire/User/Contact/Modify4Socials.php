@@ -48,7 +48,7 @@ class Modify4Socials extends Component
             abort(403, 'Unauthorized action.');
         }
 
-        $this->userContact = UserContact::where('user_id', $uid)->first();
+        $this->userContact = UserContact::where('id', $uid)->first();
         // form fields
         $this->firstName = $this->userContact->first_name;
         $this->lastName = $this->userContact->last_name;

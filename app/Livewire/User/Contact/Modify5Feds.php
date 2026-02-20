@@ -56,7 +56,7 @@ class Modify5Feds extends Component
 
         $uid = ($uid === '') ? Auth::id() : $uid;
         $this->userId = $uid;
-        $this->userContact = UserContact::where('user_id', $this->userId)->get();
+        $this->userContact = UserContact::where('id', $this->userId)->get();
 
         // full list
         $this->fieldDefinitions = FederationMore::select([

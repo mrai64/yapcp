@@ -18,11 +18,11 @@ class Modify2PostAddress extends Component
     public $country;
 
     // fields
-    public string $first_name;
+    public string $firstName;
 
-    public string $last_name;
+    public string $lastName;
 
-    public string $country_id;
+    public string $countryId;
 
     public string $address;
 
@@ -47,14 +47,14 @@ class Modify2PostAddress extends Component
             abort(403, 'Unauthorized action.');
         }
 
-        $this->userContact = UserContact::where('user_id', $uid)->first();
+        $this->userContact = UserContact::where('id', $uid)->first();
         ds($this->userContact);
 
         // form fields
-        $this->first_name = $this->userContact->first_name; // name
-        $this->last_name = $this->userContact->last_name; //   surname
+        $this->firstName = $this->userContact->first_name; // name
+        $this->lastName = $this->userContact->last_name; //   surname
 
-        $this->country_id = ($this->userContact->country_id ?? '***');
+        $this->countryId = ($this->userContact->country_id ?? '***'); // used?
         $this->country = $this->userContact->country; //       nationality
 
         $this->address = $this->userContact->address ?? 'insert address';

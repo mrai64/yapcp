@@ -42,16 +42,15 @@ class Modify3Phones extends Component
             abort(403, 'Unauthorized action.');
         }
 
-        $this->userContact = UserContact::where('user_id', $uid)->first();
+        $this->userContact = UserContact::where('id', $uid)->first();
         // form fields
         $this->firstName = $this->userContact->firstName;
         $this->lastName = $this->userContact->last_name;
-        $this->countryId = ($this->userContact->country_id ?? '***');
+        $this->countryId = ($this->userContact->country_id ?? '***');  // used?
         $this->country = ($this->userContact->country ?? null);
 
         $this->cellular = $this->userContact->cellular ?? '';
         $this->whatsapp = $this->userContact->whatsapp ?? 'https://wa.me/';
-
     }
 
     // 2. render
@@ -81,6 +80,5 @@ class Modify3Phones extends Component
         return redirect()
             ->with('success', __("'Cellular and Whatsapp updated successfully.'"))
             ->route('user-contact-modify4', ['uid' => $this->userContact->user_id]);
-
     }
 }

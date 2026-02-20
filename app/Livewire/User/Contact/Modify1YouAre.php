@@ -1,10 +1,11 @@
 <?php
 
 /**
- * userContact modify 1 - personal data
+ * userContact modify 1 of 5 - personal data
  * Should be used form admin and user to modify personal data
  *
  * 2026-01-25 When name == surname and a comma is in the between
+ * 
  */
 
 namespace App\Livewire\User\Contact;
@@ -46,7 +47,7 @@ class Modify1YouAre extends Component
         if ($uid != Auth::id()) {
             abort(403, 'Unauthorized action.');
         }
-        $this->userContact = UserContact::where('user_id', $uid)->first();
+        $this->userContact = UserContact::where('id', $uid)->first();
         // form fields
         $this->firstName = $this->userContact->first_name;
         $this->lastName = $this->userContact->last_name;
@@ -114,6 +115,5 @@ class Modify1YouAre extends Component
         return redirect()
             ->with('success', __("'Name, Country n Pass photo updated successfully.'"))
             ->route('user-contact-modify2', ['uid' => $this->userContact->user_id]);
-
     }
 }
