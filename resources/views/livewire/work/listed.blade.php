@@ -1,7 +1,8 @@
 <div>
+    <!-- user works listed by title name -->
     <div class="mb-4 fyk" style="font-size:3rem">
-        {{ ($country['flag_code']) ? $country['flag_code'] : '🏳️‍🌈' }}
-        {{ $user_contact['first_name']}} {{ $user_contact['last_name']}}
+        {{ $userContact->country->flag_code }}
+        {{ $userContact->first_name }} {{ $userContact->last_name }}
         <br />
     </div>
     <p>{{ __('Works are sorted by english title.') }} </small></p>
@@ -16,7 +17,7 @@
 
     <hr class="my-4" />
     <div>
-        @if ( !isset($work_list) || count($work_list) === 0)
+        @if ( !isset($userWorkList) || count($userWorkList) === 0)
         <p style="font-size:2rem">
             <a href="#">{{ __('Zero found, wanna add your works?') }}</a>
         </p>
@@ -38,7 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach ($work_list as $work)
+            @foreach ($userWorkList as $work)
                 <tr class="border">
                     <td class="px-4" scope="row" style="background-color: #808080">
                         <a href="{{ route( 'photo-box-modify', [ 'wid' => $work[ 'id' ] ] ) }}">

@@ -18,15 +18,15 @@ class Add extends Component
     // form field and class attribute
     public UserRole $user_role;
 
-    public string $user_id;
+    public string $userId;
 
-    public $role_list;
+    public $rolesSet;
 
     public string $role;
 
-    public $federation_list;
+    public $federationList;
 
-    public $federation_id;
+    public $federationId;
 
     public $federation;
 
@@ -36,9 +36,9 @@ class Add extends Component
     public function mount() // no id use Auth::id()
     {
         Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        $this->user_id = Auth::id();
-        $this->role_list = UserRolesRoleSet::validRoles(); // []
-        $this->federation_list = Federation::countryIdSorted();
+        $this->userId = Auth::id();
+        $this->rolesSet = UserRolesRoleSet::validRoles(); // []
+        $this->federationList = Federation::countryIdSorted();
     }
 
     /**
@@ -61,20 +61,21 @@ class Add extends Component
         return [
             // 'role'          => 'required|string|max:255',
             'role' => 'required|exists:user_roles_role_sets,role',
-            'federation_id' => 'required|string|exists:federations,id',
+            'federationId' => 'required|string|exists:federations,id',
         ];
     }
 
     /**
      * 4. check n save
      */
-    public function save_user_role()
+    public function saveUserRole()
     {
         Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $validated = $this->validate();
 
         // integration
-        $validated['user_id'] = $this->user_id;
+        $validated['user_id'] = $this->userId;
+        $validated['federation_id'] = $this->federationId;
         Log::info(__FUNCTION__.' '.__LINE__.' '.$validated['user_id']);
         Log::info(__FUNCTION__.' '.__LINE__.' '.$validated['role']);
         Log::info(__FUNCTION__.' '.__LINE__.' '.$validated['federation_id']);

@@ -5,7 +5,7 @@
  * Should be used form admin and user to modify personal data
  *
  * 2026-01-25 When name == surname and a comma is in the between
- * 
+ *
  */
 
 namespace App\Livewire\User\Contact;

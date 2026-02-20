@@ -10,34 +10,29 @@ use Livewire\Component;
 
 class Listed extends Component
 {
-    public $user_id = null;
+    public $userId = null;
 
-    public $user_contact = null;
+    public $userContact = null;
 
     public $country = [];
 
-    public $work_list = [];
+    public $userWorkList = [];
 
     public $odd; // alternated background rows
 
     /**
-     * Before the show
+     * 1. Before the show
      */
     public function mount()
     {
-        $this->user_id = Auth::id();
+        $this->userId = Auth::id();
 
-        $this->user_contact = UserContact::whereNull('deleted_at')
-            ->where('user_id', $this->user_id)
-            ->select('user_id', 'country_id', 'first_name', 'last_name')
-            ->get()[0];
+        $this->userContact = UserContact::where('id', $this->userId)->first();
 
-        $this->country = Country::where('id', $this->user_contact['country_id'])
-            ->select('id', 'country', 'flag_code')
-            ->get()[0];
+        $this->country = $this->userContact->country;
 
-        $this->work_list = Work::whereNull('deleted_at')
-            ->where('user_id', $this->user_contact['user_id'])
+        $this->userWorkList = Work::whereNull('deleted_at')
+            ->where('user_id', $this->userContact['id'])
             ->orderBy('title_en')
             ->get();
 
@@ -45,7 +40,7 @@ class Listed extends Component
     }
 
     /**
-     * The show
+     * 2. The show
      */
     public function render()
     {

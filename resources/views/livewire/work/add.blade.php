@@ -1,6 +1,6 @@
 <?php
 /**
- * Upload User_contact works
+ * Upload User\Works
  * image accepted: jpg, webp (future use)
  */
 
@@ -51,31 +51,33 @@
 
         <!-- english title -->
         <div class="mt-4 mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="title_en">
+            <label class="block font-medium text-sm text-gray-700" for="titleEn">
                 {{ __('Work title, in international english language') }}
             </label>
             <input 
-                type="text" name="title_en"
-                wire:model.live.debounce.1500ms="title_en" 
+                type="text" name="titleEn"
+                wire:model.live.debounce.1500ms="titleEn" 
                 required="required"
                 aria-describedby="titleHelp"
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-            />
-            <div class="small" id="titleHelp">{{ __('Remember: Some contest not allow work w/title "Untitled", your title work should appear [and 🤞🏻 we hope 4 u] in contest catalogue.') }}</div>
-            <div class="small">@error('title_en') {{ $message }} @enderror</div>
-        </div>
-
-        <!-- local title -->
-        <div class="mt-4 mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="text_local">
-                {{ __('Work title, in your local language') }}
-            </label>
-            <input 
-                type="text" name="title_local"
-                wire:model.live.debounce.500ms="title_local" 
+                />
+                <div class="small" id="titleHelp">{{ __('Remember: Some contest not allow work w/title "Untitled", your title work should appear [and 🤞🏻 we hope 4 u] in contest catalogue.') }}</div>
+                <div class="small">@error('titleEn') {{ $message }} @enderror</div>
+            </div>
+            
+            <!-- local title -->
+            <div class="mt-4 mb-4">
+                <label class="block font-medium text-sm text-gray-700" for="titleLocal">
+                    {{ __('Work title, in your local language') }}
+                </label>
+                <input 
+                type="text" name="titleLocal"
+                wire:model.live.debounce.500ms="titleLocal" 
+                aria-describedby="titleLocalHelp"
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-            />
-            <div class="small">@error('title_local') {{ $message }} @enderror</div>
+                />
+            <div class="small" id="titleLocalHelp">{{ __('Remember: Some contest not allow work w/title "Untitled", your title work should appear [and 🤞🏻 we hope 4 u] in contest catalogue.') }}</div>
+            <div class="small">@error('titleLocal') {{ $message }} @enderror</div>
         </div>
 
         <!-- monochromatic -->

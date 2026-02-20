@@ -16,17 +16,17 @@ use Livewire\Component;
 class Add extends Component
 {
     // define fields
-    public UserRole $user_role;
+    public UserRole $userRole;
 
-    public string $user_id;
+    public string $userId;
 
-    public $role_list;
+    public $roleList;
 
     public string $role;
 
-    public $organization_list;
+    public $organizationList;
 
-    public $organization_id;
+    public $organizationId;
 
     public $organization;
 
@@ -35,10 +35,9 @@ class Add extends Component
      */
     public function mount() // no id for user_id
     {
-        $this->user_id = Auth::id();
-        $this->role_list = UserRolesRoleSet::validRoles(); // it's an []
-        $this->organization_list = Organization::countryIdSorted(); // country_id, name
-
+        $this->userId = Auth::id();
+        $this->roleList = UserRolesRoleSet::validRoles(); // it's an []
+        $this->organizationList = Organization::countryIdSorted(); // country_id, name
     }
 
     /**
@@ -56,30 +55,30 @@ class Add extends Component
     {
         return [
             'role' => 'required|exists:user_roles_role_sets,role',
-            'organization_id' => 'required|string|exists:organizations,id',
+            'organizationId' => 'required|string|exists:organizations,id',
         ];
     }
 
     /**
      * 4. check! act!
      */
-    public function save_user_role()
+    public function saveUserRole()
     {
         // Log::info(__FUNCTION__. ' ' . __LINE__ );
         $validated = $this->validate();
+        $validated['organization_id'] = $validated['organizationId'];
 
         // integration
-        $validated['user_id'] = $this->user_id;
+        $validated['user_id'] = $this->userId;
         // Log::info(__FUNCTION__. ' ' . __LINE__ . ' ' . $validated['user_id']);
         // Log::info(__FUNCTION__. ' ' . __LINE__ . ' ' . $validated['role']);
         // Log::info(__FUNCTION__. ' ' . __LINE__ . ' ' . $validated['organization_id']);
 
-        $this->user_role = UserRole::create($validated);
+        $this->userRole = UserRole::create($validated);
         // Log::info(__FUNCTION__. ' ' . __LINE__ . $this->user_role );
 
         return redirect()
             ->route('dashboard')
             ->with('success', __('New Role added to list, enjoy!'));
-
     }
 }

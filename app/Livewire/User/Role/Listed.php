@@ -31,7 +31,7 @@ class Listed extends Component
 
     public $userRoleSet;
 
-    public Organization $organization_list;
+    // public Organization $organization_list; // used?
 
     public Contest $contestList;
 
@@ -78,7 +78,6 @@ class Listed extends Component
         //
         $this->sortedUserRoleList = collect($this->userRoleList)->sortBy('federation')->sortBy('organization')->sortBy('contest')->sortBy('role')->toArray();
         $this->userRoleList = $this->sortedUserRoleList;
-
     }
 
     /**
@@ -86,7 +85,6 @@ class Listed extends Component
      */
     public function render()
     {
-
         return view('livewire.user.role.listed');
     }
 }

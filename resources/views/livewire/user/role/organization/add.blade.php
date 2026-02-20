@@ -26,7 +26,7 @@ use App\Models\Country;
     </a>
     <br style="clear:both;" />
 
-    <form wire:submit="save_user_role">
+    <form wire:submit="saveUserRole">
         @csrf
 
         <div class="mb-4">
@@ -40,7 +40,7 @@ use App\Models\Country;
                 required="required"
                 >
                 <option value="">--</option>
-                @foreach ($role_list as $role_item)
+                @foreach ($roleList as $role_item)
                 <option value="{{ $role_item }}" {{ ($role_item == $role) ? 'selected' : '' }}> {{ $role_item }} </option>
                 @endforeach
             </select>
@@ -55,12 +55,12 @@ use App\Models\Country;
             </label>
             <select 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                wire:model="organization_id"
-                name="organization_id" 
+                wire:model="organizationId"
+                name="organizationId" 
                 required="required"
                 >
-                @foreach ($organization_list as $organization_item)
-                <option value="{{ $organization_item->id }}" {{ ($organization_item->id == $organization_id) ? 'selected' : '' }}> {{ Country::countryFlag( $organization_item->country_id ) }} | {{ $organization_item->name }}</option>
+                @foreach ($organizationList as $organization_item)
+                <option value="{{ $organization_item->id }}" {{ ($organization_item->id == $organizationId) ? 'selected' : '' }}> {{ Country::countryFlag( $organization_item->country_id ) }} | {{ $organization_item->name }}</option>
                 @endforeach
             </select>
             <div class="small">

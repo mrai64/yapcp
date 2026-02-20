@@ -27,7 +27,7 @@
     </a>
     <br style="clear:both;" />
 
-    <form wire:submit="save_user_role">
+    <form wire:submit="saveUserRole">
         @csrf
         <div class="mb-4">
             <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl" for="role">
@@ -39,7 +39,7 @@
                 name="role" 
                 required="required"
                 >
-                @foreach ($role_list as $role_item)
+                @foreach ($rolesSet as $role_item)
                 <option value="{{ $role_item }}" {{ ($role_item == $role) ? 'selected' : '' }}> {{ $role_item }} </option>
                 @endforeach
             </select>
@@ -54,12 +54,12 @@
             </label>
             <select 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                wire:model="federation_id"
-                name="federation_id" 
+                wire:model="federationId"
+                name="federationId" 
                 required="required"
                 >
-                @foreach ($federation_list as $fed)
-                <option value="{{ $fed->id }}" {{ ($fed->id == $federation_id) ? 'selected' : '' }}> {{ $fed->country->flag_code }} {{ $fed->id }} | {{ $fed->name_en }}</option>
+                @foreach ($federationList as $fed)
+                <option value="{{ $fed->id }}" {{ ($fed->id == $federationId) ? 'selected' : '' }}> {{ $fed->country->flag_code }} {{ $fed->id }} | {{ $fed->name_en }}</option>
                 @endforeach
             </select>
             <div class="small">
