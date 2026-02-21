@@ -18,22 +18,22 @@ class OrganizationMemberOnlyPolicy
      */
     public function __construct()
     {
-        Log::info('Policies '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        Log::info('Policies ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
     }
 
-    public function grant_access(string $organization_id): Response
+    public function grantAccess(string $organizationId): Response
     {
-        Log::info('Policies '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $user_id = Auth::id();
+        Log::info('Policies ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        $userId = Auth::id();
 
-        $access_granted = UserRole::where('organization_id', $organization_id)->where('user_id', $user_id)->count(); // 1 | 0
-        Log::info('Policies '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' res:'.$access_granted.' for user:'.$user_id);
+        $grantedAccess = UserRole::where('organization_id', $organizationId)->where('user_id', $userId)->exists(); // 1 | 0
+        Log::info('Policies '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' res:'.$grantedAccess.' for user:'.$userId);
 
-        if ($access_granted > 0) {
+        if ($grantedAccess) {
             return Response::allow();
         }
 
-        return Response::deny(__("You can't"));
+        return Response::deny(__("Sorry, no"));
 
     }
 }

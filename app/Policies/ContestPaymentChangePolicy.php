@@ -5,7 +5,7 @@
  *
  * To modify fee_payment_completed
  * - TODO if contest_participants.user_id === Auth::id()
- *   uploading receipt pdf
+ *   (uploading receipt pdf )
  * - if Auth::id() in (organization_id > contest_participants.contest_id)
  *
  * used in:

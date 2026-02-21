@@ -18,20 +18,22 @@ class JurorOnlyPolicy
      */
     public function __construct()
     {
-        Log::info('Policies '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        ds('Policies '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
     }
 
-    public function grant_access(string $section_id): Response
+    public function grantAccess(string $section_id): Response
     {
-        Log::info('Policies '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $user_id = Auth::id();
-        $access_granted = ContestJury::where('section_id', $section_id)->where('user_contact_id', $user_id)->count(); // 1 | 0
-        Log::info('Policies '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' res:'.$access_granted.' for user:'.$user_id);
+        ds('Policies ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        $userId = Auth::id();
+        $grantedAccess = ContestJury::where('section_id', $section_id)->where('user_contact_id', $userId)->exists(); // 1 | 0
+        ds('Policies ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' res:' . $grantedAccess . ' for user:' . $userId);
 
-        if ($access_granted > 0) {
+        // return ($grantedAccess) ? Response::allow() ? Response::deny(__("Sorry, no"));
+        if ($grantedAccess) {
+            // log
             return Response::allow();
         }
-
-        return Response::deny(__("You can't"));
+        // log
+        return Response::deny(__("Sorry, no"));
     }
 }

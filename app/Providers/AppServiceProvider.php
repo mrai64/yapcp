@@ -48,7 +48,7 @@ class AppServiceProvider extends ServiceProvider
 
         // Gate Policy
         Gate::define('contest-participants-update', [ContestPaymentChangePolicy::class, 'update']);
-        Gate::define('jury-panels', [JurorOnlyPolicy::class, 'grant_access']);
+        Gate::define('jury-panels', [JurorOnlyPolicy::class, 'grantAccess']);
 
         // Observers
         User::observe(UserObserver::class);
