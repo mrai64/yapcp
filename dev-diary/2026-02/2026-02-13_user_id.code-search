@@ -2,7 +2,6 @@
 # Flags: WordMatch
 # Including: *.php
 # Excluding: *.md, *.xlsx
-# ContextLines: 1
 
 391 risultati - 85 file
 
@@ -450,7 +449,7 @@ app/Livewire/Work/Listed.php: ✅
   40:             ->where('user_id', $this->user_contact['user_id'])
   41              ->orderBy('title_en')
 
-app/Livewire/Work/Modify.php:
+app/Livewire/Work/Modify.php: ✅
   24  
   25:     public string $user_id; // uuid
   26  
@@ -460,13 +459,13 @@ app/Livewire/Work/Modify.php:
   49:         $this->user_contact = UserContact::where('user_id', Auth::id())->get()[0];
   50          $this->work = Work::findOrFail($wid);
 
-app/Livewire/Work/Remove.php:
+app/Livewire/Work/Remove.php: ✅
   50          $this->work_id = $this->work->id;
   51:         // TODO check user_id
   52:         $this->userId = $this->work->user_id;
   53  
 
-app/Models/ContestAward.php:
+app/Models/ContestAward.php: ✅
    35   * @property string|null $winner_work_id fk: works.id
    36:  * @property string|null $winner_user_id fk: users.id user_contacts.user_id
    37   * @property string $winner_name winner not in previous cols
@@ -478,7 +477,7 @@ app/Models/ContestAward.php:
   169:         $userContact = $this->belongsTo(UserContact::class, 'winner_user_id', 'user_id');
   170          return $userContact;
 
-app/Models/ContestJury.php:
+app/Models/ContestJury.php: ✅
    26   * @property string $section_id fx: contest_section.id 1:N
    27:  * @property string $user_contact_id fx: user_contact.user_id
    28   * @property string $is_president N/Y flag
@@ -493,7 +492,7 @@ app/Models/ContestJury.php:
   160:             ownerKey: 'user_id' //            user_contacts.user_id
   161          );
 
-app/Models/ContestParticipant.php:
+app/Models/ContestParticipant.php: ✅
    16   * 1:1 contest_participants.contest_id > contests.id
    17:  * 1:1 contest_participants.user_id > user_contacts.user_id
    18   *
@@ -555,7 +554,7 @@ app/Models/ContestParticipant.php:
   219:             'user_id',
   220              'user_contact_user_id'
 
-app/Models/ContestVote.php:
+app/Models/ContestVote.php: ✅
    26   * @property string $work_id fk: works.id contest_works.work_id
    27:  * @property string $juror_user_id fk: user_contacts.user_id
    28   * @property string $vote see contests.vote_rule
@@ -564,7 +563,7 @@ app/Models/ContestVote.php:
   149:         $userContact = $this->hasOne(UserContact::class, 'user_id', 'user_id');
   150          return $userContact;
 
-app/Models/ContestWaiting.php:
+app/Models/ContestWaiting.php: ✅
    83          'section_id', //           fk contest_sections.id
    84:         'participant_user_id', //  fk user_contacts.user_id
    85          'work_id', //              fk contest_works.work_id
@@ -581,7 +580,7 @@ app/Models/ContestWaiting.php:
   150:             foreignKey: 'user_id',
   151              ownerKey: 'organization_user_id'
 
-app/Models/ContestWork.php:
+app/Models/ContestWork.php: ✅
    35   * @property string $country_id fk: user_contacts.country_id
    36:  * @property string $user_id fk: users.id
    37   * @property string $work_id fk: works.id
@@ -609,7 +608,7 @@ app/Models/ContestWork.php:
   232:         $contact = $this->hasOne(UserContact::class, 'user_id', 'user_id');
   233  
 
-app/Models/User.php:
+app/Models/User.php: ✅
   142      // RELATIONSHIPS
   143:     // TODO most of that must be user_contacts.user_id >
   144  
