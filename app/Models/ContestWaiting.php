@@ -138,7 +138,11 @@ class ContestWaiting extends Model
     // contest_waitings.participant_user_id > user_contacts.id
     public function participantUser()
     {
-        $participant = $this->hasOne(UserContact::class, 'user_id', 'participant_user_id');
+        $participant = $this->hasOne(
+            related: UserContact::class,
+            foreignKey: 'participant_user_id',
+            localKey: 'id'
+        );
         return $participant;
     }
 

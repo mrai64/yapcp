@@ -194,7 +194,7 @@ class ContestWork extends Model
     // contest_works.user_id > user_contacts.user_id
     public function author(): BelongsTo
     {
-        $userContact = $this->belongsTo(UserContact::class, 'user_id', 'user_id');
+        $userContact = $this->belongsTo(UserContact::class, 'user_id', 'id');
 
         return $userContact;
     }
@@ -230,7 +230,7 @@ class ContestWork extends Model
     // was: user_contact
     public function userContact()
     {
-        $contact = $this->hasOne(UserContact::class, 'user_id', 'user_id');
+        $contact = $this->hasOne(UserContact::class, 'user_id', 'id');
 
         return $contact;
     }

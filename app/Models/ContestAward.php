@@ -164,7 +164,7 @@ final class ContestAward extends Model
     // contest_awards.winner_user_id > user_contacts.user_id
     public function userContact()
     {
-        $userContact = $this->belongsTo(UserContact::class, 'winner_user_id', 'user_id');
+        $userContact = $this->belongsTo(UserContact::class, 'winner_user_id', 'id');
         return $userContact;
     }
 

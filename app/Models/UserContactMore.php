@@ -2,7 +2,7 @@
 
 /**
  * Some field are common to all contest, but some contest
- * because are sponsored from a national o inernational Federation
+ * because are sponsored from a national o international Federation
  * for federation requirements needs "One More Field(s)".
  * i.e. card_id for FIAP, GPU, PSA etc.
  *
@@ -82,8 +82,8 @@ class UserContactMore extends Model
     {
         $uc = $this->belongsTo(
             related: UserContact::class,
-            foreignKey: 'user_id',
-            ownerKey: 'user_contact_user_id'
+            foreignKey: 'user_contact_user_id', // ucm.user_contact_user_id
+            ownerKey: 'id' //                      uc.id
         );
         // log
         return $uc;
@@ -94,11 +94,10 @@ class UserContactMore extends Model
     {
         $federation = $this->belongsTo(
             related: Federation::class,
-            foreignKey: 'id',
-            ownerKey: 'federation_id'
+            foreignKey: 'federation_id', // ucm.federation_id
+            ownerKey: 'id' //               f.id
         );
         // log
         return $federation;
     }
-
 }

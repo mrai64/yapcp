@@ -157,7 +157,7 @@ class ContestJury extends Model
         $contact = $this->belongsTo(
             related: UserContact::class, //   user_contacts
             foreignKey: 'user_contact_id', // contest_juries.user_contact_id
-            ownerKey: 'user_id' //            user_contacts.user_id
+            ownerKey: 'id' //            user_contacts.id
         );
 
         return $contact;

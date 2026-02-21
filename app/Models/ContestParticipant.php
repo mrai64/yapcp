@@ -178,8 +178,8 @@ class ContestParticipant extends Model
     {
         $userContact = $this->belongsTo(
             UserContact::class,
-            'user_id',
-            'user_id'
+            'user_id', // contest_participants.user_id
+            'id' //       user_contacts.id
         );
 
         return $userContact;
@@ -192,7 +192,7 @@ class ContestParticipant extends Model
         $userContact = $this->belongsTo(
             UserContact::class,
             'user_id',
-            'user_id'
+            'id'
         );
 
         return $userContact;

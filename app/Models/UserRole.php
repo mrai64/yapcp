@@ -68,7 +68,7 @@ class UserRole extends Model
 
     protected $fillable = [
         'id', //               pk bigint autoincrement
-        'user_id', //          fk user_contacts.user_id users.id
+        'user_id', //          fk user_contacts.id users.id
         'role', //             fk user_roles_role_sets.role
         'organization_id', //  fk organizations.id  nullable
         'contest_id', //       fk contests.id       nullable
@@ -83,6 +83,12 @@ class UserRole extends Model
     protected function casts()
     {
         return [
+            'id' => int,
+            'user_id' => string,
+            'role' => string,
+            'organization_id' => string,
+            'contest_id' => string,
+            'federation_id' => string,
             'role_opening' => 'datetime',
             'role_closing' => 'datetime',
             'created_at' => 'datetime',

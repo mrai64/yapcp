@@ -14,6 +14,7 @@
  *
  * TODO manage file name as database label for file named uuid
  * TODO manage first_name last_name
+ * 2026-02-21 user_id become id and pk
  */
 
 namespace App\Models;
@@ -27,8 +28,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 /**
- * @property int $id
- * @property string $user_id fk: users.id uuid
+ * @property string $id fk: users.id uuid
  * @property string $country_id fk: countries.id
  * @property string $first_name
  * @property string $last_name
@@ -121,15 +121,14 @@ class UserContact extends Model
 
     // attributes mass assignable in factory and seeder
     protected $fillable = [
-        'id', //               uuid
-        'user_id', //          fk users.id uuid
+        'id', //               uuid === fk users.id uuid
         'country_id', //       fk countries.id CHAR3UPPER
         'first_name', //       text
         'last_name', //        text
         'nick_name', //        text
         'email', //            synchro users.email
         'cellular', //         E.164 format w/international prefix
-        'passport_photo', //   small jpg in /photo_box/__passport_photo.jpg
+        'passport_photo', //   ICAO small jpg in /photo_box/__passport_photo.jpg
         'address', //          postal first line
         'address_line2', //    postal
         'city', //             postal
@@ -151,9 +150,8 @@ class UserContact extends Model
     {
         return [
             'id' => 'string',
-            'user_id' => 'string',
-            'country_id' => Country3Id::class,
             //
+            'country_id' => Country3Id::class,
             'first_name' => 'string',
             'last_name' => 'string',
             'nick_name' => 'string',
@@ -183,7 +181,7 @@ class UserContact extends Model
 
     /**
      * @return the string used to store works and passport_photo
-     * Note: user_id to avoid homonymity
+     * Note: users.id to avoid homonymies
      */
     // was: photo_box
     public function photoBox(): string
@@ -192,7 +190,7 @@ class UserContact extends Model
         $pb = Str::upper($this->country_id) . '/'
             . Str::slug($this->last_name) . '/'
             . Str::slug($this->first_name) . '_'
-            . Str::lower($this->user_id);
+            . Str::lower($this->id);
 
         return $pb;
     }
@@ -205,12 +203,12 @@ class UserContact extends Model
     // was: get_photo_box
     public static function getPhotoBox(string $uid): string
     {
-        $uc = self::where('user_id', $uid)->firstOrFail();
+        $uc = self::where('id', $uid)->firstOrFail();
         // compose pb
         $photoBox = Str::upper($uc->country_id) . '/'
             . Str::slug($uc->last_name) . '/'
             . Str::slug($uc->first_name) . '_'
-            . Str::lower($uc->user_id);
+            . Str::lower($uc->id);
 
         return $photoBox;
     }
@@ -221,8 +219,8 @@ class UserContact extends Model
     //was: get_first_last_name
     public static function getFirstLastName(string $uid): string
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        $user = self::where('user_id', $uid)->first();
+        ds('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        $user = self::where('id', $uid)->first();
 
         return $user->first_name.' '.$user->last_name.' /'.$user->country_id;
     }
@@ -230,8 +228,8 @@ class UserContact extends Model
     // was: get_last_first_name
     public static function getLastNFirstName(string $uid): string
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        $user = self::where('user_id', $uid)->first();
+        ds('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        $user = self::where('id', $uid)->first();
 
         return $user->last_name.' '.$user->first_name.' /'.$user->country_id;
     }
@@ -239,8 +237,8 @@ class UserContact extends Model
     // was: get_email
     public static function getEmail(string $uid): string
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        $user = self::where('user_id', $uid)->get('email')[0];
+        ds('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        $user = self::where('id', $uid)->get('email')[0];
 
         return $user['email'];
     }
@@ -248,8 +246,8 @@ class UserContact extends Model
     // was: get_first_name
     public static function getFirstName(string $uid): string
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        $user = self::where('user_id', $uid)->get('first_name')[0];
+        ds('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        $user = self::where('id', $uid)->get('first_name')[0];
 
         return $user['first_name'];
     }
@@ -257,8 +255,8 @@ class UserContact extends Model
     // was: get_last_name
     public static function getLastName(string $uid): string
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        $user = self::where('user_id', $uid)->get('last_name')[0];
+        ds('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        $user = self::where('id', $uid)->get('last_name')[0];
 
         return $user['last_name'];
     }
@@ -266,33 +264,33 @@ class UserContact extends Model
     // was: get_country_id
     public static function getCountryId(string $uid): string
     {
-        Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        $user = self::where('user_id', $uid)->get('country_id')[0];
+        ds('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        $user = self::where('id', $uid)->get('country_id')[0];
 
         return $user['country_id'];
     }
 
     // RELATIONSHIP
 
-    // user_contacts.user_id > contest_awards.winner_user_id
+    // user_contacts.id > contest_awards.winner_user_id
     public function contestAwards()
     {
         $contestAwardsWinnersSet = $this->hasMany(
             related: ContestAward::class,
             foreignKey: 'winner_user_id',
-            localKey: 'user_id'
+            localKey: 'id'
         );
         // log
         return $contestAwardsWinnersSet;
     }
 
-    // user_contacts.user_id > contest_juries.user_contact_id
+    // user_contacts.id > contest_juries.user_contact_id
     public function contestJurors()
     {
         $contestJurorsSet = $this->hasMany(
             related: ContestJury::class,
             foreignKey: 'user_contact_id',
-            localKey: 'user_id'
+            localKey: 'id'
         );
         // log
         return $contestJurorsSet;
@@ -303,67 +301,67 @@ class UserContact extends Model
         $juries = $this->hasMany(
             related: ContestJury::class,
             foreignKey: 'user_contact_id',
-            localKey: 'user_id'
+            localKey: 'id'
         );
         // log
         return $juries;
     }
 
-    // user_contacts.user_id > contest_participants.user_id
+    // user_contacts.id > contest_participants.user_id
     public function contestParticipants()
     {
         $contestParticipantsSet = $this->hasMany(
             related: ContestParticipant::class,
-            foreignKey: 'user_id',
-            localKey: 'user_id'
+            foreignKey: 'user_id', //  contest_participants.user_id
+            localKey: 'id' //          user_contacts.id
         );
         // log
         return $contestParticipantsSet;
     }
 
-    // user_contacts.user_id > contest_votes.juror_user_id
+    // user_contacts.id > contest_votes.juror_user_id
     public function contestVotesJuror()
     {
         $cvjSet = $this->hasMany(
             related:  ContestVote::class,
             foreignKey: 'juror_user_id',
-            localKey: 'user_id'
+            localKey: 'id'
         );
         // log
         return $cvjSet;
     }
 
-    // user_contacts.user_id > contest_waitings.participant_user_id
+    // user_contacts.id > contest_waitings.participant_user_id
     public function contestWaitingParticipants()
     {
         $cwpSet = $this->hasMany(
             related: ContestWaiting::class,
             foreignKey: 'participant_user_id',
-            localKey: 'user_id'
+            localKey: 'id'
         );
         // log
         return $cwpSet;
     }
 
-    // user_contacts.user_id > contest_waitings.organization_user_id
+    // user_contacts.id > contest_waitings.organization_user_id
     public function contestWaitingOrganizations()
     {
         $cwoSet = $this->hasMany(
             related: ContestWaiting::class,
             foreignKey: 'organization_user_id',
-            localKey: 'user_id'
+            localKey: 'id'
         );
         // log
         return $cwoSet;
     }
 
-    // user_contacts.user_id > contest_works.user_id
+    // user_contacts.id > contest_works.user_id
     public function contestWorks()
     {
         $cwSet = $this->hasMany(
             related: ContestWork::class,
             foreignKey: 'user_id',
-            localKey: 'user_id'
+            localKey: 'id'
         );
         // log
         return $cwSet;
@@ -380,64 +378,64 @@ class UserContact extends Model
         return $country;
     }
 
-    // user_contacts.user_id > user_contact_mores.user_contact_user_id
+    // user_contacts.id > user_contact_mores.user_contact_user_id
     public function contactMores()
     {
         $contactMores = $this->hasMany(
             UserContactMore::class,
             'user_contact_user_id',
-            'user_id'
+            'id'
         );
         // log
         return $contactMores;
     }
 
     // user_contacts.id > user_contacts.id
-    // user_contacts.user_id > user_contacts.user_id
+    // user_contacts.id > user_contacts.user_id
 
-    // user_contacts.user_id > user_roles.user_id
+    // user_contacts.id > user_roles.user_id
     public function userRoles()
     {
         $userRoles = $this->hasMany(
             related: UserRole::class,
             foreignKey: 'user_id',
-            localKey: 'user_id'
+            localKey: 'id'
         );
         // loc
         return $userRoles;
     }
 
-    // user_contacts.user_id > users.id
+    // user_contacts.id > users.id
     public function user()
     {
         $user = $this->belongsTo(
             related: User::class,
             foreignKey: 'id',
-            ownerKey: 'user_id'
+            ownerKey: 'id'
         );
         // log
         return $user;
     }
 
-    // user_contacts.user_id > work_validations.validator_user_id
+    // user_contacts.id > work_validations.validator_user_id
     public function workValidators()
     {
         $wvSet = $this->hasMany(
             related: WorkValidation::class,
             foreignKey: ' validator_user_id',
-            localKey: 'user_id'
+            localKey: 'id'
         );
         // log
         return $wvSet;
     }
 
-    // contest_contacts.user_id > works.user_id
+    // contest_contacts.id > works.user_id
     public function userWorks()
     {
         $uwSet = $this->hasMany(
             related: Work::class,
             foreignKey: 'user_id',
-            localKey: 'user_id'
+            localKey: 'id'
         );
         // log
         return $uwSet;

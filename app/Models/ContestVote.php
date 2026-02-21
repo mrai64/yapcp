@@ -146,7 +146,7 @@ class ContestVote extends Model
     // was: user_contact
     public function userContact()
     {
-        $userContact = $this->hasOne(UserContact::class, 'user_id', 'user_id');
+        $userContact = $this->hasOne(UserContact::class, 'user_id', 'id');
         return $userContact;
     }
 }

@@ -16,7 +16,7 @@ class Remove extends Component
     public Work $work;
 
     //
-    public $work_id;
+    public $workId;
 
     public $userId;
 
@@ -47,7 +47,7 @@ class Remove extends Component
     {
         $this->work = Work::findOrFail($wid)->get()[0];
 
-        $this->work_id = $this->work->id;
+        $this->workId = $this->work->id;
         // TODO check user_id
         $this->userId = $this->work->user_id;
 
@@ -79,7 +79,7 @@ class Remove extends Component
         $this->validate();
 
         $work = new Work();
-        $work->findOrFail($this->work_id)->delete();
+        $work->findOrFail($this->workId)->delete();
 
         // back to list
         return redirect()

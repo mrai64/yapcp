@@ -239,7 +239,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $contact = $this->hasOne(
             related: UserContact::class,
-            foreignKey: 'user_id',
+            foreignKey: 'id',
             localKey: 'id'
         );
         // log
@@ -251,7 +251,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $contact = $this->hasOne(
             related: UserContact::class,
-            foreignKey: 'user_id',
+            foreignKey: 'id',
             localKey: 'id'
         );
         // log
