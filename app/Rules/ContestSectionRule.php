@@ -17,7 +17,6 @@
 namespace App\Rules;
 
 use App\Models\ContestSection;
-use App\Models\Work;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Log;

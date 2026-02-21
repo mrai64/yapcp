@@ -58,7 +58,7 @@ use Illuminate\Support\Str;
  * @property-read int|null $user_roles_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\WorkValidation> $workValidators
  * @property-read int|null $work_validators_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Work> $works
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWork> $works
  * @property-read int|null $works_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()

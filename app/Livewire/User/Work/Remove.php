@@ -4,16 +4,16 @@
  * Work/Remove
  */
 
-namespace App\Livewire\Work;
+namespace App\Livewire\User\Work;
 
 use App\Models\UserContact;
-use App\Models\Work;
+use App\Models\UserWork;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Remove extends Component
 {
-    public Work $work;
+    public UserWork $work;
 
     //
     public $workId;
@@ -45,7 +45,7 @@ class Remove extends Component
      */
     public function mount(string $wid) // see route()
     {
-        $this->work = Work::findOrFail($wid)->get()[0];
+        $this->work = UserWork::findOrFail($wid)->get()[0];
 
         $this->workId = $this->work->id;
         // TODO check user_id
@@ -78,7 +78,7 @@ class Remove extends Component
     {
         $this->validate();
 
-        $work = new Work();
+        $work = new UserWork(); // empty
         $work->findOrFail($this->workId)->delete();
 
         // back to list

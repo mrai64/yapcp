@@ -15,7 +15,6 @@
 namespace App\Livewire\Organization\PreJury;
 
 use App\Models\ContestSection;
-use App\Models\Work;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Livewire\Component;

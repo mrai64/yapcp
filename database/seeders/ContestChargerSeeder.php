@@ -23,7 +23,6 @@ use App\Models\ContestWork;
 use App\Models\User;
 use App\Models\UserContact;
 use App\Models\UserRole;
-use App\Models\Work;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;

@@ -73,7 +73,7 @@ use Illuminate\Support\Str;
  * @property-read \App\Models\User|null $user
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $userRoles
  * @property-read int|null $user_roles_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Work> $userWorks
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWork> $userWorks
  * @property-read int|null $user_works_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\WorkValidation> $workValidators
  * @property-read int|null $work_validators_count

@@ -14,10 +14,10 @@
  *
  */
 
-namespace App\Livewire\Work;
+namespace App\Livewire\User\Work;
 
 use App\Models\UserContact;
-use App\Models\Work;
+use App\Models\UserWork;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -33,7 +33,7 @@ class Add extends Component
     use WithFileUploads;
 
     // form fields and tmp vars
-    public Work $work;
+    public UserWork $work;
 
     public UserContact $user_contact;
 
@@ -123,7 +123,7 @@ class Add extends Component
         ds('Component ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' validated:' . json_encode($validated));
 
         $validated['extension'] = Str::lower(pathinfo($this->userWorkImage->getClientOriginalName(), PATHINFO_EXTENSION));
-        if (! in_array($validated['extension'], Work::VALIDEXT)) {
+        if (! in_array($validated['extension'], UserWork::VALIDEXT)) {
             $validated['extension'] = 'jpg';
         }
         // construct from userWorkImage for work_file
@@ -138,7 +138,7 @@ class Add extends Component
         // was: with snake_case fields $this->work = Work::create($validated);
         $validated['title_en'] = $validated['titleEn'];
         $validated['title_local'] = $validated['titleLocal'];
-        $this->work = Work::create($validated);
+        $this->work = UserWork::create($validated);
 
         $validated['id'] = $this->work->id; // uuid assigned
         ds('Component ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' validated:' . json_encode($validated));
@@ -156,10 +156,10 @@ class Add extends Component
         // 3. made a thumbs
         // if ($wh[0]> 300 || $wh[1] > 300) {
         // }
-        $img_man = new ImageManager(Driver::class);
+        $imageManager = new ImageManager(Driver::class);
         ds('Component ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' resize:1');
 
-        $resized = $img_man->read($this->userWorkImage);
+        $resized = $imageManager->read($this->userWorkImage);
         ds('Component ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' resize:2');
         if ($wh[0] >= $wh[1]) {
             $resized->scale(width: 300);
@@ -167,23 +167,31 @@ class Add extends Component
             $resized->scale(height: 300);
         }
 
-        $resized_filename = $this->photoBox . '/' . $validated['id'] . '_300_.' . $validated['extension'];
-        ds('Component ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' resize_file: ' . $resized_filename);
+        $resizedFilename = $this->photoBox . '/' . $validated['id'] . '_300_.' . $validated['extension'];
+        ds('Component ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' resize_file: ' . $resizedFilename);
 
-        // NO $path_resized = Storage::putFileAs('photos', new File($this->photoBox . '/' . $validated['id'] . '_300_.' . $validated['extension']), $validated['id'] . '_300_.' . $validated['extension'] );
-        //    put non va, putFile putFileAs funzionano con file che arrivano dal form
+        // NO
+        //  Storage::put non va, ::putFile ::putFileAs funzionano con file che arrivano dal form
+        //  $resizedPath = Storage::putFileAs(
+        //      path: 'photos',
+        //      file: new File(
+        //          $this->photoBox . '/'
+        //          . $validate['id'] . '_300_.' . $validated['extension']
+        //      ),
+        //      name: $validate['id'] . '_300_.' . $validated['extension']
+        //  );
 
-        $resized_encoded = (string) $resized->encode(new JpegEncoder(quality: 90)); // quality 0..100
-        // NO $put_file = Storage::put('/public/storage/photos/'.$resized_filename , $resized_encoded, 'public');
+        $resizedEncoded = (string) $resized->encode(new JpegEncoder(quality: 90)); // quality 0..100
+        // NO $put_file = Storage::put('/public/storage/photos/'.$resizedFilename , $resizedEncoded, 'public');
         //    anche dichiarandolo /public lo mette in /private
-        // NO Storage::disk('photos')->put($resized_filename , $resized_encoded, 'public');
+        // NO Storage::disk('photos')->put($resizedFilename , $resizedEncoded, 'public');
         //    non è definito un disco 'photos'
-        // NO Storage::disk('public')->put($resized_filename , $resized_encoded, 'public');
+        // NO Storage::disk('public')->put($resizedFilename , $resizedEncoded, 'public');
         //    e questo non ha fatto ...niente
-        // NO Storage::disk('public')->put('/public/storage/photos/'.$resized_filename , $resized_encoded, 'public');
+        // NO Storage::disk('public')->put('/public/storage/photos/'.$resizedFilename , $resizedEncoded, 'public');
         //    Questo salva in /public/public/storage/photos/
         // SI FINALMENTE SI
-        Storage::disk('public')->put('/photos/' . $resized_filename, $resized_encoded, 'public');
+        Storage::disk('public')->put('/photos/' . $resizedFilename, $resizedEncoded, 'public');
 
         ds('Component ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' fine');
 

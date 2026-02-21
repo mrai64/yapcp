@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\Log;
  * @property-read \App\Models\Contest|null $contest
  * @property-read \App\Models\ContestSection|null $contestSection
  * @property-read \App\Models\UserContact|null $userContact
- * @property-read \App\Models\Work|null $work
+ * @property-read \App\Models\UserWork|null $work
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote onlyTrashed()

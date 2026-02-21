@@ -5,10 +5,10 @@
  * NOT update work file
  */
 
-namespace App\Livewire\Work;
+namespace App\Livewire\User\Work;
 
 use App\Models\UserContact;
-use App\Models\Work;
+use App\Models\UserWork;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -16,7 +16,7 @@ class Modify extends Component
 {
     // don't use WithFileUploads;
 
-    public Work $work;
+    public UserWork $work;
 
     public UserContact $userContact;
 
@@ -47,7 +47,7 @@ class Modify extends Component
 
         $this->userId = Auth::id();
         $this->userContact = UserContact::where('id', Auth::id())->get()[0];
-        $this->work = Work::findOrFail($wid);
+        $this->work = UserWork::findOrFail($wid);
         // and now form fields
         $this->workId = $this->work->id;
         $this->workFileName = $this->work->work_file;
@@ -73,7 +73,7 @@ class Modify extends Component
      */
     public function update()
     {
-        $this->work = Work::findOrFail($this->workId);
+        $this->work = UserWork::findOrFail($this->workId);
         $this->work->title_en = $this->titleEnglish;
         $this->work->title_local = $this->titleLocal;
         $this->work->long_side = $this->longSide;

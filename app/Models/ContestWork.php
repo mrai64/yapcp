@@ -49,7 +49,7 @@ use Illuminate\Support\Str; //         pk uuid
  * @property-read \App\Models\Country|null $country
  * @property-read \App\Models\ContestSection $section
  * @property-read \App\Models\UserContact|null $userContact
- * @property-read \App\Models\Work $work
+ * @property-read \App\Models\UserWork $work
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork onlyTrashed()

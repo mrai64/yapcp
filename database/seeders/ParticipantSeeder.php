@@ -12,7 +12,6 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\UserContact;
-use App\Models\Work;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;

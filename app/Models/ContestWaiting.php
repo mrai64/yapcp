@@ -42,7 +42,7 @@ use Illuminate\Support\Str;
  * @property-read \App\Models\UserContact|null $organizationExaminer
  * @property-read \App\Models\UserContact|null $participantUser
  * @property-read \App\Models\ContestSection|null $section
- * @property-read \App\Models\Work|null $work
+ * @property-read \App\Models\UserWork|null $work
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting onlyTrashed()

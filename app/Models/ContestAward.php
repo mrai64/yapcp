@@ -41,7 +41,7 @@ use Illuminate\Support\Str;
  * @property-read \App\Models\Contest $contest
  * @property-read \App\Models\ContestSection|null $section
  * @property-read \App\Models\UserContact|null $userContact
- * @property-read \App\Models\Work|null $work
+ * @property-read \App\Models\UserWork|null $work
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward onlyTrashed()

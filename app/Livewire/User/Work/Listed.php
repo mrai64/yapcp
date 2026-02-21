@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Livewire\Work;
+namespace App\Livewire\User\Work;
 
 use App\Models\UserContact;
-use App\Models\Work;
+use App\Models\UserWork;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -30,8 +30,7 @@ class Listed extends Component
 
         $this->country = $this->userContact->country;
 
-        $this->userWorkList = Work::whereNull('deleted_at')
-            ->where('user_id', $this->userContact['id'])
+        $this->userWorkList = UserWork::where('user_id', $this->userContact['id'])
             ->orderBy('title_en')
             ->get();
 
