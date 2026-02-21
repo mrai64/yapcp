@@ -5,8 +5,8 @@
  *
  * related to Contest
  * related to ContestSection
- * related to Work
  * related to ContestWork
+ * related to UserWork
  * related to UserContact
  *
  * 2025-11-18 table_name fix
@@ -17,7 +17,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Log;
 
 /**
  * @property int $id
@@ -66,7 +65,7 @@ class ContestVote extends Model
         'id', //             pk unsigned bigint
         'contest_id', //     fk contests.id
         'section_id', //     fk contest_sections.id
-        'work_id', //        fk works.id contest_works.work_id
+        'contest_work_id', //        fk works.id contest_works.work_id
         'juror_user_id', //  fk user_contact.id
         'vote', //           following contests.vote_rule
         // created_at        reserved
@@ -78,6 +77,11 @@ class ContestVote extends Model
     {
         return [
             'id' => 'integer',
+            'contest_id' => 'string',
+            'section_id' => 'string',
+            'contest_work_id' => 'string',
+            'juror_user_id' => 'string',
+            'vote' => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
@@ -110,10 +114,14 @@ class ContestVote extends Model
     // was: section_vote_board
     public static function sectionVoteBoard(string $contestId, string $sectionId)
     {
-        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        $vote_board = self::where('section_id', $sectionId)->where('contest_id', $contestId)->orderBy('vote', 'desc')->orderBy('updated_at', 'desc')->get(['work_id', 'vote', 'id']);
+        ds('Model ' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' called');
+        $vote_board = self::where('section_id', $sectionId)
+            ->where('contest_id', $contestId)
+            ->orderBy('vote', 'desc')
+            ->orderBy('updated_at', 'desc')
+            ->get(['work_id', 'vote', 'id']);
 
-        Log::info('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' vote_board:'.json_encode($vote_board));
+        ds('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' vote_board:'.json_encode($vote_board));
 
         return $vote_board;
 
@@ -123,7 +131,11 @@ class ContestVote extends Model
 
     public function contest()
     {
-        $contest = $this->hasOne(Contest::class, 'id', 'contest_id');
+        $contest = $this->hasOne(
+            Contest::class,
+            'id',
+            'contest_id'
+        );
 
         return $contest;
     }
@@ -131,14 +143,22 @@ class ContestVote extends Model
     // was: contest_section
     public function contestSection()
     {
-        $contestSection = $this->hasOne(ContestSection::class, 'id', 'section_id');
+        $contestSection = $this->hasOne(
+            ContestSection::class,
+            'id',
+            'section_id'
+        );
 
         return $contestSection;
     }
 
-    public function work()
+    public function contestWork()
     {
-        $work = $this->belongsTo(Work::class);
+        $work = $this->belongsTo(
+            ContestWork::class, //  ext class
+            'id', //                ext contest_works.id
+            'contest_work_id' //    int contest_votes.contest_work_id
+        );
 
         return $work;
     }
@@ -146,7 +166,11 @@ class ContestVote extends Model
     // was: user_contact
     public function userContact()
     {
-        $userContact = $this->hasOne(UserContact::class, 'user_id', 'id');
+        $userContact = $this->hasOne(
+            UserContact::class,
+            'id',
+            'juror_user_id'
+        );
         return $userContact;
     }
 }

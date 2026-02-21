@@ -1,11 +1,12 @@
 <?php
 
 /**
+ * Contest Work depot
  * contest depot
  * - contest_id is a facility
  * - section_id must be related to contest_id
  * - country_id is a facility must be user_id->country_id
- * - work_id must be property of user_id
+ * - user_work_id is user_works.id
  * - extension is a facility must be user_work->extension
  */
 use Illuminate\Database\Migrations\Migration;
@@ -28,7 +29,7 @@ return new class () extends Migration {
                 ->index()->comment('fk: countries.id ');
             $table->char('user_id', 36)->charset('ascii')->collation('ascii_general_ci')
                 ->index()->comment('fk:user_contacts.id author');
-            $table->char('work_id', 36)->charset('ascii')->collation('ascii_general_ci')
+            $table->char('user_work_id', 36)->charset('ascii')->collation('ascii_general_ci')
                 ->index()->comment('fk: user_works.id');
             //
             $table->string('extension', 6)->charset('ascii')->collation('ascii_general_ci')
@@ -43,11 +44,11 @@ return new class () extends Migration {
             $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent()->index();
             $table->dateTime('deleted_at')->nullable()->index();
             // idx
-            $table->index(['section_id', 'is_admit', 'work_id'], 'admit_idx');
-            $table->index(['contest_id', 'country_id', 'user_id', 'section_id', 'work_id', 'id'], 'catalogue_idx');
-            $table->index(['contest_id', 'section_id', 'country_id', 'user_id', 'work_id', 'id'], 'contest_idx');
-            $table->index(['work_id', 'section_id', 'contest_id'], 'contest_works_idx');
-            $table->unique(['user_id', 'contest_id', 'section_id', 'portfolio_sequence', 'work_id', 'deleted_at'], 'sequence_idx');
+            $table->index(['section_id', 'is_admit', 'user_work_id'], 'admit_idx');
+            $table->index(['contest_id', 'country_id', 'user_id', 'section_id', 'user_work_id', 'id'], 'catalogue_idx');
+            $table->index(['contest_id', 'section_id', 'country_id', 'user_id', 'user_work_id', 'id'], 'contest_idx');
+            $table->index(['user_work_id', 'section_id', 'contest_id'], 'contest_works_idx');
+            $table->unique(['user_id', 'contest_id', 'section_id', 'portfolio_sequence', 'user_work_id', 'deleted_at'], 'sequence_idx');
             $table->index(['user_id', 'section_id', 'contest_id', 'portfolio_sequence'], 'user_contests_idx');
             //
             $table->foreign(['contest_id'])->references(['id'])->on('contests')

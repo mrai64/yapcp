@@ -17,23 +17,23 @@
 namespace App\Rules;
 
 use App\Models\ContestSection;
+use App\Models\UserWork;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Session;
 
 class ContestSectionRule implements ValidationRule
 {
-    public $section_id;
+    public $sectionId;
 
-    public $section;
+    public ContestSection $section;
 
-    #[Session(key: 'section_json')]
-    public $section_json;
+    #[Session(key: 'sectionJson')]
+    public $sectionJson;
 
     public $userWorkId;
 
-    public $work;
+    public $userWork;
 
     /**
      * Run the validation rule.
@@ -42,35 +42,38 @@ class ContestSectionRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in: attribute:'.$attribute.', value:'.$value);
+        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' in: attribute:' . $attribute . ', value:' . $value);
 
-        // section_id first
-        if ($attribute === 'section_id') {
-            $this->section_id = $value;
+        // sectionId first
+        if ($attribute === 'sectionId') {
+            $this->sectionId = $value;
             $this->section = ContestSection::where('id', $value)->get()[0];
-            $this->section_json = json_encode($this->section);
-            Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' section:'.$this->section_json);
-            session()->put('section_json', $this->section_json);
+            $this->sectionJson = json_encode($this->section);
+            ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' section:' . $this->sectionJson);
+            session()->put('sectionJson', $this->sectionJson);
         }
 
         // userWorkId follow
         if ($attribute === 'userWorkId') {
-            $this->section = json_decode(session()->get('section_json'));
-            Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' section:'.json_encode($this->section));
+            $this->section = json_decode(session()->get('sectionJson'));
+            ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' section:' . json_encode($this->section));
             $this->userWorkId = $value;
-            $this->work = Work::where('id', $value)->get()[0];
-            Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' work:'.json_encode($this->work));
+            $this->userWork = UserWork::where('id', $value)->get()[0];
+            ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' work:' . json_encode($this->userWork));
 
-            if ($this->work->long_side > $this->section->rule_max_size) {
+            if ($this->userWork->long_side > $this->section->rule_max_size) {
                 $fail('🟥 Long side');
             }
-            if ($this->work->short_side < $this->section->rule_min_size) {
+            if ($this->userWork->short_side < $this->section->rule_min_size) {
                 $fail('🟥 Short side');
             }
-            if (($this->section->rule_monochromatic === 'Y') && ($this->work->monochromatic != 'Y')) {
+            if (($this->section->rule_monochromatic) && ($this->userWork->monochromatic != true)) {
                 $fail('🟥 Monochromatic');
             }
-            Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' ok ok');
+            if (($this->section->rule_monochromatic) && ($this->userWork->raw != true)) {
+                $fail('🟥 RAW unavailable');
+            }
+            ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' ok ok');
         }
 
     }

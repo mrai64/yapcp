@@ -7,7 +7,7 @@
  *
  * related to Contest
  * related to ContestSection
- * related to Work
+ * related to UserWork
  * related to UserContact participant
  * related to UserContact examiner
  *
@@ -82,7 +82,7 @@ class ContestWaiting extends Model
         'contest_id', //           fk contests.id
         'section_id', //           fk contest_sections.id
         'participant_user_id', //  fk user_contacts.user_id
-        'work_id', //              fk contest_works.work_id
+        'user_work_id', //              fk user_works.work_id
         'portfolio_sequence', //   1..contest_sections.rule_max
         'email', //                user_contacts.email of participant
         'because', //              warning text
@@ -103,6 +103,15 @@ class ContestWaiting extends Model
     protected function casts()
     {
         return [
+            'id' => 'string',
+            'contest_id' => 'string',
+            'section_id' => 'string',
+            'participant_user_id' => 'string',
+            'user_work_id' => 'string',
+            'portfolio_sequence' => 'int',
+            'email' => 'string',
+            'because' => 'string',
+            'organization_user_id' => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
@@ -116,21 +125,34 @@ class ContestWaiting extends Model
     // contest_waitings.contest_id > contests.id
     public function contest()
     {
-        $contest = $this->hasOne(Contest::class, 'id', 'contest_id');
+        $contest = $this->hasOne(
+            Contest::class, //  ext class
+            'id', //            ext contests.id
+            'contest_id' //     int contest_waitings.contest_id
+        );
+
         return $contest;
     }
 
     // contest_waitings.section_id > contest_sections.id
     public function section()
     {
-        $section = $this->hasOne(ContestSection::class, 'id', 'section_id');
+        $section = $this->hasOne(
+            ContestSection::class, //  ext class
+            'id', //                   ext contes_sections.id
+            'section_id' //            int contest_waitings.section_id
+        );
         return $section;
     }
 
     // contest_waitings.work_id > user_contacts.id
     public function work()
     {
-        $work = $this->hasOne(Work::class, 'id', 'work_id');
+        $work = $this->hasOne(
+            UserWork::class, //  ext class
+            'id', //             ext user_works.id
+            'user_work_id' //    int contest_waitings.user_work_id
+        );
         return $work;
     }
 
@@ -139,9 +161,9 @@ class ContestWaiting extends Model
     public function participantUser()
     {
         $participant = $this->hasOne(
-            related: UserContact::class,
-            foreignKey: 'participant_user_id',
-            localKey: 'id'
+            related: UserContact::class, //     ext class
+            foreignKey: 'id', //                ext user_contacts.id
+            localKey: 'participant_user_id' //  int contest_waitings.participant_user_id
         );
         return $participant;
     }
@@ -150,9 +172,9 @@ class ContestWaiting extends Model
     public function organizationExaminer()
     {
         $userContact = $this->belongsTo(
-            related: UserContact::class,
-            foreignKey: 'user_id',
-            ownerKey: 'organization_user_id'
+            related: UserContact::class, //      ext class
+            foreignKey: 'id', //                 ext user_contacts.id
+            ownerKey: 'organization_user_id' //  int contest_waitings.organization_user_id
         );
         return $userContact;
     }

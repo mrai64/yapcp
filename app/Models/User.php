@@ -282,11 +282,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $rSet;
     }
 
-    // users.id > work_validators.validator_user_id
-    public function workValidators()
+    // users.id > user_work_validators.validator_user_id
+    public function userWorkValidators()
     {
         $wvSet = $this->hasMany(
-            related: WorkValidation::class,
+            related: UserWorkValidation::class,
             foreignKey: 'validator_user_id',
             localKey: 'id'
         );
@@ -294,10 +294,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $wvSet;
     }
 
-    // users.id > works.user_id
+    // users.id > user_works.user_id
     public function works()
     {
-        $works = $this->hasMany(Work::class);
+        $works = $this->hasMany(UserWork::class);
         // log
         return $works;
     }

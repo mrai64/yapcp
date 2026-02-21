@@ -219,10 +219,10 @@ class UserContact extends Model
     //was: get_first_last_name
     public static function getFirstLastName(string $uid): string
     {
-        ds('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        ds('Model ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         $user = self::where('id', $uid)->first();
 
-        return $user->first_name.' '.$user->last_name.' /'.$user->country_id;
+        return $user->first_name . ' ' . $user->last_name . ' /' . $user->country_id;
     }
 
     // was: get_last_first_name
@@ -417,11 +417,11 @@ class UserContact extends Model
         return $user;
     }
 
-    // user_contacts.id > work_validations.validator_user_id
-    public function workValidators()
+    // user_contacts.id > user_work_validations.validator_user_id
+    public function userWorkValidators()
     {
         $wvSet = $this->hasMany(
-            related: WorkValidation::class,
+            related: UserWorkValidation::class,
             foreignKey: ' validator_user_id',
             localKey: 'id'
         );
@@ -429,17 +429,15 @@ class UserContact extends Model
         return $wvSet;
     }
 
-    // contest_contacts.id > works.user_id
+    // contest_contacts.id > user_works.user_id
     public function userWorks()
     {
         $uwSet = $this->hasMany(
-            related: Work::class,
+            related: UserWork::class,
             foreignKey: 'user_id',
             localKey: 'id'
         );
         // log
         return $uwSet;
     }
-
-    //
 }

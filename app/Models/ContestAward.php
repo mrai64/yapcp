@@ -154,18 +154,28 @@ final class ContestAward extends Model
         return $section;
     }
 
-    // contest_awards.winner_work_id > works.id
-    public function work()
+    // contest_awards.winner_work_id > contest_works.id
+    public function contestWork()
     {
-        $work = $this->belongsTo(Work::class, 'winner_work_id', 'id');
+        $work = $this->belongsTo(
+            ContestWork::class, //  ext class
+            'winner_work_id', //    int contest_awards.winner_work_id
+            'id' //                 ext contest_works.id
+        );
         return $work;
     }
+
+    // contest_awards.winner_work_id > contest_works.id
+    // contest_works.user_work_id > user_works.id
 
     // contest_awards.winner_user_id > user_contacts.user_id
     public function userContact()
     {
-        $userContact = $this->belongsTo(UserContact::class, 'winner_user_id', 'id');
+        $userContact = $this->belongsTo(
+            UserContact::class, //  ext class
+            'winner_user_id', //    int contest_awards.winner_user_id
+            'id' //                 ext user_contacts.id
+        );
         return $userContact;
     }
-
 }

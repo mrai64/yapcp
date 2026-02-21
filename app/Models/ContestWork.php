@@ -91,7 +91,7 @@ class ContestWork extends Model
         'section_id', //      fk contest_sections.id
         'country_id', //      fk countries.id
         'user_id', //         fk user_contacts.user_id
-        'work_id', //         fk works.id
+        'user_work_id', //    fk works.id
         'is_admit', //        0 false 1 true
         'portfolio_sequence', // 1..contest_sections.rule_max
         // created_at         reserved
@@ -110,6 +110,14 @@ class ContestWork extends Model
     protected function casts()
     {
         return [
+            'id' => 'string',
+            'contest_id' => 'string',
+            'section_id' => 'string',
+            'country_id' => 'string',
+            'user_id' => 'string',
+            'user_work_id' => 'string',
+            'is_admit' => 'int',
+            'portfolio_sequence' => 'int',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
@@ -130,11 +138,12 @@ class ContestWork extends Model
     {
         // default for contest based on
         if ($originalFileName === '') {
-            $originalFileName = $this->contest_id.'/'.$this->section_id.'/300px_'.$this->work_id.$this->extension;
+            $originalFileName = $this->contest_id . '/' . $this->section_id
+                . '/' . $this->user_work_id . '.' . $this->extension;
         }
         $lastSlashPos = strrpos($originalFileName, '/');
         $path = substr($originalFileName, 0, $lastSlashPos + 1);
-        $miniatureFileName = '300px_'.substr($originalFileName, $lastSlashPos + 1);
+        $miniatureFileName = '300px_' . substr($originalFileName, $lastSlashPos + 1);
 
         if (Storage::disk('public')->exists('contests/'.$path.$miniatureFileName)) {
             // dbg ds('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' found');
@@ -155,7 +164,7 @@ class ContestWork extends Model
     // was: get_user_for_contest_work
     public static function userWorksCounter(string $contestId, string $workId): string
     {
-        $participant = self::where('contest_id', $contestId)->where('work_id', $workId)->get('id');
+        $participant = self::where('contest_id', $contestId)->where('user_work_id', $workId)->get('id');
         // log
         $participantId = (count($participant)) ? $participant[0]['id'] : '';
         // log
@@ -185,7 +194,11 @@ class ContestWork extends Model
     // contest_works.country_id > countries.id
     public function country()
     {
-        $country = $this->belongsTo(Country::class, 'id', 'country_id');
+        $country = $this->belongsTo(
+            Country::class,
+            'id',
+            'country_id'
+        );
         // log
         return $country;
     }
@@ -194,17 +207,25 @@ class ContestWork extends Model
     // contest_works.user_id > user_contacts.user_id
     public function author(): BelongsTo
     {
-        $userContact = $this->belongsTo(UserContact::class, 'user_id', 'id');
+        $userContact = $this->belongsTo(
+            UserContact::class,
+            'id',
+            'user_id'
+        );
 
         return $userContact;
     }
 
-    // contest_works.work_id > works.id
-    // contest_works.work_id > contest_awards.winner_work_id
+    // contest_works.user_user_work_id > user_works.id
+    // contest_works.user_work_id > contest_awards.winner_work_id
     // w/contest_works.section_id = contest_awards.section_id
     public function award()
     {
-        $awardReceived = $this->hasMany(ContestAward::class, 'winner_work_id', 'work_id')
+        $awardReceived = $this->hasMany(
+            ContestAward::class, // ext class
+            'winner_work_id', //    ext contest_awards.winner_work_id
+            'user_work_id' //       int contest_works.user_work_id
+        )
             ->where('section_id', $this->section_id);
 
         return $awardReceived;
@@ -223,23 +244,31 @@ class ContestWork extends Model
     }
 
     /**
-     * relation user_works >> user_contacts
+     * relation contest_works >> user_contacts
      *
-     * @return UserContact contest_works.user_id user_contacts.user_id (actually not pk)
+     * @return UserContact contest_works.user_id user_contacts.id
      */
     // was: user_contact
     public function userContact()
     {
-        $contact = $this->hasOne(UserContact::class, 'user_id', 'id');
+        $contact = $this->hasOne(
+            UserContact::class, // ext class
+            'id', //               ext user_contacts.id
+            'user_id' //           int contest_works.user_id
+        );
 
         return $contact;
     }
 
 
-    // contest_works.work_id fk works.id
-    public function work(): BelongsTo
+    // contest_works.work_id >> user_works.id
+    public function userWork(): BelongsTo
     {
-        $work = $this->belongsTo(Work::class, 'work_id');
+        $work = $this->belongsTo(
+            UserWork::class, // ext class
+            'work_id', //       int contest_works.work_id
+            'id' //             ext user_works.id
+        );
 
         return $work;
     }

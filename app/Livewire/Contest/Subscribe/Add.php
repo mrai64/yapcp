@@ -47,7 +47,7 @@ class Add extends Component
 
         $this->userWorkId = $data->workId;
         $this->contestId = $data->contestId;
-        // section_id - form field
+        // sectionId - form field
         $this->userId = Auth::id(); // even $work->user_id
         $this->contestSectionSet = $data->contestSectionSet;
         ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':'
@@ -74,7 +74,7 @@ class Add extends Component
             . __LINE__ . ' in:' . json_encode($this));
 
         return [
-            // first section_id, then userWorkId according w/ContesSectionRule
+            // first sectionId, then userWorkId according w/ContesSectionRule
             'sectionId' => [
                 'string',
                 'exists:contest_sections,id',
@@ -109,7 +109,7 @@ class Add extends Component
         $userContact = UserContact::where('id', $this->userid)->first();
 
         if ($validated['portfolioSequence'] == 0) {
-            $validated['portfolioSequence'] = ContestWork::where('section_id', $validated['section_id'])->where('user_id', $this->userId)->count();
+            $validated['portfolioSequence'] = ContestWork::where('section_id', $validated['sectionId'])->where('user_id', $this->userId)->count();
             $validated['portfolioSequence'] += 1;
         }
         ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' validated' . json_encode($validated));
@@ -117,7 +117,7 @@ class Add extends Component
         $this->userWorkInContest = ContestWork::create([
             // id assigned
             'contest_id' => $this->contestId,
-            'section_id' => $validated['sectionId'],
+            'sectionId' => $validated['sectionId'],
             'country_id' => $userContact->country_id,
             'user_id' => $userContact->id,
             'work_id' => $validated['userWorkId'],

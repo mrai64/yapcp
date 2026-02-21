@@ -11,8 +11,8 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('user_work_validations', function (Blueprint $table) {
-            $table->id()->comment('real pk is: work_id + federation_section_id'); // no uuid
-            $table->char('work_id', 36)->charset('ascii')->collation('ascii_general_ci')
+            $table->id()->comment('real pk is: user_work_id + federation_section_id'); // no uuid
+            $table->char('user_user_work_id', 36)->charset('ascii')->collation('ascii_general_ci')
                 ->index()->comment('fk: user_works.id');
             $table->unsignedBigInteger('federation_section_id')->index()
                 ->comment('fk: federation_sections.id ');
@@ -23,9 +23,9 @@ return new class () extends Migration {
             $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent()->index();
             $table->dateTime('deleted_at')->nullable()->index();
             //
-            $table->unique(['work_id', 'federation_section_id', 'deleted_at'], 'general_idx');
+            $table->unique(['user_work_id', 'federation_section_id', 'deleted_at'], 'general_idx');
             //
-            $table->foreign(['work_id'])->references(['id'])->on('user_works')
+            $table->foreign(['user_work_id'])->references(['id'])->on('user_works')
                 ->onUpdate('restrict')->onDelete('restrict');
             $table->foreign(['validator_user_id'])->references(['id'])->on('user_contacts')
                 ->onUpdate('restrict')->onDelete('restrict');

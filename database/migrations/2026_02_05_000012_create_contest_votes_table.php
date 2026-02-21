@@ -22,7 +22,7 @@ return new class () extends Migration {
                 ->index()->comment('fk: contests.id contest_sections.contest_id');
             $table->char('section_id', 36)->charset('ascii')->collation('ascii_general_ci')
                 ->index()->comment('fk: contest_sections.id');
-            $table->char('work_id', 36)->charset('ascii')->collation('ascii_general_ci')
+            $table->char('contest_work_id', 36)->charset('ascii')->collation('ascii_general_ci')
                 ->index()->comment('fk: contest_works.work_id user_works.id');
             $table->char('juror_user_id', 36)->charset('ascii')->collation('ascii_general_ci')
                 ->index()->comment('fk: user_contacts.id juror');

@@ -14,7 +14,7 @@
     <input name="userWorkId" wire:model="userWorkId" type="hidden"
         value="{{$userWorkId}}" readonly />
     <div>
-        <select name="section_id" wire:model.defer="section_id"
+        <select name="sectionId" wire:model.defer="sectionId"
             required="required"
             class="inline-flex items-center border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block px-4 py-2 mt-4 w-auto max-w-7xl"
             >

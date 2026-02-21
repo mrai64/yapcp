@@ -83,12 +83,12 @@ class UserRole extends Model
     protected function casts()
     {
         return [
-            'id' => int,
-            'user_id' => string,
-            'role' => string,
-            'organization_id' => string,
-            'contest_id' => string,
-            'federation_id' => string,
+            'id' => 'int',
+            'user_id' => 'string',
+            'role' => 'string',
+            'organization_id' => 'string',
+            'contest_id' => 'string',
+            'federation_id' => 'string',
             'role_opening' => 'datetime',
             'role_closing' => 'datetime',
             'created_at' => 'datetime',
