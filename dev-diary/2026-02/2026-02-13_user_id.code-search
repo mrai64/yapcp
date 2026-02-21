@@ -665,7 +665,7 @@ app/Models/User.php: ✅
   297:     // users.id > works.user_id
   298      public function works()
 
-app/Models/UserContact.php:
+app/Models/UserContact.php: ✅
     7   *
     8:  * user_id as uuid() should be primary key also for user_contact
     9   * 2025-09-03 photo_box where store user works and passport_photo
@@ -828,7 +828,7 @@ app/Models/UserContact.php:
   439:             localKey: 'user_id'
   440          );
 
-app/Models/UserContactMore.php:
+app/Models/UserContactMore.php: ✅
   79  
   80:     // user_contact_mores.user_contact_user_id > user_contacts.user_id
   81      public function userContact()
@@ -837,7 +837,7 @@ app/Models/UserContactMore.php:
   85:             foreignKey: 'user_id',
   86              ownerKey: 'user_contact_user_id'
 
-app/Models/UserRole.php:
+app/Models/UserRole.php: ✅
    23   * @property int $id
    24:  * @property string $user_id fk: users.id
    25   * @property string $role
@@ -851,7 +851,7 @@ app/Models/UserRole.php:
   121:             'user_id'
   122          );
 
-app/Models/Work.php:
+app/Models/Work.php: ⏩
    22   * @property string $id uuid
    23:  * @property string $user_id fk: users.id
    24   * @property string $work_file path n file
@@ -869,7 +869,7 @@ app/Models/Work.php:
   140:             'user_id'
   141          );
 
-app/Models/WorkValidation.php:
+app/Models/WorkValidation.php: ⏩
    25   * @property int $federation_section_id fk: federation_sections.id
    26:  * @property string $validator_user_id fk: user_contacts.user_id
    27   * @property \Illuminate\Support\Carbon $created_at
@@ -891,7 +891,7 @@ app/Models/WorkValidation.php:
   108:             foreignKey: 'user_id',
   109              ownerKey: 'validator_user_id'
 
-app/Policies/ContestPaymentChangePolicy.php:
+app/Policies/ContestPaymentChangePolicy.php: ✅
    6   * To modify fee_payment_completed
    7:  * - TODO if contest_participants.user_id === Auth::id()
    8   *   uploading receipt pdf
@@ -908,14 +908,14 @@ app/Policies/ContestPaymentChangePolicy.php:
   93:         $this->user_role = UserRole::where('user_id', $user->id)->whereNull('federation_id')
   94              ->whereNot('role', 'juror')->get();
 
-app/Policies/JurorOnlyPolicy.php:
+app/Policies/JurorOnlyPolicy.php: ✅
   26          Log::info('Policies '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
   27:         $user_id = Auth::id();
   28:         $access_granted = ContestJury::where('section_id', $section_id)->where('user_contact_id', $user_id)->count(); // 1 | 0
   29:         Log::info('Policies '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' res:'.$access_granted.' for user:'.$user_id);
   30  
 
-app/Policies/OrganizationMemberOnlyPolicy.php:
+app/Policies/OrganizationMemberOnlyPolicy.php: ✅
   26          Log::info('Policies '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
   27:         $user_id = Auth::id();
   28  
@@ -923,7 +923,7 @@ app/Policies/OrganizationMemberOnlyPolicy.php:
   30:         Log::info('Policies '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' res:'.$access_granted.' for user:'.$user_id);
   31  
 
-app/Rules/UserInContest.php:
+app/Rules/UserInContest.php: ⏩
    3  /**
    4:  * check if a user_id and a contest_id live in the same record
    5   * into contest_awards table
@@ -940,22 +940,22 @@ app/Rules/UserInContest.php:
   51:                 ->where('user_id', $value)->count();
   52              if ($check === 0) {
 
-database/factories/UserContactFactory.php:
+database/factories/UserContactFactory.php: ⏩
   46              'id' => $user->id,
   47:             'user_id' => $user->id, // TODO remove       fk users.id
   48              'country_id' => $country->id, //             fk countries.id
 
-database/factories/UserRoleFactory.php:
+database/factories/UserRoleFactory.php: ⏩
   54              // id
   55:             'user_id' => $user->id,
   56              'role' => UserRole::validRoles[$role],
 
-database/factories/UserWorkFactory.php:
+database/factories/UserWorkFactory.php: ⏩
   26              'id' => $photoId, // image user work id
   27:             'user_id' => $user->user_id,
   28              'work_file' => $photoBox . '/' . $photoId . '.jpg',
 
-database/factories/WorkFactory.php:
+database/factories/WorkFactory.php: ⏩
   32              'id' => Str::uuid(),
   33:             'user_id' => $user_contact->user_id,
   34              'work_file' => fake()->imageUrl(1920, 1080, null, false, null, false, 'jpg'), // TODO correct it
