@@ -34,20 +34,20 @@ class UserWork extends Model
     public $incrementing = false; //  with no increment
 
     protected $fillable = [
-        'id', //            pk
-        'user_id', //       fk user_contacts.id, users.id
-        'work_file', //     path+filename+extension
-        'extension', //     extension
-        'reference_year',// TODO UserWorkMore - a FIAF required field
-        'title_en', //      photo title
-        'title_local', //   same in lang <> 'en'
-        'long_side', //     file side pixel
-        'short_side', //    file side pixel
-        'monochromatic', // 0:'N' (colour) / 1:'Y' (monochromathic)
-        // TODO instead insert a raw related flag, use work_raws
-        // created_at       reserved
-        // updated_at       reserved
-        // deleted_at       reserved
+        'id', //             pk
+        'user_id', //        fk user_contacts.id, users.id
+        'work_file', //      path+filename+extension
+        'extension', //      extension
+        'reference_year', // TODO UserWorkMore - a FIAF required field
+        'title_en', //       photo title
+        'title_local', //    same in lang <> 'en'
+        'long_side', //      file side pixel
+        'short_side', //     file side pixel
+        'monochromatic', //  0:'N' (color) / 1:'Y' (monochromatic)
+        'raw', //            0:'N' (not available) / 1:'Y' (available)
+        // created_at        reserved
+        // updated_at        reserved
+        // deleted_at        reserved
     ];
 
     // to check file extension
@@ -73,6 +73,17 @@ class UserWork extends Model
     protected function casts(): array
     {
         return [
+            'id' => 'string',
+            'user_id' => 'string',
+            'work_file' => 'string',
+            'extension' => 'string',
+            'reference_year' => 'string',
+            'title_en' => 'string',
+            'title_local' => 'string',
+            'long_side' => 'int',
+            'short_side' => 'int',
+            'monochromatic' => 'bool',
+            'raw' => 'bool',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
@@ -87,7 +98,8 @@ class UserWork extends Model
     public function miniature(): string
     {
         $lastSlash = strrpos($this->work_file, '/');
-        $miniature = substr($this->work_file, 0, $lastSlash).'/300px_'.substr($this->work_file, $lastSlash + 1, 50);
+        $miniature = substr($this->work_file, 0, $lastSlash)
+            . '/300px_' . substr($this->work_file, $lastSlash + 1, 50);
         // log
         return $miniature;
     }
@@ -100,8 +112,8 @@ class UserWork extends Model
     {
         $userContact = $this->belongsTo(
             UserContact::class,
-            'user_id',
-            'user_id'
+            'user_id', //     uw.user_id
+            'id' //           uc.id
         );
         // log
         return $userContact;

@@ -33,6 +33,8 @@ return new class () extends Migration {
             $table->unsignedInteger('short_side')->comment('pixel');
             $table->boolean('monochromatic')->default(false)
                 ->comment('declared BW monochromatic');
+            $table->boolean('raw')->default(false)
+                ->comment('Original RAW available');
 
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate()->index();
