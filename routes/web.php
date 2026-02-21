@@ -8,7 +8,7 @@ use App\Livewire\Federation;
 use App\Livewire\Juror;
 use App\Livewire\Organization;
 use App\Livewire\User;
-use App\Livewire\Work;
+use App\Livewire\UserWork;
 use Illuminate\Support\Facades\Route;
 
 // Public pages
@@ -31,7 +31,7 @@ require __DIR__.'/auth.php';
 Route::get('/user/contact/listed', User\Contact\Listed::class)
     ->middleware(['auth', 'verified'])
     ->name('user-contact-listed');
-Route::get('/user/contact/modify', User\Contact\Modify::class)
+Route::get('/user/contact/modify', User\Contact\Modify1YouAre::class)
     ->middleware(['auth', 'verified'])
     ->name('user-contact-modify');
 Route::get('/user/contact/modify1/{uid?}', User\Contact\Modify1YouAre::class)
@@ -157,19 +157,19 @@ Route::get('/contest/award/add/{cid}', Contest\Award\Add::class, ['cid'])
     ->name('contest-award-add');
 
 // App\Livewire\Work - (aka LiveWire\UserWork) parm user id passed via Auth::id()
-Route::get('/user/work/list', Work\Listed::class)
+Route::get('/user/work/list', UserWork\Listed::class)
     ->middleware(['auth', 'verified'])
     ->name('photo-box-list');
-Route::get('/user/work/add', Work\Add::class)
+Route::get('/user/work/add', UserWork\Add::class)
     ->middleware(['auth', 'verified'])
     ->name('photo-box-add');
-Route::get('/user/work/modify/{wid}', Work\Modify::class, ['wid'])
+Route::get('/user/work/modify/{wid}', UserWork\Modify::class, ['wid'])
     ->middleware(['auth', 'verified'])
     ->name('photo-box-modify');
-Route::get('/user/work/remove/{wid}', Work\Remove::class, ['wid'])
+Route::get('/user/work/remove/{wid}', UserWork\Remove::class, ['wid'])
     ->middleware(['auth', 'verified'])
     ->name('delete-photo-box');
-Route::delete('/user/work/remove/{wid}', Work\Remove::class, ['wid'])
+Route::delete('/user/work/remove/{wid}', UserWork\Remove::class, ['wid'])
     ->middleware(['auth', 'verified']);
 
 // Contest live - Participant add work to contest section
