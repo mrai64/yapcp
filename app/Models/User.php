@@ -56,8 +56,6 @@ use Illuminate\Support\Str;
  * @property-read \App\Models\UserContact|null $userContact
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $userRoles
  * @property-read int|null $user_roles_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\WorkValidation> $workValidators
- * @property-read int|null $work_validators_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWork> $works
  * @property-read int|null $works_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
@@ -76,6 +74,10 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWorkValidation> $userWorkValidators
+ * @property-read int|null $user_work_validators_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWork> $userWorks
+ * @property-read int|null $user_works_count
  * @mixin \Eloquent
  */
 
@@ -88,11 +90,6 @@ class User extends Authenticatable implements MustVerifyEmail
     use SoftDeletes;
 
     public const TABLENAME = 'users'; // MAYBE $this->table_name()
-
-    // primary key
-    protected $primaryKey = 'id'; //  default but
-    protected $keyType = 'string'; // uuid char(36)
-    public $incrementing = false; //  with no increment
 
     /**
      * The attributes that are mass assignable.
@@ -234,7 +231,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $cmSet;
     }
 
-    // users.id > user_contacts.user_id
+    // users.id > user_contacts.id
     public function contact()
     {
         $contact = $this->hasOne(
@@ -246,7 +243,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $contact;
     }
 
-    // users.id > user_contacts.user_id
+    // users.id > user_contacts.id
     public function userContact()
     {
         $contact = $this->hasOne(
@@ -295,7 +292,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     // users.id > user_works.user_id
-    public function works()
+    public function userWorks()
     {
         $works = $this->hasMany(UserWork::class);
         // log

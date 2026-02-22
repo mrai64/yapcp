@@ -188,7 +188,7 @@ class UserContact extends Model
     public function photoBox(): string
     {
         // ITA/Verdi/Giuseppe_12345678-1234-1234-1234-123456789012
-        $pb = (string) Str::upper($this->country_id) . '/'
+        $pb = Str::upper($this->country_id) . '/'
             . Str::slug($this->last_name) . '/'
             . Str::slug($this->first_name) . '_'
             . Str::lower($this->id);
@@ -200,6 +200,8 @@ class UserContact extends Model
 
     /**
      * get photo_box folder name
+     *
+     * @return string
      */
     // was: get_photo_box
     public static function getPhotoBox(string $uid): string
@@ -230,16 +232,16 @@ class UserContact extends Model
     // was: get_last_first_name
     public static function getLastNFirstName(string $uid): string
     {
-        ds('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        ds('Model ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' called');
         $user = self::where('id', $uid)->first();
 
-        return $user->last_name.' '.$user->first_name.' /'.$user->country_id;
+        return $user->last_name . ' ' . $user->first_name . ' /' . $user->country_id;
     }
 
     // was: get_email
     public static function getEmail(string $uid): string
     {
-        ds('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        ds('Model ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' called');
         $user = self::where('id', $uid)->get('email')[0];
 
         return $user['email'];
@@ -248,7 +250,7 @@ class UserContact extends Model
     // was: get_first_name
     public static function getFirstName(string $uid): string
     {
-        ds('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        ds('Model ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' called');
         $user = self::where('id', $uid)->get('first_name')[0];
 
         return $user['first_name'];
@@ -257,7 +259,7 @@ class UserContact extends Model
     // was: get_last_name
     public static function getLastName(string $uid): string
     {
-        ds('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        ds('Model ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' called');
         $user = self::where('id', $uid)->get('last_name')[0];
 
         return $user['last_name'];

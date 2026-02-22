@@ -71,11 +71,6 @@ class ContestWaiting extends Model
 
     public const TABLENAME = 'contest_waitings';
 
-    // primary key
-    protected $primaryKey = 'id'; //  default but
-    protected $keyType = 'string'; // uuid char(36)
-    public $incrementing = false; //  with no increment
-
     // field list
     protected $fillable = [
         'id', //                   pk uuid
