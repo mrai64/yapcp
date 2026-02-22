@@ -27,7 +27,7 @@ class Remove extends Component
 
     public $titleLocal;
 
-    public $referenceYear;
+    // public $referenceYear;
 
     public $longSide;
 
@@ -54,7 +54,7 @@ class Remove extends Component
         $this->workFile = $this->work->work_file;
         $this->titleEnglish = $this->work->title_en;
         $this->titleLocal = $this->work->title_local;
-        $this->referenceYear = $this->work->reference_year;
+        // $this->referenceYear = $this->work->reference_year;
         $this->longSide = $this->work->long_side;
         $this->shortSide = $this->work->short_side;
         $this->extension = $this->work->extension;

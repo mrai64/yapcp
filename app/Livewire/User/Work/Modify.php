@@ -36,7 +36,7 @@ class Modify extends Component
 
     public string $extension;
 
-    public string $referenceYear;
+    // public string $referenceYear;
 
     public $image = []; // list($width, $height, $type, $attr)
 
@@ -59,7 +59,7 @@ class Modify extends Component
         $this->longSide = ($image[0] >= $image[1]) ? $image[0] : $image[1];
         $this->shortSide = ($image[0] <= $image[1]) ? $image[0] : $image[1];
         $this->extension = str_ireplace('image/', '', $image['mime']);
-        $this->referenceYear = $this->work->reference_year;
+        // $this->referenceYear = $this->work->reference_year;
 
     }
 
@@ -79,10 +79,10 @@ class Modify extends Component
         $this->work->long_side = $this->longSide;
         $this->work->short_side = $this->shortSide;
         $this->work->extension = $this->extension;
-        $this->work->reference_year = $this->referenceYear;
-        if ($this->work->reference_year < '1826') {
-            $this->work->reference_year = date('Y');
-        }
+        // $this->work->reference_year = $this->referenceYear;
+        // if ($this->work->reference_year < '1826') {
+        //     $this->work->reference_year = date('Y');
+        // }
         $this->work->update();
 
         // back to list
