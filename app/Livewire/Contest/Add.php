@@ -11,9 +11,10 @@
  * 2025-12-04 review to support livewire header component
  * 2025-12-05 refactor Country::countriesSorted()
  *
- * TODO substitute TmeZoneList with timezones access
  * TODO change is_circuit from Y/N to 1/0
  * TODO change circuit_id from text to select list
+ * TODO change form 1 of 1 become 1 of N
+ *
  */
 
 namespace App\Livewire\Contest;
@@ -22,9 +23,8 @@ use App\Models\Contest;
 use App\Models\Country;
 use App\Models\LangList;
 use App\Models\Organization;
-use App\Models\TimezonesList;
+use App\Models\Timezone;
 use DateTimeImmutable;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Validator;
 use Livewire\Component;
@@ -44,17 +44,17 @@ class Add extends Component
     public Organization $organization;
 
     // form fields list
-    public string $contest_id; // assigned
+    public string $contestId; // assigned
 
-    public string $country_id; // contest.country_id fk:countries.id
+    public string $countryId; // contest.country_id fk:countries.id
 
     public Country $country;
 
-    public $countries; // country[]
+    public array $countries; // country[]
 
-    public string $name_en; //
+    public string $contestNameEn; //
 
-    public string $name_local; //
+    public string $contestNameLocal; //
 
     public string $lang_local; // LangList[]
 
@@ -82,7 +82,7 @@ class Add extends Component
 
     public string $url_4_catalogue;
 
-    public $timezone_list = [];
+    public array $timezoneSet = [];
 
     public string $timezone;
 
@@ -114,23 +114,27 @@ class Add extends Component
      */
     public function mount(string $oid) // organization_id as in route()
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $this->contest_id = Str::uuid();
+        ds('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        $this->contestId = Str::uuid();
         $this->organization = Organization::where('id', $oid)->get()[0];
         $this->organization_id = $this->organization->id; // $oid
 
         $this->countries = Country::countriesSorted();
-        $this->country_id = $this->organization->country_id;
+        $this->countryId = $this->organization->country_id;
 
-        $this->timezone_list = TimezonesList::timezones_list;
+        $timezoneSet = Timezone::all(['id'])->orderBy('id')->get();
+        $this->timezoneSet = collect($timezoneSet)->sortBy('id')->toArray();
+
         $this->timezone = 'Europe/Rome';
 
-        $this->name_en = 'Contest name';
-        $this->name_local = 'Contest name';
+        $this->contestNameEn = 'Contest name';
+        $this->contestNameLocal = 'Contest name';
 
-        $this->langSet = LangList::LANGCODES;
+        $langSet = Country::whereNotNull('lang_code')->get('lang_code');
+        $this->langSet = collect($langSet)->sortBy('lang_code')->toArray();
+
         $this->lang_local = 'en';
-        $this->is_circuit = 'N';
+        $this->is_circuit = 'N'; // false
 
         // TODO use day, day+1, day+7 and so on...
         $this->day_1_opening = date(DATE_ATOM); //
@@ -150,12 +154,12 @@ class Add extends Component
         $this->fee_info = '';
 
         $this->contest = new Contest();
-        $this->contest->id = $this->contest_id;
+        $this->contest->id = $this->contestId;
         $this->contest->organization_id = $this->organization_id; // $oid
-        $this->contest->country_id = $this->country_id;
+        $this->contest->country_id = $this->countryId;
         $this->contest->timezone = 'Europe/Rome';
-        $this->contest->name_en = 'Contest name';
-        $this->contest->name_local = 'Contest name';
+        $this->contest->contestNameEn = 'Contest name';
+        $this->contest->contestNameLocal = 'Contest name';
         $this->contest->lang_local = 'en';
         $this->contest->is_circuit = $this->is_circuit;
         $this->contest->day_1_opening = $this->day_1_opening;
@@ -182,7 +186,7 @@ class Add extends Component
      */
     public function render()
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        ds('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
 
         return view('livewire.contest.add');
     }
@@ -197,13 +201,13 @@ class Add extends Component
      */
     public function rules()
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        ds('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
 
         return [
             // id           assigned, not in form
-            'country_id' => 'required|string|exists:countries,id',
-            'name_en' => 'required|string',
-            'name_local' => 'required|string',
+            'countryId' => 'required|string|exists:countries,id',
+            'contestNameEn' => 'required|string',
+            'contestNameLocal' => 'required|string',
             'lang_local' => 'required|string', // in(LangList::LANGCODES)
             // organization_id by uri,   not in form
             // contest_mark
@@ -233,15 +237,15 @@ class Add extends Component
             // updated_at
             // deleted_at
         ];
-
     }
 
     /**
+     * TODO Check if adopt a \Rules
      * after means after rules()
      */
     public function after(): array
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        ds('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
 
         return [
             function (Validator $validator) {
@@ -250,7 +254,7 @@ class Add extends Component
                     $this->is_circuit = 'N';
                 }
 
-                if (! in_array($this->timezone, TimezonesList::timezones_list)) {
+                if (! in_array($this->timezone, $this->timezoneSet)) {
                     $validator->errors()->add(
                         'timezone',
                         __('Must be one of list')
@@ -275,15 +279,15 @@ class Add extends Component
 
     public function saveNewContest()
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        ds('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
         $validated = $this->validate(); // apply rules
 
         // TODO pick from form all fields and put in update()
         // TODO because create was in mount()
-        $this->contest->id = $this->contest_id;
-        $this->contest->country_id = $validated['country_id'];
-        $this->contest->name_en = $validated['name_en'];
-        $this->contest->name_local = $validated['name_local'];
+        $this->contest->id = $this->contestId;
+        $this->contest->country_id = $validated['countryId'];
+        $this->contest->name_en = $validated['contestNameEn'];
+        $this->contest->name_local = $validated['contestNameLocal'] ?? '';
         $this->contest->lang_local = $validated['lang_local'];
         $this->contest->contact_info = $validated['contact_info'];
         $this->contest->is_circuit = $validated['is_circuit'];

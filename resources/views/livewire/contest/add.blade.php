@@ -1,6 +1,10 @@
 <?php 
 /**
  * Contest Main Card Add
+ * Contest definition 
+ * - name of contest
+ * - calendar
+ * etc
  */
 
 use App\Models\ContestSection;
@@ -8,9 +12,9 @@ use App\Models\ContestSection;
 ?>
 
 <div>
-    <header>
+    <div class="header">
         <h2 class="fyk text-2xl font-medium text-gray-900">
-            {{ __('CONTEST Main Card') }}
+            {{ __('CONTEST Definition Main Card') }}
         </h2>
         <!-- navigation --> 
         <h3>
@@ -44,12 +48,12 @@ use App\Models\ContestSection;
                 <span class="fyk text-xl">Works</span>
             </a>
         </h3>
-    </header>
+    </div>
 
     <hr />
     
-    <p class="mb-4">{{ __('Well, Contest record is already created.') }}<br />
-        {{ __('If you interrupt compiling form, you can retrieve it in your Organization Dashboard.') }}
+    <p class="mb-4">{{ __('Note: Contest record is already created.') }}<br />
+        {{ __('If you interrupt compiling form, you can retrieve - incomplete - in your Organization Dashboard.') }}
     </p>
     <p class="mb-4">
         {{ __('After that contest general definition, next step are: section list, jury definition, prize list definition.') }}
@@ -69,17 +73,17 @@ use App\Models\ContestSection;
         @csrf
 
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="name_en">
+            <label class="block font-medium text-sm text-gray-700" for="contestNameEn">
                 {{ __('Contest Name') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
                 type="text" 
-                wire:model="name_en" 
-                value="{{ old('name_en') }}"
+                wire:model="contestNameEn" 
+                value="{{ old('contestNameEn') }}"
                 required="required" 
                 />
-            <div class="alert alert-danger small">@error('name_en') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('contestNameEn') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -97,13 +101,13 @@ use App\Models\ContestSection;
         </div>
 
         <div class="mb-4">
-            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="country_id">
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="countryId">
                 {{ __('Country') }}
             </label>
             <select 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl" 
-                wire:model="country_id"
-                name="country_id" 
+                wire:model="countryId"
+                name="countryId" 
                 required="required"
                 >
                 <option value="">{{ __('-- choose country --') }}</option>
@@ -111,7 +115,7 @@ use App\Models\ContestSection;
                 <option value="{{ $country->id }}">{{ $country->country }}</option>
                 @endforeach
             </select>
-            <div class="alert alert-danger small">@error('country_id') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('countryId') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -142,7 +146,7 @@ use App\Models\ContestSection;
                 name="timezone" 
                 required="required"
                 >
-                @foreach ($timezone_list as $timezone_item)
+                @foreach ($timezoneSet as $timezone_item)
                 <option value="{{ $timezone_item }}" {{ ($timezone_item == $timezone) ? 'selected' : '' }}> {{ $timezone_item }} </option>
                 @endforeach
             </select>

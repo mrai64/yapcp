@@ -76,7 +76,12 @@ class Listed extends Component
         }
 
         //
-        $this->sortedUserRoleList = collect($this->userRoleList)->sortBy('federation')->sortBy('organization')->sortBy('contest')->sortBy('role')->toArray();
+        $this->sortedUserRoleList = collect($this->userRoleList)
+            ->sortBy('federation')
+            ->sortBy('organization')
+            ->sortBy('contest')
+            ->sortBy('role')
+            ->toArray();
         $this->userRoleList = $this->sortedUserRoleList;
     }
 

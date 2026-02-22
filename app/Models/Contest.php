@@ -163,7 +163,7 @@ class Contest extends Model
         'url_2_concurrent_list', //     web url
         'url_3_admit_n_award_list', //  web url
         'url_4_catalogue', //           web url
-        'timezone', //                  fk timezones.timezone
+        'timezone_id', //                  fk timezones.id
         'day_1_opening', //             datetime yyyy-mm-dd hh.mm UTC
         'day_2_closing', //             datetime yyyy-mm-dd hh.mm UTC
         'day_3_jury_opening', //        datetime yyyy-mm-dd hh.mm UTC
@@ -203,7 +203,7 @@ class Contest extends Model
 
             'country_id' => 'string',
             'lang_local' => 'string',
-            'timezone' => 'string',
+            'timezone_id' => 'string',
 
             'name_local' => 'string',
             'organization_id' => 'string',
@@ -290,9 +290,9 @@ class Contest extends Model
     public function country()
     {
         $country = $this->belongsTo(
-            Country::class,
-            'id',
-            'country_id'
+            related:    Country::class, //   ext class
+            foreignKey: 'country_id', //     int contests.country_id
+            ownerKey:   'id' //              ext countries.id
         );
 
         return $country;
@@ -300,13 +300,14 @@ class Contest extends Model
 
     // federation list
 
-    // contests.timezone > timezones.id
+    // contests.timezone_id > timezones.id
     public function timezone()
     {
+        //  = $this->belongsTo(Timezone::class);
         $tz = $this->belongsTo(
-            related: Timezone::class, // timezones
-            foreignKey: 'id', //         timezones.id
-            ownerKey: 'timezone' //      contests.timezone
+            related:    Timezone::class, //  ext class
+            foreignKey: 'timezone_id', //    int contests.timezone_id
+            ownerKey:   'id' //              ext timezones.id
         );
 
         return $tz;
@@ -315,7 +316,11 @@ class Contest extends Model
     // contests.organization_id > organizations.id
     public function organization()
     {
-        $organization = $this->belongsTo(Organization::class);
+        $organization = $this->belongsTo(
+            related: Organization::class,
+            foreignKey: 'organization_id',
+            ownerKey:   'id'
+        );
 
         return $organization;
     }
