@@ -25,7 +25,7 @@ class FederationMoreSeeder extends Seeder
         FederationMore::factory()->create([
             'federation_id' => 'FIAF',
             'referenced_table' => 'user_contacts',
-            'field_name' => 'tessera', 
+            'field_name' => 'tessera',
             'field_validation_rules' => 'required|string|size:6|regex:/^[0-9]+$/',
             'field_default_value' => '000000',
             'field_suggest' => 'Only 6 digit leading zeroes',

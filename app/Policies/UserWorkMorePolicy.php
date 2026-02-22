@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\UserWorkMore;
-use Illuminate\Auth\Access\Response;
 
 class UserWorkMorePolicy
 {
