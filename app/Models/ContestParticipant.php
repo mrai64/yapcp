@@ -91,6 +91,10 @@ class ContestParticipant extends Model
     protected function casts()
     {
         return [
+            'id' => 'int',
+            'contest_id' => 'string',
+            'user_id' => 'string',
+            'fee_payment_completed' => 'boolean',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',

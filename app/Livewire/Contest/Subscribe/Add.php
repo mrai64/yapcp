@@ -5,6 +5,9 @@
  *
  * 2025-10-14 ContestSectionRule don't work
  * 2025-10-18 image filename must be coherent with contest_works.id
+ *
+ * TODO when portfoliosequence is assigned, must be verified if
+ * TODO   is a dup portfolio value
  */
 
 namespace App\Livewire\Contest\Subscribe;
@@ -18,8 +21,6 @@ use Livewire\Component;
 
 class Add extends Component
 {
-    public $work;
-
     public $contestSectionSet;
 
     public $section;
@@ -82,10 +83,10 @@ class Add extends Component
             ],
             'userWorkId' => [
                 'string',
-                'exists:works,id',
+                'exists:user_works,id',
                 new ContestSectionRule(),
             ],
-            'userId' => 'string|exists:users,id',
+            'userId' => 'string|exists:user_contacts,id',
             'contestId' => 'string|exists:contests,id',
             'portfolioSequence' => 'integer|min:0|max:255',
         ];
@@ -106,13 +107,17 @@ class Add extends Component
         $validated['contest_id'] = $this->contestId;
         $validated['user_id'] = $this->userId;
         $validated['country_id'] = UserContact::getCountryId($this->userId);
-        $userContact = UserContact::where('id', $this->userid)->first();
 
+        $userContact = UserContact::where('id', $this->userId)->first();
+        // if unassigned
         if ($validated['portfolioSequence'] == 0) {
-            $validated['portfolioSequence'] = ContestWork::where('section_id', $validated['sectionId'])->where('user_id', $this->userId)->count();
+            $validated['portfolioSequence'] = ContestWork::where('section_id', $validated['sectionId'])
+                ->where('user_id', $this->userId)->count();
             $validated['portfolioSequence'] += 1;
         }
-        ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' validated' . json_encode($validated));
+        // TODO assigned - check dup value
+        ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':'
+            . __LINE__ . ' validated' . json_encode($validated));
 
         $this->userWorkInContest = ContestWork::create([
             // id assigned
@@ -124,11 +129,11 @@ class Add extends Component
             'is_admit' => false,
             'portfolio_sequence' => $validated['portfolioSequence'],
         ]);
-        ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' out:' . json_encode($this->userWorkInContest));
+        ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':'
+            . __LINE__ . ' out:' . json_encode($this->userWorkInContest));
 
         // check user_participant then add if missing
-        if (
-            ContestParticipant::where('contest_id', $this->contestId)
+        if (ContestParticipant::where('contest_id', $this->contestId)
                 ->where('user_id', $userContact->id)->doesntExist()
         ) {
             ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' add user');
