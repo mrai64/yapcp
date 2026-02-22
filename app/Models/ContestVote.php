@@ -49,6 +49,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote whereWorkId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote withoutTrashed()
+ * @property-read \App\Models\ContestWork|null $contestWork
  * @mixin \Eloquent
  */
 class ContestVote extends Model

@@ -15,6 +15,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkValidation newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkValidation newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkValidation query()
+ * @property-read \App\Models\FederationSection|null $federationSection
+ * @property-read \App\Models\UserContact|null $userValidator
+ * @property-read \App\Models\UserWork|null $work
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkValidation onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkValidation withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkValidation withoutTrashed()
  * @mixin \Eloquent
  */
 class UserWorkValidation extends Model

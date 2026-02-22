@@ -68,6 +68,7 @@ use Illuminate\Support\Str; //         pk uuid
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereWorkId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork withoutTrashed()
+ * @property-read \App\Models\UserWork $userWork
  * @mixin \Eloquent
  */
 class ContestWork extends Model

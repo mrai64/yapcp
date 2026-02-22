@@ -28,8 +28,9 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 /**
- * @property string $id fk: users.id uuid
- * @property string $country_id fk: countries.id
+ * @property string $id
+ * @property string $user_id
+ * @property mixed $country_id fk: countries.id
  * @property string $first_name
  * @property string $last_name
  * @property string|null $nick_name
@@ -37,7 +38,7 @@ use Illuminate\Support\Str;
  * @property string $cellular
  * @property string $passport_photo
  * @property string $lang_local for future use - html lang
- * @property string $timezone_id for future use - php timezone for time math
+ * @property string $timezone for future use - php timezone for time math
  * @property string $address
  * @property string $address_line2
  * @property string $city
@@ -73,10 +74,10 @@ use Illuminate\Support\Str;
  * @property-read \App\Models\User|null $user
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $userRoles
  * @property-read int|null $user_roles_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWorkValidation> $userWorkValidators
+ * @property-read int|null $user_work_validators_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWork> $userWorks
  * @property-read int|null $user_works_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\WorkValidation> $workValidators
- * @property-read int|null $work_validators_count
  * @method static \Database\Factories\UserContactFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact newQuery()
@@ -108,7 +109,6 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereXTwitter($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact withoutTrashed()
- * @property string $timezone for future use - php timezone for time math
  * @mixin \Eloquent
  */
 class UserContact extends Model
@@ -180,14 +180,15 @@ class UserContact extends Model
     }
 
     /**
-     * @return the string used to store works and passport_photo
-     * Note: users.id to avoid homonymies
+     * @return string - the string used to store works and passport_photo
+     * based on country code, last name, first name and uuid
+     * to avoid homonymies
      */
     // was: photo_box
     public function photoBox(): string
     {
         // ITA/Verdi/Giuseppe_12345678-1234-1234-1234-123456789012
-        $pb = Str::upper($this->country_id) . '/'
+        $pb = (string) Str::upper($this->country_id) . '/'
             . Str::slug($this->last_name) . '/'
             . Str::slug($this->first_name) . '_'
             . Str::lower($this->id);
@@ -204,6 +205,7 @@ class UserContact extends Model
     public static function getPhotoBox(string $uid): string
     {
         $uc = self::where('id', $uid)->firstOrFail();
+
         // compose pb
         $photoBox = Str::upper($uc->country_id) . '/'
             . Str::slug($uc->last_name) . '/'

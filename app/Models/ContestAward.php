@@ -61,6 +61,7 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereWinnerWorkId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward withoutTrashed()
+ * @property-read \App\Models\ContestWork|null $contestWork
  * @mixin \Eloquent
  */
 
