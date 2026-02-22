@@ -6,6 +6,8 @@
  * Here the works are under very-first judgment, organization must
  * review if works should be introduced to jury or appears
  * any trouble that be communicated to author.
+ * Are excluded user_works already reviewed or
+ * already warned
  *
  * 2026-01-17 PSR-12
  */
@@ -14,7 +16,7 @@ namespace App\Livewire\Organization\PreJury;
 
 use App\Models\ContestWaiting;
 use App\Models\ContestWork;
-use App\Models\WorkValidation;
+use App\Models\UserWorkValidation;
 use Livewire\Component;
 
 class WorkReview extends Component
@@ -23,30 +25,33 @@ class WorkReview extends Component
 
     public $contestSection;
 
-    public $work;
+    public $userWork;
 
-    public int $reviewedWorkCount; // counter
+    public bool $alreadyReviewed; // counter
 
-    public int $warningWorkCount; //  counter
+    public bool $alreadyWarned; //  counter
 
     /**
      * 1. Before the show (if)
      */
     public function mount(string $wid) // livewire work_id
     {
-        $this->contestWork = ContestWork::where('id', $wid)->first();
+        $this->contestWork = ContestWork::findOrFail($wid);
 
         $this->contestSection = $this->contestWork->contest_section;
 
-        $this->work = $this->contestWork->work;
+        $this->userWork = $this->contestWork->userWork;
 
-        $this->reviewedWorkCount = WorkValidation::where('work_id', $this->work->id)->where('federation_section_id', $this->contestSection->federationSection_id)->count();
-        if ($this->reviewedWorkCount) {
-            $this->warningWorkCount = 0;
+        $this->alreadyReviewed = UserWorkValidation::where('user_work_id', $this->userWork->id)
+            ->where('federation_section_id', $this->contestSection->federationSection_id)
+            ->exists();
+
+        if ($this->alreadyReviewed) {
+            $this->alreadyWarned = false;
         } else {
-            $this->warningWorkCount = ContestWaiting::where('work_id', $this->work->id)->count();
+            $this->alreadyWarned = ContestWaiting::where('user_work_id', $this->userWork->id)
+            ->exists();
         }
-
     }
 
     /**
@@ -54,10 +59,11 @@ class WorkReview extends Component
      */
     public function render()
     {
-        if ($this->reviewedWorkCount || $this->warningWorkCount) {
+        // already? show an empty view and U turn
+        if ($this->alreadyReviewed || $this->alreadyWarned) {
             return view('livewire.organization.pre-jury.section-review-work-hidden'); // empty display hidden
         }
-
+        // show and send the Validator Review
         return view('livewire.organization.pre-jury.section-review-work-show');
     }
 }

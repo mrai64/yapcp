@@ -17,9 +17,8 @@
 namespace App\Livewire\Organization\PreJury;
 
 use App\Models\ContestWork;
-use App\Models\WorkValidation;
+use App\Models\UserWorkValidation;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
@@ -31,7 +30,7 @@ class PassNext extends Component
 
     public $contestSection;
 
-    public $work;
+    public $userWork;
 
     public string $fileFromWork;
 
@@ -49,24 +48,26 @@ class PassNext extends Component
         $this->contestWork = ContestWork::where('work_id', $wid)->first();
         $this->contestSection = $this->contestWork->contest_section;
         $this->contest = $this->contestWork->contest;
-        $this->work = $this->contestWork->work;
+        $this->userWork = $this->contestWork->userWork;
         //
         //  from: photos/country_id/last_name/first_name_user_id/work_id.work.extension
         //    to: contests/contest_id/section_id/work_id.work.extension anon
         // where: in public disk
-        $this->fileFromWork = 'photos/'.$this->work->work_file;
-        $this->fileToContest = 'contests/'.$this->contestSection->contest_id
-            .'/'.$this->contestSection->id
-            .'/'.$this->work->id.'.'.$this->work->extension;
+        $this->fileFromWork = 'photos/' . $this->userWork->work_file;
+        $this->fileToContest = 'contests/' . $this->contestSection->contest_id
+            . '/' . $this->contestSection->id
+            . '/' . $this->userWork->id . '.' . $this->userWork->extension;
+
         $copyResult = Storage::disk('public')->copy($this->fileFromWork, $this->fileToContest);
+
         // save validation rec only if $this->contestSection->federationSection_id is NOT NULL
         if (($this->contestSection->under_patronage === 'N') || (is_null($this->contestSection->federationSection_id))) {
             return;
         }
 
-        $insertedResult = WorkValidation::updateOrCreate(
+        $insertedResult = UserWorkValidation::updateOrCreate(
             [
-                'work_id' => $this->work->id,
+                'user_work_id' => $this->userWork->id,
                 'federation_section_id' => $this->contestSection->federationSection_id,
             ],
             ['validator_user_id' => Auth::id()]
@@ -78,7 +79,7 @@ class PassNext extends Component
      */
     public function render()
     {
-        Log::info('Component Organization/Contest/'.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        ds('Component Organization/Contest/' . __CLASS__ . ' f:' . __FUNCTION__ . ':' . __LINE__ . ' called');
 
         session()->flash('message', __("Done."));
         return view('');

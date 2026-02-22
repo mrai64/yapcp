@@ -72,17 +72,11 @@ use Illuminate\Support\Str; //         pk uuid
  */
 class ContestWork extends Model
 {
-    //
     use HasFactory;
     use HasUuids;
     use SoftDeletes;
 
     public const TABLENAME = 'contest_works';
-
-    // primary key
-    protected $primaryKey = 'id'; //  default but
-    protected $keyType = 'string'; // uuid char(36)
-    public $incrementing = false; //  with no increment
 
     // field list fillable in factory
     protected $fillable = [
@@ -145,10 +139,10 @@ class ContestWork extends Model
         $path = substr($originalFileName, 0, $lastSlashPos + 1);
         $miniatureFileName = '300px_' . substr($originalFileName, $lastSlashPos + 1);
 
-        if (Storage::disk('public')->exists('contests/'.$path.$miniatureFileName)) {
+        if (Storage::disk('public')->exists('contests/' . $path . $miniatureFileName)) {
             // dbg ds('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' found');
 
-            return $path.$miniatureFileName;
+            return $path . $miniatureFileName;
         }
         // otherwise
         return $originalFileName;
@@ -259,7 +253,6 @@ class ContestWork extends Model
 
         return $contact;
     }
-
 
     // contest_works.work_id >> user_works.id
     public function userWork(): BelongsTo
