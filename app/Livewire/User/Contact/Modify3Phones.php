@@ -44,7 +44,7 @@ class Modify3Phones extends Component
 
         $this->userContact = UserContact::where('id', $uid)->first();
         // form fields
-        $this->firstName = $this->userContact->firstName;
+        $this->firstName = $this->userContact->first_name;
         $this->lastName = $this->userContact->last_name;
         $this->countryId = ($this->userContact->country_id ?? '***');  // used?
         $this->country = ($this->userContact->country ?? null);
@@ -78,7 +78,7 @@ class Modify3Phones extends Component
         $this->userContact->save();
 
         return redirect()
-            ->with('success', __("'Cellular and Whatsapp updated successfully.'"))
-            ->route('user-contact-modify4', ['uid' => $this->userContact->user_id]);
+        ->route('user-contact-modify4', ['uid' => $this->userContact->user_id])
+        ->with('success', __("'Cellular and Whatsapp updated successfully.'"));
     }
 }

@@ -99,13 +99,13 @@ class Modify4Socials extends Component
         // no additional fields at all
         if ($firstFed === null) {
             return redirect()
-                ->with('success', __("'Personal pages updated successfully.'"))
-                ->route('user-contact-modify1', ['uid' => $this->userContact->user_id]);
+                ->route('user-contact-modify1', ['uid' => $this->userContact->user_id])
+                ->with('success', __("'Personal pages updated successfully.'"));
         }
 
         // additional fields form for first federation id
         return redirect()
-            ->with('success', __("'Personal pages updated successfully.'"))
-            ->route('user-contact-modify5', ['fid' => $firstFed->federation_id, 'uid' => $this->userContact->user_id]);
+            ->route('user-contact-modify5', ['fid' => $firstFed->federation_id, 'uid' => $this->userContact->user_id])
+            ->with('success', __("'Personal pages updated successfully.'"));
     }
 }
