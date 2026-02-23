@@ -60,6 +60,7 @@ class Listed extends Component
             ->orderBy('role')
             ->get();
 
+        /** @var object{ id_max: int, role: string, organization_id: string, federation_id: string, contest_id: string } $role */
         foreach ($this->userRoleSet as $role) {
             $this->userRoleList[] = [
                 'id' => $role->id_max,
