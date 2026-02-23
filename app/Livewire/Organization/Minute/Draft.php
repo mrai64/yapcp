@@ -19,7 +19,6 @@ use App\Models\ContestWork;
 use App\Models\Organization;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class Draft extends Component
@@ -56,8 +55,9 @@ class Draft extends Component
 
     public static function buildMinute(string $cid) // route
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called w/input: '.$cid);
-        ds('buildMinute: '.$cid);
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called w/input: ' . $cid);
+        ds('buildMinute: ' . $cid);
 
         $contestId = $cid;
         $contest = Contest::where('id', $contestId)->firstOrFail();
@@ -67,10 +67,12 @@ class Draft extends Component
         $todayExtendedFormat = strtolower(CarbonImmutable::now()->format('l d F Y'));
 
         $sections = ContestSection::where('contest_id', $contestId)->get();
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' sections: '.json_encode($sections));
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' sections: ' . json_encode($sections));
 
         $organization = Organization::where('id', $contest->organization_id)->firstOrFail();
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' organization: '.json_encode($organization));
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' organization: ' . json_encode($organization));
 
         $juryMemberSet = [];
         $jurorSignSet = [];
@@ -81,15 +83,21 @@ class Draft extends Component
         $awards = [];
         foreach ($sections as $section) {
             // jury members
-            $juryMemberSet[$section->code] = ContestJury::select(['user_contacts.country_id', 'user_contacts.last_name', 'user_contacts.first_name', 'countries.flag_code'])
+            $juryMemberSet[$section->code] = ContestJury::select([
+                    'user_contacts.country_id',
+                    'user_contacts.last_name',
+                    'user_contacts.first_name',
+                    'countries.flag_code'
+                ])
                 ->leftJoin('user_contacts', 'user_contacts.id', '=', 'contest_juries.user_contact_id')
                 ->leftJoin('countries', 'user_contacts.country_id', '=', 'countries.id')
                 ->where('section_id', $section->id)
                 ->get();
 
-            // juror signs
+            // distinct juror signs
+            /** @var object{ country_id: string, last_name: string, first_name: string, flag_code: string } $juror */
             foreach ($juryMemberSet[$section->code] as $juror) {
-                $jn = $juror->last_name.', '.$juror->first_name;
+                $jn = $juror->last_name . ', ' . $juror->first_name;
                 $jurorSignSet[$jn] = true;
             }
             ksort($jurorSignSet, SORT_STRING);
@@ -141,7 +149,8 @@ class Draft extends Component
                 ->get();
 
         }
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' jury_mem: '.json_encode($juryMemberSet));
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' jury_mem: ' . json_encode($juryMemberSet));
 
         // should be only winner_name without winner_user_id
         $contestAwardSet = ContestAward::select(
@@ -158,7 +167,7 @@ class Draft extends Component
             ->orderBy('contest_awards.award_code')
             ->get();
 
-        $pdfFileName = 'minute-'.$todayIsoFormat.'.pdf';
+        $pdfFileName = '__contest-jury-minute-' . $todayIsoFormat . '.pdf';
         $pdfDataSet = [
             'contest_id' => $contestId,
             'todayIsoFormat' => $todayIsoFormat,

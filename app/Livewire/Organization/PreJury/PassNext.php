@@ -46,7 +46,7 @@ class PassNext extends Component
     public function mount(string $wid) // route()
     {
         $this->contestWork = ContestWork::where('work_id', $wid)->first();
-        $this->contestSection = $this->contestWork->contest_section;
+        $this->contestSection = $this->contestWork->contestSection;
         $this->contest = $this->contestWork->contest;
         $this->userWork = $this->contestWork->userWork;
         //
@@ -60,15 +60,15 @@ class PassNext extends Component
 
         $copyResult = Storage::disk('public')->copy($this->fileFromWork, $this->fileToContest);
 
-        // save validation rec only if $this->contestSection->federationSection_id is NOT NULL
-        if (($this->contestSection->under_patronage === 'N') || (is_null($this->contestSection->federationSection_id))) {
+        // save validation rec only if $this->contestSection->federation_section_id is NOT NULL
+        if (($this->contestSection->under_patronage === 'N') || (is_null($this->contestSection->federation_section_id))) {
             return;
         }
 
         $insertedResult = UserWorkValidation::updateOrCreate(
             [
                 'user_work_id' => $this->userWork->id,
-                'federation_section_id' => $this->contestSection->federationSection_id,
+                'federation_section_id' => $this->contestSection->federation_section_id,
             ],
             ['validator_user_id' => Auth::id()]
         );

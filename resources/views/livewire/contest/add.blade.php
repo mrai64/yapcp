@@ -87,17 +87,17 @@ use App\Models\ContestSection;
         </div>
 
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="name_local">
+            <label class="block font-medium text-sm text-gray-700" for="contestNameLocal">
                 {{ __('Contest Name lang') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
                 type="text" 
-                wire:model="name_local" 
-                value="{{ old('name_local') }}"
+                wire:model="contestNameLocal" 
+                value="{{ old('contestNameLocal') }}"
                 required="required" 
                 />
-            <div class="alert alert-danger small">@error('name_local') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('contestNameLocal') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
@@ -118,53 +118,37 @@ use App\Models\ContestSection;
             <div class="alert alert-danger small">@error('countryId') {{ $message }} @enderror</div>
         </div>
 
-        <div class="mb-4">
-            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="lang_local">
-                {{ __('Language code (for future use)') }}
-            </label>
-            <select 
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl" 
-                wire:model="lang_local"
-                name="lang_local" 
-                required="required"
-                >
-                @foreach ($langSet as $lang_code => $lang_lang)
-                <option value="{{ $lang_code }}" {{($lang_code == $lang_local) ? 'selected' : '' }} > {{ $lang_lang }}</option>
-                @endforeach
-            </select>
-            <div class="small">{{ __('When * marked, we need help to complete i18n. Help us.')}}</div>
-            <div class="alert alert-danger small">@error('lang_local') {{ $message }} @enderror</div>
-        </div>
+        <!-- removed lang_code select -->
 
         <div class="mb-4">
-            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl" for="timezone">
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl" for="timezoneId">
                 {{ __('Timezone') }}
             </label>
             <select 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                wire:model="timezone"
-                name="timezone" 
+                wire:model="timezoneId"
+                name="timezoneId" 
                 required="required"
                 >
                 @foreach ($timezoneSet as $timezone_item)
-                <option value="{{ $timezone_item }}" {{ ($timezone_item == $timezone) ? 'selected' : '' }}> {{ $timezone_item }} </option>
+                <option value="{{ $timezone_item }}" {{ ($timezone_item == $timezoneId) ? 'selected' : '' }}> {{ $timezone_item }} </option>
                 @endforeach
             </select>
             <div class="small">{{ __('As worldwide platform we need to manage correctly time.') }} {{ __('List is in alphabetically order A>Z') }}</div>
-            <div class="alert alert-danger small">@error('timezone') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('timezoneId') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
             <style>textarea {resize:vertical;}</style>
-            <label class="block font-medium text-sm text-gray-700" for="contact_info">
+            <label class="block font-medium text-sm text-gray-700" for="contactInfo">
                 {{ __('Chairman contact') }}
             </label>
             <textarea 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="contact_info"
-                wire:model="contact_info"
-            >{{ old('contact_info') }}</textarea>
-            <div class="alert alert-danger small">@error('contact_info') {{ $message }} @enderror</div>
+                type="text" name="contactInfo"
+                wire:model="contactInfo"
+            >{{ old('contactInfo') }}</textarea>
+            <div class="alert alert-danger small">@error('contactInfo') {{ $message }} @enderror</div>
         </div>
 
         <div class="mt-4 mb-4">
@@ -172,232 +156,232 @@ use App\Models\ContestSection;
                 {{ __("Is that a Circuit record or a Contest record?") }}
             </label>
             <label class="block font-medium text-sm text-gray-700">
-                <input type="radio" name="is_circuit" id="" value="Y" />
+                <input type="radio" name="isCircuit" id="" value="Y" />
                 {{ __("That's a CIRCUIT record, NOT of a Contest") }}
             </label>
             <label class="block font-medium text-sm text-gray-700">
-                <input type="radio" name="is_circuit" id="" value="N" checked />
+                <input type="radio" name="isCircuit" id="" value="N" checked />
                 {{ __("That's a CONTEST, NOT a Circuit") }}
             </label>
-            <div class="alert alert-danger small">@error('is_circuit') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('isCircuit') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
             <!-- TODO replace w/select -->
-            <label class="block font-medium text-sm text-gray-700" for="circuit_id">
+            <label class="block font-medium text-sm text-gray-700" for="circuitId">
                 {{ __('Circuit Id') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
                 type="text" 
-                wire:model="circuit_id" 
-                value="{{ old('circuit_id') }}"
+                wire:model="circuitId" 
+                value="{{ old('circuitId') }}"
                 />
             <div class="small">{{ __("Leave empty if previous field was 'no'. If it's a contest in circuit, insert circuit id previously registered") }}</div>
-            <div class="alert alert-danger small">@error('circuit_id') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('circuitId') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="federation_list">
+            <label class="block font-medium text-sm text-gray-700" for="federationPatronageList">
                 {{ __('Patronage / Sponsor Federation List') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
                 type="text" 
-                wire:model="federation_list" 
-                value="{{ old('federation_list') }}"
+                wire:model="federationPatronageList" 
+                value="{{ old('federationPatronageList') }}"
                 />
             <div class="small">{{ __("Insert comma separate federation codes.") }}</div>
-            @error('federation_list')
+            @error('federationPatronageList')
             <div class="alert alert-danger small">{{ $message }} </div>
             @enderror
         </div>
 
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="url_1_rule">
+            <label class="block font-medium text-sm text-gray-700" for="url1Rule">
                 {{ __('Official Contest Rule url (with subscription link)') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                wire:model="url_1_rule" 
-                type="text" name="url_1_rule" 
-                value="{{ old('url_1_rule') }}"
+                wire:model="url1Rule" 
+                type="text" name="url1Rule" 
+                value="{{ old('url1Rule') }}"
                 required="required"
                 >
-            <div class="alert alert-danger small">@error('url_1_rule') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('url1Rule') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="url_2_concurrent_list">
+            <label class="block font-medium text-sm text-gray-700" for="url2Concurrents">
                 {{ __('Official Contest Participant List url') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                wire:model="url_2_concurrent_list" 
-                type="text" name="url_2_concurrent_list" 
-                value="{{ old('url_2_concurrent_list') }}"
+                wire:model="url2Concurrents" 
+                type="text" name="url2Concurrents" 
+                value="{{ old('url2Concurrents') }}"
                 >
-            <div class="alert alert-danger small">@error('url_2_concurrent_list') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('url2Concurrents') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="url_3_admit_n_award">
+            <label class="block font-medium text-sm text-gray-700" for="url3Results">
                 {{ __('Official Contest Result List url') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                wire:model="url_3_admit_n_award" 
-                type="text" name="url_3_admit_n_award" 
-                value="{{ old('url_3_admit_n_award') }}"
+                wire:model="url3Results" 
+                type="text" name="url3Results" 
+                value="{{ old('url3Results') }}"
                 required="required"
                 >
-            <div class="alert alert-danger small">@error('url_3_admit_n_award') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('url3Results') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="url_4_catalogue">
+            <label class="block font-medium text-sm text-gray-700" for="url4Catalogs">
                 {{ __('Official Contest Catalogues url') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                wire:model="url_4_catalogue" 
-                type="text" name="url_4_catalogue" 
-                value="{{ old('url_4_catalogue') }}"
+                wire:model="url4Catalogs" 
+                type="text" name="url4Catalogs" 
+                value="{{ old('url4Catalogs') }}"
                 >
-            <div class="alert alert-danger small">@error('url_4_catalogue') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('url4Catalogs') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
             <style>textarea {resize:vertical;}</style>
-            <label class="block font-medium text-sm text-gray-700" for="fee_info">
+            <label class="block font-medium text-sm text-gray-700" for="feePaymentInfo">
                 {{ __('Participation Fee info') }}
             </label>
             <textarea 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="fee_info"
-                wire:model="fee_info"
-            >{{ old('fee_info') }}</textarea>
+                type="text" name="feePaymentInfo"
+                wire:model="feePaymentInfo"
+            >{{ old('feePaymentInfo') }}</textarea>
             <div class="small">{{ __('Only for info, and replied in Rules pdf. Even for free fee.') }}</div>
-            <div class="alert alert-danger small">@error('fee_info') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('feePaymentInfo') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="day_1_opening">
+            <label class="block font-medium text-sm text-gray-700" for="day1ParticipationOpening">
                 {{ __('Date (n time) opening Contest') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-xl" 
-                wire:model="day_1_opening" 
-                type="datetime-local" name="day_1_opening" 
-                value="{{ old('day_1_opening') }}"
+                wire:model="day1ParticipationOpening" 
+                type="datetime-local" name="day1ParticipationOpening" 
+                value="{{ old('day1ParticipationOpening', $contest->day_1_opening?->format('Y-m-d\TH:i')) }}"
                 required="required"
                 >
             <div class="mb-4">{{ __('Date format must be a sortable iso datetime: yyyy-mm-dd hh:mm:ss') }}</div>
-            <div class="alert alert-danger small">@error('day_1_opening') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('day1ParticipationOpening') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="day_2_closing">
+            <label class="block font-medium text-sm text-gray-700" for="day2ParticipationClosing">
                 {{ __('End of participation Contest') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-xl" 
-                wire:model="day_2_closing" 
-                type="datetime-local" name="day_2_closing" 
-                value="{{ old('day_2_closing') }}"
+                wire:model="day2ParticipationClosing" 
+                type="datetime-local" name="day2ParticipationClosing" 
+                value="{{ old('day2ParticipationClosing', $contest->day_2_closing?->format('Y-m-d\TH:i')) }}"
                 required="required"
                 >
             <div class="mb-4">{{ __('Must be not minor of previous date') }}</div>
-            <div class="alert alert-danger small">@error('day_2_closing') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('day2ParticipationClosing') {{ $message }} @enderror</div>
 
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="day_3_jury_opening">
+            <label class="block font-medium text-sm text-gray-700" for="day3JuryOpening">
                 {{ __('Begin of jury works') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-xl" 
-                wire:model="day_3_jury_opening" 
-                type="datetime-local" name="day_3_jury_opening" 
-                value="{{ old('day_3_jury_opening') }}"
+                wire:model="day3JuryOpening" 
+                type="datetime-local" name="day3JuryOpening" 
+                value="{{ old('day3JuryOpening', $contest->day_3_jury_opening?->format('Y-m-d\TH:i')) }}"
                 required="required"
                 >
             <div class="mb-4">{{ __('Must be not minor of previous date') }}</div>
-            <div class="alert alert-danger small">@error('day_3_jury_opening') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('day3JuryOpening') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="day_4_jury_closing">
+            <label class="block font-medium text-sm text-gray-700" for="day4JuryClosing">
                 {{ __('End of jury works') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-xl" 
-                wire:model="day_4_jury_closing" 
-                type="datetime-local" name="day_4_jury_closing" 
-                value="{{ old('day_4_jury_closing') }}"
+                wire:model="day4JuryClosing" 
+                type="datetime-local" name="day4JuryClosing" 
+                value="{{ old('day4JuryClosing', $contest->day4JuryClosing?->format('Y-m-d\TH:i')) }}"
                 required="required"
                 >
             <div class="mb-4">{{ __('Must be not minor of previous date') }}</div>
-            <div class="alert alert-danger small">@error('day_4_jury_closing') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('day4JuryClosing') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="day_5_revelations">
+            <label class="block font-medium text-sm text-gray-700" for="day5Revelations">
                 {{ __('Result communication') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-xl" 
-                wire:model="day_5_revelations" 
-                type="datetime-local" name="day_5_revelations" 
-                value="{{ old('day_5_revelations') }}"
+                wire:model="day5Revelations" 
+                type="datetime-local" name="day5Revelations" 
+                value="{{ old('day5Revelations', $contest->day_5_revelations?->format('Y-m-d\TH:i')) }}"
                 required="required"
                 >
             <div class="mb-4">{{ __('Must be not minor of previous date') }}</div>
-            <div class="alert alert-danger small">@error('day_5_revelations') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('day5Revelations') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="day_6_awards">
+            <label class="block font-medium text-sm text-gray-700" for="day6Ceremony">
                 {{ __("Award' Ceremony 1 Date") }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-xl" 
-                wire:model="day_6_awards" 
-                type="datetime-local" name="day_6_awards" 
-                value="{{ old('day_6_awards') }}"
+                wire:model="day6Ceremony" 
+                type="datetime-local" name="day6Ceremony" 
+                value="{{ old('day6Ceremony', $contest->day_6_awards?->format('Y-m-d\TH:i')) }}"
                 required="required"
                 >
             <div class="mb-4">{{ __('Must be not minor of previous date') }}</div>
-            <div class="alert alert-danger small">@error('day_6_awards') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('day6Ceremony') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
             <style>textarea {resize:vertical;}</style>
-            <label class="block font-medium text-sm text-gray-700" for="award_ceremony_info">
+            <label class="block font-medium text-sm text-gray-700" for="awardCeremonyInfo">
                 {{ __("Award' Ceremony 2 location info") }}
             </label>
             <textarea 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="award_ceremony_info"
-                wire:model="award_ceremony_info"
+                type="text" name="awardCeremonyInfo"
+                wire:model="awardCeremonyInfo"
                 required="required"
-            >{{ old('award_ceremony_info') }}</textarea>
+            >{{ old('awardCeremonyInfo') }}</textarea>
             <div class="small">Location, date and time and/or Broadcast platform </div>
-            <div class="alert alert-danger small">@error('award_ceremony_info') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('awardCeremonyInfo') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="day_7_catalogues">
+            <label class="block font-medium text-sm text-gray-700" for="day7Catalog">
                 {{ __('Catalogue publication, printed or online') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-xl" 
-                wire:model="day_7_catalogues" 
-                type="datetime-local" name="day_7_catalogues" 
-                value="{{ old('day_7_catalogues') }}"
+                wire:model="day7Catalog" 
+                type="datetime-local" name="day7Catalog" 
+                value="{{ old('day7Catalog', $contest->day_7_catalogues?->format('Y-m-d\TH:i')) }}"
                 required="required"
                 >
             <div class="mb-4">{{ __('Must be not minor of previous date') }}</div>
-            <div class="alert alert-danger small">@error('day_7_catalogues') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('day7Catalog') {{ $message }} @enderror</div>
         </div>
 
         <div class="mb-4">

@@ -92,10 +92,11 @@ class ContestAssign extends Component
         ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' set: ' . json_encode($this->assignedAwardsSet));
 
         $this->incompleteAwardsSection = [];
-        foreach ($this->assignedAwardsSet as $section_award) {
+        /** @var object{ code: string, total_awards: int, assigned_awards: int , section_id: string} $sectionAward */
+        foreach ($this->assignedAwardsSet as $sectionAward) {
 
-            if ($section_award->total_awards > $section_award->assigned_awards) {
-                $this->incompleteAwardsSection[] = $section_award->section_id;
+            if ($sectionAward->total_awards > $sectionAward->assigned_awards) {
+                $this->incompleteAwardsSection[] = $sectionAward->section_id;
             }
         }
         $this->allAwardsAssigned = (count($this->incompleteAwardsSection) === 0);
@@ -182,15 +183,16 @@ class ContestAssign extends Component
         ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
 
         return [
-            'winner_user_id' => 'string|exists:contest_participants,user_id', // TODO build a validation rule() to check 'AND contest_id', simple exists seems too large
+            // TODO build a validation rule() to check 'AND contest_id', simple exists seems too large
+            'winner_user_id' => 'string|exists:contest_participants,user_id',
             'winner_name' => 'string|max:255',
         ];
-
     }
 
     /**
      * 4. at last ASSIGN
      */
+    // was: assign_prizes
     public function assign_prizes()
     {
         ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
@@ -200,16 +202,20 @@ class ContestAssign extends Component
         $validated = $this->validate();
         ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' validated: ' . json_encode($validated));
 
-        $contest_prize = ContestAward::where('contest_id', $this->contestId)->where('award_code', $validated['award_code'])->first();
+        $contestAward = ContestAward::where('contest_id', $this->contestId)
+            ->where('award_code', $validated['award_code'])
+            ->first();
         if (isset($validated['winner_user_id'])) {
-            $contest_prize->update([
+            $contestAward->update([
                 'winner_user_id' => $validated['winner_user_id'],
-            ])->save();
+            ]);
+            $contestAward->save();
         }
         if (isset($validated['winner_name'])) {
-            $contest_prize->update([
+            $contestAward->update([
                 'winner_name' => $validated['winner_name'],
-            ])->save();
+            ]);
+            $contestAward->save();
         }
 
         return view('livewire.organization.award.contest-assign');

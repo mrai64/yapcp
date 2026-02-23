@@ -33,15 +33,14 @@ class Remove extends Component
 
     public function mount(int $id)
     {
-        $fed = new Federation();
-        $this->federation = $fed->findOrFail($id);
+        $this->federation = Federation::findOrFail($id);
 
-        $this->name = $this->federation->name;
-        $this->code = $this->federation->code;
+        $this->name = $this->federation->name_en;
+        $this->code = $this->federation->id;
         $this->website = $this->federation->website;
-        $this->countryId = $this->federation->country_id ?? '';
-        $this->contact = $this->federation->contact;
-        $this->country = Country::where('id', $this->countryId)->exists() ? $this->countryId : '';
+        $this->countryId = $this->federation->country_id;
+        $this->contact = $this->federation->contact_info;
+        $this->country = Country::where('id', $this->countryId)->first();
     }
 
     public function delete()
@@ -54,7 +53,6 @@ class Remove extends Component
         return redirect()
             ->route('federation-list')
             ->with('success', __('Federation data safely removed, thanks!'));
-
     }
 
     public function render()

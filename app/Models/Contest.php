@@ -142,11 +142,6 @@ class Contest extends Model
 
     public const TABLENAME = 'contests'; // was: table_name but also Contest()->getTable()
 
-    // primary key
-    protected $primaryKey = 'id'; //  default but
-    protected $keyType = 'string'; // uuid char(36)
-    public $incrementing = false; //  with no increment
-
     protected $fillable = [
         'id', //                        pk uuid
         'country_id', //                fk countries.id
@@ -217,18 +212,19 @@ class Contest extends Model
 
             'vote_rule' => 'string',
 
-            'url_1_rule' => 'string',
-            'url_2_concurrent_list' => 'string',
-            'url_3_admit_n_award_list' => 'string',
-            'url_4_catalogue' => 'string',
-            'day_1_opening' => 'datetime',
-            'day_2_closing' => 'datetime',
-            'day_3_jury_opening' => 'datetime',
-            'day_4_jury_closing' => 'datetime',
-            'day_5_revelations' => 'datetime',
-            'day_6_awards' => 'datetime',
-            'day_7_catalogues' => 'datetime',
-            'day_8_closing' => 'datetime',
+            'url_1_rule'                => 'string',
+            'url_2_concurrent_list'     => 'string',
+            'url_3_admit_n_award_list'  => 'string',
+            'url_4_catalogue'           => 'string',
+
+            'day_1_opening'      => 'immutable_datetime',
+            'day_2_closing'      => 'immutable_datetime',
+            'day_3_jury_opening' => 'immutable_datetime',
+            'day_4_jury_closing' => 'immutable_datetime',
+            'day_5_revelations'  => 'immutable_datetime',
+            'day_6_awards'       => 'immutable_datetime',
+            'day_7_catalogues'   => 'immutable_datetime',
+            'day_8_closing'      => 'immutable_datetime',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',

@@ -38,12 +38,12 @@ class WorkReview extends Component
     {
         $this->contestWork = ContestWork::findOrFail($wid);
 
-        $this->contestSection = $this->contestWork->contest_section;
+        $this->contestSection = $this->contestWork->contestSection;
 
         $this->userWork = $this->contestWork->userWork;
 
         $this->alreadyReviewed = UserWorkValidation::where('user_work_id', $this->userWork->id)
-            ->where('federation_section_id', $this->contestSection->federationSection_id)
+            ->where('federation_section_id', $this->contestSection->federation_section_id)
             ->exists();
 
         if ($this->alreadyReviewed) {
@@ -61,7 +61,8 @@ class WorkReview extends Component
     {
         // already? show an empty view and U turn
         if ($this->alreadyReviewed || $this->alreadyWarned) {
-            return view('livewire.organization.pre-jury.section-review-work-hidden'); // empty display hidden
+            // empty display hidden
+            return view('livewire.organization.pre-jury.section-review-work-hidden');
         }
         // show and send the Validator Review
         return view('livewire.organization.pre-jury.section-review-work-show');

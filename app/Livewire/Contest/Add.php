@@ -24,8 +24,8 @@ use App\Models\Country;
 use App\Models\LangList;
 use App\Models\Organization;
 use App\Models\Timezone;
+use Carbon\CarbonImmutable;
 use DateTimeImmutable;
-use Illuminate\Support\Str;
 use Illuminate\Validation\Validator;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
@@ -56,55 +56,47 @@ class Add extends Component
 
     public string $contestNameLocal; //
 
-    public string $lang_local; // LangList[]
+    public string $localLang; // LangList[]
 
     public $langSet = [];
 
-    public string $organization_id; // organizations.id
+    public string $organizationId; // organizations.id
 
     public string $contest_mark; // path n fle
 
     public $contest_image; // stored in 'contest' disk
 
-    public string $contact_info; // address, email, cell, and so on
+    public string $contactInfo; // address, email, cell, and so on
 
-    public string $is_circuit; // Y/N, TODO become boolean
+    public string $isCircuit; // Y/N, TODO become boolean
 
-    public string $circuit_id; // required if...
+    public string $circuitId; // required if...
 
-    public string $federation_list; // maybe federations_lis
+    public string $federationPatronageList; // maybe federations_lis
 
-    public string $url_1_rule;
+    public string $url1Rule;
 
-    public string $url_2_concurrent_list; // maybe url_2_concurrents_list
+    public string $url2Concurrent;
 
-    public string $url_3_admit_n_award_list;
+    public string $url3Results;
 
-    public string $url_4_catalogue;
+    public string $url4Catalogs;
 
     public array $timezoneSet = [];
+    public string $timezoneId;
 
-    public string $timezone;
+    public CarbonImmutable $day1ParticipationOpening;
+    public CarbonImmutable $day2ParticipationClosing;
+    public CarbonImmutable $day3JuryOpening;
+    public CarbonImmutable $day4JuryClosing;
+    public CarbonImmutable $day5Revelations;
+    public CarbonImmutable $day6Ceremony;
+    public CarbonImmutable $day7Catalog;
+    public CarbonImmutable $day8Ending;
 
-    public string $day_1_opening; // format iso datetime
+    public string $awardCeremonyInfo; // location, date, online broadcast platform
 
-    public string $day_2_closing;
-
-    public string $day_3_jury_opening;
-
-    public string $day_4_jury_closing;
-
-    public string $day_5_revelations;
-
-    public string $day_6_awards;
-
-    public string $day_7_catalogues;
-
-    public string $day_8_closing;
-
-    public string $award_ceremony_info; // location, date, online broadcast platform
-
-    public string $fee_info;
+    public string $feePaymentInfo;
     // created_at assigned
     // updated_at assigned
     // deleted_at assigned
@@ -114,71 +106,94 @@ class Add extends Component
      */
     public function mount(string $oid) // organization_id as in route()
     {
-        ds('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $this->contestId = Str::uuid();
-        $this->organization = Organization::where('id', $oid)->get()[0];
-        $this->organization_id = $this->organization->id; // $oid
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
 
+        $this->organization = Organization::where('id', $oid)->firstOrFail();
+        $this->organizationId = $this->organization->id;
         $this->countries = Country::countriesSorted();
         $this->countryId = $this->organization->country_id;
 
-        $timezoneSet = Timezone::all(['id'])->orderBy('id')->get();
-        $this->timezoneSet = collect($timezoneSet)->sortBy('id')->toArray();
-
-        $this->timezone = 'Europe/Rome';
-
+        // form fields - default value
         $this->contestNameEn = 'Contest name';
-        $this->contestNameLocal = 'Contest name';
+        $this->contestNameLocal = 'Contest name in local lang';
+        $timezoneSet = Timezone::orderBy('id')->pluck(['id']);
+        $this->timezoneSet = collect($timezoneSet)->sortBy('id')->toArray();
+        $this->timezoneId = 'Europe/Rome';
+        // $langSet = Country::whereNotNull('lang_code')->pluck('lang_code');
+        // $this->langSet = collect($langSet)->sortBy('lang_code')->toArray();
+        $this->localLang = 'en';
+        $this->contactInfo = 'Organization contact infos';
 
-        $langSet = Country::whereNotNull('lang_code')->get('lang_code');
-        $this->langSet = collect($langSet)->sortBy('lang_code')->toArray();
+        $this->isCircuit = 'N'; // false
+        $this->circuitId = '';
 
-        $this->lang_local = 'en';
-        $this->is_circuit = 'N'; // false
+        /**
+         * TODO must be replaced by a separate form
+         * FED:code FED:code FED:code
+         */
+        $this->federationPatronageList = '';
+        // web page
+        $this->url1Rule = 'https://example.local/1/contest-rule';
+        $this->url2Concurrent = 'https://example.local/2/concurrent-status-list';
+        $this->url3Results = 'http://example.local/3/result-page';
+        $this->url4Catalogs = 'http://example.local/4/download-n-web-catalogues';
+        $this->feePaymentInfo = 'info about payment amount and platform ';
+        // calendar default - show local time register utc time
+        // opening: next month, 9:00
+        $this->day1ParticipationOpening = now()->addMonth()
+            ->setHour(9)->setMinute(0);
+        // closing: 3 weeks after day1, 23:59
+        $this->day2ParticipationClosing = $this->day1ParticipationOpening->addWeeks(3)
+            ->setHour(23)->setMinute(59); // immutable_datetime
+        // jury opening 1 week later day2
+        $this->day3JuryOpening = $this->day2ParticipationClosing->addWeek()
+            ->setHour(9)->setMinute(0);
+        $this->day4JuryClosing = $this->day3JuryOpening->addWeeks(2)
+            ->setHour(23)->setMinute(59);
+        $this->day5Revelations = $this->day4JuryClosing->addWeek()
+            ->setHour(12)->setMinute(0);
+        $this->day6Ceremony = $this->day5Revelations->addWeek()
+            ->setHour(10)->setMinute(0);
+        $this->awardCeremonyInfo = 'How n when Ceremony infos';
+        $this->day7Catalog = $this->day6Ceremony->addWeek()
+            ->setHour(9)->setMinute(0);
+        $this->day8Ending = $this->day7Catalog->addWeeks(3)
+            ->setHour(23)->setMinute(59);
 
-        // TODO use day, day+1, day+7 and so on...
-        $this->day_1_opening = date(DATE_ATOM); //
-        $this->day_2_closing = date(DATE_ATOM); //
-        $this->day_3_jury_opening = date(DATE_ATOM); //
-        $this->day_4_jury_closing = date(DATE_ATOM); //
-        $this->day_5_revelations = date(DATE_ATOM); //
-        $this->day_6_awards = date(DATE_ATOM); //
-        $this->day_7_catalogues = date(DATE_ATOM); //
-        $this->day_8_closing = date(DATE_ATOM); //
+        $this->contest = Contest::create([
+            // id assigned uuid
+            'is_circuit'       => $this->isCircuit,
+            'circuit_id'       => $this->circuitId,
 
-        $this->url_1_rule = 'http://example.local/1';
-        $this->url_2_concurrent_list = 'http://example.local/2';
-        $this->url_3_admit_n_award_list = 'http://example.local/3';
-        $this->url_4_catalogue = 'http://example.local/4';
-        $this->award_ceremony_info = '';
-        $this->fee_info = '';
+            'organization_id'  => $this->organizationId,
+            'timezone_id'      => $this->timezoneId,
 
-        $this->contest = new Contest();
-        $this->contest->id = $this->contestId;
-        $this->contest->organization_id = $this->organization_id; // $oid
-        $this->contest->country_id = $this->countryId;
-        $this->contest->timezone = 'Europe/Rome';
-        $this->contest->contestNameEn = 'Contest name';
-        $this->contest->contestNameLocal = 'Contest name';
-        $this->contest->lang_local = 'en';
-        $this->contest->is_circuit = $this->is_circuit;
-        $this->contest->day_1_opening = $this->day_1_opening;
-        $this->contest->day_2_closing = $this->day_2_closing;
-        $this->contest->day_3_jury_opening = $this->day_3_jury_opening;
-        $this->contest->day_4_jury_closing = $this->day_4_jury_closing;
-        $this->contest->day_5_revelations = $this->day_5_revelations;
-        $this->contest->day_6_awards = $this->day_6_awards;
-        $this->contest->day_7_catalogues = $this->day_7_catalogues;
-        $this->contest->day_8_closing = $this->day_8_closing;
-        $this->contest->url_1_rule = $this->url_1_rule;
-        $this->contest->url_2_concurrent_list = $this->url_2_concurrent_list;
-        $this->contest->url_3_admit_n_award_list = $this->url_3_admit_n_award_list;
-        $this->contest->url_4_catalogue = $this->url_4_catalogue;
-        $this->contest->contact_info = $this->organization->name;
-        $this->contest->award_ceremony_info = $this->award_ceremony_info;
-        $this->contest->fee_info = $this->fee_info;
-        // to store uuid and default values
-        $this->contest->save();
+            'name_en'          => $this->contestNameEn,
+            'name_local'       => $this->contestNameLocal,
+            'lang_local'       => $this->localLang,
+
+            'federation_list'  => $this->federationPatronageList,
+
+            'contact_info'         => $this->contactInfo,
+            'award_ceremony_info'  => $this->awardCeremonyInfo,
+            'fee_info'             => $this->feePaymentInfo,
+
+            'url_1_rule'               => $this->url1Rule,
+            'url_2_concurrent_list'    => $this->url2Concurrent,
+            'url_3_admit_n_award_list' => $this->url3Results,
+            'url_4_catalogue'          => $this->url4Catalogs,
+            //
+            'day_1_opening'      => $this->day1ParticipationOpening,
+            'day_2_closing'      => $this->day2ParticipationClosing,
+            'day_3_jury_opening' => $this->day3JuryOpening,
+            'day_4_jury_closing' => $this->day4JuryClosing,
+            'day_5_revelations'  => $this->day5Revelations,
+            'day_6_awards'       => $this->day6Ceremony,
+            'day_7_catalogues'   => $this->day7Catalog,
+            'day_8_closing'      => $this->day8Ending,
+        ]);
+
+        $this->contestId = $this->contest->id;
     }
 
     /**
@@ -186,7 +201,7 @@ class Add extends Component
      */
     public function render()
     {
-        ds('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ .' called');
 
         return view('livewire.contest.add');
     }
@@ -201,38 +216,38 @@ class Add extends Component
      */
     public function rules()
     {
-        ds('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
 
         return [
             // id           assigned, not in form
             'countryId' => 'required|string|exists:countries,id',
             'contestNameEn' => 'required|string',
             'contestNameLocal' => 'required|string',
-            'lang_local' => 'required|string', // in(LangList::LANGCODES)
+            'localLang' => 'required|string|exists:countries,lang_code',
             // organization_id by uri,   not in form
             // contest_mark
-            'contact_info' => 'required|string',
-            'is_circuit' => 'required|string|uppercase|max:1', // in(['N','Y'])
-            'circuit_id' => 'nullable|string|exists:contests,id', //
-            'federation_list' => 'string|max:255',
+            'isCircuit' => 'required|string|uppercase|size:1', // in(['N','Y'])
+            'circuitId' => 'nullable|string|exists:contests,id', //
+            'federationPatronageList' => 'string|max:255',
 
-            'url_1_rule' => 'required|string|max:255',
-            'url_2_concurrent_list' => 'required|string|max:255',
-            'url_3_admit_n_award_list' => 'required|string|max:255',
-            'url_4_catalogue' => 'required|string|max:255',
+            'url1Rule' => 'required|string|max:255',
+            'url2Concurrent' => 'required|string|max:255',
+            'url3Results' => 'required|string|max:255',
+            'url4Catalogs' => 'required|string|max:255',
 
-            'timezone' => 'required|string',
-            'day_1_opening' => 'required|date|after_or_equal:today',
-            'day_2_closing' => 'required|date|after_or_equal:day_1_opening',
-            'day_3_jury_opening' => 'required|date|after_or_equal:day_2_closing',
-            'day_4_jury_closing' => 'required|date|after_or_equal:day_3_jury_opening',
-            'day_5_revelations' => 'required|date|after_or_equal:day_4_jury_closing',
-            'day_6_awards' => 'required|date|after_or_equal:day_5_revelations',
-            'day_7_catalogues' => 'required|date|after_or_equal:day_6_awards',
-            'day_8_closing' => 'required|date|after_or_equal:day_7_catalogues',
+            'timezoneId' => 'required|string',
+            'day1ParticipationOpening' => 'required|date|after_or_equal:today',
+            'day2ParticipationClosing' => 'required|date|after_or_equal:day1ParticipationOpening',
+            'day3JuryOpening' => 'required|date|after_or_equal:day2ParticipationClosing',
+            'day4JuryClosing' => 'required|date|after_or_equal:day3JuryOpening',
+            'day5Revelations' => 'required|date|after_or_equal:day4JuryClosing',
+            'day6Ceremony' => 'required|date|after_or_equal:day5Revelations',
+            'day7Catalog' => 'required|date|after_or_equal:day6Ceremony',
+            'day8Ending' => 'required|date|after_or_equal:day7Catalog',
 
-            'award_ceremony_info' => 'required|string',
-            'fee_info' => 'required|string',
+            'contactInfo' => 'required|string',
+            'awardCeremonyInfo' => 'required|string',
+            'feePaymentInfo' => 'required|string',
             // created_at
             // updated_at
             // deleted_at
@@ -245,31 +260,31 @@ class Add extends Component
      */
     public function after(): array
     {
-        ds('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
 
         return [
             function (Validator $validator) {
                 // like validate but
-                if ($this->is_circuit != 'Y') {
-                    $this->is_circuit = 'N';
+                if ($this->isCircuit != 'Y') {
+                    $this->isCircuit = 'N';
                 }
 
-                if (! in_array($this->timezone, $this->timezoneSet)) {
+                if (! in_array($this->timezoneId, $this->timezoneSet)) {
                     $validator->errors()->add(
-                        'timezone',
+                        'timezoneId',
                         __('Must be one of list')
                     );
                 }
 
                 // insert here check for date limits
-                $day_1_opening = new DateTimeImmutable($this->day_1_opening);
-                $day_2_closing = new DateTimeImmutable($this->day_2_closing);
-                $day_8_closing = new DateTimeImmutable($this->day_8_closing);
-                $duration = date_diff($day_2_closing, $day_8_closing);
+                $day1ParticipationOpening = new DateTimeImmutable($this->day1ParticipationOpening);
+                $day2ParticipationClosing = new DateTimeImmutable($this->day2ParticipationClosing);
+                $day8Ending = new DateTimeImmutable($this->day8Ending);
+                $duration = date_diff($day2ParticipationClosing, $day8Ending);
                 if ($duration->format('%a%') > '65') {
                     // maybe 7 greater than 65?
                     $validator->errors()->add(
-                        'day_8_closing',
+                        'day8Ending',
                         __('Must not be more than 65 day from day_2 participation closing')
                     );
                 }
@@ -279,41 +294,44 @@ class Add extends Component
 
     public function saveNewContest()
     {
-        ds('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $validated = $this->validate(); // apply rules
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        $validated = $this->validate();
 
-        // TODO pick from form all fields and put in update()
-        // TODO because create was in mount()
-        $this->contest->id = $this->contestId;
-        $this->contest->country_id = $validated['countryId'];
-        $this->contest->name_en = $validated['contestNameEn'];
-        $this->contest->name_local = $validated['contestNameLocal'] ?? '';
-        $this->contest->lang_local = $validated['lang_local'];
-        $this->contest->contact_info = $validated['contact_info'];
-        $this->contest->is_circuit = $validated['is_circuit'];
-        $this->contest->circuit_id = $validated['circuit_id'];
-        $this->contest->federation_list = $validated['federation_list'];
-        $this->contest->url_1_rule = $validated['url_1_rule'];
-        $this->contest->url_2_concurrent_list = $validated['url_2_concurrent_list'];
-        $this->contest->url_3_admit_n_award_list = $validated['url_3_admit_n_award_list'];
-        $this->contest->url_4_catalogue = $validated['url_4_catalogue'];
-        $this->contest->timezone = $validated['timezone'];
-        $this->contest->day_1_opening = $validated['day_1_opening'];
-        $this->contest->day_2_closing = $validated['day_2_closing'];
-        $this->contest->day_3_jury_opening = $validated['day_3_jury_opening'];
-        $this->contest->day_4_jury_closing = $validated['day_4_jury_closing'];
-        $this->contest->day_5_revelations = $validated['day_5_revelations'];
-        $this->contest->day_6_awards = $validated['day_6_awards'];
-        $this->contest->day_7_catalogues = $validated['day_7_catalogues'];
-        $this->contest->day_8_closing = $validated['day_8_closing'];
-        $this->contest->award_ceremony_info = $validated['award_ceremony_info'];
-        $this->contest->fee_info = $validated['fee_info'];
-        // ✏️
+        $this->contest = Contest::where('id', $this->contestId)->first();
+        $this->contest->country_id                = $validated['countryId'];
+        $this->contest->name_en                   = $validated['contestNameEn'];
+        $this->contest->name_local                = $validated['contestNameLocal'] ?? '';
+        // $this->contest->lang_local                = $validated['localLang'];
+        $this->contest->is_circuit                = $validated['isCircuit'];
+        $this->contest->circuit_id                = $validated['circuitId'];
+        $this->contest->federation_list           = $validated['federationPatronageList'];
+        $this->contest->organization_id           = $this->organizationId;
+        $this->contest->timezone_id               = $validated['timezoneId'];
+
+        $this->contest->url_1_rule                = $validated['url1Rule'];
+        $this->contest->url_2_concurrent_list     = $validated['url2Concurrent'];
+        $this->contest->url_3_admit_n_award_list  = $validated['url3Results'];
+        $this->contest->url_4_catalogue           = $validated['url4Catalogs'];
+
+
+        $this->contest->day_1_opening         = $validated['day1ParticipationOpening'];
+        $this->contest->day_2_closing         = $validated['day2ParticipationClosing'];
+        $this->contest->day_3_jury_opening    = $validated['day3JuryOpening'];
+        $this->contest->day_4_jury_closing    = $validated['day4JuryClosing'];
+        $this->contest->day_5_revelations     = $validated['day5Revelations'];
+        $this->contest->day_6_awards          = $validated['day6Ceremony'];
+        $this->contest->day_7_catalogues      = $validated['day7Catalog'];
+        $this->contest->day_8_closing         = $validated['day8Ending'];
+        // vote_rule
+        $this->contest->contact_info          = $validated['contactInfo'];
+        $this->contest->award_ceremony_info   = $validated['awardCeremonyInfo'];
+        $this->contest->fee_info              = $validated['feePaymentInfo'];
+        //
         $this->contest->save();
 
         // redirect
         return redirect()
-            ->route('organization-dashboard', ['oid' => $this->organization_id])
+            ->route('organization-dashboard', ['oid' => $this->organizationId])
             ->with('success', __('New Contest added to list, enjoy!'));
     }
 }
