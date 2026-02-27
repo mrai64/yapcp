@@ -1,0 +1,95 @@
+
+  GET|HEAD  / .......................................................................................................................................................................... 
+  GET|HEAD  _debugbar/assets/javascript .................................................................................... debugbar.assets.js › Barryvdh\Debugbar › AssetController@js
+  GET|HEAD  _debugbar/assets/stylesheets ................................................................................. debugbar.assets.css › Barryvdh\Debugbar › AssetController@css
+  DELETE    _debugbar/cache/{key}/{tags?} ........................................................................... debugbar.cache.delete › Barryvdh\Debugbar › CacheController@delete
+  GET|HEAD  _debugbar/clockwork/{id} .......................................................................... debugbar.clockwork › Barryvdh\Debugbar › OpenHandlerController@clockwork
+  GET|HEAD  _debugbar/open ..................................................................................... debugbar.openhandler › Barryvdh\Debugbar › OpenHandlerController@handle
+  POST      _debugbar/queries/explain ......................................................................... debugbar.queries.explain › Barryvdh\Debugbar › QueriesController@explain
+  GET|HEAD  confirm-password .......................................................................................................................................... password.confirm
+  GET|HEAD  contest/add/{oid} ................................................................................................................... contest-add › App\Livewire\Contest\Add
+  GET|HEAD  contest/award/add/{cid} ................................................................................................. contest-award-add › App\Livewire\Contest\Award\Add
+  GET|HEAD  contest/export/FIAF1/{cid}/{fid} ................................................. contest-report-fiaf1 › Contest\Report\Fiaf1ParticipantsController@exportFiaf1Participants
+  GET|HEAD  contest/export/FIAF2/{cid}/{fid} ............................................................... contest-report-fiaf2 › Contest\Report\Fiaf2WorksController@exportFiaf2Works
+  GET|HEAD  contest/jury/add/{sid} .................................................................................................... contest-jury-add › App\Livewire\Contest\Jury\Add
+  GET|HEAD  contest/listed .................................................................................................................. contest-list › App\Livewire\Contest\Listed
+  GET|HEAD  contest/modify/{cid} .......................................................................................................... modify-contest › App\Livewire\Contest\Modify
+  GET|HEAD  contest/section/add/{cid} ........................................................................................... contest-section-add › App\Livewire\Contest\Section\Add
+  GET|HEAD  contest/section/modify/{sid} .................................................................................. modify-contest-section › App\Livewire\Contest\Section\Modify
+  GET|HEAD  contest/section/remove/{sid} .................................................................................. remove-contest-section › App\Livewire\Contest\Section\Remove
+  DELETE    contest/section/remove/{sid} ........................................................................................................... App\Livewire\Contest\Section\Remove
+  GET|HEAD  credits .................................................................................................................................................................... 
+  GET|HEAD  dashboard ........................................................................................................................................................ dashboard
+  GET|HEAD  dashboard/role .............................................................................................................. user-role-list › App\Livewire\User\Role\Listed
+  GET|HEAD  dashboard/role/federation/add ............................................................................. add-user-role-federation › App\Livewire\User\Role\Federation\Add
+  GET|HEAD  dashboard/role/organization/add ....................................................................... add-user-role-organization › App\Livewire\User\Role\Organization\Add
+  GET|HEAD  docs ................................................................................................. larecipe.index › BinaryTorch\LaRecipe › DocumentationController@index
+  GET|HEAD  docs/scripts/{script} ........................................................................................... larecipe.scripts › BinaryTorch\LaRecipe › ScriptController
+  GET|HEAD  docs/search-index/{version} ...................................................................................... larecipe.search › BinaryTorch\LaRecipe › SearchController
+  GET|HEAD  docs/styles/{style} ............................................................................................... larecipe.styles › BinaryTorch\LaRecipe › StyleController
+  GET|HEAD  docs/{version}/{page?} ................................................................................. larecipe.show › BinaryTorch\LaRecipe › DocumentationController@show
+  GET|HEAD  federation/add ................................................................................................................ add-federation › App\Livewire\Federation\Add
+  GET|HEAD  federation/list ........................................................................................................... federation-list › App\Livewire\Federation\Listed
+  GET|HEAD  federation/modify/{fid} ................................................................................................. modify-federation › App\Livewire\Federation\Modify
+  GET|HEAD  federation/remove/{fid} ................................................................................................. delete-federation › App\Livewire\Federation\Remove
+  DELETE    federation/remove/{fid} ..................................................................................................................... App\Livewire\Federation\Remove
+  GET|HEAD  federation/section/add/{fid} .................................................................................. add-federation-section › App\Livewire\Federation\Section\Add
+  GET|HEAD  federation/section/list/{fid} ............................................................................. federation-section-list › App\Livewire\Federation\Section\Listed
+  GET|HEAD  federation/section/modify/{fid}/{sid} ................................................................... federation-section-modify › App\Livewire\Federation\Section\Modify
+  GET|HEAD  federation/section/remove/{sid} ......................................................................... delete-federation-section › App\Livewire\Federation\Section\Remove
+  DELETE    federation/section/remove/{sid} ..................................................................................................... App\Livewire\Federation\Section\Remove
+  GET|HEAD  forgot-password ........................................................................................................................................... password.request
+  GET|HEAD  juror/review-vote/{vid} .............................................................................................. contest-jury-vote-mod › App\Livewire\Juror\ReviewVote
+  GET|HEAD  juror/section-board/{sid} ............................................................................................. contest-jury-board › App\Livewire\Juror\SectionBoard
+  GET|HEAD  juror/vote/{sid} ............................................................................................................... contest-jury-vote › App\Livewire\Juror\Vote
+  POST      juror/vote/{sid} ................................................................................................................................... App\Livewire\Juror\Vote
+  GET|HEAD  livewire/livewire.js ........................................................................................... Livewire\Mechanisms › FrontendAssets@returnJavaScriptAsFile
+  GET|HEAD  livewire/livewire.min.js.map ..................................................................................................... Livewire\Mechanisms › FrontendAssets@maps
+  GET|HEAD  livewire/preview-file/{filename} .................................................................. livewire.preview-file › Livewire\Features › FilePreviewController@handle
+  POST      livewire/update ................................................................................ default.livewire.update › Livewire\Mechanisms › HandleRequests@handleUpdate
+  POST      livewire/upload-file ................................................................................ livewire.upload-file › Livewire\Features › FileUploadController@handle
+  GET|HEAD  login ................................................................................................................................................................ login
+  GET|HEAD  organization/add .......................................................................................................... add-organization › App\Livewire\Organization\Add
+  GET|HEAD  organization/award-assign/contest/{cid} .................................................. organization-award-contest-assign › App\Livewire\Organization\Award\ContestAssign
+  GET|HEAD  organization/award-assign/jury-minute/{cid} .......................................................... organization-award-minute-draft › Contest\JuryMinuteDraft@buildMinute
+  GET|HEAD  organization/award-assign/section/{sid} .................................................. organization-award-section-assign › App\Livewire\Organization\Award\SectionAssign
+  GET|HEAD  organization/contest/admit/before-final/{sid} ...................................................... contest-before-final-jury › App\Livewire\Organization\Admit\BeforeFinal
+  GET|HEAD  organization/contest/admit/set-admit/{sid} ........................................................... organization-contest-admit › App\Livewire\Organization\Admit\SetAdmit
+  GET|HEAD  organization/contest/participants/listed/{cid} .......................................................... public-participant-list › App\Livewire\Contest\Participants\Listed
+  GET|HEAD  organization/contest/participants/modify/{cid} .......................................................... modify-participant-list › App\Livewire\Contest\Participants\Modify
+  GET|HEAD  organization/contest/pre-jury/pass/{wid} ....................................................... organization-contest-pass-next › App\Livewire\Organization\PreJury\PassNext
+  GET|HEAD  organization/contest/pre-jury/section-list/{cid} ............................................... organization-contest-list › App\Livewire\Organization\PreJury\SectionListed
+  GET|HEAD  organization/contest/pre-jury/section-review/{sid} ..................................... organization-contest-section-list › App\Livewire\Organization\PreJury\SectionReview
+  GET|HEAD  organization/contest/pre-jury/warn/{wid} ..................................................... organization-contest-warn-email › App\Livewire\Organization\PreJury\WarnEmail
+  GET|HEAD  organization/contest/{cid} ................................................................................. contest-live-dashboard › App\Livewire\Organization\ContestPanel
+  GET|HEAD  organization/dashboard/{id} ................................................................................... organization-dashboard › App\Livewire\Organization\Dashboard
+  GET|HEAD  organization/list ..................................................................................................... organization-list › App\Livewire\Organization\Listed
+  GET|HEAD  organization/modify/{id} ............................................................................................ modify-organization › App\Livewire\Organization\Modify
+  GET|HEAD  organization/remove/{id} ............................................................................................ delete-organization › App\Livewire\Organization\Remove
+  DELETE    organization/remove/{id} .................................................................................................................. App\Livewire\Organization\Remove
+  GET|HEAD  organization/reports/works-participant/{cid} ................................... organization-reports-works-participant › App\Livewire\Organization\Reports\WorksParticipant
+  GET|HEAD  profile ............................................................................................................................................................ profile
+  GET|HEAD  register .......................................................................................................................................................... register
+  GET|HEAD  reset-password/{token} ...................................................................................................................................... password.reset
+  GET|HEAD  storage/{path} ............................................................................................................................................... storage.local
+  PUT       storage/{path} ........................................................................................................................................ storage.local.upload
+  GET|HEAD  up ......................................................................................................................................................................... 
+  GET|HEAD  user/contact/listed ................................................................................................. user-contact-listed › App\Livewire\User\Contact\Listed
+  GET|HEAD  user/contact/modify .......................................................................................... user-contact-modify › App\Livewire\User\Contact\Modify1YouAre
+  GET|HEAD  user/contact/modify1/{uid?} ................................................................................. user-contact-modify1 › App\Livewire\User\Contact\Modify1YouAre
+  GET|HEAD  user/contact/modify2/{uid?} ............................................................................ user-contact-modify2 › App\Livewire\User\Contact\Modify2PostAddress
+  GET|HEAD  user/contact/modify3/{uid?} ................................................................................. user-contact-modify3 › App\Livewire\User\Contact\Modify3Phones
+  GET|HEAD  user/contact/modify4/{uid?} ................................................................................ user-contact-modify4 › App\Livewire\User\Contact\Modify4Socials
+  GET|HEAD  user/contact/modify5/{fid}/{uid?} ............................................................................. user-contact-modify5 › App\Livewire\User\Contact\Modify5Feds
+  DELETE    user/contest/subscribe/remove/{pid} ............................................................................ remove-work-contest › App\Livewire\Contest\Subscribe\Remove
+  GET|HEAD  user/contest/subscribe/{cid} .......................................................................................... participate-contest › App\Livewire\Contest\Subscribe
+  GET|HEAD  user/contest/subscribe/{cid}/work/{wid} .................................................................................. add-work-contest › App\Livewire\Contest\Subscribe
+  GET|HEAD  user/work/add ................................................................................................................... photo-box-add › App\Livewire\User\Work\Add
+  GET|HEAD  user/work/list .............................................................................................................. photo-box-list › App\Livewire\User\Work\Listed
+  GET|HEAD  user/work/modify/{wid} .................................................................................................... photo-box-modify › App\Livewire\User\Work\Modify
+  GET|HEAD  user/work/remove/{wid} .................................................................................................... delete-photo-box › App\Livewire\User\Work\Remove
+  DELETE    user/work/remove/{wid} ....................................................................................................................... App\Livewire\User\Work\Remove
+  GET|HEAD  verify-email ........................................................................................................................................... verification.notice
+  GET|HEAD  verify-email/{id}/{hash} .................................................................................................. verification.verify › Auth\VerifyEmailController
+
+

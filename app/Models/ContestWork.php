@@ -203,9 +203,9 @@ class ContestWork extends Model
     public function author(): BelongsTo
     {
         $userContact = $this->belongsTo(
-            UserContact::class,
-            'id',
-            'user_id'
+            UserContact::class, //    ext class
+            'user_id', //             int contest_work.user_id
+            'id' //                   ext user_contacts.id
         );
 
         return $userContact;
@@ -233,7 +233,11 @@ class ContestWork extends Model
      */
     public function section()
     {
-        $section = $this->belongsTo(ContestSection::class, 'section_id');
+        $section = $this->belongsTo(
+            ContestSection::class, //  ext class
+            'section_id', //           int contest_works.section_id
+            'id' //                    ext contest_sections.id
+        );
 
         return $section;
     }
@@ -246,10 +250,10 @@ class ContestWork extends Model
     // was: user_contact
     public function userContact()
     {
-        $contact = $this->hasOne(
+        $contact = $this->belongsTo(
             UserContact::class, // ext class
+            'user_id', //          int contest_works.user_id
             'id', //               ext user_contacts.id
-            'user_id' //           int contest_works.user_id
         );
 
         return $contact;

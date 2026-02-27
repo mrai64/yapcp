@@ -90,11 +90,6 @@ class ContestSection extends Model
 
     public const TABLENAME = 'contest_sections';
 
-    // primary key
-    protected $primaryKey = 'id'; //  default but
-    protected $keyType = 'string'; // uuid char(36)
-    public $incrementing = false; //  with no increment
-
     // table field list
     protected $fillable = [
         'id', //                     pk uuid

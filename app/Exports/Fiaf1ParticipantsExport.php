@@ -13,10 +13,6 @@ use App\Models\FederationMore;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 
-/**
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Section[] $sections
- */
-
 final class Fiaf1ParticipantsExport implements FromView
 {
     // data to be passed to view
@@ -45,6 +41,7 @@ final class Fiaf1ParticipantsExport implements FromView
         $this->contest = Contest::with(['sections' => function ($q) {
             $q->orderBy('code');
         }])->find($this->contestId);
+
         $contest = $this->contest;
         ds('contest for cid:' . $cid);
         ds($this->contest);

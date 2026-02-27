@@ -12,6 +12,7 @@ namespace App\Exports;
 use App\Models\Contest;
 use App\Models\ContestWork;
 use App\Models\Federation;
+use App\Models\UserContact;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromView;
@@ -28,7 +29,7 @@ class Fiaf2WorksExport implements FromView
     protected string $thisYear;
 
     protected $contest;
-
+    protected UserContact $usercontact;
     protected $participantWorks;
 
     protected array $reportData;
@@ -44,19 +45,14 @@ class Fiaf2WorksExport implements FromView
      */
     public function __construct(string $cid, string $fid) // from controller
     {
-        // zero trust
-        if (Contest::where('id', $cid)->count() === 0) {
-            abort(403);
-        }
+        $contest = Contest::findOrFail($cid);
         $contestId = $cid;
         $this->contestId = $cid;
 
-        if (Federation::where('id', $fid)->count() === 0) {
-            abort(403);
-        }
+        $federation = Federation::findOrFail($fid);
         $federationId = $fid;
         $this->federationId = $fid;
-        $this->thisYear = date('Y');
+        $this->thisYear = (string) date('Y');
 
         // contest n contest sections
         $this->contest = Contest::with(['sections' => function ($q) {
@@ -68,11 +64,11 @@ class Fiaf2WorksExport implements FromView
             ->where('contest_works.contest_id', $cid)
             // Carichiamo tutte le relazioni necessarie (Eager Loading)
             ->with([
-                'section', //                     contest_work->section
-                'work', //                        contest_work->work
-                'author' => function ($query) { // contest_work->author
+                'section', //                   contest_work->section - contest_section
+                'userWork', //                  contest_work->userWork
+                //                              contest_work->author - user_contact
+                'author' => function ($query) {
                     $query->select('id', 'first_name', 'last_name', 'country_id');
-                    // was: $query->select('user_id', 'first_name', 'last_name', 'country_id');
                 },
                 'author.contactMores' => function ($query) use ($fid) {
                     $query->where('federation_id', $fid);
@@ -81,12 +77,13 @@ class Fiaf2WorksExport implements FromView
             // join and sorted by
             ->join('user_contacts', 'contest_works.user_id', '=', 'user_contacts.id') // was: 'user_contacts.user_id')
             ->join('contest_sections', 'contest_works.section_id', '=', 'contest_sections.id')
-            ->join('works', 'contest_works.work_id', '=', 'works.id')
+            ->join('user_works', 'contest_works.work_id', '=', 'user_works.id')
             // awards
             ->leftJoin('contest_awards', function ($join) {
                 $join->on('contest_works.work_id', '=', 'contest_awards.winner_work_id')
                     ->on('contest_works.section_id', '=', 'contest_awards.section_id');
             })
+            ->orderBy('user_contacts.country_id')
             ->orderBy('user_contacts.last_name')
             ->orderBy('user_contacts.first_name')
             ->orderBy('contest_sections.code')
@@ -97,6 +94,7 @@ class Fiaf2WorksExport implements FromView
 
         // at last building map
         $reportData = $participantWorks->map(function ($row) {
+            /** @var ContestWork&object{last_name: string, first_name: string, award_title: ?string} $row */
 
             // user_contact_more
             $mores = $row->author->contactMores ?? collect([]);  // data, or empty array
@@ -109,27 +107,26 @@ class Fiaf2WorksExport implements FromView
 
             // excel_row
             return [
-                'lastName' => $row->last_name,
-                'firstName' => $row->first_name,
-                'italianTaxId' => $getMore('italianTaxId') ?? 'XXXXXXXXXXXXXXXX',
-                'cardId' => $getMore('cardId') ?? '000000',
-                'distinction' => $getMore('fiafDistinctions') ?? '$$$$$',
-                'section' => 'DIG', // dig | portfolio
-                'theme_code' => $row->section->code,
-                'work_title' => $row->work->title_en,
-                'yof1st' => $row->work->reference_year ?? $this->thisYear,
-                'admit' => $row->is_admit,
-                'award' => $row->award_title,
+                'lastName'      => $row->last_name,
+                'firstName'     => $row->first_name,
+                'italianTaxId'  => $getMore('italianTaxId') ?? 'XXXXXXXXXXXXXXXX',
+                'cardId'        => $getMore('cardId') ?? '000000',
+                'distinction'   => $getMore('fiafDistinctions') ?? '$$$$$',
+                'section'       => 'DIG', // dig | portfolio
+                'theme_code'    => $row->section->code,
+                'work_title'    => $row->userWork->title_en,
+                'yof1st'        => $row->userWork->reference_year ?? $this->thisYear,
+                'admit'         => $row->is_admit,
+                'award'         => $row->award_title,
             ];
         }); // map()
         $this->reportData = $reportData;
-
-    } // __construct()
+    }
 
     /**
      * Build vew to pass as excel table
      *
-     * @return void
+     * @return View
      */
     public function view(): View
     {

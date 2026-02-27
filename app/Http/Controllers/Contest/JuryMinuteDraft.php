@@ -17,7 +17,6 @@ use App\Models\ContestWork;
 use App\Models\Organization;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Spatie\LaravelPdf\Facades\Pdf;
 
 class JuryMinuteDraft extends Controller
@@ -25,7 +24,8 @@ class JuryMinuteDraft extends Controller
     // build the draft of the jury minute
     public function buildMinute(string $cid) // route
     {
-        Log::info('Controller '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called w/input: '.$cid);
+        ds('Controller ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+        . ' called w/input: ' . $cid);
         $contestId = $cid;
         $contest = Contest::where('id', $contestId)->firstOrFail();
 
@@ -54,8 +54,9 @@ class JuryMinuteDraft extends Controller
                 ->get();
 
             // juror signs
+            /** @var object{ country_id: string, last_name: string, first_name: string, flag_code: string } $juror */
             foreach ($juryMemberSet[$section->code] as $juror) {
-                $jn = $juror->last_name.', '.$juror->first_name;
+                $jn = $juror->last_name . ', ' . $juror->first_name;
                 $jurorSignageBlock[$jn] = true;
             }
             ksort($jurorSignageBlock, SORT_STRING);
@@ -107,7 +108,7 @@ class JuryMinuteDraft extends Controller
                 ->get();
 
         }
-        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' jury_mem: ' . json_encode($juryMemberSet));
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' jury_mem: ' . json_encode($juryMemberSet));
 
         // should be only winner_name without winner_user_id
         $contestAwardSet = ContestAward::select(
