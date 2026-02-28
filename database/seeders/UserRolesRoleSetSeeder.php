@@ -18,12 +18,13 @@ class UserRolesRoleSetSeeder extends Seeder
     public function run(): void
     {
         //
-        UserRolesRoleSet::factory()->create(['role' => 'chairman']);
-        UserRolesRoleSet::factory()->create(['role' => 'juror']);
-        UserRolesRoleSet::factory()->create(['role' => 'member']);
-        UserRolesRoleSet::factory()->create(['role' => 'president']);
-        UserRolesRoleSet::factory()->create(['role' => 'secretary']);
-        UserRolesRoleSet::factory()->create(['role' => 'winner']);
+        UserRolesRoleSet::factory()->create(['role' => 'admin']); //     system
+        UserRolesRoleSet::factory()->create(['role' => 'chairman']); //  contest
+        UserRolesRoleSet::factory()->create(['role' => 'juror']); //     contest
+        UserRolesRoleSet::factory()->create(['role' => 'member']); //    organization
+        UserRolesRoleSet::factory()->create(['role' => 'president']); // organization
+        UserRolesRoleSet::factory()->create(['role' => 'secretary']); // organization
+        UserRolesRoleSet::factory()->create(['role' => 'winner']); //    contest
 
     }
 }

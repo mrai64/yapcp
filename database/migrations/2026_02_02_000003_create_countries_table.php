@@ -15,7 +15,7 @@ return new class () extends Migration {
                 ->comment('iso-3166 alpha-3 uppercase');
             $table->string('country')->index()->comment('english official');
             $table->char('flag_code', 20)->nullable()->comment('Unicode chars for country flag emoji');
-            $table->char('lang_code', 5)->charset('ascii')->collation('ascii_general_ci')->nullable()
+            $table->char('lang_code', 7)->charset('ascii')->collation('ascii_general_ci')->nullable()
                 ->index()->comment('lang=xx_YY');
             $table->char('locale', 6)->charset('ascii')->collation('ascii_general_ci')->nullable()
                 ->index()->comment('lang=xx');

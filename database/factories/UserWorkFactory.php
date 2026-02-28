@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * User Works
+ * - uploaded by user in their photoBox folder
+ * - for test purpose we need to pick a random file
+ *   from an image folder (ia generated or picked
+ *   from public et free repository) and put in
+ *   photoBox folder
+ */
 namespace Database\Factories;
 
 use App\Models\UserContact;
@@ -20,19 +28,20 @@ class UserWorkFactory extends Factory
     {
         $user = UserContact::all()->random(7)->first();
         $photoBox = $user->photoBox();
-        $photoId = Str::uuid7();
+        $userWorkId = Str::uuid7();
 
         return [
-            'id' => $photoId, // image user work id
-            'user_id' => $user->user_id,
-            'work_file' => $photoBox . '/' . $photoId . '.jpg',
+            'id' => $userWorkId, // image user work id
+            'user_id' => $user->user_id ?? '019c9f83-e9d8-70a9-a45d-39902dfcc7be',
+            'work_file' => $photoBox . '/' . $userWorkId . '.jpg',
             'extension' => 'jpg',
-            'reference_year' => date('Y'),
+            // 'reference_year' => date('Y'),
             'title_en' => fake()->text(80),
             'title_local' => '',
             'long_side' => 1920,
             'short_side' => 1080,
             'monochromatic' => false,
+            'raw' => false,
         ];
     }
 }

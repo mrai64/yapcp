@@ -12,23 +12,27 @@ return new class () extends Migration {
     {
         Schema::create('user_contacts', function (Blueprint $table) {
             $table->uuid('id')->charset('ascii')->collation('ascii_general_ci')->primary()
-                ->comment('aligned to users.id');
+                ->comment('pk fk: users.id');
 
             $table->char('country_id', 3)->charset('ascii')->collation('ascii_general_ci')
+                ->default('ITA')
                 ->comment('fk: countries.id');
             $table->string('first_name')->index();
             $table->string('last_name')->index();
             $table->string('nick_name')->nullable()->index()->comment('alias, aka');
 
-            $table->string('email')->unique()->comment('aligned to users.email');
+            $table->string('email')->unique()->comment('fk: users.email');
 
             $table->string('cellular', 20)->default('')->comment('country code prefixed');
             $table->string('passport_photo')->default('anon.jpg')->comment('as rounded avatars');
 
-            $table->char('lang_local', 5)->charset('ascii')->collation('ascii_general_ci')
-                ->default('en')->comment('xx_YY - for future use in html lang');
+            $table->char('lang_code', 7)->charset('ascii')->collation('ascii_general_ci')
+                ->default('it_IT')
+                ->comment('xx_YY - for future use in html lang');
             $table->string('timezone_id', 40)->charset('ascii')->collation('ascii_general_ci')
-                ->default('Europe/Rome')->index()->comment('fk: timezones.id');
+                ->default('Europe/Rome')
+                ->index()
+                ->comment('fk: timezones.id');
 
             // postal
             // name see up
