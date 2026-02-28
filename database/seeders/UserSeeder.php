@@ -21,6 +21,12 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        echo "\nCreate 25 users";
         User::factory()->count(25)->create();
+        echo "\nCreate 25 more users";
+        User::factory()->count(25)->create();
+        echo "\nCreate 25 more users";
+        User::factory()->count(25)->create();
+        echo "\nDone\n";
     }
 }
