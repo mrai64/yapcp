@@ -34,7 +34,7 @@ class Listed extends Component
         $this->jurorUserContactId = Auth::id();
         ds('Component ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' jurorUserContactId:' . json_encode($this->jurorUserContactId));
 
-        $this->juror = UserContact::where('user_id', $this->jurorUserContactId)->first();
+        $this->juror = UserContact::where('id', $this->jurorUserContactId)->first();
         ds('Component ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' juror:' . json_encode($this->juror));
 
         $this->juries = $this->juror->juries;

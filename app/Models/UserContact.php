@@ -303,9 +303,9 @@ class UserContact extends Model
     public function juries()
     {
         $juries = $this->hasMany(
-            related: ContestJury::class,
-            foreignKey: 'user_contact_id',
-            localKey: 'id'
+            related: ContestJury::class,    //  ext class
+            foreignKey: 'user_id', //           ext contest_juries.user_id
+            localKey: 'id' //                   int contests.id
         );
         // log
         return $juries;

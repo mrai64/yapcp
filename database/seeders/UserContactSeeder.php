@@ -21,7 +21,7 @@ class UserContactSeeder extends Seeder
         $userSet = User::all();
         foreach ($userSet as $user) {
             Log::info('Seeder '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' SRC id:'.$user->id.' name:'.$user->name);
-            if (UserContact::where('user_id', $user->id)->count() > 0) {
+            if (UserContact::where('id', $user->id)->count() > 0) {
                 Log::info('Seeder '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' FND id:'.$user->id);
 
                 continue;
