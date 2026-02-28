@@ -13,12 +13,12 @@ return new class () extends Migration {
         Schema::create('user_work_mores', function (Blueprint $table) {
             $table->id(); // standard id
             $table->char('user_work_id', 36)->charset('ascii')->collation('ascii_general_ci')
-                ->comment('fk for user_works id');
+                ->comment('fk: user_works.id');
 
             $table->string('federation_id', 10)->charset('ascii')->collation('ascii_general_ci')
-                ->comment('fk federation_mores');
+                ->comment('fk: federation_mores.federation_id');
             $table->string('field_name', 20)->charset('ascii')->collation('ascii_general_ci')
-                ->comment('fk federation_mores');
+                ->comment('fk: federation_mores.field_name');
             $table->string('field_value')->default('')->comment('following rules when updated');
             //
             $table->dateTime('created_at')->useCurrent();

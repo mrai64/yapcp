@@ -33,7 +33,9 @@ class UserContactFactory extends Factory
         // need a valid users.id
         $user = DB::table(User::TABLENAME)->select('id', 'email', 'name')->inRandomOrder()->first();
         if (Str::contains($user->name, ',')) {
-            [$lastName, $firstName] = explode(', ', $user->name);
+            [$lastName, $firstName] = explode(',', $user->name);
+            $lastName = trim($lastName);
+            $firstName = trim($firstName);
         } else {
             $firstName = $user->name;
             $lastName = $user->name;
@@ -41,11 +43,12 @@ class UserContactFactory extends Factory
 
         // need a valid country_id
         $country = DB::table(Country::TABLENAME)->select('id')->whereNull('deleted_at')->inRandomOrder()->first();
+        $countryId = ($country->id) ?? 'ITA';
 
         return [
             'id' => $user->id,
             'user_id' => $user->id, // TODO remove       fk users.id
-            'country_id' => $country->id, //             fk countries.id
+            'country_id' => $countryId, //               fk countries.id
             'first_name' => $firstName,
             'last_name' => $lastName,
             'nick_name' => '',

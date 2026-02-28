@@ -19,7 +19,7 @@ return new class () extends Migration {
             $table->string('name_en')->index()->comment('official name in english');
             $table->string('website')->default('')->comment('official website or fb info page');
 
-            $table->char('local_lang', 5)->charset('ascii')->collation('ascii_general_ci')
+            $table->char('local_lang', 6)->charset('ascii')->collation('ascii_general_ci')
                 ->default('en')->comment('follow iso-3166 2 ascii lowercase');
             $table->string('name_local')->default('')->comment('when differ from official english');
             $table->string('timezone_id')->charset('ascii')->collation('ascii_general_ci')

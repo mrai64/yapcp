@@ -9,6 +9,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
@@ -35,6 +36,7 @@ use Illuminate\Support\Facades\Log;
 class UserRolesRoleSet extends Model
 {
     use SoftDeletes;
+    use HasFactory;
 
     public const TABLENAME = 'user_roles_role_sets';
 
@@ -65,7 +67,7 @@ class UserRolesRoleSet extends Model
     {
         $validRoles = self::pluck('role')->toArray();
         // log
-        $validRoles = asort($validRoles);
+        asort($validRoles);
         // log
         return $validRoles;
     }

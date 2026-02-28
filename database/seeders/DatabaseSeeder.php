@@ -20,17 +20,17 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CountrySeeder::class,
-            // LanglistSeeder::class,
             RegionSeeder::class,
             TimezonesSeeder::class,
+            //
             FederationSeeder::class,
             FederationSectionSeeder::class,
             // OrganizationSeeder::class,
             UserSeeder::class,
             // UserContactSeeder::class,
-            UserRoleRoleSetSeeder::class,
+            UserRolesRoleSetSeeder::class,
             // UserRoleSeeder::class,
-            WorkSeeder::class,
+            UserWorkSeeder::class,
             ContestsVoteRuleSetSeeder::class,
             // ContestSeeder::class,
             // ContestSectionSeeder::class,

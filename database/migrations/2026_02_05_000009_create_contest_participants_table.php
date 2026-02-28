@@ -11,9 +11,9 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('contest_participants', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // standard id 
             $table->char('contest_id', 36)->charset('ascii')->collation('ascii_general_ci')->index();
-            $table->char('user_id', 36)->charset('ascii')->collation('ascii_general_ci')->index();
+            $table->char('user_contact_id', 36)->charset('ascii')->collation('ascii_general_ci')->index();
             $table->boolean('fee_payment_completed')->default(false)->index()
                 ->comment('reserved for contest organization members');
             //
@@ -21,12 +21,12 @@ return new class () extends Migration {
             $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent()->index();
             $table->dateTime('deleted_at')->nullable()->index();
             //
-            $table->index(['contest_id', 'user_id'], 'contest_idx');
-            $table->index(['user_id', 'contest_id'], 'user_idx');
+            $table->index(['contest_id', 'user_contact_id'], 'contest_idx');
+            $table->index(['user_contact_id', 'contest_id'], 'user_idx');
             //
             $table->foreign(['contest_id'])->references(['id'])->on('contests')
                 ->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['user_id'])->references(['user_id'])->on('user_contacts')
+            $table->foreign(['user_contact_id'])->references(['id'])->on('user_contacts')
                 ->onUpdate('restrict')->onDelete('restrict');
             //
             $table->comment('Participant list w/fee semaphore');

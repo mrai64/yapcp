@@ -35,6 +35,7 @@ return new class () extends Migration {
                 ->comment('declared BW monochromatic');
             $table->boolean('raw')->default(false)
                 ->comment('Original RAW available');
+            // reference_year
 
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate()->index();

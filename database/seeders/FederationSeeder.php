@@ -25,7 +25,7 @@ class FederationSeeder extends Seeder
             'name_en' => "Fédération Internationale de l'Art Photographique",
             // local_lang
             // name_local
-            // timezone_id
+            'timezone_id' => 'Europe/Rome',
             'website' => 'https://www.fiap.net/en/',
             'contact_info' => ' ',
         ]);
@@ -45,6 +45,7 @@ class FederationSeeder extends Seeder
             'name_en' => 'Italian Photoamateurs Union',
             'local_lang' => 'it',
             'name_local' => 'Unione Italiana Fotoamatori',
+            'timezone_id' => 'Europe/Rome',
             'website' => 'https://www.unioneitalianafotoamatori.it/',
             'contact_info' => "Via Acque 9\n17045 Mallare SV",
         ]);
@@ -53,12 +54,14 @@ class FederationSeeder extends Seeder
             'id' => 'GPU',
             'name_en' => 'Global Photographic Union',
             'website' => 'https://www.gpuphoto.com/',
-        ]);
+            'timezone_id' => 'Europe/Athens',
+            ]);
         Federation::factory()->create([
             'country_id' => 'USA',
             'id' => 'PAA',
             'name_en' => 'Photographic Alliance of America',
             'website' => 'https://www.paausa.org/',
+            'timezone_id' => 'America/Chicago',
         ]);
 
     }

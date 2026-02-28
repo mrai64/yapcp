@@ -30,5 +30,13 @@ class FederationMoreSeeder extends Seeder
             'field_default_value' => '000000',
             'field_suggest' => 'Only 6 digit leading zeroes',
         ]);
+        FederationMore::factory()->create([
+            'federation_id' => 'FIAF',
+            'referenced_table' => 'user_works',
+            'field_name' => 'reference_year',
+            'field_validation_rules' => 'required|string|size:4|regex:/^[0-9]+$/',
+            'field_default_value' => '2024',
+            'field_suggest' => 'Year of first admission, in 4 digit form',
+        ]);
     }
 }

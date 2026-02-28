@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
@@ -38,7 +39,7 @@ class UserWork extends Model
         'user_id', //        fk user_contacts.id, users.id
         'work_file', //      path+filename+extension
         'extension', //      extension
-        'reference_year', // TODO UserWorkMore - a FIAF required field
+        // 'reference_year', // TODO UserWorkMore - a FIAF required field
         'title_en', //       photo title
         'title_local', //    same in lang <> 'en'
         'long_side', //      file side pixel
@@ -77,7 +78,7 @@ class UserWork extends Model
             'user_id' => 'string',
             'work_file' => 'string',
             'extension' => 'string',
-            'reference_year' => 'string',
+            // 'reference_year' => 'string',
             'title_en' => 'string',
             'title_local' => 'string',
             'long_side' => 'int',
@@ -106,7 +107,7 @@ class UserWork extends Model
 
     // RELATIONSHIP
 
-    // works.user_id > user_contacts.user_id
+    // user_works.user_id > user_contacts.id
     // was: user_contact
     public function userContact()
     {
@@ -119,4 +120,15 @@ class UserWork extends Model
         return $userContact;
     }
 
+    // user_works.user_id > user_work_mores.user_id
+    public function userWorkMore(): HasMany
+    {
+        $userWorksMoreSet = $this->hasMany(
+            related: UserWorkMore::class,  //  ext class
+            foreignKey: 'user_work_id', //     ext user_work_mores.user_id
+            localKey: 'user_id' //             int user_works.user_id
+        );
+        // log
+        return $userWorksMoreSet;
+    }
 }

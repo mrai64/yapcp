@@ -17,7 +17,7 @@ return new class () extends Migration {
             $table->char('flag_code', 20)->nullable()->comment('Unicode chars for country flag emoji');
             $table->char('lang_code', 5)->charset('ascii')->collation('ascii_general_ci')->nullable()
                 ->index()->comment('lang=xx_YY');
-            $table->char('locale', 5)->charset('ascii')->collation('ascii_general_ci')->nullable()
+            $table->char('locale', 6)->charset('ascii')->collation('ascii_general_ci')->nullable()
                 ->index()->comment('lang=xx');
             $table->char('calling_code', 10)->charset('ascii')->collation('ascii_general_ci')->nullable()
                 ->index()->comment('[+nn] - [+nnn] - [+1 nnn]');

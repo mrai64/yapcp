@@ -19,7 +19,7 @@ class UserObserver
     public function created(User $user): void
     {
         // build a UserContact record
-        if (Str::contains(', ', $user->name, true)) {
+        if (Str::contains(haystack: $user->name, needles: ', ', ignoreCase: false)) {
             [$lastName, $firstName] = explode(', ', $user->name);
         } else {
             $lastName = $user->name;
@@ -29,7 +29,7 @@ class UserObserver
             'id' => $user->id,
             'last_name' => $lastName,
             'first_name' => $firstName,
-            'country_id' => '',
+            'country_id' => 'ITA', // as default
             'email' => $user->email,
         ]);
     }
