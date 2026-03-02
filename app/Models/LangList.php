@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|LangList query()
  * @mixin \Eloquent
  */
+
 class LangList extends Model
 {
     public const LANGCODES = [
@@ -35,10 +36,11 @@ class LangList extends Model
 
     public function __construct()
     {
-        return self::LANGCODES;
     }
 
     /**
+     * Validation function
+     *
      * @param  string  $langCode  a language code
      * @return bool true if lang code is in the list
      */
@@ -48,6 +50,8 @@ class LangList extends Model
     }
 
     /**
+     * Getter function
+     *
      * @param  string  $langCode  a language code
      * @return string ''|'rtl'
      */
