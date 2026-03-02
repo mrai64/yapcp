@@ -12,6 +12,7 @@ namespace Database\Seeders;
 
 use App\Models\Country;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class CountrySeeder extends Seeder
 {
@@ -20,6 +21,8 @@ class CountrySeeder extends Seeder
      */
     public function run()
     {
+        echo "Give reference json from github";
+
         // Dload external source from https://github.com/mledoze/countries
         $json = file_get_contents('https://raw.githubusercontent.com/mledoze/countries/master/countries.json');
         $countries = json_decode($json, true);
@@ -30,8 +33,8 @@ class CountrySeeder extends Seeder
                 [
                     'country'      => $c['name']['common'],
                     'flag_code'    => $c['flag'] ?? '',
-                    'lang_code'    => array_key_first($c['languages'] ?? ['en' => '']),
-                    'locale'       => array_key_first($c['languages'] ?? ['en' => '']) . '_' . $c['cca2'],
+                    'lang_code'    => Str::limit(array_key_first($c['languages'] ?? ['en' => '']), 2, ''),
+                    'locale'       => Str::limit(array_key_first($c['languages'] ?? ['en' => '']), 2, '') . '_' . $c['cca2'],
                     'calling_code' => ($c['idd']['root'] ?? '') . ($c['idd']['suffixes'][0] ?? ''),
                 ]
             );
