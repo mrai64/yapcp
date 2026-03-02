@@ -28,7 +28,7 @@ return new class () extends Migration {
         Schema::create('user_roles_context_sets', function (Blueprint $table) {
             $table->id();
 
-            $table->char('context_type', 10)->charset('ascii')->collation('ascii_general_ci')
+            $table->char('context_type', 16)->charset('ascii')->collation('ascii_general_ci')
                 ->unique()->comment('the real pk');
 
             $table->dateTime('created_at')->useCurrent();

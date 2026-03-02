@@ -12,6 +12,7 @@ class UserRolesContextSetSeeder extends Seeder
      */
     public function run(): void
     {
+        //                                                         1...+....0....+.
         UserRolesContextSet::factory()->create(['context_type' => 'contests']);
         UserRolesContextSet::factory()->create(['context_type' => 'organizations']);
         UserRolesContextSet::factory()->create(['context_type' => 'federations']);
