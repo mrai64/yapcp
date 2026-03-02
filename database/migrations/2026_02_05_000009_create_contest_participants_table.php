@@ -11,7 +11,7 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('contest_participants', function (Blueprint $table) {
-            $table->id(); // standard id 
+            $table->id(); // standard id
             $table->char('contest_id', 36)->charset('ascii')->collation('ascii_general_ci')->index();
             $table->char('user_contact_id', 36)->charset('ascii')->collation('ascii_general_ci')->index();
             $table->boolean('fee_payment_completed')->default(false)->index()
