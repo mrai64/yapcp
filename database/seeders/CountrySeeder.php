@@ -29,12 +29,13 @@ class CountrySeeder extends Seeder
 
         foreach ($countries as $c) {
             Country::updateOrCreate(
-                ['id' => $c['cca3']], // iso-3166 alpha-3
+                ['id' => $c['cca3']], // country code alpha 3 >> iso-3166 alpha-3
                 [
                     'country'      => $c['name']['common'],
                     'flag_code'    => $c['flag'] ?? '',
                     'lang_code'    => Str::limit(array_key_first($c['languages'] ?? ['en' => '']), 2, ''),
-                    'locale'       => Str::limit(array_key_first($c['languages'] ?? ['en' => '']), 2, '') . '_' . $c['cca2'],
+                    'locale'       => Str::limit(array_key_first($c['languages'] ?? ['en' => '']), 2, '')
+                        . '_' . $c['cca2'],
                     'calling_code' => ($c['idd']['root'] ?? '') . ($c['idd']['suffixes'][0] ?? ''),
                 ]
             );
