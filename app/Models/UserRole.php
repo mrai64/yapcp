@@ -122,9 +122,9 @@ class UserRole extends Model
     public function userContact()
     {
         $userContact = $this->belongsTo(
-            UserContact::class,
-            'user_id',
-            'user_id'
+            UserContact::class, // ext  class
+            'user_id', //          int  user_roles.user_id
+            'id' //                ext  user_contacts.id
         );
         // log
         return $userContact;
@@ -133,9 +133,9 @@ class UserRole extends Model
     public function federation()
     {
         $federation = $this->belongsTo(
-            Federation::class,
-            'id',
-            'federation_id'
+            Federation::class, //  ext  class
+            'federation_id', //    int  user_roles.federation_id
+            'id' //                ext  federations.id
         );
         // log
         return $federation;
@@ -144,9 +144,9 @@ class UserRole extends Model
     public function organization()
     {
         $organization = $this->belongsTo(
-            Organization::class,
-            'id',
-            'organization_id'
+            Organization::class, // ext class
+            'organization_id', //   int user_roles.organization_id
+            'id' //                 ext organizations_id
         );
         // log
         return $organization;
@@ -155,9 +155,9 @@ class UserRole extends Model
     public function contest()
     {
         $contest = $this->belongsTo(
-            Contest::class,
-            'contest_id',
-            'id'
+            Contest::class, //  ext  class
+            'contest_id', //    int  user_roles.contest_id
+            'id' //             ext  contests.id
         );
         // log
         return $contest;

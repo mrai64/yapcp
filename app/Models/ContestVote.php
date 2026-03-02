@@ -50,6 +50,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote withoutTrashed()
  * @property-read \App\Models\ContestWork|null $contestWork
+ * @property string $contest_work_id fk: contest_works.work_id - NOT user_works.id
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote whereContestWorkId($value)
  * @mixin \Eloquent
  */
 class ContestVote extends Model

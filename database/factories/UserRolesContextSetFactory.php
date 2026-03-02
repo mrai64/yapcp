@@ -17,7 +17,7 @@ class UserRolesContextSetFactory extends Factory
     public function definition(): array
     {
         return [
-            'context_type' => fake()->text(10),
+            'context_type' => fake()->text(16),
             //
         ];
     }

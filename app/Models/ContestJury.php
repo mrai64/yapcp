@@ -44,6 +44,10 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereUserContactId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury withoutTrashed()
+ * @property string $contest_id fk: contests.id
+ * @property string $user_id fk: user_contacts.id - juror
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereContestId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereUserId($value)
  * @mixin \Eloquent
  */
 class ContestJury extends Model

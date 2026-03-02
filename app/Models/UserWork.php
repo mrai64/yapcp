@@ -18,6 +18,34 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork withoutTrashed()
+ * @property string $id
+ * @property string $user_id
+ * @property string $work_file path n filename internal
+ * @property string $extension
+ * @property string $title_en english title
+ * @property string $title_local lang title
+ * @property int $long_side pixel
+ * @property int $short_side pixel
+ * @property bool $monochromatic declared BW monochromatic
+ * @property bool $raw Original RAW available
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWorkMore> $userWorkMore
+ * @property-read int|null $user_work_more_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereExtension($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereLongSide($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereMonochromatic($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereRaw($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereShortSide($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereTitleEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereTitleLocal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereWorkFile($value)
  * @mixin \Eloquent
  */
 class UserWork extends Model

@@ -130,6 +130,8 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest withoutTrashed()
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestSection> $contestSections
  * @property-read int|null $contest_sections_count
+ * @property string $timezone_id fk: timezones.id
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereTimezoneId($value)
  * @mixin \Eloquent
  */
 

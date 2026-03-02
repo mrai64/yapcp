@@ -60,6 +60,8 @@ use Illuminate\Support\Facades\Log;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestParticipant whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestParticipant withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestParticipant withoutTrashed()
+ * @property string $user_contact_id
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestParticipant whereUserContactId($value)
  * @mixin \Eloquent
  */
 class ContestParticipant extends Model

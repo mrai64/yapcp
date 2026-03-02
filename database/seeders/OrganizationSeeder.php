@@ -17,6 +17,7 @@ class OrganizationSeeder extends Seeder
      */
     public function run(): void
     {
+        // admin organization is
         Organization::factory()->count(2)->create();
     }
 }

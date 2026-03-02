@@ -61,6 +61,8 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting whereWorkId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting withoutTrashed()
+ * @property string $user_work_id fk: user_works.id
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWaiting whereUserWorkId($value)
  * @mixin \Eloquent
  */
 class ContestWaiting extends Model

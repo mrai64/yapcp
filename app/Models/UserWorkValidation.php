@@ -21,6 +21,20 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkValidation onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkValidation withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkValidation withoutTrashed()
+ * @property int $id real pk is: user_work_id + federation_section_id
+ * @property string $user_work_id fk: user_works.id
+ * @property string $federation_section_id fk: federation_sections.id
+ * @property string $validator_user_id contest organization members that validate the work for specific section
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkValidation whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkValidation whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkValidation whereFederationSectionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkValidation whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkValidation whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkValidation whereUserWorkId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkValidation whereValidatorUserId($value)
  * @mixin \Eloquent
  */
 class UserWorkValidation extends Model

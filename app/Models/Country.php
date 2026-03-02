@@ -57,6 +57,12 @@ use Illuminate\Support\Facades\Log;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Country withoutTrashed()
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserContact> $userContacts
  * @property-read int|null $user_contacts_count
+ * @property string|null $lang_code lang=xx_YY
+ * @property string|null $locale lang=xx
+ * @property string|null $calling_code [+nn] - [+nnn] - [+1 nnn]
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Country whereCallingCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Country whereLangCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Country whereLocale($value)
  * @mixin \Eloquent
  */
 class Country extends Model

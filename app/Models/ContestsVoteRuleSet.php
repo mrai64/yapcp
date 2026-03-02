@@ -38,6 +38,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestsVoteRuleSet whereVoteRule($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestsVoteRuleSet withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestsVoteRuleSet withoutTrashed()
+ * @property int $id
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestsVoteRuleSet whereId($value)
  * @mixin \Eloquent
  */
 class ContestsVoteRuleSet extends Model

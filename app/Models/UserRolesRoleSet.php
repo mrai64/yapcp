@@ -31,6 +31,7 @@ use Illuminate\Support\Facades\Log;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleSet whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleSet withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleSet withoutTrashed()
+ * @method static \Database\Factories\UserRolesRoleSetFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 class UserRolesRoleSet extends Model

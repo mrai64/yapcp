@@ -43,6 +43,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore whereUserContactUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore withoutTrashed()
+ * @property string $user_id fk for user_contact id
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore whereUserId($value)
  * @mixin \Eloquent
  */
 class UserContactMore extends Model

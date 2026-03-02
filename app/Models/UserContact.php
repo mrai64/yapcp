@@ -109,6 +109,10 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereXTwitter($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact withoutTrashed()
+ * @property string $lang_code xx_YY - for future use in html lang
+ * @property string $timezone_id fk: timezones.id
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereLangCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereTimezoneId($value)
  * @mixin \Eloquent
  */
 class UserContact extends Model

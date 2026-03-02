@@ -95,6 +95,11 @@ class Organization extends Model
     protected function casts()
     {
         return [
+            'id'          => 'string',
+            'country_id'  => 'string',
+            'name'        => 'string',
+            'email'       => 'string',
+            'website'     => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
@@ -104,17 +109,14 @@ class Organization extends Model
     // GETTERS
 
     /**
-     * Sorted by
-     *   - country_id
-     *   - name
-     *   - created_at (to avoid dup, theoretically not but in real world)
-     * & exclusion for deleted_at
+     * Organization list order by Country
+     *
      */
     public static function countryIdSorted()
     {
         $organizations = DB::table('organizations')
             ->select('id', 'country_id', 'name', 'email', 'website')
-            ->whereNull('deleted_at')
+            ->where('name', '>', '/')
             ->orderBy('country_id', 'asc')
             ->orderBy('name', 'asc')
             ->orderBy('created_at', 'desc')

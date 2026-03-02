@@ -48,6 +48,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore withoutTrashed()
  * @method static \Database\Factories\FederationMoreFactory factory($count = null, $state = [])
+ * @property string $referenced_table real pk - lowercase
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore whereReferencedTable($value)
  * @mixin \Eloquent
  */
 class FederationMore extends Model

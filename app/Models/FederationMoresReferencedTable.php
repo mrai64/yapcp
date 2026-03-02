@@ -10,6 +10,16 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMoresReferencedTable newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMoresReferencedTable newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMoresReferencedTable query()
+ * @property int $id
+ * @property string $referenced_table real pk - lowercase
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property string|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMoresReferencedTable whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMoresReferencedTable whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMoresReferencedTable whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMoresReferencedTable whereReferencedTable($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMoresReferencedTable whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class FederationMoresReferencedTable extends Model
