@@ -19,16 +19,17 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            // lookup tables
             CountrySeeder::class,
             RegionSeeder::class,
             TimezonesSeeder::class,
-            UserRolesRoleSetSeeder::class,
             UserRolesContextSetSeeder::class,
+            UserRolesRoleSetSeeder::class,
             ContestsVoteRuleSetSeeder::class,
             //
             FederationSeeder::class,
             FederationSectionSeeder::class,
-            // OrganizationSeeder::class,
+            OrganizationSeeder::class,
             UserSeeder::class,
             // UserContactSeeder::class, // in UserSeeder
             // UserRoleSeeder::class,

@@ -100,7 +100,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'id', //           pk bigint unsigned
         'name', //         test
         'email', //        mirrored in user_contacts
+        'email_verified_at',
         'password', //     hashed
+        'remember_token',
     ];
 
     /**
@@ -129,8 +131,15 @@ class User extends Authenticatable implements MustVerifyEmail
     protected function casts(): array
     {
         return [
+            'id' => 'string',
+            'name' => 'string',
+            'email' => 'string',
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'remember_token' => 'string',
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
+            'deleted_at' => 'datetime',
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Organization;
 use App\Models\UserContact;
 use App\Models\UserRole;
 use Carbon\CarbonImmutable;
@@ -15,15 +16,26 @@ class UserRoleSeeder extends Seeder
     public function run(): void
     {
         // admin
-        UserRole::factory()->create([
-            'user_id' => UserContact::where('last_name', 'Rainato')
-                ->where('first_name', 'Massimo')->pluck('id'),
+        $adminRole = UserRole::factory()->make([
+            'user_id' => (string) UserContact::where('last_name', 'Rainato')
+                ->where('first_name', 'Massimo')->pluck('id')->first(),
             'role' => 'admin',
-            'organization_id' => UserContact::where('last_name', 'Rainato')
-                ->where('first_name', 'Massimo')->pluck('id'),
-            'role_opening' => CarbonImmutable::now(),
-            'role_closing' => CarbonImmutable::parse('9999-12-31T23:59:59'),
-        ]);
-        // UserRole::factory()->create(5);
+            'organization_id' => (string) Organization::where('name', '.admin')->pluck('id')->first(),
+            'contest_id' => null,
+            'federation_id' => null,
+            // 'role_opening' => CarbonImmutable::now(),
+            // 'role_closing' => CarbonImmutable::parse('9999-12-31T23:59:59'),
+        ])->toArray();
+        ds($adminRole);
+        // $adminCreate = UserRole::firstOrCreate(
+        //     [
+        //         'user_id'         => $adminRole['user_id'],
+        //         'role'            => $adminRole['role'],
+        //         'organization_id' => $adminRole['organization_id'],
+        //     ],
+        //     $adminRole
+        // );
+
+        UserRole::factory()->count(5)->create();
     }
 }

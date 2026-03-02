@@ -56,19 +56,18 @@ class UserRolesRoleSet extends Model
     protected function casts()
     {
         return [
+            'id' => 'int',
+            'role' => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
         ];
     }
 
-
     // was: valid_roles
     public static function validRoles(): array
     {
         $validRoles = self::pluck('role')->toArray();
-        // log
-        asort($validRoles);
         // log
         return $validRoles;
     }

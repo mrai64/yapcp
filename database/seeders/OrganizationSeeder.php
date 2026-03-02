@@ -18,6 +18,17 @@ class OrganizationSeeder extends Seeder
     public function run(): void
     {
         // admin organization is
-        Organization::factory()->count(2)->create();
+        $adminFirst = Organization::factory()->make([
+            'country_id' => 'ITA',
+            'name' => '.admin',
+            'email' => 'yapcp.admin.group@athesis77.it',
+            'website' => 'https://yapcp.org/',
+            'contact' => 'Mr Massimo Rainato - yaPCP founder\nemail: massimo.rainato@gmail.com',
+        ])->toArray();
+        $organization = Organization::firstOrCreate(
+            ['name' => $adminFirst['name']],
+            $adminFirst
+        );
+        Organization::factory()->count(5)->create();
     }
 }

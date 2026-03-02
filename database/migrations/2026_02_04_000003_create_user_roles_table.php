@@ -11,11 +11,11 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('user_roles', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // standard
             $table->char('user_id', 36)->charset('ascii')->collation('ascii_general_ci')
                 ->index()->comment('fk: user_contacts.id');
 
-            $table->string('role')->default('member')->index('role_idx')->comment('fk: user_roles_role_sets.role');
+            $table->string('role', 25)->default('member')->index('role_idx')->comment('fk: user_roles_role_sets.role');
 
             // TODO replace columns organizaton
             // $table->char('roled_to', 10)->charset('ascii')->collation('ascii_general_ci')
@@ -44,16 +44,19 @@ return new class () extends Migration {
                 'organization_id',
                 'contest_id',
                 'federation_id',
-                'role_opening',
-                'id'
+                'role_opening'
                 ],
                 'general_idx'
             );
 
-            $table->foreign(['organization_id'])->references(['id'])->on('organizations')->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['contest_id'])->references(['id'])->on('contests')->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['federation_id'])->references(['id'])->on('federations')->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['role'])->references(['role'])->on('user_roles_role_sets')->onUpdate('restrict')->onDelete('restrict');
+            $table->foreign(['organization_id'])->references(['id'])->on('organizations')
+                ->onUpdate('restrict')->onDelete('restrict');
+            $table->foreign(['contest_id'])->references(['id'])->on('contests')
+                ->onUpdate('restrict')->onDelete('restrict');
+            $table->foreign(['federation_id'])->references(['id'])->on('federations')
+                ->onUpdate('restrict')->onDelete('restrict');
+            $table->foreign(['role'])->references(['role'])->on('user_roles_role_sets')
+                ->onUpdate('restrict')->onDelete('restrict');
 
         });
     }

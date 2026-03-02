@@ -41,8 +41,8 @@ class UserFactory extends Factory
         return [
             'name' => $name,
             'email' => $email,
-            'email_verified_at' => now(),
             'password' => $password,
+            'email_verified_at' => now(),
             'remember_token' => Str::random(10),
         ];
     }
