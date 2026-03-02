@@ -456,9 +456,9 @@ class Contest extends Model
      * For contest in circuit, from circuit
      * to find contest under / circuit
      *
-     * @return void
+     * @return HasMany
      */
-    public function contestsInCircuit()
+    public function contestsInCircuit(): HasMany
     {
         $contests = $this->hasMany(
             related: static::class, //    contests

@@ -100,13 +100,13 @@ class Modify5Feds extends Component
      * As that are "more" user_contact data, all fields are
      * 'sometimes'
      *
-     * @return void
+     * @return array
      */
     public function rules()
     {
         $rulesSet = [];
         foreach ($this->formFieldSet as $f) {
-            $rulesSet['formData.'.$f['fieldName']] = 'sometimes|'.$f['field_validation_rules'];
+            $rulesSet['formData.' . $f['fieldName']] = 'sometimes|' . $f['field_validation_rules'];
         }
 
         return $rulesSet;

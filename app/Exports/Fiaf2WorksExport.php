@@ -119,7 +119,7 @@ class Fiaf2WorksExport implements FromView
                 'admit'         => $row->is_admit,
                 'award'         => $row->award_title,
             ];
-        }); // map()
+        })->all(); // map() collection to array
         $this->reportData = $reportData;
     }
 
@@ -130,8 +130,6 @@ class Fiaf2WorksExport implements FromView
      */
     public function view(): View
     {
-        // dbg set_time_limit(120);
-
         return view('livewire.contest.report.fiaf2-works', [
             'contest' => $this->contest,
             'patronage_code' => $this->contest->federation_list,

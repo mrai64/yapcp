@@ -30,9 +30,9 @@ class Modify extends Component
 
     public string $titleLocal;
 
-    public string $longSide;
+    public int $longSide;
 
-    public string $shortSide;
+    public int $shortSide;
 
     public string $extension;
 
@@ -55,7 +55,7 @@ class Modify extends Component
         $this->titleLocal = $this->work->title_local;
         // workaround __DIR__ from here to storage
         $this->basedir = str_ireplace('/app/Livewire/Work', '/public/storage/photos', __DIR__);
-        $image = getimagesize($this->basedir.'/'.$this->workFileName);
+        $image = getimagesize($this->basedir . '/' . $this->workFileName);
         $this->longSide = ($image[0] >= $image[1]) ? $image[0] : $image[1];
         $this->shortSide = ($image[0] <= $image[1]) ? $image[0] : $image[1];
         $this->extension = str_ireplace('image/', '', $image['mime']);

@@ -10,6 +10,7 @@
  * 2025-09-17 fee_info added
  * 2025-12-04 review to support livewire header component
  * 2025-12-05 refactor Country::countriesSorted()
+ * 2026-03-02 default value in CarbonImmutable
  *
  * TODO change is_circuit from Y/N to 1/0
  * TODO change circuit_id from text to select list
@@ -140,7 +141,7 @@ class Add extends Component
         $this->feePaymentInfo = 'info about payment amount and platform ';
         // calendar default - show local time register utc time
         // opening: next month, 9:00
-        $this->day1ParticipationOpening = now()->addMonth()
+        $this->day1ParticipationOpening = CarbonImmutable::now()->addMonth()
             ->setHour(9)->setMinute(0);
         // closing: 3 weeks after day1, 23:59
         $this->day2ParticipationClosing = $this->day1ParticipationOpening->addWeeks(3)

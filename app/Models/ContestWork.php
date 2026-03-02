@@ -150,7 +150,7 @@ class ContestWork extends Model
     }
 
     // was: count_works_for_section_user
-    public static function sectionWorksCounter(string $sectionId, string $userId): string
+    public static function sectionWorksCounter(string $sectionId, string $userId): int
     {
         $count = self::where('user_id', $userId)->where('section_id', $sectionId)->count();
         return $count;
@@ -229,9 +229,9 @@ class ContestWork extends Model
     /**
      * Relation contest_works >> contest_sections
      *
-     * @return ContestSection contest_works.section_id contest_sections.id
+     * @return BelongsTo
      */
-    public function section()
+    public function section(): BelongsTo
     {
         $section = $this->belongsTo(
             ContestSection::class, //  ext class
@@ -245,10 +245,10 @@ class ContestWork extends Model
     /**
      * relation contest_works >> user_contacts
      *
-     * @return UserContact contest_works.user_id user_contacts.id
+     * @return BelongsTo
      */
     // was: user_contact
-    public function userContact()
+    public function userContact(): BelongsTo
     {
         $contact = $this->belongsTo(
             UserContact::class, // ext class
