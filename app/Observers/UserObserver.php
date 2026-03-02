@@ -15,7 +15,7 @@ class UserObserver
 {
     /**
      * Handle the User "created" event.
-     * 
+     *
      * $user already stored
      */
     public function created(User $user): void

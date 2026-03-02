@@ -56,10 +56,15 @@ class UserContactObserver
      */
     public function updating(UserContact $userContact): void
     {
-        // cambia photobox
+        // move old > new Photobox
         if ($userContact->isDirty('country_id') || $userContact->isDirty('last_name') || $userContact->isDirty('first_name')) {
             $oldPhotoBox = $userContact->getOriginal('passport_photo');
-            $oldPhotoBox = Str::substr_replace($oldPhotoBox, '/__passport_photo.jpg');
+            $oldPhotoBox = Str::replace(
+                search:'/__passport_photo.jpg',
+                replace: '',
+                subject: $oldPhotoBox,
+                caseSensitive: false
+            );
             $newPhotoBox = $userContact->photoBox();
             try {
                 Storage::disk('public')->move('/photos/' . $oldPhotoBox, '/photos/' . $newPhotoBox);

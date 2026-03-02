@@ -8,6 +8,7 @@
  *   from public et free repository) and put in
  *   photoBox folder
  */
+
 namespace Database\Factories;
 
 use App\Models\UserContact;
