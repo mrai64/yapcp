@@ -36,6 +36,7 @@ return [
         'default' => '1.0',
         'published' => [
             '1.0',
+            'dev',
         ],
     ],
 
@@ -55,7 +56,7 @@ return [
     */
 
     'settings' => [
-        'auth' => false,
+        'auth' => true, // Gate true | false,
         'guard' => null,
         'ga_id' => '',
         'middleware' => [

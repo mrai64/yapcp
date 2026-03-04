@@ -14,6 +14,7 @@ use App\Observers\UserContactObserver;
 use App\Observers\UserObserver;
 use App\Policies\ContestPaymentChangePolicy;
 use App\Policies\JurorOnlyPolicy;
+use BinaryTorch\LaRecipe\LaRecipeServiceProvider;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
@@ -49,6 +50,7 @@ class AppServiceProvider extends ServiceProvider
         // Gate Policy
         Gate::define('contest-participants-update', [ContestPaymentChangePolicy::class, 'update']);
         Gate::define('jury-panels', [JurorOnlyPolicy::class, 'grantAccess']);
+        Gate::define('larecipe-dev-access', [LaRecipeServiceProvider::class, 'gate']);
 
         // Observers
         User::observe(UserObserver::class);
