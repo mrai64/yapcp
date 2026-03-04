@@ -10,7 +10,6 @@ use App\Models\Contest;
 use App\Models\Federation;
 use App\Models\Organization;
 use App\Models\User;
-use App\Models\UserRole;
 use App\Models\UserRolesRoleSet;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -39,7 +38,7 @@ class UserRoleFactory extends Factory
         $contest = '';
         $federation = '';
         // $which = rand(1, 3);
-        $which=3;
+        $which = 3;
         switch ($which) {
             case 1:
                 $organization = DB::table(Organization::TABLENAME)

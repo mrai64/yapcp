@@ -12,7 +12,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Carbon\CarbonImmutable;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -32,7 +31,7 @@ class UserSeeder extends Seeder
         //     'remember_token' => Str::random(10),
         // ])->toArray();
         // User::upsert($newOrUpdate, ['email'], []);
-        if (!User::whereEmail('massimo.rainato.3@athesis77.it')->exists()){
+        if (!User::whereEmail('massimo.rainato.3@athesis77.it')->exists()) {
             User::create([
                 'name' => 'Rainato, Massimo',
                 'email' => 'massimo.rainato.3@athesis77.it',
@@ -44,12 +43,12 @@ class UserSeeder extends Seeder
 
         User::factory()->count(25)->create();
         echo " ✅\n  Create 25 more users";
-        
+
         User::factory()->count(25)->create();
         echo " ✅\n  Create 25 more users";
-        
+
         User::factory()->count(25)->create();
         echo " ✅\n  Done\n";
-        
+
     }
 }
