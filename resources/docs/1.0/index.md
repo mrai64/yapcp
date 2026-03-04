@@ -3,6 +3,7 @@
 - ## Get Started
 
   - [Overview](/{{route}}/{{version}}/overview)
+  - [Dev only](/{{route}}/dev/state-of-art)
 
 - ## You as Contest Participants
 
