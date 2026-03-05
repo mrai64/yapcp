@@ -110,7 +110,7 @@ use App\Models\ContestSection;
                 <tr>
                     <th width="35%" scope="col" class="data-table-email"     >{{__("Juror email")}}</th>
                     <th width="20%" scope="col" class="data-table-first-name">{{__("First name")}}</th>
-                    <th width="20%" scope="col" class="data-table-last-name" >{{__("Last name")}}</th>
+                    <th width="20%" scope="col" class="data-table-last-name" >{{__("Last Name")}}</th>
                     <th width="15%" scope="col" class="data-table-country"   >{{__("Country")}}</th>
                     <th width="10%" scope="col" class="data-table-action"    > Action </th>
                 </tr>
@@ -167,10 +167,10 @@ use App\Models\ContestSection;
                         </div>
                     </td>
                     <td>
-                        <!-- last name -->
+                        <!-- Last Name -->
                         <div class="mb-4">
                             <label class="block font-medium text-sm text-gray-700" for="jurorLastName">
-                                {{ __('Last name') }}
+                                {{ __('Last Name') }}
                             </label>
                             <input 
                                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 

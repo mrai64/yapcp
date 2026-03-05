@@ -236,14 +236,14 @@ class Modify extends Component
                         if ($check_circuit < 'a') {
                             $validator->errors()->add(
                                 'circuit_id',
-                                __('Must be already a registered circuit id, flagged as Circuit.')
+                                __('Must be already a registered circuit id, flagged as Circuit')
                             );
                         }
 
                     } catch (\Throwable $th) {
                         $validator->errors()->add(
                             'circuit_id',
-                            __('Must be already a registered circuit id, flagged as Circuit;')
+                            __('Must be already a registered circuit id, flagged as Circuit')
                         );
                     }
                 }

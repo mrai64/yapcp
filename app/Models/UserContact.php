@@ -185,7 +185,7 @@ class UserContact extends Model
 
     /**
      * @return string - the string used to store works and passport_photo
-     * based on country code, last name, first name and uuid
+     * based on country code, Last Name, first name and uuid
      * to avoid homonymies
      */
     // was: photo_box
@@ -222,7 +222,7 @@ class UserContact extends Model
     }
 
     /**
-     * @return string first name last name / country_id
+     * @return string first name Last Name / country_id
      */
     //was: get_first_last_name
     public static function getFirstLastName(string $uid): string

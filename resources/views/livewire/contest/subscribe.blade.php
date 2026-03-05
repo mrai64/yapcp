@@ -71,15 +71,15 @@ use Illuminate\Support\Facades\Log;
                 </td>
                 <td>
                 <!-- td work info  -->
-                <em>{{ __("Intl Title:")}}</em>
+                <em>{{ __("Intl Title")}}:</em>
                     {{$contest_work->work->title_en}}<br />
-                <em>{{ __("Local Title:")}}</em>
+                <em>{{ __("Local Title")}}:</em>
                     {{$contest_work->work->title_local}}<br />
-                <em>{{ __("Reference Year:")}}</em>
+                <em>{{ __("Reference Year")}}:</em>
                     {{$contest_work->work->reference_year}}
-                <em>{{ __("Short side:")}}</em> 
+                <em>{{ __("Short side")}}:</em> 
                     {{$contest_work->work->short_side}}
-                <em>{{ __("Long side:")}}</em>
+                <em>{{ __("Long side")}}:</em>
                     {{$contest_work->work->long_side}}
                 </td>
             </tr>
@@ -100,15 +100,15 @@ use Illuminate\Support\Facades\Log;
                     </td>
                     <td>
                         <!-- td work info  -->
-                        <em>{{ __("Intl Title:")}}</em>
+                        <em>{{ __("Intl Title")}}:</em>
                             {{$work->title_en}}<br />
-                        <em>{{ __("Local Title:")}}</em>
+                        <em>{{ __("Local Title")}}:</em>
                             {{$work->title_local}}<br />
-                        <em>{{ __("Reference Year:")}}</em>
+                        <em>{{ __("Reference Year")}}:</em>
                             {{$work->reference_year}}
-                        <em>{{ __("Short side:")}}</em> 
+                        <em>{{ __("Short side")}}:</em> 
                             {{$work->short_side}}
-                        <em>{{ __("Long side:")}}</em>
+                        <em>{{ __("Long side")}}:</em>
                             {{$work->long_side}}
                     </td>
                 </tr>
