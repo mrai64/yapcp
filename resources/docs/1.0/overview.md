@@ -15,7 +15,7 @@
 ## First Visit? What is yaPCP?
 
 Well, you are landed on "The User Docs of yaPCP".  
-First: what mean `Y A P C P`?  
+First: what mean **Y A P C P**?  
 It's like
 [YMCA](https://en.wikipedia.org/wiki/YMCA)?
 [YAML](https://en.wikipedia.org/wiki/YAML)?  
@@ -27,9 +27,17 @@ You can register in and play as *Contest participant*, and/or (with some restric
 
 ### Contest Participant
 
-- Register to our platform and upload your photos.
-- See the contest list, and easy participate to one or more.
-- Be quiet, no anytime reinsert your data to participate next contest. Change anytime their change.
+- Register to our platform and upload your photos.  
+  Your works are yours, you should leave in platform to reuse  
+  for more than a unique contest, and after the first upload  
+  and automatic and manual check, at second reuse we don't  
+  ask you the same infos anytime.  
+  Depending from contest sponsor organization you should add  
+  few info, also that one time only and you can update every  
+  time you need.
+- See the contest list, and easy participate to first, second and so on.
+- Relax, as indicated previuosly, no re-insert your data to participate  
+  to next contest. But change your data infos anytime their change.
 
 ### Member of Contest Organizer
 
