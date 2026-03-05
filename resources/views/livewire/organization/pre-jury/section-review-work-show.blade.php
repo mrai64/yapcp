@@ -33,12 +33,12 @@
         loading="lazy"
         style="float:left" /></a>
     <div class="block small w-auto">
-        <em>{{ __("Intl Title:")}}</em>     {{$work->title_en}}<br />
-        <em>{{ __("Local Title:")}}</em>    {{$work->title_local}}<br />
-        <em>{{ __("Author:")}}</em>         {{$work->user_contact->country_id}} | {{$work->user_contact->last_name}}, {{$work->user_contact->first_name}}<br />
-        <em>{{ __("Reference Year:")}}</em> {{$work->reference_year}}
-        <em>{{ __("Short side:")}}</em>     {{$work->short_side}}
-        <em>{{ __("Long side:")}}</em>      {{$work->long_side}}
+        <em>{{ __("Intl Title")}}:</em>     {{$work->title_en}}<br />
+        <em>{{ __("Local Title")}}:</em>    {{$work->title_local}}<br />
+        <em>{{ __("Author")}}:</em>         {{$work->user_contact->country_id}} | {{$work->user_contact->last_name}}, {{$work->user_contact->first_name}}<br />
+        <em>{{ __("Reference Year")}}:</em> {{$work->reference_year}}
+        <em>{{ __("Short side")}}:</em>     {{$work->short_side}}
+        <em>{{ __("Long side")}}:</em>      {{$work->long_side}}
     </div>
     <br style="clear:both;" />
     <div class="grid grid-cols-2 items-center gap-2 lg:grid-cols-3">

@@ -114,6 +114,6 @@ class Modify1YouAre extends Component
 
         return redirect()
             ->route('user-contact-modify2', ['uid' => $this->userContact->user_id])
-            ->with('success', __("'Name, Country n Pass photo updated successfully.'"));
+            ->with('success', __("Name, Country n Pass photo updated successfully"));
     }
 }
