@@ -54,7 +54,7 @@ use Illuminate\Support\Facades\Auth;
         . .
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
             <a href="{{ route('add-organization') }}">
-                [ {{ __("Add New Organization") }} ]
+                [ {{ __("Add new Organization") }} ]
             </a>
         </div>
         . .
@@ -66,7 +66,7 @@ use Illuminate\Support\Facades\Auth;
         . .
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
             <a href="{{ route('add-federation') }}">
-                [ {{ __("Add New Federation") }} ]
+                [ {{ __("Add new Federation") }} ]
             </a>
         </div>
         . .
