@@ -61,7 +61,41 @@ sulla piattaforma, insieme alle forme di pagamento previste.
 L'Autore si impegna a utilizzare la Piattaforma esclusivamente per
 la partecipazione ai concorsi fotografici gestiti dalla Piattaforma,
 e in conformità alle Leggi e Regolamenti in vigore, con riguardo alle
-eventuali regolamentazioni di organizzazioni nazionali e internazionali
+regolamentazioni di eventuali organizzazioni nazionali e internazionali
 che concedono patrocini ai concorsi gestiti nella Piattaforma.
 
 ### 5. **ASSISTENZA E MANUTENZIONE**
+
+La Piattaforma allo stato attuale non è oggetto di presidio 24/7,
+pertanto ogni richiesta di assistenza non può essere erogata immediatamente.
+Le manutenzioni periodiche per correzioni anomalie e per miglioramento
+di funzioni e prestazioni saranno pianificate con un anticipo di almeno
+3 settimane e comunicate via email a tutti gli Autori registrati sulla
+piattaforma, attivi e non, in modo che possano valutare l'impatto su
+loro attività (caricamento immagini, iscrizione a concorsi, lavori giurie)
+e concordare immediatamente con la gestione piattaforma la risoluzione di potenziali problemi.
+
+### 6. **RISERVATEZZA**
+
+Autori e Piattaforma si impegnano a mantenere riservate tutte le informazioni
+scambiate o acquisite durante l'esecuzione del presente contratto,
+anche dopo la scadenza.
+
+### 7. **LIMITAZIONE DI RESPONSABILITÀ**
+
+La gestione della Piattaforma non sarà responsabile per danni indiretti,
+incidentali, speciali o conseguenziali subiti dall'Autore
+a seguito dell'utilizzo della Piattaforma.
+
+### 8. **DISDETTA**
+
+Questo contratto può essere rescisso da ciascuna delle parti in caso di
+inadempienza sostanziale delle condizioni qui stabilite,
+con preavviso scritto di 30 (trenta) giorni.
+
+### 9. **LEGGE APPLICABILE E FORO COMPETENTE**
+
+Il presente contratto è regolato dal Codice Civile italiano
+e per ogni controversia legale sarà competente in via esclusiva
+il Tribunale della città di Padova, Italia.
+
