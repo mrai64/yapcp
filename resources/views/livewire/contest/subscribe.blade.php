@@ -19,8 +19,8 @@ use Illuminate\Support\Facades\Log;
 <div>
     <div class="header">
         <!-- Contest info -->
-        <p class="fyk text-2xl">{{__("Participate to:")}} {{$contest->name_local }}</p>
-        <p class="fyk text-xl">{{__("Closing date:")}} {{$contest->day_2_closing->format("Y-m-d") }}</p>
+        <p class="fyk text-2xl">{{__("Participate to")}}: {{$contest->name_local }}</p>
+        <p class="fyk text-xl">{{__("Closing date")}}: {{$contest->day_2_closing->format("Y-m-d") }}</p>
 
         <!-- Contest section list w/counter -->
         @foreach($contestSectionSet as $section)
@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Log;
         <hr />
 
         <!-- Contest work list w/counter only -->
-        <div class="fyk text-xl">{{__("Your counter:")}}
+        <div class="fyk text-xl">{{__("Your counter")}}:
         @foreach($contestSectionSet as $section)
         <p class="inline-flex small">[ {{$section->code}} your:{{ ContestWork::sectionWorksCounter($section->id, $userId) }} / {{$section->rule_max}}]</p>
         @endforeach

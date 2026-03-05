@@ -194,7 +194,7 @@ use Illuminate\Support\Facades\Log;
         <div class="mb-4">
             <!-- TODO replace w/select -->
             <label class="block font-medium text-sm text-gray-700" for="circuit_id">
-                {{ __('Circuit id') }}
+                {{ __('Circuit Id') }}
             </label>
             <input
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full"
@@ -203,7 +203,7 @@ use Illuminate\Support\Facades\Log;
                 value="{{ old('circuit_id') }}"
                 {{ ($readonly_flag) ? 'readonly' : '' }}
                 />
-            <div class="small">{{ __("For contest-in-circuit paste here previously copied circuit id.") }}</div>
+            <div class="small">{{ __("For contest-in-circuit paste here previously copied Circuit ID.") }}</div>
             <x-input-error class="small" :messages="$errors->get('circuit_id')" />
         </div>
 
