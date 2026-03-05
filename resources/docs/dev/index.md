@@ -4,6 +4,8 @@
     in 🇮🇹 italian  
     and/or 🇬🇧 english
 
+- Readme
+
 - ## (A) Problemi / Issues
 
 - ## (B) Documentazione / Docs
