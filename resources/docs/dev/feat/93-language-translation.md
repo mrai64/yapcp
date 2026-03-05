@@ -73,4 +73,11 @@ per le chiavi mancanti / aggiunte, ma quelle già convertite
 restano immutate.
 
 Adesso però serve passare e ripassare /lang/en.json
-per ridurre le chiavi
+per ridurre le chiavi. Sono state modificate una manciata di blade per
+questo.
+
+## Chiusura della issue
+
+Per verificare come funziona la chiusura automatica,
+comunque la modifica dei due file continuerà.
+
