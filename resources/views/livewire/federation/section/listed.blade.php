@@ -5,7 +5,7 @@
 <div>
     <header>
         <h1 class="fyk text-2xl">
-            {{__("Coded Section for Federation:")}} 
+            {{__("Coded Section for Federation")}}: 
             {{$federation->id}} |
             {{$federation->name_en}} 
         </h1>

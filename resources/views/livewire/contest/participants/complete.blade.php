@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Gate;
         <input type="hidden" wire:fill="participant_id" name="participant_id"
             value="{{ $participant_id }}" readonly />
 
-        <div class="small">{{ ($feePaymentCompleted === 'Y') ? __("✅ Payment completed") : __("🟨 Waiting payment receive") }}</div>
+        <div class="small">{{ ($feePaymentCompleted === 'Y') ? __("✅ Payment completed") : __("🟨 Waiting payment receipt") }}</div>
 
         @foreach ($errors->all() as $message)
         <div class="alert alert-danger small">{{$message}}</div>

@@ -2498,8 +2498,8 @@ select {
     <br /><br />
     <hr />
     <!-- header: contest data -->
-    {{ __("Today, ")}}{{ $todayExtendedFormat }} ,<br>
-    {{ __("for the contest named:")}}<br />
+    {{ __("Today, ")}}{{ $todayExtendedFormat }},<br>
+    {{ __("for the contest named")}}:<br />
     <div class="fyk text-2xl font-medium">
         {{$contest->name_en}},
     </div>

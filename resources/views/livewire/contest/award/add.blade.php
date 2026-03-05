@@ -166,7 +166,7 @@ use App\Models\ContestSection;
             <tr>
                 <td scope="col" class="data-table-section-code strong">{{ __("Section Code")}}</td>
                 <td scope="col" class="data-table-award-name strong">{{__("Award Code")}}</td>
-                <td scope="col" class="data-table-name strong">{{ __("Award name")}}</td>
+                <td scope="col" class="data-table-name strong">{{ __("Award Name")}}</td>
                 <td scope="col" class="data-table-actions strong">{{ __("Action") }}</td>
             </tr>
             @foreach($contest_award_list as $contest_award)
