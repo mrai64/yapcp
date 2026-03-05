@@ -8,7 +8,7 @@ Free thinking, in italian lang
 
 | Lun | Mar | Mer | Gio | Ven | Sab | Dom | Lun | Mar | Mer | Gio | Ven | Sab | Dom |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ___ | ___ | ___ | ___ | ___ | ___ | 1 mar | [2 mar](./2026-03/2026-03-02_IT.md) | 3 mar | 4 mar | 5 mar | 6 mar | 7 mar | 8 mar |
+| ___ | ___ | ___ | ___ | ___ | ___ | 1 mar | [2 mar](./2026-03/2026-03-02_IT.md) | [3 mar](./2026-03/2026-03-03_IT.md) | [4 mar](./2026-03/2026-03-04_IT.md) | [5 mar](./2026-03/2026-03-05_IT.md) | 6 mar | 7 mar | 8 mar |
 | 9 mar | 10 mar | 11 mar | 12 mar | 13 mar | 14 mar | 15 mar | 16 mar | 17 mar | 18 mar | 19 mar | 20 ma | 21 mar | 22 mar |
 | 23 mar | 24 mar | 25 mar | 26 mar | 27 mar | 28 mar | 29 mar | 30 mar | 31 mar | ___ | ___ | ___ | ___ | ___ |
 | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ |
