@@ -79,6 +79,6 @@ class Modify3Phones extends Component
 
         return redirect()
         ->route('user-contact-modify4', ['uid' => $this->userContact->user_id])
-        ->with('success', __("'Cellular and Whatsapp updated successfully.'"));
+        ->with('success', __("Cellular and Whatsapp updated successfully."));
     }
 }

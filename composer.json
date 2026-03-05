@@ -24,6 +24,7 @@
         "barryvdh/laravel-ide-helper": "^3.6",
         "fakerphp/faker": "^1.23",
         "kitloong/laravel-migrations-generator": "^7.2",
+        "kkomelin/laravel-translatable-string-exporter": "^1.25",
         "laradumps/laradumps": "^4.0",
         "larastan/larastan": "^3.0",
         "laravel/pail": "^1.2.2",
@@ -52,9 +53,12 @@
     },
     "scripts": {
         "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi",
             "@php artisan config:clear",
             "@php artisan clear-compiled",
-            "@php artisan package:discover --ansi"
+            "@php artisan translatable:export en --quiet",
+            "@php artisan translatable:export it --quiet"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
