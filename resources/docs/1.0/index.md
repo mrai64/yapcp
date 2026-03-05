@@ -3,6 +3,8 @@
 - ## Get Started
 
   - [Overview](/{{route}}/{{version}}/overview)
+  - [TOS Participants](/{{route}}/{{version}}/legal/term-of-service-participants)
+  - [TOS Organizations](/{{route}}/{{version}}/legal/term-of-service-organizations)
   - [Dev only](/{{route}}/dev/state-of-art)
 
 - ## You as Contest Participants
