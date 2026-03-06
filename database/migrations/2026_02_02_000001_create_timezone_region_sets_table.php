@@ -10,7 +10,7 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::create('regions', function (Blueprint $table) {
+        Schema::create('timezone_region_sets', function (Blueprint $table) {
             $table->char('id', 12)->charset('ascii')->collation('ascii_general_ci')->primary();
 
             $table->dateTime('created_at')->useCurrent();
@@ -26,6 +26,6 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('regions');
+        Schema::dropIfExists('timezone_region_sets');
     }
 };

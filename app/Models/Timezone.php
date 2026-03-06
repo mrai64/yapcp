@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Log;
 
 /**
  * @property string $id valid for php_timezones
- * @property string $region_id fk regions.id
+ * @property string $region_id fk timezone_region_sets.id
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -59,7 +59,7 @@ class Timezone extends Model
     // fields list
     protected $fillable = [
         'id', //           pk
-        'region_id', //    fk regions.id
+        'region_id', //    fk timezone_region_sets.id
         // created_at,     reserved
         // updated_at,     reserved
         // deleted_at,     reserved
@@ -68,6 +68,8 @@ class Timezone extends Model
     public function casts()
     {
         return [
+            'id' => 'string',
+            'region_id' => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
@@ -80,12 +82,16 @@ class Timezone extends Model
 
     public function region()
     {
-        $region = $this->hasOne(Region::class);
+        $region = $this->hasOne(
+            related: TimezoneRegionSet::class, // ext class
+            foreignKey: 'id', //                  ext timezone_region_sets.id
+            localKey: 'region_id' //              int timezone.region_id
+        );
         // log
         return $region;
     }
 
-    // timezones.id > contests.timezones.id
+    // timezones.id > contests.timezone_id
     public function contests()
     {
         $contests = $this->hasMany(
@@ -119,7 +125,4 @@ class Timezone extends Model
         // log
         return $fed;
     }
-
-
-
 }
