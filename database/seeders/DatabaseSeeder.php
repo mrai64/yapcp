@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // lookup tables
             CountrySeeder::class,
-            RegionSeeder::class,
+            TimezoneRegionSetSeeder::class,
             TimezonesSeeder::class,
             UserRolesContextSetSeeder::class,
             UserRolesRoleSetSeeder::class,
