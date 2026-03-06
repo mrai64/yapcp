@@ -1,19 +1,15 @@
 # Stato avanzamento lavori / State of Art
 
-Ultimo aggiornamento last update: 2026-03-04
+Ultimo aggiornamento last update: 2026-03-06
 
-- [Project](https://github.com/users/mrai64/projects/1/views/1?filterQuery=is%3Aopen&sortedBy%5Bdirection%5D=asc&sortedBy%5BcolumnId%5D=Title)
+- [🏠 index](/{{route}}/dev/state-of-art)
+- [template](/{{route}}/dev/template)
 
 ---
 
-- ## (A) Organizzazione SAL
-
-  E' stato creato un elenco di issue che sono in realtà
-  punti da sviluppare o correzioni da fare. Precedenza alle
-  correzioni di problemi, alla scrittura di test,
-  alla scrittura della documentazione e infine ma non
-  da poco lo sviluppo delle funzioni mancanti o nuove.  
-
-- ## (B) 100 Agreement between Platform and users
-
-[Agreement](/{{route}}/dev/feat/100-agreement-platform-users) between Platform and users [id:2026-01-15.01] [issue: [100](https://github.com/mrai64/yapcp/issues/100)]
+| data  | link | testo |
+| ---   |   ---| ---   |
+| 6 marzo 2026 | [#107](/{{route}}/dev/fix/107-user-role-seeder-ko) | #107 (A) fix: UserRoleSeeder bring an integrity constrain violation [id:2026-03-06.01] |
+| 6 marzo 2026 | [#89](/{{route}}/dev/refactor/89-regions-lookup-table)  | #89 (B) refactor: regions lookup table become timezone_regions lookup table [id:2025-12-24.01] |
+| 5 marzo 2026 | [#93](/{{route}}/dev/feat/93-language-translation)      | #93 (B) Language translation / it [id:2025-12-25.02] |
+| 4 marzo 2026 | ..                                                      |  Organizzazione SAL                                  |
