@@ -59,6 +59,10 @@ class UserRoleFactory extends Factory
                 $federation = $federation->id ?? '';
                 break;
         }
+        // set a value if all are empty
+        if ((! $organization) && (! $contest) && (! $federation)){
+            $federation = 'FIAP';
+        }
 
         return [
             // id
