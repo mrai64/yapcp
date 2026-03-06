@@ -30,47 +30,47 @@ class UserRoleFactory extends Factory
     {
         $user = DB::table(User::TABLENAME)
             ->select('id')->whereNull('deleted_at')->inRandomOrder()->first();
+
         $userId = (string) Str::limit($user->id, 36);
-        ds($user->id);
+
         $roleSet = UserRolesRoleSet::validRoles();
         $role = $roleSet[array_rand($roleSet)];
         $organization = '';
         $contest = '';
         $federation = '';
-        // $which = rand(1, 3);
-        $which = 3;
+        $which = rand(1, 3);
         switch ($which) {
             case 1:
                 $organization = DB::table(Organization::TABLENAME)
                     ->select('id')->whereNull('deleted_at')->inRandomOrder()->first();
-                $organization = $organization->id;
+                $organization = $organization->id ?? '';
                 break;
 
             case 2:
                 $contest = DB::table(Contest::TABLENAME)
                     ->select('id')->whereNull('deleted_at')->inRandomOrder()->first();
-                $contest = $contest->id;
+                $contest = $contest->id ?? '';
                 break;
 
             case 3:
             default:
                 $federation = DB::table(Federation::TABLENAME)
                     ->select('id')->whereNull('deleted_at')->inRandomOrder()->first();
-                $federation = $federation->id;
+                $federation = $federation->id ?? '';
                 break;
         }
-        ds('user:' . $user->id);
-        ds('org: ' . $organization);
-        ds('cont:' . $contest);
-        ds('fed: ' . $federation);
+        // set a value if all are empty
+        if ((! $organization) && (! $contest) && (! $federation)){
+            $federation = 'FIAP';
+        }
 
         return [
             // id
             'user_id' => $user->id,
             'role' => $role,
-            'organization_id' => $organization ?? '', //  uuid
-            'contest_id' => $contest ?? '', //                     uuid
-            'federation_id' => $federation ?? '', //               id
+            'organization_id' => ($organization) ? $organization : null, //  uuid
+            'contest_id' => ($contest) ? $contest : null, //                 uuid
+            'federation_id' => $federation ? $federation : null, //          id
             'role_opening' => CarbonImmutable::now(),
             'role_closing' => CarbonImmutable::now()->addMonths(3),
         ];

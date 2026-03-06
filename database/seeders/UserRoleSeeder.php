@@ -26,15 +26,15 @@ class UserRoleSeeder extends Seeder
             // 'role_opening' => CarbonImmutable::now(),
             // 'role_closing' => CarbonImmutable::parse('9999-12-31T23:59:59'),
         ])->toArray();
-        ds($adminRole);
-        // $adminCreate = UserRole::firstOrCreate(
-        //     [
-        //         'user_id'         => $adminRole['user_id'],
-        //         'role'            => $adminRole['role'],
-        //         'organization_id' => $adminRole['organization_id'],
-        //     ],
-        //     $adminRole
-        // );
+        $adminCreate = UserRole::firstOrCreate(
+            [
+                'user_id'         => $adminRole['user_id'],
+                'role'            => $adminRole['role'],
+                'organization_id' => $adminRole['organization_id'],
+            ],
+            $adminRole
+        );
+
 
         UserRole::factory()->count(5)->create();
     }
