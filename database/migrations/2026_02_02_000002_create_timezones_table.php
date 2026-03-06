@@ -14,14 +14,14 @@ return new class () extends Migration {
             $table->string('id', 40)->charset('ascii')->collation('ascii_general_ci')
                 ->primary()->comment('valid for php_timezones');
             $table->char('region_id', 12)->charset('ascii')->collation('ascii_general_ci')
-                ->index()->comment('fk regions.id');
+                ->index()->comment('fk timezone_region_sets.id');
 
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent()->index();
             $table->dateTime('deleted_at')->nullable()->index();
 
-            $table->foreign(['region_id'])->references(['id'])->on('regions')
-                ->onUpdate('restrict')->onDelete('restrict');
+            $table->foreign(['region_id'])->references(['id'])->on('timezone_region_sets')
+                ->onUpdate('cascade')->onDelete('cascade');
 
             $table->comment('correspond to php_timezone version 2025.3');
         });
