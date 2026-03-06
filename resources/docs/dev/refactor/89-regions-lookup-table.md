@@ -31,15 +31,11 @@ delle tabelle padre-figlio in cui la s della tabella padre viene persa. (Nota: I
   si chiama ancora `region_id`
 - [x] Creato model TimezoneRegionSet, controller e altro
 - [x] travasato non copiato da model Region a model TimezoneRegionSet
-- [ ] Eseguire `php artisan migrate`
-- [ ] Eseguire `php artisan db:seed`
-- [ ] Verificare funzionamento blade nella
- funzione di utente / modifica dati personali per la
- scelta della nazione di residenza
-
 
 ## 🚀 Note per il Deploy
 
 - Eseguire `php artisan migrate`
-- Aggiungere `STRIPE_SECRET` nel file .env
-
+- Eseguire `php artisan db:seed`
+- Verificare funzionamento blade nella
+ funzione di utente / modifica dati personali per la
+ scelta della nazione di residenza
