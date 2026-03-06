@@ -60,7 +60,7 @@ class UserRoleFactory extends Factory
                 break;
         }
         // set a value if all are empty
-        if ((! $organization) && (! $contest) && (! $federation)){
+        if ((! $organization) && (! $contest) && (! $federation)) {
             $federation = 'FIAP';
         }
 
