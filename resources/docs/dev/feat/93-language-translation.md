@@ -1,10 +1,14 @@
-#  Language translation
+# Feat:Language translation / it [id:2025-12-25.02]
 
-issue: [#93](https://github.com/mrai64/yapcp/issues/93)  
-last update: 2026-03-05  
-open: 2025-12-25  
+> **Branch:** `feat/93-language-translation`  
+> **Stato:** Completato  
+> **Priorità:** B  
+> **id assegnato:** 2025-12-25.02  
+> **Titolo e urgenza:** (B) Language translation / it [id:2025-12-25.02]  
+> **Project/issue link:** [#93](https://github.com/mrai64/yapcp/issues/93)  
 
 - [🏠 index](/{{route}}/dev/state-of-art)
+- [template](/{{route}}/dev/template)
 
 ---
 
@@ -42,7 +46,9 @@ Esempio:
 'max-size.error': 'max upload file size is :max-size'
 
 nel sorgente  
+```php
 echo __("max-size.error", "6MB");
+```
 
 ## Esistono dei package per questo
 
