@@ -17,6 +17,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TimezoneRegionSet query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TimezoneRegionSet withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|TimezoneRegionSet withoutTrashed()
+ * @property string $id
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TimezoneRegionSet whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TimezoneRegionSet whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TimezoneRegionSet whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|TimezoneRegionSet whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class TimezoneRegionSet extends Model

@@ -14,6 +14,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 
@@ -27,7 +28,7 @@ use Illuminate\Support\Facades\Log;
  * @property-read int|null $contests_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Federation> $federations
  * @property-read int|null $federations_count
- * @property-read \App\Models\Region|null $region
+ * @property-read \App\Models\TimezoneRegionSet|null $region
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserContact> $userContacts
  * @property-read int|null $user_contacts_count
  * @method static \Database\Factories\TimezoneFactory factory($count = null, $state = [])
@@ -80,7 +81,7 @@ class Timezone extends Model
 
     // RELATIONSHIP
 
-    public function region()
+    public function region(): HasOne
     {
         $region = $this->hasOne(
             related: TimezoneRegionSet::class, // ext class
