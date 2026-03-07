@@ -13,24 +13,26 @@ return new class () extends Migration {
         Schema::create('user_roles', function (Blueprint $table) {
             $table->id(); // standard
             $table->char('user_id', 36)->charset('ascii')->collation('ascii_general_ci')
-                ->index()->comment('fk: user_contacts.id');
+                ->index('user_idx')->comment('fk: user_contacts.id');
 
-            $table->string('role', 25)->default('member')->index('role_idx')->comment('fk: user_roles_role_sets.role');
+            $table->string('role', 25)->default('member')
+                ->index('role_idx')->comment('fk: user_roles_role_sets.role');
 
             // TODO replace columns organizaton
-            // $table->char('roled_to', 10)->charset('ascii')->collation('ascii_general_ci')
+            // $table->char('context', 10)->charset('ascii')->collation('ascii_general_ci')
             //     ->nullable()->index()->comment('fk: user_roles_context_sets.id');
-            // $table->char('roled_id', 36)->charset('ascii')->collation('ascii_general_ci')
+            // $table->char('context_id', 36)->charset('ascii')->collation('ascii_general_ci')
             //     ->nullable()->index()->comment('fk: (roled_to).id');
-            $table->char('organization_id', 36)->charset('ascii')->collation('ascii_general_ci')
-                ->nullable()->index()->comment('fk: organizations.id');
-            $table->char('contest_id', 36)->charset('ascii')->collation('ascii_general_ci')
-                ->nullable()->index()->comment('fk: contests.id');
-            $table->char('federation_id', 10)->charset('ascii')->collation('ascii_general_ci')
-                ->nullable()->index()->comment('fk: federations.id');
 
-            $table->dateTime('role_opening')->useCurrent()->index()
-                ->comment('Start of role works - default: today');
+            $table->char('organization_id', 36)->charset('ascii')->collation('ascii_general_ci')
+                ->nullable()->index('organization_idx')->comment('fk: organizations.id');
+            $table->char('contest_id', 36)->charset('ascii')->collation('ascii_general_ci')
+                ->nullable()->index('contest_idx')->comment('fk: contests.id');
+            $table->char('federation_id', 10)->charset('ascii')->collation('ascii_general_ci')
+                ->nullable()->index('federation_idx')->comment('fk: federations.id');
+
+            $table->dateTime('role_opening')->useCurrent()
+                ->index('start_idx')->comment('Start of role works - default: today');
             $table->dateTime('role_closing')->default('9999-12-31 23:59:59')
                 ->comment('End of role works default:future');
 
@@ -44,20 +46,21 @@ return new class () extends Migration {
                 'organization_id',
                 'contest_id',
                 'federation_id',
-                'role_opening'
+                'role',
+                'role_opening',
+                'role_closing',
                 ],
                 'general_idx'
             );
 
             $table->foreign(['organization_id'])->references(['id'])->on('organizations')
-                ->onUpdate('restrict')->onDelete('restrict');
+                ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign(['contest_id'])->references(['id'])->on('contests')
-                ->onUpdate('restrict')->onDelete('restrict');
+                ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign(['federation_id'])->references(['id'])->on('federations')
-                ->onUpdate('restrict')->onDelete('restrict');
+                ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign(['role'])->references(['role'])->on('user_roles_role_sets')
-                ->onUpdate('restrict')->onDelete('restrict');
-
+                ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

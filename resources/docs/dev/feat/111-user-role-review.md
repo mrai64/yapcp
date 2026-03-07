@@ -32,3 +32,53 @@ Valutare e intervenire sulla gestione dei ruoli nella piattaforma, o almeno iniz
 > <!-- to avoid index -->
 - Eseguire `php artisan migrate`
 - Aggiungere `STRIPE_SECRET` nel file .env
+
+---
+
+## Day by day
+
+### 7 marzo 2026
+
+la tabella è una *pivot table*, ovvero mette insieme più
+tabelle.
+Le tabelle di riferimento sono 5:
+
+- user_contacts
+- organizations
+- contests
+- federations
+- user_roles_role_sets
+
+[Definizione della tabella user_roles](/database/migrations/2026_02_04_000003_create_user_roles_table.php)
+
+- id
+- user_id
+- role
+- organization_id
+- contest_id
+- federation_id
+- role_opening
+- role_closing
+
+In alternativa ci può essere una colonna context che vale
+`organizations`, `contests`, `federations`, e un campo con l'id
+della tabella relativa.
+
+- id
+- user_id
+- role
+- context
+- context_id
+- role_opening
+- role_closing
+
+Validazioni
+
+1. Per la validazione del record uno e solo uno
+tra i campi organization_id, contest_id, federation_id deve essere valorizzato.  
+
+1. Ci sono dei "può/non può", esempio:
+
+- 'members' può organization_id
+- 'members' non può contest_id
+- 'members' può federation_id
