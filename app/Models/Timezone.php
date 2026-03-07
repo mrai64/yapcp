@@ -14,6 +14,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 
@@ -80,7 +81,7 @@ class Timezone extends Model
 
     // RELATIONSHIP
 
-    public function region()
+    public function region(): HasOne
     {
         $region = $this->hasOne(
             related: TimezoneRegionSet::class, // ext class
