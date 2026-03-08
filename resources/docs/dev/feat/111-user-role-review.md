@@ -14,15 +14,20 @@
 
 ## 📝 Logica Tecnica
 
-Valutare e intervenire sulla gestione dei ruoli nella piattaforma, o almeno iniziare la revisione relativament ealle attività di Organization e quindi organization' members, per proseguirla con admin, e federation in seguito.
+Valutare e intervenire sulla gestione dei ruoli nella piattaforma, o almeno iniziare la revisione relativamente alle attività di Organization e quindi organization' members, per proseguirla con admin, e federation in seguito.  
+Creata una tabella di validazione per non assegnare tutti i ruoli a tutti i context.
 
 ## 🗄️ Modifiche al Database
 
 *Solo un esempio*  
 
 > <!-- to avoid index -->
-- [x] Creata migration `create_xxx_table`
-- [ ] Aggiunto campo `status` a `users`
+- [x] Creata migration `create_user_roles_role_contexts_table`
+- [X] Sistemazione Model\UserRolesRolesContext
+- [X] Sistemazione factory
+- [X] Sistemazione seeder
+- [X] Esecuzione seeder
+- [X] Registrazione UserRolesRoleContestTableSeeder
 - [ ] Lorem ipsum
 
 ## 🚀 Note per il Deploy
@@ -33,52 +38,3 @@ Valutare e intervenire sulla gestione dei ruoli nella piattaforma, o almeno iniz
 - Eseguire `php artisan migrate`
 - Aggiungere `STRIPE_SECRET` nel file .env
 
----
-
-## Day by day
-
-### 7 marzo 2026
-
-la tabella è una *pivot table*, ovvero mette insieme più
-tabelle.
-Le tabelle di riferimento sono 5:
-
-- user_contacts
-- organizations
-- contests
-- federations
-- user_roles_role_sets
-
-[Definizione della tabella user_roles](/database/migrations/2026_02_04_000003_create_user_roles_table.php)
-
-- id
-- user_id
-- role
-- organization_id
-- contest_id
-- federation_id
-- role_opening
-- role_closing
-
-In alternativa ci può essere una colonna context che vale
-`organizations`, `contests`, `federations`, e un campo con l'id
-della tabella relativa.
-
-- id
-- user_id
-- role
-- context
-- context_id
-- role_opening
-- role_closing
-
-Validazioni
-
-1. Per la validazione del record uno e solo uno
-tra i campi organization_id, contest_id, federation_id deve essere valorizzato.  
-
-1. Ci sono dei "può/non può", esempio:
-
-- 'members' può organization_id
-- 'members' non può contest_id
-- 'members' può federation_id
