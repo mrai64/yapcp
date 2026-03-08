@@ -39,20 +39,33 @@ return new class () extends Migration {
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate()->index();
             $table->dateTime('deleted_at')->nullable()->index();
-
-            $table->index(
-                [
-                'user_id',
+            // idx
+            // primary
+            // user_id
+            // role
+            // organization_id
+            // contest_id
+            // federation_id
+            // role_opening
+            $table->index([
                 'organization_id',
-                'contest_id',
-                'federation_id',
+                'user_id',
                 'role',
-                'role_opening',
-                'role_closing',
-                ],
-                'general_idx'
-            );
-
+                'role_opening'
+            ], 'org_user_idx');
+            $table->index([
+                'contest_id',
+                'user_id',
+                'role',
+                'role_opening'
+            ], 'con_user_idx');
+            $table->index([
+                'federation_id',
+                'user_id',
+                'role',
+                'role_opening'
+            ], 'fed_user_idx');
+            // fk
             $table->foreign(['organization_id'])->references(['id'])->on('organizations')
                 ->onUpdate('cascade')->onDelete('cascade');
             $table->foreign(['contest_id'])->references(['id'])->on('contests')
