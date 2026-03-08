@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
             TimezonesSeeder::class,
             UserRolesContextSetSeeder::class,
             UserRolesRoleSetSeeder::class,
+            // UserRolesRoleContextSeeder::class,
+            UserRolesRoleContextsTableSeeder::class,
             ContestsVoteRuleSetSeeder::class,
             //
             FederationSeeder::class,
@@ -41,5 +43,6 @@ class DatabaseSeeder extends Seeder
             // ContestWorkSeeder::class,
             // ContestParticipantSeeder::class,
         ]);
+        $this->call(UserRolesRoleContextsTableSeeder::class);
     }
 }
