@@ -13,6 +13,9 @@ return new class () extends Migration {
         Schema::create('user_roles_role_sets', function (Blueprint $table) {
             $table->id();
             $table->string('role', 25)->unique('role_idx')->comment('the real pk');
+            // add 2026-03-09 - uncomment if reorg migration' files
+            // $table->unsignedTinyInteger('role_weight')->default(0)
+            //     ->comment('higher to admin, 0 guest');
 
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent()->index();
