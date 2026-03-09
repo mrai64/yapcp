@@ -5,6 +5,8 @@
  * for the field user_roles.role
  *
  * 2026-01-22 PSR-12
+ * 2026-03-09 added role_weight
+ *
  */
 
 namespace App\Models;
@@ -46,11 +48,12 @@ class UserRolesRoleSet extends Model
     // public $incrementing = true       standard
 
     protected $fillable = [
-        'id', //         pk bigint autoincrement
-        'role', //       text
-        // created_at    reserved
-        // updated_at    reserved
-        // deleted_at    reserved
+        'id', //           pk bigint autoincrement
+        'role', //         string
+        'role_weight', //  int
+        // created_at      reserved
+        // updated_at      reserved
+        // deleted_at      reserved
     ];
 
     protected function casts()
@@ -58,6 +61,7 @@ class UserRolesRoleSet extends Model
         return [
             'id' => 'int',
             'role' => 'string',
+            'role_weight' => 'int',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
@@ -70,5 +74,17 @@ class UserRolesRoleSet extends Model
         $validRoles = self::pluck('role')->toArray();
         // log
         return $validRoles;
+    }
+
+    public static function hierarchy(): array
+    {
+        $rolesSet = self::all();
+        $hierarchyArray = [];
+        foreach ($rolesSet as $role) {
+            $hierarchyArray[$role->role] = $role->role_weight;
+        }
+        arsort($hierarchyArray);
+        // log
+        return $hierarchyArray;
     }
 }
