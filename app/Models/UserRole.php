@@ -14,6 +14,7 @@
 
 namespace App\Models;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -61,6 +62,7 @@ class UserRole extends Model
     use SoftDeletes;
 
     public const TABLENAME = 'user_roles';
+    public const ADMINGROUP = 'admin';
 
     // protected $primaryKey 'id'        standard
     // protected $keyType = unsigned int standard
@@ -108,12 +110,30 @@ class UserRole extends Model
         return ($present === 1);
     }
 
+    // GETTERS 
+
     // was: valid_roles
     public static function validRoles()
     {
         $valid = UserRolesRoleSet::validRoles();
         // log
         return $valid;
+    }
+
+    public function isAdmin():bool
+    {
+        $examine = self::where('user_id', $this->user_id)
+            ->where('role', self::ADMINGROUP)
+            ->active()
+            ->exists();
+        ds($examine);
+        return $examine;
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('role_opening', '<=', now())
+                    ->where('role_closing', '>=', now());
     }
 
     // RELATIONS

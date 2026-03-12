@@ -1,22 +1,16 @@
-<?php 
-/**
- * 2025-10-16 federations table refactored - now v.2
- * 
- */
-?> 
-
-<div>
-    <header>
+<x-app-layout>
+    <x-slot name="header">
         <h2 class="fyk text-2xl font-medium text-gray-900">
             {{ __('Add few Federation infos') }}
         </h2>
-    </header>
-    <p class="mb-4">
-        <a  href="{{ route('federation-list') }}"
-            rel="noopener noreferrer">
-        [ {{ __('Back to Fed list') }} ]
-        </a>?
-    </p>
+        <p class="mb-4">
+            <a  href="{{ route('federation-list') }}"
+                rel="noopener noreferrer">
+            [ {{ __('Back to Fed list') }} ]
+            </a>
+        </p>
+    </x-slot>
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
     <form wire:submit="save_federation">
         @csrf
 
@@ -101,4 +95,5 @@
 
         </div>
     </form>
-</div>
+    </div>
+</x-app-layout>

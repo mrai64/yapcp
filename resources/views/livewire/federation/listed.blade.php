@@ -1,13 +1,5 @@
-<?php
-/**
- * 2025-10-16 changed table
- * 
- */
-
-?>
-
-<div>
-    <header>
+<x-app-layout>
+    <x-slot name="header">
         <h2 class="fyk text-2xl font-medium text-gray-900">
             {{ __('Federation List') }}
         </h2>
@@ -21,12 +13,17 @@
             <br />
             {{ __("But when they made contest they must be also 'in' Organization list.") }}
             <br />
-            {{ __("Note: Shortcode is key to find Federation, so if you need insert a shortcode already present add a colone and country_code to made it unique, i.e. Argentina and Andorra are both FAF, use FAF:AND and FAF:ARG .") }}
+            {{ __("Note: Shortcode is key to find Federation.") }}
+            {{ __("so if you must insert a shortcode already present add them a colon : and country_code to made it unique,") }}
+            {{ __("i.e. Argentina and Andorra are both FAF, use FAF:AND and FAF:ARG.") }}
+            <p class="mb-4">
+            <a href="{{ route('add-federation')}}" 
+                class="float-end font-medium rounded-md py-2"
+                >[ {{__('Add a new Federation')}} ]</a>
+            </p>
         </p>
-    </header>
-    <a href="{{ route('add-federation')}}" 
-        class="float-end font-medium rounded-md py-2"
-        >[ {{__('Add a new Federation')}} ]</a>
+    </x-slot>
+    <div class="py-12">
     <hr />
     @if (session('success'))
     <div class="float-end font-medium rounded-md px-4 py-2">
@@ -34,9 +31,9 @@
     </div> 
     @endif
 
-    @if(isset($federation_list) && count($federation_list) > 0 )
+    @if(isset($federationSet) && count($federationSet) > 0 )
     <ul>
-        @foreach($federation_list as $federation)
+        @foreach($federationSet as $federation)
         <li class="my-2 p-4 font-medium">
             <strong class="fyk text-xl">{{$federation->name_en}}</strong><br />
             {{$federation->code}} | Country: {{$federation->country_id}} | web: {{$federation->website}}
@@ -54,4 +51,5 @@
         {{ __('Empty federation list') }}
     </div>
     @endif
-</div>
+    </div>
+</x-app-layout>
