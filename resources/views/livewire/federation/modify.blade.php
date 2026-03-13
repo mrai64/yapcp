@@ -18,7 +18,7 @@
         [ {{ __('Back to Fed list') }} ]
         </a>?
     </p>
-    <form wire:submit="update_federation">
+    <form wire:submit="updateFederation">
         @csrf 
         
         <div class="mb-4">

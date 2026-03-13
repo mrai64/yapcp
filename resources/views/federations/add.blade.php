@@ -11,7 +11,7 @@
         </p>
     </x-slot>
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-    <form wire:submit="save_federation">
+    <form action="{{route('federation-store')}}" method="POST">
         @csrf
 
         <div class="mb-4">
@@ -21,7 +21,6 @@
             <input
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full"
                 type="text"
-                wire:model="name_en"
                 value="{{ old('name_en') }}"
                 required="required"
                 />
@@ -36,7 +35,7 @@
             </label>
             <input
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-48"
-                wire:model="id" type="text" name="id"
+                type="text" name="id"
                 value="{{ old('id') }}"
                 required="required"
                 />
@@ -49,7 +48,6 @@
             </label>
             <input
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full"
-                wire:model="website"
                 type="text" name="website"
                 value="{{ old('website') }}"
                 >
@@ -62,7 +60,6 @@
             </label>
             <select
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full"
-                wire:model="country_id"
                 name="country_id"
                 required="required
                 >
@@ -82,7 +79,6 @@
             <textarea
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full"
                 type="text" name="contact_info"
-                wire:model="contact_info"
             >{{ old('contact') }}</textarea>
             <div class="small">@error('contact_info') {{ $message }} @enderror</div>
         </div>
@@ -93,7 +89,6 @@
             {{ __('Add') }}
         </button>
 
-        </div>
     </form>
     </div>
 </x-app-layout>
