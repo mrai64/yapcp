@@ -5,12 +5,15 @@
  * 2025-08-30 add country_id, contact
  * 2025-09-20 enlarge 6 > 10 code field
  * 2025-10-16 refactor for new federation table
+ * 2026-03-13 add Authorize - FederationPolicies
  */
 
 namespace App\Livewire\Federation;
 
 use App\Models\Country;
 use App\Models\Federation;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -41,6 +44,10 @@ class Modify extends Component
      */
     public function mount(string $fid) // $fid as 'fid' in route()
     {
+        //
+        $userToCheck = User::find(Auth::id());
+        $this->authorize('update', $userToCheck);
+        //
         Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' fid'.$fid);
         $this->federation = Federation::where('id', $fid)->get()[0];
@@ -60,7 +67,6 @@ class Modify extends Component
      */
     public function render()
     {
-
         return view('livewire.federation.modify');
     }
 
@@ -71,8 +77,12 @@ class Modify extends Component
     /**
      * 4. After the show
      */
-    public function update_federation()
+    public function updateFederation()
     {
+        //
+        $userToCheck = User::find(Auth::id());
+        $this->authorize('update', $userToCheck);
+        //
         Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
         $validated = $this->validate();
 

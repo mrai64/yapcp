@@ -17,7 +17,7 @@ class FederationController extends Controller
         ds('Controller ' . __CLASS__ . ' ' . __FUNCTION__ . ' ' . __LINE__ . ' called');
         $federationSet = Federation::countryIdSorted();
         ds('Controller ' . __CLASS__ . ' ' . __FUNCTION__ . ' ' . __LINE__ . ' federationList:' . json_encode($federationSet));
-        return view('livewire.federation.listed', ['federationSet' => $federationSet]);
+        return view('federations.listed', ['federationSet' => $federationSet]);
     }
 
     /**
@@ -27,7 +27,7 @@ class FederationController extends Controller
     {
         ds('Controller ' . __CLASS__ . ' ' . __FUNCTION__ . ' ' . __LINE__ . ' called');
         $countries = Country::countriesSorted();
-        return view('livewire.federation.add', ['countries' => $countries]);
+        return view('federations.add', ['countries' => $countries]);
     }
 
     /**
@@ -35,7 +35,17 @@ class FederationController extends Controller
      */
     public function store(StoreFederationRequest $request)
     {
-        //
+        // already checked in \StoreFederationController
+        $validated = $request->validated();
+        Federation::created($validated);
+        // then add yourself as federation member? no, you are admin
+
+        return redirect()
+            ->route('federation-list')
+            ->with(
+                key: 'success',
+                value: __('New Federation added to list. Now add other info about new federation')
+            );
     }
 
     /**
