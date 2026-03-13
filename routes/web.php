@@ -9,6 +9,7 @@ use App\Livewire\Federation;
 use App\Livewire\Juror;
 use App\Livewire\Organization;
 use App\Livewire\User;
+use App\Models\Federation as ModelsFederation;
 use Illuminate\Support\Facades\Route;
 
 // =====================================
@@ -22,6 +23,7 @@ require __DIR__ . '/auth.php';
 // Federation - guest/list
 Route::get('/federation', [FederationController::class, 'index'])
     ->name('federation-list');
+// TODO Federation Section/list - guest
 
 // TODO other public guest pages
 // TODO list of open contest with board of participants
@@ -41,9 +43,12 @@ Route::view('/dashboard', 'dashboard')
 /**
  * UserContact
  */
+// user contact/add - user itself and organization (for juror) and admin
+// admin
 Route::get('/user/contact/listed', User\Contact\Listed::class)
     ->middleware(['auth', 'verified'])
     ->name('user-contact-listed');
+// user contact/ modify* - user itself n admin
 Route::get('/user/contact/modify', User\Contact\Modify1YouAre::class)
     ->middleware(['auth', 'verified'])
     ->name('user-contact-modify');
@@ -69,21 +74,18 @@ Route::get('/user/contact/modify5/{fid}/{uid?}', User\Contact\Modify5Feds::class
 /**
  * Admin - Federation
  */
-//  federation list - guest
-//  Route::get('/federation/list', Federation\Listed::class)
-//      ->middleware(['auth', 'verified'])
-//      ->name('federation-list');
-//  federation create - admin
-//  Route::get('/federation/add', Federation\Add::class)
-//      ->middleware(['auth', 'verified'])
-//      ->name('add-federation');
+//  federation list - guest    Route::get('/federation/list', Federation\Listed::class)->middleware(['auth', 'verified'])->name('federation-list');
+//  federation create - admin  Route::get('/federation/add', Federation\Add::class)->middleware(['auth', 'verified'])->name('add-federation');
 Route::get('/admin/federation/add', [FederationController::class, 'create'])
-    ->middleware('can:create,' . Federation::class)
+    ->middleware('can:create,' . ModelsFederation::class)
     ->name('add-federation');
-
+Route::post('/admin/federation/add', [FederationController::class, 'store'])
+    ->name('federation-store');
+//  federation update - admin  livewire style
 Route::get('/federation/modify/{fid}', Federation\Modify::class, ['fid'])
     ->middleware(['auth', 'verified'])
     ->name('modify-federation');
+//  federation softdelete - admin
 Route::get('/federation/remove/{fid}', Federation\Remove::class, ['fid'])
     ->middleware(['auth', 'verified'])
     ->name('delete-federation');
@@ -93,9 +95,11 @@ Route::delete('/federation/remove/{fid}', Federation\Remove::class, ['fid'])
 /**
  * Admin - FederationSection
  */
+// federation_section list  - guest
 Route::get('/federation/section/list/{fid}', Federation\Section\Listed::class, ['fid'])
     ->middleware(['auth', 'verified'])
     ->name('federation-section-list');
+// federation_section add   - admin
 Route::get('/federation/section/add/{fid}', Federation\Section\Add::class, ['fid'])
     ->middleware(['auth', 'verified'])
     ->name('add-federation-section');
@@ -170,7 +174,7 @@ Route::delete('/user/work/remove/{wid}', User\Work\Remove::class, ['wid'])
  * - contest section
  * - contest jury
  * - contest award
- * 
+ *
  * Contest
  * TODO /contest/listed for guest version
  */
