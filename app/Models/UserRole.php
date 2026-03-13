@@ -14,10 +14,10 @@
 
 namespace App\Models;
 
-use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -110,7 +110,7 @@ class UserRole extends Model
         return ($present === 1);
     }
 
-    // GETTERS 
+    // GETTERS
 
     // was: valid_roles
     public static function validRoles()
@@ -120,20 +120,16 @@ class UserRole extends Model
         return $valid;
     }
 
-    public function isAdmin():bool
+    // user_id is based on logged user
+    public static function isAdmin(): bool
     {
-        $examine = self::where('user_id', $this->user_id)
+        $examine = self::where('user_id', Auth::id())
             ->where('role', self::ADMINGROUP)
-            ->active()
+            ->where('role_opening', '<=', now())
+            ->where('role_closing', '>=', now())
             ->exists();
         ds($examine);
         return $examine;
-    }
-
-    public function scopeActive($query)
-    {
-        return $query->where('role_opening', '<=', now())
-                    ->where('role_closing', '>=', now());
     }
 
     // RELATIONS
