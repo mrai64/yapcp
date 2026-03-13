@@ -5,8 +5,6 @@ namespace App\Policies;
 use App\Models\Federation;
 use App\Models\User;
 use App\Models\UserRole;
-use Illuminate\Auth\Access\Response;
-use Illuminate\Support\Facades\Log;
 
 class FederationPolicy
 {
@@ -35,11 +33,7 @@ class FederationPolicy
     {
         // only for user in admin group
         ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
-        $evaluate = UserRole::where('user_id', $user->id)
-            ->where('role', UserRole::ADMINGROUP)
-            ->where('role_opening', '<=', now())
-            ->where('role_closing', '>=', now())
-            ->exists();
+        $evaluate = UserRole::isAdmin();
         ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
         return $evaluate;
     }
@@ -49,7 +43,11 @@ class FederationPolicy
      */
     public function update(User $user, Federation $federation): bool
     {
-        return false;
+        // for all federation - only for user in admin group
+        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
+        $evaluate = UserRole::isAdmin();
+        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        return $evaluate;
     }
 
     /**
@@ -57,7 +55,11 @@ class FederationPolicy
      */
     public function delete(User $user, Federation $federation): bool
     {
-        return false;
+        // for all federation - only for user in admin group
+        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
+        $evaluate = UserRole::isAdmin();
+        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        return $evaluate;
     }
 
     /**
@@ -65,7 +67,11 @@ class FederationPolicy
      */
     public function restore(User $user, Federation $federation): bool
     {
-        return false;
+        // for all federation - only for user in admin group
+        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
+        $evaluate = UserRole::isAdmin();
+        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        return $evaluate;
     }
 
     /**
@@ -73,6 +79,10 @@ class FederationPolicy
      */
     public function forceDelete(User $user, Federation $federation): bool
     {
-        return false;
+        // for all federation - only for user in admin group
+        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
+        $evaluate = UserRole::isAdmin();
+        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        return $evaluate;
     }
 }
