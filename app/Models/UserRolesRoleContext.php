@@ -6,6 +6,28 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @property string $role fk user_roles_role_sets.id
+ * @property string $context fk user_roles_context_set.id
+ * @property int $green true green flag, false red flag
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static \Database\Factories\UserRolesRoleContextFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleContext newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleContext newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleContext onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleContext query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleContext whereContext($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleContext whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleContext whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleContext whereGreen($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleContext whereRole($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleContext whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleContext withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleContext withoutTrashed()
+ * @mixin \Eloquent
+ */
 class UserRolesRoleContext extends Model
 {
     /** @use HasFactory<\Database\Factories\UserRolesRoleContextFactory> */
