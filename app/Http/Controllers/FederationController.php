@@ -6,7 +6,6 @@ use App\Http\Requests\StoreFederationRequest;
 use App\Http\Requests\UpdateFederationRequest;
 use App\Models\Country;
 use App\Models\Federation;
-use Illuminate\Http\Request;
 
 class FederationController extends Controller
 {
