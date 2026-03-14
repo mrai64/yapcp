@@ -109,7 +109,7 @@ class Country extends Model
     // was: country_list_by_country
     public static function countriesSorted()
     {
-        $countries = self::select('country')->orderBy('country')->get();
+        $countries = self::select('id', 'country')->orderBy('country')->get();
         // log
         return $countries;
     }
