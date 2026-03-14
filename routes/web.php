@@ -79,7 +79,7 @@ Route::get('/user/contact/modify5/{fid}/{uid?}', User\Contact\Modify5Feds::class
 Route::get('/admin/federation/add', [FederationController::class, 'create'])
     ->middleware('can:create,' . ModelsFederation::class)
     ->name('add-federation');
-Route::post('/admin/federation/add', [FederationController::class, 'store'])
+Route::post('/admin/federation/store', [FederationController::class, 'store'])
     ->name('federation-store');
 //  federation update - admin  livewire style
 Route::get('/federation/modify/{fid}', Federation\Modify::class, ['fid'])

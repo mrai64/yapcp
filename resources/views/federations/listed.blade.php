@@ -23,33 +23,34 @@
             </p>
         </p>
     </x-slot>
-    <div class="py-12">
-    <hr />
-    @if (session('success'))
-    <div class="float-end font-medium rounded-md px-4 py-2">
-        {{ session('success') }}
-    </div> 
-    @endif
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        @if (session('success'))
+        <hr />
+        <div class="float-end font-medium rounded-md px-4 py-2">
+            {{ session('success') }}
+        </div> 
+        @endif
 
-    @if(isset($federationSet) && count($federationSet) > 0 )
-    <ul>
-        @foreach($federationSet as $federation)
-        <li class="my-2 p-4 font-medium">
-            <strong class="fyk text-xl">{{$federation->name_en}}</strong><br />
-            {{$federation->code}} | Country: {{$federation->country_id}} | web: {{$federation->website}}
-            <a  href="{{ route('modify-federation', ['fid' => $federation->id]) }}"
-                class="font-medium rounded-md px-4 py-2"
-                >[ {{ __('Modify') }} ]</a>
-            <a  href="{{ route('delete-federation', ['fid' => $federation->id]) }}"
-                class="font-medium rounded-md px-4 py-2"
-                >[ {{ __('Remove') }} ]</a>
-        </li>
-        @endforeach        
-    </ul>
-    @else
-    <div class="border text-xl rounded-md px-4 py-2">
-        {{ __('Empty federation list') }}
-    </div>
-    @endif
-    </div>
+        @if(isset($federationSet) && count($federationSet) > 0 )
+        <ul>
+            @foreach($federationSet as $federation)
+            <li class="my-2 p-4 font-medium">
+                <strong class="fyk text-xl">{{$federation->name_en}}</strong><br />
+                {{$federation->code}} | Country: {{$federation->country_id}} | web: {{$federation->website}}
+                <a  href="{{ route('modify-federation', ['fid' => $federation->id]) }}"
+                    class="font-medium rounded-md px-4 py-2"
+                    >[ {{ __('Modify') }} ]</a>
+                <a  href="{{ route('delete-federation', ['fid' => $federation->id]) }}"
+                    class="font-medium rounded-md px-4 py-2"
+                    >[ {{ __('Remove') }} ]</a>
+            </li>
+            @endforeach        
+        </ul>
+        @else
+        <div class="border text-xl rounded-md px-4 py-2">
+            {{ __('Empty federation list') }}
+        </div>
+        @endif
+        </div>
+    </div> 
 </x-app-layout>
