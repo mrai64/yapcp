@@ -15,8 +15,8 @@ class StoreFederationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
         $examine = UserRole::isAdmin();
+        ds('FormRequest: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' rc:' . $examine);
         // log
         return $examine;
     }
@@ -29,12 +29,13 @@ class StoreFederationRequest extends FormRequest
      */
     public function rules(): array
     {
+        ds('FormRequest: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
         return [
-            'id' => 'required|string|uppercase|min:3|max:10|unique:federations,id',
-            'name_en' => 'required|string|min:3|max:255',
-            'country_id' => 'required|string|uppercase|min:3|exists:countries,id',
+            'federationId' => 'required|string|uppercase|min:3|max:10|unique:federations,id', //  id
+            'federationName' => 'required|string|min:3|max:255', //                               name_en
+            'countryId' => 'required|string|uppercase|min:3|exists:countries,id', //              country_id
             'website' => 'string|active_url|max:255',
-            'contact_info' => 'string',
+            'contactInfo' => 'string', //                                                         contact_info
         ];
     }
 }
