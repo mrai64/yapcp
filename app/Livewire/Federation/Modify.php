@@ -48,10 +48,10 @@ class Modify extends Component
         $userToCheck = User::find(Auth::id());
         $this->authorize('update', $userToCheck);
         //
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' fid'.$fid);
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        Log::info('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' fid' . $fid);
         $this->federation = Federation::where('id', $fid)->get()[0];
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' found:'.json_encode($this->federation));
+        Log::info('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' found:' . json_encode($this->federation));
 
         $this->id = $fid;
         $this->name_en = $this->federation['name_en'];
@@ -83,7 +83,7 @@ class Modify extends Component
         $userToCheck = User::find(Auth::id());
         $this->authorize('update', $userToCheck);
         //
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        Log::info('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' called');
         $validated = $this->validate();
 
         //
