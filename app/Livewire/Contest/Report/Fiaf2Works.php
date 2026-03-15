@@ -16,8 +16,7 @@ class Fiaf2Works extends Component
 
     public function render()
     {
-        ds(__CLASS__.' f:'.__FUNCTION__);
-        exit();
+        ds(__CLASS__ . ' f:' . __FUNCTION__);
 
         return view('livewire.contest.report.fiaf2-works');
     }
