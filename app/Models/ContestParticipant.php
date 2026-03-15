@@ -73,12 +73,6 @@ class ContestParticipant extends Model
 
     // default id unsigned bigint autoincrement
 
-    // no boolean
-    private const VALID_YN = [
-        'N', // 0 false
-        'Y', // 1 true
-    ];
-
     // field list fillable in factory
     protected $fillable = [
         'id', //                     pk unsigned bigint a+
