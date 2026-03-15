@@ -45,5 +45,6 @@ abstract class TestCase extends BaseTestCase
 
         // contest vote rules
         $this->seed(\Database\Seeders\ContestsVoteRuleSetSeeder::class);
+        echo "\nTestCase done\n";
     }
 }
