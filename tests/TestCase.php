@@ -23,9 +23,10 @@ abstract class TestCase extends BaseTestCase
     //
     protected function setUp(): void
     {
+        echo "\nTestCase start\n";
         parent::setUp(); // BaseTestCase
 
-        // countries
+        // countries - delay for download file from web
         $this->seed(\Database\Seeders\CountrySeeder::class);
 
         // timezone' regions
