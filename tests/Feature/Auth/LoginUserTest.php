@@ -10,7 +10,10 @@
  * A act
  * A assert
  *
- * php artisan test tests/Feature/user/LoginUserTest.php
+ * info:
+ *   bash: php artisan test tests/Feature/user/LoginUserTest.php
+ *   blade: /resources/livewire/pages/auth/login.blade.php
+ *   controller: /app/Livewire/Forms/LoginForm.php
  *
  */
 
@@ -43,3 +46,19 @@ it('can authenticate using the login screen', function () {
 
     $this->assertAuthenticated();
 });
+
+// c) test errors
+it('fails validation with invalid inputs', function ($email, $password, $errorField) {
+    // Act & Assert
+    Volt::test('pages.auth.login')
+        ->set('form.email', $email)
+        ->set('form.password', $password)
+        ->call('login')
+        ->assertHasErrors(["form.$errorField"]);
+})->with([
+    // Arrange                email,          password,      field
+    'empty email'         => ['',             'password123', 'email'],
+    'wrong email'         => ['not-an-email', 'password123', 'email'],
+    'empty password'      => ['test@example.com', '',        'password'],
+    'too short password'  => ['test@example.com', '123',     'password'],
+]);
