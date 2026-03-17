@@ -2,7 +2,6 @@
 
 /**
  * Pest test learning
- * naming with a numbering prefix ITS facultative
  *
  * that's: LoginOnTest.php
  * Memo: remember AAA
