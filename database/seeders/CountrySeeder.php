@@ -23,7 +23,7 @@ class CountrySeeder extends Seeder
      * Run the database seeds.
      *
      * Use a local file or
-     * Dload external source from https://github.com/mledoze/countries
+     * Download external source from https://github.com/mledoze/countries
      *
      */
     public function run()
@@ -32,8 +32,8 @@ class CountrySeeder extends Seeder
         $filePath = 'private/countries.json';
         $remoteUrl = 'https://raw.githubusercontent.com/mledoze/countries/master/countries.json';
 
-        // check local fle
-        if (!Storage::disk('local')->exists($filePath)){
+        // check local file
+        if (!Storage::disk('local')->exists($filePath)) {
             $this->command->info("Missing local file - Give reference json from github");
             try {
                 // pick
@@ -42,7 +42,8 @@ class CountrySeeder extends Seeder
                     Storage::disk('local')->put($filePath, $response->body());
                     $this->command->info("Saved local");
                 } else {
-                    throw new \Exception("Not saved local file - Countries reference json from github status:" . $response->status());
+                    throw new \Exception("Not saved local file - Countries reference json from github status:"
+                        . $response->status());
                 }
 
             } catch (\Throwable $th) {
@@ -56,8 +57,6 @@ class CountrySeeder extends Seeder
 
         $json = Storage::disk('local')->get($filePath);
         $countries = json_decode($json, true);
-        if (is_array($countries)) {
-            $this->command->getOutput()->progressStart(count($countries));
         if (is_array($countries)) {
             $this->command->getOutput()->progressStart(count($countries));
 
@@ -75,7 +74,6 @@ class CountrySeeder extends Seeder
                 );
                 $this->command->getOutput()->progressAdvance();
             }
-
             $this->command->getOutput()->progressFinish();
             $this->command->info("Done");
         }
