@@ -15,6 +15,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CountrySeeder extends Seeder
@@ -23,7 +26,7 @@ class CountrySeeder extends Seeder
      * Run the database seeds.
      *
      * Use a local file or
-     * Download external source from https://github.com/mledoze/countries
+     * Dload external source from https://github.com/mledoze/countries
      *
      */
     public function run()
@@ -32,18 +35,17 @@ class CountrySeeder extends Seeder
         $filePath = 'private/countries.json';
         $remoteUrl = 'https://raw.githubusercontent.com/mledoze/countries/master/countries.json';
 
-        // check local file
-        if (!Storage::disk('local')->exists($filePath)) {
+        // check local fle
+        if (!Storage::disk('local')->exists($filePath)){
             $this->command->info("Missing local file - Give reference json from github");
             try {
                 // pick
                 $response = Http::get($remoteUrl);
-                if ($response->successful()) {
+                if ($response->successful()){
                     Storage::disk('local')->put($filePath, $response->body());
                     $this->command->info("Saved local");
                 } else {
-                    throw new \Exception("Not saved local file - Countries reference json from github status:"
-                        . $response->status());
+                    throw new \Exception("Not saved local file - Countries reference json from github status:" . $response->status());
                 }
 
             } catch (\Throwable $th) {
@@ -57,6 +59,8 @@ class CountrySeeder extends Seeder
 
         $json = Storage::disk('local')->get($filePath);
         $countries = json_decode($json, true);
+        if (is_array($countries)) {
+            $this->command->getOutput()->progressStart(count($countries));
         if (is_array($countries)) {
             $this->command->getOutput()->progressStart(count($countries));
 
@@ -74,6 +78,7 @@ class CountrySeeder extends Seeder
                 );
                 $this->command->getOutput()->progressAdvance();
             }
+
             $this->command->getOutput()->progressFinish();
             $this->command->info("Done");
         }
