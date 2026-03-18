@@ -27,7 +27,6 @@ class CountrySeeder extends Seeder
      *
      * Use a local file or
      * Download external source from https://github.com/mledoze/countries
-     * Download external source from https://github.com/mledoze/countries
      *
      */
 
@@ -43,7 +42,8 @@ class CountrySeeder extends Seeder
             try {
                 // pick
                 $response = Http::get($remoteUrl);
-                if ($response->successful()){
+                if ($response->successful()) {
+                if ($response->successful()) {
                     Storage::disk('local')->put($filePath, $response->body());
                     $this->command->info("Saved local");
                 } else {
