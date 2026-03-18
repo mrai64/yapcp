@@ -15,9 +15,6 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CountrySeeder extends Seeder
@@ -27,10 +24,6 @@ class CountrySeeder extends Seeder
      *
      * Use a local file or
      * Download external source from https://github.com/mledoze/countries
-     *
-     *
-     * Use a local file or
-     * Dload external source from https://github.com/mledoze/countries
      *
      */
     public function run()
@@ -82,23 +75,6 @@ class CountrySeeder extends Seeder
                 $this->command->getOutput()->progressAdvance();
             }
             //
-            $this->command->getOutput()->progressFinish();
-            $this->command->info("Done");
-            foreach ($countries as $c) {
-                Country::updateOrCreate(
-                    ['id' => $c['cca3']], // country code alpha 3 >> iso-3166 alpha-3
-                    [
-                        'country'      => $c['name']['common'],
-                        'flag_code'    => $c['flag'] ?? '',
-                        'lang_code'    => Str::limit(array_key_first($c['languages'] ?? ['en' => '']), 2, ''),
-                        'locale'       => Str::limit(array_key_first($c['languages'] ?? ['en' => '']), 2, '')
-                            . '_' . $c['cca2'],
-                        'calling_code' => ($c['idd']['root'] ?? '') . ($c['idd']['suffixes'][0] ?? ''),
-                    ]
-                );
-                $this->command->getOutput()->progressAdvance();
-            }
-
             $this->command->getOutput()->progressFinish();
             $this->command->info("Done");
         }
