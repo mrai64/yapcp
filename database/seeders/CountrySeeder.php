@@ -71,6 +71,7 @@ class CountrySeeder extends Seeder
                 );
                 $this->command->getOutput()->progressAdvance();
             }
+
             $this->command->getOutput()->progressFinish();
             $this->command->info("Done");
         }
