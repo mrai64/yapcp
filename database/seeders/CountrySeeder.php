@@ -47,14 +47,12 @@ class CountrySeeder extends Seeder
                 } else {
                     throw new \Exception("Not saved local file - Countries reference json from github status:" . $response->status());
                 }
-
             } catch (\Throwable $th) {
                 //throw $th;
                 Log::error("Error in CountrySeeder picking remote json file with: " . $th->getMessage());
                 $this->command->error("Blocked bu error: " . $th->getMessage());
                 return;
             }
-
         }
 
         $json = Storage::disk('local')->get($filePath);
