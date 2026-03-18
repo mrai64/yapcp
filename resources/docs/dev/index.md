@@ -2,7 +2,8 @@
 
 Dev docs from 2026-03-04, in 🇮🇹 italian and/or 🇬🇧 english
 
-- Readme
+- [Leggimi / Readme](/{{route}}/dev/README)
+- [Elenco funzionalità / function index](/{{route}}/dev/functionality-index)
 
 - ## (A) Problemi / Issues
 
