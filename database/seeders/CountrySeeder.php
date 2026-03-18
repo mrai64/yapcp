@@ -38,7 +38,7 @@ class CountrySeeder extends Seeder
             try {
                 // pick
                 $response = Http::get($remoteUrl);
-                if ($response->successful()) {
+                if ($response->successful()){
                     Storage::disk('local')->put($filePath, $response->body());
                     $this->command->info("Saved local");
                 } else {
@@ -49,7 +49,7 @@ class CountrySeeder extends Seeder
             } catch (\Throwable $th) {
                 // throw $th;
                 Log::error("Error in CountrySeeder picking remote json file with: " . $th->getMessage());
-                $this->command->error("Blocked by error: " . $th->getMessage());
+                $this->command->error("Blocked bu error: " . $th->getMessage());
                 return;
             }
         }
