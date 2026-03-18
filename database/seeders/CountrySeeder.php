@@ -15,12 +15,19 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CountrySeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     *
+     * Use a local file or
+     * Dload external source from https://github.com/mledoze/countries
+     *
      *
      * Use a local file or
      * Dload external source from https://github.com/mledoze/countries
@@ -42,16 +49,15 @@ class CountrySeeder extends Seeder
                     Storage::disk('local')->put($filePath, $response->body());
                     $this->command->info("Saved local");
                 } else {
-                    throw new \Exception("Not saved local file - Countries reference json from github status:" . $response->status());
+                    throw new \Exception("Not saved local file - Countries reference json from github status:" 
+                        . $response->status());
                 }
-
             } catch (\Throwable $th) {
                 //throw $th;
                 Log::error("Error in CountrySeeder picking remote json file with: " . $th->getMessage());
                 $this->command->error("Blocked bu error: " . $th->getMessage());
                 return;
             }
-
         }
 
         $json = Storage::disk('local')->get($filePath);
