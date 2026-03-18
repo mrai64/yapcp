@@ -15,6 +15,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CountrySeeder extends Seeder
@@ -23,7 +26,7 @@ class CountrySeeder extends Seeder
      * Run the database seeds.
      *
      * Use a local file or
-     * Download external source from https://github.com/mledoze/countries
+     * download external source from https://github.com/mledoze/countries
      *
      */
     public function run()
