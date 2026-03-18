@@ -59,11 +59,8 @@ class CountrySeeder extends Seeder
                 return;
             }
         }
-
         $json = Storage::disk('local')->get($filePath);
         $countries = json_decode($json, true);
-        if (is_array($countries)) {
-            $this->command->getOutput()->progressStart(count($countries));
         if (is_array($countries)) {
             $this->command->getOutput()->progressStart(count($countries));
 
