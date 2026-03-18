@@ -15,6 +15,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CountrySeeder extends Seeder
@@ -26,6 +29,7 @@ class CountrySeeder extends Seeder
      * Download external source from https://github.com/mledoze/countries
      *
      */
+
     public function run()
     {
         $this->command->info(__CLASS__ . "...");
@@ -38,6 +42,7 @@ class CountrySeeder extends Seeder
                 // pick
                 $response = Http::get($remoteUrl);
                 if ($response->successful()) {
+                if ($response->successful()) {
                     Storage::disk('local')->put($filePath, $response->body());
                     $this->command->info("Saved local");
                 } else {
@@ -47,7 +52,7 @@ class CountrySeeder extends Seeder
                 //
             } catch (\Throwable $th) {
                 // throw $th;
-                Log::error("Error in CountrySeeder picking remote json file with: " 
+                Log::error("Error in CountrySeeder picking remote json file with: "
                     . $th->getMessage());
                 $this->command->error("Blocked bu error: " . $th->getMessage());
                 return;
