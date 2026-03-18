@@ -28,6 +28,10 @@ class CountrySeeder extends Seeder
      * Use a local file or
      * Dload external source from https://github.com/mledoze/countries
      *
+     *
+     * Use a local file or
+     * Dload external source from https://github.com/mledoze/countries
+     *
      */
     public function run()
     {
