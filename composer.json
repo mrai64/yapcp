@@ -27,7 +27,7 @@
         "kkomelin/laravel-translatable-string-exporter": "^1.25",
         "laradumps/laradumps": "^4.0",
         "larastan/larastan": "^3.0",
-        "laravel/boost": "^1.0",
+        "laravel/boost": "^2.3",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.26",
         "laravel/sail": "^1.41",
