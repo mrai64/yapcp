@@ -38,9 +38,9 @@
                 <td scope="row">{{$sec->code}}</td>
                 <td>{{$sec->name_en}}</td>
                 <td nowrap>
-                    <a href="{{ route('federation-section-modify', ['fid' => $federation->id, 'sid' => $sec->code] )}}">[Mod]</a>
+                    <a href="{{ route('federation-section.modify', ['fid' => $federation->id, 'sid' => $sec->code] )}}">[Mod]</a>
                     &nbsp;|&nbsp;
-                    <a href="{{ route('delete-federation-section', [ 'sid' => $sec->id] )}}">[Rem]</a>
+                    <a href="{{ route('federation-section.delete', [ 'sid' => $sec->id] )}}">[Rem]</a>
                 </td>
             </tr>
             @endforeach
@@ -48,7 +48,7 @@
                 <td scope="row">&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>
-                    <a href="{{ route('add-federation-section', ['fid' => $federation->id ]) }}">[Add New]</a>
+                    <a href="{{ route('federation-section.add', ['fid' => $federation->id ]) }}">[Add New]</a>
                 </td>
             </tr>
         </tbody>

@@ -17,7 +17,7 @@
             {{ __("so if you must insert a shortcode already present add them a colon : and country_code to made it unique,") }}
             {{ __("i.e. Argentina and Andorra are both FAF, use FAF:AND and FAF:ARG.") }}
             <p class="mb-4">
-            <a href="{{ route('add-federation')}}" 
+            <a href="{{ route('federation.add')}}" 
                 class="float-end font-medium rounded-md py-2"
                 >[ {{__('Add a new Federation')}} ]</a>
             </p>
@@ -37,10 +37,10 @@
             <li class="my-2 p-4 font-medium">
                 <strong class="fyk text-xl">{{$federation->name_en}}</strong><br />
                 {{$federation->code}} | Country: {{$federation->country_id}} | web: {{$federation->website}}
-                <a  href="{{ route('modify-federation', ['fid' => $federation->id]) }}"
+                <a  href="{{ route('federation.modify', ['fid' => $federation->id]) }}"
                     class="font-medium rounded-md px-4 py-2"
                     >[ {{ __('Modify') }} ]</a>
-                <a  href="{{ route('delete-federation', ['fid' => $federation->id]) }}"
+                <a  href="{{ route('federation.delete', ['fid' => $federation->id]) }}"
                     class="font-medium rounded-md px-4 py-2"
                     >[ {{ __('Remove') }} ]</a>
             </li>
