@@ -91,7 +91,7 @@ class Modify extends Component
 
         // to list
         return redirect()
-            ->route('federation-list')
+            ->route('federation.list')
             ->with('success', __('Federation data updated, thanks!'));
     }
 }

@@ -22,7 +22,7 @@ Route::view('/credits', 'credits');
 require __DIR__ . '/auth.php';
 // Federation - guest/list
 Route::get('/federation', [FederationController::class, 'index'])
-    ->name('federation-list');
+    ->name('federation.list');
 // TODO Federation Section/list - guest
 
 // TODO other public guest pages
@@ -74,21 +74,19 @@ Route::get('/user/contact/modify5/{fid}/{uid?}', User\Contact\Modify5Feds::class
 /**
  * Admin - Federation
  */
-//  federation list - guest    Route::get('/federation/list', Federation\Listed::class)->middleware(['auth', 'verified'])->name('federation-list');
-//  federation create - admin  Route::get('/federation/add', Federation\Add::class)->middleware(['auth', 'verified'])->name('add-federation');
 Route::get('/admin/federation/add', [FederationController::class, 'create'])
     ->middleware('can:create,' . ModelsFederation::class)
-    ->name('add-federation');
+    ->name('federation.add');
 Route::post('/admin/federation/store', [FederationController::class, 'store'])
-    ->name('federation-store');
+    ->name('federation.store');
 //  federation update - admin  livewire style
 Route::get('/federation/modify/{fid}', Federation\Modify::class, ['fid'])
     ->middleware(['auth', 'verified'])
-    ->name('modify-federation');
+    ->name('federation.modify');
 //  federation softdelete - admin
 Route::get('/federation/remove/{fid}', Federation\Remove::class, ['fid'])
     ->middleware(['auth', 'verified'])
-    ->name('delete-federation');
+    ->name('federation.delete');
 Route::delete('/federation/remove/{fid}', Federation\Remove::class, ['fid'])
     ->middleware(['auth', 'verified']);
 
@@ -98,17 +96,17 @@ Route::delete('/federation/remove/{fid}', Federation\Remove::class, ['fid'])
 // federation_section list  - guest
 Route::get('/federation/section/list/{fid}', Federation\Section\Listed::class, ['fid'])
     ->middleware(['auth', 'verified'])
-    ->name('federation-section-list');
+    ->name('federation-section.list');
 // federation_section add   - admin
 Route::get('/federation/section/add/{fid}', Federation\Section\Add::class, ['fid'])
     ->middleware(['auth', 'verified'])
-    ->name('add-federation-section');
+    ->name('federation-section.add');
 Route::get('/federation/section/modify/{fid}/{sid}', Federation\Section\Modify::class, ['fid', 'sid'])
     ->middleware(['auth', 'verified'])
-    ->name('federation-section-modify');
+    ->name('federation-section.modify');
 Route::get('/federation/section/remove/{sid}', Federation\Section\Remove::class, ['sid'])
     ->middleware(['auth', 'verified'])
-    ->name('delete-federation-section');
+    ->name('federation-section.delete');
 Route::delete('/federation/section/remove/{sid}', Federation\Section\Remove::class, ['sid'])
     ->middleware(['auth', 'verified']);
 

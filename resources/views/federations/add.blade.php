@@ -4,14 +4,14 @@
             {{ __('Add few Federation infos') }}
         </h2>
         <p class="mb-4">
-            <a  href="{{ route('federation-list') }}"
+            <a  href="{{ route('federation.list') }}"
                 rel="noopener noreferrer">
             [ {{ __('Back to Fed list') }} ]
             </a>
         </p>
     </x-slot>
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-    <form action="{{ route('federation-store' )}}" method="POST">
+    <form action="{{ route('federation.store' )}}" method="POST">
         @csrf
 
         <div class="mb-4">

@@ -13,7 +13,7 @@
             {{__("Modify Federation Section")}} 
         </h1>
         <p class="mb-4">
-            <a href="{{ route( 'federation-section-list', [ 'fid' => $federation_id]) }}"
+            <a href="{{ route( 'federation-section.list', [ 'fid' => $federation_id]) }}"
                 rel="noopener noreferrer">
             [ {{ __("Back to Federation Section list") }} ]
             </a>

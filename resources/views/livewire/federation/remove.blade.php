@@ -1,7 +1,7 @@
 <div>
     <p class="mb-4 font-medium">{{ __('LAST CALL. Are you SURE to delete that?')}} </p>
     <p class="mb-4"> 
-        <a  href="{{ route('federation-list') }}" 
+        <a  href="{{ route('federation.list') }}" 
             rel="noopener noreferrer">
         [ {{ __('Back to list') }} ]
         </a>?
