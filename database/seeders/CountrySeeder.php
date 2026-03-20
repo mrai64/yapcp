@@ -32,8 +32,8 @@ class CountrySeeder extends Seeder
         $filePath = 'private/countries.json';
         $remoteUrl = 'https://raw.githubusercontent.com/mledoze/countries/master/countries.json';
 
-        // check local fle
-        if (!Storage::disk('local')->exists($filePath)){
+        // check local file
+        if (!Storage::disk('local')->exists($filePath)) {
             $this->command->info("Missing local file - Give reference json from github");
             try {
                 // pick
@@ -44,14 +44,12 @@ class CountrySeeder extends Seeder
                 } else {
                     throw new \Exception("Not saved local file - Countries reference json from github status:" . $response->status());
                 }
-
             } catch (\Throwable $th) {
                 //throw $th;
                 Log::error("Error in CountrySeeder picking remote json file with: " . $th->getMessage());
                 $this->command->error("Blocked bu error: " . $th->getMessage());
                 return;
             }
-
         }
 
         $json = Storage::disk('local')->get($filePath);
