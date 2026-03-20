@@ -69,7 +69,7 @@ class Remove extends Component
 
         // back to list
         return redirect()
-            ->route('federation-section-list', ['fid' => $this->federation_id])
+            ->route('federation-section.list', ['fid' => $this->federation_id])
             ->with('success', __('Section safely removed from list, thanks!'));
 
     }

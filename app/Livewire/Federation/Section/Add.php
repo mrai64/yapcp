@@ -77,7 +77,7 @@ class Add extends Component
         Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' out:'.json_encode($sec));
 
         return redirect()
-            ->route('federation-section-list', ['fid' => $this->federation_id])
+            ->route('federation-section.list', ['fid' => $this->federation_id])
             ->with('success', __('New Federation Section inserted, enjoy!'));
 
     }
