@@ -13,7 +13,7 @@
         </h2>
     </header>
     <p class="mb-4">
-        <a  href="{{ route('federation-list') }}"
+        <a  href="{{ route('federation.list') }}"
             rel="noopener noreferrer">
         [ {{ __('Back to Fed list') }} ]
         </a>?
@@ -91,7 +91,7 @@
         </p>
 
         <p class="fyk text-xl mb-4">
-            <a href="{{ route('federation-list') }}" 
+            <a href="{{ route('federation.list') }}" 
                 target="_blank" rel="noopener noreferrer">
                 {{ __('Back to Federation list') }} 
             </a>

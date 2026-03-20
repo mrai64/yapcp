@@ -59,7 +59,7 @@ class FederationController extends Controller
         // then add yourself as federation member? no, you are admin
 
         return redirect()
-            ->route('federation-list')
+            ->route('federation.list')
             ->with(
                 key: 'success',
                 value: __('New Federation added to list. Now add other info about new federation')
