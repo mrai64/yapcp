@@ -34,6 +34,8 @@ class CountrySeeder extends Seeder
 
         // check local file
         if (!Storage::disk('local')->exists($filePath)) {
+        // check local file
+        if (!Storage::disk('local')->exists($filePath)) {
             $this->command->info("Missing local file - Give reference json from github");
             try {
                 // pick
