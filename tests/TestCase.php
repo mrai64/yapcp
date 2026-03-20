@@ -23,7 +23,7 @@ abstract class TestCase extends BaseTestCase
     //
     protected function setUp(): void
     {
-        echo "\nTestCase start\n";
+        echo "\nTestCase start";
         parent::setUp(); // BaseTestCase
 
         // countries - delay for download file from web
@@ -46,6 +46,12 @@ abstract class TestCase extends BaseTestCase
 
         // contest vote rules
         $this->seed(\Database\Seeders\ContestsVoteRuleSetSeeder::class);
+
+        // federations
+        $this->seed(\Database\Seeders\FederationSeeder::class);
+
+        // organizations
+        $this->seed(\Database\Seeders\OrganizationSeeder::class);
         echo "\nTestCase done\n";
     }
 }
