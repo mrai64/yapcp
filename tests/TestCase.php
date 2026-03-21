@@ -23,7 +23,7 @@ abstract class TestCase extends BaseTestCase
     //
     protected function setUp(): void
     {
-        echo "\nTestCase start";
+        // echo "\nTestCase start";
         parent::setUp(); // BaseTestCase
 
         // countries - delay for download file from web
@@ -52,6 +52,6 @@ abstract class TestCase extends BaseTestCase
 
         // organizations
         $this->seed(\Database\Seeders\OrganizationSeeder::class);
-        echo "\nTestCase done\n";
+        // echo "\nTestCase done\n";
     }
 }
