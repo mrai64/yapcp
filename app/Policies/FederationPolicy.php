@@ -103,4 +103,16 @@ class FederationPolicy
         Log::info('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
         return $evaluate;
     }
+
+    /**
+     * Determine whether the user can backup the model
+     */
+    public function backuppable(User $user, Federation $federation) : bool
+    {
+        // for all federation - only for user in admin group
+        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
+        $evaluate = UserRole::isAdmin();
+        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        return $evaluate;
+    }
 }
