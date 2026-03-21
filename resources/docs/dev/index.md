@@ -1,9 +1,12 @@
 # &nbsp;
 
-Dev docs from 2026-03-04, in 🇮🇹 italian and/or 🇬🇧 english
+Dev docs  
+from 2026-03-04,  
+in 🇮🇹 italian and/or  
+in 🇬🇧 english
 
-- [Leggimi / Readme](/{{route}}/dev/README)
-- [Elenco funzionalità / function index](/{{route}}/dev/functionality-index)
+- ## [Readme](/{{route}}/dev/README)
+- ## [🇮🇹 La piattaforma](/{{route}}/dev/man/index)
 
 - ## (A) Problemi / Issues
 
@@ -17,4 +20,4 @@ Dev docs from 2026-03-04, in 🇮🇹 italian and/or 🇬🇧 english
 
 - ## (D) Refactor
 
-  - [#89](/{{route}}/dev/refactor/89-regions-lookup-table) regions
+  - [#89 regions](/{{route}}/dev/refactor/89-regions-lookup-table)
