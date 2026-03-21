@@ -47,7 +47,7 @@ class CountrySeeder extends Seeder
             } catch (\Throwable $th) {
                 //throw $th;
                 Log::error("Error in CountrySeeder picking remote json file with: " . $th->getMessage());
-                $this->command->error("Blocked bu error: " . $th->getMessage());
+                $this->command->error("Blocked by error: " . $th->getMessage());
                 return;
             }
         }
