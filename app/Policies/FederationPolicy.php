@@ -43,7 +43,6 @@ class FederationPolicy
      *
      * TODO Modify federation can cause mistake on running contest,
      * TODO add some check that there is no running contest
-     * TODO HERE / NOT HERE?
      */
     public function update(User $user, Federation $federation): bool
     {
@@ -59,7 +58,6 @@ class FederationPolicy
      *
      * TODO Cannot remove federation with contest sponsored running
      * TODO check there is no running contest sponsored by federation id.
-     * TODO HERE / NOT HERE?
      */
     public function delete(User $user, Federation $federation): bool
     {
@@ -97,7 +95,7 @@ class FederationPolicy
     /**
      * Determine whether the user can backup the model
      */
-    public function backuppable(User $user, Federation $federation): bool
+    public function backuppable(User $user, Federation $federation) : bool
     {
         // for all federation - only for user in admin group
         ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
