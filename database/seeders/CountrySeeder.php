@@ -40,12 +40,12 @@ class CountrySeeder extends Seeder
         $remoteUrl = 'https://raw.githubusercontent.com/mledoze/countries/master/countries.json';
 
         // check local fle
-        if (!Storage::disk('local')->exists($filePath)){
+        if (!Storage::disk('local')->exists($filePath)) {
             $this->command->info("Missing local file - Give reference json from github");
             try {
                 // pick
                 $response = Http::get($remoteUrl);
-                if ($response->successful()){
+                if ($response->successful()) {
                     Storage::disk('local')->put($filePath, $response->body());
                     $this->command->info("Saved local");
                 } else {
