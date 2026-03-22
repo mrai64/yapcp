@@ -26,7 +26,7 @@ return new class () extends Migration {
             $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent()->index();
             $table->dateTime('deleted_at')->nullable()->index();
 
-            $table->comment('aka passwords table - for platform access only - other user info un user_contacts');
+            $table->comment('Laravel reserved table for users - platform entry only');
         });
     }
 

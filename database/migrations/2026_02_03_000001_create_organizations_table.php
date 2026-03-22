@@ -35,7 +35,7 @@ return new class () extends Migration {
             $table->foreign(['country_id'])->references(['id'])->on('countries')
                 ->onUpdate('restrict')->onDelete('restrict');
 
-            $table->comment('who organize contests');
+            $table->comment('who organize contests - have members of');
         });
     }
 
