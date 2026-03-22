@@ -1,12 +1,57 @@
 # 🇮🇹 🗄️ Documentazione Schema Database
 
-> **Valido fino alla data del:** 22/03/2026 - 21:17:32
+> **Valido fino alla data del:** 22/03/2026 - 21:28:22
 
 Questa cartella contiene la struttura tecnica del database per il supporto allo sviluppo.
 
+Per rigenerare questo documento eseguire in Terminale il seguente comando:
+php artisan db:con
 ---
 
-## 📋 Tabella: `cache` 
+## Indice alfabetico
+
+- [cache](#-tabella-cache)
+- [cache_locks](#-tabella-cache_locks)
+- [contest_awards](#-tabella-contest_awards)
+- [contest_juries](#-tabella-contest_juries)
+- [contest_participants](#-tabella-contest_participants)
+- [contest_patronages](#-tabella-contest_patronages)
+- [contest_sections](#-tabella-contest_sections)
+- [contest_votes](#-tabella-contest_votes)
+- [contest_waitings](#-tabella-contest_waitings)
+- [contest_works](#-tabella-contest_works)
+- [contests](#-tabella-contests)
+- [contests_vote_rule_sets](#-tabella-contests_vote_rule_sets)
+- [countries](#-tabella-countries)
+- [failed_jobs](#-tabella-failed_jobs)
+- [federation_mores](#-tabella-federation_mores)
+- [federation_mores_referenced_tables](#-tabella-federation_mores_referenced_tables)
+- [federation_sections](#-tabella-federation_sections)
+- [federations](#-tabella-federations)
+- [job_batches](#-tabella-job_batches)
+- [jobs](#-tabella-jobs)
+- [lang_lists](#-tabella-lang_lists)
+- [migrations](#-tabella-migrations)
+- [organizations](#-tabella-organizations)
+- [password_reset_tokens](#-tabella-password_reset_tokens)
+- [sessions](#-tabella-sessions)
+- [timezone_region_sets](#-tabella-timezone_region_sets)
+- [timezones](#-tabella-timezones)
+- [user_contact_mores](#-tabella-user_contact_mores)
+- [user_contacts](#-tabella-user_contacts)
+- [user_roles](#-tabella-user_roles)
+- [user_roles_context_sets](#-tabella-user_roles_context_sets)
+- [user_roles_role_contexts](#-tabella-user_roles_role_contexts)
+- [user_roles_role_sets](#-tabella-user_roles_role_sets)
+- [user_work_mores](#-tabella-user_work_mores)
+- [user_work_validations](#-tabella-user_work_validations)
+- [user_works](#-tabella-user_works)
+- [users](#-tabella-users)
+
+---
+
+## 📋 Tabella: `cache`
+
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **key** | varchar(255) | *-* | NO | PRI | *NULL* |
@@ -14,11 +59,13 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **expiration** | int | *-* | NO |  | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
+
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `cache_locks` 
+## 📋 Tabella: `cache_locks`
+
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **key** | varchar(255) | *-* | NO | PRI | *NULL* |
@@ -26,11 +73,13 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **expiration** | int | *-* | NO |  | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
+
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `contest_awards` 
+## 📋 Tabella: `contest_awards`
+
 **Descrizione:** Contest:award list for every section and for contest/circuit
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -50,12 +99,14 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-- 🔗 `contest_id` → `contests(id)` 
-- 🔗 `section_id` → `contest_sections(id)` 
+
+- 🔗 `contest_id` → `contests(id)`
+- 🔗 `section_id` → `contest_sections(id)`
 
 ---
 
-## 📋 Tabella: `contest_juries` 
+## 📋 Tabella: `contest_juries`
+
 **Descrizione:** juror contest section list
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -70,13 +121,15 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-- 🔗 `section_id` → `contest_sections(id)` 
-- 🔗 `contest_id` → `contests(id)` 
-- 🔗 `user_id` → `user_contacts(id)` 
+
+- 🔗 `section_id` → `contest_sections(id)`
+- 🔗 `contest_id` → `contests(id)`
+- 🔗 `user_id` → `user_contacts(id)`
 
 ---
 
-## 📋 Tabella: `contest_participants` 
+## 📋 Tabella: `contest_participants`
+
 **Descrizione:** Participant list w/fee semaphore
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -90,12 +143,14 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-- 🔗 `contest_id` → `contests(id)` 
-- 🔗 `user_contact_id` → `user_contacts(id)` 
+
+- 🔗 `contest_id` → `contests(id)`
+- 🔗 `user_contact_id` → `user_contacts(id)`
 
 ---
 
-## 📋 Tabella: `contest_patronages` 
+## 📋 Tabella: `contest_patronages`
+
 **Descrizione:** additional values for user_contacts based on federation_mores
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -109,11 +164,13 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
+
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `contest_sections` 
+## 📋 Tabella: `contest_sections`
+
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | char(36) | *real pk contest_id n code* | NO | PRI | *NULL* |
@@ -137,12 +194,14 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-- 🔗 `contest_id` → `contests(id)` 
-- 🔗 `federation_section_id` → `federation_sections(id)` 
+
+- 🔗 `contest_id` → `contests(id)`
+- 🔗 `federation_section_id` → `federation_sections(id)`
 
 ---
 
-## 📋 Tabella: `contest_votes` 
+## 📋 Tabella: `contest_votes`
+
 **Descrizione:** The Jury vote board
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -159,14 +218,16 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-- 🔗 `contest_id` → `contests(id)` 
-- 🔗 `contest_work_id` → `contest_works(id)` 
-- 🔗 `juror_user_id` → `user_contacts(id)` 
-- 🔗 `section_id` → `contest_sections(id)` 
+
+- 🔗 `contest_id` → `contests(id)`
+- 🔗 `contest_work_id` → `contest_works(id)`
+- 🔗 `juror_user_id` → `user_contacts(id)`
+- 🔗 `section_id` → `contest_sections(id)`
 
 ---
 
-## 📋 Tabella: `contest_waitings` 
+## 📋 Tabella: `contest_waitings`
+
 **Descrizione:** Parking table for user_works with any problem
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -185,21 +246,23 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-- 🔗 `contest_id` → `contests(id)` 
-- 🔗 `organization_user_id` → `user_contacts(id)` 
-- 🔗 `participant_user_id` → `user_contacts(id)` 
-- 🔗 `section_id` → `contest_sections(id)` 
-- 🔗 `user_work_id` → `user_works(id)` 
+
+- 🔗 `contest_id` → `contests(id)`
+- 🔗 `organization_user_id` → `user_contacts(id)`
+- 🔗 `participant_user_id` → `user_contacts(id)`
+- 🔗 `section_id` → `contest_sections(id)`
+- 🔗 `user_work_id` → `user_works(id)`
 
 ---
 
-## 📋 Tabella: `contest_works` 
+## 📋 Tabella: `contest_works`
+
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | char(36) | *-* | NO | PRI | *NULL* |
 | **contest_id** | char(36) | *fk: contests.id* | NO | MUL | *NULL* |
 | **section_id** | char(36) | *fk: contest_sections.id* | NO | MUL | *NULL* |
-| **country_id** | char(3) | *fk: countries.id * | NO | MUL | *NULL* |
+| **country_id** | char(3) | *fk: countries.id* | NO | MUL | *NULL* |
 | **user_id** | char(36) | *fk:user_contacts.id author* | NO | MUL | *NULL* |
 | **user_work_id** | char(36) | *fk: user_works.id* | NO | MUL | *NULL* |
 | **extension** | varchar(6) | *used to build file name* | NO |  | jpg |
@@ -210,14 +273,16 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-- 🔗 `contest_id` → `contests(id)` 
-- 🔗 `country_id` → `countries(id)` 
-- 🔗 `section_id` → `contest_sections(id)` 
-- 🔗 `user_id` → `user_contacts(id)` 
+
+- 🔗 `contest_id` → `contests(id)`
+- 🔗 `country_id` → `countries(id)`
+- 🔗 `section_id` → `contest_sections(id)`
+- 🔗 `user_id` → `user_contacts(id)`
 
 ---
 
-## 📋 Tabella: `contests` 
+## 📋 Tabella: `contests`
+
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | char(36) | *-* | NO | PRI | *NULL* |
@@ -252,15 +317,17 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-- 🔗 `country_id` → `countries(id)` 
-- 🔗 `organization_id` → `organizations(id)` 
-- 🔗 `circuit_id` → `contests(id)` 
-- 🔗 `vote_rule` → `contests_vote_rule_sets(vote_rule)` 
-- 🔗 `timezone_id` → `timezones(id)` 
+
+- 🔗 `country_id` → `countries(id)`
+- 🔗 `organization_id` → `organizations(id)`
+- 🔗 `circuit_id` → `contests(id)`
+- 🔗 `vote_rule` → `contests_vote_rule_sets(vote_rule)`
+- 🔗 `timezone_id` → `timezones(id)`
 
 ---
 
-## 📋 Tabella: `contests_vote_rule_sets` 
+## 📋 Tabella: `contests_vote_rule_sets`
+
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | bigint unsigned | *-* | NO | PRI | *NULL* |
@@ -271,11 +338,13 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
+
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `countries` 
+## 📋 Tabella: `countries`
+
 **Descrizione:** Based on iso-3166, and mledoze/countries
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -291,11 +360,13 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
+
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `failed_jobs` 
+## 📋 Tabella: `failed_jobs`
+
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | bigint unsigned | *-* | NO | PRI | *NULL* |
@@ -307,11 +378,13 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **failed_at** | timestamp | *-* | NO |  | CURRENT_TIMESTAMP |
 
 ### **Relazioni (Foreign Keys):**
+
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `federation_mores` 
+## 📋 Tabella: `federation_mores`
+
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | bigint unsigned | *the real pk is federation_id + field_name* | NO | PRI | *NULL* |
@@ -327,12 +400,14 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-- 🔗 `federation_id` → `federations(id)` 
-- 🔗 `referenced_table` → `federation_mores_referenced_tables(referenced_table)` 
+
+- 🔗 `federation_id` → `federations(id)`
+- 🔗 `referenced_table` → `federation_mores_referenced_tables(referenced_table)`
 
 ---
 
-## 📋 Tabella: `federation_mores_referenced_tables` 
+## 📋 Tabella: `federation_mores_referenced_tables`
+
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | bigint unsigned | *-* | NO | PRI | *NULL* |
@@ -342,11 +417,13 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
+
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `federation_sections` 
+## 📋 Tabella: `federation_sections`
+
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | bigint unsigned | *real pk is federation_id + code* | NO | PRI | *NULL* |
@@ -370,11 +447,13 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-- 🔗 `federation_id` → `federations(id)` 
+
+- 🔗 `federation_id` → `federations(id)`
 
 ---
 
-## 📋 Tabella: `federations` 
+## 📋 Tabella: `federations`
+
 **Descrizione:** Who build the contest rules for patronages
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -392,12 +471,14 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-- 🔗 `country_id` → `countries(id)` 
-- 🔗 `timezone_id` → `timezones(id)` 
+
+- 🔗 `country_id` → `countries(id)`
+- 🔗 `timezone_id` → `timezones(id)`
 
 ---
 
-## 📋 Tabella: `job_batches` 
+## 📋 Tabella: `job_batches`
+
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | varchar(255) | *-* | NO | PRI | *NULL* |
@@ -412,11 +493,13 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **finished_at** | int | *-* | YES |  | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
+
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `jobs` 
+## 📋 Tabella: `jobs`
+
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | bigint unsigned | *-* | NO | PRI | *NULL* |
@@ -428,11 +511,13 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **created_at** | int unsigned | *-* | NO |  | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
+
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `lang_lists` 
+## 📋 Tabella: `lang_lists`
+
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | bigint unsigned | *-* | NO | PRI | *NULL* |
@@ -440,11 +525,13 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **updated_at** | timestamp | *-* | YES |  | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
+
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `migrations` 
+## 📋 Tabella: `migrations`
+
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | int unsigned | *-* | NO | PRI | *NULL* |
@@ -452,11 +539,13 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **batch** | int | *-* | NO |  | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
+
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `organizations` 
+## 📋 Tabella: `organizations`
+
 **Descrizione:** who organize contests
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -472,11 +561,13 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-- 🔗 `country_id` → `countries(id)` 
+
+- 🔗 `country_id` → `countries(id)`
 
 ---
 
-## 📋 Tabella: `password_reset_tokens` 
+## 📋 Tabella: `password_reset_tokens`
+
 **Descrizione:** user reserved
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -486,11 +577,13 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **created_at** | datetime | *-* | YES |  | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
+
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `sessions` 
+## 📋 Tabella: `sessions`
+
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | varchar(255) | *-* | NO | PRI | *NULL* |
@@ -501,11 +594,13 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **last_activity** | int | *-* | NO | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
+
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `timezone_region_sets` 
+## 📋 Tabella: `timezone_region_sets`
+
 **Descrizione:** timezones lookup table
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -516,11 +611,13 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
+
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `timezones` 
+## 📋 Tabella: `timezones`
+
 **Descrizione:** correspond to php_timezone version 2025.3
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -532,11 +629,13 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-- 🔗 `region_id` → `timezone_region_sets(id)` 
+
+- 🔗 `region_id` → `timezone_region_sets(id)`
 
 ---
 
-## 📋 Tabella: `user_contact_mores` 
+## 📋 Tabella: `user_contact_mores`
+
 **Descrizione:** additional values for user_contacts based on federation_mores
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -551,13 +650,15 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-- 🔗 `federation_id` → `federation_mores(federation_id)` 
-- 🔗 `field_name` → `federation_mores(field_name)` 
-- 🔗 `user_id` → `user_contacts(id)` 
+
+- 🔗 `federation_id` → `federation_mores(federation_id)`
+- 🔗 `field_name` → `federation_mores(field_name)`
+- 🔗 `user_id` → `user_contacts(id)`
 
 ---
 
-## 📋 Tabella: `user_contacts` 
+## 📋 Tabella: `user_contacts`
+
 **Descrizione:** the real users info table
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -587,14 +688,16 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-- 🔗 `country_id` → `countries(id)` 
-- 🔗 `timezone_id` → `timezones(id)` 
-- 🔗 `id` → `users(id)` 
-- 🔗 `email` → `users(email)` 
+
+- 🔗 `country_id` → `countries(id)`
+- 🔗 `timezone_id` → `timezones(id)`
+- 🔗 `id` → `users(id)`
+- 🔗 `email` → `users(email)`
 
 ---
 
-## 📋 Tabella: `user_roles` 
+## 📋 Tabella: `user_roles`
+
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | bigint unsigned | *-* | NO | PRI | *NULL* |
@@ -610,14 +713,16 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-- 🔗 `contest_id` → `contests(id)` 
-- 🔗 `federation_id` → `federations(id)` 
-- 🔗 `organization_id` → `organizations(id)` 
-- 🔗 `role` → `user_roles_role_sets(role)` 
+
+- 🔗 `contest_id` → `contests(id)`
+- 🔗 `federation_id` → `federations(id)`
+- 🔗 `organization_id` → `organizations(id)`
+- 🔗 `role` → `user_roles_role_sets(role)`
 
 ---
 
-## 📋 Tabella: `user_roles_context_sets` 
+## 📋 Tabella: `user_roles_context_sets`
+
 **Descrizione:** lookup table for: user_roles.context_type
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -629,11 +734,13 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
+
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `user_roles_role_contexts` 
+## 📋 Tabella: `user_roles_role_contexts`
+
 **Descrizione:** pivot table
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -646,12 +753,14 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-- 🔗 `context` → `user_roles_context_sets(context_type)` 
-- 🔗 `role` → `user_roles_role_sets(role)` 
+
+- 🔗 `context` → `user_roles_context_sets(context_type)`
+- 🔗 `role` → `user_roles_role_sets(role)`
 
 ---
 
-## 📋 Tabella: `user_roles_role_sets` 
+## 📋 Tabella: `user_roles_role_sets`
+
 **Descrizione:** lookup table for: user_roles.role
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -664,11 +773,13 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
+
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `user_work_mores` 
+## 📋 Tabella: `user_work_mores`
+
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | bigint unsigned | *-* | NO | PRI | *NULL* |
@@ -681,31 +792,35 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
+
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `user_work_validations` 
+## 📋 Tabella: `user_work_validations`
+
 **Descrizione:** human checked user_works, based on federation_sections rules
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | bigint unsigned | *real pk is: user_work_id + federation_section_id* | NO | PRI | *NULL* |
 | **user_work_id** | char(36) | *fk: user_works.id* | NO | MUL | *NULL* |
-| **federation_section_id** | bigint unsigned | *fk: federation_sections.id * | NO | MUL | *NULL* |
+| **federation_section_id** | bigint unsigned | *fk: federation_sections.id* | NO | MUL | *NULL* |
 | **validator_user_id** | char(36) | *contest organization members that validate the work for specific section* | NO | MUL | *NULL* |
 | **created_at** | datetime | *-* | NO |  | CURRENT_TIMESTAMP |
 | **updated_at** | datetime | *-* | NO | MUL | CURRENT_TIMESTAMP |
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-- 🔗 `federation_section_id` → `federation_sections(id)` 
-- 🔗 `user_work_id` → `user_works(id)` 
-- 🔗 `validator_user_id` → `user_contacts(id)` 
+
+- 🔗 `federation_section_id` → `federation_sections(id)`
+- 🔗 `user_work_id` → `user_works(id)`
+- 🔗 `validator_user_id` → `user_contacts(id)`
 
 ---
 
-## 📋 Tabella: `user_works` 
+## 📋 Tabella: `user_works`
+
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | char(36) | *-* | NO | PRI | *NULL* |
@@ -723,11 +838,13 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-- 🔗 `user_id` → `user_contacts(id)` 
+
+- 🔗 `user_id` → `user_contacts(id)`
 
 ---
 
-## 📋 Tabella: `users` 
+## 📋 Tabella: `users`
+
 **Descrizione:** aka passwords table - for platform access only - other user info un user_contacts
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -743,7 +860,7 @@ Questa cartella contiene la struttura tecnica del database per il supporto allo 
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
+
 - ❌ Nessuna relazione trovata.
 
 ---
-
