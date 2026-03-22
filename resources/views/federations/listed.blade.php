@@ -37,7 +37,7 @@
             <li class="my-2 p-4 font-medium">
                 <strong class="fyk text-xl">{{$federation->name_en}}</strong><br />
                 {{$federation->code}} | Country: {{$federation->country_id}} | web: {{$federation->website}}
-                <a  href="{{ route('federation.modify', ['fid' => $federation->id]) }}"
+                <a  href="{{ route('federation.modify', ['federation' => $federation]) }}"
                     class="font-medium rounded-md px-4 py-2"
                     >[ {{ __('Modify') }} ]</a>
                 <a  href="{{ route('federation.delete', ['fid' => $federation->id]) }}"

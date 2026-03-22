@@ -11,31 +11,43 @@
         <h2 class="fyk text-2xl font-medium text-gray-900">
             {{ __('Modify few Federation infos') }}
         </h2>
-    </header>
+    <br />
+    <hr>
+    <br />
     <p class="mb-4">
-        <a  href="{{ route('federation.list') }}"
-            rel="noopener noreferrer">
-        [ {{ __('Back to Fed list') }} ]
-        </a>?
+        <a href="/federation/section/list/{{$id}}" 
+            class="fyk text-xl mb-4"
+            target="_blank" rel="noopener noreferrer"
+            >
+        Federation' Coded Sections List 🗒️
+        </a>
+    </p><!-- federation section list -->
+
+    <p class="fyk text-xl mb-4">
+        <a href="{{ route('federation.list') }}" 
+            target="_blank" rel="noopener noreferrer">
+            {{ __('Back to Federation list') }} 
+        </a>
     </p>
+    </header>
     <form wire:submit="updateFederation">
         @csrf 
         
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="name_en">
+            <label class="block font-medium text-sm text-gray-700" for="federationNameEn">
                 {{ __('Federation Name [en]') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="name_en"
-                wire:model.live.debounce.500ms="name_en" 
+                type="text" name="federationNameEn"
+                wire:model.live.debounce.500ms="federationNameEn" 
                 required="required" 
             />
-            @error('name_en')
+            @error('federationNameEn')
             <div class="alert alert-danger small">{{ $message }} </div>
             @enderror
-        </div>
-        
+        </div><!-- international federation name -->
+
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="website">
                 {{__('Official website')}}
@@ -47,55 +59,38 @@
             value="{{ old('website') }}"
             >
             <div class="alert alert-danger small">@error('website') {{ __($message) }} @enderror</div>
-        </div>
+        </div><!-- website -->
 
         <div class="mb-4">
-            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="country_id">
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="countryId">
                 {{ __('Country') }}
             </label>
             <select 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                wire:model.live="country_id"
-                name="country_id" 
+                wire:model.live="countryId"
+                name="countryId" 
                 required="required"
                 >
 
                 @foreach ($countries as $country)
-                <option value="{{ trim($country->id) }}" {{ ($country->id === $country_id ) ? 'selected' : '' }}>{{ $country->country }}</option>
+                <option value="{{ trim($country->id) }}" {{ ($country->id === $countryId ) ? 'selected' : '' }}>{{ $country->country }}</option>
                 @endforeach
             </select>
-            <div class="small">@error('country_id') {{ $message }} @enderror</div>
-        </div>
-        
+            <div class="small">@error('countryId') {{ $message }} @enderror</div>
+        </div><!-- country id -->
+
         <div class="mb-4">
             <style>textarea {resize:vertical;}</style>
-            <label class="block font-medium text-sm text-gray-700" for="contact_info">
+            <label class="block font-medium text-sm text-gray-700" for="federationContact">
                 {{ __('Federation Contacts') }}
             </label>
             <textarea 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="contact_info"
-                wire:model="contact_info"
-            >{{ old('contact_info') }}</textarea>
-            <div class="small">@error('contact_info') {{ $message }} @enderror</div>
-        </div>
-
-        <p class="mb-4">
-            <br />
-            <a href="/federation/section/list/{{$id}}" 
-                class="fyk text-xl mb-4"
-                target="_blank" rel="noopener noreferrer"
-                >
-            Federation' Coded Sections List 🗒️
-            </a>
-        </p>
-
-        <p class="fyk text-xl mb-4">
-            <a href="{{ route('federation.list') }}" 
-                target="_blank" rel="noopener noreferrer">
-                {{ __('Back to Federation list') }} 
-            </a>
-        </p>
+                type="text" name="federationContact"
+                wire:model="federationContact"
+            >{{ old('federationContact') }}</textarea>
+            <div class="small">@error('federationContact') {{ $message }} @enderror</div>
+        </div><!-- contact info -->
 
         <p>&nbsp;</p>
         <button type="submit" 
@@ -103,6 +98,6 @@
             >
             {{ __('Update') }}
         </button>
-
     </form>
+
 </div>
