@@ -12,6 +12,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Organization;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -56,4 +57,22 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    /**
+     * Reserved for pest tests
+     */
+    public function admin(): static
+    {
+        $adminOrganization = Organization::whereName('.admin')->firstOrFail();
+        return $this->has(
+            UserRole::factory()->state([
+                'role' => 'admin',
+                'organization_id' => $adminOrganization->id,
+                'contest_id' => null,
+                'federation_id' => null,
+            ]),
+            'userRoles'
+        );
+    }
+
 }
