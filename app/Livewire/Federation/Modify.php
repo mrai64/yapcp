@@ -20,21 +20,22 @@ use Livewire\Component;
 
 class Modify extends Component
 {
-    public $federation;
+    public Federation $federation;
 
-    public $id;
+    // readonly
+    public string $id;
 
     #[Validate('required|string|max:255')]
-    public $name_en = '';
+    public string $federationNameEn = '';
 
     #[Validate('string|url|max:255')]
-    public $website = '';
+    public string $website = '';
 
     #[Validate('required|string|uppercase|min:3|exists:countries,id')]
-    public $country_id;
+    public string $countryId;
 
     #[Validate('string')]
-    public $contact_info;
+    public string $federationContact;
 
     // readonly
     public $countries;
@@ -42,24 +43,24 @@ class Modify extends Component
     /**
      * 1. Before the show
      */
-    public function mount(string $fid) // $fid as 'fid' in route()
+    public function mount(Federation $federation) // as in route()
     {
-        //
-        $userToCheck = User::find(Auth::id());
-        $this->authorize('update', $userToCheck);
+        // authorize in FederationPolicy //
+        // $userToCheck = User::find(Auth::id());
+        // $this->authorize('update', $userToCheck);
         //
         Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
-        Log::info('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' fid' . $fid);
-        $this->federation = Federation::where('id', $fid)->get()[0];
+        Log::info('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' fid' . $federation->id);
+        $this->federation = $federation; // was: Federation::where('id', $fid)->get()[0];
         Log::info('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' found:' . json_encode($this->federation));
 
-        $this->id = $fid;
-        $this->name_en = $this->federation['name_en'];
-        $this->website = $this->federation['website'];
-        $this->country_id = $this->federation['country_id'];
-        $this->contact_info = $this->federation['contact_info'];
-        $this->countries = Country::countriesSorted();
+        $this->id                = $federation->id;
+        $this->federationNameEn  = $federation->name_en;
+        $this->website           = $federation->website;
+        $this->countryId         = $federation->country_id;
+        $this->federationContact = $federation->contact_info;
 
+        $this->countries         = Country::countriesSorted();
     }
 
     /**
@@ -72,6 +73,7 @@ class Modify extends Component
 
     /**
      * 3. validation rules
+     * see definition - no need rules()
      */
 
     /**
@@ -79,15 +81,21 @@ class Modify extends Component
      */
     public function updateFederation()
     {
-        //
-        $userToCheck = User::find(Auth::id());
-        $this->authorize('update', $userToCheck);
+        // authorize in FederationPolicy //
+        // $userToCheck = User::find(Auth::id());
+        // $this->authorize('update', $userToCheck);
         //
         Log::info('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' called');
         $validated = $this->validate();
 
         //
-        $this->federation->update($validated);
+        $this->federation->update([
+            'id'         => $this->id,
+            'name_en'    => $validated['federationNameEn'],
+            'website'    => $validated['website'],
+            'country_id' => $validated['countryId'],
+            'contact_info' => $validated['federationContact'],
+        ]);
 
         // to list
         return redirect()
