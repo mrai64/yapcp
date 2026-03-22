@@ -31,7 +31,17 @@ class GenerateDbDocs extends Command
         $markdown = "# 🇮🇹 🗄️ Documentazione Schema Database\n\n";
         $markdown .= "> **Valido fino alla data del:** " . now()->format('d/m/Y - H:i:s') . "\n\n";
         $markdown .= "Questa cartella contiene la struttura tecnica del database per il supporto allo sviluppo.\n\n";
+        $markdown .= "Per rigenerare questo documento eseguire in Terminale il seguente comando:\n";
+        $markdown .= "php artisan db:con\n";
         $markdown .= "---\n\n";
+        // indice alfabetico
+        $markdown .= "## Indice alfabetico\n\n";
+
+        foreach ($tables as $table) {
+            $tableName = $table->$tableKey;
+            $markdown .= "- [" . $tableName . "](#-tabella-" . $tableName . ")\n";
+        }
+        $markdown .= "\n---\n\n";
 
         foreach ($tables as $table) {
             $tableName = $table->$tableKey;
@@ -73,7 +83,7 @@ class GenerateDbDocs extends Command
                 $markdown .= "\n### **Relazioni (Foreign Keys):**\n";
                 $markdown .= "- ❌ Nessuna relazione trovata.\n";
             }
-            
+
             $markdown .= "\n---\n\n";
         }
 
