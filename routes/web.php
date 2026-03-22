@@ -74,14 +74,16 @@ Route::get('/user/contact/modify5/{fid}/{uid?}', User\Contact\Modify5Feds::class
 /**
  * Admin - Federation
  */
+// federation list - guest no admin
+// federation add - admin no livewire
 Route::get('/admin/federation/add', [FederationController::class, 'create'])
     ->middleware('can:create,' . ModelsFederation::class)
     ->name('federation.add');
 Route::post('/admin/federation/store', [FederationController::class, 'store'])
     ->name('federation.store');
 //  federation update - admin  livewire style
-Route::get('/federation/modify/{fid}', Federation\Modify::class, ['fid'])
-    ->middleware(['auth', 'verified'])
+Route::get('/admin/federation/modify/{federation}', Federation\Modify::class, ['fid'])
+    ->middleware('can:update,federation')
     ->name('federation.modify');
 //  federation softdelete - admin
 Route::get('/federation/remove/{fid}', Federation\Remove::class, ['fid'])
