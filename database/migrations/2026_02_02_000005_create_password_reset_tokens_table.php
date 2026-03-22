@@ -16,7 +16,7 @@ return new class () extends Migration {
             //
             $table->dateTime('created_at')->nullable();
 
-            $table->comment('user reserved');
+            $table->comment('Laravel reserved table for password reset tokens');
         });
     }
 
