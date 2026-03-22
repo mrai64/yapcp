@@ -22,6 +22,8 @@ return new class () extends Migration {
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent()->index();
             $table->dateTime('deleted_at')->nullable()->index();
+            //
+            $table->comment('lookup table for: federation_mores.referenced_table');
         });
     }
 

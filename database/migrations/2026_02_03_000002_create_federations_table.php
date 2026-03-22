@@ -39,7 +39,7 @@ return new class () extends Migration {
             $table->foreign(['timezone_id'])->references(['id'])->on('timezones')
                 ->onUpdate('restrict')->onDelete('restrict');
 
-            $table->comment('Who build the contest rules for patronages');
+            $table->comment('Who build contest rules for patronages');
         });
     }
 
