@@ -4,8 +4,12 @@
 
 Questa cartella contiene la struttura tecnica del database per il supporto allo sviluppo.
 
-Per rigenerare questo documento eseguire in Terminale il seguente comando:
+Per rigenerare questo documento, eseguire in Terminale il seguente comando:  
+
+```sh
 php artisan db:con
+```
+
 ---
 
 ## Indice alfabetico
