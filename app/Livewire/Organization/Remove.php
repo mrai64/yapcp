@@ -78,7 +78,7 @@ class Remove extends Component
 
         // back to list
         return redirect()
-            ->route('organization-list')
+            ->route('organization.list')
             ->with('success', __('Organization data safely removed, thanks!'));
     }
 }

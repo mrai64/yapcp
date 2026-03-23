@@ -1,7 +1,7 @@
 <div>
     <p class="">Well, new organization? Insert Few data here.</p>
     <p class="mb-4">Before, check 
-        <a href="{{ route('organization-list') }}">
+        <a href="{{ route('organization.list') }}">
         [ {{__('Organization list')}} ]
         </a>
     </p>

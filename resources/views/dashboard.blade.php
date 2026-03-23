@@ -35,7 +35,7 @@ use Illuminate\Support\Facades\Auth;
         </div>
         . .
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('organization-list') }}">
+            <a href="{{ route('organization.list') }}">
             [ {{ __("Organization List") }} ]
             </a>
         </div>

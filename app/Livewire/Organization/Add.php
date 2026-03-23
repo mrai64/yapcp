@@ -65,7 +65,7 @@ class Add extends Component
 
         // done back to list - see web.php
         return redirect()
-            ->route('organization-list')
+            ->route('organization.list')
             ->with('success', __('New Organization added to list, enjoy!'));
     }
 }
