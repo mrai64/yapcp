@@ -135,7 +135,7 @@ Route::delete('/organization/remove/{id}', Organization\Remove::class, ['id'])
 // organization dashboard
 Route::get('/organization/dashboard/{id}', Organization\Dashboard::class, ['id'])
     ->middleware(['auth', 'verified'])
-    ->name('organization-dashboard');
+    ->name('organization.dashboard');
 
 /**
  * UserRole
