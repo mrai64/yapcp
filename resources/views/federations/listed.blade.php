@@ -16,11 +16,6 @@
             {{ __("Note: Shortcode is key to find Federation.") }}
             {{ __("so if you must insert a shortcode already present add them a colon : and country_code to made it unique,") }}
             {{ __("i.e. Argentina and Andorra are both FAF, use FAF:AND and FAF:ARG.") }}
-            <p class="mb-4">
-            <a href="{{ route('federation.add')}}" 
-                class="float-end font-medium rounded-md py-2"
-                >[ {{__('Add a new Federation')}} ]</a>
-            </p>
         </p>
     </x-slot>
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
@@ -31,6 +26,12 @@
         </div> 
         @endif
 
+        <p class="fyk text-xl font-medium mb-4">
+            <a href="{{ route('federation.add')}}" 
+                class="float-end font-medium rounded-md py-2"
+                >[ {{__('Add a new Federation')}} ]</a>
+        </p>
+
         @if(isset($federationSet) && count($federationSet) > 0 )
         <ul>
             @foreach($federationSet as $federation)
@@ -40,15 +41,15 @@
                 <a  href="{{ route('federation.modify', ['federation' => $federation]) }}"
                     class="font-medium rounded-md px-4 py-2"
                     >[ {{ __('Modify') }} ]</a>
-                <a  href="{{ route('federation.delete', ['fid' => $federation->id]) }}"
+                <a  href="{{ route('federation.delete', ['federation' => $federation]) }}"
                     class="font-medium rounded-md px-4 py-2"
                     >[ {{ __('Remove') }} ]</a>
             </li>
-            @endforeach        
+            @endforeach
         </ul>
         @else
         <div class="border text-xl rounded-md px-4 py-2">
-            {{ __('Empty federation list') }}
+            {{ __('Empty Federations list') }}
         </div>
         @endif
         </div>
