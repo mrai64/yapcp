@@ -3,18 +3,18 @@
         <h2 class="fyk text-2xl font-medium text-gray-900">
             {{ __('Remove that federation') }}
         </h2>
-    <p class="fyk text-xl font-medium mb-4">
-        {{ __('LAST CALL. Are you SURE to delete that?')}}
-        <br />
-        {{ __('Maybe a contest running, or starting or recently ended, that make the remove harmful')}}
-    </p>
-    <p class="mb-4"> 
-        <a  href="{{ route('federation.list') }}" 
-            rel="noopener noreferrer">
-        [ {{ __('Back to list') }} ]
-        </a>?
-    </p>
-</div>
+        <p class="fyk text-xl font-medium mb-4">
+            {{ __('LAST CALL. Are you SURE to delete that?')}}
+            <br />
+            {{ __('Maybe a contest running, or starting or recently ended, that make the remove harmful')}}
+        </p>
+        <p class="mb-4"> 
+            <a  href="{{ route('federation.list') }}" 
+                rel="noopener noreferrer">
+            [ {{ __('Back to list') }} ]
+            </a>?
+        </p>
+    </div>
 
     <form wire:submit="deleteFederation" method="DELETE">
         @csrf 
