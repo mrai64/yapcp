@@ -332,7 +332,7 @@ class Add extends Component
 
         // redirect
         return redirect()
-            ->route('organization-dashboard', ['oid' => $this->organizationId])
+            ->route('organization.dashboard', ['oid' => $this->organizationId])
             ->with('success', __('New Contest added to list, enjoy!'));
     }
 }
