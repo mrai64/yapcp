@@ -125,10 +125,10 @@ Route::get('/organization/add/', Organization\Add::class)
     ->name('organization.add');
 Route::get('/organization/modify/{organization}', Organization\Modify::class)
     ->middleware(['auth', 'verified', 'can:update,organization'])
-    ->name('modify-organization');
+    ->name('organization.modify');
 Route::get('/organization/remove/{id}', Organization\Remove::class, ['id'])
     ->middleware(['auth', 'verified'])
-    ->name('delete-organization');
+    ->name('organization.delete');
 Route::delete('/organization/remove/{id}', Organization\Remove::class, ['id'])
     ->middleware(['auth', 'verified']);
 // organization dashboard

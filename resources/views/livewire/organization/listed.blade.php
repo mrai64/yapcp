@@ -28,7 +28,7 @@
         class="font-medium rounded-md px-4 py-4">
             [ {{__('user.dashboard')}} ]
         </a>
-        <a href="{{route('modify-organization', ['id' => $org->id ])}}" 
+        <a href="{{route('organization.modify', ['id' => $org->id ])}}" 
             class="font-medium rounded-md px-4 py-4">
             [ {{__('Modify')}} ]
         </a>
