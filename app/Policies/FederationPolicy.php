@@ -43,6 +43,7 @@ class FederationPolicy
      *
      * TODO Modify federation can cause mistake on running contest,
      * TODO add some check that there is no running contest
+     * TODO HERE / NOT HERE?
      */
     public function update(User $user, Federation $federation): bool
     {
@@ -58,6 +59,7 @@ class FederationPolicy
      *
      * TODO Cannot remove federation with contest sponsored running
      * TODO check there is no running contest sponsored by federation id.
+     * TODO HERE / NOT HERE?
      */
     public function delete(User $user, Federation $federation): bool
     {
