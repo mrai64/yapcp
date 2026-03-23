@@ -17,9 +17,9 @@ class CountryFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->regexify('[A-Z]{3}'),
-            'country' => fake()->text(),
-            'lang_code' => '[a-z]{2}_[A-Z]{2}',
+            'id' => fake()->unique()->regexify('[A-Z]{3}'),
+            'country' => fake()->text(30),
+            'lang_code' => fake()->regexify('[a-z]{2}_[A-Z]{2}'),
         ];
     }
 }
