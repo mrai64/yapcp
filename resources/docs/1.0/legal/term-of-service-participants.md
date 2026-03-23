@@ -15,15 +15,20 @@ si applica alla pari al genere maschile e femminile.
 la gestione della piattaforma yaPCP, legalmente rappresentata
 dal suo creatore Massimo Rainato, nato a Padova il 31 ottobre 1964,
 residente in via E. Meneghetti 10, Stanghella, codice fiscale RNTMSM64R31G224T,
-in seguito indicato come Piattaforma,  
+in seguito indicato come *Piattaforma*,  
 &nbsp;  
 &nbsp; **E TRA**  
-l'utente che partecipa alle attività della piattaforma, i cui dati anagrafici e di residenza sono forniti alla Piattaforma, in seguito chiamato utente e/o Autore, per il semplice e volontario atto di registrazione alla piattaforma stessa,  
+l'utente che partecipa alle attività della piattaforma,
+i cui dati anagrafici e di residenza sono forniti liberamente e volontariamente
+alla Piattaforma, in seguito chiamato *utente* e/o *Autore*,
+per il semplice e volontario atto di registrazione alla piattaforma stessa,  
 &nbsp;  
 &nbsp; **CONSIDERATO CHE**  
 (A) la gestione della Piattaforma è titolare di tutti i diritti di proprietà intellettuale relativi al software in cloud denominato yaPCP, che offre funzioni di partecipazione a concorsi di fotografia per immagini digitali, comprensivi di verifiche automatiche e manuali atte a prevenire per quanto possibile forme di ammonizione o sanzioni comminate da enti organizzatori o co-organizzatori di concorsi fotografici,
 
 (B) che l'Autore desidera utilizzare questa piattaforma per gestire la propria volontaria e facoltativa partecipazione ai concorsi fotografici in essa ospitati.
+
+(C) L'autore era, è e rimane detentore dei diritti sull'opera creata dall'autore anche quando la mette a disposizione, in copia, nella Piattaforma per una eventuale partecipazione a Concorsi.
 
 Piattaforma e Autore convengono su quanto segue:
 
@@ -46,7 +51,7 @@ I dettagli delle tariffe sono pubblici e comunicati in una apposta pagina sulla 
 
 ### 4. **CONDIZIONI DI UTILIZZO**
 
-L'Autore si impegna a utilizzare la Piattaforma esclusivamente per la partecipazione ai concorsi fotografici gestiti dalla Piattaforma, e in conformità alle Leggi e Regolamenti in vigore, con riguardo alle regolamentazioni di eventuali organizzazioni nazionali e internazionali che concedono patrocini ai concorsi gestiti nella Piattaforma.
+L'Autore si impegna a utilizzare la Piattaforma esclusivamente per la partecipazione ai concorsi fotografici gestiti dalla Piattaforma, nei modi descritti nella Documentazione utente e in conformità alle Leggi e Regolamenti in vigore, con riguardo alle regolamentazioni di eventuali organizzazioni nazionali e internazionali che concedono patrocini ai concorsi gestiti nella Piattaforma.
 
 ### 5. **ASSISTENZA E MANUTENZIONE**
 
@@ -74,4 +79,4 @@ con preavviso scritto di 30 (trenta) giorni.
 ### 9. **LEGGE APPLICABILE E FORO COMPETENTE**
 
 9.1. Il presente contratto è regolato dalla legge italiana.  
-9.2. Per ogni controversia legale sarà competente in via esclusiva il foro di Padova, Italia.
+9.2. Per ogni controversia legale sarà competente in via esclusiva il Foro di Padova, Italia.
