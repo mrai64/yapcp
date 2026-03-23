@@ -2,7 +2,7 @@
     <!-- header -->
     <h2 class="fyk text-2xl mb-4">{{ __('Update your personal info') }}</h2>
     <p class="mb-4">
-        <a  href="{{ route('dashboard') }}"
+        <a  href="{{ route('user.dashboard') }}"
             rel="noopener noreferrer">
         [ {{ __('Back to dashboard') }} ]
         </a>

@@ -84,7 +84,7 @@ class Add extends Component
         Log::info(__FUNCTION__.' '.__LINE__.$this->user_role);
 
         return redirect()
-            ->route('dashboard')
+            ->route('user.dashboard')
             ->with('success', __('New Role added to list, enjoy!'));
     }
 }

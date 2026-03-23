@@ -35,12 +35,12 @@ Route::get('/organization/listed', Organization\Listed::class)
 /**
  * User view
  */
-Route::view('/profile', 'profile')
+Route::view('/user/profile', 'profile')
     ->middleware(['auth'])
-    ->name('profile');
-Route::view('/dashboard', 'dashboard')
+    ->name('user.profile');
+Route::view('/user/dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+    ->name('user.dashboard');
 
 /**
  * UserContact

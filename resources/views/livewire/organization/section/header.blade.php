@@ -30,7 +30,7 @@
     [ 
         <a href="{{ route('organization.dashboard', ['id' => $contest->organization_id ]) }}"> {{__("Organization dashboard")}} </a> 
     ] [ 
-        <a href="{{ route('dashboard') }}"> {{  __("Personal dashboard")}} </a> 
+        <a href="{{ route('user.dashboard') }}"> {{  __("Personal dashboard")}} </a> 
     ]
     <br style="clear:both;" />
     <br style="clear:both;" />

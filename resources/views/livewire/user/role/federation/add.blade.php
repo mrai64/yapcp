@@ -21,7 +21,7 @@
     <p class="small">{{__("Unlock platform feature based on your Federation Role")}}</p>
     @endif
     <br style="clear:both;" />
-    <a  href="{{ route('dashboard') }}" 
+    <a  href="{{ route('user.dashboard') }}" 
         class="float-end font-medium rounded-md mb-4 py-2" >
         [ {{ __('Back to dashboard') }} ]
     </a>

@@ -42,7 +42,7 @@ it('can authenticate using the login screen', function () {
         ->set('form.remember', true) // checkbox
         ->call('login') // method
         ->assertHasNoErrors()
-        ->assertRedirect(route('dashboard', absolute: false));
+        ->assertRedirect(route('user.dashboard', absolute: false));
 
     $this->assertAuthenticated();
 });

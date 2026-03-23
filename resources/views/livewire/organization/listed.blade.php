@@ -26,7 +26,7 @@
         <small><em>{{__('uuid')}}: {{$org->id}}</em></small>
         <a href="{{route('organization.dashboard', ['id' => $org->id ])}}" 
         class="font-medium rounded-md px-4 py-4">
-            [ {{__('Dashboard')}} ]
+            [ {{__('user.dashboard')}} ]
         </a>
         <a href="{{route('modify-organization', ['id' => $org->id ])}}" 
             class="font-medium rounded-md px-4 py-4">
