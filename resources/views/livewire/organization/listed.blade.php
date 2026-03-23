@@ -1,6 +1,6 @@
 <div>
     <!-- organization list -->
-    <a  href="{{ route('add-organization') }}" 
+    <a  href="{{ route('organization.add') }}" 
         class="float-end font-medium rounded-md mb-4 py-2"
         >
         [ {{ __('Add a new Organization') }} ]
