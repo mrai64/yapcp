@@ -120,12 +120,12 @@ Route::delete('/federation/section/remove/{sid}', Federation\Section\Remove::cla
  * User - Organization blueprint
  */
 // organization list - guest no admin
-// organization add - user
+// organization add - user - livewire
 Route::get('/organization/add/', Organization\Add::class)
     ->middleware(['auth', 'verified'])
     ->name('add-organization');
-Route::get('/organization/modify/{id}', Organization\Modify::class, ['id'])
-    ->middleware(['auth', 'verified'])
+Route::get('/organization/modify/{organization}', Organization\Modify::class)
+    ->middleware(['auth', 'verified', 'can:update,organization'])
     ->name('modify-organization');
 Route::get('/organization/remove/{id}', Organization\Remove::class, ['id'])
     ->middleware(['auth', 'verified'])
