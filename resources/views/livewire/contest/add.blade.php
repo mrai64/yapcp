@@ -59,7 +59,7 @@ use App\Models\ContestSection;
         {{ __('After that contest general definition, next step are: section list, jury definition, prize list definition.') }}
     </p>    
     <p class="mb-4"> 
-        <a  href="{{ route('dashboard') }}" rel="noopener noreferrer">
+        <a  href="{{ route('user.dashboard') }}" rel="noopener noreferrer">
         [ {{ __('Back to Personal Dashboard')}} ]
         </a>
         <a  href="{{ route('organization.dashboard', [ 'id' => $organization_id ]) }}" rel="noopener noreferrer">
