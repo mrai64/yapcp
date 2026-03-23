@@ -1,7 +1,7 @@
 <?php
 /**
  * Organization Dashboard
- * 
+ *
  */
 
 use App\Models\UserContact;
@@ -14,26 +14,28 @@ use App\Models\UserContact;
             {{ __('Organization Dashboard for/') }}
             {{ $organization['name'] }}
         </h2>
-    </div>
-
-    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        <h3 class="mb-4 w-full sm:px-6 lg:px-8"">
-            {{"Back to "}}
+        <h3 class="mb-4 w-full sm:px-6 lg:px-8">
             <a href="{{ route('organization.list') }}">
-            [ {{ __('Organization list') }} ]
-            </a>
+                [ {{ __('Back to Organization list') }} ]
+            </a> 
             . .
-            {{"Back to "}}
             <a href="{{ route('dashboard') }}">
-            [ {{ __('Personal Dashboard') }} ]
+                [ {{ __('Back to Personal Dashboard') }} ]
             </a>
         </h3>
-
+    </div>
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <!-- contest list -->
         <section name="contestSet" class="mb-4 w-full sm:px-6 lg:px-8">
             <p class="fyk font-semibold text-2xl text-gray-800 leading-tight">
                 {{ __("Contest list") }}
             </p>
+            <a href="{{ route('contest-add', ['oid' => $organization->id] )}}" 
+                class="float-end font-medium rounded-md py-2"
+                >
+                [ {{ __('Add a new Contest')}} ]
+            </a>
+            <hr />
             @if (count($contestSet) > 0)
             <ul>
                 @foreach($contestSet as $contest)
@@ -49,13 +51,8 @@ use App\Models\UserContact;
                 @endforeach
             </ul>
             @endif
-            <hr />
-            <a href="{{ route('contest-add', ['oid' => $organization->id] )}}" 
-                class="float-end font-medium rounded-md py-2"
-                >[ {{ __('Add a new Contest')}} ]</a>
-            <hr />
         </section>
-
+        
         <!-- member list -->
         <section name="member_list" class="mt-6 w-full sm:px-6 lg:px-8">
             <p class="fyk font-semibold text-2xl text-gray-800 leading-tight">
@@ -72,7 +69,7 @@ use App\Models\UserContact;
                 @endforeach
             </ul>
             <hr />
-            <small>{{__("Every Organization Member, to be in the list, must have to register in platform as individual, then set her/him membership to Organization")}}</small>
+            <small>{{__("Every Organization Member, to be in the list, must have to register in platform as individual, then set herself/himself membership to Organization.")}}</small>
         </section>
     </div>
 </div>
