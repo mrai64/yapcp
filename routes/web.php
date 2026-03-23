@@ -72,25 +72,26 @@ Route::get('/user/contact/modify5/{fid}/{uid?}', User\Contact\Modify5Feds::class
 // D /user/contact/remove is not needed - contact removed at user deletion
 
 /**
- * Admin - Federation
+ * Federation - admin only
  */
 // federation list - guest no admin
-// federation add - admin no livewire
+// federation add, no livewire - admin
 Route::get('/admin/federation/add', [FederationController::class, 'create'])
     ->middleware('can:create,' . ModelsFederation::class)
     ->name('federation.add');
 Route::post('/admin/federation/store', [FederationController::class, 'store'])
     ->name('federation.store');
-//  federation update - admin  livewire style
+//
+//  federation update, livewire - admin
 Route::get('/admin/federation/modify/{federation}', Federation\Modify::class, ['fid'])
     ->middleware('can:update,federation')
     ->name('federation.modify');
-//  federation softdelete - admin
-Route::get('/federation/remove/{fid}', Federation\Remove::class, ['fid'])
-    ->middleware(['auth', 'verified'])
+//  federation softdelete, livewire - admin
+Route::get('/federation/remove/{federation}', Federation\Remove::class)
+    ->middleware('can:delete,federation')
     ->name('federation.delete');
-Route::delete('/federation/remove/{fid}', Federation\Remove::class, ['fid'])
-    ->middleware(['auth', 'verified']);
+Route::delete('/federation/remove/{federation}', Federation\Remove::class)
+    ->middleware('can:delete,federation');
 
 /**
  * Admin - FederationSection
