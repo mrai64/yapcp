@@ -19,7 +19,7 @@ use App\Models\UserContact;
                 [ {{ __('Back to Organization list') }} ]
             </a> 
             . .
-            <a href="{{ route('dashboard') }}">
+            <a href="{{ route('user.dashboard') }}">
                 [ {{ __('Back to Personal Dashboard') }} ]
             </a>
         </h3>
