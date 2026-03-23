@@ -84,12 +84,11 @@ Route::get('/admin/federation/add', [FederationController::class, 'create'])
 Route::post('/admin/federation/store', [FederationController::class, 'store'])
     ->middleware(['auth', 'verified', 'can:create,' . ModelsFederation::class])
     ->name('federation.store');
-//
-//  federation update, livewire - admin
+// federation update, livewire - admin
 Route::get('/admin/federation/modify/{federation}', Federation\Modify::class, ['fid'])
     ->middleware(['auth', 'verified', 'can:update,federation'])
     ->name('federation.modify');
-//  federation softdelete, livewire - admin
+// federation softdelete, livewire - admin
 Route::get('/admin/federation/remove/{federation}', Federation\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,federation'])
     ->name('federation.delete');
@@ -100,10 +99,10 @@ Route::delete('/admin/federation/remove/{federation}', Federation\Remove::class)
  * Admin - FederationSection
  */
 // federation_section add   - admin
-Route::get('/federation/section/add/{fid}', Federation\Section\Add::class, ['fid'])
+Route::get('/admin/federation/section/add/{fid}', Federation\Section\Add::class, ['fid'])
     ->middleware(['auth', 'verified'])
     ->name('federation-section.add');
-Route::get('/federation/section/modify/{fid}/{sid}', Federation\Section\Modify::class, ['fid', 'sid'])
+Route::get('/admin/federation/section/modify/{fid}/{sid}', Federation\Section\Modify::class, ['fid', 'sid'])
     ->middleware(['auth', 'verified'])
     ->name('federation-section.modify');
 Route::get('/federation/section/remove/{sid}', Federation\Section\Remove::class, ['sid'])
@@ -123,7 +122,7 @@ Route::delete('/federation/section/remove/{sid}', Federation\Section\Remove::cla
 // organization add - user - livewire
 Route::get('/organization/add/', Organization\Add::class)
     ->middleware(['auth', 'verified'])
-    ->name('add-organization');
+    ->name('organization.add');
 Route::get('/organization/modify/{organization}', Organization\Modify::class)
     ->middleware(['auth', 'verified', 'can:update,organization'])
     ->name('modify-organization');
