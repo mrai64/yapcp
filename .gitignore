@@ -26,3 +26,9 @@ Homestead.yaml
 Thumbs.db
 laradumps.yaml
 !storage/app/private/version.json
+boost.json
+/.agents
+/.gemini
+/AGENTS.md
+/GEMINI.md
+/.github/skills
