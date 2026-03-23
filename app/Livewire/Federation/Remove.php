@@ -3,7 +3,7 @@
 /**
  * Learning Laravel that panel show a readonly form
  * and last validate it's only a pro-forma
- * 
+ *
  * 2025-08-30 Only show in read-only, add country_id and contact
  * 2025-01-16 refactorize for PSR-12
  * 2026-03-23 refactor for use of FederationPolicy
