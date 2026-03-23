@@ -7,6 +7,7 @@
 namespace Database\Factories;
 
 use App\Models\Country;
+use App\Models\Timezone;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -27,14 +28,14 @@ class FederationFactory extends Factory
 
         return [
             'id' => fake()->regexify('[A-Z]{6}'), // check howto build random but from 3 to 6 chars
-            'country_id' => DB::table(Country::TABLENAME)->pluck('id')->random(5)->first(),
+            'country_id' => Country::factory(),
             'name_en' => fake()->text(),
             // local_lang
-            // timezone_id
+            'timezone_id' => Timezone::factory(),
             'website' => fake()->url(),
             'contact_info' => fake()->address(),
-            'created_at' => now(),
-            'updated_at' => now(),
+            // 'created_at' => now(),
+            // 'updated_at' => now(),
             // deleted_at
         ];
     }
