@@ -70,7 +70,7 @@ use Illuminate\Support\Facades\Log;
         <a  href="/dashboard" rel="noopener noreferrer">
         [ {{ __('Back to Personal Dashboard')}} ]
         </a>
-        <a  href="{{ route('organization-dashboard', [ 'id' => $organization_id ]) }}" rel="noopener noreferrer">
+        <a  href="{{ route('organization.dashboard', [ 'id' => $organization_id ]) }}" rel="noopener noreferrer">
         [ {{ __('Back to organization Dashboard')}} ]
         </a>
     </p>
@@ -444,7 +444,7 @@ use Illuminate\Support\Facades\Log;
         <a  href="/dashboard" rel="noopener noreferrer">
         [ {{ __('Back to Personal Dashboard')}} ]
         </a>
-        <a  href="{{ route('organization-dashboard', [ 'id' => $organization_id ]) }}" rel="noopener noreferrer">
+        <a  href="{{ route('organization.dashboard', [ 'id' => $organization_id ]) }}" rel="noopener noreferrer">
         [ {{ __('Back to organization Dashboard')}} ]
         </a>
     </p>
