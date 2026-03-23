@@ -12,20 +12,22 @@ use App\Livewire\User;
 use App\Models\Federation as ModelsFederation;
 use Illuminate\Support\Facades\Route;
 
-// =====================================
-// Public pages - url show directly view
-// =====================================
-
+/**
+ * Guest view - open for all
+ */
 Route::view('/', 'welcome');
 Route::view('/credits', 'credits');
 // USER Volt guest/auth routes
 require __DIR__ . '/auth.php';
-// Federation - guest/list
-Route::get('/federation', [FederationController::class, 'index'])
+// Federation List - laravel no livewire
+Route::get('/federation/listed', [FederationController::class, 'index'])
     ->name('federation.list');
-// TODO Federation Section/list - guest
-
-// TODO other public guest pages
+// federation_section list  - guest
+Route::get('/federation/section/list/{fid}', Federation\Section\Listed::class, ['fid'])
+    ->name('federation-section.list');
+// Organization List - livewire
+Route::get('/organization/listed', Organization\Listed::class)
+    ->name('organization.list');
 // TODO list of open contest with board of participants
 // TODO list of closed contest with board of winners
 // TODO contest admitted and awarded thumb
@@ -77,29 +79,26 @@ Route::get('/user/contact/modify5/{fid}/{uid?}', User\Contact\Modify5Feds::class
 // federation list - guest no admin
 // federation add, no livewire - admin
 Route::get('/admin/federation/add', [FederationController::class, 'create'])
-    ->middleware('can:create,' . ModelsFederation::class)
+    ->middleware(['auth', 'verified', 'can:create,' . ModelsFederation::class])
     ->name('federation.add');
 Route::post('/admin/federation/store', [FederationController::class, 'store'])
+    ->middleware(['auth', 'verified', 'can:create,' . ModelsFederation::class])
     ->name('federation.store');
 //
 //  federation update, livewire - admin
 Route::get('/admin/federation/modify/{federation}', Federation\Modify::class, ['fid'])
-    ->middleware('can:update,federation')
+    ->middleware(['auth', 'verified', 'can:update,federation'])
     ->name('federation.modify');
 //  federation softdelete, livewire - admin
-Route::get('/federation/remove/{federation}', Federation\Remove::class)
-    ->middleware('can:delete,federation')
+Route::get('/admin/federation/remove/{federation}', Federation\Remove::class)
+    ->middleware(['auth', 'verified', 'can:delete,federation'])
     ->name('federation.delete');
-Route::delete('/federation/remove/{federation}', Federation\Remove::class)
-    ->middleware('can:delete,federation');
+Route::delete('/admin/federation/remove/{federation}', Federation\Remove::class)
+    ->middleware(['auth', 'livewire', 'can:delete,federation']);
 
 /**
  * Admin - FederationSection
  */
-// federation_section list  - guest
-Route::get('/federation/section/list/{fid}', Federation\Section\Listed::class, ['fid'])
-    ->middleware(['auth', 'verified'])
-    ->name('federation-section.list');
 // federation_section add   - admin
 Route::get('/federation/section/add/{fid}', Federation\Section\Add::class, ['fid'])
     ->middleware(['auth', 'verified'])
@@ -120,8 +119,8 @@ Route::delete('/federation/section/remove/{sid}', Federation\Section\Remove::cla
 /**
  * User - Organization blueprint
  */
-Route::get('/organization/listed', Organization\Listed::class)
-    ->name('organization-list');
+// organization list - guest no admin
+// organization add - user
 Route::get('/organization/add/', Organization\Add::class)
     ->middleware(['auth', 'verified'])
     ->name('add-organization');

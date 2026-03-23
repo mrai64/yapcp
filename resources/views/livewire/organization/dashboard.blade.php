@@ -19,7 +19,7 @@ use App\Models\UserContact;
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <h3 class="mb-4 w-full sm:px-6 lg:px-8"">
             {{"Back to "}}
-            <a href="{{ route('organization-list') }}">
+            <a href="{{ route('organization.list') }}">
             [ {{ __('Organization list') }} ]
             </a>
             . .

@@ -94,7 +94,7 @@ class Modify extends Component
 
         // to list
         return redirect()
-            ->route('organization-list')
+            ->route('organization.list')
             ->with('success', __('Organization data updated, thanks!'));
     }
 }
