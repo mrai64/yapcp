@@ -4,7 +4,7 @@
     </h2>
     <h3 class="mb-4">
         {{"Back to "}}
-        <a href="{{ route('organization-list') }}">
+        <a href="{{ route('organization.list') }}">
         [ {{ __('Organization list') }} ]
         </a>
         . .
