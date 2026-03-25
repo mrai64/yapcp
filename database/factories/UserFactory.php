@@ -13,6 +13,7 @@
 namespace Database\Factories;
 
 use App\Models\Organization;
+use App\Models\UserRole;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -63,16 +64,15 @@ class UserFactory extends Factory
      */
     public function admin(): static
     {
-        $adminOrganization = Organization::whereName('.admin')->firstOrFail();
-        return $this->has(
-            UserRole::factory()->state([
+        return $this->afterCreating(function (\App\Models\User $user) {
+            $adminOrganization = Organization::firstOrCreate(['name' => '.admin']);
+            $adminRole = UserRole::firstOrCreate([
+                'user_id' => $user->id,
                 'role' => 'admin',
                 'organization_id' => $adminOrganization->id,
                 'contest_id' => null,
                 'federation_id' => null,
-            ]),
-            'userRoles'
-        );
+            ]);
+        });
     }
-
 }

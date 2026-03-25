@@ -41,14 +41,10 @@ class UserContactFactory extends Factory
             $lastName = $user->name;
         }
 
-        // need a valid country_id
-        $country = DB::table(Country::TABLENAME)->select('id')->whereNull('deleted_at')->inRandomOrder()->first();
-        $countryId = ($country->id) ?? 'ITA';
-
         return [
             'id' => $user->id,
-            'user_id' => $user->id, // TODO remove       fk users.id
-            'country_id' => $countryId, //               fk countries.id
+            'user_id' => $user->id,
+            'country_id' => Country::factory(),
             'first_name' => $firstName,
             'last_name' => $lastName,
             'nick_name' => '',

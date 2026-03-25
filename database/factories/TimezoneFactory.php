@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\TimezoneRegionSet;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,8 +18,8 @@ class TimezoneFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->text(35),
-            'region_id' => fake()->text(15),
+            'id' => fake()->unique()->timezone(),
+            'region_id' => TimezoneRegionSet::factory(),
         ];
     }
 }
