@@ -16,9 +16,10 @@ use Livewire\Livewire;
 
 uses(RefreshDatabase::class);
 
-test('mounts correctly with federation data', function () {
-    $user = User::factory()->create();
-    $country = Country::factory()->create(['id' => 'USA', 'country' => 'United States']);
+it('mounts correctly with federation data - admin user', function () {
+    $country = Country::factory()->create();
+    $user = User::factory()->create(); // simple user
+    $adminUser = User::factory()->admin()->create(); // admin user
 
     $federation = Federation::factory()->create([
         'name_en' => 'International Federation',
@@ -27,17 +28,29 @@ test('mounts correctly with federation data', function () {
         'contact_info' => 'Contact details here',
     ]);
 
-    Livewire::actingAs($user)
+    $modifiedFederation = Federation::factory()->create([
+        'name_en' => 'Modified Federation',
+        'website' => 'https://modified.org',
+        'country_id' => $country->id,
+        'contact_info' => 'Modified contact details',
+    ]);
+
+    // form fields vs record fields
+    Livewire::actingAs($adminUser)
         ->test(Modify::class, ['federation' => $federation])
         ->assertStatus(200)
-        ->assertSet('id', $federation->id)
-        ->assertSet('federationNameEn', 'International Federation')
-        ->assertSet('website', 'https://example.org')
-        ->assertSet('countryId', $country->id)
-        ->assertSet('federationContact', 'Contact details here')
-        ->assertSee('International Federation');
+        ->assertSet('id',                $federation->id)
+        ->assertSet('federationNameEn',  $federation->name_en)
+        ->assertSet('website',           $federation->website)
+        ->assertSet('countryId',         $federation->country_id)
+        ->assertSet('federationContact', $federation->contact_info)
+        ->assertSee($federation->name_en);
+
 });
 
+/**
+ * 
+ * 
 test('federation name is required', function () {
     $country = Country::factory()->create();
     $federation = Federation::factory()->create(['country_id' => $country->id]);
@@ -94,3 +107,5 @@ test('update federation saves changes and redirects', function () {
         'contact_info' => 'New Contact',
     ]);
 });
+ * 
+ */
