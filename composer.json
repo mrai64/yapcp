@@ -16,6 +16,7 @@
         "livewire/volt": "^1.10",
         "maatwebsite/excel": "^3.1",
         "robertogallea/laravel-codicefiscale": "^2",
+        "binarytorch/larecipe": "dev-l13-compatibility",
         "spatie/laravel-pdf": "^2.0"
     },
     "require-dev": {
@@ -90,6 +91,12 @@
             "dont-discover": []
         }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/laravel-shift/larecipe.git"
+        }
+    ],
     "authors": [
         {
             "name": "Massimo Rainato",
