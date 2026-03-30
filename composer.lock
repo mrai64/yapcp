@@ -7,12 +7,15 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
     "content-hash": "8147cdc7277144e30899591cbfd3c3d2",
+<<<<<<< HEAD
 =======
     "content-hash": "b02042894f1db8afb516b14b26c16f6e",
 >>>>>>> 1e73f01 (chore: Pest reistall [skip ci])
 =======
     "content-hash": "8147cdc7277144e30899591cbfd3c3d2",
 >>>>>>> adf0e4d (chore: dev docs update [skip ci])
+=======
+>>>>>>> fb8702a (feat: composer)
     "packages": [
         {
             "name": "binarytorch/larecipe",
