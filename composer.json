@@ -6,14 +6,14 @@
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "^8.4",
+        "php": "^8.5",
         "ext-gd": "*",
         "intervention/image": "^3.11",
         "laravel/breeze": "^2.3",
         "laravel/framework": "^13.0",
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "^4.0",
-        "livewire/volt": "^1.10",
+        "livewire/volt": "^1.7.0",
         "maatwebsite/excel": "^3.1",
         "robertogallea/laravel-codicefiscale": "^2",
         "binarytorch/larecipe": "dev-l13-compatibility",
@@ -27,16 +27,16 @@
         "kkomelin/laravel-translatable-string-exporter": "^1.25",
         "laradumps/laradumps": "^4.0",
         "larastan/larastan": "^3.0",
-        "laravel/boost": "^2.3",
+        "laravel/boost": "^1.0",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.26",
         "laravel/sail": "^1.41",
         "mmo/faker-images": "^0.9.1",
         "mockery/mockery": "^1.6",
-        "nunomaduro/collision": "^8.9.1",
+        "nunomaduro/collision": "^8.6",
         "orangehill/iseed": "^3.8",
-        "pestphp/pest": "^4.4",
-        "pestphp/pest-plugin-laravel": "^4.1",
+        "pestphp/pest": "^4.3",
+        "pestphp/pest-plugin-laravel": "^4.0",
         "phiki/phiki": "^2.0",
         "squizlabs/php_codesniffer": "^3.11"
     },
@@ -52,6 +52,12 @@
             "Tests\\": "tests/"
         }
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/laravel-shift/larecipe.git"
+        }
+    ],
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
@@ -91,12 +97,6 @@
             "dont-discover": []
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/laravel-shift/larecipe.git"
-        }
-    ],
     "authors": [
         {
             "name": "Massimo Rainato",
