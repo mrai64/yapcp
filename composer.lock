@@ -5,7 +5,6 @@
         "This file is @generated automatically"
     ],
     "content-hash": "8147cdc7277144e30899591cbfd3c3d2",
-    "content-hash": "8147cdc7277144e30899591cbfd3c3d2",
     "packages": [
         {
             "name": "binarytorch/larecipe",
@@ -1785,7 +1784,6 @@
                 "orchestra/testbench-core": "^10.9.0",
                 "pda/pheanstalk": "^5.0.6|^7.0.0",
                 "php-http/discovery": "^1.15",
-                "phpstan/phpstan": "^2.1.41",
                 "phpstan/phpstan": "^2.1.41",
                 "phpunit/phpunit": "^10.5.35|^11.5.3|^12.0.1",
                 "predis/predis": "^2.3|^3.0",
