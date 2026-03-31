@@ -2673,6 +2673,7 @@
         {
             "name": "livewire/livewire",
 <<<<<<< HEAD
+<<<<<<< HEAD
             "version": "v3.7.15",
             "source": {
                 "type": "git",
@@ -2685,16 +2686,24 @@
                 "reference": "d68e65beb7717eaabef74a1cf63cd1670260ff5f",
 =======
             "version": "v3.7.12",
+=======
+            "version": "v3.7.13",
+>>>>>>> 6ef105d (composer update)
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "7fcb612d1274980d80703efb5658e58d6d37ada9"
+                "reference": "152b5a1a3f9ee93b6887a3bad6ab8e6db035efa5"
             },
             "dist": {
                 "type": "zip",
+<<<<<<< HEAD
                 "url": "https://api.github.com/repos/livewire/livewire/zipball/7fcb612d1274980d80703efb5658e58d6d37ada9",
                 "reference": "7fcb612d1274980d80703efb5658e58d6d37ada9",
 >>>>>>> 296e67d (feat: composer)
+=======
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/152b5a1a3f9ee93b6887a3bad6ab8e6db035efa5",
+                "reference": "152b5a1a3f9ee93b6887a3bad6ab8e6db035efa5",
+>>>>>>> 6ef105d (composer update)
                 "shasum": ""
             },
             "require": {
@@ -2750,10 +2759,14 @@
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
 <<<<<<< HEAD
+<<<<<<< HEAD
                 "source": "https://github.com/livewire/livewire/tree/v3.7.15"
 =======
                 "source": "https://github.com/livewire/livewire/tree/v3.7.12"
 >>>>>>> 296e67d (feat: composer)
+=======
+                "source": "https://github.com/livewire/livewire/tree/v3.7.13"
+>>>>>>> 6ef105d (composer update)
             },
             "funding": [
                 {
@@ -2762,10 +2775,14 @@
                 }
             ],
 <<<<<<< HEAD
+<<<<<<< HEAD
             "time": "2026-04-03T13:08:41+00:00"
 =======
             "time": "2026-03-25T23:04:42+00:00"
 >>>>>>> 296e67d (feat: composer)
+=======
+            "time": "2026-03-30T22:04:01+00:00"
+>>>>>>> 6ef105d (composer update)
         },
         {
             "name": "livewire/volt",
@@ -10768,6 +10785,7 @@
         {
             "name": "phpstan/phpstan",
 <<<<<<< HEAD
+<<<<<<< HEAD
             "version": "2.1.51",
             "dist": {
                 "type": "zip",
@@ -10780,6 +10798,13 @@
                 "url": "https://api.github.com/repos/phpstan/phpstan/zipball/4a88c083c668b2c364a425c9b3171b2d9ea5d218",
                 "reference": "4a88c083c668b2c364a425c9b3171b2d9ea5d218",
 >>>>>>> 296e67d (feat: composer)
+=======
+            "version": "2.1.45",
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/f8cdfd9421b7edb7686a2d150a234870464eac70",
+                "reference": "f8cdfd9421b7edb7686a2d150a234870464eac70",
+>>>>>>> 6ef105d (composer update)
                 "shasum": ""
             },
             "require": {
@@ -10825,10 +10850,14 @@
                 }
             ],
 <<<<<<< HEAD
+<<<<<<< HEAD
             "time": "2026-04-21T18:22:01+00:00"
 =======
             "time": "2026-03-25T17:34:21+00:00"
 >>>>>>> 296e67d (feat: composer)
+=======
+            "time": "2026-03-30T13:22:02+00:00"
+>>>>>>> 6ef105d (composer update)
         },
         {
             "name": "phpunit/php-code-coverage",
