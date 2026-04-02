@@ -27,6 +27,7 @@ class CountrySeeder extends Seeder
      *
      * Use a local file or
      * Download external source from https://github.com/mledoze/countries
+     * Download external source from https://github.com/mledoze/countries
      *
      */
 
@@ -35,6 +36,7 @@ class CountrySeeder extends Seeder
         $this->command->info(__CLASS__ . "...");
         $filePath = 'private/countries.json';
         $remoteUrl = 'https://raw.githubusercontent.com/mledoze/countries/master/countries.json';
+
         // check local file
         if (!Storage::disk('local')->exists($filePath)) {
             $this->command->info("Missing local file - Give reference json from github");
@@ -45,18 +47,18 @@ class CountrySeeder extends Seeder
                     Storage::disk('local')->put($filePath, $response->body());
                     $this->command->info("Saved local");
                 } else {
-                    throw new \Exception("Not saved local file - Countries reference json - from github, status:"
+                    throw new \Exception("Not saved local file - Countries reference json from github status:"
                         . $response->status());
                 }
                 //
             } catch (\Throwable $th) {
                 // throw $th;
-                Log::error("Error in CountrySeeder picking remote json file with: "
-                    . $th->getMessage());
+                Log::error("Error in CountrySeeder picking remote json file with: " . $th->getMessage());
                 $this->command->error("Blocked bu error: " . $th->getMessage());
                 return;
             }
         }
+        //
         //
         $json = Storage::disk('local')->get($filePath);
         $countries = json_decode($json, true);
