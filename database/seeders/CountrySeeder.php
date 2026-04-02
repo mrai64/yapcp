@@ -32,7 +32,6 @@ class CountrySeeder extends Seeder
         $this->command->info(__CLASS__ . "...");
         $filePath = 'private/countries.json';
         $remoteUrl = 'https://raw.githubusercontent.com/mledoze/countries/master/countries.json';
-
         // check local file
         if (!Storage::disk('local')->exists($filePath)) {
             $this->command->info("Missing local file - Give reference json from github");
