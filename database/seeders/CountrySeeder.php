@@ -31,7 +31,6 @@ class CountrySeeder extends Seeder
         $this->command->info(__CLASS__ . "...");
         $filePath = 'private/countries.json';
         $remoteUrl = 'https://raw.githubusercontent.com/mledoze/countries/master/countries.json';
-
         // check local file
         if (!Storage::disk('local')->exists($filePath)) {
         // check local file
@@ -60,7 +59,7 @@ class CountrySeeder extends Seeder
         $countries = json_decode($json, true);
         if (is_array($countries)) {
             $this->command->getOutput()->progressStart(count($countries));
-
+            //
             foreach ($countries as $c) {
                 Country::updateOrCreate(
                     ['id' => $c['cca3']], // country code alpha 3 >> iso-3166 alpha-3
