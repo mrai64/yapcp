@@ -15,9 +15,6 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CountrySeeder extends Seeder
@@ -42,11 +39,10 @@ class CountrySeeder extends Seeder
                 // pick
                 $response = Http::get($remoteUrl);
                 if ($response->successful()) {
-                if ($response->successful()) {
                     Storage::disk('local')->put($filePath, $response->body());
                     $this->command->info("Saved local");
                 } else {
-                    throw new \Exception("Not saved local file - Countries reference json from github status:"
+                    throw new \Exception("Not saved local file - Countries reference json - from github, status:"
                         . $response->status());
                 }
                 //
