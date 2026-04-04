@@ -10,6 +10,7 @@ use App\Livewire\Juror;
 use App\Livewire\Organization;
 use App\Livewire\User;
 use App\Models\Federation as ModelsFederation;
+use App\Models\FederationSection as ModelsFederationSection;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -96,11 +97,12 @@ Route::delete('/admin/federation/remove/{federation}', Federation\Remove::class)
     ->middleware(['auth', 'livewire', 'can:delete,federation']);
 
 /**
- * Admin - FederationSection
+ * FederationSection - admin only
  */
-// federation_section add   - admin
-Route::get('/admin/federation/section/add/{fid}', Federation\Section\Add::class, ['fid'])
-    ->middleware(['auth', 'verified'])
+// federation_section list - guest no admin
+// federation_section add  - admin
+Route::get('/admin/federation/section/add/{federation}', Federation\Section\Add::class)
+    ->middleware(['auth', 'verified', 'can:create,' . ModelsFederationSection::class])
     ->name('federation-section.add');
 Route::get('/admin/federation/section/modify/{fid}/{sid}', Federation\Section\Modify::class, ['fid', 'sid'])
     ->middleware(['auth', 'verified'])
@@ -112,7 +114,7 @@ Route::delete('/federation/section/remove/{sid}', Federation\Section\Remove::cla
     ->middleware(['auth', 'verified']);
 
 /**
- * Admin - FederationMores
+ * FederationMores - admin only
  */
 
 /**
