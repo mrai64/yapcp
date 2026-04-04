@@ -1,7 +1,8 @@
 <?php 
 /**
  * 2025-10-16 federations table refactored - now v.2
- * 
+ *
+ * @see /app/livewire/federation/modify.php
  */
 
 ?> 
