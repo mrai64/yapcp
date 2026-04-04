@@ -7,9 +7,7 @@
 namespace Database\Factories;
 
 use App\Models\Country;
-use App\Models\Timezone;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 /**
