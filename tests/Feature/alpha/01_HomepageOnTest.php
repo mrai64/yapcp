@@ -16,10 +16,10 @@ use function Pest\Laravel\get;
 // uses(Illuminate\Foundation\Testing\RefreshDatabase::class);
 
 it('check homepage response ok', function () {
-  // arrange
+    // arrange
 
-  // act
-  // assert
+    // act
+    // assert
     get('/')
         ->assertStatus(200);
 });
