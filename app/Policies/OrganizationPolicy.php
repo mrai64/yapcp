@@ -5,7 +5,6 @@ namespace App\Policies;
 use App\Models\Organization;
 use App\Models\User;
 use App\Models\UserRole;
-use Illuminate\Auth\Access\Response;
 
 class OrganizationPolicy
 {
@@ -53,7 +52,7 @@ class OrganizationPolicy
          * Organization can be deleted if
          * - have no user registered in it
          * - have no contest in blueprint, running or recently ended
-         * - user is in admin group 
+         * - user is in admin group
          */
         return false;
     }
