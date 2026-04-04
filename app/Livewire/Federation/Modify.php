@@ -6,6 +6,9 @@
  * 2025-09-20 enlarge 6 > 10 code field
  * 2025-10-16 refactor for new federation table
  * 2026-03-13 add Authorize - FederationPolicies
+ *
+ * @see /resources/views/livewire/federation/modify.blade.php
+ *
  */
 
 namespace App\Livewire\Federation;
