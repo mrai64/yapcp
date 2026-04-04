@@ -109,7 +109,7 @@ use App\Models\ContestSection;
             <thead>
                 <tr>
                     <th width="35%" scope="col" class="data-table-email"     >{{__("Juror email")}}</th>
-                    <th width="20%" scope="col" class="data-table-first-name">{{__("First name")}}</th>
+                    <th width="20%" scope="col" class="data-table-first-name">{{__("First Name")}}</th>
                     <th width="20%" scope="col" class="data-table-last-name" >{{__("Last Name")}}</th>
                     <th width="15%" scope="col" class="data-table-country"   >{{__("Country")}}</th>
                     <th width="10%" scope="col" class="data-table-action"    > Action </th>
