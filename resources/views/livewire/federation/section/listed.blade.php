@@ -10,8 +10,8 @@
             {{$federation->name_en}} 
         </h1>
         <p class="small">
-            {{ __("Federation wrote Contest Regulatory doc that must be followed by sponsored Contest Organizations.")}}
-            {{ __("Then, when your Organization choose to follow a Federation Auspices / Patronage / Sponsorship")}}
+            {{ __("Federation(s) wrote Contest Regulatory doc(s), that must be followed by sponsored Contest Organizations.")}}
+            {{ __("Then, when your Organization choose to follow any Federation Auspices / Patronage / Sponsorship")}}
             {{ __("that lst help them to follow right way when build a contest blueprint.")}}
             <br />
             {{ __("When, for the competition, you choose the sponsorship of two federations,")}}
