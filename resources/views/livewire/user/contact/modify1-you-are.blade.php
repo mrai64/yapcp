@@ -35,7 +35,8 @@
 
         <div class="mb-4" data-yapcp="firstName">
             <label class="fyk block font-medium text-2xl text-gray-700" for="firstName">
-                {{ __('First name | required') }}
+                {{ __('First Name') }}
+                | {{ __('required') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -49,7 +50,8 @@
 
         <div class="mb-4" data-yapcp="lastName">
             <label class="fyk block font-medium text-2xl text-gray-700" for="lastName">
-                {{ __('Surname - Family name | required') }}
+                {{ __('Last Name') }}
+                | {{ __('required') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -64,7 +66,8 @@
         <!-- From country -->
         <div class="mb-4" data-yapcp="countryId">
             <label class="fyk block font-medium text-2xl text-gray-700" for="countryId">
-                {{ __('Nationality - From Country | required') }}
+                {{ __('Nationality - From Country') }}
+                | {{ __('required') }}
             </label>
             <select 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -83,7 +86,8 @@
         <!-- passport photo upload -->
         <div class="block mb-4">
             <label class="fyk block font-medium text-2xl text-gray-700" for="passportPhotoImage">
-                {{ __('Passport Photo | facultative') }}
+                {{ __('Passport Photo') }}
+                | {{ __('facultative') }}
             </label>
         @if ($passportPhotoImage)
             <img src="{{ $passportPhotoImage->temporaryUrl() }}" style="float: left;" class="block w-48 me-3" />
