@@ -39,18 +39,18 @@ it('mounts correctly with federation data - admin user', function () {
     Livewire::actingAs($adminUser)
         ->test(Modify::class, ['federation' => $federation])
         ->assertStatus(200)
-        ->assertSet('id',                $federation->id)
-        ->assertSet('federationNameEn',  $federation->name_en)
-        ->assertSet('website',           $federation->website)
-        ->assertSet('countryId',         $federation->country_id)
+        ->assertSet('id', $federation->id)
+        ->assertSet('federationNameEn', $federation->name_en)
+        ->assertSet('website', $federation->website)
+        ->assertSet('countryId', $federation->country_id)
         ->assertSet('federationContact', $federation->contact_info)
         ->assertSee($federation->name_en);
 
 });
 
 /**
- * 
- * 
+ *
+ *
 test('federation name is required', function () {
     $country = Country::factory()->create();
     $federation = Federation::factory()->create(['country_id' => $country->id]);
@@ -107,5 +107,5 @@ test('update federation saves changes and redirects', function () {
         'contact_info' => 'New Contact',
     ]);
 });
- * 
+ *
  */
