@@ -6,6 +6,10 @@
  * child of: federation
  *
  * 2025-10-16 federations and federation_sections refactorize
+ *
+ * @see /resources/views/livewire/federation/section/listed.blade.php
+ *
+ *
  */
 
 namespace App\Livewire\Federation\Section;
@@ -17,22 +21,20 @@ use Livewire\Component;
 
 class Listed extends Component
 {
-    public $federation;
+    public Federation $federation;
 
     public $section;
 
     /**
      * 1. Before the show
      */
-    public function mount(string $fid) // same name in route()
+    public function mount(Federation $federation)
     {
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-        $this->federation = Federation::where('id', $fid)->first();
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' federation:'.json_encode($this->federation));
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        $this->federation = $federation;
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' federation:' . json_encode($this->federation));
 
-        $this->section = FederationSection::where('federation_id', $fid)
-            ->orderBy('code')
-            ->get();
     }
 
     /**
@@ -40,8 +42,13 @@ class Listed extends Component
      */
     public function render()
     {
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
-
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        $this->section = FederationSection::where('federation_id', $this->federation->id)
+        ->orderBy('code')
+        ->get();
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' section:' . json_encode($this->section));
+        //
         return view('livewire.federation.section.listed');
     }
+    // no other
 }

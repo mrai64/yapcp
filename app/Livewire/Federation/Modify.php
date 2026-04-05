@@ -26,7 +26,8 @@ class Modify extends Component
     public Federation $federation;
 
     // readonly
-    public string $id;
+    #[Validate('required|string|max:10|unique:federations,id')]
+    public string $federationId;
 
     #[Validate('required|string|max:255')]
     public string $federationNameEn = '';
@@ -56,7 +57,7 @@ class Modify extends Component
         $this->federation = $federation; // was: Federation::where('id', $fid)->get()[0];
         Log::info('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' found:' . json_encode($this->federation));
 
-        $this->id                = $federation->id;
+        $this->federationId      = $federation->id;
         $this->federationNameEn  = $federation->name_en;
         $this->website           = $federation->website;
         $this->countryId         = $federation->country_id;
@@ -92,7 +93,7 @@ class Modify extends Component
 
         //
         $this->federation->update([
-            'id'         => $this->id,
+            'id'         => $validated['federationId'],
             'name_en'    => $validated['federationNameEn'],
             'website'    => $validated['website'],
             'country_id' => $validated['countryId'],
