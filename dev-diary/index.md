@@ -4,6 +4,16 @@ aka *MAD developer journal*
 Free thinking, in italian lang  
 [Project1 aka TDL](https://github.com/users/mrai64/projects/1), was ~~[ToDo List](./TDL.md)~~
 
+## aprile 2026
+
+| Lun | Mar | Mer | Gio | Ven | Sab | Dom | Lun | Mar | Mer | Gio | Ven | Sab | Dom |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| ___ | ___ | [01 apr](./2026-04/2026-04-01_IT.md) | [02 apr](./2026-04/2026-04-02_IT.md) | 03 apr | [04 apr](./2026-04/2026-04-04_IT.md) | [05 apr](./2026-04/2026-04-05_IT.md) | 06 apr | 07 apr | 08 apr | 09 apr | 10 apr | 11 apr | 12 apr |
+| 13 apr | 14 apr | 15 apr | 16 apr | 17 apr | 18 apr | 19 apr | 20 apr | 21 apr | 22 apr | 23 apr | 24 apr | 25 apr | 26 apr |
+| 27 apr | 28 apr | 29 apr | 30 apr | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ |
+| ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ |
+| ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ | ___ |
+
 ## marzo 2026
 
 | Lun | Mar | Mer | Gio | Ven | Sab | Dom | Lun | Mar | Mer | Gio | Ven | Sab | Dom |
