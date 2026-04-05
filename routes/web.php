@@ -24,7 +24,7 @@ require __DIR__ . '/auth.php';
 Route::get('/federation/listed', [FederationController::class, 'index'])
     ->name('federation.list');
 // federation_section list  - guest
-Route::get('/federation/section/list/{fid}', Federation\Section\Listed::class, ['fid'])
+Route::get('/federation/section/list/{federation}', Federation\Section\Listed::class)
     ->name('federation-section.list');
 // Organization List - livewire
 Route::get('/organization/listed', Organization\Listed::class)
@@ -68,7 +68,6 @@ Route::get('/user/contact/modify4/{uid?}', User\Contact\Modify4Socials::class)
     ->middleware(['auth', 'verified'])
     ->name('user-contact-modify4');
 // Add federation required fields
-// try https://yapcp.test/user/contact/modify5/FIAF/019b519e-129d-73d4-ba13-ba922a8aeb85
 Route::get('/user/contact/modify5/{fid}/{uid?}', User\Contact\Modify5Feds::class, ['fid', 'uid'])
     ->middleware(['auth', 'verified'])
     ->name('user-contact-modify5');
@@ -104,13 +103,13 @@ Route::delete('/admin/federation/remove/{federation}', Federation\Remove::class)
 Route::get('/admin/federation/section/add/{federation}', Federation\Section\Add::class)
     ->middleware(['auth', 'verified', 'can:create,' . ModelsFederationSection::class])
     ->name('federation-section.add');
-Route::get('/admin/federation/section/modify/{fid}/{sid}', Federation\Section\Modify::class, ['fid', 'sid'])
+Route::get('/admin/federation/section/modify/{federation-section}', Federation\Section\Modify::class)
     ->middleware(['auth', 'verified'])
     ->name('federation-section.modify');
-Route::get('/federation/section/remove/{sid}', Federation\Section\Remove::class, ['sid'])
+Route::get('/federation/section/remove/{federation-section}', Federation\Section\Remove::class)
     ->middleware(['auth', 'verified'])
     ->name('federation-section.delete');
-Route::delete('/federation/section/remove/{sid}', Federation\Section\Remove::class, ['sid'])
+Route::delete('/federation/section/remove/{federation-section}', Federation\Section\Remove::class)
     ->middleware(['auth', 'verified']);
 
 /**
