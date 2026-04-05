@@ -3,10 +3,10 @@
         <h2 class="fyk text-2xl font-medium text-gray-900">
             {{ __('Add few Federation infos') }}
         </h2>
-        <p class="mb-4">
+        <p class="fyk text-xl font-medium mb-4">
             <a  href="{{ route('federation.list') }}"
                 rel="noopener noreferrer">
-            [ {{ __('Back to Fed list') }} ]
+            [ {{ __('Back to Federation list') }} ]
             </a>
         </p>
     </x-slot>
@@ -15,8 +15,24 @@
         @csrf
 
         <div class="mb-4">
+            <label class="block font-medium text-sm text-gray-700" for="federationId">
+                {{ __('Federation Shortcode')}}
+                | {{__('required')}}
+                | {{__('unique')}}
+            </label>
+            <input
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-48"
+                type="text" name="federationId"
+                value="{{ old('federationId') }}"
+                required="required"
+                />
+            <div class="small">@error('federationId') {{ $message }} @enderror</div>
+        </div><!-- federationId -->
+
+        <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="federationName">
                 {{ __('Federation Name [en]') }}
+                | {{__('required')}}
             </label>
             <input
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full"
@@ -28,19 +44,6 @@
             <div class="alert alert-danger small">{{ $message }} </div>
             @enderror
         </div><!-- federationName -->
-
-        <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="federationId">
-                {{ __('Federation Shortcode')}}
-            </label>
-            <input
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-48"
-                type="text" name="federationId"
-                value="{{ old('federationId') }}"
-                required="required"
-                />
-            <div class="small">@error('federationId') {{ $message }} @enderror</div>
-        </div><!-- federationId -->
 
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="website">
@@ -57,6 +60,7 @@
         <div class="mb-4">
             <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="countryId">
                 {{ __('Country') }}
+                | {{__('required')}}
             </label>
             <select
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full"

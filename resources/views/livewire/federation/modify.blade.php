@@ -12,11 +12,10 @@
         <h2 class="fyk text-2xl font-medium text-gray-900">
             {{ __('Modify few Federation infos') }}
         </h2>
-    <br />
-    <hr>
+    <hr />
     <br />
     <p class="mb-4">
-        <a href="/federation/section/list/{{$id}}" 
+        <a href="{{ route('federation-section.list', ['federation' => $federation])}}" 
             class="fyk text-xl mb-4"
             target="_blank" rel="noopener noreferrer"
             >
@@ -24,19 +23,37 @@
         </a>
     </p><!-- federation section list -->
 
-    <p class="fyk text-xl mb-4">
-        <a href="{{ route('federation.list') }}" 
-            target="_blank" rel="noopener noreferrer">
-            {{ __('Back to Federation list') }} 
-        </a>
-    </p>
+        <p class="fyk text-xl font-medium mb-4">
+            <a  href="{{ route('federation.list') }}"
+                rel="noopener noreferrer">
+            [ {{ __('Back to Federation list') }} ]
+            </a>
+        </p>
     </header>
     <form wire:submit="updateFederation">
         @csrf 
-        
+
+        <div class="mb-4">
+            <label class="block font-medium text-sm text-gray-700" for="federationId">
+                {{ __('Federation Shortcode')}}
+                | {{__('required')}}
+                  {{__('unique')}}
+            </label>
+            <div class="small">{{__('Remember: must be a unique value in platform, uppercase letters, upto 10 chars')}}</div>
+            <input
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-48"
+                type="text" name="federationId"
+                wire:model.live.debounce.500ms="federationId" 
+                value="{{ old('federationId') }}"
+                required="required"
+                />
+            <div class="small">@error('federationId') {{ $message }} @enderror</div>
+        </div><!-- federationId -->
+
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="federationNameEn">
                 {{ __('Federation Name [en]') }}
+                | {{__('required')}}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -65,6 +82,7 @@
         <div class="mb-4">
             <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="countryId">
                 {{ __('Country') }}
+                | {{__('required')}}
             </label>
             <select 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -85,6 +103,7 @@
             <label class="block font-medium text-sm text-gray-700" for="federationContact">
                 {{ __('Federation Contacts') }}
             </label>
+            <div class="small">{{__('HQ address, postal addess, email, international whatsapp number...')}}</div>
             <textarea 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
                 type="text" name="federationContact"
