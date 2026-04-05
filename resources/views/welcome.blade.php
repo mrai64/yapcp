@@ -62,7 +62,7 @@
 
                         @auth
                         <p class="fyk text-2xl text-center my-6">
-                            <a href="{{ url('/dashboard') }}">
+                            <a href="{{ route('user.dashboard') }}">
                                 {{ __('Your Dashboard') }}
                             </a>
                         </p>
