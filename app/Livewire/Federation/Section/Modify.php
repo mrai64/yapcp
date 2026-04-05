@@ -87,7 +87,7 @@ class Modify extends Component
 
         // to list
         return redirect()
-            ->route('federation-section.list', ['fid' => $this->section->federation_id])
+            ->route('federation-section.list', ['federation' => $this->section->federation])
             ->with('success', __('Federation Section data updated, thanks!'));
     }
 }

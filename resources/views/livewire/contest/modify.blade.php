@@ -67,7 +67,7 @@ use Illuminate\Support\Facades\Log;
         {{ __('section list, jury definition, prize list definition.') }}
     </p>    
     <p class="mb-4"> 
-        <a  href="/dashboard" rel="noopener noreferrer">
+        <a  href="{{ route('user.dashboard') }}" rel="noopener noreferrer">
         [ {{ __('Back to Personal Dashboard')}} ]
         </a>
         <a  href="{{ route('organization.dashboard', [ 'id' => $organization_id ]) }}" rel="noopener noreferrer">
