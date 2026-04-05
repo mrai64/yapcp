@@ -11,8 +11,6 @@
             {{ __("It's their job to define how to ensure successful preparation, ") }}
             {{ __("successful management, and a successful conclusion to each competition.") }}
             <br />
-            {{ __("But when they made contest they must be also 'in' Organization list.") }}
-            <br />
             {{ __("Note: Shortcode is key to find Federation.") }}
             {{ __("so if you must insert a shortcode already present add them a colon : and country_code to made it unique,") }}
             {{ __("i.e. Argentina and Andorra are both FAF, use FAF:AND and FAF:ARG.") }}
