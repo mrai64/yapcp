@@ -1,5 +1,10 @@
 <?php
-
+/**
+ * admin only
+ * 
+ * @see /app/Livewire/Federation/Section/Listed.php
+ * 
+ */
 ?>
 
 <div>
@@ -23,55 +28,62 @@
         <p class="fyk text-xl mb-4">
             [ 
             <a href="{{ route('federation.list') }}" 
-                target="_blank" rel="noopener noreferrer">
+                rel="noopener noreferrer">
                 {{ __('Back to Federation list') }} 
+            </a>
+            ]
+            <br />
+            [ 
+            <a href="{{ route('federation-section.add', ['federation' => $federation ]) }}" 
+                rel="noopener noreferrer">
+                {{ __('Add New Federation Section') }} 
             </a>
             ]
         </p>
     </header>
     <p>&nbsp;</p>
 
-@if (session('success'))
-<div class="float-end font-medium rounded-md px-4 py-2">
-    {{ session('success') }}
-</div> 
-<hr />
-@endif
+    @if (session('success'))
+    <div class="float-end font-medium rounded-md px-4 py-2">
+        {{ session('success') }}
+    </div> 
+    <hr />
+    @endif
 
-<div class="table-responsive">
-    <table
-        class="table table-primary table-striped"
-    >
-        <thead>
-            <tr>
-                <th scope="col">Code</th>
-                <th scope="col">Description</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($section as $sec)
-            <tr class="border my-2 py-2">
-                <td scope="row">{{$sec->code}}</td>
-                <td>{{$sec->name_en}}</td>
-                <td nowrap>
-                    <!-- TODO change string w/objects -->
-                    <a href="{{ route('federation-section.modify', ['fid' => $federation->id, 'sid' => $sec->code] )}}">[Mod]</a>
-                    &nbsp;|&nbsp;
-                    <!-- TODO change string w/objects -->
-                    <a href="{{ route('federation-section.delete', [ 'sid' => $sec->id] )}}">[Rem]</a>
-                </td>
-            </tr>
-            @endforeach
-            <tr class="my-2 py-2">
-                <td scope="row">&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>
-                    <a href="{{ route('federation-section.add', ['federation' => $federation ]) }}">[Add New]</a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
+    <div class="table-responsive">
+        <table class="table table-primary table-striped w-full"        >
+            <thead>
+                <tr>
+                    <th scope="col">{{__('Code')}}</th>
+                    <th scope="col">{{__('Description')}}</th>
+                    <th scope="col">{{__('Actions')}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+                @foreach ($section as $sec)
+                <tr class="border my-2 py-2">
+                    <td scope="row">{{$sec->code}}</td>
+                    <td >{{$sec->name_en}}<br />{{$sec->rule_definition}}</td>
+                    <td nowrap>
+                        <!-- TODO change string w/objects -->
+                        <a href="{{ route('federation-section.modify', ['federation-section' => $sec] )}}">[Mod]</a>
+                        &nbsp;|&nbsp;
+                        <!-- TODO change string w/objects -->
+                        <a href="{{ route('federation-section.delete', ['federation-section' => $sec] )}}">[Rem]</a>
+                    </td>
+                </tr>
+                @endforeach
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+    </div><!-- section list table -->
 </div>
