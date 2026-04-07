@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\FederationMore;
 use App\Models\User;
+use App\Models\UserRole;
 
 class FederationMorePolicy
 {
@@ -12,7 +13,8 @@ class FederationMorePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        // view for all
+        return true;
     }
 
     /**
@@ -20,7 +22,8 @@ class FederationMorePolicy
      */
     public function view(User $user, FederationMore $federationMore): bool
     {
-        return false;
+        // view for all
+        return true;
     }
 
     /**
@@ -28,7 +31,11 @@ class FederationMorePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        // only for user in admin group
+        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
+        $evaluate = UserRole::isAdmin();
+        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        return $evaluate;
     }
 
     /**
@@ -36,7 +43,11 @@ class FederationMorePolicy
      */
     public function update(User $user, FederationMore $federationMore): bool
     {
-        return false;
+        // only for user in admin group
+        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
+        $evaluate = UserRole::isAdmin();
+        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        return $evaluate;
     }
 
     /**
@@ -44,7 +55,11 @@ class FederationMorePolicy
      */
     public function delete(User $user, FederationMore $federationMore): bool
     {
-        return false;
+        // only for user in admin group
+        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
+        $evaluate = UserRole::isAdmin();
+        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        return $evaluate;
     }
 
     /**
@@ -52,7 +67,11 @@ class FederationMorePolicy
      */
     public function restore(User $user, FederationMore $federationMore): bool
     {
-        return false;
+        // only for user in admin group
+        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
+        $evaluate = UserRole::isAdmin();
+        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        return $evaluate;
     }
 
     /**
@@ -60,6 +79,10 @@ class FederationMorePolicy
      */
     public function forceDelete(User $user, FederationMore $federationMore): bool
     {
-        return false;
+        // only for user in admin group
+        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
+        $evaluate = UserRole::isAdmin();
+        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        return $evaluate;
     }
 }
