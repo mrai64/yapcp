@@ -282,6 +282,19 @@ class Contest extends Model
         return $contestSet;
     }
 
+    // SCOPE - used to add filter to query
+
+    /**
+     * Scope for contests closed after-than-a-year ago
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeClosedAfterOneYearAgo(Builder $query): Builder
+    {
+        return $query->where('day_8_closing', '>', now()->subYear());
+    }
+
     // RELATIONSHIPs
 
     // contests.country_id > countries.id
