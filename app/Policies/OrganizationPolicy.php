@@ -2,9 +2,11 @@
 
 namespace App\Policies;
 
+use App\Models\Contest;
 use App\Models\Organization;
 use App\Models\User;
 use App\Models\UserRole;
+use Illuminate\Support\Facades\Log;
 
 class OrganizationPolicy
 {
@@ -13,6 +15,7 @@ class OrganizationPolicy
      */
     public function viewAny(User $user): bool
     {
+        // all can view
         return true;
     }
 
@@ -21,6 +24,7 @@ class OrganizationPolicy
      */
     public function view(User $user, Organization $organization): bool
     {
+        // all can view
         return true;
     }
 
@@ -29,6 +33,7 @@ class OrganizationPolicy
      */
     public function create(User $user): bool
     {
+        // all user can define a new Organization
         return true;
     }
 
@@ -37,23 +42,49 @@ class OrganizationPolicy
      */
     public function update(User $user, Organization $organization): bool
     {
+        // admin can
+        $admin = UserRole::isAdmin();
+        if ($admin) {
+            return true;
+        }
         // check if a userRole is present
-        $evaluate = UserRole::whereUserId($user->id)->whereOrganizationId($organization->id)->exists();
-        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        $evaluate = UserRole::whereUserId($user->id)
+            ->whereOrganizationId($organization->id)
+            ->exists();
+        Log::info('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__
+            . ' evaluated:' . $evaluate);
         return $evaluate;
     }
 
     /**
      * Determine whether the user can delete the model.
+     *
+     * TODO Should be unadmissible also for admin if contest are running... ?
+     *
      */
     public function delete(User $user, Organization $organization): bool
     {
-        /**
-         * Organization can be deleted if
-         * - have no user registered in it
-         * - have no contest in blueprint, running or recently ended
-         * - user is in admin group
-         */
+        // admin can
+        $admin = UserRole::isAdmin();
+        if ($admin) {
+            return true;
+        }
+
+        // organization member can
+        $member = UserRole::whereUserId($user->id)->whereOrganizationId($organization->id)->exists();
+        Log::info('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__
+            . ' user member:' . $member);
+        if (!$member) {
+            return false;
+        }
+        // no contest ended less than a year ago...
+        $recentContest = Contest::where('organization_id', $organization->id)
+            ->scopeClosedAfterOneYearAgo()
+            ->exists();
+        if (!$recentContest) {
+            return true;
+        }
+        //
         return false;
     }
 
