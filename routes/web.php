@@ -104,17 +104,19 @@ Route::get('/admin/federation/section/add/{federation}', Federation\Section\Add:
     ->middleware(['auth', 'verified', 'can:create,' . ModelsFederationSection::class])
     ->name('federation-section.add');
 Route::get('/admin/federation/section/modify/{federation-section}', Federation\Section\Modify::class)
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsFederationSection::class])
     ->name('federation-section.modify');
 Route::get('/federation/section/remove/{federation-section}', Federation\Section\Remove::class)
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'can:delete,' . ModelsFederationSection::class])
     ->name('federation-section.delete');
 Route::delete('/federation/section/remove/{federation-section}', Federation\Section\Remove::class)
-    ->middleware(['auth', 'verified']);
+    ->middleware(['auth', 'verified', 'can:delete,' . ModelsFederationSection::class]);
+// no name()
 
 /**
  * FederationMores - admin only
  */
+//
 
 /**
  * User - Organization blueprint
