@@ -103,7 +103,7 @@
             <label class="block font-medium text-sm text-gray-700" for="federationContact">
                 {{ __('Federation Contacts') }}
             </label>
-            <div class="small">{{__('HQ address, postal addess, email, international whatsapp number...')}}</div>
+            <div class="small">{{__('HQ address, postal address, email, international whatsapp number...')}}</div>
             <textarea 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
                 type="text" name="federationContact"
