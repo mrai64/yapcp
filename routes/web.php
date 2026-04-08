@@ -121,22 +121,24 @@ Route::delete('/federation/section/remove/{federation-section}', Federation\Sect
 /**
  * User - Organization blueprint
  */
-// organization list - guest no admin
-// organization add - user - livewire
+// organization list - guest
+// organization add - admin | user member(organization)
 Route::get('/organization/add/', Organization\Add::class)
     ->middleware(['auth', 'verified'])
     ->name('organization.add');
+// organization modify - admin | user member(organization)
 Route::get('/organization/modify/{organization}', Organization\Modify::class)
     ->middleware(['auth', 'verified', 'can:update,organization'])
     ->name('organization.modify');
-Route::get('/organization/remove/{id}', Organization\Remove::class, ['id'])
-    ->middleware(['auth', 'verified'])
+Route::get('/organization/remove/{organization}', Organization\Remove::class)
+    ->middleware(['auth', 'verified', 'can:delete,organization'])
     ->name('organization.delete');
-Route::delete('/organization/remove/{id}', Organization\Remove::class, ['id'])
-    ->middleware(['auth', 'verified']);
-// organization dashboard
-Route::get('/organization/dashboard/{id}', Organization\Dashboard::class, ['id'])
-    ->middleware(['auth', 'verified'])
+Route::delete('/organization/remove/{organization}', Organization\Remove::class)
+    ->middleware(['auth', 'verified', 'can:delete,organization']);
+// no name()
+// organization dashboard - admin | user member(organization)
+Route::get('/organization/dashboard/{organization}', Organization\Dashboard::class)
+    ->middleware(['auth', 'verified', 'can:update,organization'])
     ->name('organization.dashboard');
 
 /**
