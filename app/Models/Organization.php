@@ -20,6 +20,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
@@ -114,14 +115,14 @@ class Organization extends Model
      */
     public static function countryIdSorted()
     {
-        $organizations = DB::table('organizations')
-            ->select('id', 'country_id', 'name', 'email', 'website')
+        $organizations = self::with('country') // Eager load the 'country' relationship
             ->where('name', '>', '/')
             ->orderBy('country_id', 'asc')
             ->orderBy('name', 'asc')
             ->orderBy('created_at', 'desc')
             ->get();
         // log
+
         return $organizations;
     }
 
@@ -136,9 +137,9 @@ class Organization extends Model
     // RELATIONSHIP
 
     // organizations.country_id > countries.id
-    public function country(): HasOne
+    public function country(): BelongsTo
     {
-        $country = $this->hasOne(Country::class, 'id', 'country_id');
+        $country = $this->belongsTo(Country::class, 'country_id', 'id');
         // log
         return $country;
     }
@@ -166,6 +167,32 @@ class Organization extends Model
         );
         // log
         return $userRoles;
+    }
+
+    /**
+     * List users_id related to organization
+     *
+     * @return array
+     */
+    public function userOrganizations() : array
+    {
+        return $this->userRoles()
+            ->where('role_opening', '<=', now())
+            ->where('role_closing', '>=', now())
+            ->pluck('user_id')
+            ->toArray();
+    }
+
+    /**
+     * Check if a specific user is an active member of this organization
+     */
+    public function hasMember(string $userId): bool
+    {
+        return $this->userRoles()
+            ->where('user_id', $userId)
+            ->where('role_opening', '<=', now())
+            ->where('role_closing', '>=', now())
+            ->exists();
     }
 
 }
