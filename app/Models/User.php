@@ -308,4 +308,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $works;
     }
 
+    /**
+     * Check if the user is currently an active member of a specific organization
+     */
+    public function isMemberOfOrganization(string $organizationId): bool
+    {
+        return $this->userRoles()
+            ->where('organization_id', $organizationId)
+            ->where('role_opening', '<=', now())
+            ->where('role_closing', '>=', now())
+            ->exists();
+    }
+
 }
