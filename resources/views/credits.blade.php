@@ -49,8 +49,9 @@
                         </ul>
                     </main>
 
-                    <footer class="py-16 text-center text-sm text-black dark:text-white/70">
-                        v{{ App\Models\User::APPVERSION }}
+
+                    <footer class="py-16 text-center text-sm text-black dark:text-white/70 text-muted">
+                        &copy; {{ date('Y')}} - {{ config('app.name') }} - version {{ $appVersion }} guest
                     </footer>
                 </div>
             </div>
