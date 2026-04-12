@@ -30,7 +30,7 @@ use App\Models\UserContact;
             <p class="fyk font-semibold text-2xl text-gray-800 leading-tight">
                 {{ __("Contest list") }}
             </p>
-            <a href="{{ route('contest-add', ['oid' => $organization->id] )}}" 
+            <a href="{{ route('organization.contest.add', ['oid' => $organization->id] )}}" 
                 class="float-end font-medium rounded-md py-2"
                 >
                 [ {{ __('Add a new Contest')}} ]

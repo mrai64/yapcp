@@ -16,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 /**
  * Guest view - open for all
  */
-Route::view('/', 'welcome');
-Route::view('/credits', 'credits');
-// USER Volt guest/auth routes
-require __DIR__ . '/auth.php';
+Route::view('/', 'welcome')
+    ->name('welcome.aboard');
+Route::view('/credits', 'credits')
+    ->name('credits.notice');
 // Federation List - laravel no livewire
 Route::get('/federation/listed', [FederationController::class, 'index'])
     ->name('federation.list');
@@ -29,6 +29,9 @@ Route::get('/federation/section/list/{federation}', Federation\Section\Listed::c
 // Organization List - livewire
 Route::get('/organization/listed', Organization\Listed::class)
     ->name('organization.list');
+Route::get('/contest/listed', Contest\Listed::class)
+    ->middleware(['auth', 'verified'])
+    ->name('contest.list');
 // TODO list of open contest with board of participants
 // TODO list of closed contest with board of winners
 // TODO contest admitted and awarded thumb
@@ -36,6 +39,8 @@ Route::get('/organization/listed', Organization\Listed::class)
 /**
  * User view
  */
+// USER Volt guest/auth routes
+require __DIR__ . '/auth.php';
 Route::view('/user/profile', 'profile')
     ->middleware(['auth'])
     ->name('user.profile');
@@ -44,34 +49,33 @@ Route::view('/user/dashboard', 'dashboard')
     ->name('user.dashboard');
 
 /**
- * UserContact
+ * UserContact - user itself, but also admin and
+ * organization for juror
+ *
  */
-// user contact/add - user itself and organization (for juror) and admin
-// admin
 Route::get('/user/contact/listed', User\Contact\Listed::class)
     ->middleware(['auth', 'verified'])
-    ->name('user-contact-listed');
+    ->name('user-contact.list');
 // user contact/ modify* - user itself n admin
-Route::get('/user/contact/modify', User\Contact\Modify1YouAre::class)
-    ->middleware(['auth', 'verified'])
-    ->name('user-contact-modify');
+// Route::get('/user/contact/modify', User\Contact\Modify1YouAre::class)
+//     ->middleware(['auth', 'verified'])
+//     ->name('user-contact-modify');
 Route::get('/user/contact/modify1/{uid?}', User\Contact\Modify1YouAre::class)
     ->middleware(['auth', 'verified'])
-    ->name('user-contact-modify1');
+    ->name('user-contact.modify1');
 Route::get('/user/contact/modify2/{uid?}', User\Contact\Modify2PostAddress::class)
     ->middleware(['auth', 'verified'])
-    ->name('user-contact-modify2');
+    ->name('user-contact.modify2');
 Route::get('/user/contact/modify3/{uid?}', User\Contact\Modify3Phones::class)
     ->middleware(['auth', 'verified'])
-    ->name('user-contact-modify3');
+    ->name('user-contact.modify3');
 Route::get('/user/contact/modify4/{uid?}', User\Contact\Modify4Socials::class)
     ->middleware(['auth', 'verified'])
-    ->name('user-contact-modify4');
-// Add federation required fields
+    ->name('user-contact.modify4');
 Route::get('/user/contact/modify5/{fid}/{uid?}', User\Contact\Modify5Feds::class, ['fid', 'uid'])
     ->middleware(['auth', 'verified'])
-    ->name('user-contact-modify5');
-// D /user/contact/remove is not needed - contact removed at user deletion
+    ->name('user-contact.modify5'); // Add "federation more" required fields
+// user contact remove intentionally miss - must be done in maintenance mode
 
 /**
  * Federation - admin only
@@ -88,7 +92,7 @@ Route::post('/admin/federation/store', [FederationController::class, 'store'])
 Route::get('/admin/federation/modify/{federation}', Federation\Modify::class, ['fid'])
     ->middleware(['auth', 'verified', 'can:update,federation'])
     ->name('federation.modify');
-// federation softdelete, livewire - admin
+// TODO federation remove only in maintenance mode
 Route::get('/admin/federation/remove/{federation}', Federation\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,federation'])
     ->name('federation.delete');
@@ -115,31 +119,35 @@ Route::delete('/federation/section/remove/{federation-section}', Federation\Sect
 
 /**
  * FederationMores - admin only
+ *
+ * TODO - build routes n views
  */
-//
+// /admin/federation-more.add
+// /admin/federation-more.modify
+// /admin/federation-more.remove
 
 /**
  * User - Organization blueprint
  */
 // organization list - guest
 // organization add - admin | user member(organization)
-Route::get('/organization/add/', Organization\Add::class)
+Route::get('/user/organization/add/', Organization\Add::class)
     ->middleware(['auth', 'verified'])
-    ->name('organization.add');
+    ->name('user.organization.add');
 // organization modify - admin | user member(organization)
-Route::get('/organization/modify/{organization}', Organization\Modify::class)
+Route::get('/user/organization/modify/{organization}', Organization\Modify::class)
     ->middleware(['auth', 'verified', 'can:update,organization'])
-    ->name('organization.modify');
-Route::get('/organization/remove/{organization}', Organization\Remove::class)
+    ->name('user.organization.modify');
+Route::get('/user/organization/remove/{organization}', Organization\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,organization'])
-    ->name('organization.delete');
-Route::delete('/organization/remove/{organization}', Organization\Remove::class)
+    ->name('user.organization.delete');
+Route::delete('/user/organization/remove/{organization}', Organization\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,organization']);
 // no name()
 // organization dashboard - admin | user member(organization)
 Route::get('/organization/dashboard/{organization}', Organization\Dashboard::class)
     ->middleware(['auth', 'verified', 'can:update,organization'])
-    ->name('organization.dashboard');
+    ->name('organization.dashboard'); // no user.organization.dashboard
 
 /**
  * UserRole
@@ -173,7 +181,7 @@ Route::delete('/user/work/remove/{wid}', User\Work\Remove::class, ['wid'])
     ->middleware(['auth', 'verified']);
 
 /**
- * Contest blueprint - Organization define
+ * Organization Contest blueprint - define
  * - contest
  * - contest section
  * - contest jury
@@ -182,12 +190,9 @@ Route::delete('/user/work/remove/{wid}', User\Work\Remove::class, ['wid'])
  * Contest
  * TODO /contest/listed for guest version
  */
-Route::get('/contest/listed', Contest\Listed::class)
-    ->middleware(['auth', 'verified'])
-    ->name('contest-list');
 Route::get('/contest/add/{oid}', Contest\Add::class, ['oid'])
     ->middleware(['auth', 'verified'])
-    ->name('contest-add');
+    ->name('organization.contest.add');
 Route::get('/contest/modify/{cid}', Contest\Modify::class, ['cid'])
     ->middleware(['auth', 'verified'])
     ->name('modify-contest');
@@ -256,7 +261,7 @@ Route::get('/organization/contest/participants/modify/{cid}', Contest\Participan
 // Contest live - organization works before jury works
 Route::get('/organization/contest/pre-jury/section-list/{cid}', Organization\PreJury\SectionListed::class, ['cid'])
     ->middleware(['auth', 'verified'])
-    ->name('organization-contest-list');
+    ->name('organization-contest.list');
 Route::get('/organization/contest/pre-jury/section-review/{sid}', Organization\PreJury\SectionReview::class, ['sid'])
     ->middleware(['auth', 'verified'])
     ->name('organization-contest-section-list');
