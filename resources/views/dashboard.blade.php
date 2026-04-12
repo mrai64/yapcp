@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
     </x-slot>
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('user-contact-modify1') }}">
+            <a href="{{ route('user-contact.modify1') }}">
             [ {{ __("Your Contact info") }} ]
             </a>
         </div>
@@ -53,7 +53,7 @@ use Illuminate\Support\Facades\Auth;
         </div>
         . .
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('organization.add') }}">
+            <a href="{{ route('user.organization.add') }}">
                 [ {{ __("Add new Organization") }} ]
             </a>
         </div>
