@@ -23,3 +23,13 @@ it('check homepage response ok', function () {
     get('/')
         ->assertStatus(200);
 });
+
+
+it('check credits page response ok', function () {
+    // arrange
+
+    // act
+    // assert
+    get('/credits')
+        ->assertStatus(200);
+});
