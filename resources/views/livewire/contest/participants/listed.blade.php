@@ -20,7 +20,7 @@ use App\Models\ContestWork;
         <hr />
         <div class="p-4 border rounded-md">
             [ 
-                <a href="{{route('contest-live-dashboard', ['cid' => $contest->id ])}}">
+                <a href="{{route('contest.dashboard', ['cid' => $contest->id ])}}">
                     {{__("Back to contest live panel")}} 
                 </a>
             ]

@@ -124,7 +124,7 @@ class Add extends Component
 
         // redirect
         return redirect()
-            ->route('contest-award-add', ['cid' => $this->contest_id])
+            ->route('organization.contest-award.add', ['cid' => $this->contest_id])
             ->with('success', __('New Award added to list, enjoy!'));
     }
 }

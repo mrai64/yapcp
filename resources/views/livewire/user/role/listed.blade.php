@@ -89,7 +89,7 @@
                 >[ {{ __('Closing Role') }} ]</a>
             </div>
             <div class="inline-flex h-16 w-auto sm:px-3 lg:px-4">
-                <a  href="{{ route('modify-contest', ['cid' => $role['contest_id'] ]) }}"
+                <a  href="{{ route('organization.contest.modify', ['cid' => $role['contest_id'] ]) }}"
                 class="font-medium rounded-md py-2"
                 >[ {{ __('Contest dashboard') }} ]</a>
             </div>

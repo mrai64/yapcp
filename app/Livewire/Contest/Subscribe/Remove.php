@@ -92,7 +92,7 @@ class Remove extends Component
         Log::info(__CLASS__.' '.__FUNCTION__.':'.__LINE__.' deleted:'.json_encode($this->work_in_contest));
 
         return redirect()
-            ->route('participate-contest', ['cid' => $this->contest_id])
+            ->route('user.contest.participate', ['cid' => $this->contest_id])
             ->with('success', __('Work removed. Now U have a slot free.'));
     }
 }
