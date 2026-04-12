@@ -41,10 +41,10 @@ use App\Models\UserContact;
                 @foreach($contestSet as $contest)
                 <li class="mb-2 p-4 border rounded-md">
                     <strong class="fyk text-2xl">{{$contest->name_en}}</strong><br />
-                    <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
+                    <a href="{{ route('organization.contest.modify', ['cid' => $contest->id ]) }}">
                         [ {{ __("Contest Definition Dashboard") }} ]
                     </a>
-                    <a href="{{ route('contest-live-dashboard', ['cid' => $contest->id ]) }}">
+                    <a href="{{ route('contest.dashboard', ['cid' => $contest->id ]) }}">
                         [ {{ __("Contest Live Dashboard") }} ]
                     </a>
                 </li>

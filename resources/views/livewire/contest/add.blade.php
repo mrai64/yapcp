@@ -18,16 +18,16 @@ use App\Models\ContestSection;
         </h2>
         <!-- navigation --> 
         <h3>
-            <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization.contest.modify', ['cid' => $contest->id ]) }}">
                 <span class="fyk text-2xl">Main</span>
             </a>
             . .
-            <a href="{{ route('contest-section-add', ['cid' => $contest->id]) }}">
+            <a href="{{ route('organization.contest-section.add', ['cid' => $contest->id]) }}">
                 <span class="fyk text-xl">Sections</span>
             </a>
             {{ $sid = ContestSection::firstContestSectionId( $contest->id ); }}
             @if($sid > '')
-            <a href="{{ route('contest-jury-add', ['sid' => $sid] ); }}">
+            <a href="{{ route('organization.contest-jury.add', ['sid' => $sid] ); }}">
                 <span class="fyk text-xl">Jury</span>
             </a>
             @else
@@ -36,7 +36,7 @@ use App\Models\ContestSection;
             </a>
             @endif
             . .
-            <a href="{{ route('contest-award-add', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('organization.contest-award.add', ['cid' => $contest->id ]); }}">
                 <span class="fyk text-xl">Awards</span>
             </a>
             . .
@@ -44,7 +44,7 @@ use App\Models\ContestSection;
                 <span class="fyk text-xl">Participants</span>
             </a>
             . .
-            <a href="{{ route('organization-contest-list', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('organization.contest.list', ['cid' => $contest->id ]); }}">
                 <span class="fyk text-xl">Works</span>
             </a>
         </h3>

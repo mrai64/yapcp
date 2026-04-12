@@ -27,16 +27,16 @@ use Illuminate\Support\Facades\Log;
             {{ __('Contest Main Form') }}
         </h2>
         <h3>
-            <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization.contest.modify', ['cid' => $contest->id ]) }}">
                 <span class="fyk text-2xl">Main</span>
             </a>
             . .
-            <a href="{{ route('contest-section-add', ['cid' => $contest->id]) }}">
+            <a href="{{ route('organization.contest-section.add', ['cid' => $contest->id]) }}">
                 <span class="fyk text-xl">Sections</span>
             </a>
             . .
             @if(ContestSection::firstContestSectionId( $contest->id ) > '')
-            <a href="{{ route('contest-jury-add', ['sid' => ContestSection::firstContestSectionId( $contest->id )] ); }}">
+            <a href="{{ route('organization.contest-jury.add', ['sid' => ContestSection::firstContestSectionId( $contest->id )] ); }}">
                 <span class="fyk text-xl">Jury</span>
             </a>
             @else
@@ -45,7 +45,7 @@ use Illuminate\Support\Facades\Log;
             </a>
             @endif
             . .
-            <a href="{{ route('contest-award-add', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('organization.contest-award.add', ['cid' => $contest->id ]); }}">
                 <span class="fyk text-xl">Awards</span>
             </a>
             . .

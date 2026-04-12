@@ -124,7 +124,7 @@ class Add extends Component
         $section->create($validated);
 
         return redirect()
-            ->route('contest-section-add', ['cid' => $this->contest_id])
+            ->route('organization.contest-section.add', ['cid' => $this->contest_id])
             ->with('success', __('New section added to section list, another?'));
 
     }

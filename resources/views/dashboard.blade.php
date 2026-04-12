@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Auth;
         . .
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
             <!-- Open Contest list -->
-            <a href="{{ route('contest-list') }}">
+            <a href="{{ route('contest.list') }}">
             [ {{ __("Contest Open ") }} ]
             </a>
         </div>
@@ -47,7 +47,7 @@ use Illuminate\Support\Facades\Auth;
         </div>
         . .
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('add-user-role-organization') }}">
+            <a href="{{ route('user-role.add.organization') }}">
             [ {{ __("Add in Organization") }} ]
             </a>
         </div>
@@ -59,7 +59,7 @@ use Illuminate\Support\Facades\Auth;
         </div>
         . .
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('add-user-role-federation') }}">
+            <a href="{{ route('user-role.add.federation') }}">
                 [ {{ __("Add in Federation") }} ]
             </a>
         </div>
@@ -82,6 +82,13 @@ use Illuminate\Support\Facades\Auth;
         <section name="user_roles" class="mb-4 sm:px-6 lg:px-8 py-12">
             <livewire:contest.jury.listed />
         </section>
+    </div>
+    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <p class="small">
+            {{__('That's YOUR personal dashboard but remember, only when necessary)}}
+            {{_("your data should be <u><i>corrected by others</i></u> as platform administrator,")}}
+            {{_("and contest organizer when you are in platform as contest juror")}}.
+        </p>
     </div>
 
 </x-app-layout>

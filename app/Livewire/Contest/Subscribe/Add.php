@@ -146,7 +146,7 @@ class Add extends Component
         }
 
         return redirect()
-            ->route('participate-contest', ['cid' => $this->contestId])
+            ->route('user.contest.participate', ['cid' => $this->contestId])
             ->with('success', __('Work added, Great!'));
     }
 }

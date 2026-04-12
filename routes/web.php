@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * The Route board
+ */
+
 use App\Http\Controllers\Contest\JuryMinuteDraft;
 use App\Http\Controllers\Contest\Report\Fiaf1ParticipantsController;
 use App\Http\Controllers\Contest\Report\Fiaf2WorksController;
@@ -16,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 /**
  * Guest view - open for all
  */
+
 Route::view('/', 'welcome')
     ->name('welcome.aboard');
 Route::view('/credits', 'credits')
@@ -51,6 +56,8 @@ Route::view('/user/dashboard', 'dashboard')
 /**
  * UserContact - user itself, but also admin and
  * organization for juror
+ * 
+ * TODO admin and organization for juror
  *
  */
 Route::get('/user/contact/listed', User\Contact\Listed::class)
@@ -110,10 +117,10 @@ Route::get('/admin/federation/section/add/{federation}', Federation\Section\Add:
 Route::get('/admin/federation/section/modify/{federation-section}', Federation\Section\Modify::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsFederationSection::class])
     ->name('federation-section.modify');
-Route::get('/federation/section/remove/{federation-section}', Federation\Section\Remove::class)
+Route::get('/admin/federation/section/remove/{federation-section}', Federation\Section\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,' . ModelsFederationSection::class])
     ->name('federation-section.delete');
-Route::delete('/federation/section/remove/{federation-section}', Federation\Section\Remove::class)
+Route::delete('/admin/federation/section/remove/{federation-section}', Federation\Section\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,' . ModelsFederationSection::class]);
 // no name()
 
@@ -152,15 +159,15 @@ Route::get('/organization/dashboard/{organization}', Organization\Dashboard::cla
 /**
  * UserRole
  */
-Route::get('/dashboard/role', User\Role\Listed::class)
+Route::get('/user/dashboard/role', User\Role\Listed::class)
     ->middleware(['auth', 'verified'])
-    ->name('user-role-list');
-Route::get('/dashboard/role/federation/add', User\Role\Federation\Add::class)
+    ->name('user-role.list');
+Route::get('/user/dashboard/role/federation/add', User\Role\Federation\Add::class)
     ->middleware(['auth', 'verified'])
-    ->name('add-user-role-federation');
-Route::get('/dashboard/role/organization/add', User\Role\Organization\Add::class)
+    ->name('user-role.add.federation');
+Route::get('/user/dashboard/role/organization/add', User\Role\Organization\Add::class)
     ->middleware(['auth', 'verified'])
-    ->name('add-user-role-organization');
+    ->name('user-role.add.organization');
 
 /**
  * UserWork
@@ -188,67 +195,86 @@ Route::delete('/user/work/remove/{wid}', User\Work\Remove::class, ['wid'])
  * - contest award
  *
  * Contest
- * TODO /contest/listed for guest version
+ * TODO /contest/listed for guest version - see up
  */
-Route::get('/contest/add/{oid}', Contest\Add::class, ['oid'])
+Route::get('/organization/contest/add/{oid}', Contest\Add::class, ['oid'])
     ->middleware(['auth', 'verified'])
     ->name('organization.contest.add');
-Route::get('/contest/modify/{cid}', Contest\Modify::class, ['cid'])
+Route::get('/organization/contest/modify/{cid}', Contest\Modify::class, ['cid'])
     ->middleware(['auth', 'verified'])
-    ->name('modify-contest');
+    ->name('organization.contest.modify');
 
 /**
- * Contest blueprint - ContestSection
+ * Organization Contest blueprint
+ *
+ * ContestSection
+ *
  */
-Route::get('/contest/section/add/{cid}', Contest\Section\Add::class, ['cid'])
+Route::get('/organization/contest/section/add/{cid}', Contest\Section\Add::class, ['cid'])
     ->middleware(['auth', 'verified'])
-    ->name('contest-section-add');
-Route::get('/contest/section/modify/{sid}', Contest\Section\Modify::class, ['sid'])
+    ->name('organization.contest-section.add');
+Route::get('/organization/contest/section/modify/{sid}', Contest\Section\Modify::class, ['sid'])
     ->middleware(['auth', 'verified'])
-    ->name('modify-contest-section');
-Route::get('/contest/section/modify/{sid}', Contest\Section\Modify::class, ['sid'])
+    ->name('organization.contest-section.modify');
+Route::get('/organization/contest/section/modify/{sid}', Contest\Section\Modify::class, ['sid'])
     ->middleware(['auth', 'verified'])
-    ->name('modify-contest-section');
-Route::get('/contest/section/remove/{sid}', Contest\Section\Remove::class, ['sid'])
+    ->name('organization.contest-section.modify');
+Route::get('/organization/contest/section/remove/{sid}', Contest\Section\Remove::class, ['sid'])
     ->middleware(['auth', 'verified'])
-    ->name('remove-contest-section');
-Route::delete('/contest/section/remove/{sid}', Contest\Section\Remove::class, ['sid'])
+    ->name('organization.contest-section.remove');
+Route::delete('/organization/contest/section/remove/{sid}', Contest\Section\Remove::class, ['sid'])
     ->middleware(['auth', 'verified']);
+// no name
 
 /**
- * Contest blueprint - ContestJury
+ * Organization Contest blueprint
+ *
+ * ContestJury
+ *
  */
-Route::get('/contest/jury/add/{sid}', Contest\Jury\Add::class, ['sid'])
+Route::get('/organization/contest/jury/add/{sid}', Contest\Jury\Add::class, ['sid'])
     ->middleware(['auth', 'verified'])
-    ->name('contest-jury-add');
+    ->name('organization.contest-jury.add');
+// TODO Contest jury modify organization.contest-jury.modify
+// TODO Contest jury remove organization.contest-jury.remove
 
 /**
- * Contest blueprint - ContestAward
+ * Organization Contest blueprint
+ *
+ * ContestAward
+ *
  */
-Route::get('/contest/award/add/{cid}', Contest\Award\Add::class, ['cid'])
+Route::get('/organization/contest/award/add/{cid}', Contest\Award\Add::class, ['cid'])
     ->middleware(['auth', 'verified'])
-    ->name('contest-award-add');
+    ->name('organization.contest-award.add');
+// TODO organization.contest-award.modify
+// TODO organization.contest-award.remove
 
 /**
- * Contest manage - User contest subscribe
+ * User - Contest subscribe, add works, remove works
+ *
+ * user, and contest organization
  */
+// user only
 Route::get('/user/contest/subscribe/{cid}', Contest\Subscribe::class, ['cid'])
     ->middleware(['auth', 'verified'])
-    ->name('participate-contest');
-Route::get('/user/contest/subscribe/{cid}/work/{wid}', Contest\Subscribe::class, ['cid', 'wid'])
+    ->name('user.contest.participate');
+// user only
+    Route::get('/user/contest/subscribe/{cid}/work/{wid}', Contest\Subscribe::class, ['cid', 'wid'])
     ->middleware(['auth', 'verified'])
-    ->name('add-work-contest');
+    ->name('user.contest.add-work');
+// user and contest organization
 Route::delete('/user/contest/subscribe/remove/{pid}', Contest\Subscribe\Remove::class, ['pid'])
     ->middleware(['auth', 'verified'])
-    ->name('remove-work-contest');
+    ->name('user.contest.remove-work');
 
 /**
  * Contest manage - Organization
  */
 // Contest live - Organization contest dashboard
-Route::get('/organization/contest/{cid}', Organization\ContestPanel::class, ['cid'])
+Route::get('/contest/{cid}', Organization\ContestPanel::class, ['cid'])
     ->middleware(['auth', 'verified'])
-    ->name('contest-live-dashboard');
+    ->name('contest.dashboard');
 
 // Contest live - Organization review Participant User list _fee payment completed_
 Route::get('/organization/contest/participants/listed/{cid}', Contest\Participants\Listed::class, ['cid'])

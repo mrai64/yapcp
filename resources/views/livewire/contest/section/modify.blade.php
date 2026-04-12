@@ -14,16 +14,16 @@ use App\Models\ContestSection;
             {{ __('Contest definition: SECTION LIST') }}
         </h2>
         <h3>
-            <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization.contest.modify', ['cid' => $contest->id ]) }}">
                 <span class="fyk text-xl">Main</span>
             </a>
             . .
-            <a href="{{ route('contest-section-add', ['cid' => $contest->id]) }}">
+            <a href="{{ route('organization.contest-section.add', ['cid' => $contest->id]) }}">
                 <span class="fyk text-2xl">Sections</span>
             </a>
             {{ $sid = ContestSection::firstContestSectionId( $contest->id ); }}
             @if($sid > '')
-            <a href="{{ route('contest-jury-add', ['sid' => $sid] ); }}">
+            <a href="{{ route('organization.contest-jury.add', ['sid' => $sid] ); }}">
                 <span class="fyk text-xl">Jury</span>
             </a>
             @else
@@ -32,7 +32,7 @@ use App\Models\ContestSection;
             </a>
             @endif
             . .
-            <a href="{{ route('contest-award-add', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('organization.contest-award.add', ['cid' => $contest->id ]); }}">
                 <span class="fyk text-xl">Awards</span>
             </a>
             . .
@@ -62,7 +62,7 @@ use App\Models\ContestSection;
         <p class="fyk text-xl">Country: {{ Country::countryName( $contest->country_id ) }} </p>
         <p class="small">Closing date: {{ $contest->day_2_closing->format('Y-m-d') }} </p>
         <p class="small py-6">
-            <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization.contest.modify', ['cid' => $contest->id ]) }}">
                 [ {{ __("Back to Main Contest Card")}} ]
             </a>
         </p>
@@ -88,10 +88,10 @@ use App\Models\ContestSection;
                     {{ ($section->under_patronage === 'Y') ? "under patronage" : "free of patronage" }}</td>
                     <td >{{ $section->name_en}}<br />{{ $section->name_local}}</td>
                     <td >
-                        <a href="{{ route('modify-contest-section', ['sid' => $section->id] ) }}">
+                        <a href="{{ route('organization.contest-section.modify', ['sid' => $section->id] ) }}">
                             [ {{ __("Modify") }} ]
                         </a>
-                        <a href="{{ route('remove-contest-section', ['sid' => $section->id] ) }}">
+                        <a href="{{ route('organization.contest-section.remove', ['sid' => $section->id] ) }}">
                             [ {{ __("Remove") }} ]
                         </a>
                     </td>
