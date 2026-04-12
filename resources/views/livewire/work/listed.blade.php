@@ -23,7 +23,7 @@
         </p>
         @else
         <div class="mb-4 fyk text-xl">
-            <a  href="{{ route('contest-list') }}"
+            <a  href="{{ route('contest.list') }}"
                 class="float-end font-medium rounded-md mb-4 py-2"
                 >
                 [ {{ __('Open Contest List') }} ]

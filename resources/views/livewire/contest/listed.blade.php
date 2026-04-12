@@ -39,7 +39,7 @@
             <a  href="{{ route('public-participant-list', [ 'cid' => $contest->id ] ) }}" rel="noopener noreferrer">
                 [ {{ __('Participation list')}} ]
             </a>
-            <a  href="{{ route('participate-contest', [ 'cid' => $contest->id ] ) }}" rel="noopener noreferrer">
+            <a  href="{{ route('user.contest.participate', [ 'cid' => $contest->id ] ) }}" rel="noopener noreferrer">
                 [ {{ __('Participate? Great!')}} ]
             </a>
         </p>

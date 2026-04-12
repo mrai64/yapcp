@@ -199,7 +199,7 @@ class Add extends Component
 
         // redirect
         return redirect()
-            ->route('contest-jury-add', ['sid' => $this->sectionId])
+            ->route('organization.contest-jury.add', ['sid' => $this->sectionId])
             ->with('success', __('New Juror added to list, enjoy!'));
     }
 }
