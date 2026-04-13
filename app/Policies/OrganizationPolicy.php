@@ -59,7 +59,7 @@ class OrganizationPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * TODO Should be unadmissible also for admin if contest are running... ?
+     * TODO Should be wrong also for admin if contest are running... ?
      *
      */
     public function delete(User $user, Organization $organization): bool

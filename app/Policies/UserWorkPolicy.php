@@ -12,6 +12,12 @@ class UserWorkPolicy
      */
     public function viewAny(User $user): bool
     {
+        // only admin
+        // admin can
+        $admin = UserRole::isAdmin();
+        if ($admin) {
+            return true;
+        }
         return false;
     }
 
@@ -20,6 +26,14 @@ class UserWorkPolicy
      */
     public function view(User $user, UserWork $userWork): bool
     {
+        // admin can
+        $admin = UserRole::isAdmin();
+        if ($admin) {
+            return true;
+        }
+        if ($user->id === $userWork->user_id) {
+            return true;
+        }
         return false;
     }
 
@@ -28,7 +42,8 @@ class UserWorkPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        // user only
+        return true;
     }
 
     /**
@@ -36,7 +51,7 @@ class UserWorkPolicy
      */
     public function update(User $user, UserWork $userWork): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -44,7 +59,7 @@ class UserWorkPolicy
      */
     public function delete(User $user, UserWork $userWork): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -52,7 +67,7 @@ class UserWorkPolicy
      */
     public function restore(User $user, UserWork $userWork): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -60,6 +75,6 @@ class UserWorkPolicy
      */
     public function forceDelete(User $user, UserWork $userWork): bool
     {
-        return false;
+        return true;
     }
 }
