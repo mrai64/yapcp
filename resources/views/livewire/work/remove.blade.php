@@ -9,7 +9,7 @@
     @endif
 
     <br style="clear:both;" />
-    <a  href="{{ route('photo-box-list') }}" 
+    <a  href="{{ route('user.gallery') }}" 
         class="float-end font-medium rounded-md mb-4 py-2"
         >
         [ {{ __('Back to Gallery') }} ]
@@ -125,7 +125,7 @@
         </button>
     </form>
     <br style="clear: both;" />
-    <a  href="{{ route('photo-box-list') }}" 
+    <a  href="{{ route('user.gallery') }}" 
         class="float-end font-medium rounded-md mt-4 py-2"
         >
         [ {{ __('Your beautiful Gallery') }} ]

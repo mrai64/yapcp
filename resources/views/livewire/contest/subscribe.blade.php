@@ -42,7 +42,7 @@ use Illuminate\Support\Facades\Log;
     @if (count($work_list) < 1)
     <div class="fyk text-xl">
         {{__("Seems you have no work uploaded to submit.")}}
-        <a href="{{ route('photo-box-list') }}">
+        <a href="{{ route('user.gallery') }}">
             {{ __("Upload some photos") }}
         </a>
     </div>

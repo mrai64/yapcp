@@ -17,7 +17,7 @@
     <p class="small">🆙 Add another masterpiece to your private Uffizi' Gallery.</p>
     @endif
         <br style="clear:both;" />
-    <a  href="{{ route('photo-box-list') }}" 
+    <a  href="{{ route('user.gallery') }}" 
         class="float-end font-medium rounded-md mb-4 py-2" >
         [ {{ __('Your beautiful Gallery') }} ]
     </a>
@@ -102,7 +102,7 @@
     </form>
 
     <br style="clear:both;" />
-    <a  href="{{ route('photo-box-list') }}" 
+    <a  href="{{ route('user.gallery') }}" 
         class="float-end font-medium rounded-md mb-4 py-2">
         [ {{ __('Back to your beautiful Gallery') }} ]
     </a>
