@@ -6,6 +6,7 @@
 
 namespace App\Livewire\Federation\Section;
 
+use App\Models\Federation;
 use App\Models\FederationSection;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
@@ -26,6 +27,8 @@ class Remove extends Component
 
     public FederationSection $section;
 
+    public Federation $federation;
+
     /**
      * 1. Before the show
      */
@@ -42,6 +45,7 @@ class Remove extends Component
         $this->code = $this->section->code;
         $this->name_en = $this->section->name_en;
         $this->rule_definition = ($this->section->rule_definition === null) ? '' : $this->section->rule_definition;
+        $this->federation = Federation::findOrFail($this->federation_id);
     }
 
     /**
@@ -63,7 +67,7 @@ class Remove extends Component
      */
     public function delete_federation_section()
     {
-        Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
 
         $this->section->delete();
 

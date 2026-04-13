@@ -71,7 +71,9 @@ class OrganizationPolicy
         }
 
         // organization member can
-        $member = UserRole::whereUserId($user->id)->whereOrganizationId($organization->id)->exists();
+        $member = UserRole::whereUserId($user->id)
+            ->whereOrganizationId($organization->id)
+            ->exists();
         Log::info('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__
             . ' user member:' . $member);
         if (!$member) {
@@ -79,7 +81,7 @@ class OrganizationPolicy
         }
         // no contest ended less than a year ago...
         $recentContest = Contest::where('organization_id', $organization->id)
-            ->scopeClosedAfterOneYearAgo()
+            ->closedAfterOneYearAgo()
             ->exists();
         if (!$recentContest) {
             return true;
