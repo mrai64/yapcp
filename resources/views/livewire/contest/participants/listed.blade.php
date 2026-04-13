@@ -2,8 +2,7 @@
 /**
  * Contest (user) Participant list 1
  * Status readonly
- * 
- * TODO move into /organization/participants
+ *
  */
 
 use App\Models\Country;
