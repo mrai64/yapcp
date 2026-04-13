@@ -83,7 +83,7 @@ class Remove extends Component
 
         // back to list
         return redirect()
-            ->route('photo-box-list')
+            ->route('user.gallery')
             ->with('success', __('Work safely removed, thanks!'));
     }
 }
