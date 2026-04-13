@@ -13,14 +13,13 @@ use App\Livewire\Federation;
 use App\Livewire\Juror;
 use App\Livewire\Organization;
 use App\Livewire\User;
+use App\Models\Contest as ModelsContest;
 use App\Models\Federation as ModelsFederation;
 use App\Models\FederationSection as ModelsFederationSection;
+use App\Models\Organization as ModelOrganization;
 use Illuminate\Support\Facades\Route;
 
-/**
- * Guest view - open for all
- */
-
+// 
 Route::view('/', 'welcome')
     ->name('welcome.aboard');
 Route::view('/credits', 'credits')
@@ -97,14 +96,14 @@ Route::post('/admin/federation/store', [FederationController::class, 'store'])
     ->name('federation.store');
 // federation update, livewire - admin
 Route::get('/admin/federation/modify/{federation}', Federation\Modify::class, ['fid'])
-    ->middleware(['auth', 'verified', 'can:update,federation'])
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsFederation::class])
     ->name('federation.modify');
 // TODO federation remove only in maintenance mode
 Route::get('/admin/federation/remove/{federation}', Federation\Remove::class)
-    ->middleware(['auth', 'verified', 'can:delete,federation'])
+    ->middleware(['auth', 'verified', 'can:delete' . ModelsFederation::class])
     ->name('federation.delete');
 Route::delete('/admin/federation/remove/{federation}', Federation\Remove::class)
-    ->middleware(['auth', 'livewire', 'can:delete,federation']);
+    ->middleware(['auth', 'livewire', 'can:delete,' . ModelsFederation::class]);
 
 /**
  * FederationSection - admin only
@@ -143,21 +142,24 @@ Route::get('/user/organization/add/', Organization\Add::class)
     ->name('user.organization.add');
 // organization modify - admin | user member(organization)
 Route::get('/user/organization/modify/{organization}', Organization\Modify::class)
-    ->middleware(['auth', 'verified', 'can:update,organization'])
+    ->middleware(['auth', 'verified', 'can:update,' . ModelOrganization::class])
     ->name('user.organization.modify');
 Route::get('/user/organization/remove/{organization}', Organization\Remove::class)
-    ->middleware(['auth', 'verified', 'can:delete,organization'])
+    ->middleware(['auth', 'verified', 'can:delete,' . ModelOrganization::class])
     ->name('user.organization.delete');
 Route::delete('/user/organization/remove/{organization}', Organization\Remove::class)
-    ->middleware(['auth', 'verified', 'can:delete,organization']);
+    ->middleware(['auth', 'verified', 'can:delete,' . ModelOrganization::class]);
 // no name()
 // organization dashboard - admin | user member(organization)
 Route::get('/organization/dashboard/{organization}', Organization\Dashboard::class)
-    ->middleware(['auth', 'verified', 'can:update,organization'])
+    ->middleware(['auth', 'verified', 'can:update,' . ModelOrganization::class])
     ->name('organization.dashboard'); // no user.organization.dashboard
 
 /**
  * UserRole
+ *
+ * user itself and admin
+ *
  */
 Route::get('/user/dashboard/role', User\Role\Listed::class)
     ->middleware(['auth', 'verified'])
@@ -171,6 +173,9 @@ Route::get('/user/dashboard/role/organization/add', User\Role\Organization\Add::
 
 /**
  * UserWork
+ *
+ * user itself and admin
+ *
  */
 Route::get('/user/work/list', User\Work\Listed::class)
     ->middleware(['auth', 'verified'])
@@ -194,15 +199,18 @@ Route::delete('/user/work/remove/{wid}', User\Work\Remove::class, ['wid'])
  * - contest jury
  * - contest award
  *
+ * organization member and admin
+ *
  * Contest
  * TODO /contest/listed for guest version - see up
  */
 Route::get('/organization/contest/add/{oid}', Contest\Add::class, ['oid'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'can:create,' . ModelsContest::class])
     ->name('organization.contest.add');
 Route::get('/organization/contest/modify/{cid}', Contest\Modify::class, ['cid'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsContest::class])
     ->name('organization.contest.modify');
+// no contest delete, after backup it's soft-deleted then removed after years
 
 /**
  * Organization Contest blueprint
@@ -272,7 +280,7 @@ Route::delete('/user/contest/subscribe/remove/{pid}', Contest\Subscribe\Remove::
  * Contest manage - Organization
  */
 // Contest live - Organization contest dashboard
-Route::get('/contest/{cid}', Organization\ContestPanel::class, ['cid'])
+Route::get('/contest/dashboard/{cid}', Organization\ContestPanel::class, ['cid'])
     ->middleware(['auth', 'verified'])
     ->name('contest.dashboard');
 
