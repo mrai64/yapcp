@@ -37,7 +37,7 @@
             >[ {{ __('Closing Role') }} ]</a>
             </div>
             <div class="inline-flex h-16 w-auto sm:px-3 lg:px-4">
-            <a  href="{{ route('organization.dashboard', ['id' => $role['organization_id'] ]) }}"
+            <a  href="{{ route('organization.dashboard', ['organization' => $role['organization_id'] ]) }}"
                 class="font-medium rounded-md py-2"
                 >[ {{ __('Organization dashboard') }} ]</a>
             </div>

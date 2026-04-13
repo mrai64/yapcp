@@ -24,7 +24,7 @@
         <em>{{__('email')}}:</em> {{$org->email}}<br />
         <em>{{__('website')}}:</em> {{$org->website}}<br />
         <small><em>{{__('uuid')}}: {{$org->id}}</em></small>
-        <a href="{{route('organization.dashboard', ['id' => $org->id ])}}" 
+        <a href="{{route('organization.dashboard', ['organization' => $org->id ])}}" 
         class="font-medium rounded-md px-4 py-4">
             [ {{__('user.dashboard')}} ]
         </a>

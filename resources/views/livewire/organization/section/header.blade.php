@@ -28,7 +28,7 @@
     </div>
     <hr />
     [ 
-        <a href="{{ route('organization.dashboard', ['id' => $contest->organization_id ]) }}"> {{__("Organization dashboard")}} </a> 
+        <a href="{{ route('organization.dashboard', ['organization' => $contest->organization_id ]) }}"> {{__("Organization dashboard")}} </a> 
     ] [ 
         <a href="{{ route('user.dashboard') }}"> {{  __("Personal dashboard")}} </a> 
     ]
