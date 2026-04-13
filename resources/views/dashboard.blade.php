@@ -10,9 +10,16 @@ use Illuminate\Support\Facades\Auth;
 
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="fyk font-semibold text-2xl text-gray-800 leading-tight">
+        <h2 class="fyk text-2xl font-medium text-gray-900">
             {{ __('Personal Dashboard') }}
         </h2>
+        <hr />
+        <p class="fyk text-xl font-medium mb-4">
+            <a  href="{{ route('user.profile') }}"
+                rel="noopener noreferrer">
+            [ {{ __('Email, password') }} ]
+            </a>
+        </p>
     </x-slot>
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
@@ -22,7 +29,7 @@ use Illuminate\Support\Facades\Auth;
         </div>
         . .
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('photo-box-list') }}">
+            <a href="{{ route('user.gallery') }}">
             [ {{ __("Your Uffizi' Gallery") }} ]
             </a>
         </div>
@@ -70,7 +77,12 @@ use Illuminate\Support\Facades\Auth;
             </a>
         </div>
         . .
-        <br style="clear:both;" /> 
+        <br style="clear:both;" />
+        <p class="small">
+            {{ __("Your personal data will be used when you want to register ") }}
+            {{ __("for the next photo contest, or to contact you if you are  ") }}
+            {{ __("chosen as judges of a contest.                            ") }}
+        </p>
         <hr class="my-4" />
         
         <!-- user roles -->
@@ -82,13 +94,6 @@ use Illuminate\Support\Facades\Auth;
         <section name="user_roles" class="mb-4 sm:px-6 lg:px-8 py-12">
             <livewire:contest.jury.listed />
         </section>
-    </div>
-    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-        <p class="small">
-            {{__('That's YOUR personal dashboard but remember, only when necessary)}}
-            {{_("your data should be <u><i>corrected by others</i></u> as platform administrator,")}}
-            {{_("and contest organizer when you are in platform as contest juror")}}.
-        </p>
-    </div>
 
+    </div>
 </x-app-layout>

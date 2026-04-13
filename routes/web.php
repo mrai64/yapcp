@@ -19,11 +19,16 @@ use App\Models\FederationSection as ModelsFederationSection;
 use App\Models\Organization as ModelOrganization;
 use Illuminate\Support\Facades\Route;
 
-// 
+/**
+ * 1. no model - guest
+ */
+
 Route::view('/', 'welcome')
     ->name('welcome.aboard');
 Route::view('/credits', 'credits')
     ->name('credits.notice');
+
+
 // Federation List - laravel no livewire
 Route::get('/federation/listed', [FederationController::class, 'index'])
     ->name('federation.list');
@@ -41,21 +46,21 @@ Route::get('/contest/listed', Contest\Listed::class)
 // TODO contest admitted and awarded thumb
 
 /**
- * User view
+ * 2. User, platform registration - user
  */
-// USER Volt guest/auth routes
 require __DIR__ . '/auth.php';
-Route::view('/user/profile', 'profile')
-    ->middleware(['auth'])
-    ->name('user.profile');
+// user dashboard
 Route::view('/user/dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('user.dashboard');
+// change email and password 
+Route::view('/user/profile', 'profile')
+    ->middleware(['auth'])
+    ->name('user.profile');
 
 /**
- * UserContact - user itself, but also admin and
- * organization for juror
- * 
+ * 3. UserContact - user and admin
+ *
  * TODO admin and organization for juror
  *
  */
@@ -179,7 +184,7 @@ Route::get('/user/dashboard/role/organization/add', User\Role\Organization\Add::
  */
 Route::get('/user/work/list', User\Work\Listed::class)
     ->middleware(['auth', 'verified'])
-    ->name('photo-box-list');
+    ->name('user.gallery');
 Route::get('/user/work/add', User\Work\Add::class)
     ->middleware(['auth', 'verified'])
     ->name('photo-box-add');
