@@ -10,7 +10,7 @@
             </a>
             . .
             {{"Back to "}}
-            <a href="{{ route('organization.dashboard', ['id' => $id ]) }}">
+            <a href="{{ route('organization.dashboard', ['organization' => $id ]) }}">
                 [ {{ __('Organization dashboard') }} ]
             </a>
         </h3>
