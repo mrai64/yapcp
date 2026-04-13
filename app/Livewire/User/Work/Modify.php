@@ -88,7 +88,7 @@ class Modify extends Component
         // back to list
         // Next!?
         return redirect()
-            ->route('photo-box-list')
+            ->route('user.gallery')
             ->with('success', __('Your personal Gallery has been updated, thanks! Another?'));
 
     }
