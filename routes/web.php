@@ -53,7 +53,7 @@ require __DIR__ . '/auth.php';
 Route::view('/user/dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
     ->name('user.dashboard');
-// change email and password 
+// change email and password
 Route::view('/user/profile', 'profile')
     ->middleware(['auth'])
     ->name('user.profile');
@@ -273,9 +273,9 @@ Route::get('/user/contest/subscribe/{cid}', Contest\Subscribe::class, ['cid'])
     ->middleware(['auth', 'verified'])
     ->name('user.contest.participate');
 // user only
-    Route::get('/user/contest/subscribe/{cid}/work/{wid}', Contest\Subscribe::class, ['cid', 'wid'])
-    ->middleware(['auth', 'verified'])
-    ->name('user.contest.add-work');
+Route::get('/user/contest/subscribe/{cid}/work/{wid}', Contest\Subscribe::class, ['cid', 'wid'])
+->middleware(['auth', 'verified'])
+->name('user.contest.add-work');
 // user and contest organization
 Route::delete('/user/contest/subscribe/remove/{pid}', Contest\Subscribe\Remove::class, ['pid'])
     ->middleware(['auth', 'verified'])
