@@ -34,10 +34,10 @@
         @if(isset($federationSet) && count($federationSet) > 0 )
         <ul>
             @foreach($federationSet as $federation)
-            <li class="font-medium my-2 p-4">
-                <strong class="fyk text-xl">{{$federation->name_en}}</strong>
+            <li class="font-medium px-4 py-2">
+                <strong class="fyk text-xl">[ {{$federation->id}} ] {{$federation->name_en}}</strong>
                 <br />
-                {{$federation->code}} | Country: {{$federation->country_id}} | web: {{$federation->website}}
+                {{ __("Country")}}: {{$federation->country_id}} | {{__("website")}}: {{$federation->website}}
                 <br />
                 <a  href="{{ route('federation.modify', ['federation' => $federation]) }}"
                     class="fyk font-medium rounded-md pe-4 py-2" >
