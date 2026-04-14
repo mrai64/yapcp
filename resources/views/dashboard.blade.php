@@ -13,18 +13,18 @@ use Illuminate\Support\Facades\Auth;
         <h2 class="fyk text-2xl font-medium text-gray-900">
             {{ __('Personal Dashboard') }}
         </h2>
-        <hr />
-        <p class="fyk text-xl font-medium mb-4">
-            <a  href="{{ route('user.profile') }}"
-                rel="noopener noreferrer">
-            [ {{ __('Email, password') }} ]
-            </a>
-        </p>
     </x-slot>
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
             <a href="{{ route('user-contact.modify1') }}">
             [ {{ __("Your Contact info") }} ]
+            </a>
+        </div>
+        . .
+        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
+            <a  href="{{ route('user.profile') }}"
+                rel="noopener noreferrer">
+            [ {{ __('Email, password') }} ]
             </a>
         </div>
         . .
@@ -40,16 +40,10 @@ use Illuminate\Support\Facades\Auth;
             [ {{ __("Contest Open ") }} ]
             </a>
         </div>
-        . .
+        <br />
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
             <a href="{{ route('organization.list') }}">
             [ {{ __("Organization List") }} ]
-            </a>
-        </div>
-        . .
-        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('federation.list') }}">
-                [ {{ __("Federation List") }} ]
             </a>
         </div>
         . .
@@ -62,6 +56,12 @@ use Illuminate\Support\Facades\Auth;
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
             <a href="{{ route('user.organization.add') }}">
                 [ {{ __("Add new Organization") }} ]
+            </a>
+        </div>
+        <br />
+        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
+            <a href="{{ route('federation.list') }}">
+                [ {{ __("Federation List") }} ]
             </a>
         </div>
         . .
@@ -83,9 +83,10 @@ use Illuminate\Support\Facades\Auth;
             {{ __("for the next photo contest, or to contact you if you are  ") }}
             {{ __("chosen as judges of a contest.                            ") }}
         </p>
+        <br />
         <hr class="my-4" />
-        
-        <!-- user roles -->
+
+        <!-- user roles in... -->
         <section name="user_roles" >
             <livewire:user.role.listed />
         </section>
@@ -94,6 +95,5 @@ use Illuminate\Support\Facades\Auth;
         <section name="user_roles" class="mb-4 sm:px-6 lg:px-8 py-12">
             <livewire:contest.jury.listed />
         </section>
-
     </div>
 </x-app-layout>
