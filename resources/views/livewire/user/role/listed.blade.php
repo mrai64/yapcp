@@ -1,7 +1,7 @@
 <?php
 /**
- * User Roles 
- * in User dashboard
+ * User Roles list
+ * for User dashboard
  */
 
 ?>
@@ -9,9 +9,12 @@
 <div>
     @if (isset($userRoleList) && (count($userRoleList) > 0))
     <h2 class="fyk font-semibold text-2xl text-gray-800 leading-tight">
-        {{ __("Your roles in") }}
+        {{ __("You are in") }}
     </h2>
-    <hr />
+    <p class="small">
+        {{ __('Please: for any variation, maintain updated your Roles data.') }}
+    </p>
+    <br />
     <ul>
         @foreach($userRoleList as $role)
         <li class="my-2 p-4 font-medium">
@@ -63,7 +66,7 @@
                 >[ {{ __('Closing Role (today)') }} ]</a>
             </div>
             <div class="inline-flex h-16 w-auto sm:px-3 lg:px-4">
-            <a  href="{{ route('federation.modify', ['fid' => $role['federation_id'] ]) }}"
+            <a  href="{{ route('federation.modify', ['federation' => $role['federation_id'] ]) }}"
                 class="font-medium rounded-md py-2"
                 >[ {{ __('Federation dashboard') }} ]</a>
             </div>
@@ -98,9 +101,6 @@
         </li>
         @endforeach
     </ul>
-    <div class="border text-sm rounded-md px-4 py-2">
-        {{ __('Please: for any variation, maintain updated your Roles data.') }}
-    </div>
 
     @else
     <div class="border rounded-md px-4 py-2">
