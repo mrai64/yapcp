@@ -15,9 +15,11 @@ namespace App\Livewire\Federation;
 
 use App\Models\Country;
 use App\Models\Federation;
+use App\Models\Timezone;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -25,24 +27,22 @@ class Modify extends Component
 {
     public Federation $federation;
 
-    // readonly
-    #[Validate('required|string|max:10|unique:federations,id')]
     public string $federationId;
 
-    #[Validate('required|string|max:255')]
     public string $federationNameEn = '';
 
-    #[Validate('string|url|max:255')]
     public string $website = '';
 
-    #[Validate('required|string|uppercase|min:3|exists:countries,id')]
     public string $countryId;
 
-    #[Validate('string')]
+    public string $timezoneId;
+
     public string $federationContact = '';
 
     // readonly
     public $countries;
+
+    public $timezoneSet;
 
     /**
      * 1. Before the show
@@ -62,8 +62,11 @@ class Modify extends Component
         $this->website           = $federation->website;
         $this->countryId         = $federation->country_id;
         $this->federationContact = $federation->contact_info;
+        $this->timezoneId        = $federation->timezone_id ?? 'Europe/Rome';
 
         $this->countries         = Country::countriesSorted();
+        $timezoneSet             = Timezone::all()->pluck(['id']);
+        $this->timezoneSet       = collect($timezoneSet)->sortBy('id')->toArray();
     }
 
     /**
@@ -76,8 +79,19 @@ class Modify extends Component
 
     /**
      * 3. validation rules
-     * see definition - no need rules()
      */
+    public function rules() {
+        return [
+            'federationId' => [
+                Rule::unique('federations', 'id')->ignore($this->federationId, 'id')
+            ],
+            'federationNameEn' => 'required|string|max:255',
+            'website' => 'string|url|max:255',
+            'countryId' => 'required|exists:countries,id',
+            'timezoneId' => 'required|exists:timezones,id',
+            'federationContact' => 'string',
+        ];
+    }
 
     /**
      * 4. After the show
@@ -93,10 +107,11 @@ class Modify extends Component
 
         //
         $this->federation->update([
-            'id'         => $validated['federationId'],
-            'name_en'    => $validated['federationNameEn'],
-            'website'    => $validated['website'],
-            'country_id' => $validated['countryId'],
+            'id'           => $validated['federationId'],
+            'name_en'      => $validated['federationNameEn'],
+            'website'      => $validated['website'],
+            'country_id'   => $validated['countryId'],
+            'timezone_id'  => $validated['timezoneId'],
             'contact_info' => $validated['federationContact'],
         ]);
 
