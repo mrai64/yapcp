@@ -5,6 +5,9 @@
  *
  * 2025-12-05 review for Country::countriesSorted and Log
  * 2026-03-26 changed mount input from id to organization
+ *
+ * @see /resources/views/livewire/organization/modify.blade.php
+ *
  */
 
 namespace App\Livewire\Organization;
@@ -28,6 +31,9 @@ class Modify extends Component
     public string $email;
 
     public string $website;
+
+    public string $contact;
+
     // created_at
     // updated_at
     // deleted_at
@@ -46,7 +52,9 @@ class Modify extends Component
         $this->countryId     = $this->organization->country_id;
         $this->name          = $this->organization->name;
         $this->email         = $this->organization->email;
-        $this->website       = $this->organization->website;
+        $this->website       = $this->organization->website ?? '';
+        $this->contact       = $this->organization->contact ?? '';
+
         Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . 'l :' . __LINE__ . ' out:' . json_encode($this));
         // created_at
         // updated_at
@@ -74,8 +82,9 @@ class Modify extends Component
         return [
             'countryId' => 'required|string|uppercase|min:3|exists:countries,id',
             'name'      => 'required|string|min:3|max:255',
-            'email'     => 'required|string|email|max:255',
-            'website'   => 'string|url|max:255',
+            'email'     => 'required|string|email|max:255|unique:organization,email',
+            'website'   => 'string|url|max:255|unique:organization,website',
+            'contact'   => 'string|max:1000',
         ];
     }
 
@@ -94,6 +103,7 @@ class Modify extends Component
             'name'         => $validated['name'],
             'email'        => $validated['email'],
             'website'      => $validated['website'],
+            'contact'      => $validated['contact'],
         ]);
 
         // to list

@@ -2,8 +2,9 @@
 
 /**
  * User add Organization
- * 
- * @see /app/Livewire/Organization/App.php 
+ *
+ * @see /app/Livewire/Organization/Add.php
+ *
  */
 
 ?>
@@ -24,7 +25,7 @@
             </a>
         </p>
     </header>
-    <form wire:submit="save">
+    <form wire:submit="saveOrganization">
         @csrf
 
         <div>

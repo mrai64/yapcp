@@ -1,21 +1,31 @@
+<?php 
+
+/**
+ * User modify Organization
+ *
+ * @see /app/Livewire/Organization/Modify.php
+ *
+ */
+
+?>
+
 <div>
-    <div class="header">
+    <header>
         <h2 class="fyk text-2xl font-medium text-gray-900">
-            {{ __('Organization infos ') }}
+            {{ __('Modify Organization infos') }}
         </h2>
-        <h3 class="mb-4">
-            {{"Back to "}}
+        <p class="fyk text-xl font-medium mb-4">
+            {{ __("Back to ")}}
             <a href="{{ route('organization.list') }}">
-                [ {{ __('Organization list') }} ]
+                [ {{__('Organization list')}} ]
             </a>
             . .
-            {{"Back to "}}
+            {{ __("Back to ")}}
             <a href="{{ route('organization.dashboard', ['organization' => $id ]) }}">
                 [ {{ __('Organization dashboard') }} ]
             </a>
-        </h3>
-    </div>
-
+        </p>
+    </header>
     <form wire:submit="updateOrganization">
         @csrf
 
@@ -37,7 +47,7 @@
             <div class="alert alert-danger small">@error('countryId') {{ $message }} @enderror</div>
         </div>
 
-        <div>
+        <div class="mb-4">
             <label for="name"
                 class="block mt-4 font-medium text-sm text-gray-700"
                 >
@@ -54,11 +64,11 @@
             @enderror
         </div>
 
-        <div>
+        <div class="mb-4">
             <label for="email"
                 class="block mt-4 font-medium text-sm text-gray-700"
                 >
-                {{__('email')}}
+                {{__('Secretary email')}}
             </label>
             <input
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full"
@@ -71,11 +81,11 @@
             @enderror
         </div>
 
-        <div>
+        <div class="mb-4">
             <label for="website"
                 class="block mt-4 font-medium text-sm text-gray-700"
                 >
-                {{__('website')}}
+                {{__('Official website')}}
             </label>
             <input
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full"
@@ -88,6 +98,19 @@
             <div class="alert alert-danger small">{{ $message }}</div>
             @enderror
         </div>
+
+        <div class="mb-4">
+            <style>textarea {resize:vertical;}</style>
+            <label class="block font-medium text-sm text-gray-700" for="contact">
+                {{ __('Organization HQ and reference contact') }}
+            </label>
+            <textarea 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                type="text" name="contact"
+                wire:model="contact"
+            >{{ old('contact') }}</textarea>
+            <div class="small">@error('contact') {{ $message }} @enderror</div>
+        </div><!-- contact info -->
 
         <hr />
 
