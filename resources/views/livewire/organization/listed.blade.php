@@ -1,3 +1,14 @@
+<?php
+
+/**
+ * Organization List
+ * 
+ * @see /app/Livewire/Organization/Listed.php
+ * 
+ */
+
+?>
+
 <div>
     <!-- organization list -->
     <a  href="{{ route('user.organization.add') }}" 
@@ -14,7 +25,7 @@
     </div> 
     @endif
 
-    @if(isset($organization_list) && 
+    @if(isset($organization_list) &&
        count($organization_list) > 0)
     <ul class="">   
        <?php $first_bool = true; ?>
@@ -23,16 +34,15 @@
         <strong class="fyk text-xl">{{$org->name}} / {{$org->country_id}}<br /></strong> 
         <em>{{__('email')}}:</em> {{$org->email}}<br />
         <em>{{__('website')}}:</em> {{$org->website}}<br />
-        <small><em>{{__('uuid')}}: {{$org->id}}</em></small>
         <a href="{{route('organization.dashboard', ['organization' => $org->id ])}}" 
-        class="font-medium rounded-md px-4 py-4">
-            [ {{__('user.dashboard')}} ]
+            class="font-medium rounded-md px-4 py-4">
+            [ {{__('dashboard')}} ]
         </a>
-        <a href="{{route('user.organization.modify', ['id' => $org->id ])}}" 
+        <a href="{{route('user.organization.modify', ['organization' => $org->id ])}}" 
             class="font-medium rounded-md px-4 py-4">
             [ {{__('Modify')}} ]
         </a>
-        <a href="/organization/remove/{{$org->id}}" 
+        <a href="{{ route('user.organization.delete', ['organization' => $org ]) }}"
             class="font-medium rounded-md px-4 py-4">
             [ {{__('Remove')}} ]
         </a>

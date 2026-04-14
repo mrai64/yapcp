@@ -28,22 +28,19 @@ class Remove extends Component
     // updated_at
     // deleted_at
 
-    public $country;
+    public string $country;
 
-    public function mount(string $id) // id as in route()
+    public function mount(Organization $organization) // organization as in route()
     {
-        $org = new Organization();
-        $this->organization = $org->findOrFail($id);
-        $this->id = $this->organization->id; // uuid
-        $this->country_id = $this->organization->country_id;
-        $this->name = $this->organization->name;
-        $this->email = $this->organization->email;
-        $this->website = $this->organization->website;
+        $this->organization = $organization;
+        $this->id = $organization->id; // uuid
+        $this->country_id = $organization->country_id;
+        $this->name = $organization->name;
+        $this->email = $organization->email;
+        $this->website = $organization->website;
 
-        $this->country = DB::table(Country::TABLENAME)
-            ->whereNull('deleted_at')
-            ->where('id', $this->country_id)
-            ->pluck('id');
+        $country = Country::find($this->country_id);
+        $this->country = $country->flag_code . " | " . $country->country;
     }
 
     public function render()
@@ -52,29 +49,11 @@ class Remove extends Component
     }
 
     /**
-     * Validation rules
-     */
-    public function rules()
-    {
-        return [
-            // TODO Country::idValidate( string ) : bool
-            // https://laravel.com/docs/12.x/validation#available-validation-rules
-            'country_id' => 'required|string|uppercase|min:3|max:3',
-            'name' => 'required|string|min:3|max:255',
-            'email' => 'required|string|email|max:255',
-            'website' => 'string|url|max:255',
-        ];
-    }
-
-    /**
      * At last (soft)Delete
      */
-    public function delete()
+    public function deleteOrganization()
     {
-        $this->validate();
-
-        $org = new Organization();
-        $org->findOrFail($this->id)->delete();
+        $this->organization->delete();
 
         // back to list
         return redirect()

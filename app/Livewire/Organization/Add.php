@@ -14,7 +14,7 @@ use Livewire\Component;
 
 class Add extends Component
 {
-    // uuid
+    // form fields
     public string $country_id;
 
     public string $name;
@@ -22,6 +22,8 @@ class Add extends Component
     public string $email;
 
     public string $website;
+
+    public string $contact;
 
     // created_at
     // updated_at
@@ -48,6 +50,7 @@ class Add extends Component
             'name' => 'required|string|min:3|max:255',
             'email' => 'required|string|email|max:255',
             'website' => 'string|url|max:255',
+            'contact' => 'string|max:1000',
         ];
     }
 

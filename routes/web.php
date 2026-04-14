@@ -101,14 +101,14 @@ Route::post('/admin/federation/store', [FederationController::class, 'store'])
     ->name('federation.store');
 // federation update, livewire - admin
 Route::get('/admin/federation/modify/{federation}', Federation\Modify::class, ['fid'])
-    ->middleware(['auth', 'verified', 'can:update,' . ModelsFederation::class])
+    ->middleware(['auth', 'verified', 'can:update,federation'])
     ->name('federation.modify');
 // TODO federation remove only in maintenance mode
 Route::get('/admin/federation/remove/{federation}', Federation\Remove::class)
-    ->middleware(['auth', 'verified', 'can:delete' . ModelsFederation::class])
+    ->middleware(['auth', 'verified', 'can:delete,federation'])
     ->name('federation.delete');
 Route::delete('/admin/federation/remove/{federation}', Federation\Remove::class)
-    ->middleware(['auth', 'livewire', 'can:delete,' . ModelsFederation::class]);
+    ->middleware(['auth', 'livewire', 'can:delete,federation']);
 
 /**
  * FederationSection - admin only
@@ -119,13 +119,13 @@ Route::get('/admin/federation/section/add/{federation}', Federation\Section\Add:
     ->middleware(['auth', 'verified', 'can:create,' . ModelsFederationSection::class])
     ->name('federation-section.add');
 Route::get('/admin/federation/section/modify/{federation-section}', Federation\Section\Modify::class)
-    ->middleware(['auth', 'verified', 'can:update,' . ModelsFederationSection::class])
+    ->middleware(['auth', 'verified', 'can:update,federation-section'])
     ->name('federation-section.modify');
 Route::get('/admin/federation/section/remove/{federation-section}', Federation\Section\Remove::class)
-    ->middleware(['auth', 'verified', 'can:delete,' . ModelsFederationSection::class])
+    ->middleware(['auth', 'verified', 'can:delete,federation-section'])
     ->name('federation-section.delete');
 Route::delete('/admin/federation/section/remove/{federation-section}', Federation\Section\Remove::class)
-    ->middleware(['auth', 'verified', 'can:delete,' . ModelsFederationSection::class]);
+    ->middleware(['auth', 'verified', 'can:delete,federation-section']);
 // no name()
 
 /**
@@ -147,17 +147,17 @@ Route::get('/user/organization/add/', Organization\Add::class)
     ->name('user.organization.add');
 // organization modify - admin | user member(organization)
 Route::get('/user/organization/modify/{organization}', Organization\Modify::class)
-    ->middleware(['auth', 'verified', 'can:update,' . ModelOrganization::class])
+    ->middleware(['auth', 'verified', 'can:update,organization'])
     ->name('user.organization.modify');
 Route::get('/user/organization/remove/{organization}', Organization\Remove::class)
-    ->middleware(['auth', 'verified', 'can:delete,' . ModelOrganization::class])
+    ->middleware(['auth', 'verified', 'can:delete,organization'])
     ->name('user.organization.delete');
 Route::delete('/user/organization/remove/{organization}', Organization\Remove::class)
-    ->middleware(['auth', 'verified', 'can:delete,' . ModelOrganization::class]);
+    ->middleware(['auth', 'verified', 'can:delete,organization']);
 // no name()
 // organization dashboard - admin | user member(organization)
 Route::get('/organization/dashboard/{organization}', Organization\Dashboard::class)
-    ->middleware(['auth', 'verified', 'can:update,' . ModelOrganization::class])
+    ->middleware(['auth', 'verified', 'can:update,organization'])
     ->name('organization.dashboard'); // no user.organization.dashboard
 
 /**
