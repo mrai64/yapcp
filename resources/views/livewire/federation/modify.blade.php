@@ -12,16 +12,16 @@
         <h2 class="fyk text-2xl font-medium text-gray-900">
             {{ __('Modify few Federation infos') }}
         </h2>
-    <hr />
-    <br />
-    <p class="mb-4">
-        <a href="{{ route('federation-section.list', ['federation' => $federation])}}" 
-            class="fyk text-xl mb-4"
-            target="_blank" rel="noopener noreferrer"
-            >
-        Federation' Coded Sections List 🗒️
-        </a>
-    </p><!-- federation section list -->
+        <hr />
+        <br />
+        <p class="mb-4">
+            <a href="{{ route('federation-section.list', ['federation' => $federation])}}" 
+                class="fyk text-xl mb-4"
+                target="_blank" rel="noopener noreferrer"
+                >
+            Federation' Coded Sections List 🗒️
+            </a>
+        </p><!-- federation section list -->
 
         <p class="fyk text-xl font-medium mb-4">
             <a  href="{{ route('federation.list') }}"

@@ -14,89 +14,109 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 
-uses(RefreshDatabase::class);
-
 it('mounts correctly with federation data - admin user', function () {
+    // Arrange
     $country = Country::factory()->create();
-    $user = User::factory()->create(); // simple user
     $adminUser = User::factory()->admin()->create(); // admin user
+    $federation = Federation::factory()->create([
+        'name_en' => 'International Federation',
+        'website' => 'https://example.org',
+        'country_id' => $country->id,
+        'timezone_id' => 'Europe/Rome',
+        'contact_info' => 'Contact details here',
+    ]);
+    // Act Assert
+    // form fields vs record fields
+    Livewire::actingAs($adminUser)
+        ->test(Modify::class, ['federation' => $federation])
+        ->assertStatus(200)
+        ->assertSet('federationId', $federation->id)
+        ->assertSet('federationNameEn', $federation->name_en)
+        ->assertSet('website', $federation->website)
+        ->assertSet('countryId', $federation->country_id)
+        ->assertSet('federationContact', $federation->contact_info)
+        ->call('updateFederation');
+    //
+    $this->assertDatabaseHas('federations', [
+        'id' => $federation->id,
+        'name_en' => $federation->name_en,
+    ]);
+});
 
+it('federation name is required', function () {
+    // Arrange
+    $country = Country::factory()->create();
+    $adminUser = User::factory()->admin()->create(); // admin user
     $federation = Federation::factory()->create([
         'name_en' => 'International Federation',
         'website' => 'https://example.org',
         'country_id' => $country->id,
         'contact_info' => 'Contact details here',
     ]);
-
-    $modifiedFederation = Federation::factory()->create([
-        'name_en' => 'Modified Federation',
-        'website' => 'https://modified.org',
-        'country_id' => $country->id,
-        'contact_info' => 'Modified contact details',
-    ]);
-
-    // form fields vs record fields
+    // Act Assert
     Livewire::actingAs($adminUser)
         ->test(Modify::class, ['federation' => $federation])
-        ->assertStatus(200)
-        ->assertSet('id', $federation->id)
-        ->assertSet('federationNameEn', $federation->name_en)
-        ->assertSet('website', $federation->website)
-        ->assertSet('countryId', $federation->country_id)
-        ->assertSet('federationContact', $federation->contact_info)
-        ->assertSee($federation->name_en);
-
-});
-
-/**
- *
- *
-test('federation name is required', function () {
-    $country = Country::factory()->create();
-    $federation = Federation::factory()->create(['country_id' => $country->id]);
-
-    Livewire::test(Modify::class, ['federation' => $federation])
         ->set('federationNameEn', '')
         ->call('updateFederation')
         ->assertHasErrors(['federationNameEn' => 'required']);
 });
 
-test('website must be valid url', function () {
+it('website must be valid url', function () {
+    // Arrange
     $country = Country::factory()->create();
-    $federation = Federation::factory()->create(['country_id' => $country->id]);
-
-    Livewire::test(Modify::class, ['federation' => $federation])
+    $adminUser = User::factory()->admin()->create(); // admin user
+    $federation = Federation::factory()->create([
+        'name_en' => 'International Federation',
+        'website' => 'https://example.org',
+        'country_id' => $country->id,
+        'contact_info' => 'Contact details here',
+    ]);
+    // Act Assert
+    Livewire::actingAs($adminUser)
+        ->test(Modify::class, ['federation' => $federation])
         ->set('website', 'invalid-url')
         ->call('updateFederation')
         ->assertHasErrors(['website' => 'url']);
 });
 
-test('country id must exist', function () {
+it('country id must exitst', function () {
+    // Arrange
     $country = Country::factory()->create();
-    $federation = Federation::factory()->create(['country_id' => $country->id]);
-
-    Livewire::test(Modify::class, ['federation' => $federation])
-        ->set('countryId', 'ZZZ') // Non-existent
+    $adminUser = User::factory()->admin()->create(); // admin user
+    $federation = Federation::factory()->create([
+        'name_en' => 'International Federation',
+        'website' => 'https://example.org',
+        'country_id' => $country->id,
+        'contact_info' => 'Contact details here',
+    ]);
+    // Act Assert
+    Livewire::actingAs($adminUser)
+        ->test(Modify::class, ['federation' => $federation])
+        ->set('countryId', 'ZZZ')
         ->call('updateFederation')
         ->assertHasErrors(['countryId' => 'exists']);
 });
 
-test('update federation saves changes and redirects', function () {
-    $oldCountry = Country::factory()->create(['id' => 'USA']);
-    $newCountry = Country::factory()->create(['id' => 'CAN']);
+it('update federation saves changes and redirects', function () {
+    $oldCountry = Country::find('USA');
+    $newCountry = Country::find('CAN');
+    $adminUser = User::factory()->admin()->create(); // admin user
 
     $federation = Federation::factory()->create([
-        'name_en' => 'Old Name',
+        'name_en' => 'International Federation',
+        'website' => 'https://example.org',
         'country_id' => $oldCountry->id,
+        'contact_info' => 'Contact details here',
     ]);
 
-    Livewire::test(Modify::class, ['federation' => $federation])
+    Livewire::actingAs($adminUser)
+        ->test(Modify::class, ['federation' => $federation])
         ->set('federationNameEn', 'Updated Name')
         ->set('website', 'https://updated.com')
         ->set('countryId', $newCountry->id)
         ->set('federationContact', 'New Contact')
         ->call('updateFederation')
-        ->assertRedirect(route('federation.list'))
+        ->assertRedirectToRoute('federation.list')
         ->assertSessionHas('success');
 
     $this->assertDatabaseHas('federations', [
@@ -107,5 +127,3 @@ test('update federation saves changes and redirects', function () {
         'contact_info' => 'New Contact',
     ]);
 });
- *
- */

@@ -24,9 +24,9 @@ class Add extends Component
 
     public string $email;
 
-    public string $website;
+    public ?string $website = null;
 
-    public string $contact;
+    public ?string $contact = null;
 
     // created_at
     // updated_at
@@ -51,9 +51,9 @@ class Add extends Component
         return [
             'country_id' => 'required|string|exists:countries,id',
             'name' => 'required|string|min:3|max:255',
-            'email' => 'required|string|email|max:255|unique:organization,email',
-            'website' => 'string|url|max:255|unique:organization,website',
-            'contact' => 'string|max:1000',
+            'email' => 'required|string|email|max:255|unique:organizations,email',
+            'website' => 'nullable|string|url|max:255|unique:organizations,website',
+            'contact' => 'nullable|string|max:1000',
         ];
     }
 
