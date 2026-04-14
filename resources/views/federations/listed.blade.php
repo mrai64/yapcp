@@ -26,22 +26,27 @@
 
         <p class="fyk text-xl font-medium mb-4">
             <a href="{{ route('federation.add')}}" 
-                class="float-end font-medium rounded-md py-2"
-                >[ {{__('Add a new Federation')}} ]</a>
+                class="float-end font-medium rounded-md py-2" >
+                [ {{__('Add a new Federation')}} ]
+            </a>
         </p>
 
         @if(isset($federationSet) && count($federationSet) > 0 )
         <ul>
             @foreach($federationSet as $federation)
-            <li class="my-2 p-4 font-medium">
-                <strong class="fyk text-xl">{{$federation->name_en}}</strong><br />
+            <li class="font-medium my-2 p-4">
+                <strong class="fyk text-xl">{{$federation->name_en}}</strong>
+                <br />
                 {{$federation->code}} | Country: {{$federation->country_id}} | web: {{$federation->website}}
+                <br />
                 <a  href="{{ route('federation.modify', ['federation' => $federation]) }}"
-                    class="font-medium rounded-md px-4 py-2"
-                    >[ {{ __('Modify') }} ]</a>
+                    class="fyk font-medium rounded-md pe-4 py-2" >
+                    [ {{ __('Modify') }} ]
+                </a>
                 <a  href="{{ route('federation.delete', ['federation' => $federation]) }}"
-                    class="font-medium rounded-md px-4 py-2"
-                    >[ {{ __('Remove') }} ]</a>
+                    class="fyk font-medium rounded-md px-4 py-2" >
+                    [ {{ __('Remove') }} ]
+                </a>
             </li>
             @endforeach
         </ul>

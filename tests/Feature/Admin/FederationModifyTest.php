@@ -111,6 +111,7 @@ it('update federation saves changes and redirects', function () {
 
     Livewire::actingAs($adminUser)
         ->test(Modify::class, ['federation' => $federation])
+        ->set('federationId', $federation->id)
         ->set('federationNameEn', 'Updated Name')
         ->set('website', 'https://updated.com')
         ->set('countryId', $newCountry->id)
