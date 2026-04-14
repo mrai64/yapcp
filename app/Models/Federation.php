@@ -104,6 +104,14 @@ class Federation extends Model
     protected function casts(): array
     {
         return [
+            'id' => 'string',
+            'country_id' => 'string',
+            'name_en' => 'string',
+            'local_lang' => 'string',
+            'name_local' => 'string',
+            'timezone_id' => 'string',
+            'website' => 'string',
+            'contact_info' => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
