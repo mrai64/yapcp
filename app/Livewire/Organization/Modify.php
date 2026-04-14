@@ -15,6 +15,7 @@ namespace App\Livewire\Organization;
 use App\Models\Country;
 use App\Models\Organization;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class Modify extends Component
@@ -30,9 +31,9 @@ class Modify extends Component
 
     public string $email;
 
-    public string $website;
+    public ?string $website = null;
 
-    public string $contact;
+    public ?string $contact = null;
 
     // created_at
     // updated_at
@@ -46,16 +47,16 @@ class Modify extends Component
      */
     public function mount(Organization $organization) // route
     {
-        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . 'l :' . __LINE__ . ' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         $this->id            = $organization->id;
         $this->organization  = $organization;
         $this->countryId     = $this->organization->country_id;
         $this->name          = $this->organization->name;
         $this->email         = $this->organization->email;
-        $this->website       = $this->organization->website ?? '';
-        $this->contact       = $this->organization->contact ?? '';
+        $this->website       = $this->organization->website;
+        $this->contact       = $this->organization->contact;
 
-        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . 'l :' . __LINE__ . ' out:' . json_encode($this));
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' out:' . json_encode($this));
         // created_at
         // updated_at
         // deleted_at
@@ -66,7 +67,7 @@ class Modify extends Component
      */
     public function render()
     {
-        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . 'l :' . __LINE__ . ' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         $this->countries = Country::countriesSorted();
 
         return view('livewire.organization.modify');
@@ -77,14 +78,26 @@ class Modify extends Component
      */
     public function rules()
     {
-        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . 'l :' . __LINE__ . ' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' email: ' . 'required|string|email|max:255|unique:organizations,email,' . $this->id );
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' website: ' . 'string|url|max:255|unique:organizations,website,' . $this->id );
 
         return [
             'countryId' => 'required|string|uppercase|min:3|exists:countries,id',
             'name'      => 'required|string|min:3|max:255',
-            'email'     => 'required|string|email|max:255|unique:organization,email',
-            'website'   => 'string|url|max:255|unique:organization,website',
-            'contact'   => 'string|max:1000',
+            'email' => [
+                'required',
+                'string',
+                'email',
+                Rule::unique(Organization::class, 'email')->ignore($this->organization)
+            ],
+            'website' => [
+                'nullable',
+                'string',
+                'url',
+                'max:255',
+            ],
+            'contact'   => 'nullable|string|max:1000',
         ];
     }
 
@@ -93,10 +106,10 @@ class Modify extends Component
      */
     public function updateOrganization()
     {
-        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . 'l :' . __LINE__ . ' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         $validated = $this->validate();
 
-        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . 'l :' . __LINE__ . ' validate:' . json_encode($validated));
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' validate:' . json_encode($validated));
         $this->organization->update([
         //  'id'           => $this->organization->id,
             'country_id'   => $validated['countryId'],
