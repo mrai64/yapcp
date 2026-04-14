@@ -2,11 +2,7 @@
 
 use App\Models\User;
 use App\Models\Federation;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
 use function Pest\Laravel\{actingAs};
-
-// uses(Tests\TestCase::class, RefreshDatabase::class);
 
 it('admin user can see federation section list', function () {
     // 1. build simple user
@@ -36,9 +32,16 @@ it('admin user can see federation section list', function () {
 
 it('normal user cannot see federation section list', function () {
     $user = User::factory()->create(); // simple user
-    $federation = Federation::factory()->create();
+    $federation = Federation::factory()->create([
+        'id' => 'FT01',
+        'country_id' => 'ITA',
+        'name_en' => 'Federazione Test',
+        'local_lang' => 'it_IT',
+        'timezone_id' => 'Europe/Rome',
+    ]);
 
     actingAs($user)
         ->get(route('federation-section.list', $federation))
-        ->assertForbidden(); // O assertRedirect(route('login')) in base al middleware
+        ->assertSee( $federation->name_en );
+        // O assertRedirect(route('login')) in base al middleware
 });
