@@ -40,6 +40,7 @@ use Illuminate\Support\Facades\Auth;
             [ {{ __("Contest Open ") }} ]
             </a>
         </div>
+        . .
         <br />
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
             <a href="{{ route('organization.list') }}">
@@ -48,16 +49,17 @@ use Illuminate\Support\Facades\Auth;
         </div>
         . .
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('user-role.add.organization') }}">
-            [ {{ __("Add in Organization") }} ]
+            <a href="{{ route('user.organization.add') }}">
+                [ {{ __("Add a new Org") }} ]
             </a>
         </div>
         . .
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('user.organization.add') }}">
-                [ {{ __("Add new Organization") }} ]
+            <a href="{{ route('user-role.add.organization') }}">
+            [ {{ __("Add you in Organization") }} ]
             </a>
         </div>
+        . .
         <br />
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
             <a href="{{ route('federation.list') }}">
@@ -66,14 +68,14 @@ use Illuminate\Support\Facades\Auth;
         </div>
         . .
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('user-role.add.federation') }}">
-                [ {{ __("Add in Federation") }} ]
+            <a href="{{ route('federation.add') }}">
+                [ {{ __("Add a new Fed") }} ]
             </a>
         </div>
         . .
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('federation.add') }}">
-                [ {{ __("Add new Federation") }} ]
+            <a href="{{ route('user-role.add.federation') }}">
+                [ {{ __("Add you in Federation") }} ]
             </a>
         </div>
         . .
