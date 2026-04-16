@@ -11,7 +11,6 @@ use App\Livewire\Federation\Modify;
 use App\Models\Country;
 use App\Models\Federation;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 
 it('mounts correctly with federation data - admin user', function () {

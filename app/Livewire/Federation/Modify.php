@@ -20,7 +20,6 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Modify extends Component
@@ -80,7 +79,8 @@ class Modify extends Component
     /**
      * 3. validation rules
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             'federationId' => [
                 Rule::unique('federations', 'id')->ignore($this->federationId, 'id')
