@@ -11,11 +11,15 @@ class UserContactPolicy
 {
     /**
      * Determine whether the user can view any models.
+     *
+     * admin can view the entre list of.
      */
     public function viewAny(User $user): bool
     {
         Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
-        return false;
+        $evaluate = UserRole::isAdmin();
+        Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' evaluated:' . $evaluate);
+        return $evaluate;
     }
 
     /**
