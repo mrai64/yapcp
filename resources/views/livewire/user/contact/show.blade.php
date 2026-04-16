@@ -1,8 +1,35 @@
-<div>
-    <h2 class="fyk text-3xl mb-4">{{ __("👤 Your Information")}}</h2>
-    <p class="small">{{ __("Info required from contest")}}</p>
+<?php 
+/**
+ * user contact model - show individual values
+ *
+ * @see /app/livewire/user/contact/show.blade.php
+ *
+ */
 
-    <!- simulate DD DT with table structure -->
+?> 
+
+<div>
+    <header>
+        <h2 class="fyk text-2xl font-medium text-gray-900">
+            {{ __("👤 Your Information")}}
+        </h2>
+        <hr />
+        <p class="small mb-4">
+            {{ __("Excluding email and password, here are listed all your personal information")}}
+            {{ __("that are used to fill your ev participation to contest,") }}
+            {{ __("or fill jury minute, and you can change it anytime.") }}
+            <br />
+            {{ __("Some infos are required 'extra' from federations for sponsored contest,")}}
+            {{ __("and are reported below.")}}
+        </p>
+        <p class="fyk text-xl font-medium mb-4">
+            <a  href="{{ route('user-contact.modify1', ['uid' => $userContact->id] ) }}"
+                rel="noopener noreferrer">
+            [ {{ __('Modify your personal infos') }} ]
+            </a>
+        </p>
+    </header>
+    <!-- simulate DD DT with table structure -->
     <table class="data-table-container w-full">
         <thead>
             <tr>
@@ -27,7 +54,7 @@
             <tr>
                 <td>&nbsp;</td>
                 <td>{{ __("From") }}</td>
-                <td>{{ $country->flag_code ?? 'N\A'}}</td>
+                <td>{{ $userContact->country->flag_code ?? 'N\A'}} {{ $userContact->country->country }}</td>
             </tr>
             <tr>
                 <td colspan="3">International Postal Address</td>
