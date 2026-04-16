@@ -33,7 +33,7 @@ class Dashboard extends Component
         ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         $this->organization = $organization;
         $this->id = $organization->id;
-        
+
         $this->organizationMembersRolesSet = UserRole::where('organization_id', $this->id)
             ->orderBy('role')
             ->orderBy('updated_at')

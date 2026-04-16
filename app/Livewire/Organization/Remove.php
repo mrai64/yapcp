@@ -8,7 +8,6 @@ namespace App\Livewire\Organization;
 
 use App\Models\Country;
 use App\Models\Organization;
-use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Remove extends Component

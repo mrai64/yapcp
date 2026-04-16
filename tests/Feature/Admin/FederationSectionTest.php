@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use App\Models\Federation;
+
 use function Pest\Laravel\{actingAs};
 
 it('admin user can see federation section list', function () {
@@ -42,6 +43,6 @@ it('normal user cannot see federation section list', function () {
 
     actingAs($user)
         ->get(route('federation-section.list', $federation))
-        ->assertSee( $federation->name_en );
-        // O assertRedirect(route('login')) in base al middleware
+        ->assertSee($federation->name_en);
+    // O assertRedirect(route('login')) in base al middleware
 });
