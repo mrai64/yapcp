@@ -79,8 +79,8 @@ class Modify extends Component
     public function rules()
     {
         Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
-        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' email: ' . 'required|string|email|max:255|unique:organizations,email,' . $this->id );
-        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' website: ' . 'string|url|max:255|unique:organizations,website,' . $this->id );
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' email: ' . 'required|string|email|max:255|unique:organizations,email,' . $this->id);
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' website: ' . 'string|url|max:255|unique:organizations,website,' . $this->id);
 
         return [
             'countryId' => 'required|string|uppercase|min:3|exists:countries,id',
