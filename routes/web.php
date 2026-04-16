@@ -85,7 +85,10 @@ Route::view('/user/profile', 'profile')
  *
  */
 // TODO user-contact list must be a user directory for admin use
-// user-contact list - no
+// user-contact list - admin only
+Route::get('/admin/user/contact/listed', User\Contact\Listed::class)
+    ->middleware(['auth', 'verified', 'can:viewAny,' . ModelsUserContact::class])
+    ->name('user-contact.listed');
 // user-contact add - no
 // user-contact show - user | admin
 Route::get('/user/contact/show/{userContact?}', User\Contact\Show::class)
