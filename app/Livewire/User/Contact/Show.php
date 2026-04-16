@@ -16,7 +16,7 @@ class Show extends Component
 {
     public UserContact $userContact;
 
-    public function mount(UserContact $userContact = null) // from route, parm can miss
+    public function mount(?UserContact $userContact = null) // from route, parm can miss
     {
         Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         if ($userContact) {
