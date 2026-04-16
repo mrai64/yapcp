@@ -12,6 +12,7 @@
  * 5. delete
  *
  * That route board cover:
+ * - [splashscreen n credits]
  * - User
  * - UserContact
  * - UserRole
@@ -52,6 +53,7 @@ use App\Livewire\User;
 use App\Models\Contest as ModelsContest;
 use App\Models\Federation as ModelsFederation;
 use App\Models\FederationSection as ModelsFederationSection;
+use App\Models\UserContact as ModelsUserContact;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -62,14 +64,6 @@ Route::view('/', 'welcome')
     ->name('welcome.aboard');
 Route::view('/credits', 'credits')
     ->name('credits.notice');
-
-
-Route::get('/contest/listed', Contest\Listed::class)
-    ->middleware(['auth', 'verified'])
-    ->name('contest.list');
-// TODO list of open contest with board of participants
-// TODO list of closed contest with board of winners
-// TODO contest admitted and awarded thumb
 
 /**
  * 2. User, platform registration - user
@@ -91,12 +85,13 @@ Route::view('/user/profile', 'profile')
  *
  */
 // TODO user-contact list must be a user directory for admin use
+// user-contact list - no
 // user-contact add - no
+// user-contact show - user | admin
+Route::get('/user/contact/show/{userContact?}', User\Contact\Show::class)
+    ->middleware(['auth', 'verified', 'can:view,' . ModelsUserContact::class])
+    ->name('user-contact.show');
 // user contact/ modify* - user itself n admin
-// TODO must become user-contact show, that's a single user contact data show
-Route::get('/user/contact/listed', User\Contact\Listed::class)
-    ->middleware(['auth', 'verified'])
-    ->name('user-contact.list');
 Route::get('/user/contact/modify1/{uid?}', User\Contact\Modify1YouAre::class)
     ->middleware(['auth', 'verified'])
     ->name('user-contact.modify1');
@@ -246,6 +241,10 @@ Route::delete('/user/organization/remove/{organization}', Organization\Remove::c
  * Contest
  * TODO /contest/listed for guest version - see up
  */
+
+Route::get('/contest/listed', Contest\Listed::class)
+    ->middleware(['auth', 'verified'])
+    ->name('contest.list');
 Route::get('/organization/contest/add/{oid}', Contest\Add::class, ['oid'])
     ->middleware(['auth', 'verified', 'can:create,' . ModelsContest::class])
     ->name('organization.contest.add');
@@ -396,6 +395,10 @@ Route::get('/organization/award-assign/jury-minute/{cid}', [JuryMinuteDraft::cla
 // Contest live - reports - no auth required - public access
 Route::get('/organization/reports/works-participant/{cid}', Organization\Reports\WorksParticipant::class, ['cid'])
     ->name('organization-reports-works-participant');
+
+// TODO list of open contest with board of participants
+// TODO list of closed contest with board of winners
+// TODO contest admitted and awarded thumb
 
 /**
  * Contest manage - "latest" job: report for federations

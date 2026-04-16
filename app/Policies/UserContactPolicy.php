@@ -3,7 +3,9 @@
 namespace App\Policies;
 
 use App\Models\User;
+use App\Models\UserRole;
 use App\Models\UserContact;
+use Illuminate\Support\Facades\Log;
 
 class UserContactPolicy
 {
@@ -12,14 +14,31 @@ class UserContactPolicy
      */
     public function viewAny(User $user): bool
     {
+        Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         return false;
     }
 
     /**
      * Determine whether the user can view the model.
+     *
+     * admin | user can view him/her userContact
      */
-    public function view(User $user, UserContact $userContact): bool
+    public function view(User $user, ?UserContact $userContact = null): bool
     {
+        // only for user in admin group
+        Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        $evaluate = UserRole::isAdmin();
+        Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' evaluated:' . $evaluate);
+        if ($evaluate) {
+            return true;
+        }
+
+        $userContactId = $userContact?->id;
+        Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' id:' . $userContactId);
+        if ($userContactId === $user->id) {
+            return true;
+        }
+
         return false;
     }
 
