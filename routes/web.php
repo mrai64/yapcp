@@ -89,14 +89,15 @@ Route::view('/user/profile', 'profile')
 Route::get('/admin/user/contact/listed', User\Contact\Listed::class)
     ->middleware(['auth', 'verified', 'can:viewAny,' . ModelsUserContact::class])
     ->name('user-contact.listed');
-// user-contact add - no
+// user-contact add - no, 
 // user-contact show - user | admin
 Route::get('/user/contact/show/{userContact?}', User\Contact\Show::class)
-    ->middleware(['auth', 'verified', 'can:view,' . ModelsUserContact::class])
-    ->name('user-contact.show');
+->middleware(['auth', 'verified', 'can:view,' . ModelsUserContact::class])
+->name('user-contact.show');
+// **review mark** //
 // user contact/ modify* - user itself n admin
-Route::get('/user/contact/modify1/{uid?}', User\Contact\Modify1YouAre::class)
-    ->middleware(['auth', 'verified'])
+Route::get('/user/contact/modify1/{userContact?}', User\Contact\Modify1YouAre::class)
+    ->middleware(['auth', 'verified', 'can:view,' . ModelsUserContact::class])
     ->name('user-contact.modify1');
 Route::get('/user/contact/modify2/{uid?}', User\Contact\Modify2PostAddress::class)
     ->middleware(['auth', 'verified'])
