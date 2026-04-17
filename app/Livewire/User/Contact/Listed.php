@@ -23,13 +23,13 @@ class Listed extends Component
     {
         ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
 
-        $userContactSet = UserContact::query()
+        $userContactSet = UserContact::with('country')
             ->orderBy('country_id', 'asc')
             ->orderBy('last_name', 'asc')
             ->orderBy('first_name', 'asc')
             ->orderBy('created_at', 'asc')
             ->simplePaginate(20);
-        // ->get();
+        //
         ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' res: ' 
             . json_encode($userContactSet));
 
