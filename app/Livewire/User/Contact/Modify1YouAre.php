@@ -6,7 +6,7 @@
  *
  * 2026-01-25 When name == surname and a comma is in the between
  *
- * @see /resources/views/livewire/user/contact/modify1-you-are.php
+ * @see /resources/views/livewire/user/contact/modify1-you-are.blade.php
  */
 
 namespace App\Livewire\User\Contact;
