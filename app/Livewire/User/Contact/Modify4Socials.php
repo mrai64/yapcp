@@ -10,6 +10,7 @@ use App\Models\Country;
 use App\Models\FederationMore;
 use App\Models\UserContact;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class Modify4Socials extends Component
@@ -36,24 +37,26 @@ class Modify4Socials extends Component
     public string $instagram;
 
     // 1. mount
-    public function mount(?string $uid = '')
+    public function mount(?UserContact $userContact = null) // as route
     {
-        if ($uid === '') {
-            $uid = Auth::id();
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        if ($userContact === null) {
+            Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' no parm');
+            $uid = Auth::id(); // user id
+            Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' uid: ' . $uid);
+            $this->userContact = UserContact::where('id', $uid)->first();
+            Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' uC: ' . json_encode($this->userContact));
+        } else {
+            Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' parm');
+            $this->userContact = $userContact;
         }
 
-        // if uid is not Auth::id(), auth::id() must be in user_admins.id
-        // otherwise -and temporary- abort 403
-        if ($uid != Auth::id()) {
-            abort(403, 'Unauthorized action.');
-        }
-
-        $this->userContact = UserContact::where('id', $uid)->first();
         // form fields
-        $this->firstName = $this->userContact->first_name;
-        $this->lastName = $this->userContact->last_name;
-        $this->countryId = ($this->userContact->country_id ?? '***');
-        $this->country = ($this->userContact->country ?? null);
+        $this->firstName = $this->userContact->first_name; // name         readonly
+        $this->lastName = $this->userContact->last_name; //   surname      readonly
+        // default value ITA as first developer he's italian 
+        $this->countryId = ($this->userContact->country_id ?? 'ITA');
+        $this->country = $this->userContact->country; //      nationality  readonly
 
         $this->website = $this->userContact->website ?? '';
         $this->facebook = $this->userContact->facebook ?? '';
@@ -99,13 +102,13 @@ class Modify4Socials extends Component
         // no additional fields at all
         if ($firstFed === null) {
             return redirect()
-                ->route('user-contact.modify1', ['uid' => $this->userContact->user_id])
+                ->route('user-contact.modify1', ['userContact' => $this->userContact])
                 ->with('success', __("Personal pages updated successfully"));
         }
 
         // additional fields form for first federation id
         return redirect()
-            ->route('user-contact.modify5', ['fid' => $firstFed->federation_id, 'uid' => $this->userContact->user_id])
+            ->route('user-contact.modify5', ['federation' => $firstFed, 'userContact' => $this->userContact])
             ->with('success', __("Personal pages updated successfully"));
     }
 }
