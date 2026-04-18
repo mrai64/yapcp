@@ -1,0 +1,91 @@
+name: 🐛 Bug Report [it] 
+description: Segnala un errore o un malfunzionamento in yaPCP
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Grazie per voler migliorare **yaPCP**! Compila questo modulo con più dettagli possibili.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descrizione del Bug
+      description: Una descrizione chiara e concisa di cosa sia il bug.
+      placeholder: Es. "Le immagini non vengono caricate correttamente nella sezione contest..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Ambiente di esecuzione
+      description: Dove stai riscontrando il problema?
+      options:
+        - Locale (Sviluppo)
+        - Docker
+        - Produzione / Hosting Remoto
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Passaggi per riprodurre il problema
+      description: Spiega come possiamo replicare il bug.
+      placeholder: |
+        1. Vai su '...'
+        2. Clicca su '...'
+        3. Visualizza l'errore '...'
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Comportamento atteso
+      description: Cosa ti saresti aspettato che accadesse?
+    validations:
+      required: true
+
+  - type: input
+    id: php-version
+    attributes:
+      label: Versione PHP
+      placeholder: "Es. 8.2.0"
+    validations:
+      required: false
+
+  - type: input
+    id: laravel-version
+    attributes:
+      label: Versione Laravel
+      placeholder: "Es. 10.x o 11.x"
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs o Stack Trace
+      description: Se disponibile, incolla qui l'output di `storage/logs/laravel.log` o l'errore della console.
+      render: shell
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Verifiche preliminari
+      description: Assicurati di aver fatto queste operazioni prima di postare.
+      options:
+        - label: Ho cercato tra le Issue esistenti e non ho trovato duplicati.
+          required: true
+        - label: Ho svuotato la cache di Laravel (`php artisan optimize:clear`).
+          required: false
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshot o Video
+      description: Trascina qui le immagini per aiutarci a capire meglio (opzionale).
