@@ -60,7 +60,7 @@ class UserContactPolicy
      * admin | user himself/herself
      *
      */
-    public function update(User $user, UserContact $userContact): bool
+    public function update(User $user, ?UserContact $userContact = null): bool
     {
         // only for user in admin group
         Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');

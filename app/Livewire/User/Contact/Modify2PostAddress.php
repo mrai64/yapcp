@@ -1,14 +1,17 @@
 <?php
 
 /**
- * UserContact modify 2 - postal address
- * Should be used form admin and user to modify postal address
+ * UserContact modify 2 of 5 - postal address
+ * Should be used by admin and user herself/himself for postal address
+ * 
+ * @see /resources/views/livewire/user/contact/modify2-post-address.blade.php
  */
 
 namespace App\Livewire\User\Contact;
 
 use App\Models\UserContact;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class Modify2PostAddress extends Component
@@ -35,27 +38,26 @@ class Modify2PostAddress extends Component
     public string $postalCode;
 
     // 1. mount
-    public function mount(?string $uid = '')
+    public function mount(?UserContact $userContact = null) // from route, facultative
     {
-        if ($uid === '') {
-            $uid = Auth::id();
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        if ($userContact === null) {
+            Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' no parm');
+            $uid = Auth::id(); // user id
+            Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' uid: ' . $uid);
+            $this->userContact = UserContact::where('id', $uid)->first();
+            Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' uC: ' . json_encode($this->userContact));
+        } else {
+            Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' parm');
+            $this->userContact = $userContact;
         }
-
-        // if uid is not Auth::id(), auth::id() must be in user_admins.id
-        // otherwise -and temporary- abort 403
-        if ($uid != Auth::id()) {
-            abort(403, 'Unauthorized action.');
-        }
-
-        $this->userContact = UserContact::where('id', $uid)->first();
-        ds($this->userContact);
 
         // form fields
-        $this->firstName = $this->userContact->first_name; // name
-        $this->lastName = $this->userContact->last_name; //   surname
-
-        $this->countryId = ($this->userContact->country_id ?? '***'); // used?
-        $this->country = $this->userContact->country; //       nationality
+        $this->firstName = $this->userContact->first_name; // name         readonly
+        $this->lastName = $this->userContact->last_name; //   surname      readonly
+        // default value ITA as first developer he's italian 
+        $this->countryId = ($this->userContact->country_id ?? 'ITA');
+        $this->country = $this->userContact->country; //      nationality  readonly
 
         $this->address = $this->userContact->address ?? 'insert address';
         $this->addressLine2 = $this->userContact->addressLine2 ?? '';
