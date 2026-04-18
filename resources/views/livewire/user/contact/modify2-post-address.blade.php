@@ -1,15 +1,28 @@
 <div>
-    <!-- header -->
-    <h2 class="fyk text-2xl mb-4">{{ __('Update your personal info') }}</h2>
-    <p class="mb-4">
-        <a  href="{{ route('user.dashboard') }}"
-            rel="noopener noreferrer">
-        [ {{ __('Back to dashboard') }} ]
-        </a>
-    </p>
-    <hr class="my-4" />
-    <br />
-    <br />
+    <header>
+        <h2 class="fyk text-2xl font-medium text-gray-900">
+            {{ __('Update your personal info') }}
+        </h2>
+    <!-- nav bar here -->
+        <h3 class="fyk text-2xl font-medium text-gray-900">
+            {{$lastName}}, {{ $firstName }} | {{$userContact->country->flag_code}} {{$userContact->country->country}}
+        </h3>
+        <h3 class="fyk text-xl font-medium text-gray-900">
+            <em>{{ __("2nd of 5 | Where are you...")}}</em>
+        </h3>
+        <p class="small mb-4">
+            {{ __('Contest organizer need your postal address to send you the prizes if you win.') }}
+            {{ __('Use the international postal address standard, with latin character.') }}
+        </p>
+        <hr />
+        <br />
+        <p class="fyk text-xl font-medium mb-4">
+            <a  href="{{ route('user.dashboard') }}"
+                rel="noopener noreferrer">
+            [ {{ __('Back to dashboard') }} ]
+            </a>
+        </p>
+    </header>
 
     <!-- success -->
     @if (session('success'))
@@ -18,24 +31,20 @@
     </div>
     @endif
 
+    <!-- errors list -->
     @if ($errors->any())
     <div>
         <ul>
             @foreach ($errors->all() as $error)
-                <li class="text-red-600">{{ $error }}</li>
+                <li class="text-red-600">❌ {{ $error }}</li>
             @endforeach
         </ul>
     </div>
     @endif
 
-    <!-- nav bar here -->
-    <div class="fyk block font-medium text-2xl text-gray-700 mb-4">
-        {{$country->flag_code}} | {{ $lastName}}, {{ $firstName }}
-    </div>
-    <h3 class="fyk text-xl mb-4"><em>{{ __("Where do you live...")}}</em></h3>    
     <form wire:submit="updateUserContact2nd">
         @csrf
-        <p class="small mb-4">{{ __('Contest organizer need your postal address to send you the prizes if you win. Please be accurate.') }}</p>
+
         <div class="mt-4 mb-4">
             <label class="fyk block font-medium text-2xl text-gray-700" for="address">
                 {{ __('Address') }}
