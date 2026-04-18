@@ -1,15 +1,28 @@
 <div>
-    <!-- header -->
-    <h2 class="fyk text-2xl mb-4">{{ __('Update your personal info') }}</h2>
-    <p class="mb-4">
-        <a  href="{{ route('user.dashboard') }}"
-            rel="noopener noreferrer">
-        [ {{ __('Back to dashboard') }} ]
-        </a>
-    </p>
-    <hr class="my-4" />
-    <br />
-    <br />
+    <header>
+        <h2 class="fyk text-2xl font-medium text-gray-900">
+            {{ __('Update your personal info') }}
+        </h2>
+    <!-- nav bar here -->
+        <h3 class="fyk text-2xl font-medium text-gray-900">
+            {{$lastName}}, {{ $firstName }} | {{$userContact->country->flag_code}} {{$userContact->country->country}}
+        </h3>
+        <h3 class="fyk text-xl font-medium text-gray-900">
+            <em>{{ __("2nd of 5 | Where are you...")}}</em>
+        </h3>
+        <p class="small mb-4">
+            {{ __('For future use your portfolios over some social.') }}
+        </p>
+        <hr />
+        <br />
+        <p class="fyk text-xl font-medium mb-4">
+            <a  href="{{ route('user.dashboard') }}"
+                rel="noopener noreferrer">
+            [ {{ __('Back to dashboard') }} ]
+            </a>
+        </p>
+    </header>
+
 
     <!-- success -->
     @if (session('success'))
@@ -28,20 +41,13 @@
     </div>
     @endif
 
-    <!-- nav bar here -->
-    <div class="fyk block font-medium text-2xl text-gray-700 mb-4">
-        {{$country->flag_code}} | {{ $lastName}}, {{ $firstName }}
-    </div>
-    <h3 class="fyk text-xl mb-4"><em>{{ __("Where do you live...")}}</em></h3>    
-
     <form wire:submit="updateUserContact4th">
         @csrf
 
-        <p class="small mb-4">{{ __('For future use.') }}</p>
-
         <div class="mb-4">
             <label class="fyk block font-medium text-2xl text-gray-700" for="website">
-                {{ __('Personal website | facultative') }}
+                {{ __('Personal website') }}
+                | {{ __('facultative') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -53,7 +59,8 @@
 
         <div class="mb-4">
             <label class="fyk block font-medium text-2xl text-gray-700" for="facebook">
-                {{ __('Personal facebook page | facultative') }}
+                {{ __('Personal facebook page') }}
+                | {{ __('facultative') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -65,7 +72,8 @@
 
         <div class="mb-4">
             <label class="fyk block font-medium text-2xl text-gray-700" for="exTwitter">
-                {{ __('Personal X page | facultative') }}
+                {{ __('Personal X page') }}
+                | {{ __('facultative') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -77,7 +85,8 @@
 
         <div class="mb-4">
             <label class="fyk block font-medium text-2xl text-gray-700" for="instagram">
-                {{ __('Instagram page | facultative') }}
+                {{ __('Instagram page') }}
+                | {{ __('facultative') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
