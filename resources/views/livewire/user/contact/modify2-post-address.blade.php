@@ -48,6 +48,7 @@
         <div class="mt-4 mb-4">
             <label class="fyk block font-medium text-2xl text-gray-700" for="address">
                 {{ __('Address') }}
+                | {{ __('required') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -60,6 +61,7 @@
         <div class="mb-4">
             <label class="fyk block font-medium text-2xl text-gray-700" for="addressLine2">
                 {{ __('Address 2nd line') }}
+                | {{ __('facultative') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -72,6 +74,7 @@
         <div class="mb-4">
             <label class="fyk block font-medium text-2xl text-gray-700" for="city">
                 {{ __('City') }}
+                | {{ __('required') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -84,6 +87,7 @@
         <div class="mb-4">
             <label class="fyk block font-medium text-2xl text-gray-700" for="region">
                 {{ __('Region') }}
+                | {{ __('required') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -96,6 +100,7 @@
         <div class="mb-4">
             <label class="fyk block font-medium text-2xl text-gray-700" for="postalCode">
                 {{ __('Postal code') }}
+                | {{ __('required') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-48" 

@@ -99,7 +99,7 @@ class Modify2PostAddress extends Component
         $this->userContact->save();
 
         return redirect()
-            ->route('user-contact.modify3', ['uid' => $this->userContact->user_id])
+            ->route('user-contact.modify3', ['userContact' => $this->userContact])
             ->with('success', __("Postal address updated successfully"));
     }
 }
