@@ -98,18 +98,18 @@ Route::get('/user/contact/show/{userContact?}', User\Contact\Show::class)
 Route::get('/user/contact/modify1/{userContact?}', User\Contact\Modify1YouAre::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsUserContact::class])
     ->name('user-contact.modify1');
-// **review mark** //
 Route::get('/user/contact/modify2/{userContact?}', User\Contact\Modify2PostAddress::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsUserContact::class])
     ->name('user-contact.modify2');
-Route::get('/user/contact/modify3/{uid?}', User\Contact\Modify3Phones::class)
-    ->middleware(['auth', 'verified'])
+Route::get('/user/contact/modify3/{userContact?}', User\Contact\Modify3Phones::class)
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsUserContact::class])
     ->name('user-contact.modify3');
-Route::get('/user/contact/modify4/{uid?}', User\Contact\Modify4Socials::class)
-    ->middleware(['auth', 'verified'])
+Route::get('/user/contact/modify4/{userContact?}', User\Contact\Modify4Socials::class)
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsUserContact::class])
     ->name('user-contact.modify4');
-Route::get('/user/contact/modify5/{fid}/{uid?}', User\Contact\Modify5Feds::class, ['fid', 'uid'])
-    ->middleware(['auth', 'verified'])
+// **review mark** //
+Route::get('/user/contact/modify5/{federation}/{userContact?}', User\Contact\Modify5Feds::class)
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsUserContact::class])
     ->name('user-contact.modify5'); // Add "federation more" required fields
 // user-contact remove - no
 
