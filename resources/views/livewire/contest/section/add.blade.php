@@ -1,6 +1,7 @@
 <?php
 /**
  * Contest Section Add
+ *
  */
 
 use App\Models\Country;
@@ -8,7 +9,7 @@ use App\Models\ContestSection;
 
 ?>
 
-<section>
+<div>
     <header>
         <h2 class="fyk text-2xl font-medium text-gray-900">
             {{ __('Contest definition: SECTION LIST') }}
@@ -18,7 +19,7 @@ use App\Models\ContestSection;
                 <span class="fyk text-xl">Main</span>
             </a>
             . .
-            <a href="{{ route('organization.contest-section.add', ['cid' => $contest->id]) }}">
+            <a href="{{ route('organization.contest-section.add', ['contest' => $contest]) }}">
                 <span class="fyk text-2xl">Sections</span>
             </a>
             @if (ContestSection::firstContestSectionId( $contest->id ) > '')
@@ -89,10 +90,10 @@ use App\Models\ContestSection;
                     {{ ($section->under_patronage === 'Y') ? "under patronage" : "free of patronage" }}</td>
                     <td >{{ $section->name_en}}<br />{{ $section->name_local}}</td>
                     <td >
-                        <a href="{{ route('organization.contest-section.modify', ['sid' => $section->id] ) }}">
+                        <a href="{{ route('organization.contest-section.modify', ['section' => $section] ) }}">
                             [ {{ __("Modify") }} ]
                         </a>
-                        <a href="{{ route('organization.contest-section.remove', ['sid' => $section->id] ) }}">
+                        <a href="{{ route('organization.contest-section.remove', ['section' => $section] ) }}">
                             [ {{ __("Remove") }} ]
                         </a>
                     </td>
@@ -178,4 +179,4 @@ use App\Models\ContestSection;
         </p>
     </div>
 
-</section>
+</div>
