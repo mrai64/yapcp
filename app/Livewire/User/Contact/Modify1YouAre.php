@@ -61,7 +61,7 @@ class Modify1YouAre extends Component
             $this->lastName = trim($this->lastName);
             $this->firstName = trim($this->firstName);
         }
-        // default value ITA as first developer he's italian 
+        // default value ITA as first developer he's italian
         $this->countryId = ($this->userContact->country_id ?? 'ITA');
         // countries list
         $this->allCountriesSet = Country::select(['id', 'country', 'flag_code'])

@@ -15,7 +15,7 @@ class StoreFederationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $examine = UserRole::isAdmin();
+        $examine = $user->isAdmin();
         ds('FormRequest: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' rc:' . $examine);
         // log
         return $examine;

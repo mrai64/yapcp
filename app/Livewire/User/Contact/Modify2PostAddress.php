@@ -3,7 +3,7 @@
 /**
  * UserContact modify 2 of 5 - postal address
  * Should be used by admin and user herself/himself for postal address
- * 
+ *
  * @see /resources/views/livewire/user/contact/modify2-post-address.blade.php
  */
 
@@ -55,7 +55,7 @@ class Modify2PostAddress extends Component
         // form fields
         $this->firstName = $this->userContact->first_name; // name         readonly
         $this->lastName = $this->userContact->last_name; //   surname      readonly
-        // default value ITA as first developer he's italian 
+        // default value ITA as first developer he's italian
         $this->countryId = ($this->userContact->country_id ?? 'ITA');
         $this->country = $this->userContact->country; //      nationality  readonly
 
