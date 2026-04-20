@@ -5,7 +5,6 @@ namespace App\Livewire\Contest\Section;
 use App\Models\Contest;
 use App\Models\ContestSection;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\Validator;
 use Livewire\Component;
 
 class Modify extends Component
