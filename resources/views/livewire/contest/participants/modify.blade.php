@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Gate;
             {{ $contest->name_en }}
         </h2>
         <h3>
-            <a href="{{ route('organization.contest.modify', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization.contest.modify', ['contest' => $contest ]) }}">
                 <span class="fyk text-xl">Main</span>
             </a>
             . .

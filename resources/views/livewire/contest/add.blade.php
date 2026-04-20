@@ -18,7 +18,7 @@ use App\Models\ContestSection;
         </h2>
         <!-- navigation --> 
         <h3>
-            <a href="{{ route('organization.contest.modify', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization.contest.modify', ['contest' => $contest ]) }}">
                 <span class="fyk text-2xl">Main</span>
             </a>
             . .
