@@ -89,7 +89,7 @@ Route::view('/user/profile', 'profile')
 Route::get('/admin/user/contact/listed', User\Contact\Listed::class)
     ->middleware(['auth', 'verified', 'can:viewAny,' . ModelsUserContact::class])
     ->name('user-contact.listed');
-// user-contact add - no, 
+// user-contact add - no,
 // user-contact show - user | admin
 Route::get('/user/contact/show/{userContact?}', User\Contact\Show::class)
 ->middleware(['auth', 'verified', 'can:view,' . ModelsUserContact::class])
@@ -107,18 +107,18 @@ Route::get('/user/contact/modify3/{userContact?}', User\Contact\Modify3Phones::c
 Route::get('/user/contact/modify4/{userContact?}', User\Contact\Modify4Socials::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsUserContact::class])
     ->name('user-contact.modify4');
-// **review mark** //
 Route::get('/user/contact/modify5/{federation}/{userContact?}', User\Contact\Modify5Feds::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsUserContact::class])
     ->name('user-contact.modify5'); // Add "federation more" required fields
 // user-contact remove - no
 
 /**
- * UserRole
+ * 4. UserRole
  *
  * user itself and admin
  *
  */
+// **review mark** //
 Route::get('/user/dashboard/role', User\Role\Listed::class)
     ->middleware(['auth', 'verified'])
     ->name('user-role.list');
@@ -128,9 +128,13 @@ Route::get('/user/dashboard/role/federation/add', User\Role\Federation\Add::clas
 Route::get('/user/dashboard/role/organization/add', User\Role\Organization\Add::class)
     ->middleware(['auth', 'verified'])
     ->name('user-role.add.organization');
+// TODO /user/dashboard/federation/list
+// TODO /federation/member/list
+// TODO /user/dashboard/organization/list
+// TODO /organization/member/list
 
 /**
- * UserWork
+ * 5. UserWork
  *
  * user itself and admin
  *

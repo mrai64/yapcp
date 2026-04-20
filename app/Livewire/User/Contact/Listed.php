@@ -30,7 +30,7 @@ class Listed extends Component
             ->orderBy('created_at', 'asc')
             ->simplePaginate(20);
         //
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' res: ' 
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' res: '
             . json_encode($userContactSet));
 
         return view('livewire.user.contact.listed', [
