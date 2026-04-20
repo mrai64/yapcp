@@ -308,4 +308,65 @@ class User extends Authenticatable implements MustVerifyEmail
         return $works;
     }
 
+    /**
+     * Determine if the user has an active admin role.
+     *
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->userRoles()
+            ->where('role', UserRole::ADMINGROUP)
+            ->where('role_opening', '<=', now())
+            ->where('role_closing', '>=', now())
+            ->exists();
+    }
+
+    /**
+     * Determine if the user is registered for a specific organization.
+     *
+     * @param Organization|string $organization Organization instance or organization id string
+     * @return bool
+     */
+    public function isMemberOfOrganization(Organization|string $organization): bool
+    {
+        $organizationId = $organization instanceof Organization ? $organization->id : $organization;
+
+        return $this->userRoles()
+            ->where('organization_id', $organizationId)
+            ->where('role_opening', '<=', now())
+            ->where('role_closing', '>=', now())
+            ->exists();
+    }
+
+    /**
+     * Determine if the user is member of any Organization
+     *
+     * @return bool
+     */
+    public function isMemberOfAnyOrganization(): bool
+    {
+        return $this->userRoles()
+            ->whereNotNull('organization_id')
+            ->where('role_opening', '<=', now())
+            ->where('role_closing', '>=', now())
+            ->exists();
+    }
+
+    /**
+     * Determine if the user is registered for a specific federation.
+     *
+     * @param Federation|string $federation Federation instance or federation string Id
+     * @return bool
+     */
+    public function isMemberOfFederation(Federation|string $federation): bool
+    {
+        $federationId = $federation instanceof Federation ? $federation->id : $federation;
+
+        return $this->userRoles()
+            ->where('federation_id', $federationId)
+            ->where('role_opening', '<=', now())
+            ->where('role_closing', '>=', now())
+            ->exists();
+    }
 }

@@ -33,7 +33,7 @@ class FederationPolicy
     {
         // only for user in admin group
         ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
-        $evaluate = UserRole::isAdmin();
+        $evaluate = $user->isAdmin();
         ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
         return $evaluate;
     }
@@ -48,7 +48,7 @@ class FederationPolicy
     {
         // for all federation - only for user in admin group
         ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
-        $evaluate = UserRole::isAdmin();
+        $evaluate = $user->isAdmin();
         ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
         return $evaluate;
     }
@@ -63,7 +63,7 @@ class FederationPolicy
     {
         // for all federation - only for user in admin group
         ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
-        $evaluate = UserRole::isAdmin();
+        $evaluate = $user->isAdmin();
         ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
         return $evaluate;
     }
@@ -75,7 +75,7 @@ class FederationPolicy
     {
         // for all federation - only for user in admin group
         ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
-        $evaluate = UserRole::isAdmin();
+        $evaluate = $user->isAdmin();
         ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
         return $evaluate;
     }
@@ -87,7 +87,7 @@ class FederationPolicy
     {
         // for all federation - only for user in admin group
         ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
-        $evaluate = UserRole::isAdmin();
+        $evaluate = $user->isAdmin();
         ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
         return $evaluate;
     }
@@ -99,7 +99,7 @@ class FederationPolicy
     {
         // for all federation - only for user in admin group
         ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
-        $evaluate = UserRole::isAdmin();
+        $evaluate = $user->isAdmin();
         ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
         return $evaluate;
     }
