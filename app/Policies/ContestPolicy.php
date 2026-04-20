@@ -19,7 +19,7 @@ class ContestPolicy
 
     /**
      * Determine whether the user can view the model.
-     * 
+     *
      * all can
      */
     public function view(User $user, Contest $contest): bool
@@ -41,14 +41,16 @@ class ContestPolicy
 
     /**
      * Determine whether the user can update the model.
-     * 
+     *
      * admin: can
      * member of contest organization: can
      */
     public function update(User $user, Contest $contest): bool
     {
         // admin : can
-        if ($user->isAdmin()) return true;
+        if ($user->isAdmin()) {
+            return true;
+        }
 
         // member of contest organization: can
         $contestOrganizationId = $contest->organization_id;
@@ -59,7 +61,7 @@ class ContestPolicy
 
     /**
      * Determine whether the user can delete the model.
-     * 
+     *
      * Contest are closed, backupped, removed only by admin
      */
     public function delete(User $user, Contest $contest): bool
