@@ -43,7 +43,7 @@ class OrganizationPolicy
     public function update(User $user, Organization $organization): bool
     {
         // admin can
-        $admin = UserRole::isAdmin();
+        $admin = $user->isAdmin();
         if ($admin) {
             return true;
         }
@@ -65,7 +65,7 @@ class OrganizationPolicy
     public function delete(User $user, Organization $organization): bool
     {
         // admin can
-        $admin = UserRole::isAdmin();
+        $admin = $user->isAdmin();
         if ($admin) {
             return true;
         }
