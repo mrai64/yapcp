@@ -45,7 +45,7 @@ use Illuminate\Support\Facades\Log;
             </a>
             @endif
             . .
-            <a href="{{ route('organization.contest-award.add', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('organization.contest-award.add', ['contest' => $contest]) }}">
                 <span class="fyk text-xl">Awards</span>
             </a>
             . .

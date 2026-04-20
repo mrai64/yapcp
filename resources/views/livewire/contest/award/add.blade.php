@@ -29,7 +29,7 @@ use App\Models\ContestSection;
                 <span class="fyk text-xl">Jury</span>
             </a>
             . .
-            <a href="{{ route('organization.contest-award.add', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('organization.contest-award.add', ['contest' => $contest]) }}">
                 <span class="fyk text-2xl">Awards</span>
             </a>
             . .
