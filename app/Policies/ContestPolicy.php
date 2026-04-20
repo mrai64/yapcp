@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Contest;
+use App\Models\Organization;
 use App\Models\User;
 
 class ContestPolicy
