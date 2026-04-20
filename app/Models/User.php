@@ -369,4 +369,15 @@ class User extends Authenticatable implements MustVerifyEmail
             ->where('role_closing', '>=', now())
             ->exists();
     }
+
+    /**
+     * Determine how many works are available in user gallery
+     * 
+     * @return int
+     */
+    public function worksCount(): int
+    {
+        return $this->userWorks()->count();
+    }
+
 }
