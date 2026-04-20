@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\ContestJury;
+use App\Models\ContestSection;
 use App\Models\User;
 
 class ContestJuryPolicy
@@ -33,9 +34,13 @@ class ContestJuryPolicy
      *
      * organization members
      */
-    public function create(User $user): bool
+    public function create(User $user, ContestSection $section): bool
     {
-        return false;
+        $organizationId = $section->contest->organization_id;
+        // Log
+        $evaluate = $user->isMemberOfOrganization($organizationId);
+        // Log
+        return $evaluate;
     }
 
     /**
