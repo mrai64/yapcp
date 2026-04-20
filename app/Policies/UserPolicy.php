@@ -35,7 +35,7 @@ class UserPolicy
         }
         // user herself / himself
         $userId = $model?->id;
-        Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' id:' . $userRoleId);
+        Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' id:' . $userId);
         if ($userId === $user->id) {
             return true;
         }
@@ -69,7 +69,7 @@ class UserPolicy
         }
         // user herself / himself
         $userId = $model?->id;
-        Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' id:' . $userRoleId);
+        Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' id:' . $userId);
         if ($userId === $user->id) {
             return true;
         }
