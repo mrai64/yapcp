@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Models\User;
-use App\Models\UserRole;
 use App\Models\UserWork;
 
 class UserWorkPolicy
