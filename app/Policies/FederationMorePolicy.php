@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\FederationMore;
 use App\Models\User;
-use App\Models\UserRole;
 
 class FederationMorePolicy
 {
