@@ -15,7 +15,7 @@ class UserWorkPolicy
     {
         // only admin
         // admin can
-        $admin = UserRole::isAdmin();
+        $admin = $user->isAdmin();
         if ($admin) {
             return true;
         }
@@ -28,7 +28,7 @@ class UserWorkPolicy
     public function view(User $user, UserWork $userWork): bool
     {
         // admin can
-        $admin = UserRole::isAdmin();
+        $admin = $user->isAdmin();
         if ($admin) {
             return true;
         }
