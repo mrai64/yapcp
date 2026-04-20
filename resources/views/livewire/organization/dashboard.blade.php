@@ -30,7 +30,7 @@ use App\Models\UserContact;
             <p class="fyk font-semibold text-2xl text-gray-800 leading-tight">
                 {{ __("Contest list") }}
             </p>
-            <a href="{{ route('organization.contest.add', ['oid' => $organization->id] )}}" 
+            <a href="{{ route('organization.contest.add', ['organization' => $organization] )}}" 
                 class="float-end font-medium rounded-md py-2"
                 >
                 [ {{ __('Add a new Contest')}} ]
@@ -41,7 +41,7 @@ use App\Models\UserContact;
                 @foreach($contestSet as $contest)
                 <li class="mb-2 p-4 border rounded-md">
                     <strong class="fyk text-2xl">{{$contest->name_en}}</strong><br />
-                    <a href="{{ route('organization.contest.modify', ['cid' => $contest->id ]) }}">
+                    <a href="{{ route('organization.contest.modify', ['contest' => $contest ]) }}">
                         [ {{ __("Contest Definition Dashboard") }} ]
                     </a>
                     <a href="{{ route('contest.dashboard', ['cid' => $contest->id ]) }}">

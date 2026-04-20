@@ -53,7 +53,11 @@ use App\Livewire\User;
 use App\Models\Contest as ModelsContest;
 use App\Models\Federation as ModelsFederation;
 use App\Models\FederationSection as ModelsFederationSection;
+use App\Models\User as ModelsUser;
 use App\Models\UserContact as ModelsUserContact;
+use App\Models\UserRole as ModelsUserRole;
+use App\Models\UserWork as ModelsUserWork;
+use App\Models\Organization as ModelsOrganization;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -94,7 +98,7 @@ Route::get('/admin/user/contact/listed', User\Contact\Listed::class)
 Route::get('/user/contact/show/{userContact?}', User\Contact\Show::class)
 ->middleware(['auth', 'verified', 'can:view,' . ModelsUserContact::class])
 ->name('user-contact.show');
-// user contact/ modify* - user itself n admin
+// user contact/ modify* - user herself/himself n admin
 Route::get('/user/contact/modify1/{userContact?}', User\Contact\Modify1YouAre::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsUserContact::class])
     ->name('user-contact.modify1');
@@ -115,18 +119,17 @@ Route::get('/user/contact/modify5/{federation}/{userContact?}', User\Contact\Mod
 /**
  * 4. UserRole
  *
- * user itself and admin
+ * user herself/himself and admin
  *
  */
-// **review mark** //
 Route::get('/user/dashboard/role', User\Role\Listed::class)
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'can:view,' . ModelsUserRole::class])
     ->name('user-role.list');
 Route::get('/user/dashboard/role/federation/add', User\Role\Federation\Add::class)
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsUserRole::class])
     ->name('user-role.add.federation');
 Route::get('/user/dashboard/role/organization/add', User\Role\Organization\Add::class)
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsUserRole::class])
     ->name('user-role.add.organization');
 // TODO /user/dashboard/federation/list
 // TODO /federation/member/list
@@ -136,23 +139,23 @@ Route::get('/user/dashboard/role/organization/add', User\Role\Organization\Add::
 /**
  * 5. UserWork
  *
- * user itself and admin
+ * user herself/himself and admin
  *
  */
 Route::get('/user/work/list', User\Work\Listed::class)
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'can:view,' . ModelsUserWork::class])
     ->name('user.gallery');
 Route::get('/user/work/add', User\Work\Add::class)
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'can:create,' . ModelsUserWork::class])
     ->name('photo-box-add');
 Route::get('/user/work/modify/{wid}', User\Work\Modify::class, ['wid'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsUserWork::class])
     ->name('photo-box-modify');
 Route::get('/user/work/remove/{wid}', User\Work\Remove::class, ['wid'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'can:delete,' . ModelsUserWork::class])
     ->name('delete-photo-box');
 Route::delete('/user/work/remove/{wid}', User\Work\Remove::class, ['wid'])
-    ->middleware(['auth', 'verified']);
+    ->middleware(['auth', 'verified', 'can:delete,' . ModelsUserWork::class]);
 
 
 /**
@@ -218,23 +221,23 @@ Route::delete('/admin/federation/section/remove/{federation-section}', Federatio
 Route::get('/organization/listed', Organization\Listed::class)
     ->name('organization.list');
 // organization add - admin | user member(organization)
-Route::get('/user/organization/add/', Organization\Add::class)
-    ->middleware(['auth', 'verified'])
+Route::get('/user/organization/add', Organization\Add::class)
+    ->middleware(['auth', 'verified', 'can:create,' . ModelsOrganization::class])
     ->name('user.organization.add');
 // organization dashboard - admin | user member(organization)
 Route::get('/organization/dashboard/{organization}', Organization\Dashboard::class)
-    ->middleware(['auth', 'verified', 'can:update,organization'])
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsOrganization::class])
     ->name('organization.dashboard'); // no user.organization.dashboard
 // organization edit modify - admin | user member(organization)
 Route::get('/user/organization/modify/{organization}', Organization\Modify::class)
-    ->middleware(['auth', 'verified', 'can:update,organization'])
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsOrganization::class])
     ->name('user.organization.modify');
 // organization remove - admin
 Route::get('/user/organization/remove/{organization}', Organization\Remove::class)
-    ->middleware(['auth', 'verified', 'can:delete,organization'])
+    ->middleware(['auth', 'verified', 'can:delete,' . ModelsOrganization::class])
     ->name('user.organization.delete');
 Route::delete('/user/organization/remove/{organization}', Organization\Remove::class)
-    ->middleware(['auth', 'verified', 'can:delete,organization']);
+    ->middleware(['auth', 'verified', 'can:delete,' . ModelsOrganization::class]);
 // no name()
 
 /**
@@ -250,13 +253,14 @@ Route::delete('/user/organization/remove/{organization}', Organization\Remove::c
  * TODO /contest/listed for guest version - see up
  */
 
+// **review mark** //
 Route::get('/contest/listed', Contest\Listed::class)
     ->middleware(['auth', 'verified'])
     ->name('contest.list');
-Route::get('/organization/contest/add/{oid}', Contest\Add::class, ['oid'])
+Route::get('/organization/contest/add/{organization}', Contest\Add::class)
     ->middleware(['auth', 'verified', 'can:create,' . ModelsContest::class])
     ->name('organization.contest.add');
-Route::get('/organization/contest/modify/{cid}', Contest\Modify::class, ['cid'])
+Route::get('/organization/contest/modify/{contest}', Contest\Modify::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContest::class])
     ->name('organization.contest.modify');
 // no contest delete, after backup it's soft-deleted then removed after years
@@ -267,6 +271,7 @@ Route::get('/organization/contest/modify/{cid}', Contest\Modify::class, ['cid'])
  * ContestSection
  *
  */
+// **review mark** //
 Route::get('/organization/contest/section/add/{cid}', Contest\Section\Add::class, ['cid'])
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-section.add');

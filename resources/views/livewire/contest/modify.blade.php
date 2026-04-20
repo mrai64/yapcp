@@ -27,7 +27,7 @@ use Illuminate\Support\Facades\Log;
             {{ __('Contest Main Form') }}
         </h2>
         <h3>
-            <a href="{{ route('organization.contest.modify', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization.contest.modify', ['contest' => $contest ]) }}">
                 <span class="fyk text-2xl">Main</span>
             </a>
             . .

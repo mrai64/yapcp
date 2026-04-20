@@ -14,7 +14,7 @@ use App\Models\ContestSection;
             {{ __('Contest definition: SECTION LIST') }}
         </h2>
         <h3>
-            <a href="{{ route('organization.contest.modify', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization.contest.modify', ['contest' => $contest ]) }}">
                 <span class="fyk text-xl">Main</span>
             </a>
             . .
@@ -63,7 +63,7 @@ use App\Models\ContestSection;
         <p class="fyk text-xl">Country: {{ Country::countryName( $contest->country_id ) }} </p>
         <p class="small">Closing date: {{ $contest->day_2_closing->format('Y-m-d') }} </p>
         <p class="small py-6">
-            <a href="{{ route('organization.contest.modify', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization.contest.modify', ['contest' => $contest ]) }}">
                 [ {{ __("Back to Main Contest Card")}} ]
             </a>
         </p>
