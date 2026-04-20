@@ -54,7 +54,6 @@ use App\Models\Contest as ModelsContest;
 use App\Models\ContestSection as ModelsContestSection;
 use App\Models\Federation as ModelsFederation;
 use App\Models\FederationSection as ModelsFederationSection;
-use App\Models\User as ModelsUser;
 use App\Models\UserContact as ModelsUserContact;
 use App\Models\UserRole as ModelsUserRole;
 use App\Models\UserWork as ModelsUserWork;
@@ -274,14 +273,13 @@ Route::get('/organization/contest/modify/{contest}', Contest\Modify::class)
 Route::get('/organization/contest/section/add/{contest}', Contest\Section\Add::class)
     ->middleware(['auth', 'verified', 'can:create,' . ModelsContestSection::class])
     ->name('organization.contest-section.add');
-// **review mark** //
 Route::get('/organization/contest/section/modify/{section}', Contest\Section\Modify::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContestSection::class])
     ->name('organization.contest-section.modify');
-Route::get('/organization/contest/section/remove/{sid}', Contest\Section\Remove::class, ['sid'])
+Route::get('/organization/contest/section/remove/{section}', Contest\Section\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,' . ModelsContestSection::class])
     ->name('organization.contest-section.remove');
-Route::delete('/organization/contest/section/remove/{sid}', Contest\Section\Remove::class, ['sid'])
+Route::delete('/organization/contest/section/remove/{section}', Contest\Section\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,' . ModelsContestSection::class]);
 // no name
 
@@ -290,8 +288,11 @@ Route::delete('/organization/contest/section/remove/{sid}', Contest\Section\Remo
  *
  * ContestJury
  *
+ * organization members and admin
+ *
  */
-Route::get('/organization/contest/jury/add/{sid}', Contest\Jury\Add::class, ['sid'])
+// **review mark** //
+Route::get('/organization/contest/jury/add/{section}', Contest\Jury\Add::class)
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-jury.add');
 // TODO Contest jury modify organization.contest-jury.modify
