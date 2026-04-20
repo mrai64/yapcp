@@ -51,6 +51,7 @@ use App\Livewire\Juror;
 use App\Livewire\Organization;
 use App\Livewire\User;
 use App\Models\Contest as ModelsContest;
+use App\Models\ContestSection as ModelsContestSection;
 use App\Models\Federation as ModelsFederation;
 use App\Models\FederationSection as ModelsFederationSection;
 use App\Models\User as ModelsUser;
@@ -253,7 +254,6 @@ Route::delete('/user/organization/remove/{organization}', Organization\Remove::c
  * TODO /contest/listed for guest version - see up
  */
 
-// **review mark** //
 Route::get('/contest/listed', Contest\Listed::class)
     ->middleware(['auth', 'verified'])
     ->name('contest.list');
@@ -271,21 +271,18 @@ Route::get('/organization/contest/modify/{contest}', Contest\Modify::class)
  * ContestSection
  *
  */
-// **review mark** //
-Route::get('/organization/contest/section/add/{cid}', Contest\Section\Add::class, ['cid'])
-    ->middleware(['auth', 'verified'])
+Route::get('/organization/contest/section/add/{contest}', Contest\Section\Add::class)
+    ->middleware(['auth', 'verified', 'can:create,' . ModelsContestSection::class])
     ->name('organization.contest-section.add');
-Route::get('/organization/contest/section/modify/{sid}', Contest\Section\Modify::class, ['sid'])
-    ->middleware(['auth', 'verified'])
-    ->name('organization.contest-section.modify');
-Route::get('/organization/contest/section/modify/{sid}', Contest\Section\Modify::class, ['sid'])
-    ->middleware(['auth', 'verified'])
+// **review mark** //
+Route::get('/organization/contest/section/modify/{section}', Contest\Section\Modify::class)
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsContestSection::class])
     ->name('organization.contest-section.modify');
 Route::get('/organization/contest/section/remove/{sid}', Contest\Section\Remove::class, ['sid'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'can:delete,' . ModelsContestSection::class])
     ->name('organization.contest-section.remove');
 Route::delete('/organization/contest/section/remove/{sid}', Contest\Section\Remove::class, ['sid'])
-    ->middleware(['auth', 'verified']);
+    ->middleware(['auth', 'verified', 'can:delete,' . ModelsContestSection::class]);
 // no name
 
 /**
