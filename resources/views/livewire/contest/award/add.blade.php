@@ -21,7 +21,7 @@ use App\Models\ContestSection;
                 <span class="fyk text-xl">Main</span>
             </a>
             . .
-            <a href="{{ route('organization.contest-section.add', ['cid' => $contest->id]) }}">
+            <a href="{{ route('organization.contest-section.add', ['contest' => $contest]) }}">
                 <span class="fyk text-xl">Sections</span>
             </a>
             . .
