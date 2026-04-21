@@ -6,7 +6,6 @@ use App\Models\Federation;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 
-
 class FederationPolicy
 {
     /**

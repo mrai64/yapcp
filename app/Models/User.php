@@ -372,7 +372,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * Determine how many works are available in user gallery
-     * 
+     *
      * @return int
      */
     public function worksCount(): int
