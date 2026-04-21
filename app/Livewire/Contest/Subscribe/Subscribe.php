@@ -16,7 +16,7 @@
  * 2026-02-13 PSR-12 *work in progress*
  */
 
-namespace App\Livewire\Contest;
+namespace App\Livewire\Contest\Subscribe;
 
 use App\Models\Contest;
 use App\Models\ContestSection;
@@ -107,6 +107,6 @@ class Subscribe extends Component
     {
         Log::info('Component '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' in:'.json_encode($this));
 
-        return view('livewire.contest.subscribe');
+        return view('livewire.contest.subscribe.subscribe');
     }
 }
