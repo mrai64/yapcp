@@ -32,7 +32,7 @@ use App\Models\ContestSection;
             </a>
             @endif
             . .
-            <a href="{{ route('organization.contest-award.add', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('organization.contest-award.add', ['contest' => $contest]) }}">
                 <span class="fyk text-xl">Awards</span>
             </a>
             . .
