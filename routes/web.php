@@ -51,7 +51,9 @@ use App\Livewire\Juror;
 use App\Livewire\Organization;
 use App\Livewire\User;
 use App\Models\Contest as ModelsContest;
+use App\Models\ContestJury as ModelsContestJury;
 use App\Models\ContestSection as ModelsContestSection;
+use App\Models\ContestWork as ModelsContestWork;
 use App\Models\Federation as ModelsFederation;
 use App\Models\FederationSection as ModelsFederationSection;
 use App\Models\UserContact as ModelsUserContact;
@@ -291,9 +293,8 @@ Route::delete('/organization/contest/section/remove/{section}', Contest\Section\
  * organization members and admin
  *
  */
-// **review mark** //
 Route::get('/organization/contest/jury/add/{section}', Contest\Jury\Add::class)
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'can:create,' . ModelsContestJury::class])
     ->name('organization.contest-jury.add');
 // TODO Contest jury modify organization.contest-jury.modify
 // TODO Contest jury remove organization.contest-jury.remove
@@ -303,8 +304,10 @@ Route::get('/organization/contest/jury/add/{section}', Contest\Jury\Add::class)
  *
  * ContestAward
  *
+ * organization members
+ *
  */
-Route::get('/organization/contest/award/add/{cid}', Contest\Award\Add::class, ['cid'])
+Route::get('/organization/contest/award/add/{contest}', Contest\Award\Add::class, ['cid'])
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-award.add');
 // TODO organization.contest-award.modify
@@ -315,17 +318,17 @@ Route::get('/organization/contest/award/add/{cid}', Contest\Award\Add::class, ['
  *
  * user, and contest organization
  */
-// user only
-Route::get('/user/contest/subscribe/{cid}', Contest\Subscribe::class, ['cid'])
-    ->middleware(['auth', 'verified'])
+// **review mark** //
+Route::get('/user/subscribe/contest/{contest}', Contest\Subscribe\Subscribe::class)
+    ->middleware(['auth', 'verified', 'can:view,' . ModelsContestWork::class])
     ->name('user.contest.participate');
 // user only
-Route::get('/user/contest/subscribe/{cid}/work/{wid}', Contest\Subscribe::class, ['cid', 'wid'])
-->middleware(['auth', 'verified'])
-->name('user.contest.add-work');
+Route::get('/user/subscribe/add-work/{contest}/{user-work}', Contest\Subscribe\Add::class)
+    ->middleware(['auth', 'verified', 'can:create,' . ModelsContestWork::class])
+    ->name('user.contest.add-work');
 // user and contest organization
-Route::delete('/user/contest/subscribe/remove/{pid}', Contest\Subscribe\Remove::class, ['pid'])
-    ->middleware(['auth', 'verified'])
+Route::delete('/user/subscribe/remove/{contest-work}', Contest\Subscribe\Remove::class, ['pid'])
+    ->middleware(['auth', 'verified', 'can:delete,' . ModelsContestWork::class])
     ->name('user.contest.remove-work');
 
 /**
@@ -378,7 +381,7 @@ Route::get('/juror/review-vote/{vid}', Juror\ReviewVote::class, ['vid'])
  * Contest manage - Organization before last jury meeting
  */
 // Contest live - cumulative vote board for a section
-Route::get('/organization/contest/admit/before-final/{sid}', organization\Admit\BeforeFinal::class, ['sid'])
+Route::get('/organization/contest/admit/before-final/{sid}', Organization\Admit\BeforeFinal::class, ['sid'])
     ->middleware(['auth', 'verified'])
     ->name('contest-before-final-jury');
 
