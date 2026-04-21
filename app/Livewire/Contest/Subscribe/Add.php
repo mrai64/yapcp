@@ -17,6 +17,7 @@ use App\Models\ContestWork;
 use App\Models\UserContact;
 use App\Rules\ContestSectionRule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class Add extends Component
@@ -42,7 +43,7 @@ class Add extends Component
      */
     public function mount(string $dataJson) // livewire contest.subscribe.add
     {
-        ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':'
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:'
             . __LINE__ . ' in:' . $dataJson);
         $data = json_decode($dataJson);
 
@@ -51,7 +52,7 @@ class Add extends Component
         // sectionId - form field
         $this->userId = Auth::id(); // even $work->user_id
         $this->contestSectionSet = $data->contestSectionSet;
-        ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':'
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:'
             . __LINE__ . ' out:' . json_encode($this));
     }
 
@@ -60,7 +61,7 @@ class Add extends Component
      */
     public function render()
     {
-        ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':'
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:'
             . __LINE__ . ' in:' . json_encode($this));
 
         return view('livewire.contest.subscribe.add');
@@ -71,7 +72,7 @@ class Add extends Component
      */
     public function rules()
     {
-        ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':'
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:'
             . __LINE__ . ' in:' . json_encode($this));
 
         return [
@@ -97,10 +98,10 @@ class Add extends Component
      */
     public function addUserWorkToContest()
     {
-        ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':'
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:'
             . __LINE__ . ' in:' . json_encode($this));
         $validated = $this->validate();
-        ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':'
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:'
             . __LINE__ . ' validated' . json_encode($validated));
 
         // integration from mount()
@@ -116,7 +117,7 @@ class Add extends Component
             $validated['portfolioSequence'] += 1;
         }
         // TODO assigned - check dup value
-        ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':'
+        Log::info('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ':'
             . __LINE__ . ' validated' . json_encode($validated));
 
         $this->userWorkInContest = ContestWork::create([
@@ -129,14 +130,14 @@ class Add extends Component
             'is_admit' => false,
             'portfolio_sequence' => $validated['portfolioSequence'],
         ]);
-        ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':'
+        Log::info('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ':'
             . __LINE__ . ' out:' . json_encode($this->userWorkInContest));
 
         // check user_participant then add if missing
         if (ContestParticipant::where('contest_id', $this->contestId)
                 ->where('user_id', $userContact->id)->doesntExist()
         ) {
-            ds('Component Contest/Subscribe/' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' add user');
+            Log::info('Component ' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' add user');
             ContestParticipant::create([
                 // id assigned,
                 'contest_id' => $this->contestId,
