@@ -39,6 +39,8 @@
  * - [contest closing: participants board] (CHECK|TODO)
  * - [contest closing: awarded works board] (CHECK|TODO)
  *
+ * Note: middleware can be grouped? yes, but i prefer that way
+ *
  */
 
 use App\Http\Controllers\Contest\JuryMinuteDraft;
@@ -319,15 +321,15 @@ Route::get('/organization/contest/award/add/{contest}', Contest\Award\Add::class
  * user, and contest organization
  */
 // **review mark** //
-Route::get('/user/subscribe/contest/{contest}', Contest\Subscribe\Subscribe::class)
+Route::get('/user/contest/subscribe/{contest}', Contest\Subscribe\Subscribe::class)
     ->middleware(['auth', 'verified', 'can:view,' . ModelsContestWork::class])
     ->name('user.contest.participate');
 // user only
-Route::get('/user/subscribe/add-work/{contest}/{user-work}', Contest\Subscribe\Add::class)
+Route::get('/user/contest/add-work/{contest}/{user-work}', Contest\Subscribe\Add::class)
     ->middleware(['auth', 'verified', 'can:create,' . ModelsContestWork::class])
     ->name('user.contest.add-work');
 // user and contest organization
-Route::delete('/user/subscribe/remove/{contest-work}', Contest\Subscribe\Remove::class, ['pid'])
+Route::delete('/user/contest/remove/{contest-work}', Contest\Subscribe\Remove::class, ['pid'])
     ->middleware(['auth', 'verified', 'can:delete,' . ModelsContestWork::class])
     ->name('user.contest.remove-work');
 

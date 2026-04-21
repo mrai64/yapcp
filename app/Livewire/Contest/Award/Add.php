@@ -4,9 +4,9 @@
  * Contest Definition for Section and Contest Award Add (and list)
  *
  * 2025-12-05 review
- * 
+ *
  * @see /resources/views/livewire/contest/award/add.blade.php
- * 
+ *
  */
 
 namespace App\Livewire\Contest\Award;
