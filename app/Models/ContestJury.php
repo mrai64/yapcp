@@ -17,6 +17,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -48,6 +49,7 @@ use Illuminate\Support\Str;
  * @property string $user_id fk: user_contacts.id - juror
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereContestId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereUserId($value)
+ * @method static \Database\Factories\ContestJuryFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 class ContestJury extends Model
@@ -148,7 +150,7 @@ class ContestJury extends Model
 
     // was: contest_section
     // contest_juries.section_id > contest_sections.id
-    public function contestSection()
+    public function contestSection() : BelongsTo
     {
         $section = $this->belongsTo(ContestSection::class);
 
@@ -156,7 +158,7 @@ class ContestJury extends Model
     }
 
     // was: user_contact
-    public function userContact()
+    public function userContact() : BelongsTo
     {
         $contact = $this->belongsTo(
             related: UserContact::class, //   user_contacts

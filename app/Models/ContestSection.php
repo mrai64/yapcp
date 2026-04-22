@@ -80,6 +80,7 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection withoutTrashed()
+ * @method static \Database\Factories\ContestSectionFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 class ContestSection extends Model

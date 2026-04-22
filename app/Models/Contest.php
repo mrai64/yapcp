@@ -133,6 +133,8 @@ use Illuminate\Support\Str;
  * @property-read int|null $contest_sections_count
  * @property string $timezone_id fk: timezones.id
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereTimezoneId($value)
+ * @method static Builder<static>|Contest closedAfterOneYearAgo()
+ * @method static \Database\Factories\ContestFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 
