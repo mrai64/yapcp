@@ -34,7 +34,7 @@ class ContestWorkPolicy
     {
         Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         // user herself / himself can
-        $userContestId = $contestWork?->user_id;
+        $userContestId = $contestWork->user_id;
         Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' id:' . $userContestId);
         if ($userContestId === $user->id) {
             return true;
@@ -53,7 +53,7 @@ class ContestWorkPolicy
     {
         Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         // user herself / himself can
-        $evaluate = ($user?->id == Auth::id());
+        $evaluate = ($user->id == Auth::id());
         // other cannot
         return $evaluate;
     }
@@ -65,7 +65,7 @@ class ContestWorkPolicy
     {
         Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         // user herself / himself can
-        $userContestId = $contestWork?->user_id;
+        $userContestId = $contestWork->user_id;
         Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' id:' . $userContestId);
         if ($userContestId === $user->id) {
             return true;
@@ -91,7 +91,7 @@ class ContestWorkPolicy
     {
         Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         // user herself / himself
-        $userContestId = $contestWork?->user_id;
+        $userContestId = $contestWork->user_id;
         Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' id:' . $userContestId);
         $evaluate = ($userContestId === $user->id);
         Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' evaluated:' . $evaluate);
