@@ -71,6 +71,7 @@ use Illuminate\Support\Str; //         pk uuid
  * @property-read \App\Models\UserWork $userWork
  * @property string $user_work_id fk: user_works.id
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereUserWorkId($value)
+ * @method static \Database\Factories\ContestWorkFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 class ContestWork extends Model

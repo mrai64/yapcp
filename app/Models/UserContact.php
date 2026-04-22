@@ -23,6 +23,7 @@ use App\Casts\Country3Id;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -376,7 +377,7 @@ class UserContact extends Model
     }
 
     // user_contacts.country_id > countries.id
-    public function country()
+    public function country() : BelongsTo
     {
         $country = $this->belongsTo(
             related: Country::class, //   countries.

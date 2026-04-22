@@ -25,13 +25,23 @@ use Livewire\Component;
 
 class Modify5Feds extends Component
 {
+    // header fields
+    public string $firstName;
+
+    public string $lastName;
+
+    public string $countryId;
+
+    public $country;
+
+    // form fields
+    public Federation $federation;
+    
     public string $federationId;
 
-    public Federation $federation;
-
-    public string $userId;
-
     public UserContact $userContact;
+    
+    public string $userId;
 
     public array $formData = [];
 
@@ -45,8 +55,8 @@ class Modify5Feds extends Component
      * first is federation id, second should be a user contact id
      * but if missing is assumed logged user contact id.
      *
-     * @param string $fid
-     * @param string|null $uid
+     * @param Federation $federation
+     * @param UserContact $userContact
      * @return void
      */
     public function mount(Federation $federation, ?UserContact $userContact = null) // route()
@@ -68,7 +78,7 @@ class Modify5Feds extends Component
         $this->lastName = $this->userContact->last_name; //   surname      readonly
         // default value ITA as first developer he's italian
         $this->countryId = ($this->userContact->country_id ?? 'ITA');
-        $this->country = $this->userContact->country; //      nationality  readonly
+        $this->country = $this->userContact->country(); //      nationality  readonly
 
         // 1. check input
         $this->federationId = $federation->id;

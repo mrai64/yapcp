@@ -19,7 +19,7 @@ class LogContext
     {
         // Aggiunge il contesto a TUTTI i log generati durante questa richiesta
         Log::shareContext([
-            'session_id' => $request->session()->getId() ?? 'nosession',
+            'session_id' => $request->session()->getId(),
             'user_id'    => auth()->id() ?? '00000000-0000-0000-0000-000000000000', // null uuid
         ]);
         //
