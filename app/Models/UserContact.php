@@ -377,7 +377,7 @@ class UserContact extends Model
     }
 
     // user_contacts.country_id > countries.id
-    public function country() : BelongsTo
+    public function country(): BelongsTo
     {
         $country = $this->belongsTo(
             related: Country::class, //   countries.

@@ -36,11 +36,11 @@ class Modify5Feds extends Component
 
     // form fields
     public Federation $federation;
-    
+
     public string $federationId;
 
     public UserContact $userContact;
-    
+
     public string $userId;
 
     public array $formData = [];
