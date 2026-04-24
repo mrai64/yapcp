@@ -150,7 +150,7 @@ class ContestJury extends Model
 
     // was: contest_section
     // contest_juries.section_id > contest_sections.id
-    public function contestSection() : BelongsTo
+    public function contestSection(): BelongsTo
     {
         $section = $this->belongsTo(ContestSection::class);
 
@@ -158,7 +158,7 @@ class ContestJury extends Model
     }
 
     // was: user_contact
-    public function userContact() : BelongsTo
+    public function userContact(): BelongsTo
     {
         $contact = $this->belongsTo(
             related: UserContact::class, //   user_contacts
