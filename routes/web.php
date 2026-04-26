@@ -316,11 +316,11 @@ Route::get('/organization/contest/award/add/{contest}', Contest\Award\Add::class
 // TODO organization.contest-award.remove
 
 /**
+ * Contest live - user becomes a participant
  * User - Contest subscribe, add works, remove works
  *
- * user, and contest organization
+ * user, and organization members
  */
-// **review mark** //
 Route::get('/user/contest/subscribe/{contest}', Contest\Subscribe\Subscribe::class)
     ->middleware(['auth', 'verified', 'can:view,' . ModelsContestWork::class])
     ->name('user.contest.participate');
@@ -334,11 +334,14 @@ Route::delete('/user/contest/remove/{contest-work}', Contest\Subscribe\Remove::c
     ->name('user.contest.remove-work');
 
 /**
- * Contest manage - Organization
+ * Contest live - Organization check participants, and work submitted for validation
+ *
+ * organization members, admin
  */
 // Contest live - Organization contest dashboard
-Route::get('/contest/dashboard/{cid}', Organization\ContestPanel::class, ['cid'])
-    ->middleware(['auth', 'verified'])
+// **review mark** //
+Route::get('/contest/dashboard/{contest}', Contest\Dashboard::class)
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsContest::class])
     ->name('contest.dashboard');
 
 // Contest live - Organization review Participant User list _fee payment completed_

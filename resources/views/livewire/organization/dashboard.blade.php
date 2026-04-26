@@ -44,7 +44,7 @@ use App\Models\UserContact;
                     <a href="{{ route('organization.contest.modify', ['contest' => $contest ]) }}">
                         [ {{ __("Contest Definition Dashboard") }} ]
                     </a>
-                    <a href="{{ route('contest.dashboard', ['cid' => $contest->id ]) }}">
+                    <a href="{{ route('contest.dashboard', ['contest' => $contest ]) }}">
                         [ {{ __("Contest Live Dashboard") }} ]
                     </a>
                 </li>
