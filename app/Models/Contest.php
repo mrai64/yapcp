@@ -275,7 +275,7 @@ class Contest extends Model
 
 
     // for circuit: get contest in circuit
-    public function getContests() : HasMany
+    public function getContests(): HasMany
     {
         $contestSet = $this->hasMany(
             related: static::class,
@@ -302,7 +302,7 @@ class Contest extends Model
     // RELATIONSHIPs
 
     // contests.country_id > countries.id
-    public function country() : BelongsTo
+    public function country(): BelongsTo
     {
         $country = $this->belongsTo(
             related:    Country::class, //   ext class
@@ -316,7 +316,7 @@ class Contest extends Model
     // federation list
 
     // contests.timezone_id > timezones.id
-    public function timezone() : BelongsTo
+    public function timezone(): BelongsTo
     {
         //  = $this->belongsTo(Timezone::class);
         $tz = $this->belongsTo(
@@ -329,7 +329,7 @@ class Contest extends Model
     }
 
     // contests.organization_id > organizations.id
-    public function organization() : BelongsTo
+    public function organization(): BelongsTo
     {
         $organization = $this->belongsTo(
             related: Organization::class,
@@ -341,7 +341,7 @@ class Contest extends Model
     }
 
     // valid for is_circuit 'Y'
-    public function contestInCircuit() : HasMany
+    public function contestInCircuit(): HasMany
     {
         $contests = $this->hasMany(
             related: static::class,
@@ -395,7 +395,7 @@ class Contest extends Model
 
     //
     // contest_votes
-    public function contestVotes() : HasMany
+    public function contestVotes(): HasMany
     {
         $contestVotes = $this->hasMany(
             related: ContestVote::class,
@@ -407,7 +407,7 @@ class Contest extends Model
     }
 
     // contest_waitings.contest_id contests.id
-    public function contestWaitings() : HasMany
+    public function contestWaitings(): HasMany
     {
         $contestWaitings = $this->hasMany(
             related: ContestWaiting::class,
@@ -419,7 +419,7 @@ class Contest extends Model
     }
 
     // contest_waitings.contest_id contests.id
-    public function waitings() : HasMany
+    public function waitings(): HasMany
     {
         $contestWaitings = $this->hasMany(
             related: ContestWaiting::class,
@@ -431,7 +431,7 @@ class Contest extends Model
     }
 
     // contest_works
-    public function contestWorks() : HasMany
+    public function contestWorks(): HasMany
     {
         $contestWorksSet = $this->hasMany(
             related: ContestWork::class,
@@ -443,7 +443,7 @@ class Contest extends Model
     }
 
     // user_contests.contest_id contests.id
-    public function userRoles() : HasMany
+    public function userRoles(): HasMany
     {
         $userRoles = $this->hasMany(
             related: UserRole::class,
@@ -460,7 +460,7 @@ class Contest extends Model
      *
      * contests.circuit_id > contests.id
      */
-    public function circuit() : BelongsTo
+    public function circuit(): BelongsTo
     {
         $circuitId = $this->belongsTo(
             related: static::class, //    contests
