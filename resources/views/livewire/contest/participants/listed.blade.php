@@ -26,9 +26,10 @@ use App\Models\ContestWork;
         </h3>
         @if($canUpdate)
         <hr />
+        <br />
         <p class="fyk text-xl font-medium mb-4">
             <a href="{{ route('contest.dashboard', ['contest' => $contest]) }}">
-                [ {{__("Back to Contest dashboard")}} ]
+                [ {{ __("Back to Contest dashboard") }} ]
             </a>
         </p>
         @endif
@@ -38,7 +39,7 @@ use App\Models\ContestWork;
     <div>
         <h3 class="fyk text-2xl">
             <a href="{{ route('user.contest.participate', ['contest' => $contest]) }}"></a>
-            [ {{ __("Wanna become the first?") }} ]
+            [ {{ __("Do you want to be the first?") }} ]
             </a>
         </h3>
     </div>
@@ -48,12 +49,12 @@ use App\Models\ContestWork;
         <table class="data-table-container w-full">
             <thead>
                 <tr>
-                    <th scope="col" class="data-table-country">From</td>
-                    <th scope="col" class="data-table-name">Surname, Name</td>
-                    <th scope="col" class="data-table-actions">Fee status</td>
-                    <th scope="col" class="data-table-actions">Work participation</td>
+                    <th scope="col" class="data-table-country"> {{ __("From              ") }} </th>
+                    <th scope="col" class="data-table-name">    {{ __("Surname, Name     ") }} </th>
+                    <th scope="col" class="data-table-status">  {{ __("Fee status        ") }} </th>
+                    <th scope="col" class="data-table-actions"> {{ __("Work participation") }} </th>
                     @if($canUpdate)
-                    <th scope="col" class="data-table-actions">Actions</td>
+                    <th scope="col" class="data-table-actions"> {{ __("Actions") }}            </th>                    </td>
                     @endif
                 </tr>
             </thead>
@@ -79,11 +80,21 @@ use App\Models\ContestWork;
                         &nbsp;
                         @endforeach
                     </td>
-                    @if($canUpdate)
+                    @if($userCanRevokeId === $participant->user_id)
                     <td>
-                        <a href="{{ route('contest-participant.modify', ['cid' => $contest->id]) }}" class="text-indigo-600 hover:text-indigo-900">
-                            [ {{ __('Edit') }} ]
-                        </a>
+                        <p class="fyk text-xl font-medium mb-4">
+                            <a href="{{ route('contest-participant.revoke', ['contest' => $contest]) }}" class="text-indigo-600 hover:text-indigo-900">
+                                [ {{ __('Revoke') }} ]
+                            </a>
+                        </p>
+                    </td>
+                    @elseif($canUpdate)
+                    <td>
+                        <p class="fyk text-xl font-medium mb-4">
+                            <a href="{{ route('contest-participant.modify', ['contest' => $contest]) }}" class="text-indigo-600 hover:text-indigo-900">
+                                [ {{ __('Edit') }} ]
+                            </a>
+                        </p>
                     </td>
                     @endif
                 </tr>
