@@ -16,7 +16,6 @@ use App\Models\Contest;
 use App\Models\ContestParticipant;
 use App\Models\ContestSection;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
@@ -37,24 +36,24 @@ class Listed extends Component
      */
     public function mount(Contest $contest) // as route
     {
-        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ 
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
             . ' called');
         $this->contest = $contest;
         $this->contest_id = $contest->id;
         $this->contestParticipantsSet = [];
 
         // Esempio: verifichiamo se l'utente può aggiornare i partecipanti di questo contest
-        // La policy 'update' su ContestParticipant potrebbe controllare se l'utente 
+        // La policy 'update' su ContestParticipant potrebbe controllare se l'utente
         // è un membro dell'organizzazione o un admin.
         $this->canUpdate = Auth::check() && Auth::user()->can('update', $contest);
 
-        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ 
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
             . ' contest:' . json_encode($this->contest));
 
         $this->contestSectionsSet = ContestSection::where('contest_id', $contest->id)->get();
 
         $this->contestParticipantsSet = ContestParticipant::contestParticipantsArray($contest->id);
-        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ 
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
             . ' contestParticipantsSet:' . json_encode($this->contestParticipantsSet));
     }
 
@@ -63,7 +62,7 @@ class Listed extends Component
      */
     public function render()
     {
-        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ 
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
             . ' called');
         return view('livewire.contest.participants.listed');
     }
