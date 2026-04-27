@@ -38,7 +38,7 @@ use App\Models\ContestWork;
     <div>
         <h3 class="fyk text-2xl">
             <a href="{{ route('user.contest.participate', ['contest' => $contest]) }}"></a>
-            {{ __("Wanna become the first?") }}
+            [ {{ __("Wanna become the first?") }} ]
             </a>
         </h3>
     </div>
@@ -58,16 +58,16 @@ use App\Models\ContestWork;
                 </tr>
             </thead>
             <tbody>
-            @foreach($contestParticipantsSet as $key => $participant)
+            @foreach($contestParticipantsSet as $participant)
                 <tr class="border py-2">
                     <td scope="row" class="fyk text-xl">
-                        {{ Country::countryFlag($participant['country_id']) }}
-                        {{ $participant['country_id'] }}
+                        {{ Country::countryFlag($participant->contact->country_id) }}
+                        {{ $participant->contact->country_id }}
                     </td>
                     <td class="fyk text-2xl">
-                        {{ $participant['last_name'] }}, {{ $participant['first_name'] }}
+                        {{ $participant->contact->last_name }}, {{ $participant->contact->first_name }}
                     </td>
-                    <td>@if(($participant['fee_payment_completed'] === 'Y'))
+                    <td>@if($participant->fee_payment_completed)
                         {{ __("completed") }}
                         @else
                         <div class="alert alert-danger small">{{ __("waiting confirm") }} </div>
@@ -75,7 +75,7 @@ use App\Models\ContestWork;
                     </td>
                     <td class="small kbd" nowrap>
                         @foreach($contestSectionsSet as $section)
-                        [{{$section->code}}: {{ ContestWork::sectionWorksCounter($section->id, $participant['user_id']) }} / {{$section->rule_max}}] 
+                        [{{$section->code}}: {{ ContestWork::sectionWorksCounter($section->id, $participant->user_id) }} / {{$section->rule_max}}] 
                         &nbsp;
                         @endforeach
                     </td>

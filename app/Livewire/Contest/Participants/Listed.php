@@ -52,7 +52,7 @@ class Listed extends Component
 
         $this->contestSectionsSet = ContestSection::where('contest_id', $contest->id)->get();
 
-        $this->contestParticipantsSet = ContestParticipant::contestParticipantsArray($contest->id);
+        $this->contestParticipantsSet = ContestParticipant::contestParticipantsCollection($contest->id);
         Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
             . ' contestParticipantsSet:' . json_encode($this->contestParticipantsSet));
     }
