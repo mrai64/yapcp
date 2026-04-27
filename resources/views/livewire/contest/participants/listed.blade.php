@@ -1,7 +1,13 @@
 <?php
 /**
- * Contest (user) Participant list 1
- * Status readonly
+ * Contest live: participant board
+ *
+ * organization member: action button modify fee payment status
+ *                      upto starting jury working day
+ * admin: the same
+ * others: a readonly list, absolutely no action buttons
+ *
+ * @see /App/Livewire/Contest/Participants/Listed.php
  *
  */
 
@@ -12,10 +18,12 @@ use App\Models\ContestWork;
 
 <div>
     <div class="header">
-        <div class="fyk text-2xl">{{ $contest->country->flag_code }} | {{$contest->name_en}}</div>
-            <h2 class="fyk text-2xl font-medium text-gray-900">
-                {{ __('Participant List') }}
-            </h2>
+        <h2 class="fyk text-2xl font-medium text-gray-900">
+            {{ __('Participant List for') }}
+        </h2>
+        <h3 class="fyk text-2xl">
+            {{ $contest->country->flag_code }} | {{ $contest->name_en }}
+        </h3>
         <hr />
         <div class="p-4 border rounded-md">
             [ 
@@ -26,9 +34,11 @@ use App\Models\ContestWork;
         </div>
     </div>
 
-    @if (count($participant_list) < 1)
+    @if (count($contestParticipantsSet) < 1)
     <div>
-        <h3 class="fyk text-2xl">{{ __("Waitin', but you should be the first") }}</h3>
+        <h3 class="fyk text-2xl">
+            {{ __("Wanna become the first?") }}
+        </h3>
     </div>
 
     @else
@@ -43,7 +53,7 @@ use App\Models\ContestWork;
                 </tr>
             </thead>
             <tbody>
-            @foreach($participant_list as $key => $participant)
+            @foreach($contestParticipantsSet as $key => $participant)
                 <tr class="border py-2">
                     <td scope="row" class="fyk text-xl">
                         {{ Country::countryFlag($participant['country_id']) }}
@@ -59,7 +69,7 @@ use App\Models\ContestWork;
                         @endif
                     </td>
                     <td class="small kbd" nowrap>
-                        @foreach($contest_section_list as $section)
+                        @foreach($contestSectionsSet as $section)
                         [{{$section->code}}: {{ ContestWork::sectionWorksCounter($section->id, $participant['user_id']) }} / {{$section->rule_max}}] 
                         &nbsp;
                         @endforeach

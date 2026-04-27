@@ -54,6 +54,7 @@ use App\Livewire\Organization;
 use App\Livewire\User;
 use App\Models\Contest as ModelsContest;
 use App\Models\ContestJury as ModelsContestJury;
+use App\Models\ContestParticipant as ModelsContestParticipant;
 use App\Models\ContestSection as ModelsContestSection;
 use App\Models\ContestWork as ModelsContestWork;
 use App\Models\Federation as ModelsFederation;
@@ -339,14 +340,14 @@ Route::delete('/user/contest/remove/{contest-work}', Contest\Subscribe\Remove::c
  * organization members, admin
  */
 // Contest live - Organization contest dashboard
-// **review mark** //
 Route::get('/contest/dashboard/{contest}', Contest\Dashboard::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContest::class])
     ->name('contest.dashboard');
 
 // Contest live - Organization review Participant User list _fee payment completed_
-Route::get('/organization/contest/participants/listed/{cid}', Contest\Participants\Listed::class, ['cid'])
-    ->middleware(['auth', 'verified'])
+// **review mark** //
+Route::get('/contest/participants/listed/{contest}', Contest\Participants\Listed::class)
+    ->middleware(['auth', 'verified', 'can:view,' . ModelsContestParticipant::class])
     ->name('public-participant-list');
 Route::get('/organization/contest/participants/modify/{cid}', Contest\Participants\Modify::class, ['cid'])
     ->middleware(['auth', 'verified'])
