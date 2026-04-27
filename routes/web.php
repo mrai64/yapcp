@@ -349,8 +349,8 @@ Route::get('/contest/participants/listed/{contest}', Contest\Participants\Listed
     ->middleware(['auth', 'verified', 'can:viewAny,' . ModelsContestParticipant::class])
     ->name('contest-participant.list');
 // **review mark** //
-Route::get('/contest/participants/modify/{cid}', Contest\Participants\Modify::class, ['cid'])
-    ->middleware(['auth', 'verified'])
+Route::get('/contest/participants/modify/{contest}', Contest\Participants\Modify::class)
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsContestParticipant::class])
     ->name('contest-participant.modify');
 
 // Contest live - organization works before jury works
