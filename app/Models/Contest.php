@@ -35,6 +35,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
@@ -274,7 +275,7 @@ class Contest extends Model
 
 
     // for circuit: get contest in circuit
-    public function getContests()
+    public function getContests() : HasMany
     {
         $contestSet = $this->hasMany(
             related: static::class,
@@ -301,21 +302,21 @@ class Contest extends Model
     // RELATIONSHIPs
 
     // contests.country_id > countries.id
-    public function country()
+    public function country() : BelongsTo
     {
         $country = $this->belongsTo(
             related:    Country::class, //   ext class
             foreignKey: 'country_id', //     int contests.country_id
             ownerKey:   'id' //              ext countries.id
         );
-
+        // log
         return $country;
     }
 
     // federation list
 
     // contests.timezone_id > timezones.id
-    public function timezone()
+    public function timezone() : BelongsTo
     {
         //  = $this->belongsTo(Timezone::class);
         $tz = $this->belongsTo(
@@ -328,7 +329,7 @@ class Contest extends Model
     }
 
     // contests.organization_id > organizations.id
-    public function organization()
+    public function organization() : BelongsTo
     {
         $organization = $this->belongsTo(
             related: Organization::class,
@@ -340,7 +341,7 @@ class Contest extends Model
     }
 
     // valid for is_circuit 'Y'
-    public function contestInCircuit()
+    public function contestInCircuit() : HasMany
     {
         $contests = $this->hasMany(
             related: static::class,
@@ -394,7 +395,7 @@ class Contest extends Model
 
     //
     // contest_votes
-    public function contestVotes()
+    public function contestVotes() : HasMany
     {
         $contestVotes = $this->hasMany(
             related: ContestVote::class,
@@ -406,7 +407,7 @@ class Contest extends Model
     }
 
     // contest_waitings.contest_id contests.id
-    public function contestWaitings()
+    public function contestWaitings() : HasMany
     {
         $contestWaitings = $this->hasMany(
             related: ContestWaiting::class,
@@ -418,7 +419,7 @@ class Contest extends Model
     }
 
     // contest_waitings.contest_id contests.id
-    public function waitings()
+    public function waitings() : HasMany
     {
         $contestWaitings = $this->hasMany(
             related: ContestWaiting::class,
@@ -430,7 +431,7 @@ class Contest extends Model
     }
 
     // contest_works
-    public function contestWorks()
+    public function contestWorks() : HasMany
     {
         $contestWorksSet = $this->hasMany(
             related: ContestWork::class,
@@ -442,7 +443,7 @@ class Contest extends Model
     }
 
     // user_contests.contest_id contests.id
-    public function userRoles()
+    public function userRoles() : HasMany
     {
         $userRoles = $this->hasMany(
             related: UserRole::class,
@@ -459,7 +460,7 @@ class Contest extends Model
      *
      * contests.circuit_id > contests.id
      */
-    public function circuit()
+    public function circuit() : BelongsTo
     {
         $circuitId = $this->belongsTo(
             related: static::class, //    contests
@@ -486,5 +487,4 @@ class Contest extends Model
 
         return $contests;
     }
-
 }
