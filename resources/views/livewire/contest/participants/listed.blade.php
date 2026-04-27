@@ -17,27 +17,29 @@ use App\Models\ContestWork;
 ?>
 
 <div>
-    <div class="header">
+    <header>
         <h2 class="fyk text-2xl font-medium text-gray-900">
             {{ __('Participant List for') }}
         </h2>
         <h3 class="fyk text-2xl">
             {{ $contest->country->flag_code }} | {{ $contest->name_en }}
         </h3>
+        @if($canUpdate)
         <hr />
-        <div class="p-4 border rounded-md">
-            [ 
-                <a href="{{route('contest.dashboard', ['contest' => $contest ])}}">
-                    {{__("Back to contest live panel")}} 
-                </a>
-            ]
-        </div>
-    </div>
+        <p class="fyk text-xl font-medium mb-4">
+            <a href="{{ route('contest.dashboard', ['contest' => $contest]) }}">
+                [ {{__("Back to Contest dashboard")}} ]
+            </a>
+        </p>
+        @endif
+    </header>
 
     @if (count($contestParticipantsSet) < 1)
     <div>
         <h3 class="fyk text-2xl">
+            <a href="{{ route('user.contest.participate', ['contest' => $contest]) }}"></a>
             {{ __("Wanna become the first?") }}
+            </a>
         </h3>
     </div>
 
@@ -50,6 +52,9 @@ use App\Models\ContestWork;
                     <th scope="col" class="data-table-name">Surname, Name</td>
                     <th scope="col" class="data-table-actions">Fee status</td>
                     <th scope="col" class="data-table-actions">Work participation</td>
+                    @if($canUpdate)
+                    <th scope="col" class="data-table-actions">Actions</td>
+                    @endif
                 </tr>
             </thead>
             <tbody>
@@ -74,12 +79,19 @@ use App\Models\ContestWork;
                         &nbsp;
                         @endforeach
                     </td>
+                    @if($canUpdate)
+                    <td>
+                        <a href="{{ route('modify-participant-list', ['cid' => $contest->id]) }}" class="text-indigo-600 hover:text-indigo-900">
+                            [ {{ __('Edit') }} ]
+                        </a>
+                    </td>
+                    @endif
                 </tr>
             @endforeach
             </tbody>
         </table>
     </div>
-    <div class="small">{{__("-- End of list--")}}</div>
+    <div class="small">{{ __("-- End of list--") }}</div>
 
     @endif
 </div>

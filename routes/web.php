@@ -345,10 +345,10 @@ Route::get('/contest/dashboard/{contest}', Contest\Dashboard::class)
     ->name('contest.dashboard');
 
 // Contest live - Organization review Participant User list _fee payment completed_
-// **review mark** //
 Route::get('/contest/participants/listed/{contest}', Contest\Participants\Listed::class)
     ->middleware(['auth', 'verified', 'can:view,' . ModelsContestParticipant::class])
     ->name('public-participant-list');
+// **review mark** //
 Route::get('/organization/contest/participants/modify/{cid}', Contest\Participants\Modify::class, ['cid'])
     ->middleware(['auth', 'verified'])
     ->name('modify-participant-list');
