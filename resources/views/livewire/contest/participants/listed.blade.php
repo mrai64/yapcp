@@ -81,7 +81,7 @@ use App\Models\ContestWork;
                     </td>
                     @if($canUpdate)
                     <td>
-                        <a href="{{ route('modify-participant-list', ['cid' => $contest->id]) }}" class="text-indigo-600 hover:text-indigo-900">
+                        <a href="{{ route('contest-participant.modify', ['cid' => $contest->id]) }}" class="text-indigo-600 hover:text-indigo-900">
                             [ {{ __('Edit') }} ]
                         </a>
                     </td>

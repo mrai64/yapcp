@@ -346,12 +346,12 @@ Route::get('/contest/dashboard/{contest}', Contest\Dashboard::class)
 
 // Contest live - Organization review Participant User list _fee payment completed_
 Route::get('/contest/participants/listed/{contest}', Contest\Participants\Listed::class)
-    ->middleware(['auth', 'verified', 'can:view,' . ModelsContestParticipant::class])
-    ->name('public-participant-list');
+    ->middleware(['auth', 'verified', 'can:viewAny,' . ModelsContestParticipant::class])
+    ->name('contest-participant.list');
 // **review mark** //
-Route::get('/organization/contest/participants/modify/{cid}', Contest\Participants\Modify::class, ['cid'])
+Route::get('/contest/participants/modify/{cid}', Contest\Participants\Modify::class, ['cid'])
     ->middleware(['auth', 'verified'])
-    ->name('modify-participant-list');
+    ->name('contest-participant.modify');
 
 // Contest live - organization works before jury works
 Route::get('/organization/contest/pre-jury/section-list/{cid}', Organization\PreJury\SectionListed::class, ['cid'])

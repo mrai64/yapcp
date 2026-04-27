@@ -75,6 +75,6 @@ class Remove extends Component
             ->update(['fee_payment_completed' => 'N']);
         //
         return redirect()
-            ->route('modify-participant-list', ['cid' => $this->contestId]);
+            ->route('contest-participant.modify', ['cid' => $this->contestId]);
     }
 }

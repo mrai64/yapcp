@@ -75,7 +75,7 @@ class Complete extends Component
             ->update(['fee_payment_completed' => 'Y']);
         //
         return redirect()
-            ->route('modify-participant-list', ['cid' => $this->contestId]);
+            ->route('contest-participant.modify', ['cid' => $this->contestId]);
 
     }
 }
