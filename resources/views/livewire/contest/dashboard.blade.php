@@ -54,7 +54,7 @@
 
     <div class="p-4 border rounded-md mb-4 w-full">
         <h3 class="fyk text-xl font-medium mb-4">
-            <a  href="{{ route('public-participant-list', ['cid' => $contest->id ]) }}"
+            <a  href="{{ route('contest-participant.list', ['cid' => $contest->id ]) }}"
                 rel="noopener noreferrer">
                 [ {{ __('Update Participant list') }} ]
             </a>

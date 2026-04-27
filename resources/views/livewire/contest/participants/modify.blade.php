@@ -47,7 +47,7 @@ use Illuminate\Support\Facades\Gate;
                 <span class="fyk text-xl">Awards</span>
             </a>
             . .
-            <a href="{{ route('modify-participant-list', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('contest-participant.modify', ['cid' => $contest->id ]); }}">
                 <span class="fyk text-2xl">Participants</span>
             </a>
             . .
