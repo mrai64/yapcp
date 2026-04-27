@@ -14,12 +14,11 @@
         </h2>
         <hr />
         <br />
-        <p class="mb-4">
+        <p class="fyk text-xl font-medium mb-4">
             <a href="{{ route('federation-section.list', ['federation' => $federation])}}" 
-                class="fyk text-xl mb-4"
-                target="_blank" rel="noopener noreferrer"
-                >
-            Federation' Coded Sections List 🗒️
+                target="_blank"
+                rel="noopener noreferrer">
+            [ {{ __("Federation' Coded Sections List") }} 🗒️ ]
             </a>
         </p><!-- federation section list -->
 

@@ -21,7 +21,7 @@ use Livewire\Component;
 
 class Listed extends Component
 {
-    public string $contest_id;
+    public string $contestId;
 
     public Contest $contest;
 
@@ -31,6 +31,8 @@ class Listed extends Component
 
     public bool $canUpdate = false;
 
+    public string $userCanRevokeId;
+
     /**
      * 1. before
      */
@@ -39,18 +41,15 @@ class Listed extends Component
         Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
             . ' called');
         $this->contest = $contest;
-        $this->contest_id = $contest->id;
-        $this->contestParticipantsSet = [];
+        $this->contestId = $contest->id;
 
-        // Esempio: verifichiamo se l'utente può aggiornare i partecipanti di questo contest
-        // La policy 'update' su ContestParticipant potrebbe controllare se l'utente
-        // è un membro dell'organizzazione o un admin.
         $this->canUpdate = Auth::check() && Auth::user()->can('update', $contest);
+        $this->userCanRevokeId = Auth::user()->id;
 
         Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
             . ' contest:' . json_encode($this->contest));
 
-        $this->contestSectionsSet = ContestSection::where('contest_id', $contest->id)->get();
+        $this->contestSectionsSet = ContestSection::where('contestId', $contest->id)->get();
 
         $this->contestParticipantsSet = ContestParticipant::contestParticipantsCollection($contest->id);
         Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
