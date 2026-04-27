@@ -22,8 +22,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
@@ -137,8 +139,27 @@ class ContestParticipant extends Model
         return $contestParticipantsArray;
     }
 
-    // RELATIONSHIP
+    /**
+     * Contest user Participant list (complete, no paginated),
+     * sorted by country, last_name, first_name
+     */
+    public static function contestParticipantsCollection(string $contestId): Collection
+    {
+        // Usiamo Eager Loading ('contact') per caricare i dati anagrafici in un'unica query.
+        // Facciamo una join solo per permettere al database di ordinare i risultati
+        // in base ai campi della tabella user_contacts.
+        return self::where('contest_id', $contestId)
+            ->with('contact')
+            ->join('user_contacts', 'contest_participants.user_id', '=', 'user_contacts.id')
+            ->select('contest_participants.*') // Assicuriamoci di prendere i campi di partecipazione
+            ->orderBy('user_contacts.country_id')
+            ->orderBy('user_contacts.last_name')
+            ->orderBy('user_contacts.first_name')
+            ->orderBy('user_contacts.user_id')
+            ->get();
+    }
 
+    // RELATIONSHIP
 
     public function contest()
     {
@@ -174,7 +195,7 @@ class ContestParticipant extends Model
     }
 
     // was: user_contact
-    public function userContact()
+    public function userContact(): BelongsTo
     {
         $userContact = $this->belongsTo(
             UserContact::class,
@@ -186,7 +207,7 @@ class ContestParticipant extends Model
     }
 
     // doubled as used in query as contact
-    public function contact()
+    public function contact(): BelongsTo
     {
         //                     user_contacts.user_id contest_participants.user_id
         $userContact = $this->belongsTo(
@@ -199,7 +220,7 @@ class ContestParticipant extends Model
     }
 
     // was: user_contact_more
-    public function userContactMores()
+    public function userContactMores(): HasMany
     {
         //                       user_contact_mores.user_contact_user_id contest_participants.user_id
         $userContactMores = $this->hasMany(
@@ -211,7 +232,7 @@ class ContestParticipant extends Model
         return $userContactMores;
     }
 
-    public function contactMores()
+    public function contactMores(): HasMany
     {
         //                       user_contact_mores.user_contact_user_id contest_participants.user_id
         $userContactMores = $this->hasMany(
