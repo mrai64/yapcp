@@ -48,7 +48,7 @@ use Illuminate\Support\Facades\Gate;
                 <span class="fyk text-xl">Awards</span>
             </a>
             . .
-            <a href="{{ route('contest-participant.modify', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('contest-participant.modify', ['contest' => $contest]) }}">
                 <span class="fyk text-2xl">Participants</span>
             </a>
             . .
@@ -59,7 +59,7 @@ use Illuminate\Support\Facades\Gate;
     <div class="my-4">
         <h3 class="fyk text-2xl">
             <a href="{{ route('user.contest.participate', ['contest' => $contest]) }}"></a>
-                [ {{ __("Wanna become the first?") }} ]
+                [ {{ __("Do you want to be the first?") }} ]
             </a>
         </h3>
     </div>

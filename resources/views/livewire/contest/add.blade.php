@@ -40,7 +40,7 @@ use App\Models\ContestSection;
                 <span class="fyk text-xl">Awards</span>
             </a>
             . .
-            <a href="{{ route('contest-participant.modify', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('contest-participant.modify', ['contest' => $contest]) }}">
                 <span class="fyk text-xl">Participants</span>
             </a>
             . .
