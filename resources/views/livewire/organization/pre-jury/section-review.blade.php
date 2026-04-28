@@ -1,14 +1,7 @@
 <?php
 /**
- * Contest Section - Work List - for Organization Review 
+ * Contest Live - Organization Work submitted Review 
  * 
- * CLASS: app/Livewire/Organization/Contest/SectionBoard.php
- * VIEW:  resources/views/livewire/organization/contest/section-board.blade.php
- *
- * Not all rules are automatic-able, i.e. if you ask to search
- * sign and mark, personal signature an mark on author' works,
- * actually there is no AI to run that task. And here is the 
- * section board
  */
 
 ?>
@@ -20,10 +13,10 @@
     <div class="header mb-4">
         <h3 class="fyk text-xl">{{ __("Contest pre-jury IN / OUT")}}</h3>
         <div class="header mb-4">
-            {{ __("As member of organization, in that page you check in human way")}}
+            {{ __("As member of contest organization, here you check in human way")}}
             {{ __("if these works can be pass to Jury work. ")}}<br />
             {{ __("Or advice author that her/him work have a little trouble.")}}<br >
-            {{ __("For every img choice Ok/IN or KO/WARN.)")}}
+            {{ __("For every img choice Ok/IN or KO/WARN. ")}}
         </div>
     </div>
     <br style="clear:both;" />
@@ -72,7 +65,7 @@
             <span>
                 <!--[if BLOCK]><![endif]-->
                 <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 cursor-default leading-5 rounded-md dark:text-gray-600 dark:bg-gray-800 dark:border-gray-600">
-                    <a href="{{ route('organization-contest-pass-next', ['wid' => $work->id ]) }}" class="fyk text-xl">
+                    <a href="{{ route('organizaton-contest.review.pass', ['wid' => $work->id ]) }}" class="fyk text-xl">
                     {{ __("✅ OK IT's IN ✅") }}
                     </a>
                     </span>
@@ -81,7 +74,7 @@
             <span>                
                 <!--[if BLOCK]><![endif]-->                        
                 <button class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-blue-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:focus:border-blue-700 dark:active:bg-gray-700 dark:active:text-gray-300">
-                    <a href="{{ route('organization-contest-warn-email', ['wid' => $work->id ]) }}" class="fyk text-xl">
+                    <a href="{{ route('organizaton-contest.review.warn', ['wid' => $work->id ]) }}" class="fyk text-xl">
                         {{ __("⚠️ OUT 📧") }}
                     </a>
                 </button>

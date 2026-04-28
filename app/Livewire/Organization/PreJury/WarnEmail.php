@@ -86,7 +86,7 @@ class WarnEmail extends Component
         $contest_waiting->notifyNow(new ContestWarning($contest_waiting));
 
         return redirect()
-            ->route('organization-contest-section-list', ['sid' => $this->contest_work->section_id])
+            ->route('organization-contest.review.section-list', ['contest-section' => $this->contest_work->section_id])
             ->with('success', __('Warn Send. Next,...'));
     }
 }

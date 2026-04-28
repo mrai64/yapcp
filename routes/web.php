@@ -348,24 +348,24 @@ Route::get('/contest/dashboard/{contest}', Contest\Dashboard::class)
 Route::get('/contest/participants/listed/{contest}', Contest\Participants\Listed::class)
     ->middleware(['auth', 'verified', 'can:viewAny,' . ModelsContestParticipant::class])
     ->name('contest-participant.list');
-// **review mark** //
 Route::get('/contest/participants/modify/{contest}', Contest\Participants\Modify::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContestParticipant::class])
     ->name('contest-participant.modify');
 
 // Contest live - organization works before jury works
-Route::get('/organization/contest/pre-jury/section-list/{cid}', Organization\PreJury\SectionListed::class, ['cid'])
-    ->middleware(['auth', 'verified'])
+Route::get('/organization/contest/pre-jury/section-list/{contest}', Organization\PreJury\SectionListed::class)
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsContest::class])
     ->name('organization-contest.list');
-Route::get('/organization/contest/pre-jury/section-review/{sid}', Organization\PreJury\SectionReview::class, ['sid'])
-    ->middleware(['auth', 'verified'])
-    ->name('organization-contest-section-list');
+Route::get('/organization/contest/pre-jury/section-review/{contest-section}', Organization\PreJury\SectionReview::class)
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsContestSection::class])
+    ->name('organization-contest.review.section-list');
+// **review mark** //
 Route::get('/organization/contest/pre-jury/warn/{wid}', Organization\PreJury\WarnEmail::class, ['wid'])
     ->middleware(['auth', 'verified'])
-    ->name('organization-contest-warn-email');
+    ->name('organizaton-contest.review.warn');
 Route::get('/organization/contest/pre-jury/pass/{wid}', Organization\PreJury\PassNext::class, ['wid'])
     ->middleware(['auth', 'verified'])
-    ->name('organization-contest-pass-next');
+    ->name('organizaton-contest.review.pass');
 
 /**
  * Contest manage - Jury works

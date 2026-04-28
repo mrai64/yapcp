@@ -1,7 +1,17 @@
 <?php
 
+/**
+ * User can revoke her/him participation
+ *
+ * THATS A NEARLY MOCKUP
+ *
+ */
+
 namespace App\Livewire\Contest\Participants;
 
+use App\Models\Contest;
+use App\Models\ContestParticipant;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Revoke extends Component
