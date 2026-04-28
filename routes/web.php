@@ -392,15 +392,13 @@ Route::get('/organization/contest/before-final/{contestSection}', Organization\A
     ->name('organization-contest.before-final');
 
 /**
- * Contest live
+ * Contest live - assign admin, section awards, contest awards, then jury minute, and first report.
  */
-// **review mark** //
-// Contest live - After jury first works set admit list
 Route::get('/organization/contest/admit/set-admit/{contestSection}', Organization\Admit\SetAdmit::class)
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsContest::class])
     ->name('organization-contest.set-admit');
 
-// Contest live - during or after last Jury reunion
+// **review mark** //
 Route::get('/organization/award-assign/section/{sid}', Organization\Award\SectionAssign::class, ['sid'])
     ->middleware(['auth', 'verified'])
     ->name('organization-contest.section-awards');
