@@ -188,6 +188,15 @@ class ContestSection extends Model
         return $worksInSection;
     }
 
+    // section awards also in order
+    public function awards(): HasMany
+    {
+        $awards = $this->hasMany(ContestAward::class, 'section_id', 'id')
+            ->orderBy('award_code');
+        // Log
+        return $awards;
+    }
+
     // was: federation_section()
     // contest_sections.federation_section_id > federation_sections.id
     public function federationSection(): HasOne

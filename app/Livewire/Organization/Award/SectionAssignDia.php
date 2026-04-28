@@ -86,12 +86,12 @@ class SectionAssignDia extends Component
         if ($this->unassigned_award_codes->count() > 1) {
             // redirect
             return redirect()
-                ->route('organization-contest.section-awards', ['sid' => $this->section_id])
+                ->route('organization-contest.section-awards', ['contestSection' => $this->section_id])
                 ->with('success', __('Award assigned, next?'));
         } else {
             // last, back to contest page
             return redirect()
-                ->route('organization-contest.contest-awards', ['cid' => $this->contest_id])
+                ->route('organization-contest.contest-awards', ['contest' => $this->contest_id])
                 ->with('success', __('Section Award all assigned, next?'));
         }
     }

@@ -487,4 +487,27 @@ class Contest extends Model
 
         return $contests;
     }
+
+    // all the awards
+    public function awards(): HasMany
+    {
+        $awards = $this->hasMany(ContestAward::class)
+            ->orderBy('section_id')
+            ->orderBy('section_code')
+            ->orderBy('award_code');
+        // Log
+        return $awards;
+    }
+
+    /**
+     * Only the Contest award (no section == global award)
+     */
+    public function globalAwards(): HasMany
+    {
+        $awards = $this->hasMany(ContestAward::class)
+            ->whereNull('section_id')
+            ->orderBy('award_code');
+        // Log::debug("Richiesta relazione globalAwards per contest: " . $this->id);
+        return $awards;
+    }
 }
