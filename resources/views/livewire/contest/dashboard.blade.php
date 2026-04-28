@@ -114,7 +114,7 @@
         </h3>
         @foreach( $contestSectionsSet as $contestSection)
         <div class="fyk text-xl mb-4 w-full">
-            <a href="{{ route('contest-before-final-jury', ['sid' => $contestSection->id ]) }}">
+            <a href="{{ route('organization-contest.before-final', ['sid' => $contestSection->id ]) }}">
                 [ {{ __("Sum Votes Board + Ask Vote Change") }} ]
             </a>
             {{ $contestSection->code }} | {{ $contestSection->name_en }}
@@ -132,7 +132,7 @@
         </h3>
         @foreach( $contestSectionsSet as $contestSection)
         <div class="fyk text-xl mb-4 w-full">
-            <a href="{{ route('organization-contest-admit', ['sid' => $contestSection->id ]) }}">
+            <a href="{{ route('organization-contest.set-admit', ['sid' => $contestSection->id ]) }}">
                 [ {{ __("Admission set, based on Sum Votes") }} ]
             </a>
             {{ $contestSection->code }} | {{ $contestSection->name_en }}
@@ -150,7 +150,7 @@
         </h3>
         @foreach( $contestSectionsSet as $contestSection)
         <div class="fyk text-xl mb-4 w-full">
-            <a href="{{ route('organization-award-section-assign', ['sid' => $contestSection->id ]) }}">
+            <a href="{{ route('organization-contest.section-awards', ['sid' => $contestSection->id ]) }}">
                 [ {{ __("Awards assignment") }} ]
             </a>
             {{ $contestSection->code }} | {{ $contestSection->name_en }}
@@ -164,7 +164,7 @@
         </h3>
         <hr />
         <div class="fyk text-xl mb-4 w-full">
-            <a href="{{ route('organization-award-contest-assign', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization-contest.contest-awards', ['cid' => $contest->id ]) }}">
                 [ {{ __("Contest Awards assignment") }} ]
             </a>
         </div>
@@ -183,7 +183,7 @@
         </p>
         <hr />
         <div class="fyk text-xl mb-4 w-full">
-            <a href="{{ route('organization-award-minute-draft', ['cid' => $contest->id]) }}">
+            <a href="{{ route('organization-contest.minute-draft', ['cid' => $contest->id]) }}">
                 [ {{ __("Jury Minute - download pdf") }} ]
             </a>
         </div>

@@ -20,6 +20,7 @@ use App\Models\UserContact;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Livewire\Component;
@@ -64,20 +65,25 @@ class SectionBoard extends Component
      */
     public static function miniature(string $originalPathName): string
     {
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called');
         $lastSlashPosition = strrpos($originalPathName, '/');
         $originalPath = substr($originalPathName, 0, $lastSlashPosition + 1);
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' path:' . $originalPath);
+        Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' path:' . $originalPath);
 
         $miniatureName = '300px_' . substr($originalPathName, $lastSlashPosition + 1);
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' name:' . $miniatureName);
+        Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' name:' . $miniatureName);
 
         if (Storage::disk('public')->exists('contests/' . $originalPath . $miniatureName)) {
-            ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' found');
+            Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+                . ' found');
 
             return $originalPath . $miniatureName;
         }
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' not found');
+        Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' not found');
 
         return $originalPathName;
     }
@@ -85,25 +91,31 @@ class SectionBoard extends Component
     /**
      * 1. Before the show
      */
-    public function mount(string $sid) // route()
+    public function mount(ContestSection $contestSection) // route()
     {
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
-        Gate::authorize('jury-panels', $sid);
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called');
+        Gate::authorize('jury-panels', $contestSection->id);
+        $sid = $contestSection->id;
 
         $this->jurorId = Auth::id();
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' juror_id:' . $this->jurorId);
+        Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' juror_id:' . $this->jurorId);
 
         $this->juror = UserContact::where('id', $this->jurorId)->first();
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' juror:' . json_encode($this->juror));
+        Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' juror:' . json_encode($this->juror));
 
         $this->contestSectionId = $sid;
         $this->contestSection = ContestSection::where('id', $this->contestSectionId)->first();
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' contestSection:' . json_encode($this->contestSection));
+        Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' contestSection:' . json_encode($this->contestSection));
 
         $this->contest = Contest::where('id', $this->contestSection->contest_id)->first();
         $this->contestVoteRule = $this->contest->vote_rule;
         $this->contestId = $this->contest->id;
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' contest:' . json_encode($this->contest));
+        Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' contest:' . json_encode($this->contest));
 
         // how that juror had voted
         // $this->contestVoteIdSet = ContestVote::contestVoteIdSet( $this->contest->id, $this->contestSection->id);
@@ -113,7 +125,8 @@ class SectionBoard extends Component
             ->where('contest_id', $this->contestId)
             ->get();
         $this->contestVoteIdSet = array_values(collect($voted)->toArray());
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' contestVoteIdSet:' . json_encode($this->contestVoteIdSet));
+        Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' contestVoteIdSet:' . json_encode($this->contestVoteIdSet));
 
         // SET of un-voted - limited to 6
         if (count($this->contestVoteIdSet)) {
@@ -124,7 +137,8 @@ class SectionBoard extends Component
                 ->whereNotIn('work_id', $this->contestVoteIdSet)
                 ->limit(6)
                 ->get();
-            ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' paginatedContestWorkSet:' . json_encode($this->paginatedContestWorkSet));
+            Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+                . ' paginatedContestWorkSet:' . json_encode($this->paginatedContestWorkSet));
 
         } else {
             $this->paginatedContestWorkSet = ContestWork::where('contest_id', $this->contest->id)
@@ -139,11 +153,11 @@ class SectionBoard extends Component
                 . '/' . $contestWork->work_id . '.' . $contestWork->extension
             );
         }
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' participantWorkSet:' . json_encode($this->participantWorkSet));
+        Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' participantWorkSet:' . json_encode($this->participantWorkSet));
 
         $this->participantsCounter = ContestWork::where('section_id', $sid)
             ->where('contest_id', $this->contest->id)->count();
-
     }
 
     /**
@@ -152,7 +166,8 @@ class SectionBoard extends Component
      */
     public function render(): View
     {
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called');
         $this->votedCounter = ContestVote::where('section_id', $this->contestSectionId)->where('juror_user_id', $this->jurorId)->count();
 
         // select contest_votes . id
@@ -163,7 +178,8 @@ class SectionBoard extends Component
             ->where('contest_id', $this->contest->id)
             ->orderByDesc('vote')
             ->simplePaginate(12); // or 24 or 36
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' votedWorks:' . json_encode($votedWorks));
+        Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' votedWorks:' . json_encode($votedWorks));
 
         return view('', [
             'votedWorks' => $votedWorks,

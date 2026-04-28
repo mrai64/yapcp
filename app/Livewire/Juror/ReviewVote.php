@@ -40,17 +40,21 @@ class ReviewVote extends Component
     public string $voted_work_id;
 
     // 1. Before the show
-    public function mount(string $vid) // route()
+    public function mount(ContestVote $contestVote) // route()
     {
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called');
         $this->juror_user_id = Auth::id();
-        $this->vote_id = $vid;
-        $this->vote = ContestVote::where('id', $this->vote_id)->where('juror_user_id', $this->juror_user_id)->first();
+        $this->vote_id = (string) $contestVote->id;
+        $this->vote = ContestVote::where('id', $this->vote_id)
+            ->where('juror_user_id', $this->juror_user_id)
+            ->first();
         $this->vote_change = '';
         $this->contest = $this->vote->contest;
         $this->vote_rule = $this->contest->vote_rule;
         $this->work = $this->vote->work;
 
+        // TODO vote sequence can be replaced by a lookup table record - issue #46
         switch ($this->vote_rule) {
             case 'num:1..10':
                 $this->valid_votes = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
@@ -65,21 +69,23 @@ class ReviewVote extends Component
 
         $this->index = array_search($this->vote->vote, $this->valid_votes, true);
         $this->old_index = $this->index;
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' this:'.json_encode($this));
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' this:' . json_encode($this));
     }
 
     // 2. Show
     public function render()
     {
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called');
         return view('');
     }
 
     // 3. Validation rules only
     public function rules()
     {
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called');
 
         return [
             'vote_change' => 'string|in:"up","down"',
@@ -115,7 +121,7 @@ class ReviewVote extends Component
 
         // then back to?
         return redirect()
-            ->route('contest-jury-board', ['sid' => $this->vote->section_id])
+            ->route('contest-jury.board', ['sid' => $this->vote->section_id])
             ->with('success', __('Vote '.$up_down.' successfully!'));
     }
 }
