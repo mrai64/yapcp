@@ -10,5 +10,7 @@
 ?>
 
 <div>
-    <a href="{{ route('organization-contest-section-list', ['sid' => $contest_section->id ] ) }}">[ {{ __("All right, back n Refresh list")}} ]</a>
+    <a href="{{ route('organization-contest.review.section-list', ['contest-section' => $contest_section]) }}">
+        [ {{ __("All right, back n Refresh list")}} ]
+    </a>
 </div>

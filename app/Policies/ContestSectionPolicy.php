@@ -20,6 +20,14 @@ class ContestSectionPolicy
      */
     public function view(User $user, ContestSection $contestSection): bool
     {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        if ($user->isMemberOfOrganization($contestSection->contest->organization_id)) {
+            return true;
+        }
+
         return false;
     }
 
@@ -28,7 +36,7 @@ class ContestSectionPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -36,6 +44,14 @@ class ContestSectionPolicy
      */
     public function update(User $user, ContestSection $contestSection): bool
     {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        if ($user->isMemberOfOrganization($contestSection->contest->organization_id)) {
+            return true;
+        }
+
         return false;
     }
 
@@ -44,6 +60,14 @@ class ContestSectionPolicy
      */
     public function delete(User $user, ContestSection $contestSection): bool
     {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        if ($user->isMemberOfOrganization($contestSection->contest->organization_id)) {
+            return true;
+        }
+
         return false;
     }
 
@@ -52,6 +76,10 @@ class ContestSectionPolicy
      */
     public function restore(User $user, ContestSection $contestSection): bool
     {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
         return false;
     }
 
