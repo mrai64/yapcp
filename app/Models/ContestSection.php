@@ -81,6 +81,8 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection withoutTrashed()
  * @method static \Database\Factories\ContestSectionFactory factory($count = null, $state = [])
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestAward> $awards
+ * @property-read int|null $awards_count
  * @mixin \Eloquent
  */
 class ContestSection extends Model
