@@ -15,7 +15,6 @@
 namespace App\Livewire\Organization\Award;
 
 use App\Models\Contest;
-use App\Models\ContestAward;
 use App\Models\ContestSection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
