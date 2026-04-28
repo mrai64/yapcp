@@ -4,6 +4,7 @@
  * Build Jury Miniature at ending of jury works
  *
  * scope: download A4 pdf
+ * ! WARN: chrome app needed - env chromePath required
  */
 
 namespace App\Http\Controllers\Contest;
@@ -17,17 +18,20 @@ use App\Models\ContestWork;
 use App\Models\Organization;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Spatie\LaravelPdf\Facades\Pdf;
 
 class JuryMinuteDraft extends Controller
 {
+    // pdf by view - no public $this->
+
     // build the draft of the jury minute
-    public function buildMinute(string $cid) // route
+    public function buildMinute(Contest $contest) // route
     {
-        ds('Controller ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
-        . ' called w/input: ' . $cid);
+        $cid = $contest->id;
+        Log::info('Controller ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called w/input: ' . $cid);
         $contestId = $cid;
-        $contest = Contest::where('id', $contestId)->firstOrFail();
 
         $organization = Organization::where('id', $contest->organization_id)->first();
 
@@ -108,7 +112,8 @@ class JuryMinuteDraft extends Controller
                 ->get();
 
         }
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' jury_mem: ' . json_encode($juryMemberSet));
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ 
+            . ' jury_mem: ' . json_encode($juryMemberSet));
 
         // should be only winner_name without winner_user_id
         $contestAwardSet = ContestAward::select(
@@ -146,6 +151,7 @@ class JuryMinuteDraft extends Controller
         ];
         // ds('Controller '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' pdfContent: '.json_encode($pdfContent));
 
+        // TODO must become an env const - that's for a macosx localhost
         $chromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
         // ds('Controller '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' pdfContent: '.json_encode($pdfContent));
 

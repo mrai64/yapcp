@@ -53,6 +53,7 @@ use App\Livewire\Juror;
 use App\Livewire\Organization;
 use App\Livewire\User;
 use App\Models\Contest as ModelsContest;
+use App\Models\ContestAward as ModelsContestAward;
 use App\Models\ContestJury as ModelsContestJury;
 use App\Models\ContestParticipant as ModelsContestParticipant;
 use App\Models\ContestSection as ModelsContestSection;
@@ -397,22 +398,27 @@ Route::get('/organization/contest/before-final/{contestSection}', Organization\A
 Route::get('/organization/contest/admit/set-admit/{contestSection}', Organization\Admit\SetAdmit::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContest::class])
     ->name('organization-contest.set-admit');
-
-// **review mark** //
-Route::get('/organization/award-assign/section/{sid}', Organization\Award\SectionAssign::class, ['sid'])
-    ->middleware(['auth', 'verified'])
+Route::get('/organization/award-assign/section/{contestSection}', Organization\Award\SectionAssign::class)
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsContestAward::class])
     ->name('organization-contest.section-awards');
-Route::get('/organization/award-assign/contest/{cid}', Organization\Award\ContestAssign::class, ['cid'])
-    ->middleware(['auth', 'verified'])
+Route::get('/organization/award-assign/contest/{contest}', Organization\Award\ContestAssign::class)
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsContestAward::class])
     ->name('organization-contest.contest-awards');
+// **review mark** //
 
-// Contest live - build the draft of the jury minute
-Route::get('/organization/award-assign/jury-minute/{cid}', [JuryMinuteDraft::class, 'buildMinute'], ['cid'])
-    ->middleware(['auth', 'verified'])
+/**
+ * No more UI - pdf, xlsx etc.
+ *
+ * organization members can
+ * admin can
+ *
+ */
+Route::get('/organization/contest/jury-minute/{contest}', [JuryMinuteDraft::class, 'buildMinute'])
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsContestAward::class])
     ->name('organization-contest.minute-draft');
-
-// Contest live - reports - no auth required - public access
-Route::get('/organization/reports/participant-works/{cid}', Organization\Reports\WorksParticipant::class, ['cid'])
+//
+Route::get('/organization/contest/report-works/{contest}', Organization\Reports\WorksParticipant::class)
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsContestAward::class])
     ->name('organization-contest.participant-works-report');
 
 // TODO list of open contest with board of participants

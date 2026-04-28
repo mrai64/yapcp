@@ -64,6 +64,7 @@ use Illuminate\Support\Facades\Log;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestParticipant withoutTrashed()
  * @property string $user_contact_id
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestParticipant whereUserContactId($value)
+ * @method static \Database\Factories\ContestParticipantFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 class ContestParticipant extends Model
