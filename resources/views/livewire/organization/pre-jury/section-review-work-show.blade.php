@@ -50,7 +50,7 @@
         </div>
         <div class="flex justify-end">
             <!-- EMAIL TO AUTHOR -->
-            <a href="{{ route('organizaton-contest.review.warn', ['wid' => $work->id ]) }}" class="fyk text-xl">
+            <a href="{{ route('organizaton-contest.review.warn', ['contestWork' => $work->id ]) }}" class="fyk text-xl">
                 {{ __("⚠️ OUT 📧") }}
             </a>
         </div>

@@ -359,17 +359,17 @@ Route::get('/organization/contest/pre-jury/section-list/{contest}', Organization
 Route::get('/organization/contest/pre-jury/section-review/{contest-section}', Organization\PreJury\SectionReview::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContestSection::class])
     ->name('organization-contest.review.section-list');
-// **review mark** //
-Route::get('/organization/contest/pre-jury/warn/{wid}', Organization\PreJury\WarnEmail::class, ['wid'])
-    ->middleware(['auth', 'verified'])
+Route::get('/organization/contest/pre-jury/warn/{contestWork}', Organization\PreJury\WarnEmail::class)
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsContestWork::class])
     ->name('organizaton-contest.review.warn');
-Route::get('/organization/contest/pre-jury/pass/{wid}', Organization\PreJury\PassNext::class, ['wid'])
-    ->middleware(['auth', 'verified'])
+Route::get('/organization/contest/pre-jury/pass/{contestWork}', Organization\PreJury\PassNext::class)
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsContestWork::class])
     ->name('organizaton-contest.review.pass');
 
 /**
  * Contest manage - Jury works
  */
+// **review mark** //
 // for jurors only
 Route::get('/juror/section-board/{sid}', Juror\SectionBoard::class, ['sid'])
     ->middleware(['auth', 'verified'])
