@@ -14,7 +14,6 @@
 
 namespace App\Livewire\Juror;
 
-use App\Models\Contest;
 use App\Models\ContestSection;
 use App\Models\ContestVote;
 use App\Models\ContestWork;
@@ -53,22 +52,26 @@ class Vote extends Component
     /**
      * 1. before the show
      */
-    public function mount(string $sid) // route()
+    public function mount(ContestSection $contestSection) // route()
     {
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        Gate::authorize('jury-panels', $sid);
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called');
+        Gate::authorize('jury-panels', $contestSection->id);
 
-        $this->contest_section_id = $sid;
+        $this->contest_section_id = $contestSection->id;
 
         $this->juror_user_id = Auth::id();
 
-        $this->contest_section = ContestSection::where('id', $this->contest_section_id)->first();
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' contest_section: '.json_encode($this->contest_section));
+        $this->contest_section = $contestSection;
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' contest_section: ' . json_encode($this->contest_section));
 
         $this->contest_id = $this->contest_section->contest_id;
-        $this->contest = Contest::where('id', $this->contest_section->contest_id)->first();
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' contest_section: '.json_encode($this->contest_section));
+        $this->contest = $contestSection->contest;
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' contest_section: ' . json_encode($this->contest_section));
 
+        // TODO vote sequence can be replaced by a lookup table record - issue #46
         $this->vote_rule = $this->contest->vote_rule;
         switch ($this->vote_rule) {
             case 'num:1..10':
@@ -81,7 +84,8 @@ class Vote extends Component
                 $this->valid_votes = ['⭐️', '⭐️⭐️', '⭐️⭐️⭐️', '⭐️⭐️⭐️⭐️', '⭐️⭐️⭐️⭐️⭐️'];
                 break;
         }
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' vote_rule: '.json_encode($this->vote_rule));
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' vote_rule: ' . json_encode($this->vote_rule));
 
         $this->voted_works_id = ContestVote::votedIds($this->contest_id, $this->contest_section_id);
         if (count($this->voted_works_id) > 0) {
@@ -91,7 +95,8 @@ class Vote extends Component
             // first vote
             $this->unvoted_work_first = ContestWork::where('contest_id', $this->contest->id)->where('section_id', $this->contest_section->id)->first();
         }
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' unvoted_first: '.json_encode($this->unvoted_work_first));
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' unvoted_first: ' . json_encode($this->unvoted_work_first));
 
         $this->vote = [];
     }
@@ -101,7 +106,8 @@ class Vote extends Component
      */
     public function render()
     {
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called');
 
         return view('');
     }
@@ -111,7 +117,8 @@ class Vote extends Component
      */
     public function rules()
     {
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called');
 
         return [
             'vote' => 'string|'.Rule::in($this->valid_votes),
@@ -126,28 +133,32 @@ class Vote extends Component
      */
     public function assign_vote(string $vote) // form
     {
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called: '.json_encode($vote));
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called: ' . json_encode($vote));
         $this->vote = $vote;
 
         // check value
         $validated = $this->validate();
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' validated:'.json_encode($validated));
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' validated:' . json_encode($validated));
 
         // integrate array
         $validated['contest_id'] = $this->contest_id;
         $validated['section_id'] = $this->contest_section_id;
         $validated['work_id'] = $this->unvoted_work_first->work_id;
         $validated['juror_user_id'] = $this->juror_user_id;
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' insert:'.json_encode($validated));
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' insert:' . json_encode($validated));
         // vote
 
         // register value
         $registered_vote = ContestVote::create($validated);
-        Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' out:'.json_encode($registered_vote));
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' out:' . json_encode($registered_vote));
 
         // back / go to (another) vote
         return redirect()
-            ->route('contest-jury-vote', ['sid' => $this->contest_section_id])
+            ->route('contest-jury.vote', ['sid' => $this->contest_section_id])
             ->with('success', __('Vote registered successfully!'));
     }
 }

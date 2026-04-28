@@ -371,6 +371,23 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Determine if the user is registered as juror in a specific contest.
+     *
+     * @return bool
+     */
+    public function isJurorInContest(ContestSection|string $section): bool
+    {
+        $contestId = $section instanceof ContestSection ? $section->contest_id : ContestSection::find($section);
+
+        return $this->userRoles()
+            ->where('contest_id', $contestId)
+            ->where('role', UserRole::JUROR)
+            ->where('role_opening', '<=', now())
+            ->where('role_closing', '>=', now())
+            ->exists();
+    }
+
+    /**
      * Determine how many works are available in user gallery
      *
      * @return int
