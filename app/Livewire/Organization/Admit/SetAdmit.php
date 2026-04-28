@@ -47,11 +47,11 @@ class SetAdmit extends Component
     /**
      * 1. Before the show
      */
-    public function mount(string $sid) // named as route()
+    public function mount(ContestSection $contestSection) // named as route()
     {
+        $sid = $contestSection->id;
         Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called w/sid: '.$sid);
         // TODO GATE organization only
-
         $this->section_id = $sid;
         $this->section = ContestSection::where('id', $sid)->first();
         $this->contest = Contest::where('id', $this->section->contest_id)->first();

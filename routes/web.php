@@ -56,6 +56,7 @@ use App\Models\Contest as ModelsContest;
 use App\Models\ContestJury as ModelsContestJury;
 use App\Models\ContestParticipant as ModelsContestParticipant;
 use App\Models\ContestSection as ModelsContestSection;
+use App\Models\ContestVote as ModelsContestVote;
 use App\Models\ContestWork as ModelsContestWork;
 use App\Models\Federation as ModelsFederation;
 use App\Models\FederationSection as ModelsFederationSection;
@@ -367,61 +368,61 @@ Route::get('/organization/contest/pre-jury/pass/{contestWork}', Organization\Pre
     ->name('organizaton-contest.review.pass');
 
 /**
- * Contest manage - Jury works
+ * Contest live - Jury works
  */
-// **review mark** //
-// for jurors only
-Route::get('/juror/section-board/{sid}', Juror\SectionBoard::class, ['sid'])
-    ->middleware(['auth', 'verified'])
-    ->name('contest-jury-board');
-Route::get('/juror/vote/{sid}', Juror\Vote::class, ['sid'])
-    ->middleware(['auth', 'verified'])
-    ->name('contest-jury-vote');
-Route::post('/juror/vote/{sid}', Juror\Vote::class, ['sid'])
-    ->middleware(['auth', 'verified']);
-Route::get('/juror/review-vote/{vid}', Juror\ReviewVote::class, ['vid'])
-    ->middleware(['auth', 'verified'])
-    ->name('contest-jury-vote-mod');
+Route::get('/juror/section-board/{contestSection}', Juror\SectionBoard::class)
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsContestVote::class])
+    ->name('contest-jury.board');
+Route::get('/juror/vote/{contestSection}', Juror\Vote::class)
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsContestVote::class])
+    ->name('contest-jury.vote');
+Route::post('/juror/vote/{contestSection}', Juror\Vote::class)
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsContestVote::class]);
+// review +1 -1
+Route::get('/juror/review-vote/{contestVote}', Juror\ReviewVote::class)
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsContestVote::class])
+    ->name('contest-jury.grade-review');
 
 /**
- * Contest manage - Organization before last jury meeting
+ * Contest live - Organization before last jury meeting
  */
 // Contest live - cumulative vote board for a section
-Route::get('/organization/contest/admit/before-final/{sid}', Organization\Admit\BeforeFinal::class, ['sid'])
-    ->middleware(['auth', 'verified'])
-    ->name('contest-before-final-jury');
+Route::get('/organization/contest/before-final/{contestSection}', Organization\Admit\BeforeFinal::class)
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsContestSection::class])
+    ->name('organization-contest.before-final');
 
 /**
- * Contest manage
+ * Contest live
  */
+// **review mark** //
 // Contest live - After jury first works set admit list
-Route::get('/organization/contest/admit/set-admit/{sid}', Organization\Admit\SetAdmit::class, ['sid'])
+Route::get('/organization/contest/admit/set-admit/{contestSection}', Organization\Admit\SetAdmit::class)
     ->middleware(['auth', 'verified'])
-    ->name('organization-contest-admit');
+    ->name('organization-contest.set-admit');
 
 // Contest live - during or after last Jury reunion
 Route::get('/organization/award-assign/section/{sid}', Organization\Award\SectionAssign::class, ['sid'])
     ->middleware(['auth', 'verified'])
-    ->name('organization-award-section-assign');
+    ->name('organization-contest.section-awards');
 Route::get('/organization/award-assign/contest/{cid}', Organization\Award\ContestAssign::class, ['cid'])
     ->middleware(['auth', 'verified'])
-    ->name('organization-award-contest-assign');
+    ->name('organization-contest.contest-awards');
 
 // Contest live - build the draft of the jury minute
 Route::get('/organization/award-assign/jury-minute/{cid}', [JuryMinuteDraft::class, 'buildMinute'], ['cid'])
     ->middleware(['auth', 'verified'])
-    ->name('organization-award-minute-draft');
+    ->name('organization-contest.minute-draft');
 
 // Contest live - reports - no auth required - public access
-Route::get('/organization/reports/works-participant/{cid}', Organization\Reports\WorksParticipant::class, ['cid'])
-    ->name('organization-reports-works-participant');
+Route::get('/organization/reports/participant-works/{cid}', Organization\Reports\WorksParticipant::class, ['cid'])
+    ->name('organization-contest.participant-works-report');
 
 // TODO list of open contest with board of participants
 // TODO list of closed contest with board of winners
 // TODO contest admitted and awarded thumb
 
 /**
- * Contest manage - "latest" job: report for federations
+ * Contest live - "latest" job: report for federations
  *
  * TODO contest id and federation id must be replaced by a contest instance
  * TODO   and a federation instance, but federation id must be removed

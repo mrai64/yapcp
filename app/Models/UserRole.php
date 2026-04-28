@@ -63,6 +63,7 @@ class UserRole extends Model
 
     public const TABLENAME = 'user_roles';
     public const ADMINGROUP = 'admin';
+    public const JUROR = 'juror';
 
     // protected $primaryKey 'id'        standard
     // protected $keyType = unsigned int standard

@@ -19,6 +19,7 @@ use App\Models\ContestSection;
 use App\Models\ContestVote;
 use App\Models\ContestWork;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Termwind\Components\Raw;
@@ -39,10 +40,12 @@ class BeforeFinal extends Component
     // public $jury_votes;
     // public $contest_votes;
 
-    public function mount(string $sid) // route
+    public function mount(ContestSection $contestSection) // route
     {
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
-        $this->section = ContestSection::where('id', $sid)->first();
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called');
+        $this->section = $contestSection;
+        $sid = $contestSection->id;
         $this->sectionId = $sid;
         $this->contestId = $this->section->contest_id;
 
@@ -53,7 +56,8 @@ class BeforeFinal extends Component
 
     public function render()
     {
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called');
 
         // that's a complex query - assuming that between navigation vote are unmodified
         $bindings = [
@@ -86,7 +90,8 @@ class BeforeFinal extends Component
             ->orderBy('vote_data.voted_sum', 'desc')
             ->simplePaginate(12);
         // ->get();
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' sectionResult' . json_encode($sectionResult));
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' sectionResult' . json_encode($sectionResult));
 
         /*
 

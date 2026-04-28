@@ -19,7 +19,7 @@
     @endif
 
     <div style="width:80%;height:80%;display:block;margin:0 auto;background-color:#f0f0f0;">
-        <a href="route('contest-jury-board', ['sid' => $vote->section_id ])">
+        <a href="route('contest-jury.board', ['sid' => $vote->section_id ])">
             [ {{ __("Back to Board")}} ]
         </a>
         <div style="max-width:90%;max-height:90%;background-color:#f0f0f0;border:10px solid #ccc;display:flex;justify-content: center;align-items: center;box-shadow: 0 0 10px rgba(0,0,0,0.2);">
