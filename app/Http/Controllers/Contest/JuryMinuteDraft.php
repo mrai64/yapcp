@@ -112,7 +112,7 @@ class JuryMinuteDraft extends Controller
                 ->get();
 
         }
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ 
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
             . ' jury_mem: ' . json_encode($juryMemberSet));
 
         // should be only winner_name without winner_user_id
