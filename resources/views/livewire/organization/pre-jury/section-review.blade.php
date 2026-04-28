@@ -42,18 +42,17 @@
             <!-- image -->
             <a href="{{ asset('storage/photos').'/'.$work->work_file }}" 
                 target="_blank" class="w-full h-100" 
-                title='{{ __("Click to view single image") }}' 
-                >
-            <img src="{{ asset('storage/photos').'/'. $work->work_file }}" 
-                title="click to view full size" 
-                class="block w-48 me-3" 
-                loading="lazy"
-                style="float:left" />
-            </a>    
+                title='{{ __("Click to view single image") }}'>
+                <img src="{{ asset('storage/photos').'/'. $work->work_file }}" 
+                    title="click to view full size" 
+                    class="block w-48 me-3" 
+                    loading="lazy"
+                    style="float:left" />
+            </a>
             <!-- image infos -->
             <em>{{ __("Author")}}:</em>          {{$work->country_id}} | {{$work->last_name}}, {{$work->first_name}} <br />
-            <em>{{ __("Intl Title")}}:</em>      {{$work->title_en}}<br />
-            <em>{{ __("Local Title")}}:</em>     {{($work->title_local) ? $work->title_local : "..." }}<br />
+            <em>{{ __("Intl Title")}}:</em>      {{$work->title_en}} <br />
+            <em>{{ __("Local Title")}}:</em>     {{($work->title_local) ? $work->title_local : "..." }} <br />
             <em>{{ __("Reference Year")}}:</em>  {{$work->reference_year}}
             <em>{{ __("Short side")}}:</em>      {{$work->short_side}}
             <em>{{ __("Long side")}}:</em>       {{$work->long_side}}
@@ -71,16 +70,16 @@
                     </span>
                 <!--[if ENDBLOCK]><![endif]-->
             </span>
-            <span>                
-                <!--[if BLOCK]><![endif]-->                        
+            <span>
+                <!--[if BLOCK]><![endif]-->
                 <button class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-blue-300 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 dark:focus:border-blue-700 dark:active:bg-gray-700 dark:active:text-gray-300">
-                    <a href="{{ route('organizaton-contest.review.warn', ['wid' => $work->id ]) }}" class="fyk text-xl">
+                    <a href="{{ route('organizaton-contest.review.warn', ['contestWork' => $work->id ]) }}" class="fyk text-xl">
                         {{ __("⚠️ OUT 📧") }}
                     </a>
                 </button>
                 <!--[if ENDBLOCK]><![endif]-->
             </span>
-        </nav>        
+        </nav>
     </div>
     @endforeach
     <br />

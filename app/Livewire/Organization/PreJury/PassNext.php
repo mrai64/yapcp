@@ -19,6 +19,7 @@ namespace App\Livewire\Organization\PreJury;
 use App\Models\ContestWork;
 use App\Models\UserWorkValidation;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
@@ -43,9 +44,11 @@ class PassNext extends Component
      *
      * wid is contest_works.work_id not contest_works.id
      */
-    public function mount(string $wid) // route()
+    public function mount(ContestWork $contestWork) // route()
     {
-        $this->contestWork = ContestWork::where('work_id', $wid)->first();
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called');
+        $this->contestWork = $contestWork;
         $this->contestSection = $this->contestWork->contestSection;
         $this->contest = $this->contestWork->contest;
         $this->userWork = $this->contestWork->userWork;
@@ -58,7 +61,8 @@ class PassNext extends Component
             . '/' . $this->contestSection->id
             . '/' . $this->userWork->id . '.' . $this->userWork->extension;
 
-        $copyResult = Storage::disk('public')->copy($this->fileFromWork, $this->fileToContest);
+        $copyResult = Storage::disk('public')
+            ->copy($this->fileFromWork, $this->fileToContest);
 
         // save validation rec only if $this->contestSection->federation_section_id is NOT NULL
         if (($this->contestSection->under_patronage === 'N') || (is_null($this->contestSection->federation_section_id))) {
@@ -79,7 +83,8 @@ class PassNext extends Component
      */
     public function render()
     {
-        ds('Component Organization/Contest/' . __CLASS__ . ' f:' . __FUNCTION__ . ':' . __LINE__ . ' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called');
 
         session()->flash('message', __("Done."));
         return view('');
