@@ -1,7 +1,13 @@
 <?php
 
 /**
- * Contest participant works, Organization view
+ * Contest live - Contest Works review from organization
+ *   in the days between end-of-participation and start-jury-works.
+ *   Here we start from ContestSection list.
+ *
+ * organization members can
+ * admin can
+ * other not
  *
  * That component will help organization to check works
  * participants before jury works begin. There are some
@@ -14,7 +20,8 @@
  * requirement; or the presence of a signature / mark that explain author.
  *
  * First task: give contest info, section list, then the blade
- * for
+ *   is for go to review panel.
+ *
  */
 
 namespace App\Livewire\Organization\PreJury;
@@ -25,16 +32,16 @@ use Livewire\Component;
 
 class SectionListed extends Component
 {
-    public $contest;
+    public Contest $contest;
 
     /**
      * 1. Before the show
      */
-    public function mount(string $cid) // route
+    public function mount(Contest $contest) // as in route()
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $this->contest = Contest::where('id', $cid)->first();
-
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called');
+        $this->contest = $contest;
     }
 
     /**
@@ -42,8 +49,8 @@ class SectionListed extends Component
      */
     public function render()
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called');
         return view('livewire.organization.pre-jury.section-listed');
     }
 }

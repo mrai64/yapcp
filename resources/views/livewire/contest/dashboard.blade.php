@@ -90,7 +90,7 @@
         </h3>
         @foreach( $contestSectionsSet as $contestSection)
         <div class="fyk text-xl mb-4 w-full">
-            <a href="{{ route('organization-contest-section-list', ['sid' => $contestSection->id]) }}">
+            <a href="{{ route('organization-contest.review.section-list', ['contest-section' => $contestSection]) }}">
                 [ {{ __("Section Works Preview for") }} ]
             </a>
             {{ $contestSection->code }} | {{ $contestSection->name_en }}
