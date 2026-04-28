@@ -136,6 +136,10 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Contest whereTimezoneId($value)
  * @method static Builder<static>|Contest closedAfterOneYearAgo()
  * @method static \Database\Factories\ContestFactory factory($count = null, $state = [])
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestAward> $awards
+ * @property-read int|null $awards_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestAward> $globalAwards
+ * @property-read int|null $global_awards_count
  * @mixin \Eloquent
  */
 
