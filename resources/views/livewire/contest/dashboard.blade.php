@@ -132,7 +132,7 @@
         </h3>
         @foreach( $contestSectionsSet as $contestSection)
         <div class="fyk text-xl mb-4 w-full">
-            <a href="{{ route('organization-contest.set-admit', ['sid' => $contestSection->id ]) }}">
+            <a href="{{ route('organization-contest.set-admit', ['contestSection' => $contestSection->id ]) }}">
                 [ {{ __("Admission set, based on Sum Votes") }} ]
             </a>
             {{ $contestSection->code }} | {{ $contestSection->name_en }}
@@ -150,7 +150,7 @@
         </h3>
         @foreach( $contestSectionsSet as $contestSection)
         <div class="fyk text-xl mb-4 w-full">
-            <a href="{{ route('organization-contest.section-awards', ['sid' => $contestSection->id ]) }}">
+            <a href="{{ route('organization-contest.section-awards', ['contestSection' => $contestSection->id ]) }}">
                 [ {{ __("Awards assignment") }} ]
             </a>
             {{ $contestSection->code }} | {{ $contestSection->name_en }}
@@ -164,7 +164,7 @@
         </h3>
         <hr />
         <div class="fyk text-xl mb-4 w-full">
-            <a href="{{ route('organization-contest.contest-awards', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization-contest.contest-awards', ['contest' => $contest->id ]) }}">
                 [ {{ __("Contest Awards assignment") }} ]
             </a>
         </div>
