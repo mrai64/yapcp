@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="fyk text-2xl font-medium text-gray-900">
-            {{ __('Update Profile') }}
+            {{ __('Update user n password') }}
         </h2>
         <hr />
         <p class="fyk text-xl font-medium mb-4">
