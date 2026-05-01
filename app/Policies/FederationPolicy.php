@@ -107,7 +107,7 @@ class FederationPolicy
     /**
      * Determine whether the user can backup the model
      */
-    public function backuppable(User $user, Federation $federation) : bool
+    public function backuppable(User $user, Federation $federation): bool
     {
         // for all federation - only for user in admin group
         ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
