@@ -1,18 +1,28 @@
 <div>
-    <p class="mb-4 font-medium">{{ __('LAST CALL. Are you SURE to delete that?')}} </p>
-    <p class="mb-4"> 
-        <a  href="{{ route('federation-list') }}" 
-            rel="noopener noreferrer">
-        [ {{ __('Back to list') }} ]
-        </a>?
-    </p>
-    <form wire:submit="delete" method="DELETE">
+    <div name="header">
+        <h2 class="fyk text-2xl font-medium text-gray-900">
+            {{ __('Remove that federation') }}
+        </h2>
+        <p class="fyk text-xl font-medium mb-4">
+            {{ __('LAST CALL. Are you SURE to delete that?')}}
+            <br />
+            {{ __('Maybe a contest running, or starting or recently ended, that make the remove harmful')}}
+        </p>
+        <p class="mb-4"> 
+            <a  href="{{ route('federation.list') }}" 
+                rel="noopener noreferrer">
+            [ {{ __('Back to list') }} ]
+            </a>?
+        </p>
+    </div>
+
+    <form wire:submit="deleteFederation" method="DELETE">
         @csrf 
         <input type="hidden" name="id" wire:model.fill="id" />
 
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="name">
-                {{ __('Federation Name') }}
+                {{ __('Federation Name') }} 🔒
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -24,7 +34,7 @@
         
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="code">
-                {{ __('Federation Shortcode')}}
+                {{ __('Federation Shortcode')}} 🔒
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-48" 
@@ -36,7 +46,7 @@
         
         <div class="mb-4">
             <label class="block font-medium text-sm text-gray-700" for="website">
-                {{__('Official website')}}
+                {{__('Official website')}} 🔒
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -47,13 +57,13 @@
         </div>
 
         <div class="mb-4">
-            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="country_id">
-                {{ __('Country') }}
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="countryId">
+                {{ __('Country') }} 🔒
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
                 type="text" name="website" 
-                wire:model.fill="country"
+                wire:model.fill="countryId"
                 readonly
             >
         </div>
@@ -61,7 +71,7 @@
         <div class="mb-4">
             <style>textarea {resize:vertical;}</style>
             <label class="block font-medium text-sm text-gray-700" for="contact">
-                {{ __('Federation Contacts') }}
+                {{ __('Federation Contacts') }} 🔒
             </label>
             <textarea 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 

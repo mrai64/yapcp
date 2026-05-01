@@ -19,27 +19,27 @@ use App\Models\ContestSection;
             {{ __('JURY LIST f/SECTION ') }} {{ $section->name_en }} 
         </h2>
         <h3>
-            <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization.contest.modify', ['contest' => $contest ]) }}">
                 <span class="fyk text-xl">Main</span>
             </a>
             . .
-            <a href="{{ route('contest-section-add', ['cid' => $contest->id]) }}">
+            <a href="{{ route('organization.contest-section.add', ['contest' => $contest]) }}">
                 <span class="fyk text-xl">Sections</span>
             </a>
             . .
-            <a href="{{ route('contest-jury-add', ['sid' => ContestSection::firstContestSectionId( $contest->id )] ); }}">
+            <a href="{{ route('organization.contest-jury.add', ['sid' => ContestSection::firstContestSectionId( $contest->id )] ); }}">
                 <span class="fyk text-2xl">Jury</span>
             </a>
             . .
-            <a href="{{ route('contest-award-add', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('organization.contest-award.add', ['contest' => $contest]) }}">
                 <span class="fyk text-xl">Awards</span>
             </a>
             . .
-            <a href="{{ route('modify-participant-list', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('contest-participant.modify', ['contest' => $contest]) }}">
                 <span class="fyk text-xl">Participants</span>
             </a>
             . .
-            <a href="{{ route('organization-contest-list', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('organization.contest.list', ['cid' => $contest->id ]); }}">
                 <span class="fyk text-xl">Works</span>
             </a>
         </h3>
@@ -58,11 +58,11 @@ use App\Models\ContestSection;
         <p class="small">Closing date: {{ $contest->day_2_closing->format('Y-m-d') }} </p>
         @endif
         <p class="flex-inline small py-6">
-            <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization.contest.modify', ['contest' => $contest ]) }}">
                 [ {{ __("Back to Main Contest Card")}} ]
             </a>
             . .
-            <a href="{{ route('contest-award-add', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization.contest-award.add', ['cid' => $contest->id ]) }}">
                 [ {{ __("Go to Award List Contest Card")}} ]
             </a>
         </p>
@@ -89,7 +89,7 @@ use App\Models\ContestSection;
                     <td valign="top">
                         {{ ContestJury::jurorCount( (string) $contest_section->id ); }}
                         <br />
-                        <a href="{{ route('contest-jury-add', ['sid' => $contest_section->id] ) }}"
+                        <a href="{{ route('organization.contest-jury.add', ['sid' => $contest_section->id] ) }}"
                         >
                             [ {{ __("Modify that jury") }} ]
                         </a>
@@ -109,7 +109,7 @@ use App\Models\ContestSection;
             <thead>
                 <tr>
                     <th width="35%" scope="col" class="data-table-email"     >{{__("Juror email")}}</th>
-                    <th width="20%" scope="col" class="data-table-first-name">{{__("First name")}}</th>
+                    <th width="20%" scope="col" class="data-table-first-name">{{__("First Name")}}</th>
                     <th width="20%" scope="col" class="data-table-last-name" >{{__("Last Name")}}</th>
                     <th width="15%" scope="col" class="data-table-country"   >{{__("Country")}}</th>
                     <th width="10%" scope="col" class="data-table-action"    > Action </th>

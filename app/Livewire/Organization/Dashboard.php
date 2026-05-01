@@ -28,20 +28,17 @@ class Dashboard extends Component
     /**
      * 1. before show
      */
-    public function mount(string $id) // as in route/web.php
+    public function mount(Organization $organization) // as in route/web.php
     {
         ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
-        $this->id = $id;
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' id:' . $this->id);
-        $this->organization = Organization::where('id', $id)->get(['id', 'country_id', 'name'])[0];
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' organization:' . json_encode($this->organization));
+        $this->organization = $organization;
+        $this->id = $organization->id;
 
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' id:' . $this->id);
-        $this->organizationMembersRolesSet = UserRole::where('organization_id', $id)
+        $this->organizationMembersRolesSet = UserRole::where('organization_id', $this->id)
             ->orderBy('role')
             ->orderBy('updated_at')
             ->get(['id', 'user_id', 'role', 'role_opening', 'role_closing']);
-        $this->contestSet = Contest::where('organization_id', $id)
+        $this->contestSet = Contest::where('organization_id', $this->id)
             ->orderBy('updated_at')
             ->get(['id', 'name_en', 'day_2_closing']);
 

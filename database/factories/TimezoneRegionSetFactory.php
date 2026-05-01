@@ -17,7 +17,7 @@ class TimezoneRegionSetFactory extends Factory
     public function definition(): array
     {
         return [
-            'id' => fake()->text(15),
+            'id' => fake()->unique()->regexify('[A-Z][a-z]{10}'),
         ];
     }
 }

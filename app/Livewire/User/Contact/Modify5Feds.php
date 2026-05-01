@@ -20,17 +20,28 @@ use App\Models\FederationMore;
 use App\Models\UserContact;
 use App\Models\UserContactMore;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class Modify5Feds extends Component
 {
+    // header fields
+    public string $firstName;
+
+    public string $lastName;
+
+    public string $countryId;
+
+    public $country;
+
+    // form fields
+    public Federation $federation;
+
     public string $federationId;
 
-    public $federation;
+    public UserContact $userContact;
 
     public string $userId;
-
-    public $userContact;
 
     public array $formData = [];
 
@@ -44,19 +55,34 @@ class Modify5Feds extends Component
      * first is federation id, second should be a user contact id
      * but if missing is assumed logged user contact id.
      *
-     * @param string $fid
-     * @param string|null $uid
+     * @param Federation $federation
+     * @param UserContact $userContact
      * @return void
      */
-    public function mount(string $fid, ?string $uid = '') // route()
+    public function mount(Federation $federation, ?UserContact $userContact = null) // route()
     {
-        // 1. check input
-        $this->federationId = $fid;
-        $this->federation = Federation::findOrFail($fid);
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        if ($userContact === null) {
+            Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' no parm');
+            $uid = Auth::id(); // user id
+            Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' uid: ' . $uid);
+            $this->userContact = UserContact::where('id', $uid)->first();
+            Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' uC: ' . json_encode($this->userContact));
+        } else {
+            Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' parm');
+            $this->userContact = $userContact;
+        }
 
-        $uid = ($uid === '') ? Auth::id() : $uid;
-        $this->userId = $uid;
-        $this->userContact = UserContact::where('id', $this->userId)->get();
+        // form fields
+        $this->firstName = $this->userContact->first_name; // name         readonly
+        $this->lastName = $this->userContact->last_name; //   surname      readonly
+        // default value ITA as first developer he's italian
+        $this->countryId = ($this->userContact->country_id ?? 'ITA');
+        $this->country = $this->userContact->country(); //      nationality  readonly
+
+        // 1. check input
+        $this->federationId = $federation->id;
+        $this->federation = $federation;
 
         // full list
         $this->fieldDefinitions = FederationMore::select([
@@ -74,8 +100,8 @@ class Modify5Feds extends Component
         // default values | user values for user id
         foreach ($this->fieldDefinitions as $definition) {
             $value = UserContactMore::select('field_value')
-                ->where('user_contact_user_id', $uid)
-                ->where('federation_id', $fid)
+                ->where('user_contact_user_id', $userContact->id)
+                ->where('federation_id', $federation->id)
                 ->where('field_name', $definition->field_name)
                 ->first();
             $this->formData[$definition->field_name] = ($value) ? $value->field_value : '';
@@ -83,9 +109,7 @@ class Modify5Feds extends Component
 
         // maintain array, not collection
         // here array keys
-        ds($this->fieldDefinitions);
         $this->formFieldSet = array_values(collect($this->fieldDefinitions)->toArray());
-        ds($this->formFieldSet);
     }
 
     // 2. render()
@@ -135,15 +159,15 @@ class Modify5Feds extends Component
      */
     public function updateUserContactMore()
     {
-        ds(__FUNCTION__);
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         $validated = $this->validate();
         // not the best but... for few record acceptable
         foreach ($validated['formData'] as $key => $value) {
-            ds('KV: '.$key.' / '.$value);
+            Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' KV: '.$key.' / '.$value);
             foreach ($this->formFieldSet as $field) {
-                ds('check ff:'.$field['fieldName']);
+                Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' check ff:'.$field['fieldName']);
                 if ($field['fieldName'] === $key) {
-                    ds('for: '.$key.' val:'.$field['field_default_value'].' vs. '.$value);
+                    Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' for: '.$key.' val:'.$field['field_default_value'].' vs. '.$value);
                     if ($field['field_default_value'] !== $value) {
                         $set = UserContactMore::updateOrCreate(
                             ['user_contact_user_id' => $this->userId, 'federation_id' => $this->federationId, 'field_name' => $key],

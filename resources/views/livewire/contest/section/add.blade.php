@@ -1,6 +1,7 @@
 <?php
 /**
  * Contest Section Add
+ *
  */
 
 use App\Models\Country;
@@ -8,21 +9,21 @@ use App\Models\ContestSection;
 
 ?>
 
-<section>
+<div>
     <header>
         <h2 class="fyk text-2xl font-medium text-gray-900">
             {{ __('Contest definition: SECTION LIST') }}
         </h2>
         <h3>
-            <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization.contest.modify', ['contest' => $contest ]) }}">
                 <span class="fyk text-xl">Main</span>
             </a>
             . .
-            <a href="{{ route('contest-section-add', ['cid' => $contest->id]) }}">
+            <a href="{{ route('organization.contest-section.add', ['contest' => $contest]) }}">
                 <span class="fyk text-2xl">Sections</span>
             </a>
             @if (ContestSection::firstContestSectionId( $contest->id ) > '')
-            <a href="{{ route('contest-jury-add', ['sid' => ContestSection::firstContestSectionId( $contest->id ) ] ) }}">
+            <a href="{{ route('organization.contest-jury.add', ['sid' => ContestSection::firstContestSectionId( $contest->id ) ] ) }}">
                 <span class="fyk text-xl">Jury</span>
             </a>
             @else
@@ -31,15 +32,15 @@ use App\Models\ContestSection;
             </a>
             @endif
             . .
-            <a href="{{ route('contest-award-add', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('organization.contest-award.add', ['contest' => $contest]) }}">
                 <span class="fyk text-xl">Awards</span>
             </a>
             . .
-            <a href="{{ route('modify-participant-list', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('contest-participant.modify', ['contest' => $contest]) }}">
                 <span class="fyk text-xl">Participants</span>
             </a>
             . .
-            <a href="{{ route('organization-contest-list', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('organization.contest.list', ['cid' => $contest->id ]); }}">
                 <span class="fyk text-xl">Works</span>
             </a>
         </h3>
@@ -63,7 +64,7 @@ use App\Models\ContestSection;
         <p class="fyk text-xl">Country: {{ Country::countryName( $contest->country_id ) }} </p>
         <p class="small">Closing date: {{ $contest->day_2_closing->format('Y-m-d') }} </p>
         <p class="small py-6">
-            <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization.contest.modify', ['contest' => $contest ]) }}">
                 [ {{ __("Back to Main Contest Card")}} ]
             </a>
         </p>
@@ -89,10 +90,10 @@ use App\Models\ContestSection;
                     {{ ($section->under_patronage === 'Y') ? "under patronage" : "free of patronage" }}</td>
                     <td >{{ $section->name_en}}<br />{{ $section->name_local}}</td>
                     <td >
-                        <a href="{{ route('modify-contest-section', ['sid' => $section->id] ) }}">
+                        <a href="{{ route('organization.contest-section.modify', ['section' => $section] ) }}">
                             [ {{ __("Modify") }} ]
                         </a>
-                        <a href="{{ route('remove-contest-section', ['sid' => $section->id] ) }}">
+                        <a href="{{ route('organization.contest-section.remove', ['section' => $section] ) }}">
                             [ {{ __("Remove") }} ]
                         </a>
                     </td>
@@ -178,4 +179,4 @@ use App\Models\ContestSection;
         </p>
     </div>
 
-</section>
+</div>

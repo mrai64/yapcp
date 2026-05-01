@@ -1,14 +1,21 @@
 <div>
-    <!-- header -->
-    <h2 class="fyk text-2xl mb-4">{{ __('Update your personal info') }}</h2>
-    <p class="mb-4">
-        <a  href="{{ route('dashboard') }}"
-            rel="noopener noreferrer">
-        [ {{ __('Back to dashboard') }} ]
-        </a>
-    </p>
-    <hr class="my-4" />
-    <br />
+    <header>
+        <h2 class="fyk text-2xl font-medium text-gray-900">
+            {{ __('Update your personal info') }}
+        </h2>
+    <!-- nav bar here -->
+        <h3 class="fyk text-xl font-medium text-gray-900">
+        <em>{{ __("1st of 5 | You are...")}}</em>
+        </h3>
+        <hr />
+        <br />
+        <p class="fyk text-xl font-medium mb-4">
+            <a  href="{{ route('user.dashboard') }}"
+                rel="noopener noreferrer">
+            [ {{ __('Back to dashboard') }} ]
+            </a>
+        </p>
+    </header>
 
     <!-- success -->
     @if (session('success'))
@@ -17,25 +24,24 @@
     </div>
     @endif
 
+    <!-- errors list -->
     @if ($errors->any())
     <div>
         <ul>
             @foreach ($errors->all() as $error)
-                <li class="text-red-600">{{ $error }}</li>
+                <li class="text-red-600">❌ {{ $error }} 👈</li>
             @endforeach
         </ul>
     </div>
     @endif
-
-    <!-- nav bar here -->
-    <h3 class="fyk text-2xl mb-4"><em>{{ __("1st of 5 | You are...")}}</em></h3>    
 
     <form wire:submit="updateUserContact1st" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-4" data-yapcp="firstName">
             <label class="fyk block font-medium text-2xl text-gray-700" for="firstName">
-                {{ __('First name | required') }}
+                {{ __('First Name') }}
+                | {{ __('required') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -49,7 +55,8 @@
 
         <div class="mb-4" data-yapcp="lastName">
             <label class="fyk block font-medium text-2xl text-gray-700" for="lastName">
-                {{ __('Surname - Family name | required') }}
+                {{ __('Last Name') }}
+                | {{ __('required') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -64,7 +71,8 @@
         <!-- From country -->
         <div class="mb-4" data-yapcp="countryId">
             <label class="fyk block font-medium text-2xl text-gray-700" for="countryId">
-                {{ __('Nationality - From Country | required') }}
+                {{ __('Nationality - From Country') }}
+                | {{ __('required') }}
             </label>
             <select 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -73,7 +81,7 @@
                 required="required"
                 >
                 <option value="">{{ __("...") }}</option>
-                @foreach ($countries as $country)
+                @foreach ($allCountriesSet as $country)
                 <option value="{{ trim($country->id) }}" {{ ($country->id === $countryId ) ? 'selected' : '' }}>{{$country->flag_code}} {{ $country->country }}</option>
                 @endforeach
             </select>
@@ -83,7 +91,8 @@
         <!-- passport photo upload -->
         <div class="block mb-4">
             <label class="fyk block font-medium text-2xl text-gray-700" for="passportPhotoImage">
-                {{ __('Passport Photo | facultative') }}
+                {{ __('Passport Photo') }}
+                | {{ __('facultative') }}
             </label>
         @if ($passportPhotoImage)
             <img src="{{ $passportPhotoImage->temporaryUrl() }}" style="float: left;" class="block w-48 me-3" />

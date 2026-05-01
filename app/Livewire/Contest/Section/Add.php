@@ -40,19 +40,20 @@ class Add extends Component
     /**
      * 1. before the show
      */
-    public function mount(string $cid) // as 'cid' in route - contests.id
+    public function mount(Contest $contest) // as in route - contests.id
     {
-        Log::info(__FUNCTION__);
-        $this->contest_id = $cid;
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        $this->contest_id = $contest->id;
         $this->under_patronage = $this->valid_under_patronage[0]; // 'N'
         $this->name_en = '';
         $this->name_local = '';
 
-        $this->contest = Contest::whereNull('deleted_at')
-            ->where('id', $cid)->get()[0];
+        $this->contest = $contest;
 
         $this->contest_section_list = ContestSection::whereNull('deleted_at')
-            ->where('contest_id', $cid)->orderBy('code')->get();
+            ->where('contest_id', $contest->id)
+            ->orderBy('code')
+            ->get();
 
         foreach ($this->contest_section_list as $section) {
             $this->code_list[] = $section->code;
@@ -64,7 +65,7 @@ class Add extends Component
      */
     public function render()
     {
-        Log::info(__FUNCTION__);
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
 
         return view('livewire.contest.section.add');
     }
@@ -74,7 +75,7 @@ class Add extends Component
      */
     public function rules(): array
     {
-        Log::info(__FUNCTION__);
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
 
         return [
             // id
@@ -91,7 +92,7 @@ class Add extends Component
      */
     public function after(): array
     {
-        Log::info(__FUNCTION__);
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
 
         return [
             function (Validator $validator) {
@@ -115,16 +116,16 @@ class Add extends Component
      */
     public function addSectionToContest()
     {
-        Log::info(__FUNCTION__);
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         $validated = $this->validate();
-        Log::info(__FUNCTION__.' validated: '.serialize($validated));
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' validated: ' . serialize($validated));
 
         $validated['contest_id'] = $this->contest_id;
         $section = new ContestSection();
         $section->create($validated);
 
         return redirect()
-            ->route('contest-section-add', ['cid' => $this->contest_id])
+            ->route('organization.contest-section.add', ['contest' => $this->contest])
             ->with('success', __('New section added to section list, another?'));
 
     }

@@ -22,7 +22,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -111,11 +110,11 @@ class Organization extends Model
     /**
      * Organization list order by Country
      *
+     * Organization name must start with a letter or digit.
      */
     public static function countryIdSorted()
     {
-        $organizations = DB::table('organizations')
-            ->select('id', 'country_id', 'name', 'email', 'website')
+        $organizations = self::select()
             ->where('name', '>', '/')
             ->orderBy('country_id', 'asc')
             ->orderBy('name', 'asc')

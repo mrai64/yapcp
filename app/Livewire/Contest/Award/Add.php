@@ -4,6 +4,9 @@
  * Contest Definition for Section and Contest Award Add (and list)
  *
  * 2025-12-05 review
+ *
+ * @see /resources/views/livewire/contest/award/add.blade.php
+ *
  */
 
 namespace App\Livewire\Contest\Award;
@@ -51,19 +54,18 @@ class Add extends Component
     /**
      * 1. before the show
      */
-    public function mount(string $cid) // named as in route()
+    public function mount(Contest $contest) // as in route()
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
 
-        $this->contest_id = $cid;
-        $this->contest = Contest::where('id', $this->contest_id)->get()[0];
-        Log::info(__FUNCTION__.' '.__LINE__.$this->contest);
+        $this->contest = $contest;
+        $this->contest_id = $contest->id;
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__.' ' . __LINE__ . $this->contest);
 
-        $this->contest_section_list = ContestSection::where('contest_id', $this->contest_id)->orderBy('code')->get();
-        Log::info(__FUNCTION__.' '.__LINE__.$this->contest_section_list);
-
-        $this->contest_award_list = ContestAward::where('contest_id', $this->contest_id)->orderBy('section_code')->orderBy('award_code')->get();
-        Log::info(__FUNCTION__.' '.__LINE__.$this->contest_award_list);
+        $this->contest_section_list = ContestSection::where('contest_id', $this->contest_id)
+            ->orderBy('code')
+            ->get();
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__.' ' . __LINE__ . $this->contest_section_list);
 
         // new rec
         $this->section_code = '';
@@ -73,7 +75,7 @@ class Add extends Component
         $this->winner_work_id = '';
         $this->winner_user_id = '';
         $this->winner_name = '';
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' out');
     }
 
     /**
@@ -81,7 +83,13 @@ class Add extends Component
      */
     public function render()
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+
+        $this->contest_award_list = ContestAward::where('contest_id', $this->contest_id)
+            ->orderBy('section_code')
+            ->orderBy('award_code')
+            ->get();
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__.' ' . __LINE__ . $this->contest_award_list);
 
         return view('livewire.contest.award.add');
     }
@@ -93,7 +101,7 @@ class Add extends Component
      */
     public function rules()
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
 
         return [
             // contest_id not in form
@@ -113,18 +121,18 @@ class Add extends Component
      */
     public function add_contest_award()
     {
-        Log::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         $validated = $this->validate();
         // invariant fk integration
         $validated['contest_id'] = $this->contest_id;
-        Log::info(__FUNCTION__.' '.__LINE__.serialize($validated));
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__.' ' . __LINE__ . serialize($validated));
 
         $award = ContestAward::create($validated);
-        Log::info(__FUNCTION__.' '.__LINE__.$award);
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__.' ' . __LINE__ . $award);
 
         // redirect
         return redirect()
-            ->route('contest-award-add', ['cid' => $this->contest_id])
+            ->route('organization.contest-award.add', ['contest' => $this->contest])
             ->with('success', __('New Award added to list, enjoy!'));
     }
 }

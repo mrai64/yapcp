@@ -1,8 +1,15 @@
 <?php
 
 /**
+ * Learning Laravel that panel show a readonly form
+ * and last validate it's only a pro-forma
+ *
  * 2025-08-30 Only show in read-only, add country_id and contact
  * 2025-01-16 refactorize for PSR-12
+ * 2026-03-23 refactor for use of FederationPolicy
+ *
+ * @see blade /resources/views/livewire/federation/remove.blade.php
+ *
  */
 
 namespace App\Livewire\Federation;
@@ -16,8 +23,8 @@ class Remove extends Component
 {
     public Federation $federation;
 
-    #[Validate('required|int')]
-    public $id;
+    #[Validate('required|string|uppercase|max:10')]
+    public string $id;
 
     public $name = '';
 
@@ -31,19 +38,35 @@ class Remove extends Component
 
     public $contact = '';
 
-    public function mount(int $id)
+    public function mount(Federation $federation)
     {
-        $this->federation = Federation::findOrFail($id);
+        $this->federation = $federation;
 
-        $this->name = $this->federation->name_en;
-        $this->code = $this->federation->id;
-        $this->website = $this->federation->website;
+        $this->name      = $this->federation->name_en;
+        $this->id        = $this->federation->id;
+        $this->code      = $this->federation->id;
+        $this->website   = $this->federation->website;
         $this->countryId = $this->federation->country_id;
-        $this->contact = $this->federation->contact_info;
-        $this->country = Country::where('id', $this->countryId)->first();
+        $this->contact   = $this->federation->contact_info;
+        $this->country   = Country::where('id', $this->countryId)->first();
+
+        // TODO avoid delete Federation in most case
+        // TODO because there are Contest with Federation Sponsor
+        // TODO running, planned or closed less than a year-ago
+        //
+        // use a bool flag for chose between a "Turn U" | "Deletable"
+        // button
     }
 
-    public function delete()
+    public function render()
+    {
+        return view('livewire.federation.remove');
+    }
+
+    // rules()
+
+    //
+    public function deleteFederation()
     {
         $this->validate();
         $fed = new Federation();
@@ -51,12 +74,8 @@ class Remove extends Component
 
         // to list
         return redirect()
-            ->route('federation-list')
+            ->route('federation.list')
             ->with('success', __('Federation data safely removed, thanks!'));
     }
 
-    public function render()
-    {
-        return view('livewire.federation.remove');
-    }
 }

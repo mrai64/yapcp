@@ -80,6 +80,9 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection withoutTrashed()
+ * @method static \Database\Factories\ContestSectionFactory factory($count = null, $state = [])
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestAward> $awards
+ * @property-read int|null $awards_count
  * @mixin \Eloquent
  */
 class ContestSection extends Model
@@ -95,7 +98,7 @@ class ContestSection extends Model
         'id', //                     pk uuid
         'contest_id', //             fk contests.id
         'code', //                   unique( contest_id + code )
-        'under_patronage', //        a Y/N instead boolean
+        'under_patronage', //        0/No 1/Yes
         'federation_section_id', //  fk federation_sections.id
         'name_en',
         'name_local',
@@ -105,24 +108,18 @@ class ContestSection extends Model
         'rule_min_size', //          int px size
         'rule_max_size', //
         'rule_max_weight', //        int MB
-        'rule_monochromatic', //     a Y/N instead boolean
-        'rule_raw_required', //      a Y/N instead boolean
-        'rule_only_one', //          a Y/N instead boolean
+        'rule_monochromatic', //     0/No, color 1/monochromatic
+        'rule_raw_required', //      0/No, 1/Raw required
+        'rule_only_one', //          0/More than an award per secton 1/only one award per section
         // created_at                reserved
         // updated_at                reserved
         // deleted_at                reserved
     ];
 
-    // check Y/N fields
-    private const VALID_YN = [
-        'N', // 0 false
-        'Y', // 1 true
-    ];
-
     // pk is uuid
     public static function booted()
     {
-        //dbg Log::info('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        ds('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         static::creating(function ($model) {
             $model->id = Str::uuid();
         });
@@ -130,53 +127,33 @@ class ContestSection extends Model
 
     protected function casts()
     {
-        // Log::info('Model ' . __CLASS__ .' f/'. __FUNCTION__.':' . __LINE__ . ' called');
+        ds('Model ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         return [
+            'id' => 'string',
+            'contest_id' => 'string',
+            'code' => 'string',
+            'under_patronage' => 'boolean',
+            'federation_section_id' => 'string',
+            'name_en' => 'string',
+            'name_local' => 'string',
+            'rule_format' => 'string',
+            'rule_min' => 'int',
+            'rule_max' => 'int',
+            'rule_min_size' => 'int',
+            'rule_max_size' => 'int',
+            'rule_max_weight' => 'int',
+            'rule_monochromatic' => 'boolean',
+            'rule_raw_required' => 'boolean',
+            'rule_only_one' => 'boolean',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
         ];
     }
 
-    // Validators
-    // was: is_a_valid_under_patronage
-    public static function checkUnderPatronage(ContestSection $section): bool
-    {
-        return in_array(
-            needle: $section->under_patronage,
-            haystack: self::VALID_YN,
-            strict: true
-        );
-    }
+    // VALIDATORS
 
-    public static function checkMonochromatic(ContestSection $section): bool
-    {
-        return in_array(
-            needle: $section->rule_monochromatic,
-            haystack: self::VALID_YN,
-            strict: true
-        );
-    }
-
-    public static function checkRawRequired(ContestSection $section): bool
-    {
-        return in_array(
-            needle: $section->rule_raw_required,
-            haystack: self::VALID_YN,
-            strict: true
-        );
-    }
-
-    public static function checkOnlyOne(ContestSection $section): bool
-    {
-        return in_array(
-            needle: $section->rule_only_one,
-            haystack: self::VALID_YN,
-            strict: true
-        );
-    }
-
-    // GETTER
+    // GETTERS
 
     // was: get_section_list() - removed as unused function
 
@@ -211,6 +188,15 @@ class ContestSection extends Model
         $worksInSection = $this->hasMany(ContestWork::class, 'section_id', 'id');
 
         return $worksInSection;
+    }
+
+    // section awards also in order
+    public function awards(): HasMany
+    {
+        $awards = $this->hasMany(ContestAward::class, 'section_id', 'id')
+            ->orderBy('award_code');
+        // Log
+        return $awards;
     }
 
     // was: federation_section()

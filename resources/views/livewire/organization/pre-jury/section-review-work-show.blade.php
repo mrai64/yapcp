@@ -44,13 +44,13 @@
     <div class="grid grid-cols-2 items-center gap-2 lg:grid-cols-3">
         <div class="flex lg:justify-start">
             <!-- Validate, OK TO GO -->
-            <a href="{{ route('organization-contest-pass-next', ['wid' => $work->id ]) }}" class="fyk text-xl">
+            <a href="{{ route('organizaton-contest.review.pass', ['wid' => $work->id ]) }}" class="fyk text-xl">
                {{ __("✅ OK IT's IN ✅") }}
             </a>
         </div>
         <div class="flex justify-end">
             <!-- EMAIL TO AUTHOR -->
-            <a href="{{ route('organization-contest-warn-email', ['wid' => $work->id ]) }}" class="fyk text-xl">
+            <a href="{{ route('organizaton-contest.review.warn', ['contestWork' => $work->id ]) }}" class="fyk text-xl">
                 {{ __("⚠️ OUT 📧") }}
             </a>
         </div>

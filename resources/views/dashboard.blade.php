@@ -10,70 +10,85 @@ use Illuminate\Support\Facades\Auth;
 
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="fyk font-semibold text-2xl text-gray-800 leading-tight">
+        <h2 class="fyk text-2xl font-medium text-gray-900">
             {{ __('Personal Dashboard') }}
         </h2>
     </x-slot>
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('user-contact-modify1') }}">
+            <a href="{{ route('user-contact.modify1') }}">
             [ {{ __("Your Contact info") }} ]
             </a>
         </div>
         . .
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('photo-box-list') }}">
+            <a  href="{{ route('user.profile') }}"
+                rel="noopener noreferrer">
+            [ {{ __('Email, password') }} ]
+            </a>
+        </div>
+        . .
+        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
+            <a href="{{ route('user.gallery') }}">
             [ {{ __("Your Uffizi' Gallery") }} ]
             </a>
         </div>
         . .
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
             <!-- Open Contest list -->
-            <a href="{{ route('contest-list') }}">
+            <a href="{{ route('contest.list') }}">
             [ {{ __("Contest Open ") }} ]
             </a>
         </div>
         . .
+        <br />
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('organization-list') }}">
+            <a href="{{ route('organization.list') }}">
             [ {{ __("Organization List") }} ]
             </a>
         </div>
         . .
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('federation-list') }}">
+            <a href="{{ route('user.organization.add') }}">
+                [ {{ __("Add a new Org") }} ]
+            </a>
+        </div>
+        . .
+        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
+            <a href="{{ route('user-role.add.organization') }}">
+            [ {{ __("Add you in Organization") }} ]
+            </a>
+        </div>
+        . .
+        <br />
+        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
+            <a href="{{ route('federation.list') }}">
                 [ {{ __("Federation List") }} ]
             </a>
         </div>
         . .
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('add-user-role-organization') }}">
-            [ {{ __("Add in Organization") }} ]
+            <a href="{{ route('federation.add') }}">
+                [ {{ __("Add a new Fed") }} ]
             </a>
         </div>
         . .
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('add-organization') }}">
-                [ {{ __("Add new Organization") }} ]
+            <a href="{{ route('user-role.add.federation') }}">
+                [ {{ __("Add you in Federation") }} ]
             </a>
         </div>
         . .
-        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('add-user-role-federation') }}">
-                [ {{ __("Add in Federation") }} ]
-            </a>
-        </div>
-        . .
-        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('add-federation') }}">
-                [ {{ __("Add new Federation") }} ]
-            </a>
-        </div>
-        . .
-        <br style="clear:both;" /> 
+        <br style="clear:both;" />
+        <p class="small">
+            {{ __("Your personal data will be used when you want to register ") }}
+            {{ __("for the next photo contest, or to contact you if you are  ") }}
+            {{ __("chosen as judges of a contest.                            ") }}
+        </p>
+        <br />
         <hr class="my-4" />
-        
-        <!-- user roles -->
+
+        <!-- user roles in... -->
         <section name="user_roles" >
             <livewire:user.role.listed />
         </section>
@@ -83,5 +98,4 @@ use Illuminate\Support\Facades\Auth;
             <livewire:contest.jury.listed />
         </section>
     </div>
-
 </x-app-layout>

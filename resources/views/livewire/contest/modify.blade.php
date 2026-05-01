@@ -27,16 +27,16 @@ use Illuminate\Support\Facades\Log;
             {{ __('Contest Main Form') }}
         </h2>
         <h3>
-            <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization.contest.modify', ['contest' => $contest ]) }}">
                 <span class="fyk text-2xl">Main</span>
             </a>
             . .
-            <a href="{{ route('contest-section-add', ['cid' => $contest->id]) }}">
+            <a href="{{ route('organization.contest-section.add', ['contest' => $contest]) }}">
                 <span class="fyk text-xl">Sections</span>
             </a>
             . .
             @if(ContestSection::firstContestSectionId( $contest->id ) > '')
-            <a href="{{ route('contest-jury-add', ['sid' => ContestSection::firstContestSectionId( $contest->id )] ); }}">
+            <a href="{{ route('organization.contest-jury.add', ['sid' => ContestSection::firstContestSectionId( $contest->id )] ); }}">
                 <span class="fyk text-xl">Jury</span>
             </a>
             @else
@@ -45,11 +45,11 @@ use Illuminate\Support\Facades\Log;
             </a>
             @endif
             . .
-            <a href="{{ route('contest-award-add', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('organization.contest-award.add', ['contest' => $contest]) }}">
                 <span class="fyk text-xl">Awards</span>
             </a>
             . .
-            <a href="{{ route('modify-participant-list', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('contest-participant.modify', ['contest' => $contest]) }}">
                 <span class="fyk text-xl">Participants</span>
             </a>
             . .
@@ -67,10 +67,10 @@ use Illuminate\Support\Facades\Log;
         {{ __('section list, jury definition, prize list definition.') }}
     </p>    
     <p class="mb-4"> 
-        <a  href="/dashboard" rel="noopener noreferrer">
+        <a  href="{{ route('user.dashboard') }}" rel="noopener noreferrer">
         [ {{ __('Back to Personal Dashboard')}} ]
         </a>
-        <a  href="{{ route('organization-dashboard', [ 'id' => $organization_id ]) }}" rel="noopener noreferrer">
+        <a  href="{{ route('organization.dashboard', [ 'id' => $organization_id ]) }}" rel="noopener noreferrer">
         [ {{ __('Back to organization Dashboard')}} ]
         </a>
     </p>
@@ -444,7 +444,7 @@ use Illuminate\Support\Facades\Log;
         <a  href="/dashboard" rel="noopener noreferrer">
         [ {{ __('Back to Personal Dashboard')}} ]
         </a>
-        <a  href="{{ route('organization-dashboard', [ 'id' => $organization_id ]) }}" rel="noopener noreferrer">
+        <a  href="{{ route('organization.dashboard', [ 'id' => $organization_id ]) }}" rel="noopener noreferrer">
         [ {{ __('Back to organization Dashboard')}} ]
         </a>
     </p>

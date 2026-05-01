@@ -7,7 +7,6 @@
  * section, then contest awards.
  * And that page serve it.
  *
- * TODO Organization members only
  */
 
 namespace App\Livewire\Organization\Award;
@@ -16,13 +15,14 @@ use App\Models\Contest;
 use App\Models\ContestAward;
 use App\Models\ContestSection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class ContestAssign extends Component
 {
     public string $contestId;
 
-    public $contest;
+    public Contest $contest;
 
     public $contestAwardsSet;
 
@@ -50,11 +50,13 @@ class ContestAssign extends Component
     /**
      * 1.
      */
-    public function mount(string $cid) // route
+    public function mount(Contest $contest)
     {
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called');
+        $cid = $contest;
         $this->contestId = $cid;
-        $this->contest = Contest::where('id', $this->contestId)->first();
+        $this->contest = $contest;
 
         /**
          * Check if every section prize and mention are assigned:
@@ -89,7 +91,8 @@ class ContestAssign extends Component
             ->groupBy('section_code')
             ->groupBy('section_id')
             ->get();
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' set: ' . json_encode($this->assignedAwardsSet));
+        Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' set: ' . json_encode($this->assignedAwardsSet));
 
         $this->incompleteAwardsSection = [];
         /** @var object{ code: string, total_awards: int, assigned_awards: int , section_id: string} $sectionAward */
@@ -100,14 +103,17 @@ class ContestAssign extends Component
             }
         }
         $this->allAwardsAssigned = (count($this->incompleteAwardsSection) === 0);
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' set: ' . json_encode($this->incompleteAwardsSection));
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' allAwardsAssigned: ' . json_encode($this->allAwardsAssigned));
+        Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' set: ' . json_encode($this->incompleteAwardsSection));
+        Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' allAwardsAssigned: ' . json_encode($this->allAwardsAssigned));
         if (count($this->incompleteAwardsSection)) {
             $this->incompleteSectionSet = ContestSection::whereIn('id', $this->incompleteAwardsSection)->get();
         } else {
             $this->incompleteSectionSet = [];
         }
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' incompleteSectionSet: ' . json_encode($this->incompleteSectionSet));
+        Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' incompleteSectionSet: ' . json_encode($this->incompleteSectionSet));
 
         $sectionAwards = ContestAward::where('contest_id', $this->contestId)
             ->where('section_code', '>', '')->get();

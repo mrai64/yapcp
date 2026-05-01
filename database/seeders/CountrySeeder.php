@@ -26,19 +26,19 @@ class CountrySeeder extends Seeder
      * Download external source from https://github.com/mledoze/countries
      *
      */
+
     public function run()
     {
         $this->command->info(__CLASS__ . "...");
         $filePath = 'private/countries.json';
         $remoteUrl = 'https://raw.githubusercontent.com/mledoze/countries/master/countries.json';
-
         // check local file
         if (!Storage::disk('local')->exists($filePath)) {
             $this->command->info("Missing local file - Give reference json from github");
             try {
                 // pick
                 $response = Http::get($remoteUrl);
-                if ($response->successful()) {
+                if ($response->successful()){
                     Storage::disk('local')->put($filePath, $response->body());
                     $this->command->info("Saved local");
                 } else {
@@ -49,16 +49,17 @@ class CountrySeeder extends Seeder
             } catch (\Throwable $th) {
                 // throw $th;
                 Log::error("Error in CountrySeeder picking remote json file with: " . $th->getMessage());
-                $this->command->error("Blocked bu error: " . $th->getMessage());
+                $this->command->error("Blocked by error: " . $th->getMessage());
                 return;
             }
         }
+        //
         //
         $json = Storage::disk('local')->get($filePath);
         $countries = json_decode($json, true);
         if (is_array($countries)) {
             $this->command->getOutput()->progressStart(count($countries));
-
+            //
             foreach ($countries as $c) {
                 Country::updateOrCreate(
                     ['id' => $c['cca3']], // country code alpha 3 >> iso-3166 alpha-3

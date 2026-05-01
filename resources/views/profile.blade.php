@@ -1,8 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
+        <h2 class="fyk text-2xl font-medium text-gray-900">
+            {{ __('Update Profile') }}
         </h2>
+        <hr />
+        <p class="fyk text-xl font-medium mb-4">
+            <a  href="{{ route('federation.list') }}"
+                rel="noopener noreferrer">
+            [ {{ __('Your contact infos') }} ]
+            </a>
+        </p>
     </x-slot>
 
     <div class="py-12">

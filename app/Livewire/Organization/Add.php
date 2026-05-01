@@ -4,6 +4,9 @@
  * Organization definition page
  *
  * 2025-12-05 review for Country::countriesSorted and Log
+ *
+ * @see /resources/views/livewire/organization/add.blade.php
+ *
  */
 
 namespace App\Livewire\Organization;
@@ -14,14 +17,16 @@ use Livewire\Component;
 
 class Add extends Component
 {
-    // uuid
+    // form fields
     public string $country_id;
 
     public string $name;
 
     public string $email;
 
-    public string $website;
+    public ?string $website = null;
+
+    public ?string $contact = null;
 
     // created_at
     // updated_at
@@ -46,15 +51,16 @@ class Add extends Component
         return [
             'country_id' => 'required|string|exists:countries,id',
             'name' => 'required|string|min:3|max:255',
-            'email' => 'required|string|email|max:255',
-            'website' => 'string|url|max:255',
+            'email' => 'required|string|email|max:255|unique:organizations,email',
+            'website' => 'nullable|string|url|max:255|unique:organizations,website',
+            'contact' => 'nullable|string|max:1000',
         ];
     }
 
     /**
      * after show
      */
-    public function save()
+    public function saveOrganization()
     {
         // here rules() apply: true or fail
         $validated = $this->validate();
@@ -65,7 +71,7 @@ class Add extends Component
 
         // done back to list - see web.php
         return redirect()
-            ->route('organization-list')
+            ->route('organization.list')
             ->with('success', __('New Organization added to list, enjoy!'));
     }
 }

@@ -6,6 +6,7 @@
  *
  * 2026-01-25 When name == surname and a comma is in the between
  *
+ * @see /resources/views/livewire/user/contact/modify1-you-are.blade.php
  */
 
 namespace App\Livewire\User\Contact;
@@ -13,6 +14,7 @@ namespace App\Livewire\User\Contact;
 use App\Models\Country;
 use App\Models\UserContact;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
@@ -20,9 +22,9 @@ class Modify1YouAre extends Component
 {
     use WithFileUploads;
 
-    public $userContact;
+    public UserContact $userContact;
 
-    public $countries;
+    public $allCountriesSet;
 
     // form fields
     public string $firstName;
@@ -36,34 +38,37 @@ class Modify1YouAre extends Component
     public $passportPhotoImage;
 
     // 1. mount
-    public function mount(?string $uid = '')
+    public function mount(?UserContact $userContact = null) // facultative route()
     {
-        if ($uid === '') {
-            $uid = Auth::id();
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        if ($userContact === null) {
+            Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' no parm');
+            $uid = Auth::id(); // user id
+            Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' uid: ' . $uid);
+            $this->userContact = UserContact::where('id', $uid)->first();
+            Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' uC: ' . json_encode($this->userContact));
+        } else {
+            Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' parm');
+            $this->userContact = $userContact;
         }
 
-        // if uid is not Auth::id(), auth::id() must be in user_admins.id
-        // otherwise -and temporary- abort 403
-        if ($uid != Auth::id()) {
-            abort(403, 'Unauthorized action.');
-        }
-        $this->userContact = UserContact::where('id', $uid)->first();
         // form fields
         $this->firstName = $this->userContact->first_name;
         $this->lastName = $this->userContact->last_name;
-        // first time modify, when Surname, Name
+        // when inserted from user creation - when both are 'Surname, Name'
         if (($this->firstName == $this->lastName) && (stripos($this->lastName, ',') > 0)) {
             [$this->lastName, $this->firstName] = explode(',', $this->lastName);
             $this->lastName = trim($this->lastName);
             $this->firstName = trim($this->firstName);
         }
-
-        $this->countryId = ($this->userContact->country_id ?? '***');
-
-        $this->countries = Country::select(['id', 'country', 'flag_code'])->orderBy('country')->get();
-
+        // default value ITA as first developer he's italian
+        $this->countryId = ($this->userContact->country_id ?? 'ITA');
+        // countries list
+        $this->allCountriesSet = Country::select(['id', 'country', 'flag_code'])
+            ->orderBy('country')
+            ->get();
+        // passport photo
         $this->passportPhoto = $this->userContact->passport_photo ?? '';
-
         $this->passportPhotoImage = null;
     }
 
@@ -113,7 +118,7 @@ class Modify1YouAre extends Component
         $this->userContact->save();
 
         return redirect()
-            ->route('user-contact-modify2', ['uid' => $this->userContact->user_id])
+            ->route('user-contact.modify2', ['userContact' => $this->userContact])
             ->with('success', __("Name, Country n Pass photo updated successfully"));
     }
 }

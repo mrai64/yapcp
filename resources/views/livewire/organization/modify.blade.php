@@ -1,41 +1,53 @@
-<div>
-    <h2 class="fyk text-2xl font-medium text-gray-900">
-        {{ __('Organization infos ') }}
-    </h2>
-    <h3 class="mb-4">
-        {{"Back to "}}
-        <a href="{{ route('organization-list') }}">
-        [ {{ __('Organization list') }} ]
-        </a>
-        . .
-        {{"Back to "}}
-        <a href="{{ route('organization-dashboard', ['id' => $id ]) }}">
-        [ {{ __('Organization dashboard') }} ]
-        </a>
-    </h3>
+<?php 
 
-    <form wire:submit="update_organization">
+/**
+ * User modify Organization
+ *
+ * @see /app/Livewire/Organization/Modify.php
+ *
+ */
+
+?>
+
+<div>
+    <header>
+        <h2 class="fyk text-2xl font-medium text-gray-900">
+            {{ __('Modify Organization infos') }}
+        </h2>
+        <p class="fyk text-xl font-medium mb-4">
+            {{ __("Back to ")}}
+            <a href="{{ route('organization.list') }}">
+                [ {{__('Organization list')}} ]
+            </a>
+            . .
+            {{ __("Back to ")}}
+            <a href="{{ route('organization.dashboard', ['organization' => $id ]) }}">
+                [ {{ __('Organization dashboard') }} ]
+            </a>
+        </p>
+    </header>
+    <form wire:submit="updateOrganization">
         @csrf
 
         <div class="mb-4">
-            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="country_id">
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="countryId">
                 {{ __('Country') }}
             </label>
             <select
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full"
-                wire:model.live="country_id"
-                name="country_id"
+                wire:model.live="countryId"
+                name="countryId"
                 required="required"
                 >
 
                 @foreach ($countries as $country)
-                <option value="{{ trim($country->id) }}" {{ ($country->id === $country_id ) ? 'selected' : '' }}>{{ $country->country }}</option>
+                <option value="{{ trim($country->id) }}" {{ ($country->id === $countryId ) ? 'selected' : '' }}>{{ $country->country }}</option>
                 @endforeach
             </select>
-            <div class="alert alert-danger small">@error('country_id') {{ $message }} @enderror</div>
+            <div class="alert alert-danger small">@error('countryId') {{ $message }} @enderror</div>
         </div>
 
-        <div>
+        <div class="mb-4">
             <label for="name"
                 class="block mt-4 font-medium text-sm text-gray-700"
                 >
@@ -52,11 +64,11 @@
             @enderror
         </div>
 
-        <div>
+        <div class="mb-4">
             <label for="email"
                 class="block mt-4 font-medium text-sm text-gray-700"
                 >
-                {{__('email')}}
+                {{__('Secretary email')}}
             </label>
             <input
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full"
@@ -69,11 +81,11 @@
             @enderror
         </div>
 
-        <div>
+        <div class="mb-4">
             <label for="website"
                 class="block mt-4 font-medium text-sm text-gray-700"
                 >
-                {{__('website')}}
+                {{__('Official website')}}
             </label>
             <input
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full"
@@ -86,6 +98,19 @@
             <div class="alert alert-danger small">{{ $message }}</div>
             @enderror
         </div>
+
+        <div class="mb-4">
+            <style>textarea {resize:vertical;}</style>
+            <label class="block font-medium text-sm text-gray-700" for="contact">
+                {{ __('Organization HQ and reference contact') }}
+            </label>
+            <textarea 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                type="text" name="contact"
+                wire:model="contact"
+            >{{ old('contact') }}</textarea>
+            <div class="small">@error('contact') {{ $message }} @enderror</div>
+        </div><!-- contact info -->
 
         <hr />
 

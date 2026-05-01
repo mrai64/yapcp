@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Support\Facades\Log; // //dbg ds
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str; //         pk uuid
 
@@ -71,6 +71,7 @@ use Illuminate\Support\Str; //         pk uuid
  * @property-read \App\Models\UserWork $userWork
  * @property string $user_work_id fk: user_works.id
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereUserWorkId($value)
+ * @method static \Database\Factories\ContestWorkFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 class ContestWork extends Model
@@ -133,6 +134,7 @@ class ContestWork extends Model
      */
     public function miniature(string $originalFileName = ''): string
     {
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         // default for contest based on
         if ($originalFileName === '') {
             $originalFileName = $this->contest_id . '/' . $this->section_id
@@ -143,7 +145,8 @@ class ContestWork extends Model
         $miniatureFileName = '300px_' . substr($originalFileName, $lastSlashPos + 1);
 
         if (Storage::disk('public')->exists('contests/' . $path . $miniatureFileName)) {
-            // dbg ds('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' found');
+            Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+                . ' miniature: ' . $path . $miniatureFileName . ' found');
 
             return $path . $miniatureFileName;
         }

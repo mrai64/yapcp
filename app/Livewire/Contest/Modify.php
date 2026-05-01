@@ -317,7 +317,7 @@ class Modify extends Component
 
         // redirect
         return redirect()
-            ->route('contest-section-add', ['cid' => $this->contest->id])
+            ->route('organization.contest-section.add', ['contest' => $this->contest])
             ->with('success', __('Contest Main data updated, enjoy!'));
         //
     }

@@ -62,7 +62,7 @@
 
                         @auth
                         <p class="fyk text-2xl text-center my-6">
-                            <a href="{{ url('/dashboard') }}">
+                            <a href="{{ route('user.dashboard') }}">
                                 {{ __('Your Dashboard') }}
                             </a>
                         </p>
@@ -86,7 +86,7 @@
 
                         <p class="h-10">&nbsp;</p>
                         <p class="fyk text-2xl text-center my-6">
-                            <a href="{{ route('contest-list') }}">
+                            <a href="{{ route('contest.list') }}">
                                 {{ __('The Open Contest List') }}
                             </a>
                         </p>

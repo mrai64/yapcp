@@ -8,22 +8,22 @@ use App\Models\ContestSection;
 
 ?>
 
-<section>
+<div>
     <header>
         <h2 class="fyk text-2xl font-medium text-gray-900">
             {{ __('Contest definition: SECTION LIST') }}
         </h2>
         <h3>
-            <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization.contest.modify', ['contest' => $contest ]) }}">
                 <span class="fyk text-xl">Main</span>
             </a>
             . .
-            <a href="{{ route('contest-section-add', ['cid' => $contest->id]) }}">
+            <a href="{{ route('organization.contest-section.add', ['contest' => $contest]) }}">
                 <span class="fyk text-2xl">Sections</span>
             </a>
             {{ $sid = ContestSection::firstContestSectionId( $contest->id ); }}
             @if($sid > '')
-            <a href="{{ route('contest-jury-add', ['sid' => $sid] ); }}">
+            <a href="{{ route('organization.contest-jury.add', ['sid' => $sid] ); }}">
                 <span class="fyk text-xl">Jury</span>
             </a>
             @else
@@ -32,11 +32,11 @@ use App\Models\ContestSection;
             </a>
             @endif
             . .
-            <a href="{{ route('contest-award-add', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('organization.contest-award.add', ['contest' => $contest]) }}">
                 <span class="fyk text-xl">Awards</span>
             </a>
             . .
-            <a href="{{ route('modify-participant-list', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('contest-participant.modify', ['contest' => $contest]) }}">
                 <span class="fyk text-xl">Participants</span>
             </a>
             . .
@@ -62,7 +62,7 @@ use App\Models\ContestSection;
         <p class="fyk text-xl">Country: {{ Country::countryName( $contest->country_id ) }} </p>
         <p class="small">Closing date: {{ $contest->day_2_closing->format('Y-m-d') }} </p>
         <p class="small py-6">
-            <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization.contest.modify', ['contest' => $contest ]) }}">
                 [ {{ __("Back to Main Contest Card")}} ]
             </a>
         </p>
@@ -81,31 +81,31 @@ use App\Models\ContestSection;
                 </tr>
             </thead>
             <tbody>
-                @if (count($contest_section_list) > 0 )
-                    @foreach($contest_section_list as $section)
+            @if (count($contestSectionSet) > 0 )
+                @foreach($contestSectionSet as $section)
                 <tr class="border">
                     <td scope="row"> "{{ $section->code }}"<br />
-                    {{ ($section->under_patronage === 'Y') ? "under patronage" : "free of patronage" }}</td>
-                    <td >{{ $section->name_en}}<br />{{ $section->name_local}}</td>
+                    {{ ($section->underPatronage === 'Y') ? "under patronage" : "free of patronage" }}</td>
+                    <td >{{ $section->sectionNameEn}}<br />{{ $section->sectionNameLang}}</td>
                     <td >
-                        <a href="{{ route('modify-contest-section', ['sid' => $section->id] ) }}">
+                        <a href="{{ route('organization.contest-section.modify', ['section' => $section] ) }}">
                             [ {{ __("Modify") }} ]
                         </a>
-                        <a href="{{ route('remove-contest-section', ['sid' => $section->id] ) }}">
+                        <a href="{{ route('organization.contest-section.remove', ['section' => $section] ) }}">
                             [ {{ __("Remove") }} ]
                         </a>
                     </td>
                 </tr>
-                    @endforeach
-                @else
+                @endforeach
+            @else
                 <tr class="border">
                     <td scope="row" colspan="3">
                         <p class="mb-6 small m-auto text-center">{{ __("Insert first contest section") }}</p>
                     </td>
                 </tr>
-                @endif
+            @endif
                 <!-- Form Add section -->
-                <form wire:submit="modify_section_contest">
+                <form wire:submit="updateContestSection">
                     @csrf
                 <tr>
                     <td scope="row" valign="top" style="width:15% !important">
@@ -119,50 +119,50 @@ use App\Models\ContestSection;
                         <br style="clear:both;" />
                         <div>
                             <label class="block font-medium text-sm text-gray-700">
-                                <input type="radio" name="under_patronage" id="under_patronage" value="N" 
-                                wire:model="under_patronage" 
-                                {{ ( old('under_patronage') == "N") ? 'checked' : ''}}
+                                <input type="radio" name="underPatronage" id="underPatronageN" value="N" 
+                                wire:model="underPatronage" 
+                                {{ ( old('underPatronage') == "N") ? 'checked' : ''}}
                                 />
                                 {{ __("Free of patronage") }}
                             </label>
                             <label class="block font-medium text-sm text-gray-700">
-                                <input type="radio" name="under_patronage" id="under_patronage" value="Y" 
-                                wire:model="under_patronage" 
-                                {{ ( old('under_patronage') == "Y" ) ? 'checked' : '';}}
+                                <input type="radio" name="underPatronage" id="underPatronageY" value="Y" 
+                                wire:model="underPatronage" 
+                                {{ ( old('underPatronage') == "Y" ) ? 'checked' : '';}}
                                 />
                                 {{ __("Follow patronage rules") }}
                             </label>
-                            <x-input-error class="small" :messages="$errors->get('under_patronage')" />
+                            <x-input-error class="small" :messages="$errors->get('underPatronage')" />
                         </div>
                     </td>
                     <td valign="top" class="w-full" style="width:75% !important"
-                        <label for="name_en" class="block font-medium text-sm text-gray-700">
+                        <label for="sectionNameEn" class="block font-medium text-sm text-gray-700">
                             {{ __("Section description [en]") }}
                         </label>
                         <input
                             class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full"
-                            wire:model="name_en"
-                            type="text" name="name_en"
-                            value="{{ old('name_en') }}"
+                            wire:model="sectionNameEn"
+                            type="text" name="sectionNameEn"
+                            value="{{ old('sectionNameEn') }}"
                         />
-                        <x-input-error class="small" :messages="$errors->get('name_en')" />
+                        <x-input-error class="small" :messages="$errors->get('sectionNameEn')" />
                         <hr style="clear:both;" />
-                        <label for="name_local" class="block font-medium text-sm text-gray-700">
+                        <label for="sectionNameLang" class="block font-medium text-sm text-gray-700">
                             {{ __("Section description [local]") }}
                         </label>
                         <input
                             class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full"
-                            wire:model="name_local"
-                            type="text" name="name_local"
-                            value="{{ old('name_local') }}"
+                            wire:model="sectionNameLang"
+                            type="text" name="sectionNameLang"
+                            value="{{ old('sectionNameLang') }}"
                         />
-                        <x-input-error class="small" :messages="$errors->get('name_local')" />
+                        <x-input-error class="small" :messages="$errors->get('sectionNameLang')" />
                     </td>
                     <td valign="top" nowrap>
                         <button type="submit"
                             class="inline-flex items-center px-4 py-2 mt-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-3"
                         >
-                        {{ __('Add') }}
+                        {{ __('Modify') }}
                         </button>
                     </td>
                 </tr>
@@ -176,4 +176,4 @@ use App\Models\ContestSection;
         </p>
     </div>
 
-</section>
+</div>

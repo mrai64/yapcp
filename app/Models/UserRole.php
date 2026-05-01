@@ -17,6 +17,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -61,6 +62,8 @@ class UserRole extends Model
     use SoftDeletes;
 
     public const TABLENAME = 'user_roles';
+    public const ADMINGROUP = 'admin';
+    public const JUROR = 'juror';
 
     // protected $primaryKey 'id'        standard
     // protected $keyType = unsigned int standard
@@ -108,12 +111,26 @@ class UserRole extends Model
         return ($present === 1);
     }
 
+    // GETTERS
+
     // was: valid_roles
     public static function validRoles()
     {
         $valid = UserRolesRoleSet::validRoles();
         // log
         return $valid;
+    }
+
+    // user_id is based on logged user
+    public static function isAdmin(): bool
+    {
+        $examine = self::where('user_id', Auth::id())
+            ->where('role', self::ADMINGROUP)
+            ->where('role_opening', '<=', now())
+            ->where('role_closing', '>=', now())
+            ->exists();
+        ds($examine);
+        return $examine;
     }
 
     // RELATIONS

@@ -35,7 +35,7 @@ use Illuminate\Support\Facades\Log;
 
     @if (count($participantWorks) > 0)
     <h2 class="fyk text-2xl">{{ __("These (and more...) Are Waiting Your Vote") }} 
-        <a href="{{ route('contest-jury-vote', ['sid' => $contestSections->id ]) }}">
+        <a href="{{ route('contest-jury.vote', ['sid' => $contestSections->id ]) }}">
         [ {{ __("Start") }} ]
         </a>
     </h2>
@@ -74,7 +74,7 @@ use Illuminate\Support\Facades\Log;
     <p class="fyk text-2xl">
         &hellip;<br />
         &hellip; 
-        <a href="{{ route('contest-jury-vote', ['sid' => $contestSections->id ]) }}">
+        <a href="{{ route('contest-jury.vote', ['sid' => $contestSections->id ]) }}">
             {{ __("Why Wait? Start Vote NOW!") }}
         </a>
     </p>

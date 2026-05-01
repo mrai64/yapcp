@@ -10,6 +10,7 @@ namespace App\Livewire\Organization\Reports;
 use App\Models\Contest;
 use App\Models\ContestSection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class WorksParticipant extends Component
@@ -22,10 +23,13 @@ class WorksParticipant extends Component
 
     public $sectionWorks;
 
-    public function mount($cid) // route param
+    public function mount(Contest $contest) // route param
     {
-        $this->contestId = $cid;
-        $this->contest = Contest::find($this->contestId);
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called');
+        $this->contest = $contest;
+        $this->contestId = $contest->id;
+        $cid = $contest->id;
 
         $this->sections = ContestSection::where('contest_id', $this->contestId)
             ->orderBy('created_at', 'asc')
@@ -77,6 +81,8 @@ class WorksParticipant extends Component
 
     public function render()
     {
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
+            . ' called');
         return view('livewire.organization.reports.works-participant');
     }
 }

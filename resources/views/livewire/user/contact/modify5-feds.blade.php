@@ -1,15 +1,27 @@
 <div>
-    <!-- header -->
-    <h2 class="fyk text-2xl mb-4">{{ __('Update your personal info') }}</h2>
-    <p class="mb-4">
-        <a  href="{{ route('dashboard') }}"
-            rel="noopener noreferrer">
-        [ {{ __('Back to dashboard') }} ]
-        </a>
-    </p>
-    <hr class="my-4" />
-    <br />
-    <br />
+    <header>
+        <h2 class="fyk text-2xl font-medium text-gray-900">
+            {{ __('Update your personal info') }}
+        </h2>
+    <!-- nav bar here -->
+        <h3 class="fyk text-2xl font-medium text-gray-900">
+            {{$lastName}}, {{ $firstName }} | {{$userContact->country->flag_code}} {{$userContact->country->country}}
+        </h3>
+        <h3 class="fyk text-xl font-medium text-gray-900">
+            <em>{{ __("5th of 5 | Request from Federations...")}}</em>
+        </h3>
+        <p class="small mb-4">
+            {{ __('Fields request from federations.') }}
+        </p>
+        <hr />
+        <br />
+        <p class="fyk text-xl font-medium mb-4">
+            <a  href="{{ route('user.dashboard') }}"
+                rel="noopener noreferrer">
+            [ {{ __('Back to dashboard') }} ]
+            </a>
+        </p>
+    </header>
 
     <!-- success -->
     @if (session('success'))
@@ -28,17 +40,8 @@
     </div>
     @endif
 
-    <!-- nav bar here -->
-    <h3 class="fyk text-xl mb-4"><em>{{ __("Additional infos...")}}</em> required by </h3>    
-
-    <h3 class="fyk text-2xl mb-4">{{$federation->country->flag_code}} {{$federation->id}} | {{$federation->name_en}}</h3>
-    <p class="small">{{ __("When field is empty show a default value")}}</p>
-    <p class="small">{{ __("When you insert in field a default value de facto you require it's removing")}}</p>
-    <br style="clear:both;" />
-    <br />
     <form wire:submit.prevent="updateUserContactMore">
-
-        {{-- Cicla sulle definizioni dei campi caricate nel mount() --}}
+        <!-- meta form of a federation -->
         @foreach ($fieldDefinitions as $field)
             <div class="mb-4" wire:key="field-{{$field->id}}">
                 <label for="{{ $field->field_name }}" class="fyk block font-medium text-2xl text-gray-700" >

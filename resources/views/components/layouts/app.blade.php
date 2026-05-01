@@ -20,7 +20,7 @@
             <div class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
                 <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                     <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
-                        <div class="flex lg:justify-start h-20 fyk text-2xl">yaPCP</div>
+                        <div class="flex lg:justify-start h-20 fyk text-2xl">{{ config('app.name') }}</div>
                         <div class="flex lg:justify-center lg:col-start-2">
                             <x-application-logo class="h-12 w-auto text-white lg:h-16 lg:text-[#FF2D20]" width="60px" height="60px" /> 
                         </div>
@@ -34,7 +34,7 @@
                     </main>
 
                     <footer class="py-16 text-center text-sm text-black dark:text-white/70 text-muted">
-                        &copy; {{ date('Y')}} - {{ config('app.name') }} - version {{ $appVersion }} guest
+                        &copy; 2024-{{ date('Y')}} Massimo Rainato - {{ config('app.name') }} - version {{ $appVersion }} guest
                     </footer>
                 </div>
             </div>

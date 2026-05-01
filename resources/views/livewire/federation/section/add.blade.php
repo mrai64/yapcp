@@ -3,6 +3,9 @@
  * Federation Section Add 
  * 
  * 2025-10-16 federations and federation_sections refactorize
+ * 
+ * @see /app/Livewire/Federation/Section/Add.php
+ * 
  */
 
 ?> 
@@ -13,58 +16,100 @@
             {{__("New Section from Federation Contest Regulation")}} 
         </h1>
         <p class="mb-4">
-            <a href="{{ route( 'federation-section-list', [ 'fid' => $federation_id]) }}"
+            <a href="{{ route('federation-section.list', ['federation' => $federation] ) }}"
                 rel="noopener noreferrer">
             [ {{ __("Back to Federation Section list") }} ]
             </a>
         </p>
     </header>
 
-    <form wire:submit="save_new_section">
+    <form wire:submit="saveNewFederationSection">
         @csrf
-        
+
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="code">
-                {{ _('Section Shortcode') }}
+            <label class="block font-medium text-sm text-gray-700" for="sectionCode">
+                {{ __("Code for Section") }}
+                | {{ __('required')}}
             </label>
+            <div class="small">{{ __("Only uppercase chars, upto 10 chars.")}} </div>
             <input 
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-48" 
-                wire:model="code" 
-                type="text" name="code"
-                value="{{ old('code') }}"
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                type="text" name="sectionCode"
+                wire:model="sectionCode" 
+                value="{{ old('sectionCode') }}"
                 required="required" 
             />
-            <div class="small">{{ __("Code must be unique")}} </div>
-            <div class="alert alert-danger small">@error('code') {{ $message }} @enderror</div>
+            @error('sectionCode')
+            <div class="alert alert-danger small">{{ $message }} </div>
+            @enderror
         </div>
 
         <div class="mb-4">
-            <label class="block font-medium text-sm text-gray-700" for="name_en">
+            <label class="block font-medium text-sm text-gray-700" for="sectionNameEn">
                 {{ __("Section name [en]") }}
+                | {{ __('required')}}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="name_en"
-                wire:model="name_en" 
-                value="{{ old('name_en') }}"
+                type="text" name="sectionNameEn"
+                wire:model="sectionNameEn" 
+                value="{{ old('sectionNameEn') }}"
                 required="required" 
             />
-            @error('name_en')
+            @error('sectionNameEn')
             <div class="alert alert-danger small">{{ $message }} </div>
             @enderror
         </div>
 
         <div class="mb-4">
             <style>textarea {resize:vertical;}</style>
-            <label class="block font-medium text-sm text-gray-700" for="rule_definition">
+            <label class="block font-medium text-sm text-gray-700" for="ruleDefinition">
                 {{ __('Section definition') }}
+                | {{ __('required')}}
             </label>
+            <div class="small">{{ __("Explain official definition for that section from official docs, translated in english text")}} </div>
             <textarea 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="rule_definition"
-                wire:model="rule_definition"
-            >{{ old('rule_definition') }}</textarea>
-            @error('rule_definition')
+                type="text" name="ruleDefinition"
+                wire:model="ruleDefinition"
+            >{{ old('ruleDefinition') }}</textarea>
+            @error('ruleDefinition')
+            <div class="alert alert-danger small">{{ $message }} </div>
+            @enderror
+        </div>
+
+        <div class="mb-4">
+            <label class="block font-medium text-sm text-gray-700" for="minWorks">
+                {{ __("Min n. of works to participate") }}
+                | {{ __('required')}}
+            </label>
+            <div class="small">{{ __("An integer between 0 and ...")}} </div>
+            <input 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-48" 
+                type="text" name="minWorks"
+                wire:model="minWorks" 
+                value="{{ old('minWorks') }}"
+                required="required" 
+            />
+            @error('minWorks')
+            <div class="alert alert-danger small">{{ $message }} </div>
+            @enderror
+        </div>
+
+        <div class="mb-4">
+            <label class="block font-medium text-sm text-gray-700" for="maxWorks">
+                {{ __("Max n. of works to participate") }}
+                | {{ __('required')}}
+            </label>
+            <div class="small">{{ __("An integer between minWorks and ...")}} </div>
+            <input 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-48" 
+                type="text" name="maxWorks"
+                wire:model="maxWorks" 
+                value="{{ old('maxWorks') }}"
+                required="required" 
+            />
+            @error('maxWorks')
             <div class="alert alert-danger small">{{ $message }} </div>
             @enderror
         </div>

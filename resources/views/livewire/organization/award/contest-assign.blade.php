@@ -24,7 +24,7 @@ use App\Models\ContestSection;
     @if (count($incompleteAwardsSection))
     <h3 class="fyk text-2xl">{{__("Complete Awards Assignment for")}}:</h3>
         @foreach($incompleteSectionSet as $section)
-        <a href="{{ route('organization-award-section-assign', [ 'sid' => $section->id ] ) }}">
+        <a href="{{ route('organization-contest.section-awards', [ 'contestSection' => $section->id ] ) }}">
             [ {{ $section->code}} | {{ $section->name_en }} ]
         </a>
         <br />

@@ -1,30 +1,32 @@
-<div>
-    <p class="">Well, new organization? Insert Few data here.</p>
-    <p class="mb-4">Before, check 
-        <a href="{{ route('organization-list') }}">
-        [ {{__('Organization list')}} ]
-        </a>
-    </p>
-    <form wire:submit="save">
-        @csrf
+<?php 
 
-        <div>
-            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="country_id">
-                {{ __('Country') }}
-            </label>
-            <select 
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                wire:model="country_id"
-                name="country_id" 
-                required="required
-                >
-                <option value="">{{ __('-- choose country --') }}</option>
-                @foreach ($countries as $country)
-                <option value="{{ $country->id }}">{{ $country->country }}</option>
-                @endforeach
-            </select>
-            <div class="small">@error('country_id') {{ $message }} @enderror</div>
-        </div>
+/**
+ * User add Organization
+ *
+ * @see /app/Livewire/Organization/Add.php
+ *
+ */
+
+?>
+
+<div>
+    <header>
+        <h2 class="fyk text-2xl font-medium text-gray-900">
+            {{ __('New Organization') }}
+        </h2>
+        <hr />
+        <br />
+        <p class="small">
+            {{ __("To avoid trouble please check if your Organization is already in platform.")}}
+        </p>
+        <p class="fyk text-xl font-medium mb-4">
+            <a href="{{ route('organization.list') }}">
+                [ {{__('Organization list')}} ]
+            </a>
+        </p>
+    </header>
+    <form wire:submit="saveOrganization">
+        @csrf
 
         <div>
             <label for="name" 
@@ -45,10 +47,28 @@
         </div>
 
         <div>
+            <label class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" for="country_id">
+                {{ __('Country') }}
+            </label>
+            <select 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                wire:model="country_id"
+                name="country_id" 
+                required="required
+                >
+                <option value="">{{ __('-- choose country --') }}</option>
+                @foreach ($countries as $country)
+                <option value="{{ $country->id }}">{{ $country->country }}</option>
+                @endforeach
+            </select>
+            <div class="small">@error('country_id') {{ $message }} @enderror</div>
+        </div>
+
+        <div>
             <label for="email" 
                 class="block mt-4 font-medium text-sm text-gray-700"
                 >
-                {{__('email')}}
+                {{__('Secretary email')}}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -66,7 +86,7 @@
             <label for="website" 
                 class="block mt-4 font-medium text-sm text-gray-700"
                 >
-                {{__('website')}}
+                {{__('Official website')}}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -81,6 +101,20 @@
             @enderror
         </div>
 
+        <div class="mb-4">
+            <style>textarea {resize:vertical;}</style>
+            <label class="block font-medium text-sm text-gray-700" for="federationContact">
+                {{ __('Organization HQ and reference contact') }}
+            </label>
+            <textarea 
+                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                type="text" name="federationContact"
+                wire:model="federationContact"
+            >{{ old('federationContact') }}</textarea>
+            <div class="small">@error('federationContact') {{ $message }} @enderror</div>
+        </div><!-- contact info -->
+
+
         <hr />
 
         <button type="submit" 
@@ -88,6 +122,9 @@
             >
             {{ __('Add new Organization') }}
         </button>
+        <p class="small">
+            {{__("After insert you land in Organization List")}}
+        </p>
 
     </form>
 </div>

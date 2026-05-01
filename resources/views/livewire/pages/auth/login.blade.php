@@ -23,11 +23,16 @@ $login = function () {
 
     $user = User::where('email', $this->form->email)->firstOrFail();
     Log::debug( __CLASS__ . 'Validate ok, authenticate ok, adesso chiamo notify per: '. $user->email);
-    $user->notify(new LoginDone($user));
+    // was: $user->notify(new LoginDone($user));
+    try {
+        $user->notify(new LoginDone($user));
+    } catch (\Throwable $th) {
+        Log::error('Error sending notification to user: ' . $user->email . ' for: ' . $th->getMessage());
+    }
 
     Session::regenerate();
 
-    $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+    $this->redirectIntended(default: route('user.dashboard', absolute: false), navigate: true);
 };
 
 ?>

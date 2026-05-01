@@ -1,15 +1,30 @@
 <div>
     <!-- header -->
-    <h2 class="fyk text-2xl mb-4">{{ __('Update your personal info') }}</h2>
-    <p class="mb-4">
-        <a  href="{{ route('dashboard') }}"
-            rel="noopener noreferrer">
-        [ {{ __('Back to dashboard') }} ]
-        </a>
-    </p>
-    <hr class="my-4" />
-    <br />
-    <br />
+    <header>
+        <h2 class="fyk text-2xl font-medium text-gray-900">
+            {{ __('Update your personal info') }}
+        </h2>
+    <!-- nav bar here -->
+        <h3 class="fyk text-2xl font-medium text-gray-900">
+            {{$lastName}}, {{ $firstName }} | {{$userContact->country->flag_code}} {{$userContact->country->country}}
+        </h3>
+        <h3 class="fyk text-xl font-medium text-gray-900">
+            <em>{{ __("2nd of 5 | Where are you...")}}</em>
+        </h3>
+        <p class="small mb-4">
+            {{ __('Cellular international Id (like +393101234567) is facultative, but ') }}
+            {{ __('sometimes needed to resolve trouble when email are stopped for any reason.') }}
+        </p>
+        <hr />
+        <br />
+        <p class="fyk text-xl font-medium mb-4">
+            <a  href="{{ route('user.dashboard') }}"
+                rel="noopener noreferrer">
+            [ {{ __('Back to dashboard') }} ]
+            </a>
+        </p>
+    </header>
+
 
     <!-- success -->
     @if (session('success'))
@@ -28,19 +43,13 @@
     </div>
     @endif
 
-    <!-- nav bar here -->
-    <div class="fyk block font-medium text-2xl text-gray-700 mb-4">
-        {{$country->flag_code}} | {{ $lastName}}, {{ $firstName }}
-    </div>
-    <h3 class="fyk text-xl mb-4"><em>{{ __("Phone Numbers...")}}</em></h3>    
-
     <form wire:submit="updateUserContact3rd">
         @csrf
 
-        <p class="small mb-4">{{ __('Please provide at least one phone number where we can reach you ')}} <strong>{{ __('only if necessary.') }}</strong></p>
         <div class="mb-4">
             <label class="fyk block font-medium text-2xl text-gray-700" for="cellular">
-                {{ __('Cellular international number | facultative') }}
+                {{ __('Cellular international number') }}
+                | {{ __('facultative') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
@@ -54,7 +63,8 @@
 
         <div class="mb-4">
             <label class="fyk block font-medium text-2xl text-gray-700" for="whatsapp">
-                {{ __('Whatsapp | facultative') }}
+                {{ __('Whatsapp contact url') }}
+                | {{ __('facultative') }}
             </label>
             <input 
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 

@@ -8,7 +8,6 @@ namespace Database\Factories;
 
 use App\Models\Country;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -23,18 +22,21 @@ class FederationFactory extends Factory
      */
     public function definition(): array
     {
-        Log::info('Factory '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' called');
+        Log::info('Factory ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
 
         return [
-            'id' => fake()->regexify('[A-Z]{6}'), // check howto build random but from 3 to 6 chars
-            'country_id' => DB::table(Country::TABLENAME)->pluck('id')->random(5)->first(),
+            'id' => fake()->unique()->regexify('[A-Z]{6}'), // check howto build random but from 3 to 6 chars
+            'country_id' => Country::factory(),
             'name_en' => fake()->text(),
-            // local_lang
-            // timezone_id
+            'local_lang' => fake()->regexify('[a-z]{2}_[A-Z]{2}'),
+            'timezone_id' => function () {
+                return \App\Models\Timezone::inRandomOrder()->first()?->id
+                    ?? \App\Models\Timezone::factory()->create()->id;
+            },
             'website' => fake()->url(),
             'contact_info' => fake()->address(),
-            'created_at' => now(),
-            'updated_at' => now(),
+            // 'created_at' => now(),
+            // 'updated_at' => now(),
             // deleted_at
         ];
     }

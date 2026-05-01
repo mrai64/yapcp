@@ -10,7 +10,7 @@
     <p class="small">{{ __('Warning: you can change some data but not image. Instead remove and upload another.') }}</p>
     @endif
     <br style="clear:both;" />
-    <a  href="{{ route('photo-box-list') }}" 
+    <a  href="{{ route('user.gallery') }}" 
         class="float-end font-medium rounded-md mb-4 py-2"
         >
         [ {{ __('Your beautiful Gallery') }} ]
@@ -145,7 +145,7 @@
         </button>
     </form>
     <br style="clear: both;" />
-    <a  href="{{ route('photo-box-list') }}" 
+    <a  href="{{ route('user.gallery') }}" 
         class="float-end font-medium rounded-md mt-4 py-2"
         >
         [ {{ __('Your beautiful Gallery') }} ]

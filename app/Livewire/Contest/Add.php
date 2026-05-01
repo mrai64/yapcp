@@ -27,6 +27,7 @@ use App\Models\Organization;
 use App\Models\Timezone;
 use Carbon\CarbonImmutable;
 use DateTimeImmutable;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Validator;
 use Livewire\Component;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
@@ -105,11 +106,11 @@ class Add extends Component
     /**
      * Before the show
      */
-    public function mount(string $oid) // organization_id as in route()
+    public function mount(Organization $organization) // organization as in route()
     {
-        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
 
-        $this->organization = Organization::where('id', $oid)->firstOrFail();
+        $this->organization = $organization;
         $this->organizationId = $this->organization->id;
         $this->countries = Country::countriesSorted();
         $this->countryId = $this->organization->country_id;
@@ -125,7 +126,7 @@ class Add extends Component
         $this->localLang = 'en';
         $this->contactInfo = 'Organization contact infos';
 
-        $this->isCircuit = 'N'; // false
+        $this->isCircuit = 'N'; // TODO false
         $this->circuitId = '';
 
         /**
@@ -332,7 +333,7 @@ class Add extends Component
 
         // redirect
         return redirect()
-            ->route('organization-dashboard', ['oid' => $this->organizationId])
+            ->route('organization.dashboard', ['organization' => $this->organizationId])
             ->with('success', __('New Contest added to list, enjoy!'));
     }
 }

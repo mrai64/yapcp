@@ -1,37 +1,40 @@
 <?php
 
 /**
- * Simply show all data of user contacts
+ * admin only
+ *
+ * the paged list of users for all platform
+ *
  */
 
 namespace App\Livewire\User\Contact;
 
-use App\Models\Country;
 use App\Models\UserContact;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Listed extends Component
 {
-    public string $userId;
+    use WithPagination;
 
-    public $userContact;
-
-    public $country;
-
-    public function mount()
-    {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        $this->userId = Auth::id();
-        $this->userContact = UserContact::where('id', $this->userId)->first();
-        $this->country = Country::where('id', $this->userContact->country_id)->first();
-    }
+    // no mount()
 
     public function render()
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
 
-        return view('livewire.user.contact.listed');
+        $userContactSet = UserContact::with('country')
+            ->orderBy('country_id', 'asc')
+            ->orderBy('last_name', 'asc')
+            ->orderBy('first_name', 'asc')
+            ->orderBy('created_at', 'asc')
+            ->simplePaginate(20);
+        //
+        ds('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' res: '
+            . json_encode($userContactSet));
+
+        return view('livewire.user.contact.listed', [
+            'userContactSet' => $userContactSet
+        ]);
     }
 }

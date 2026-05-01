@@ -130,7 +130,7 @@ class ContestAwardAssign extends Component
         }
 
         return redirect()
-            ->route('organization-award-contest-assign', ['cid' => $this->contestId])
+            ->route('organization-contest.contest-awards', ['contest' => $this->contestId])
             ->with('success', __('Yes! Great!'));
     }
 }

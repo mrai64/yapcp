@@ -17,27 +17,27 @@ use App\Models\ContestSection;
             {{ __('AWARDs LIST f/CONTEST ') }} {{ $contest->name_en }}
         </h2>
         <h3>
-            <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization.contest.modify', ['contest' => $contest ]) }}">
                 <span class="fyk text-xl">Main</span>
             </a>
             . .
-            <a href="{{ route('contest-section-add', ['cid' => $contest->id]) }}">
+            <a href="{{ route('organization.contest-section.add', ['contest' => $contest]) }}">
                 <span class="fyk text-xl">Sections</span>
             </a>
             . .
-            <a href="{{ route('contest-jury-add', ['sid' => ContestSection::firstContestSectionId( $contest->id )] ); }}">
+            <a href="{{ route('organization.contest-jury.add', ['sid' => ContestSection::firstContestSectionId( $contest->id )] ); }}">
                 <span class="fyk text-xl">Jury</span>
             </a>
             . .
-            <a href="{{ route('contest-award-add', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('organization.contest-award.add', ['contest' => $contest]) }}">
                 <span class="fyk text-2xl">Awards</span>
             </a>
             . .
-            <a href="{{ route('modify-participant-list', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('contest-participant.modify', ['contest' => $contest]) }}">
                 <span class="fyk text-xl">Participants</span>
             </a>
             . .
-            <a href="{{ route('organization-contest-list', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('organization.contest.list', ['cid' => $contest->id ]); }}">
                 <span class="fyk text-xl">Works</span>
             </a>
             
@@ -57,7 +57,7 @@ use App\Models\ContestSection;
         <p class="small">Closing date: {{ $contest->day_2_closing->format('Y-m-d') }} </p>
         @endif
         <p class="small py-6">
-            <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization.contest.modify', ['contest' => $contest ]) }}">
                 [ {{ __("Back to main Contest Definition")}} ]
             </a>
         </p>

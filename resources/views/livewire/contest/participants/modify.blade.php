@@ -1,6 +1,6 @@
 <?php
 /**
- * Contest Participants Modify 
+ * Contest Participants List / Modify 
  * 
  * Here we can change (only, if) the fee_payment_completed field
  * First parte mount/render is for build the list of participants
@@ -14,6 +14,7 @@ use App\Models\Country;
 use App\Models\ContestParticipant;
 use App\Models\ContestSection;
 use App\Models\ContestWork;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 ?>
@@ -25,16 +26,16 @@ use Illuminate\Support\Facades\Gate;
             {{ $contest->name_en }}
         </h2>
         <h3>
-            <a href="{{ route('modify-contest', ['cid' => $contest->id ]) }}">
+            <a href="{{ route('organization.contest.modify', ['contest' => $contest ]) }}">
                 <span class="fyk text-xl">Main</span>
             </a>
             . .
-            <a href="{{ route('contest-section-add', ['cid' => $contest->id]) }}">
+            <a href="{{ route('organization.contest-section.add', ['contest' => $contest]) }}">
                 <span class="fyk text-xl">Sections</span>
             </a>
-            {{ $sid = ContestSection::firstContestSectionId( $contest->id ); }}
+            @php $sid = ContestSection::firstContestSectionId( $contest->id ); @endphp
             @if($sid > '')
-            <a href="{{ route('contest-jury-add', ['sid' => $sid] ); }}">
+            <a href="{{ route('organization.contest-jury.add', ['sid' => $sid] ); }}">
                 <span class="fyk text-xl">Jury</span>
             </a>
             @else
@@ -43,11 +44,11 @@ use Illuminate\Support\Facades\Gate;
             </a>
             @endif
             . .
-            <a href="{{ route('contest-award-add', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('organization.contest-award.add', ['contest' => $contest]) }}">
                 <span class="fyk text-xl">Awards</span>
             </a>
             . .
-            <a href="{{ route('modify-participant-list', ['cid' => $contest->id ]); }}">
+            <a href="{{ route('contest-participant.modify', ['contest' => $contest]) }}">
                 <span class="fyk text-2xl">Participants</span>
             </a>
             . .
@@ -55,8 +56,12 @@ use Illuminate\Support\Facades\Gate;
         </h3>
     </header>
     @if (count($participantSet) < 1)
-    <div>
-        <h3 class="fyk text-2xl">{{ __("Waitin', but 🏁 you should be the first") }}</h3>
+    <div class="my-4">
+        <h3 class="fyk text-2xl">
+            <a href="{{ route('user.contest.participate', ['contest' => $contest]) }}"></a>
+                [ {{ __("Do you want to be the first?") }} ]
+            </a>
+        </h3>
     </div>
     @else
     <div class="my-4">
@@ -70,35 +75,37 @@ use Illuminate\Support\Facades\Gate;
                 </tr>
             </thead>
             <tbody>
-            @foreach($participantSet as $key => $participant)
+            @foreach($participantSet as $participant)
                 <tr class="border py-2">
                     <td scope="row" class="fyk text-xl">
-                        {{ Country::countryFlag($participant['country_id']) }}
-                        {{ $participant['country_id'] }}
+                        {{ Country::countryFlag($participant->contact->country_id) }}
+                        {{ $participant->contact->country_id }}
                     </td>
                     <td class="fyk text-2xl">
-                        {{ $participant['last_name'] }}, {{ $participant['first_name'] }}
+                        {{ $participant->contact->last_name }}, {{ $participant->contact->first_name }}
                     </td>
                     <td>
-                        @if( ($participant['fee_payment_completed'] === 'N') )
-                            @can('contest-participants-update', ContestParticipant::where('user_id', $participant['user_id'])->get()[0] )
-                                @livewire('contest.participants.complete',  ['dataJson' => json_encode(['contestId' => $contest->id, 'participantId' => $participant['user_id'], 'feePaymentCompleted' => $participant['fee_payment_completed'] ] ) ] )
-                            @endcan
-                            @cannot('contest-participants-update', ContestParticipant::where('user_id', $participant['user_id'])->get()[0] )
+                        @php
+                            $userCanEditThisRow = $isManager || (Auth::check() && Auth::id() === $participant->user_id);
+                        @endphp
+                        @if(!$participant->fee_payment_completed)
+                            @if($userCanEditThisRow)
+                                @livewire('contest.participants.complete',  ['dataJson' => json_encode(['contestId' => $contest->id, 'participantId' => $participant->user_id, 'feePaymentCompleted' => $participant->fee_payment_completed ? 'Y' : 'N' ] ) ] )
+                            @else
                                 {{ __("🟨 Waiting payment receipt") }}
-                            @endcan
+                            @endif
                         @else
-                            @can('contest-participants-update', ContestParticipant::where('user_id', $participant['user_id'])->get()[0] )
-                                @livewire('contest.participants.remove',  ['dataJson' => json_encode(['contestId' => $contest->id, 'participantId' => $participant['user_id'], 'feePaymentCompleted' => $participant['fee_payment_completed'] ] ) ] )
-                            @endcan
-                            @cannot('contest-participants-update', ContestParticipant::where('user_id', $participant['user_id'])->get()[0] )
+                            @if($userCanEditThisRow)
+                                @livewire('contest.participants.remove',  ['dataJson' => json_encode(['contestId' => $contest->id, 'participantId' => $participant->user_id, 'feePaymentCompleted' => $participant->fee_payment_completed ? 'Y' : 'N' ] ) ] )
+                            @else
                                 {{ __("✅ Completed") }}
-                            @endcan
+                            @endif
                         @endif
                     </td>
                     <td class="small kbd" nowrap>
+                        <!-- works of max works -->
                         @foreach($contestSectionSet as $section)
-                        [{{$section->code}}: {{ ContestWork::sectionWorksCounter($section->id, $participant['user_id']) }} / {{$section->rule_max}}] 
+                        [{{$section->code}}: {{ $workCounts[$participant->user_id][$section->id] ?? 0 }} / {{$section->rule_max}}] 
                         &nbsp;
                         @endforeach
                     </td>
@@ -107,6 +114,8 @@ use Illuminate\Support\Facades\Gate;
             </tbody>
         </table>
     </div>
-    <div class="small">{{__("-- End of list--")}}</div>
     @endif
+    <p class="small">
+        {{ __("-- End of list--") }}
+    </p>
 </div>
