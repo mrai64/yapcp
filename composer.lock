@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8147cdc7277144e30899591cbfd3c3d2",
+    "content-hash": "b37ce2910375e81e61e8bd0361e4051f",
     "packages": [
         {
             "name": "binarytorch/larecipe",
@@ -12340,5 +12340,8 @@
         "ext-gd": "*"
     },
     "platform-dev": {},
+    "platform-overrides": {
+        "php": "8.4.20"
+    },
     "plugin-api-version": "2.9.0"
 }
