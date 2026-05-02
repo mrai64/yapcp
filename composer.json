@@ -16,7 +16,7 @@
         "livewire/volt": "^1.7.0",
         "maatwebsite/excel": "^3.1",
         "robertogallea/laravel-codicefiscale": "^2",
-        "binarytorch/larecipe": "dev-l13-compatibility",
+        "binarytorch/larecipe": "^2.9",
         "spatie/laravel-pdf": "^2.0"
     },
     "require-dev": {
@@ -52,12 +52,6 @@
             "Tests\\": "tests/"
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/laravel-shift/larecipe.git"
-        }
-    ],
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

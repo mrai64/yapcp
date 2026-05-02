@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "145b39fd166538b5d43351863575a760",
+    "content-hash": "cc71942dadc633adef236b5e7d46a662",
     "packages": [
         {
             "name": "binarytorch/larecipe",
-            "version": "dev-l13-compatibility",
+            "version": "v2.9.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/laravel-shift/larecipe.git",
-                "reference": "9aaea77e5013f9e6ce58a04e54d5dd7f54c6d1ba"
+                "url": "https://github.com/saleem-hadad/larecipe.git",
+                "reference": "3899d8dccca87f1dcb1607a9c46d0e92a942f2ec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-shift/larecipe/zipball/9aaea77e5013f9e6ce58a04e54d5dd7f54c6d1ba",
-                "reference": "9aaea77e5013f9e6ce58a04e54d5dd7f54c6d1ba",
+                "url": "https://api.github.com/repos/saleem-hadad/larecipe/zipball/3899d8dccca87f1dcb1607a9c46d0e92a942f2ec",
+                "reference": "3899d8dccca87f1dcb1607a9c46d0e92a942f2ec",
                 "shasum": ""
             },
             "require": {
@@ -35,12 +35,12 @@
             "type": "library",
             "extra": {
                 "laravel": {
-                    "providers": [
-                        "BinaryTorch\\LaRecipe\\LaRecipeServiceProvider"
-                    ],
                     "aliases": {
                         "LaRecipe": "BinaryTorch\\LaRecipe\\LaRecipe"
-                    }
+                    },
+                    "providers": [
+                        "BinaryTorch\\LaRecipe\\LaRecipeServiceProvider"
+                    ]
                 }
             },
             "autoload": {
@@ -51,11 +51,7 @@
                     "BinaryTorch\\LaRecipe\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "BinaryTorch\\LaRecipe\\Tests\\": "tests/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -79,11 +75,11 @@
             },
             "funding": [
                 {
-                    "type": "open_collective",
-                    "url": "https://opencollective.com/larecipe"
+                    "url": "https://github.com/saleem-hadad",
+                    "type": "github"
                 }
             ],
-            "time": "2026-02-22T16:14:49+00:00"
+            "time": "2026-04-03T22:43:04+00:00"
         },
         {
             "name": "brick/math",
@@ -12349,9 +12345,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "binarytorch/larecipe": 20
-    },
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
