@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
+// common middleware
 Route::middleware('guest')->group(function () {
     Volt::route('register', 'pages.auth.register')
         ->name('register');
@@ -18,6 +19,7 @@ Route::middleware('guest')->group(function () {
         ->name('password.reset');
 });
 
+// common middleware auth
 Route::middleware('auth')->group(function () {
     Volt::route('verify-email', 'pages.auth.verify-email')
         ->name('verification.notice');

@@ -1,38 +1,37 @@
 <?php
-/**
- * 2025-09-12 Add notification in $login
- * 2025-09-15 UserContact instead of User 
- */
-use App\Livewire\Forms\LoginForm;
-use Illuminate\Support\Facades\Session;
 
-use function Livewire\Volt\form;
-use function Livewire\Volt\layout;
-use App\Models\User;
-use App\Notifications\LoginDone;
-use Illuminate\Support\Facades\Log;
+/**
+ * 2026-05-03 user login for laravel 13
+ *
+ */
+
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
+use function Livewire\Volt\{rules, state, layout};
 
 layout('layouts.guest');
 
-form(LoginForm::class);
+state(['email' => '', 'password' => '', 'remember' => false]);
+
+rules([
+    'email' => ['required', 'string', 'email'],
+    'password' => ['required', 'string'],
+]);
 
 $login = function () {
     $this->validate();
 
-    $this->form->authenticate();
-
-    $user = User::where('email', $this->form->email)->firstOrFail();
-    Log::debug( __CLASS__ . 'Validate ok, authenticate ok, adesso chiamo notify per: '. $user->email);
-    // was: $user->notify(new LoginDone($user));
-    try {
-        $user->notify(new LoginDone($user));
-    } catch (\Throwable $th) {
-        Log::error('Error sending notification to user: ' . $user->email . ' for: ' . $th->getMessage());
+    if (! Auth::attempt($this->only(['email', 'password']), $this->remember)) {
+        throw ValidationException::withMessages([
+            'email' => __('auth.failed'),
+        ]);
     }
 
-    Session::regenerate();
+    session()->regenerate();
 
-    $this->redirectIntended(default: route('user.dashboard', absolute: false), navigate: true);
+    // return redirect()->intended(RouteServiceProvider::HOME);
+    return redirect()->intended(RouteServiceProvider::HOME);
 };
 
 ?>
@@ -45,26 +44,24 @@ $login = function () {
         <!-- Email Address -->
         <div>
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input wire:model="form.email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
+            <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
+            <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input wire:model="form.password" id="password" class="block mt-1 w-full"
+            <x-text-input wire:model="password" id="password" class="block mt-1 w-full"
                             type="password"
                             name="password"
                             required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('form.password')" class="mt-2" />
+            <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
         <!-- Remember Me -->
         <div class="block mt-4">
-            <label for="remember" class="inline-flex items-center">
-                <input wire:model="form.remember" id="remember" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+            <label for="remember_me" class="inline-flex items-center">
+                <input wire:model="remember" id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
                 <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
             </label>
         </div>
