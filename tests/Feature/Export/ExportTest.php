@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Export test
+ * - user Export
+ * - FIAF 1 participants Export
+ * - FIAF 2
+ * 
+ */
+
 use App\Models\User;
 use App\Models\Contest;
 use App\Models\Federation;
@@ -13,9 +21,9 @@ use App\Exports\Fiaf2WorksExport;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(RefreshDatabase::class);
+// uses(RefreshDatabase::class);
 
-test('UserExport genera una risposta valida', function () {
+it('UserExport genera una risposta valida', function () {
     User::factory()->count(3)->create();
 
     $response = (new UserExport())->download('utenti.xlsx');
@@ -29,6 +37,10 @@ test('Fiaf1ParticipantsExport genera il report senza errori', function () {
     $fed = Federation::factory()->create();
     $contest = Contest::factory()->create([
         'organization_id' => $org->id,
+        'country_id' => 'ITA',
+        'name_en' => 'The test contest',
+        'contact_info' => 'HD ' . $org->name_en,
+        'timezone_id' => 'Europe/Rome',
     ]);
 
     // Creiamo un paio di sezioni
