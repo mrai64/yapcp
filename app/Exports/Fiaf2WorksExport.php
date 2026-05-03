@@ -13,14 +13,12 @@ use App\Models\Contest;
 use App\Models\ContestWork;
 use App\Models\Federation;
 use App\Models\UserContact;
-use Illuminate\Contracts\View\View;
-use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\FromView;
+use PhpOffice\PhpSpreadsheet\Reader\Html;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
-class Fiaf2WorksExport implements FromView
+class Fiaf2WorksExport
 {
-    use Exportable;
-
     // data for view
     protected string $contestId; //    cid
 
@@ -124,16 +122,26 @@ class Fiaf2WorksExport implements FromView
     }
 
     /**
-     * Build vew to pass as excel table
-     *
-     * @return View
+     * Genera e scarica il file Excel usando PhpSpreadsheet.
      */
-    public function view(): View
+    public function download(string $filename): StreamedResponse
     {
-        return view('livewire.contest.report.fiaf2-works', [
+        $html = view('livewire.contest.report.fiaf2-works', [
             'contest' => $this->contest,
             'patronage_code' => $this->contest->federation_list,
             'reportData' => $this->reportData,
+        ])->render();
+
+        $reader = new Html();
+        $spreadsheet = $reader->loadFromString($html);
+
+        return new StreamedResponse(function () use ($spreadsheet) {
+            $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+            $writer->save('php://output');
+        }, 200, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+            'Cache-Control' => 'max-age=0',
         ]);
     }
 }
