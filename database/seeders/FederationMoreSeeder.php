@@ -22,13 +22,22 @@ class FederationMoreSeeder extends Seeder
             'field_default_value' => '000000',
             'field_suggest' => 'Only 6 digit leading zeroes',
         ]);
+
         FederationMore::factory()->create([
             'federation_id' => 'FIAF',
             'referenced_table' => 'user_contacts',
             'field_name' => 'tessera',
-            'field_validation_rules' => 'required|string|size:6|regex:/^[0-9]+$/',
+            'field_validation_rules' => 'required|string|size:6|regex:/^0[0-9]{5}$/',
             'field_default_value' => '000000',
             'field_suggest' => 'Only 6 digit leading zeroes',
+        ]);
+        FederationMore::factory()->create([
+            'federation_id' => 'FIAF',
+            'referenced_table' => 'user_contacts',
+            'field_name' => 'italianTaxId',
+            'field_validation_rules' => 'required|string|size:16|regex:/^[XXXXXXXXXXXXXXXX]|[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][+$/',
+            'field_default_value' => 'XXXXXXXXXXXXXXXX',
+            'field_suggest' => 'Even 16 chars in italian tax id form or sixteen X',
         ]);
         FederationMore::factory()->create([
             'federation_id' => 'FIAF',
