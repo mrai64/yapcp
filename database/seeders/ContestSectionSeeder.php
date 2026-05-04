@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ContestSection;
 use Illuminate\Database\Seeder;
 
 class ContestSectionSeeder extends Seeder
@@ -12,5 +13,6 @@ class ContestSectionSeeder extends Seeder
     public function run(): void
     {
         //
+        ContestSection::factory()->create();
     }
 }
