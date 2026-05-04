@@ -16,6 +16,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable; // uuid booted()
 use Illuminate\Notifications\Notifiable;
@@ -252,30 +253,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $contact;
     }
 
-    // users.id > user_contacts.id
-    public function userContact()
-    {
-        $contact = $this->hasOne(
-            related: UserContact::class,
-            foreignKey: 'id',
-            localKey: 'id'
-        );
-        // log
-        return $contact;
-    }
-
-    // users.id > user_roles.user_id
-    public function roles()
-    {
-        $rSet = $this->hasMany(
-            related: UserRole::class,
-            foreignKey: 'user_id',
-            localKey: 'id'
-        );
-        // log
-        return $rSet;
-    }
-
     // users.id > user_roles.user_id
     public function userRoles()
     {
@@ -301,7 +278,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     // users.id > user_works.user_id
-    public function userWorks()
+    public function userWorks(): HasMany
     {
         $works = $this->hasMany(UserWork::class);
         // log
@@ -394,7 +371,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function worksCount(): int
     {
-        return $this->userWorks()->count();
+        return $this->works()->count();
     }
 
 }
