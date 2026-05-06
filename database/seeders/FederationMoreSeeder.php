@@ -51,5 +51,14 @@ class FederationMoreSeeder extends Seeder
             'field_default_value' => '2024',
             'field_suggest' => 'Year of first admission, in 4 digit form',
         ]);
+        FederationMore::factory()->create([
+            'federation_id' => 'FIAF',
+            'referenced_table' => 'user_contacts',
+            'field_name' => 'fiafDistinctions',
+            'field_label' => 'FIAF Distinction(s)',
+            'field_validation_rules' => 'string|maxsize:255',
+            'field_default_value' => '',
+            'field_suggest' => 'List of distinction(s) from FIAF, uppercase and separated by space',
+        ]);
     }
 }

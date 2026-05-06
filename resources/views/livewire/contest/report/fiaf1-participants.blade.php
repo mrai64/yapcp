@@ -1,6 +1,5 @@
 <table>
     <!-- no thead intentionally -->
-    <!-- test url: https://yapcp.test/contest/export/e8ac5674-c3d1-4afa-adaf-a7d5ed82d292/FIAF -->
     <tbody>
         <!-- row: 1 -->
         <tr>
@@ -31,17 +30,17 @@
         </tr>
         @foreach($excelRows as $part)
         <tr>
-            <td style="font-size:9px;font-weight:bold;text-align:center;">{{$contest->federation_list}}</td>
-            <td>{{$part['fed_cardId']}}</td>
-            <td>{{$part['fed_italianTaxId']}}</td>
-            <td>{{$part['last_name']}}</td>
-            <td>{{$part['first_name']}}</td>
-            <td>{{$part['address']}}</td>
-            <td>{{$part['postal_code']}}</td>
-            <td>{{$part['city']}}</td>
-            <td>{{$part['region']}}</td>
-            <td><a href="mailto:{{$part['email']}}">{{$part['email']}}</a></td>
-            <td>{{$part['fed_fiafDistinctions']}}</td>
+            <td style="font-size:9px;font-weight:bold;text-align:center;">{{ $contest->federation_list }}</td>
+            <td>{{ $part['fed_cardId'] }}</td>
+            <td>{{ $part['fed_italianTaxId'] }}</td>
+            <td>{{ $part['last_name'] }}</td>
+            <td>{{ $part['first_name'] }}</td>
+            <td>{{ $part['address'] }}</td>
+            <td>{{ $part['postal_code'] }}</td>
+            <td>{{ $part['city'] }}</td>
+            <td>{{ $part['region'] }}</td>
+            <td><a href="mailto:{{ $part['email'] }}">{{ $part['email'] }}</a></td>
+            <td>{{ $part['fed_fiafDistinctions'] }}</td>
             @foreach ($contest->sections as $section)
             <td style="font-size:9px;font-weight:bold;text-align:center;"> {{$part['sez_'.$section->code.'_has']}}</td>
             <td style="font-size:9px;font-weight:bold;text-align:center;"> {{$part['sez_'.$section->code.'_admit']}}</td>
