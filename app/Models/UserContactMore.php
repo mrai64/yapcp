@@ -17,6 +17,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
@@ -45,6 +46,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore withoutTrashed()
  * @property string $user_id fk for user_contact id
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore whereUserId($value)
+ * @method static \Database\Factories\UserContactMoreFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 class UserContactMore extends Model

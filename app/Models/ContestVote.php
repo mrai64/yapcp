@@ -16,13 +16,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @property int $id
  * @property string $contest_id fk: contests.id
  * @property string $section_id fk: contest_sections.id
- * @property string $work_id fk: works.id contest_works.work_id
+ * @property string $contest_work_id fk: works.id contest_works.user_work_id
  * @property string $juror_user_id fk: user_contacts.user_id
  * @property string $vote see contests.vote_rule
  * @property int $review_required 0 = not required
@@ -46,11 +48,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote whereSectionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote whereVote($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote whereWorkId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote whereContestWorkId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote withoutTrashed()
  * @property-read \App\Models\ContestWork|null $contestWork
- * @property string $contest_work_id fk: contest_works.work_id - NOT user_works.id
+ * @property string $contest_work_id fk: contest_works.contest_work_id - NOT user_works.id
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestVote whereContestWorkId($value)
  * @mixin \Eloquent
  */
@@ -103,7 +105,7 @@ class ContestVote extends Model
      */
     public static function votedIds(string $contestId, string $sectionId): array
     {
-        $voteIds = self::select(['work_id'])
+        $voteIds = self::select(['contest_work_id'])
             ->where('section_id', $sectionId)
             ->where('contest_id', $contestId)
             ->get();
@@ -122,7 +124,7 @@ class ContestVote extends Model
             ->where('contest_id', $contestId)
             ->orderBy('vote', 'desc')
             ->orderBy('updated_at', 'desc')
-            ->get(['work_id', 'vote', 'id']);
+            ->get(['contest_work_id', 'vote', 'id']);
 
         ds('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' vote_board:'.json_encode($vote_board));
 
@@ -132,7 +134,7 @@ class ContestVote extends Model
 
     // RELATIONSHIPs
 
-    public function contest()
+    public function contest(): HasOne
     {
         $contest = $this->hasOne(
             Contest::class,
@@ -144,7 +146,7 @@ class ContestVote extends Model
     }
 
     // was: contest_section
-    public function contestSection()
+    public function contestSection(): HasOne
     {
         $contestSection = $this->hasOne(
             ContestSection::class,
@@ -155,7 +157,7 @@ class ContestVote extends Model
         return $contestSection;
     }
 
-    public function contestWork()
+    public function contestWork(): BelongsTo
     {
         $work = $this->belongsTo(
             ContestWork::class, //  ext class
@@ -167,13 +169,14 @@ class ContestVote extends Model
     }
 
     // was: user_contact
-    public function userContact()
+    public function userContact(): HasOne
     {
         $userContact = $this->hasOne(
             UserContact::class,
             'id',
             'juror_user_id'
         );
+        // log
         return $userContact;
     }
 }

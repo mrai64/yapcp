@@ -46,6 +46,8 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereWorkFile($value)
+ * @property string $reference_year usually first admit year
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereReferenceYear($value)
  * @mixin \Eloquent
  */
 class UserWork extends Model
@@ -67,7 +69,7 @@ class UserWork extends Model
         'user_id', //        fk user_contacts.id, users.id
         'work_file', //      path+filename+extension
         'extension', //      extension
-        // 'reference_year', // TODO UserWorkMore - a FIAF required field
+        'reference_year', // abilitato per supporto export FIAF
         'title_en', //       photo title
         'title_local', //    same in lang <> 'en'
         'long_side', //      file side pixel
@@ -106,7 +108,7 @@ class UserWork extends Model
             'user_id' => 'string',
             'work_file' => 'string',
             'extension' => 'string',
-            // 'reference_year' => 'string',
+            'reference_year' => 'string',
             'title_en' => 'string',
             'title_local' => 'string',
             'long_side' => 'int',
@@ -154,7 +156,7 @@ class UserWork extends Model
         $userWorksMoreSet = $this->hasMany(
             related: UserWorkMore::class,  //  ext class
             foreignKey: 'user_work_id', //     ext user_work_mores.user_id
-            localKey: 'user_id' //             int user_works.user_id
+            localKey: 'id' //                  pk user_works.id
         );
         // log
         return $userWorksMoreSet;

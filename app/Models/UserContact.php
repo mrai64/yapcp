@@ -388,14 +388,15 @@ class UserContact extends Model
         return $country;
     }
 
-    // user_contacts.id > user_contact_mores.user_contact_user_id
+    // user_contacts.id > user_contact_mores.user_id
     public function contactMores()
     {
         $contactMores = $this->hasMany(
-            UserContactMore::class,
-            'user_contact_user_id',
-            'id'
+            related: UserContactMore::class, // ext
+            foreignKey: 'user_id', //           ext user_contact_mores.user_id
+            localKey: 'id' //                   int user_contacts.id
         );
+        // log
         // log
         return $contactMores;
     }

@@ -393,7 +393,7 @@ class Contest extends Model
     public function sections(): HasMany
     {
         $sec = $this->hasMany(ContestSection::class);
-
+        // Log
         return $sec;
     }
 

@@ -371,7 +371,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function worksCount(): int
     {
-        return $this->works()->count();
+        return $this->userWorks()->count();
     }
 
 }

@@ -78,8 +78,8 @@ class UserWorkValidation extends Model
     {
         $work = $this->belongsTo(
             related: UserWork::class,
-            foreignKey: 'user_id',
-            ownerKey: 'user_id'
+            foreignKey: 'user_work_id',
+            ownerKey: 'id'
         );
         // log
         return $work;
@@ -91,8 +91,8 @@ class UserWorkValidation extends Model
     {
         $fedSec = $this->belongsTo(
             related: FederationSection::class,
-            foreignKey: 'id',
-            ownerKey: 'federation_section_id'
+            foreignKey: 'federation_section_id',
+            ownerKey: 'id'
         );
         // log
         return $fedSec;
@@ -103,8 +103,8 @@ class UserWorkValidation extends Model
     {
         $uV = $this->belongsTo(
             related: UserContact::class,
-            foreignKey: 'user_id',
-            ownerKey: 'validator_user_id'
+            foreignKey: 'validator_user_id',
+            ownerKey: 'id'
         );
         // log
         return $uV;

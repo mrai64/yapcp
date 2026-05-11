@@ -34,7 +34,7 @@ use Illuminate\Support\Str; //         pk uuid
  * @property string $section_id fk: contest_sections.id
  * @property string $country_id fk: user_contacts.country_id
  * @property string $user_id fk: users.id
- * @property string $work_id fk: works.id
+ * @property string $user_work_id fk: user_works.id
  * @property string $extension to build file name
  * @property int $portfolio_sequence valid also in section counter
  * @property int $is_admit 0 = not admit, admit otherwise
@@ -65,7 +65,7 @@ use Illuminate\Support\Str; //         pk uuid
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereSectionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereWorkId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereUserWorkId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork withoutTrashed()
  * @property-read \App\Models\UserWork $userWork
@@ -157,14 +157,18 @@ class ContestWork extends Model
     // was: count_works_for_section_user
     public static function sectionWorksCounter(string $sectionId, string $userId): int
     {
-        $count = self::where('user_id', $userId)->where('section_id', $sectionId)->count();
+        $count = self::where('user_id', $userId)
+            ->where('section_id', $sectionId)
+            ->count();
         return $count;
     }
 
     // was: get_user_for_contest_work
     public static function userWorksCounter(string $contestId, string $workId): string
     {
-        $participant = self::where('contest_id', $contestId)->where('user_work_id', $workId)->get('id');
+        $participant = self::where('contest_id', $contestId)
+            ->where('user_work_id', $workId)
+            ->get('id');
         // log
         $participantId = (count($participant)) ? $participant[0]['id'] : '';
         // log
@@ -216,7 +220,7 @@ class ContestWork extends Model
         return $userContact;
     }
 
-    // contest_works.user_user_work_id > user_works.id
+    // contest_works.user_work_id > user_works.id
     // contest_works.user_work_id > contest_awards.winner_work_id
     // w/contest_works.section_id = contest_awards.section_id
     public function award()
@@ -269,7 +273,7 @@ class ContestWork extends Model
     {
         $work = $this->belongsTo(
             UserWork::class, // ext class
-            'work_id', //       int contest_works.work_id
+            'user_work_id', //  int contest_works.user_work_id
             'id' //             ext user_works.id
         );
 
