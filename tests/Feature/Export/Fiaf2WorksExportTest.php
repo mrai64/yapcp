@@ -48,14 +48,11 @@ it('genera correttamente il report Fiaf2WorksExport con join su opere e premi', 
     );
 
     // L'opera nell'archivio personale dell'utente
-    dump("Sto per creare UserWork...");
-    ds("Check UserWork creation");
     $userWork = UserWork::factory()->create([
         'user_id' => $userContact->id,
         'title_en' => 'Sogno di una notte di mezza estate',
         'reference_year' => '2025'
     ]);
-    ds("UserWork created, est: " . json_encode($userWork));
 
     // Iscrizione dell'opera al concorso (ContestWork)
     ContestWork::factory()->create([
