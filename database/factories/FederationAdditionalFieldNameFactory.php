@@ -19,7 +19,7 @@ class FederationAdditionalFieldNameFactory extends Factory
     {
         return [
             // id auto
-            'federation_id' => Federation::all('id')->random(7)->first()['id'], // TODO link to Federation
+            'federation_id' => Federation::inRandomOrder()->first()?->id ?? Federation::factory(),
             'federation_field_name' => fake()->word(),
             'federation_field_label' => fake()->sentence(3),
             'federation_field_validation_rules' => 'string|max:255', // example

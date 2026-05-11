@@ -52,7 +52,8 @@ class UserContactMoreFactory extends Factory
         if ($exists) {
             throw new RuntimeException(sprintf(
                 "Impossibile generare una combinazione univoca per %s dopo %d tentativi. Le combinazioni disponibili potrebbero essere esaurite.",
-                UserContactMore::class, $maxAttempts
+                UserContactMore::class,
+                $maxAttempts
             ));
         }
 

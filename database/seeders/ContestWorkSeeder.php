@@ -11,6 +11,6 @@ class ContestWorkSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        ContestWork::factory()->create();
     }
 }
