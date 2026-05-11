@@ -75,10 +75,10 @@ class Fiaf2WorksExport
             // join and sorted by
             ->join('user_contacts', 'contest_works.user_id', '=', 'user_contacts.id') // was: 'user_contacts.user_id')
             ->join('contest_sections', 'contest_works.section_id', '=', 'contest_sections.id')
-            ->join('user_works', 'contest_works.work_id', '=', 'user_works.id')
+            ->join('user_works', 'contest_works.user_work_id', '=', 'user_works.id')
             // awards
             ->leftJoin('contest_awards', function ($join) {
-                $join->on('contest_works.work_id', '=', 'contest_awards.winner_work_id')
+                $join->on('contest_works.user_work_id', '=', 'contest_awards.winner_work_id')
                     ->on('contest_works.section_id', '=', 'contest_awards.section_id');
             })
             ->orderBy('user_contacts.country_id')

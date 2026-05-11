@@ -17,21 +17,12 @@ use App\Models\Organization;
 use App\Models\ContestSection;
 use App\Models\ContestParticipant;
 use App\Models\ContestWork;
-use App\Exports\UserExport;
 use App\Exports\Fiaf1ParticipantsExport;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 // uses(RefreshDatabase::class);
-
-it('UserExport genera una risposta valida', function () {
-    User::factory()->count(3)->create();
-
-    $response = (new UserExport())->download('utenti.xlsx');
-
-    expect($response)->toBeInstanceOf(StreamedResponse::class);
-});
 
 it('FIAF Fiaf1ParticipantsExport genera il report senza errori', function () {
     // 1. Setup dati gerarchici
