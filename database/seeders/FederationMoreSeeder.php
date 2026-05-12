@@ -17,26 +17,48 @@ class FederationMoreSeeder extends Seeder
         FederationMore::factory()->create([
             'federation_id' => 'FIAP',
             'referenced_table' => 'user_contacts',
-            'field_name' => 'cardId', // may change ?personal number?
+            'field_name' => 'cardId', //    may change ?personal number?
+            'field_label' => 'Card Id', //  may change ?personal number?
             'field_validation_rules' => 'required|string|size:6|regex:/^[0-9]+$/',
+            'field_default_value' => '000000',
+            'field_suggest' => 'Only 6 digit leading zeroes',
+        ]);
+
+        FederationMore::factory()->create([
+            'federation_id' => 'FIAF',
+            'referenced_table' => 'user_contacts',
+            'field_name' => 'cardId',
+            'field_label' => "Card Id",
+            'field_validation_rules' => 'required|string|size:6|regex:/^0[0-9]{5}$/',
             'field_default_value' => '000000',
             'field_suggest' => 'Only 6 digit leading zeroes',
         ]);
         FederationMore::factory()->create([
             'federation_id' => 'FIAF',
             'referenced_table' => 'user_contacts',
-            'field_name' => 'tessera',
-            'field_validation_rules' => 'required|string|size:6|regex:/^[0-9]+$/',
-            'field_default_value' => '000000',
-            'field_suggest' => 'Only 6 digit leading zeroes',
+            'field_name' => 'italianTaxId',
+            'field_label' => 'Italian Tax Id',
+            'field_validation_rules' => 'required|string|size:16|regex:/^[XXXXXXXXXXXXXXXX]|[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][+$/',
+            'field_default_value' => 'XXXXXXXXXXXXXXXX',
+            'field_suggest' => 'Even 16 chars in italian tax id form or sixteen X',
         ]);
         FederationMore::factory()->create([
             'federation_id' => 'FIAF',
             'referenced_table' => 'user_works',
             'field_name' => 'reference_year',
+            'field_label' => 'First admit year',
             'field_validation_rules' => 'required|string|size:4|regex:/^[0-9]+$/',
             'field_default_value' => '2024',
             'field_suggest' => 'Year of first admission, in 4 digit form',
+        ]);
+        FederationMore::factory()->create([
+            'federation_id' => 'FIAF',
+            'referenced_table' => 'user_contacts',
+            'field_name' => 'fiafDistinctions',
+            'field_label' => 'FIAF Distinction(s)',
+            'field_validation_rules' => 'string|maxsize:255',
+            'field_default_value' => '',
+            'field_suggest' => 'List of distinction(s) from FIAF, uppercase and separated by space',
         ]);
     }
 }

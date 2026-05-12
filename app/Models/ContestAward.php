@@ -18,6 +18,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -32,7 +33,7 @@ use Illuminate\Support\Str;
  * @property string $award_code free but unique in contest
  * @property string $award_name free
  * @property string $is_award N/Y flag, Y=award prize, N=HM or other
- * @property string|null $winner_work_id fk: works.id
+ * @property string|null $winner_work_id fk: user_works.id
  * @property string|null $winner_user_id fk: users.id user_contacts.user_id
  * @property string $winner_name winner not in previous cols
  * @property \Illuminate\Support\Carbon $created_at
@@ -62,11 +63,13 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward withoutTrashed()
  * @property-read \App\Models\ContestWork|null $contestWork
+ * @method static \Database\Factories\ContestAwardFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 
 final class ContestAward extends Model
 {
+    use HasFactory;
     use HasUuids;
     use SoftDeletes;
 
@@ -161,13 +164,23 @@ final class ContestAward extends Model
         $work = $this->belongsTo(
             ContestWork::class, //  ext class
             'winner_work_id', //    int contest_awards.winner_work_id
-            'id' //                 ext contest_works.id
+            'user_work_id' //       ext contest_works.user_work_id
         );
         return $work;
     }
 
-    // contest_awards.winner_work_id > contest_works.id
-    // contest_works.user_work_id > user_works.id
+    /**
+     * Relazione diretta con l'opera dell'utente (UserWork).
+     * winner_work_id punta direttamente a pcp_user_works.id
+     */
+    public function work()
+    {
+        return $this->belongsTo(
+            UserWork::class,
+            'winner_work_id',
+            'id'
+        );
+    }
 
     // contest_awards.winner_user_id > user_contacts.user_id
     public function userContact()

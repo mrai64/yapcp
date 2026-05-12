@@ -17,6 +17,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
@@ -45,6 +46,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore withoutTrashed()
  * @property string $user_id fk for user_contact id
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContactMore whereUserId($value)
+ * @method static \Database\Factories\UserContactMoreFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
 class UserContactMore extends Model
@@ -69,6 +71,11 @@ class UserContactMore extends Model
     protected function casts()
     {
         return [
+            'id' => 'integer',
+            'user_contact_user_id' => 'string',
+            'federation_id' => 'string',
+            'field_name' => 'string',
+            'field_value' => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
@@ -80,7 +87,7 @@ class UserContactMore extends Model
     // RELATIONSHIP
 
     // user_contact_mores.user_contact_user_id > user_contacts.user_id
-    public function userContact()
+    public function userContact(): BelongsTo
     {
         $uc = $this->belongsTo(
             related: UserContact::class,
@@ -92,7 +99,7 @@ class UserContactMore extends Model
     }
 
     // user_contact_mores.federation_id > federations.id
-    public function federation()
+    public function federation(): BelongsTo
     {
         $federation = $this->belongsTo(
             related: Federation::class,

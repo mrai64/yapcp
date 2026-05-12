@@ -50,6 +50,12 @@ abstract class TestCase extends BaseTestCase
         // federations
         $this->seed(\Database\Seeders\FederationSeeder::class);
 
+        // federations more fields
+        $this->seed(\Database\Seeders\FederationMoresReferencedTableSeeder::class);
+
+        // federations more fields
+        $this->seed(\Database\Seeders\FederationMoreSeeder::class);
+
         // organizations
         $this->seed(\Database\Seeders\OrganizationSeeder::class);
         // echo "\nTestCase done\n";

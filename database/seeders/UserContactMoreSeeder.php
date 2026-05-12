@@ -2,15 +2,17 @@
 
 namespace Database\Seeders;
 
+use App\Models\UserContactMore;
 use Illuminate\Database\Seeder;
 
-class ContestWorkSeeder extends Seeder
+class UserContactMoreSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        ContestWork::factory()->create();
+        //
+        UserContactMore::factory()->create();
     }
 }

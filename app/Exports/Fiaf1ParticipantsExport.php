@@ -10,15 +10,16 @@ namespace App\Exports;
 use App\Models\Contest;
 use App\Models\ContestParticipant;
 use App\Models\FederationMore;
-use Illuminate\Contracts\View\View;
-use Maatwebsite\Excel\Concerns\FromView;
+use PhpOffice\PhpSpreadsheet\Reader\Html;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
-final class Fiaf1ParticipantsExport implements FromView
+final class Fiaf1ParticipantsExport
 {
     // data to be passed to view
     protected string $contestId;
 
-    protected string $federationId;
+    protected string $federationId; // TODO 'FIAF'
 
     protected $contest;
 
@@ -33,26 +34,18 @@ final class Fiaf1ParticipantsExport implements FromView
     // TODO Check for federationId == '' (no federation sponsor)
     public function __construct(string $cid, string $fid)
     {
-        ds(__CLASS__ . ' f:' . __FUNCTION__ . ' cid:' . $cid . ' fid:' . $fid);
         $this->contestId = $cid;
         $this->federationId = $fid;
 
         // 1. 2. pick contest n contest_sections
         $this->contest = Contest::with(['sections' => function ($q) {
             $q->orderBy('code');
-        }])->find($this->contestId);
-
-        $contest = $this->contest;
-        ds('contest for cid:' . $cid);
-        ds($this->contest);
+        }])->findOrFail($this->contestId);
 
         // 3. more fields - which
         $this->federationMores = FederationMore::where('federation_id', $this->federationId)
             ->orderBy('field_name')
             ->get();
-        ds('federationMores for:' . $fid);
-        ds($this->federationMores);
-        $federationMores = $this->federationMores;
 
         // the fab 4. eager loaders
         $this->contestParticipants = ContestParticipant::query()
@@ -70,8 +63,6 @@ final class Fiaf1ParticipantsExport implements FromView
             ])
             ->get()
             ->keyBy('user_id');
-        ds('contestParticipants for cid:' . $cid . ' & fid:' . $fid);
-        ds($this->contestParticipants);
 
         // At last, the lego building blocks
         $this->excelRows = $this->contestParticipants->map(function ($participant) {
@@ -113,18 +104,28 @@ final class Fiaf1ParticipantsExport implements FromView
 
             return $row;
         });
-
-        ds($this->excelRows);
     }
 
-    // 2nd: fill the view and export
-    public function view(): View
+    /**
+     * Genera e scarica il file Excel partendo dalla vista Blade.
+     */
+    public function download(string $filename): StreamedResponse
     {
-        ds(__CLASS__ . ' f:' . __FUNCTION__);
-
-        return view('livewire.contest.report.fiaf1-participants', [
+        $html = view('livewire.contest.report.fiaf1-participants', [
             'contest' => $this->contest,
             'excelRows' => $this->excelRows,
+        ])->render();
+
+        $reader = new Html();
+        $spreadsheet = $reader->loadFromString($html);
+
+        return new StreamedResponse(function () use ($spreadsheet) {
+            $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+            $writer->save('php://output');
+        }, 200, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+            'Cache-Control' => 'max-age=0',
         ]);
     }
 }

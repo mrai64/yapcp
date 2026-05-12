@@ -200,7 +200,7 @@ class ContestParticipant extends Model
     {
         $userContact = $this->belongsTo(
             UserContact::class,
-            'user_id', // contest_participants.user_id
+            'user_contact_id', // contest_participants.user_id
             'id' //       user_contacts.id
         );
 
@@ -213,8 +213,8 @@ class ContestParticipant extends Model
         //                     user_contacts.user_id contest_participants.user_id
         $userContact = $this->belongsTo(
             UserContact::class,
-            'user_id',
-            'id'
+            'user_contact_id', //   contest_participants.user_id
+            'id' //                 user_contacts.id
         );
 
         return $userContact;
@@ -226,8 +226,8 @@ class ContestParticipant extends Model
         //                       user_contact_mores.user_contact_user_id contest_participants.user_id
         $userContactMores = $this->hasMany(
             UserContactMore::class,
-            'user_id', //              contest_participants.user_id
-            'user_contact_user_id' //  user_contact_mores.user_contact_user_id
+            'user_id', //               user_contact_mores.user_id
+            'user_id' //                contest_participants.user_id
         );
 
         return $userContactMores;
@@ -239,7 +239,7 @@ class ContestParticipant extends Model
         $userContactMores = $this->hasMany(
             UserContactMore::class,
             'user_id',
-            'user_contact_user_id'
+            'user_id'
         );
 
         return $userContactMores;

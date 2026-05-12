@@ -43,7 +43,6 @@ class UserContactFactory extends Factory
 
         return [
             'id' => $user->id,
-            'user_id' => $user->id,
             'country_id' => Country::factory(),
             'first_name' => $firstName,
             'last_name' => $lastName,

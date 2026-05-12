@@ -7,7 +7,6 @@ use App\Models\ContestSection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
 
-
 /**
  * @extends Factory<ContestSection>
  */

@@ -33,7 +33,7 @@ class WarnEmail extends Component
             . ' called');
         $this->contest_work = $contestWork;
         Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
-            . ' wid:'.json_encode($this->contest_work->work_id));
+            . ' wid:'.json_encode($this->contest_work->user_work_id));
         Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
             . ' contest_work:'.json_encode($this->contest_work));
         $this->because = '';
