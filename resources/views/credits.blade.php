@@ -32,7 +32,7 @@
 
                     <main class="mt-6 max-w-xl mx-auto">
                         <p class="mb-4">The project was build from scratch by Massimo Rainato, 
-                            using php and based on Laravel 12.<br />
+                            using php and based on Laravel 12, and updated to 13.<br />
                             MIT License consent use of sw to build a proprietary sw,
                             i hope that platform became profitable with a lot of contest with a very
                             low-fee based on participants (yes, it's a BIG dream, i know).<br />
