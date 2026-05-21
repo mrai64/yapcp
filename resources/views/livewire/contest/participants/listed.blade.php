@@ -49,9 +49,9 @@ use App\Models\ContestWork;
         <table class="data-table-container w-full">
             <thead>
                 <tr>
-                    <th scope="col" class="data-table-country"> {{ __("From              ") }} </th>
-                    <th scope="col" class="data-table-name">    {{ __("Surname, Name     ") }} </th>
-                    <th scope="col" class="data-table-status">  {{ __("Fee status        ") }} </th>
+                    <th scope="col" class="data-table-country"> {{ __("From") }} </th>
+                    <th scope="col" class="data-table-name">    {{ __("Surname, Name") }} </th>
+                    <th scope="col" class="data-table-status">  {{ __("Fee status") }} </th>
                     <th scope="col" class="data-table-actions"> {{ __("Work participation") }} </th>
                     @if($canUpdate)
                     <th scope="col" class="data-table-actions"> {{ __("Actions") }}            </th>                    </td>

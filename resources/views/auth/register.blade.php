@@ -10,13 +10,20 @@
             @csrf
 
             <div>
-                <x-label for="name" value="{{ __('Name') }}" />
+                <x-label for="name" value="{{ __('Surname, FirstName') }}" />
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                <x-input-suggest message="{{ __('As indicated, insert lastname, firstname. Comma and space separated')}}" />
             </div>
-
+            
             <div class="mt-4">
                 <x-label for="email" value="{{ __('Email') }}" />
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
+            </div>
+            
+            <div class="mt-4">
+                <x-label for="email_confirmation" value="{{ __('Confirm Email') }}" />
+                <x-input id="email_confirmation" class="block mt-1 w-full" type="email" name="email_confirmation" required autocomplete="username" />
+                <x-input-suggest message="{{ __('Next, your email address is your access key with password.')}}" />
             </div>
 
             <div class="mt-4">
