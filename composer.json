@@ -15,6 +15,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^3.0",
         "livewire/livewire": "^3.6.4",
+        "livewire/volt": "^1.10",
         "phpoffice/phpspreadsheet": "^2.3",
         "robertogallea/laravel-codicefiscale": "^2",
         "spatie/laravel-pdf": "^2.0"
