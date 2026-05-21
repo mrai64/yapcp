@@ -1,15 +1,11 @@
 # 🇮🇹 🗄️ Documentazione Schema Database
 
-> **Valido fino alla data del:** 22/03/2026 - 21:28:22
+> **Valido fino alla data del:** 19/05/2026 - 18:30:54
 
 Questa cartella contiene la struttura tecnica del database per il supporto allo sviluppo.
 
-Per rigenerare questo documento, eseguire in Terminale il seguente comando:  
-
-```sh
-php artisan db:con
-```
-
+Per rigenerare questo documento eseguire in Terminale il seguente comando:
+php artisan db:doc
 ---
 
 ## Indice alfabetico
@@ -38,6 +34,7 @@ php artisan db:con
 - [migrations](#-tabella-migrations)
 - [organizations](#-tabella-organizations)
 - [password_reset_tokens](#-tabella-password_reset_tokens)
+- [personal_access_tokens](#-tabella-personal_access_tokens)
 - [sessions](#-tabella-sessions)
 - [timezone_region_sets](#-tabella-timezone_region_sets)
 - [timezones](#-tabella-timezones)
@@ -54,7 +51,8 @@ php artisan db:con
 
 ---
 
-## 📋 Tabella: `cache`
+## 📋 Tabella: `cache` 
+**Descrizione:** Laravel reserved table for caching
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -63,12 +61,12 @@ php artisan db:con
 | **expiration** | int | *-* | NO |  | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `cache_locks`
+## 📋 Tabella: `cache_locks` 
+**Descrizione:** Laravel reserved table for caching
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -77,13 +75,11 @@ php artisan db:con
 | **expiration** | int | *-* | NO |  | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `contest_awards`
-
+## 📋 Tabella: `contest_awards` 
 **Descrizione:** Contest:award list for every section and for contest/circuit
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -103,14 +99,12 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
-- 🔗 `contest_id` → `contests(id)`
-- 🔗 `section_id` → `contest_sections(id)`
+- 🔗 `contest_id` → `contests(id)` 
+- 🔗 `section_id` → `contest_sections(id)` 
 
 ---
 
-## 📋 Tabella: `contest_juries`
-
+## 📋 Tabella: `contest_juries` 
 **Descrizione:** juror contest section list
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -125,15 +119,13 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
-- 🔗 `section_id` → `contest_sections(id)`
-- 🔗 `contest_id` → `contests(id)`
-- 🔗 `user_id` → `user_contacts(id)`
+- 🔗 `section_id` → `contest_sections(id)` 
+- 🔗 `contest_id` → `contests(id)` 
+- 🔗 `user_id` → `user_contacts(id)` 
 
 ---
 
-## 📋 Tabella: `contest_participants`
-
+## 📋 Tabella: `contest_participants` 
 **Descrizione:** Participant list w/fee semaphore
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -147,14 +139,12 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
-- 🔗 `contest_id` → `contests(id)`
-- 🔗 `user_contact_id` → `user_contacts(id)`
+- 🔗 `contest_id` → `contests(id)` 
+- 🔗 `user_contact_id` → `user_contacts(id)` 
 
 ---
 
-## 📋 Tabella: `contest_patronages`
-
+## 📋 Tabella: `contest_patronages` 
 **Descrizione:** additional values for user_contacts based on federation_mores
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -168,13 +158,11 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `contest_sections`
-
+## 📋 Tabella: `contest_sections` 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | char(36) | *real pk contest_id n code* | NO | PRI | *NULL* |
@@ -198,14 +186,12 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
-- 🔗 `contest_id` → `contests(id)`
-- 🔗 `federation_section_id` → `federation_sections(id)`
+- 🔗 `contest_id` → `contests(id)` 
+- 🔗 `federation_section_id` → `federation_sections(id)` 
 
 ---
 
-## 📋 Tabella: `contest_votes`
-
+## 📋 Tabella: `contest_votes` 
 **Descrizione:** The Jury vote board
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -222,16 +208,14 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
-- 🔗 `contest_id` → `contests(id)`
-- 🔗 `contest_work_id` → `contest_works(id)`
-- 🔗 `juror_user_id` → `user_contacts(id)`
-- 🔗 `section_id` → `contest_sections(id)`
+- 🔗 `contest_id` → `contests(id)` 
+- 🔗 `contest_work_id` → `contest_works(id)` 
+- 🔗 `juror_user_id` → `user_contacts(id)` 
+- 🔗 `section_id` → `contest_sections(id)` 
 
 ---
 
-## 📋 Tabella: `contest_waitings`
-
+## 📋 Tabella: `contest_waitings` 
 **Descrizione:** Parking table for user_works with any problem
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -250,23 +234,21 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
-- 🔗 `contest_id` → `contests(id)`
-- 🔗 `organization_user_id` → `user_contacts(id)`
-- 🔗 `participant_user_id` → `user_contacts(id)`
-- 🔗 `section_id` → `contest_sections(id)`
-- 🔗 `user_work_id` → `user_works(id)`
+- 🔗 `contest_id` → `contests(id)` 
+- 🔗 `organization_user_id` → `user_contacts(id)` 
+- 🔗 `participant_user_id` → `user_contacts(id)` 
+- 🔗 `section_id` → `contest_sections(id)` 
+- 🔗 `user_work_id` → `user_works(id)` 
 
 ---
 
-## 📋 Tabella: `contest_works`
-
+## 📋 Tabella: `contest_works` 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | char(36) | *-* | NO | PRI | *NULL* |
 | **contest_id** | char(36) | *fk: contests.id* | NO | MUL | *NULL* |
 | **section_id** | char(36) | *fk: contest_sections.id* | NO | MUL | *NULL* |
-| **country_id** | char(3) | *fk: countries.id* | NO | MUL | *NULL* |
+| **country_id** | char(3) | *fk: countries.id * | NO | MUL | *NULL* |
 | **user_id** | char(36) | *fk:user_contacts.id author* | NO | MUL | *NULL* |
 | **user_work_id** | char(36) | *fk: user_works.id* | NO | MUL | *NULL* |
 | **extension** | varchar(6) | *used to build file name* | NO |  | jpg |
@@ -277,16 +259,14 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
-- 🔗 `contest_id` → `contests(id)`
-- 🔗 `country_id` → `countries(id)`
-- 🔗 `section_id` → `contest_sections(id)`
-- 🔗 `user_id` → `user_contacts(id)`
+- 🔗 `contest_id` → `contests(id)` 
+- 🔗 `country_id` → `countries(id)` 
+- 🔗 `section_id` → `contest_sections(id)` 
+- 🔗 `user_id` → `user_contacts(id)` 
 
 ---
 
-## 📋 Tabella: `contests`
-
+## 📋 Tabella: `contests` 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | char(36) | *-* | NO | PRI | *NULL* |
@@ -321,17 +301,15 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
-- 🔗 `country_id` → `countries(id)`
-- 🔗 `organization_id` → `organizations(id)`
-- 🔗 `circuit_id` → `contests(id)`
-- 🔗 `vote_rule` → `contests_vote_rule_sets(vote_rule)`
-- 🔗 `timezone_id` → `timezones(id)`
+- 🔗 `country_id` → `countries(id)` 
+- 🔗 `organization_id` → `organizations(id)` 
+- 🔗 `circuit_id` → `contests(id)` 
+- 🔗 `vote_rule` → `contests_vote_rule_sets(vote_rule)` 
+- 🔗 `timezone_id` → `timezones(id)` 
 
 ---
 
-## 📋 Tabella: `contests_vote_rule_sets`
-
+## 📋 Tabella: `contests_vote_rule_sets` 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | bigint unsigned | *-* | NO | PRI | *NULL* |
@@ -342,13 +320,11 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `countries`
-
+## 📋 Tabella: `countries` 
 **Descrizione:** Based on iso-3166, and mledoze/countries
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -364,12 +340,12 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `failed_jobs`
+## 📋 Tabella: `failed_jobs` 
+**Descrizione:** Laravel reserved table for failed jobs
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -382,17 +358,15 @@ php artisan db:con
 | **failed_at** | timestamp | *-* | NO |  | CURRENT_TIMESTAMP |
 
 ### **Relazioni (Foreign Keys):**
-
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `federation_mores`
-
+## 📋 Tabella: `federation_mores` 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | bigint unsigned | *the real pk is federation_id + field_name* | NO | PRI | *NULL* |
-| **referenced_table** | char(40) | *real pk - lowercase* | NO | UNI | *NULL* |
+| **referenced_table** | char(40) | *real pk - lowercase* | NO | MUL | *NULL* |
 | **federation_id** | varchar(10) | *fk federations.id* | NO | MUL | *NULL* |
 | **field_name** | varchar(20) | *lowercase* | NO |  | *NULL* |
 | **field_label** | varchar(255) | *label for the field* | NO |  | *NULL* |
@@ -404,13 +378,13 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
-- 🔗 `federation_id` → `federations(id)`
-- 🔗 `referenced_table` → `federation_mores_referenced_tables(referenced_table)`
+- 🔗 `federation_id` → `federations(id)` 
+- 🔗 `referenced_table` → `federation_mores_referenced_tables(referenced_table)` 
 
 ---
 
-## 📋 Tabella: `federation_mores_referenced_tables`
+## 📋 Tabella: `federation_mores_referenced_tables` 
+**Descrizione:** lookup table for: federation_mores.referenced_table
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -421,13 +395,11 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `federation_sections`
-
+## 📋 Tabella: `federation_sections` 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | bigint unsigned | *real pk is federation_id + code* | NO | PRI | *NULL* |
@@ -451,14 +423,12 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
-- 🔗 `federation_id` → `federations(id)`
+- 🔗 `federation_id` → `federations(id)` 
 
 ---
 
-## 📋 Tabella: `federations`
-
-**Descrizione:** Who build the contest rules for patronages
+## 📋 Tabella: `federations` 
+**Descrizione:** Who build contest rules for patronages
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -475,13 +445,13 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
-- 🔗 `country_id` → `countries(id)`
-- 🔗 `timezone_id` → `timezones(id)`
+- 🔗 `country_id` → `countries(id)` 
+- 🔗 `timezone_id` → `timezones(id)` 
 
 ---
 
-## 📋 Tabella: `job_batches`
+## 📋 Tabella: `job_batches` 
+**Descrizione:** Laravel reserved table for long running jobs
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -497,12 +467,12 @@ php artisan db:con
 | **finished_at** | int | *-* | YES |  | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `jobs`
+## 📋 Tabella: `jobs` 
+**Descrizione:** Laravel reserved table for long running jobs
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -515,13 +485,11 @@ php artisan db:con
 | **created_at** | int unsigned | *-* | NO |  | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `lang_lists`
-
+## 📋 Tabella: `lang_lists` 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | bigint unsigned | *-* | NO | PRI | *NULL* |
@@ -529,13 +497,11 @@ php artisan db:con
 | **updated_at** | timestamp | *-* | YES |  | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `migrations`
-
+## 📋 Tabella: `migrations` 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | int unsigned | *-* | NO | PRI | *NULL* |
@@ -543,14 +509,12 @@ php artisan db:con
 | **batch** | int | *-* | NO |  | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `organizations`
-
-**Descrizione:** who organize contests
+## 📋 Tabella: `organizations` 
+**Descrizione:** who organize contests - have members of
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -565,14 +529,12 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
-- 🔗 `country_id` → `countries(id)`
+- 🔗 `country_id` → `countries(id)` 
 
 ---
 
-## 📋 Tabella: `password_reset_tokens`
-
-**Descrizione:** user reserved
+## 📋 Tabella: `password_reset_tokens` 
+**Descrizione:** Laravel reserved table for password reset tokens
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -581,12 +543,32 @@ php artisan db:con
 | **created_at** | datetime | *-* | YES |  | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `sessions`
+## 📋 Tabella: `personal_access_tokens` 
+| Campo | Tipo | Descrizione | Null | Chiave | Default |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **id** | bigint unsigned | *-* | NO | PRI | *NULL* |
+| **tokenable_type** | varchar(255) | *-* | NO | MUL | *NULL* |
+| **tokenable_id** | bigint unsigned | *-* | NO |  | *NULL* |
+| **name** | text | *-* | NO |  | *NULL* |
+| **token** | varchar(64) | *-* | NO | UNI | *NULL* |
+| **abilities** | text | *-* | YES |  | *NULL* |
+| **last_used_at** | datetime | *-* | YES |  | *NULL* |
+| **expires_at** | datetime | *-* | YES | MUL | *NULL* |
+| **created_at** | datetime | *-* | NO |  | CURRENT_TIMESTAMP |
+| **updated_at** | datetime | *-* | NO | MUL | CURRENT_TIMESTAMP |
+| **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
+
+### **Relazioni (Foreign Keys):**
+- ❌ Nessuna relazione trovata.
+
+---
+
+## 📋 Tabella: `sessions` 
+**Descrizione:** Laravel reserved table for sessions
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -598,13 +580,11 @@ php artisan db:con
 | **last_activity** | int | *-* | NO | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `timezone_region_sets`
-
+## 📋 Tabella: `timezone_region_sets` 
 **Descrizione:** timezones lookup table
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -615,13 +595,11 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `timezones`
-
+## 📋 Tabella: `timezones` 
 **Descrizione:** correspond to php_timezone version 2025.3
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -633,13 +611,11 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
-- 🔗 `region_id` → `timezone_region_sets(id)`
+- 🔗 `region_id` → `timezone_region_sets(id)` 
 
 ---
 
-## 📋 Tabella: `user_contact_mores`
-
+## 📋 Tabella: `user_contact_mores` 
 **Descrizione:** additional values for user_contacts based on federation_mores
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -654,15 +630,13 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
-- 🔗 `federation_id` → `federation_mores(federation_id)`
-- 🔗 `field_name` → `federation_mores(field_name)`
-- 🔗 `user_id` → `user_contacts(id)`
+- 🔗 `federation_id` → `federation_mores(federation_id)` 
+- 🔗 `field_name` → `federation_mores(field_name)` 
+- 🔗 `user_id` → `user_contacts(id)` 
 
 ---
 
-## 📋 Tabella: `user_contacts`
-
+## 📋 Tabella: `user_contacts` 
 **Descrizione:** the real users info table
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -692,16 +666,14 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
-- 🔗 `country_id` → `countries(id)`
-- 🔗 `timezone_id` → `timezones(id)`
-- 🔗 `id` → `users(id)`
-- 🔗 `email` → `users(email)`
+- 🔗 `country_id` → `countries(id)` 
+- 🔗 `timezone_id` → `timezones(id)` 
+- 🔗 `id` → `users(id)` 
+- 🔗 `email` → `users(email)` 
 
 ---
 
-## 📋 Tabella: `user_roles`
-
+## 📋 Tabella: `user_roles` 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | bigint unsigned | *-* | NO | PRI | *NULL* |
@@ -717,16 +689,14 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
-- 🔗 `contest_id` → `contests(id)`
-- 🔗 `federation_id` → `federations(id)`
-- 🔗 `organization_id` → `organizations(id)`
-- 🔗 `role` → `user_roles_role_sets(role)`
+- 🔗 `contest_id` → `contests(id)` 
+- 🔗 `federation_id` → `federations(id)` 
+- 🔗 `organization_id` → `organizations(id)` 
+- 🔗 `role` → `user_roles_role_sets(role)` 
 
 ---
 
-## 📋 Tabella: `user_roles_context_sets`
-
+## 📋 Tabella: `user_roles_context_sets` 
 **Descrizione:** lookup table for: user_roles.context_type
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -738,13 +708,11 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `user_roles_role_contexts`
-
+## 📋 Tabella: `user_roles_role_contexts` 
 **Descrizione:** pivot table
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -757,14 +725,12 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
-- 🔗 `context` → `user_roles_context_sets(context_type)`
-- 🔗 `role` → `user_roles_role_sets(role)`
+- 🔗 `context` → `user_roles_context_sets(context_type)` 
+- 🔗 `role` → `user_roles_role_sets(role)` 
 
 ---
 
-## 📋 Tabella: `user_roles_role_sets`
-
+## 📋 Tabella: `user_roles_role_sets` 
 **Descrizione:** lookup table for: user_roles.role
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -777,13 +743,11 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `user_work_mores`
-
+## 📋 Tabella: `user_work_mores` 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | bigint unsigned | *-* | NO | PRI | *NULL* |
@@ -796,35 +760,31 @@ php artisan db:con
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
 - ❌ Nessuna relazione trovata.
 
 ---
 
-## 📋 Tabella: `user_work_validations`
-
+## 📋 Tabella: `user_work_validations` 
 **Descrizione:** human checked user_works, based on federation_sections rules
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | bigint unsigned | *real pk is: user_work_id + federation_section_id* | NO | PRI | *NULL* |
 | **user_work_id** | char(36) | *fk: user_works.id* | NO | MUL | *NULL* |
-| **federation_section_id** | bigint unsigned | *fk: federation_sections.id* | NO | MUL | *NULL* |
+| **federation_section_id** | bigint unsigned | *fk: federation_sections.id * | NO | MUL | *NULL* |
 | **validator_user_id** | char(36) | *contest organization members that validate the work for specific section* | NO | MUL | *NULL* |
 | **created_at** | datetime | *-* | NO |  | CURRENT_TIMESTAMP |
 | **updated_at** | datetime | *-* | NO | MUL | CURRENT_TIMESTAMP |
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
-- 🔗 `federation_section_id` → `federation_sections(id)`
-- 🔗 `user_work_id` → `user_works(id)`
-- 🔗 `validator_user_id` → `user_contacts(id)`
+- 🔗 `federation_section_id` → `federation_sections(id)` 
+- 🔗 `user_work_id` → `user_works(id)` 
+- 🔗 `validator_user_id` → `user_contacts(id)` 
 
 ---
 
-## 📋 Tabella: `user_works`
-
+## 📋 Tabella: `user_works` 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | char(36) | *-* | NO | PRI | *NULL* |
@@ -837,19 +797,18 @@ php artisan db:con
 | **short_side** | int unsigned | *pixel* | NO |  | *NULL* |
 | **monochromatic** | tinyint(1) | *declared BW monochromatic* | NO |  | 0 |
 | **raw** | tinyint(1) | *Original RAW available* | NO |  | 0 |
+| **reference_year** | int unsigned | *usually first admit year* | NO |  | 2023 |
 | **created_at** | datetime | *-* | NO |  | CURRENT_TIMESTAMP |
 | **updated_at** | datetime | *-* | NO | MUL | CURRENT_TIMESTAMP |
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
-- 🔗 `user_id` → `user_contacts(id)`
+- 🔗 `user_id` → `user_contacts(id)` 
 
 ---
 
-## 📋 Tabella: `users`
-
-**Descrizione:** aka passwords table - for platform access only - other user info un user_contacts
+## 📋 Tabella: `users` 
+**Descrizione:** Laravel reserved table for users - platform entry only
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -858,13 +817,18 @@ php artisan db:con
 | **email** | varchar(255) | *-* | NO | UNI | *NULL* |
 | **email_verified_at** | datetime | *-* | YES |  | *NULL* |
 | **password** | varchar(255) | *hashed obv* | NO |  | *NULL* |
+| **two_factor_secret** | text | *-* | YES |  | *NULL* |
+| **two_factor_recovery_codes** | text | *-* | YES |  | *NULL* |
+| **two_factor_confirmed_at** | datetime | *-* | YES |  | *NULL* |
 | **remember_token** | varchar(100) | *-* | YES |  | *NULL* |
+| **current_team_id** | bigint unsigned | *-* | YES |  | *NULL* |
+| **profile_photo_path** | varchar(2048) | *-* | YES |  | *NULL* |
 | **created_at** | datetime | *-* | NO |  | CURRENT_TIMESTAMP |
 | **updated_at** | datetime | *-* | NO | MUL | CURRENT_TIMESTAMP |
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-
 - ❌ Nessuna relazione trovata.
 
 ---
+

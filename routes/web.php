@@ -79,7 +79,6 @@ Route::view('/credits', 'credits')
 /**
  * 2. User, platform registration - user
  */
-require __DIR__ . '/auth.php';
 // user dashboard
 Route::view('/user/dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -454,3 +453,13 @@ Route::get(
 /**
  * end of list
  */
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});

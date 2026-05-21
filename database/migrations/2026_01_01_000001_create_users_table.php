@@ -14,13 +14,17 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->uuid('id')->charset('ascii')->collation('ascii_general_ci')->primary()->comment('lowercase uuid');
-            $table->string('name')->index()->comment('surname, name - not used for access');
+            $table->uuid('id')->charset('ascii')->collation('ascii_general_ci')
+                ->primary()->comment('lowercase uuid');
+            $table->string('name')->index()
+                ->comment('surname, name - not used for access');
             $table->string('email')->unique();
             $table->dateTime('email_verified_at')->nullable();
             //
             $table->string('password')->comment('hashed obv');
             $table->rememberToken();
+            $table->foreignId('current_team_id')->nullable(); // TODO REMOVE
+            $table->string('profile_photo_path', 2048)->nullable(); // TODO REMOVE
             //
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent()->index();
