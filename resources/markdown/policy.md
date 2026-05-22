@@ -1,4 +1,4 @@
-# Informativa sulla Privacy (GDPR)
+# 🇮🇹 Informativa sulla Privacy (GDPR)
 
 La presente Informativa ha lo scopo di descrivere le modalità di gestione del sito yaPCP in riferimento al trattamento dei dati personali degli utenti (Autori, Organizzatori, Giurati) che lo consultano e lo utilizzano.
 
