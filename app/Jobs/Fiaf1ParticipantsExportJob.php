@@ -18,7 +18,6 @@ use App\Notifications\Fiaf1ParticipantsReadyNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Support\Facades\Storage;
-use Maatwebsite\Excel\Facades\Excel;
 
 class Fiaf1ParticipantsExportJob implements ShouldQueue
 {
@@ -49,12 +48,19 @@ class Fiaf1ParticipantsExportJob implements ShouldQueue
             Storage::disk('public')->makeDirectory($directory);
         }
 
-        // build
-        Excel::store(
-            new Fiaf1ParticipantsExport($this->cid, $this->fid),
-            'contests/'.$this->filename,
-            'public'
-        );
+        // build - get the file content from export
+        $export = new Fiaf1ParticipantsExport($this->cid, $this->fid);
+        $response = $export->download(basename($this->filename));
+
+        // save the streamed content to disk
+        $content = '';
+        $response->sendContent();
+        ob_start();
+        $response->sendContent();
+        $content = ob_get_clean();
+
+        // store file
+        Storage::disk('public')->put('contests/'.$this->filename, $content);
 
         // And... here we go! It's finished.
         $user = User::find($this->userId);
