@@ -46,7 +46,7 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with('appVersion', $version);
         });
-        
+
         // TODO Remove Volt, but until
 
         // Gate Policy

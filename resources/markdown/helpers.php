@@ -23,7 +23,7 @@ if (! function_exists('__db')) {
 
         // Se trovi la traduzione nel DB, processa i placeholder, altrimenti usa __() nativo
         // return $translation ? strtr($translation, $replace) : __($key, $replace, $locale);
-        
+
         return __($key, $replace, $locale);
     }
 }
