@@ -42,6 +42,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public const TABLENAME = 'users'; // MAYBE $this->table_name()
 
+    protected $primaryKey = 'id'; //  default but
+    protected $keyType = 'string'; // uuid char(36)
+    public $incrementing = false; //  with no increment
+
+
     /**
      * The attributes that are mass assignable.
      *

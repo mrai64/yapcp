@@ -41,9 +41,10 @@ class UserFactory extends Factory
         $first = fake()->firstName();
         $last = fake()->lastName();
         $name = $last . ', ' . $first;
+        $email = $first . '.' . $last . '@example.com';
         return [
             'name' => $name,
-            'email' => fake()->unique()->safeEmail(),
+            'email' => $email,
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'two_factor_secret' => null,
