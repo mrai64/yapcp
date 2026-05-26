@@ -15,7 +15,6 @@ use App\Jobs\Fiaf2WorksExportJob;
 use App\Models\Contest;
 use App\Models\Federation;
 use Illuminate\Support\Facades\Auth;
-use Maatwebsite\Excel\Facades\Excel;
 
 class Fiaf2WorksController extends Controller
 {
@@ -33,7 +32,7 @@ class Fiaf2WorksController extends Controller
         /**
          * Direct download
          *
-        return Excel::download(new Fiaf2WorksExport($cid, $fid), 'fiaf_foto_partecipanti_ed_esiti.xlsx');
+        return (new Fiaf2WorksExport($cid, $fid))->download('fiaf_foto_partecipanti_ed_esiti.xlsx');
          *
          **/
 
