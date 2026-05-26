@@ -22,10 +22,10 @@ use App\Models\User;
 use App\Models\UserRole;
 
 // a) add federation - admin can see page
-it('can render add federation page as admin ', function () {
+test('User can render _add federation page_ as admin ', function () {
     // arrange
     $user = User::factory()->create(); //
-    $adminOrganization = Organization::whereName('.admin')->firstOrFail();
+    $adminOrganization = Organization::firstOrCreate(['name' => '.admin']);
     $userRole = UserRole::factory()->create([
       // id
       'user_id'          => $user->id,
@@ -48,10 +48,10 @@ it('can render add federation page as admin ', function () {
 });
 
 // b) add federation - admin can use page
-it('can use add federation page as admin ', function () {
+test('User can use _add federation page_ as admin ', function () {
     // arrange
     $user = User::factory()->create(); //
-    $adminOrganization = Organization::whereName('.admin')->firstOrFail();
+    $adminOrganization = Organization::firstOrCreate(['name' => '.admin']);
     $userRole = UserRole::factory()->create([
       // id
       'user_id'          => $user->id,
@@ -87,7 +87,7 @@ it('can use add federation page as admin ', function () {
 it('cannot access page as not admin', function () {
     // arrange
     $user = User::factory()->create(); //
-    $adminOrganization = Organization::whereName('.admin')->firstOrFail();
+    $adminOrganization = Organization::firstOrCreate(['name' => '.admin']);
     $userRole = UserRole::factory()->create([
       // id
       'user_id'          => $user->id,
@@ -110,7 +110,7 @@ it('cannot access page as not admin', function () {
 it('fails validation with missing fields in form ', function ($federationName, $federationId, $countryId, $contactInfo, $website, $errorField) {
     // arrange
     $user = User::factory()->create(); //
-    $adminOrganization = Organization::whereName('.admin')->firstOrFail();
+    $adminOrganization = Organization::firstOrCreate(['name' => '.admin']);
     $userRole = UserRole::factory()->create([
       // id
       'user_id'          => $user->id,
