@@ -9,7 +9,7 @@ test('user accounts can be deleted', function () {
     $this->actingAs($user = User::factory()->create());
 
     Livewire::test(DeleteUserForm::class)
-        ->set('password', 'password')
+        ->set('password', 'Password@12345') // was: password
         ->call('deleteUser');
 
     // Per verificare che l'utente sia stato soft-eliminato, dobbiamo recuperarlo
