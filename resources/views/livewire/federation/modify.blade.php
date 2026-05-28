@@ -23,6 +23,20 @@
         </p><!-- federation section list -->
 
         <p class="fyk text-xl font-medium mb-4">
+            <a  href="{{ route('federation-more.list', ['federation' => $federation]) }}"
+                target="_blank"
+                rel="noopener noreferrer">
+            [ {{ __("'Federation more' fields list") }} ]
+            </a>
+            |
+            <a  href="{{ route('federation-more.add', ['federation' => $federation]) }}"
+                target="_blank"
+                rel="noopener noreferrer">
+            [ {{ __("'Federation more' field add") }} ]
+            </a>
+        </p>
+
+        <p class="fyk text-xl font-medium mb-4">
             <a  href="{{ route('federation.list') }}"
                 rel="noopener noreferrer">
             [ {{ __('Back to Federation list') }} ]

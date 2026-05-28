@@ -52,6 +52,7 @@ use App\Livewire\Federation;
 use App\Livewire\Juror;
 use App\Livewire\Organization;
 use App\Livewire\User;
+use Livewire\Volt\Volt;
 use App\Models\Contest as ModelsContest;
 use App\Models\ContestAward as ModelsContestAward;
 use App\Models\ContestJury as ModelsContestJury;
@@ -60,6 +61,7 @@ use App\Models\ContestSection as ModelsContestSection;
 use App\Models\ContestVote as ModelsContestVote;
 use App\Models\ContestWork as ModelsContestWork;
 use App\Models\Federation as ModelsFederation;
+use App\Models\FederationMore as ModelsFederationMore;
 use App\Models\FederationSection as ModelsFederationSection;
 use App\Models\UserContact as ModelsUserContact;
 use App\Models\UserRole as ModelsUserRole;
@@ -219,10 +221,17 @@ Route::delete('/admin/federation/section/remove/{federation-section}', Federatio
 
 /**
  * FederationMores - admin only
+ * note: volt route from/for livewire 4
  *
- * TODO - build routes n views
  */
-// /admin/federation-more.add
+// federation-more list
+Volt::route('/federation/more/list/{federation}', 'pages.federationmore.list') // Assuming this is a standard Livewire component
+    ->middleware(['auth', 'verified'])
+    ->name('federation-more.list');
+// federation-more add
+Volt::route('/admin/federation/more/add/{federation}', 'pages.federationmore.add')
+    ->middleware(['auth', 'verified', 'can:create,' . ModelsFederationMore::class])
+    ->name('federation-more.add');
 // /admin/federation-more.modify
 // /admin/federation-more.remove
 

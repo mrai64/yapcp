@@ -39,9 +39,9 @@ Creare pagine per:
 ## 🗄️ Modifiche al Database
 
 > <!-- to avoid index -->
-- [x] Creata migration `create_xxx_table`
-- [ ] Aggiunto campo `status` a `users`
-- [ ] Lorem ipsum
+- [x] Verifica tabelle `federation_mores`
+- [ ] Integrazione controlli di integrità su `user_contact_mores`
+- [ ] Integrazione controlli di integrità su `user_work_mores`
 
 ## 🚀 Note per il Deploy
 
