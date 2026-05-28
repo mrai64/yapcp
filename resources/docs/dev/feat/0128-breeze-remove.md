@@ -5,10 +5,10 @@
 > **Priorità:** A  
 > **id assegnato:** 2026-05-14.01  
 > **Titolo e urgenza:** (A) feat: Breeze removal and Jetstream integration [id:2026-05-14.01]  
-> **Project/issue link:** #128
+> **Project/issue link:** [#128](https://github.com/mrai64/yapcp/issues/128)
 
-- 🏠 index
-- template
+- [🏠 index](/{{route}}/dev/state-of-art)
+- [template](/{{route}}/dev/template)
 
 ---
 
