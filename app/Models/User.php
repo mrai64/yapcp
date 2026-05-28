@@ -13,23 +13,34 @@
 
 namespace App\Models;
 
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable; // uuid booted()
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Laravel\Fortify\TwoFactorAuthenticatable;
+use Laravel\Jetstream\HasProfilePhoto;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
- * @property string $id uuid
- * @property string $name
+ * @property string $id lowercase uuid
+ * @property string $name surname, name - not used for access
  * @property string $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
- * @property string $password
+ * @property string $password hashed obv
+ * @property string|null $two_factor_secret
+ * @property string|null $two_factor_recovery_codes
+ * @property string|null $two_factor_confirmed_at
  * @property string|null $remember_token
+ * @property int|null $current_team_id
+ * @property string|null $profile_photo_path
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -52,68 +63,79 @@ use Illuminate\Support\Str;
  * @property-read int|null $juries_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $roles
- * @property-read int|null $roles_count
+ * @property-read string $profile_photo_url
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
+ * @property-read int|null $tokens_count
  * @property-read \App\Models\UserContact|null $userContact
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $userRoles
  * @property-read int|null $user_roles_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWork> $works
- * @property-read int|null $works_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWorkValidation> $userWorkValidators
+ * @property-read int|null $user_work_validators_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWork> $userWorks
+ * @property-read int|null $user_works_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereCurrentTeamId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereEmailVerifiedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereProfilePhotoPath($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereTwoFactorConfirmedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereTwoFactorRecoveryCodes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereTwoFactorSecret($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWorkValidation> $userWorkValidators
- * @property-read int|null $user_work_validators_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWork> $userWorks
- * @property-read int|null $user_works_count
  * @mixin \Eloquent
  */
-
 class User extends Authenticatable implements MustVerifyEmail
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    use HasApiTokens;
+    /** @use HasFactory<UserFactory> */
     use HasFactory;
     use HasUuids;
+    use HasProfilePhoto;
     use Notifiable;
     use SoftDeletes;
+    use TwoFactorAuthenticatable;
 
     public const TABLENAME = 'users'; // MAYBE $this->table_name()
+
+    protected $primaryKey = 'id'; //  default but
+    protected $keyType = 'string'; // uuid char(36)
+    public $incrementing = false; //  with no increment
+
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var list<string>
      */
     protected $fillable = [
-        'id', //           pk bigint unsigned
-        'name', //         test
-        'email', //        mirrored in user_contacts
+        'id',
+        'name',
+        'email',
         'email_verified_at',
-        'password', //     hashed
+        'password',
         'remember_token',
     ];
 
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var list<string>
      */
     protected $hidden = [
         'password',
         'remember_token',
+        'two_factor_recovery_codes',
+        'two_factor_secret',
     ];
 
     // uuid as pk
@@ -123,6 +145,14 @@ class User extends Authenticatable implements MustVerifyEmail
             $model->id = Str::uuid7();
         });
     }
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     */
+    protected $appends = [
+        'profile_photo_url',
+    ];
 
     /**
      * Get the attributes that should be cast.
@@ -147,10 +177,9 @@ class User extends Authenticatable implements MustVerifyEmail
     // GETTERS
 
     // RELATIONSHIPS
-    // TODO most of that must be user_contacts.user_id >
 
     // users.id > contest_awards.winner_user_id
-    public function awardWinners()
+    public function awardWinners(): HasMany
     {
         $awardWinnersSet = $this->hasMany(
             related: ContestAward::class,
@@ -162,7 +191,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     // users.id > contest_juries.user_contact_id
-    public function juries()
+    public function juries(): HasMany
     {
         $juries = $this->hasMany(
             related: ContestJury::class,
@@ -174,7 +203,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     // users.id > contest_participants.user_id
-    public function contestParticipants()
+    public function contestParticipants(): HasMany
     {
         $contestParticipants = $this->hasMany(
             related: ContestParticipant::class,
@@ -186,15 +215,19 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     // users.id > contest_votes.juror_user_id
-    public function contestVotesJurors()
+    public function contestVotesJurors(): HasMany
     {
-        $cvjSet = $this->hasMany(related: ContestVote::class, foreignKey: 'juror_user_id', localKey: 'id');
+        $cvjSet = $this->hasMany(
+            related: ContestVote::class,
+            foreignKey: 'juror_user_id',
+            localKey: 'id'
+        );
         // log
         return $cvjSet;
     }
 
     // users.id > contest_waitings.participant_user_id
-    public function contestParticipantsWaiting()
+    public function contestParticipantsWaiting(): HasMany
     {
         $cpwSet = $this->hasMany(
             related: ContestWaiting::class,
@@ -206,7 +239,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     // users.id > contest_waitings.organization_user_id
-    public function contestOrganizationsWaiting()
+    public function contestOrganizationsWaiting(): HasMany
     {
         $cowSet = $this->hasMany(
             related: ContestWaiting::class,
@@ -218,7 +251,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     // users.id > contest_works.user_id
-    public function contestWorks()
+    public function contestWorks(): HasMany
     {
         $cwSet = $this->hasMany(
             related: ContestWork::class,
@@ -230,7 +263,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     // users.id > user_contact_mores.user_contact_user_id
-    public function contactMores()
+    public function contactMores(): HasMany
     {
         $cmSet = $this->hasMany(
             related: UserContactMore::class,
@@ -242,7 +275,19 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     // users.id > user_contacts.id
-    public function contact()
+    public function contact(): HasOne
+    {
+        $contact = $this->hasOne(
+            related: UserContact::class,
+            foreignKey: 'id',
+            localKey: 'id'
+        );
+        // log
+        return $contact;
+    }
+
+    // users.id > user_contacts.id
+    public function userContact(): HasOne
     {
         $contact = $this->hasOne(
             related: UserContact::class,
@@ -254,7 +299,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     // users.id > user_roles.user_id
-    public function userRoles()
+    public function userRoles(): HasMany
     {
         $rSet = $this->hasMany(
             related: UserRole::class,
@@ -266,7 +311,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     // users.id > user_work_validators.validator_user_id
-    public function userWorkValidators()
+    public function userWorkValidators(): HasMany
     {
         $wvSet = $this->hasMany(
             related: UserWorkValidation::class,
@@ -285,6 +330,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $works;
     }
 
+    // IS?
+
     /**
      * Determine if the user has an active admin role.
      *
@@ -294,6 +341,20 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->userRoles()
             ->where('role', UserRole::ADMINGROUP)
+            ->where('role_opening', '<=', now())
+            ->where('role_closing', '>=', now())
+            ->exists();
+    }
+
+    /**
+     * Determine if the user is member of any Organization
+     *
+     * @return bool
+     */
+    public function isMemberOfAnyOrganization(): bool
+    {
+        return $this->userRoles()
+            ->whereNotNull('organization_id')
             ->where('role_opening', '<=', now())
             ->where('role_closing', '>=', now())
             ->exists();
@@ -311,20 +372,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return $this->userRoles()
             ->where('organization_id', $organizationId)
-            ->where('role_opening', '<=', now())
-            ->where('role_closing', '>=', now())
-            ->exists();
-    }
-
-    /**
-     * Determine if the user is member of any Organization
-     *
-     * @return bool
-     */
-    public function isMemberOfAnyOrganization(): bool
-    {
-        return $this->userRoles()
-            ->whereNotNull('organization_id')
             ->where('role_opening', '<=', now())
             ->where('role_closing', '>=', now())
             ->exists();
@@ -352,7 +399,7 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return bool
      */
-    public function isJurorInContest(ContestSection|string $section): bool
+    public function isJurorInAContest(ContestSection|string $section): bool
     {
         $contestId = $section instanceof ContestSection ? $section->contest_id : ContestSection::find($section);
 
@@ -373,5 +420,11 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->userWorks()->count();
     }
+
+    public function userWorksCount(): int
+    {
+        return $this->userWorks()->count();
+    }
+
 
 }

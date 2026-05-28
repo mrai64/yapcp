@@ -47,6 +47,8 @@ class AppServiceProvider extends ServiceProvider
             $view->with('appVersion', $version);
         });
 
+        // TODO Remove Volt, but until
+
         // Gate Policy
         Gate::define('contest-participants-update', [ContestPaymentChangePolicy::class, 'update']);
         Gate::define('jury-panels', [JurorOnlyPolicy::class, 'grantAccess']);

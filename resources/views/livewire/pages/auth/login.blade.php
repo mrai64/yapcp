@@ -1,7 +1,8 @@
 <?php
+
 /**
- * 2025-09-12 Add notification in $login
- * 2025-09-15 UserContact instead of User 
+ * 2026-05-03 user login for laravel 13
+ *
  */
 use App\Livewire\Forms\LoginForm;
 use Illuminate\Support\Facades\Session;
@@ -46,7 +47,7 @@ $login = function () {
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input wire:model="form.email" id="email" class="block mt-1 w-full" type="email" name="email" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('form.email')" class="mt-2" />
+            <x-input-error for="form.email" class="mt-2" />
         </div>
 
         <!-- Password -->
@@ -58,7 +59,7 @@ $login = function () {
                             name="password"
                             required autocomplete="current-password" />
 
-            <x-input-error :messages="$errors->get('form.password')" class="mt-2" />
+            <x-input-error for="form.password" class="mt-2" />
         </div>
 
         <!-- Remember Me -->

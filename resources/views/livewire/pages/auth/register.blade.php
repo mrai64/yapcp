@@ -9,6 +9,7 @@
  *            now user_contacts creation is under email verification
  *
  */
+
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
@@ -58,7 +59,7 @@ $register = function () {
         <div>
             <x-input-label for="name" :value="__('Surname, Name')" />
             <x-text-input wire:model="name" id="name" class="block mt-1 w-full" type="text" name="name" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <x-input-error for="name" class="mt-2" />
         </div>
 
         <!-- Email Address -->
@@ -67,7 +68,7 @@ $register = function () {
             <x-text-input wire:model="email" id="email" class="block mt-1 w-full"
                             type="email" 
                             name="email" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <x-input-error for="email" class="mt-2" />
         </div>
 
         <!-- Conformation Email Address -->
@@ -76,7 +77,7 @@ $register = function () {
             <x-text-input wire:model="email_confirmation" id="email_confirmation" class="block mt-1 w-full" 
                             type="email" 
                             name="email_confirmation" required autocomplete="new-username" />
-            <x-input-error :messages="$errors->get('email_confirmation')" class="mt-2" />
+            <x-input-error for="email_confirmation" class="mt-2" />
         </div>
 
         <!-- Password -->
@@ -88,7 +89,7 @@ $register = function () {
                             name="password"
                             required autocomplete="new-password" />
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <x-input-error for="password" class="mt-2" />
         </div>
 
         <!-- Confirm Password -->
@@ -99,7 +100,7 @@ $register = function () {
                             type="password"
                             name="password_confirmation" required autocomplete="new-password" />
 
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+            <x-input-error for="password_confirmation" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">

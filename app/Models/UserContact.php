@@ -124,6 +124,10 @@ class UserContact extends Model
 
     public const TABLENAME = 'user_contacts';
 
+    protected $primaryKey = 'id'; //  default but
+    protected $keyType = 'string'; // uuid char(36)
+    public $incrementing = false; //  with no increment
+
     // attributes mass assignable in factory and seeder
     protected $fillable = [
         'id', //               uuid === fk users.id uuid

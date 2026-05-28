@@ -15,7 +15,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="antialiased font-sans">
-        <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
+        <div class="bg-gray-50 text-black/50">
             <div class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
                 <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                     <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
@@ -32,7 +32,7 @@
 
                     <main class="mt-6 max-w-xl mx-auto">
                         <p class="mb-4">The project was build from scratch by Massimo Rainato, 
-                            using php and based on Laravel 12.<br />
+                            using php and based on Laravel 12, and updated to 13.<br />
                             MIT License consent use of sw to build a proprietary sw,
                             i hope that platform became profitable with a lot of contest with a very
                             low-fee based on participants (yes, it's a BIG dream, i know).<br />
@@ -49,7 +49,7 @@
                         </ul>
                     </main>
 
-                    <footer class="py-16 text-center text-sm text-black dark:text-white/70 text-muted">
+                    <footer class="py-16 text-center text-sm text-black text-muted">
                         &copy; 2024-{{ date('Y')}} Massimo Rainato - {{ config('app.name') }} - version {{ $appVersion }} guest
                     </footer>
                 </div>

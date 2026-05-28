@@ -79,7 +79,6 @@ Route::view('/credits', 'credits')
 /**
  * 2. User, platform registration - user
  */
-require __DIR__ . '/auth.php';
 // user dashboard
 Route::view('/user/dashboard', 'dashboard')
     ->middleware(['auth', 'verified'])
@@ -101,6 +100,12 @@ Route::get('/admin/user/contact/listed', User\Contact\Listed::class)
     ->middleware(['auth', 'verified', 'can:viewAny,' . ModelsUserContact::class])
     ->name('user-contact.listed');
 // user-contact add - no,
+
+// Alias per compatibilità con i componenti Jetstream (Navigation)
+Route::get('/user/contact/profile', User\Contact\Show::class)
+    ->middleware(['auth', 'verified', 'can:view,' . ModelsUserContact::class])
+    ->name('profile.show');
+
 // user-contact show - user | admin
 Route::get('/user/contact/show/{userContact?}', User\Contact\Show::class)
 ->middleware(['auth', 'verified', 'can:view,' . ModelsUserContact::class])
@@ -454,3 +459,13 @@ Route::get(
 /**
  * end of list
  */
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});

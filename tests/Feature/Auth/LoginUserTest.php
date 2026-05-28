@@ -38,9 +38,9 @@ it('can authenticate using the login screen', function () {
     // assert* - assert
     Volt::test('pages.auth.login')
         ->set('form.email', $user->email)
-        ->set('form.password', $user->email) // it's a default in factory
-        ->set('form.remember', true) // checkbox
-        ->call('login') // method
+        ->set('form.password', 'Password@12345') //  see factory
+        ->set('form.remember', true) //              checkbox
+        ->call('login') //                           method
         ->assertHasNoErrors()
         ->assertRedirect(route('user.dashboard', absolute: false));
 
@@ -56,9 +56,9 @@ it('fails validation with invalid inputs', function ($email, $password, $errorFi
         ->call('login')
         ->assertHasErrors(["form.$errorField"]);
 })->with([
-    // Arrange                email,          password,      field
-    'empty email'         => ['',             'password123', 'email'],
-    'wrong email'         => ['not-an-email', 'password123', 'email'],
-    'empty password'      => ['test@example.com', '',        'password'],
-    'too short password'  => ['test@example.com', '123',     'password'],
+    // Arrange                email,              password,      field
+    'empty email'         => ['',                 'Password@12345', 'email'],
+    'wrong email'         => ['not-an-email',     'Password@12345', 'email'],
+    'empty password'      => ['test@example.com', '',               'password'],
+    'too short password'  => ['test@example.com', 'Pass@123',       'password'],
 ]);
