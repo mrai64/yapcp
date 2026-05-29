@@ -2,9 +2,8 @@
 /**
  * Open Contest - list
  * Reserved for: contest participants
- * 
+ *
  * 2025-12-05 used relations ->country ->organization
- * 2026-05-28 apply livewire 4 envelope x-app-layout
  *
  */
 
@@ -17,7 +16,7 @@
         <h2 class="fyk text-2xl my-6">
             {{ __("Open Contest List") }}
         </h2>
-        <p class="text-sm">
+        <p class="max-w-4xl mx-auto text-sm">
             {{ __("After U registered in platform, after U load your better works and masterpiece, ") }}
             {{ __("that's the moment to put in the green grass and play your game.") }}
             {{ __("Read the Open Contest list, choice a contest at time and ") }}
