@@ -11,6 +11,8 @@
                     </header>
 
                     <main class="mt-6 max-w-l mx-auto lg:mt-16 lg:max-w-4xl min-h-screen h-full">
+                        @if(!session()->has('welcome_shown'))
+                        <!-- one time message -->
                         <p class="mb-4">🇬🇧 Welcome to Photo Contest Platform, <br />
                             <em>our mission</em> is help <strong>you</strong> to have
                             a comfortable way to participate or organize Photo Contest everywhere you are.
@@ -39,6 +41,9 @@
                                 </li>
                             </ul>
                         </p>
+                        @php session()->put('welcome_shown', true); @endphp
+                        <!--/one time message -->
+                        @endif
 
                         @auth
                         <p class="fyk text-2xl text-center my-6">
