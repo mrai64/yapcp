@@ -29,7 +29,7 @@
   - [Admit status assignment](#)
   - *[Section Awards assignments](#)*
   - [Contest Awards assignments](#)
-  - *[Contest Board of partcipants](#)*
+  - *[Contest Board of participants](#)*
   - [Contest Board of Works partcipants](#)
 
 - ## You as Juror
