@@ -48,7 +48,7 @@
         <div>
             <label for="name"
                 class="block mt-4 font-medium text-sm text-gray-700">
-                {{__('name')}}
+                {{ __('Name') }}
                 | {{ __("readonly")}}
             </label>
             <input
