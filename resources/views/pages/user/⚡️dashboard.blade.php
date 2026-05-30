@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * User dashboard
+ *
+ */
 use function Livewire\Volt\{state, with};
 
 // Pass the authenticated user to the Blade view
@@ -98,21 +102,21 @@ with([
 
             @can('access-juror')
             <div class="bg-indigo-50 border-l-4 border-indigo-500 overflow-hidden shadow-xl sm:rounded-lg p-6">
-                <h3 class="text-lg font-bold mb-4 text-indigo-900">{{ __("As Jury member") }}</h3>
+                <h3 class="fyk text-xl font-bold mb-4">{{ __("As Jury member") }}</h3>
                 <livewire:contest.jury.listed />
             </div>
             @endcan
 
             @can('access-organization')
             <div class="bg-green-50 border-l-4 border-green-500 overflow-hidden shadow-xl sm:rounded-lg p-6">
-                <h3 class="text-lg font-bold mb-4 text-green-900">{{ __("As Organization member") }}</h3>
+                <h3 class="fyk text-xl font-bold mb-4">{{ __("As Organization member") }}</h3>
                 <livewire:organization.dashboard />
             </div>
             @endcan
 
             @can('access-admin')
             <div class="bg-green-50 border-l-4 border-green-500 overflow-hidden shadow-xl sm:rounded-lg p-6">
-                <p class="text-red-700 font-bold">{{ __("As Admins member") }}</p>
+                <h3 class="fyk text-xl font-bold mb-4">{{ __("As Admins member") }}</h3>
                 <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
                     <a href="{{ route('admin.dashboard') }}" 
                         class="mt-2 inline-block bg-red-600 text-white px-4 py-2 rounded">
