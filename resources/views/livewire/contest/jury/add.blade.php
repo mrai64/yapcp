@@ -156,7 +156,7 @@ use App\Models\ContestSection;
                         <div class="mb-4">
                             <label for="jurorFirstName"
                                 class="block font-medium text-sm text-gray-700">
-                                {{ __('First name') }}
+                                {{ __('First Name') }}
                             </label>
                             <input type="text" name="jurorFirstName"
                                 wire:model.live.debounce.500ms="jurorFirstName" 
