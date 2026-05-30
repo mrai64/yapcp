@@ -69,7 +69,7 @@ with([
                 . .
                 <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
                     <a href="{{ route('user-role.add.organization') }}">
-                        [ {{ __("Add you in Org") }} ]
+                        [ {{ __("Add you in an Org") }} ]
                     </a>
                 </div>
                 . .
@@ -82,7 +82,7 @@ with([
                 . .
                 <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
                     <a href="{{ route('user-role.add.federation') }}">
-                        [ {{ __("Add you in Fed") }} ]
+                        [ {{ __("Add you in a Fed") }} ]
                     </a>
                 </div>
                 . .
@@ -94,10 +94,12 @@ with([
             </div>
 
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
-                <h3 class="fyk text-xl font-bold mb-4">{{ __("As Contest participant") }}</h3>
-                <a href="{{ route('contest.list') }}">
-                    [ {{ __("Open Contest List") }} ]
-                </a>
+                <h3 class="fyk text-xl font-bold mb-4">{{ __("As Contest(s) participant") }}</h3>
+                <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
+                    <a href="{{ route('contest.list') }}">
+                        [ {{ __("Open Contest List") }} ]
+                    </a>
+                </div>
             </div>
 
             @can('access-juror')

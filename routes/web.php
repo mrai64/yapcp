@@ -479,7 +479,7 @@ Route::middleware([
 /**
  * admin
  */
-Volt::route('/admin/dashboard', 'pages.admin.dashboard')
+Volt::route('/admin/dashboard', 'admin.⚡️dashboard')
     ->middleware(['auth', 'verified', 'can:access-admin'])
     ->name('admin.dashboard');
 
