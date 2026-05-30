@@ -72,7 +72,6 @@ use Illuminate\Support\Facades\Route;
 /**
  * 1. no model - guest
  */
-
 Route::view('/', 'welcome')
     ->name('welcome.aboard');
 Route::view('/credits', 'credits')
@@ -81,8 +80,7 @@ Route::view('/credits', 'credits')
 /**
  * 2. User, platform registration - user
  */
-// user dashboard
-Route::view('/user/dashboard', 'dashboard')
+Volt::route('/user/dashboard/{user?}', 'user.⚡️dashboard')
     ->middleware(['auth', 'verified'])
     ->name('user.dashboard');
 // change email and password
@@ -466,9 +464,8 @@ Route::get(
     ->name('contest-report-fiaf2');
 
 /**
- * end of list
+ * jetstream added
  */
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -478,3 +475,14 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+/**
+ * admin
+ */
+Volt::route('/admin/dashboard', 'pages.admin.dashboard')
+    ->middleware(['auth', 'verified', 'can:access-admin'])
+    ->name('admin.dashboard');
+
+/**
+ * end of list
+ */

@@ -5,7 +5,10 @@
         </h2>
         <hr />
         <p class="fyk text-xl font-medium mb-4">
-            <a  href="{{ route('federation.list') }}"
+            {{ __("In that place you can update only platform access infos.") }}
+            {{ __("Instead, if you need to change your contact infos, use that link:") }}
+            <br />
+            <a  href="{{ route('user-contact.modify1') }}"
                 rel="noopener noreferrer">
             [ {{ __('Your contact infos') }} ]
             </a>
