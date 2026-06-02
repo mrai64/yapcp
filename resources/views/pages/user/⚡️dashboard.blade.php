@@ -30,6 +30,19 @@ with([
                     [ {{ __("The Manual") }} ]
                     </a>
                 </div>
+                . .
+                <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
+                    <a href="{{ route('organization.list') }}">
+                        [ {{ __("Organization List") }} ]
+                    </a>
+                </div>
+                . .
+                <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
+                    <a href="{{ route('federation.list') }}">
+                        [ {{ __("Federation List") }} ]
+                    </a>
+                </div>
+                . .
             </div>
 
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
@@ -56,12 +69,6 @@ with([
                 . .
                 <br />
                 <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-                    <a href="{{ route('organization.list') }}">
-                        [ {{ __("Organization List") }} ]
-                    </a>
-                </div>
-                . .
-                <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
                     <a href="{{ route('user.organization.add') }}">
                         [ {{ __("Add a new Org") }} ]
                     </a>
@@ -74,12 +81,6 @@ with([
                 </div>
                 . .
                 <br />
-                <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-                    <a href="{{ route('federation.list') }}">
-                        [ {{ __("Federation List") }} ]
-                    </a>
-                </div>
-                . .
                 <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
                     <a href="{{ route('user-role.add.federation') }}">
                         [ {{ __("Add you in a Fed") }} ]
