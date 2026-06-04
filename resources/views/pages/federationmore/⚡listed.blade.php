@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * List 'federation more' fields for federation
+ *
+ */
 use App\Models\Federation;
 use App\Models\FederationMore;
 use function Livewire\Volt\state;

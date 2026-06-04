@@ -68,7 +68,14 @@
                 [ {{ __("'Federation more' field add") }} ]
             </a>
         </div>
+        . .
         @endif
+        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
+            <a href="{{ route('federation.list') }}">
+                [ {{ __("Federation List") }} ]
+            </a>
+        </div>
+        . .
     </x-slot>
 
     <div class="py-12">

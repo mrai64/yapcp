@@ -63,10 +63,12 @@ class FederationMore extends Model
     protected $fillable = [
         'id', //                     pk standard bigint
         'federation_id', //          fk federations.id
+        'referenced_table', //       real pk - lowercase
         'field_name', //             code
         'field_label', //            label
         'field_validation_rules', // use in rules()
         'field_default_value', //    used in report when userContactRole is missing
+        'field_suggest', //          plain text how fill field
         // created_at                reserved
         // updated_at                reserved
         // deleted_at                reserved
@@ -75,6 +77,15 @@ class FederationMore extends Model
     protected function casts()
     {
         return [
+            'id' => 'integer',
+            'federation_id' => 'string',
+            'referenced_table' => 'string',
+            'field_name' => 'string',
+            'field_label' => 'string',
+            'field_validation_rules' => 'string',
+            'field_default_value' => 'string',
+            'field_suggest' => 'string',
+            //
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
