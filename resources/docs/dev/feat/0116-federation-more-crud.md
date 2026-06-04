@@ -34,6 +34,7 @@ non siano presenti record nelle tabelle user_contact_mores e user_work_mores.
 
 Creare pagine per:
 
+- Elencare
 - Creare
 - Modificare
 - Cancellare
@@ -41,12 +42,12 @@ Creare pagine per:
 ## 🗄️ Modifiche al Database
 
 > <!-- to avoid index -->
-- [x] Verifica tabelle `federation_mores`
-- [ ] Integrazione controlli di integrità su `user_contact_mores`
-- [ ] Integrazione controlli di integrità su `user_work_mores`
+- [x] Creata tabella lookup `federation_mores_referenced_tables`
+- [x] Creata colonna `federation_mores.referenced_table` (string 40)
+- [x] Creata Factory e seeder per la tabella lookup, eseguito caricamento
+- [x] Modificato factory e seeder per la tabella `federation_mores`, eseguito caricamento
 
 ## 🚀 Note per il Deploy
 
 > <!-- to avoid index -->
-- Eseguire `php artisan migrate`
-- Aggiungere `STRIPE_SECRET` nel file .env
+- _Per ora nessuna modifica_
