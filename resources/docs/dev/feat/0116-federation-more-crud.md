@@ -20,6 +20,8 @@ questi devono essere accessibili solo ai membri del gruppo admin.
 Finora non sono state create perché sono record _molto statici_, ovvero
 per ogni federazione / organizzazione nazionale e internazionale che
 ai dati anagrafici dei concorrenti o delle opere chiede "dei dati in più".
+E, finora, sono sempre stati inseriti direttamente nel DB con un programma
+di interfaccia per mysql.
 Caso tipico: chiedere ai concorrenti i codice tessera della federazione.
 Esempio: per l'Italia la locale FIAF chiede anche il Tax ID italiano detto 'codice fiscale'.  
 
