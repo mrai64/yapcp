@@ -60,7 +60,7 @@ new class extends Component
 
         $federationMore = FederationMore::updateOrCreate(
             [
-                'reference_table' => $validate['referencedTable'],
+                'referenced_table' => $validate['referencedTable'],
                 'federation_id' => $this->federationId,
             ],
             [
@@ -120,7 +120,7 @@ new class extends Component
                     {{ ($referencedTableItem->reference_table === $referencedTable ) ? 'selected' : '' }}>{{ $referencedTableItem->reference_table }}</option>
                 @endforeach
             </select>
-            @error('referenceTable')
+            @error('referencedTable')
             <div class="small"> {{ $message }} </div>
             @enderror
         </div>
