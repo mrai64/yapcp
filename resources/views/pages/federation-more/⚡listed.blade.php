@@ -70,33 +70,36 @@ mount(function (Federation $federation) {
                             <tbody class="divide-y divide-gray-100">
                                 @foreach($mores as $more)
                                     <tr class="hover:bg-gray-50 transition duration-150">
-                                        <td class="py-3 px-4 text-sm font-medium text-gray-900">
+                                        <td class="py-3 px-4 text-sm font-medium text-gray-900 text-align-top">
                                             <span class="px-2 py-1 text-xs font-semibold bg-indigo-50 text-indigo-700 rounded-full border border-indigo-100">
                                                 {{ $more->referenced_table }}
                                             </span>
                                         </td>
-                                        <td class="py-3 px-4 text-sm font-mono font-bold text-gray-900">
+                                        <td class="py-3 px-4 text-sm font-mono font-bold text-gray-900 text-align-top">
                                             {{ $more->field_name }}
                                         </td>
-                                        <td class="py-3 px-4 text-sm text-gray-700">
+                                        <td class="py-3 px-4 text-sm text-gray-700 text-align-top">
                                             {{ $more->field_label }}
                                         </td>
-                                        <td class="py-3 px-4 text-sm font-mono text-gray-600">
+                                        <td class="py-3 px-4 text-sm font-mono text-gray-600 text-align-top">
                                             {{ $more->field_validation_rules }}
                                         </td>
-                                        <td class="py-3 px-4 text-sm text-gray-600">
+                                        <td class="py-3 px-4 text-sm text-gray-600 text-align-top">
                                             {{ $more->field_default_value }}
                                         </td>
-                                        <td class="py-3 px-4 text-sm text-gray-500 italic">
+                                        <td class="py-3 px-4 text-sm text-gray-500 italic text-align-top">
                                             {{ $more->field_suggest }}
                                         </td>
-                                        <td class="py-3 px-4 text-sm text-right space-x-2">
-                                            <a href="{{ route('federation-more.modify', ['federationMore' => $more->id]) }}" class="text-indigo-600 hover:text-indigo-900 font-semibold">
-                                                [ {{ __('Modify') }} ]
-                                            </a>
-                                            <a href="{{ route('federation-more.delete', ['federationMore' => $more->id]) }}" class="text-red-600 hover:text-red-900 font-semibold">
-                                                [ {{ __('Remove') }} ]
-                                            </a>
+                                        <td class="py-3 px-4 text-sm text-right space-x-2 text-align-top" nowrap>
+                                            <p class="fyk text-xl font-medium mb-4">
+                                                <a href="{{ route('federation-more.modify', ['federation_more' => $more]) }}" class="text-indigo-600 hover:text-indigo-900 font-semibold">
+                                                    [ {{ __('Modify') }} ]
+                                                </a>
+                                                <br /
+                                                <a href="{{ route('federation-more.delete', ['federation_more' => $more]) }}" class="text-red-600 hover:text-red-900 font-semibold">
+                                                    [ {{ __('Remove') }} ]
+                                                </a>
+                                            </p>
                                         </td>
                                     </tr>
                                 @endforeach

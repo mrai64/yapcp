@@ -2,7 +2,6 @@
 
 namespace App\Policies;
 
-use App\Models\FederationMore;
 use App\Models\User;
 
 class FederationMorePolicy
@@ -19,7 +18,7 @@ class FederationMorePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, FederationMore $federationMore): bool
+    public function view(User $user, $federationMore): bool
     {
         // view for all
         return true;
@@ -40,7 +39,7 @@ class FederationMorePolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, FederationMore $federationMore): bool
+    public function update(User $user, $federation_more = null): bool
     {
         // only for user in admin group
         ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
@@ -52,7 +51,7 @@ class FederationMorePolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, FederationMore $federationMore): bool
+    public function delete(User $user, $federation_more = null): bool
     {
         // only for user in admin group
         ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
@@ -64,7 +63,7 @@ class FederationMorePolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, FederationMore $federationMore): bool
+    public function restore(User $user, $federationMore): bool
     {
         // only for user in admin group
         ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
@@ -76,7 +75,7 @@ class FederationMorePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, FederationMore $federationMore): bool
+    public function forceDelete(User $user, $federationMore): bool
     {
         // only for user in admin group
         ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');

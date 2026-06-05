@@ -13,8 +13,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -74,7 +76,7 @@ class FederationMore extends Model
         // deleted_at                reserved
     ];
 
-    protected function casts()
+    protected function casts(): array
     {
         return [
             'id' => 'integer',
@@ -97,15 +99,22 @@ class FederationMore extends Model
     // RELATIONSHIP
 
     // federation_mores.federation_id > federations.id
-    public function federation()
+    public function federation(): BelongsTo
     {
-        $federation = $this->belongsTo(Federation::class, 'id', 'federation_id');
+        $federation = $this->belongsTo(
+            Federation::class,
+            'federation_id',
+            'id'
+        );
         // Log
         return $federation;
     }
 
+    // federation_mores.related_table > federation_mores_related_tables.referenced_table
+    // spoiler: no
+
     // federation_mores.federation_id > user_contact_mores.federation_id
-    public function userMores()
+    public function userMores(): HasMany
     {
         $moreFields = $this->hasMany(
             related: UserContactMore::class,
