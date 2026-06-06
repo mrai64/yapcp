@@ -8,28 +8,28 @@
 - ## You as Contest Participants
 
   - [Registration](/{{route}}/{{version}}/users/registration)  
-  - *[Login](/{{route}}/{{version}}/users/registration#login)*
+  - [Login](/{{route}}/{{version}}/users/registration#login)
   - [Contact Info](/{{route}}/{{version}}/users/contact_infos)
-  - *[Personal Dashboard](/{{route}}/{{version}}/users/dashboard)*
+  - [Personal Dashboard](/{{route}}/{{version}}/users/dashboard)
   - [Personal Gallery](/{{route}}/{{version}}/users/works_gallery)
-  - *[Participate to contest](#)*
+  - [Participate to contest](#)
 
 - ## You as Contest Organizer
 
   - [Define your Organization](#)
-  - *[Add yourself to a registered Organization](#)*
+  - [Add yourself to a registered Organization](#)
   - [Howto open a Contest](#)
-  - *[Main info n Calendar](#)*
+  - [Main info n Calendar](#)
   - [Section n Themes](#)
-  - *[Jury members](#)*
+  - [Jury members](#)
   - [Section Awards](#)
-  - *[Contest Awards](#)*
+  - [Contest Awards](#)
   - [Participant Works Review](#)
-  - *[Jury vote Board](#)*
+  - [Jury vote Board](#)
   - [Admit status assignment](#)
-  - *[Section Awards assignments](#)*
+  - [Section Awards assignments](#)
   - [Contest Awards assignments](#)
-  - *[Contest Board of participants](#)*
+  - [Contest Board of participants](#)
   - [Contest Board of Works partcipants](#)
 
 - ## You as Juror

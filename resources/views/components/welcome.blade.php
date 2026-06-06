@@ -128,9 +128,9 @@
         . .
         <br style="clear:both;" />
         <p class="small">
-            {{ __("Your personal data will be used when you want to register ") }}
-            {{ __("for the next photo contest, or to contact you if you are  ") }}
-            {{ __("chosen as judges of a contest.                            ") }}
+            {{ __("Your personal data will be used when you want to register") }}
+            {{ __("for the next photo contest, or to contact you if you are") }}
+            {{ __("chosen as judges of a contest.") }}
         </p>
         <br />
         <hr class="my-4" />
