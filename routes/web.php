@@ -223,20 +223,20 @@ Route::delete('/admin/federation/section/remove/{federation-section}', Federatio
  *
  */
 // federation-more list
-Volt::route('/federation/more/list/{federation}', 'federation-more.⚡listed')
+Volt::route('/federation-more/list/{federation}', 'federation-more.⚡listed') // pick name from filesystem
     ->middleware(['auth', 'verified'])
     ->name('federation-more.list');
 // federation-more add
-Volt::route('/admin/federation/more/add/{federation}', 'federation-more.⚡add')
+Volt::route('/admin/federation-more/add/{federation}', 'federation-more.⚡add')
     ->middleware(['auth', 'verified', 'can:create,' . ModelsFederationMore::class])
     ->name('federation-more.add');
 // federation-more modify
-Volt::route('/admin/federation/more/modify/{federation_more}', 'federation-more.⚡modify')
-    ->middleware(['auth', 'verified', 'can:update,federation_more'])
+Volt::route('/admin/federation-more/modify/{federation_more}', 'federation-more.⚡modify')
+    ->middleware(['auth', 'verified'])
     ->name('federation-more.modify');
 // federation-more remove
-Volt::route('/admin/federation/more/remove/{federation_more}', 'federation-more.⚡remove')
-    ->middleware(['auth', 'verified', 'can:delete,federation_more'])
+Volt::route('/admin/federation-more/remove/{federation_more}', 'federation-more.⚡remove')
+    ->middleware(['auth', 'verified'])
     ->name('federation-more.delete');
 
 /**
