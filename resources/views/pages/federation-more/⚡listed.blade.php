@@ -34,17 +34,21 @@ mount(function (Federation $federation) {
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                 <div class="flex justify-between items-center mb-6">
                     <div>
-                        <h3 class="fyk text-xl font-bold">{{ __("Custom Fields List") }}</h3>
+                        <h3 class="fyk text-xl font-bold">
+                            {{ __("Custom Fields List") }}
+                        </h3>
                         <p class="text-sm text-gray-600 mt-1">
                             {{ __("These custom fields are specifically requested by :name for user contacts or works.", ['name' => $federation->name_en]) }}
                         </p>
                     </div>
                     <div class="flex gap-4">
-                        <a href="{{ route('federation.modify', ['federation' => $federation]) }}" class="inline-flex items-center px-4 py-2 bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-300 transition duration-150">
+                        <a href="{{ route('federation.modify', ['federation' => $federation]) }}" 
+                            class="inline-flex items-center px-4 py-2 bg-gray-200 border border-transparent rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest hover:bg-gray-300 transition duration-150">
                             &larr; {{ __('Federation') }}
                         </a>
-                        <a href="{{ route('federation-more.add', ['federation' => $federation]) }}" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 transition duration-150">
-                            {{ __('Add new field') }}
+                        <a href="{{ route('federation-more.add', ['federation' => $federation]) }}" 
+                            class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 transition duration-150">
+                            + {{ __('Add new field') }}
                         </a>
                     </div>
                 </div>
@@ -95,7 +99,7 @@ mount(function (Federation $federation) {
                                                 <a href="{{ route('federation-more.modify', ['federation_more' => $more]) }}" class="text-indigo-600 hover:text-indigo-900 font-semibold">
                                                     [ {{ __('Modify') }} ]
                                                 </a>
-                                                <br /
+                                                <br />
                                                 <a href="{{ route('federation-more.delete', ['federation_more' => $more]) }}" class="text-red-600 hover:text-red-900 font-semibold">
                                                     [ {{ __('Remove') }} ]
                                                 </a>
@@ -108,7 +112,7 @@ mount(function (Federation $federation) {
                     </div>
                 @endif
             </div>
-
+            <x-footer-app />
         </div>
     </div>
 </div>

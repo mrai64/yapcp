@@ -16,7 +16,7 @@ class FederationMoreSeeder extends Seeder
         // run after FederationSeeder
         FederationMore::factory()->create([
             'federation_id' => 'FIAP',
-            'referenced_table' => 'user_contacts',
+            'referenced_table' => 'user_contact_mores',
             'field_name' => 'cardId', //    may change ?personal number?
             'field_label' => 'Card Id', //  may change ?personal number?
             'field_validation_rules' => 'required|string|size:6|regex:/^[0-9]+$/',
@@ -26,7 +26,7 @@ class FederationMoreSeeder extends Seeder
 
         FederationMore::factory()->create([
             'federation_id' => 'FIAF',
-            'referenced_table' => 'user_contacts',
+            'referenced_table' => 'user_contact_mores',
             'field_name' => 'cardId',
             'field_label' => "Card Id",
             'field_validation_rules' => 'required|string|size:6|regex:/^0[0-9]{5}$/',
@@ -35,7 +35,7 @@ class FederationMoreSeeder extends Seeder
         ]);
         FederationMore::factory()->create([
             'federation_id' => 'FIAF',
-            'referenced_table' => 'user_contacts',
+            'referenced_table' => 'user_contact_mores',
             'field_name' => 'italianTaxId',
             'field_label' => 'Italian Tax Id',
             'field_validation_rules' => 'required|string|size:16|regex:/^[XXXXXXXXXXXXXXXX]|[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][+$/',
@@ -44,7 +44,7 @@ class FederationMoreSeeder extends Seeder
         ]);
         FederationMore::factory()->create([
             'federation_id' => 'FIAF',
-            'referenced_table' => 'user_works',
+            'referenced_table' => 'user_work_mores',
             'field_name' => 'reference_year',
             'field_label' => 'First admit year',
             'field_validation_rules' => 'required|string|size:4|regex:/^[0-9]+$/',
@@ -53,7 +53,7 @@ class FederationMoreSeeder extends Seeder
         ]);
         FederationMore::factory()->create([
             'federation_id' => 'FIAF',
-            'referenced_table' => 'user_contacts',
+            'referenced_table' => 'user_contact_mores',
             'field_name' => 'fiafDistinctions',
             'field_label' => 'FIAF Distinction(s)',
             'field_validation_rules' => 'string|maxsize:255',

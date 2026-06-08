@@ -20,6 +20,7 @@ state([
     'federation',
     'referencedTableSet' => [],
     'federationId' => null,
+    'isInUse' => false,
     'referencedTable' => '',
     'fieldName' => '',
     'fieldLabel' => '',
@@ -33,7 +34,7 @@ mount(function (FederationMore $federation_more) {
     Log::info('Component ' . __FILE__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
 
     // Autorizzazione esplicita: se fallisce, lancia 403 e vedrai i log ds() nella Policy
-    $this->authorize('update', $federation_more);
+    $this->authorize('delete', $federation_more);
 
     $this->federationMore = $federation_more;
     $this->federation = $federation_more->federation;
@@ -46,11 +47,20 @@ mount(function (FederationMore $federation_more) {
     $this->fieldValidation = $federation_more->field_validation_rules;
     $this->fieldDefault = $federation_more->field_default_value;
     $this->fieldSuggest = $federation_more->field_suggest;
+    
+    // Controllo integrità: il record non può essere eliminato se è già in uso
+    $this->isInUse = $federation_more->isInUse();
 });
 
 $removeFederationMore = function (){
     Log::info('Component ' . __FILE__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
-    // Usiamo l'istanza già caricata per fare l'update
+
+    if ($this->federationMore->isInUse()) {
+        session()->flash('error', __('Cannot delete: this field is already associated with existing data.'));
+        return;
+    }
+
+    // Usiamo l'istanza già caricata per fare il delete
     $this->federationMore->delete([
         'id' => $this->federationMore->id,
     ]);
@@ -83,16 +93,26 @@ $removeFederationMore = function (){
         </p>
     </x-slot>
 
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
             <form wire:submit="removeFederationMore">
                 @csrf
-                <button type="submit" 
-                    class="inline-flex items-center px-4 py-2 m-0 mt-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-3"
+
+                @if($isInUse)
+                <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4" role="alert">
+                    <p class="font-bold">{{ __('Action Prohibited') }}</p>
+                    <p>{{ __('This configuration is currently in use by users or works. Deletion is disabled to protect data integrity.') }}</p>
+                </div>
+                @else
+                <button type="submit"
+                    class="inline-flex items-center px-4 py-2 m-0 mt-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-3 {{ $isInUse ? 'opacity-50 cursor-not-allowed' : '' }}"
                     >
                     {{ __('Check, then delete') }}
                 </button>
+                @endif
+                <br><br>
 
                 <!-- referenced table -->
                 <div class="mb-4">
@@ -192,7 +212,7 @@ $removeFederationMore = function (){
                 <hr />
 
             </form>
-
+            <x-footer-app />
         </div>
     </div>
 </div>

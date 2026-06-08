@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @property int $id
@@ -123,5 +124,31 @@ class FederationMore extends Model
         );
         // log
         return $moreFields;
+    }
+
+    // IS...
+
+    /**
+     * Loop over the, few but dynamically listed, referenced_table in
+     * federation_mores_referenced_tables to check if "is in use"
+     * in the table itself - first true exit true
+     */
+    public function isInUse(): bool
+    {
+        // Recuperiamo tutte le tabelle di riferimento registrate
+        $referencedTables = FederationMoresReferencedTable::all();
+
+        foreach ($referencedTables as $ref) {
+            $dataTable = $ref->referenced_table ?? null;
+
+            if ($dataTable && DB::table($dataTable)
+                ->where('federation_id', $this->federation_id)
+                ->where('field_name', $this->field_name)
+                ->exists()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

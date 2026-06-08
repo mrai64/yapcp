@@ -69,8 +69,9 @@ $addFederationMore = function (){
     Log::info('Component ' . __FILE__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ 
         . ' federationMore:' . json_encode($federationMore) );
     // redirect
+    // redirect
     return redirect()
-        ->route('federation.modify', ['federation' => $this->federation])
+        ->route('federation-more.list', ['federation' => $this->federation])
         ->with('success', __('New federation-more field added, well done!'));
 };
 
@@ -100,17 +101,12 @@ $addFederationMore = function (){
                 @csrf
                 <!-- referenced table -->
                 <div class="mb-4">
-                    <label for="referencedTable"
-                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" >
-                        {{ __("Referenced table") }}
-                        | {{__('required')}}
-                    </label>
+                    <x-input-label for="referencedTable" :value="__('Referenced table')" />
                     <select 
                         class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
                         wire:model.live="referencedTable"
                         name="referencedTable" 
-                        required="required"
-                    >
+                        required="required">
                         <option value="">{{ __('Select a table...') }}</option>
                         @foreach ($referencedTableSet as $referencedTableItem)
                             <option value="{{ trim($referencedTableItem['referenced_table']) }}">
@@ -118,121 +114,55 @@ $addFederationMore = function (){
                             </option>
                         @endforeach
                     </select>
-                    @error('referencedTable')
-                    <div class="small"> {{ $message }} </div>
-                    @enderror
+                    <x-input-error for="referencedTable" class="mt-2" />
                 </div>
 
                 <!-- field name -->
-                <div>
-                    <label for="fieldName" 
-                        class="block mt-4 font-medium text-sm text-gray-700"
-                        >
-                        {{__('Field name')}}
-                        | {{__('required')}}
-                    </label>
-                    <input 
-                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                        type="text" name="fieldName" 
-                        wire:model="fieldName"
-                        required="required"
-                        placeholder="{{ __('camelCase, english') }}"
-                        />
-                    @error('fieldName')
-                    <div class="alert alert-danger small">{{ $message }}</div>
-                    @enderror
-                </div><!-- field name -->
+                <div class="mb-4">
+                    <x-input-label for="fieldName" :value="__('Field label')" />
+                    <x-text-input wire:model="fieldName" id="fieldName" class="block mt-1 w-full" type="text" name="fieldName" required placeholder="{{ __('clear label for field name, english') }}"/>
+                    <x-input-error for="fieldName" class="mt-2" />
+                </div>
+                <!--/field name -->
 
                 <!-- field label -->
-                <div>
-                    <label for="fieldLabel" 
-                        class="block mt-4 font-medium text-sm text-gray-700"
-                        >
-                        {{__('Field label')}}
-                        | {{__('required')}}
-                    </label>
-                    <input 
-                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                        type="text" name="fieldLabel" 
-                        wire:model="fieldLabel"
-                        required="required"
-                        placeholder="{{ __('clear label for field name, english') }}"
-                        />
-                    @error('fieldLabel')
-                    <div class="alert alert-danger small">{{ $message }}</div>
-                    @enderror
-                </div><!-- field label -->
+                <div class="mb-4">
+                    <x-input-label for="fieldLabel" :value="__('Field name')" />
+                    <x-text-input wire:model="fieldLabel" id="fieldLabel" class="block mt-1 w-full" type="text" name="fieldLabel" required placeholder="{{ __('camelCase, english') }}"/>
+                    <x-input-error for="fieldLabel" class="mt-2" />
+                </div>
+                <!--/field label -->
 
                 <!-- field validation rules -->
-                <div>
-                    <label for="fieldValidation" 
-                        class="block mt-4 font-medium text-sm text-gray-700"
-                        >
-                        {{__('Field validation rules')}}
-                        | {{__('required')}}
-                    </label>
-                    <input 
-                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                        type="text" name="fieldValidation" 
-                        wire:model="fieldValidation"
-                        required="required"
-                        placeholder="{{ __('rules to validate field, in laravel way') }}"
-                        />
-                    @error('fieldValidation')
-                    <div class="alert alert-danger small">{{ $message }}</div>
-                    @enderror
-                </div><!-- field validation rules -->
+                <div class="mb-4">
+                    <x-input-label for="fieldValidation" :value="__('Field validation rules')" />
+                    <x-text-input wire:model="fieldValidation" id="fieldValidation" class="block mt-1 w-full" type="text" name="fieldValidation" required placeholder="{{ __('rules to validate field, in laravel way') }}"/>
+                    <x-input-error for="fieldValidation" class="mt-2" />
+                </div>
+                <!--/field validation rules -->
 
                 <!-- field default value -->
-                <div>
-                    <label for="fieldDefault" 
-                        class="block mt-4 font-medium text-sm text-gray-700"
-                        >
-                        {{__('Field default value')}}
-                        | {{__('required')}}
-                    </label>
-                    <input 
-                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                        type="text" name="fieldDefault" 
-                        wire:model="fieldDefault"
-                        required="required"
-                        placeholder="{{ __('that value is used when field is missing') }}"
-                        />
-                    @error('fieldDefault')
-                    <div class="alert alert-danger small">{{ $message }}</div>
-                    @enderror
-                </div><!-- field default value -->
+                <div class="mb-4">
+                    <x-input-label for="fieldDefault" :value="__('Field default value')" />
+                    <x-text-input wire:model="fieldDefault" id="fieldDefault" class="block mt-1 w-full" type="text" name="fieldDefault" required placeholder="{{ __('value used when user´ field is missing') }}"/>
+                    <x-input-error for="fieldDefault" class="mt-2" />
+                </div>
+                <!--/field default value -->
 
                 <!-- field suggest -->
-                <div>
-                    <label for="fieldSuggest" 
-                        class="block mt-4 font-medium text-sm text-gray-700"
-                        >
-                        {{__('Field suggest')}}
-                        | {{__('required')}}
-                    </label>
-                    <input 
-                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                        type="text" name="fieldSuggest" 
-                        wire:model="fieldSuggest"
-                        required="required"
-                        placeholder="{{ __('a short suggestion for the field') }}"
-                        />
-                    @error('fieldSuggest')
-                    <div class="alert alert-danger small">{{ $message }}</div>
-                    @enderror
-                </div><!-- field suggest -->
+                <div class="mb-4">
+                    <x-input-label for="fieldSuggest" :value="__('Field suggest')" />
+                    <x-text-input wire:model="fieldSuggest" id="fieldSuggest" class="block mt-1 w-full" type="text" name="fieldSuggest" required placeholder="{{ __('a short suggestion for the field') }}"/>
+                    <x-input-error for="fieldSuggest" class="mt-2" />
+                </div>
+                <!--/field suggest -->
 
-                <hr />
-
-                <button type="submit" 
-                    class="inline-flex items-center px-4 py-2 m-0 mt-4 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-3"
-                    >
+                <x-button class="mt-2 ms-4">
                     {{ __('Add new') }}
-                </button>
+                </x-button>
 
             </form>
-
+            <x-footer-app />
         </div>
     </div>
 </div>

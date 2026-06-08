@@ -18,6 +18,7 @@ state([
     'federationMore',
     'federation',
     'referencedTableSet' => [],
+    'isInUse' => true,
     'federationId' => null,
     'referencedTable' => '',
     'fieldName' => '',
@@ -30,7 +31,7 @@ state([
 // first
 mount(function (FederationMore $federation_more) {
     Log::info('Component ' . __FILE__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
-    
+
     // Autorizzazione esplicita: se fallisce, lancia 403 e vedrai i log ds() nella Policy
     $this->authorize('update', $federation_more);
     // Se usi il middleware 'can' nella rotta, questo è tecnicamente ridondante 
@@ -48,6 +49,8 @@ mount(function (FederationMore $federation_more) {
     $this->fieldValidation = $federation_more->field_validation_rules;
     $this->fieldDefault = $federation_more->field_default_value;
     $this->fieldSuggest = $federation_more->field_suggest;
+
+    $this->isInUse = $federation_more->isInUse(); // lock the record when true
 });
 
 // to validate
@@ -98,8 +101,8 @@ $modifyFederationMore = function (){
         <hr />
         <br />
         <p class="small">
-            {{ __("The federation more field are required fields that interest only a federation adn not is a common field.")}}
-            {{ __("I.e. the federation card id si a federation-more field, when surname not, it's a common field.")}}
+            {{ __("The /federation more field/ are fields required only by a federation and is not a /common field/.")}}
+            {{ __("I.e. name, surname are /common fields/, the federation card id is a /federation more field/.")}}
         </p>
         <p class="fyk text-xl font-medium mb-4">
             <a href="{{ route('federation.modify', ['federation' => $federation]) }}">
@@ -111,6 +114,13 @@ $modifyFederationMore = function (){
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
+            @if($isInUse)
+                <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4" role="alert">
+                    <p class="font-bold">{{ __('Notice') }}</p>
+                    <p>{{ __('This field is already in use. To protect data integrity, cannot be changed.') }}</p>
+                </div>
+            @endif
+
             <form wire:submit="modifyFederationMore">
                 @csrf
                 <!-- referenced table -->
@@ -120,11 +130,16 @@ $modifyFederationMore = function (){
                         {{ __("Referenced table") }}
                         | {{__('required')}}
                     </label>
-                    <select 
-                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                    <select
+                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full {{ $isInUse ? 'bg-gray-100 cursor-not-allowed' : '' }}"
                         wire:model.live="referencedTable"
-                        name="referencedTable" 
+                        name="referencedTable"
                         required="required"
+                        @if($isInUse)
+                            disabled
+                            title="{{ __('Cannot change reference table once data is associated.') }}"
+                        @endif
+
                     >
                         <option value="">{{ __('Select a table...') }}</option>
                         @foreach ($referencedTableSet as $referencedTableItem)
@@ -133,6 +148,11 @@ $modifyFederationMore = function (){
                             </option>
                         @endforeach
                     </select>
+
+                    @if($isInUse)
+                        <input type="hidden" name="referencedTable" wire:model="referencedTable">
+                    @endif
+
                     @error('referencedTable')
                     <div class="small"> {{ $message }} </div>
                     @enderror
@@ -247,7 +267,7 @@ $modifyFederationMore = function (){
                 </button>
 
             </form>
-
+            <x-footer-app />
         </div>
     </div>
 </div>
