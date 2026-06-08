@@ -16,7 +16,7 @@ test('federation-more-fields list access by an admin', function () {
     $this->actingAs($this->admin)
         ->get(route('federation-more.list', ['federation' => $this->federation]))
         ->assertStatus(200)
-        ->assertSee($this->federation->name_en); 
+        ->assertSee($this->federation->name_en);
 });
 
 test('an admin can reach federation-more-field add page', function () {
@@ -29,7 +29,7 @@ test('an admin can reach federation-more-field add page', function () {
 test('an admin can add a federation-more-field record', function () {
     $this->actingAs($this->admin);
 
-    Volt::test('federation-more.⚡add', ['federation' => $this->federation] ) // component file name
+    Volt::test('federation-more.⚡add', ['federation' => $this->federation]) // component file name
         ->set('referencedTable', 'user_contact_mores') // valid value
         ->set('fieldName', 'ItalianTaxId')
         ->set('fieldLabel', 'Codice Fiscale')
@@ -57,7 +57,8 @@ test('an admin can reach federation-more-field modify page', function () {
             'field_validation_rules' => 'string',
             'field_default_value' => 'XXXXXXXXXXXXXXXX',
             'field_suggest' => 'Suggest'
-        ]);
+        ]
+    );
 
     $this->actingAs($this->admin)
         ->get(route('federation-more.modify', $federationMore))
@@ -75,7 +76,8 @@ test('an admin can update a federation-more-field record', function () {
             'field_validation_rules' => 'string',
             'field_default_value' => 'XXXXXXXXXXXXXXXX',
             'field_suggest' => 'Suggest'
-        ]);
+        ]
+    );
 
     $this->actingAs($this->admin);
 
@@ -98,7 +100,8 @@ test('an admin can remove a federation-more-field record', function () {
             'field_validation_rules' => 'string',
             'field_default_value' => 'XXXXXXXXXXXXXXXX',
             'field_suggest' => 'Suggest'
-        ]);
+        ]
+    );
 
     $this->actingAs($this->admin);
 
@@ -108,7 +111,7 @@ test('an admin can remove a federation-more-field record', function () {
         ->assertRedirect(route('federation-more.list', $this->federation));
 
     // was:     $this->assertDatabaseMissing('federation_mores', ['id' => $federationMore->id]);
-    // ok only for phisical deletion, for softdeete instead must be used 
+    // ok only for phisical deletion, for softdeete instead must be used
     $this->assertSoftDeleted($federationMore);
 });
 
