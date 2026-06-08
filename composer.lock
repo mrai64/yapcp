@@ -5,7 +5,6 @@
         "This file is @generated automatically"
     ],
     "content-hash": "7ab4291056cbf3ed0f43342b0e55363b",
-    "content-hash": "7ab4291056cbf3ed0f43342b0e55363b",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -5669,7 +5668,6 @@
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v8.0.13",
             "version": "v8.1.0",
             "source": {
                 "type": "git",
