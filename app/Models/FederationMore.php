@@ -13,9 +13,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 /**
  * @property int $id
@@ -63,18 +66,29 @@ class FederationMore extends Model
     protected $fillable = [
         'id', //                     pk standard bigint
         'federation_id', //          fk federations.id
+        'referenced_table', //       real pk - lowercase
         'field_name', //             code
         'field_label', //            label
         'field_validation_rules', // use in rules()
         'field_default_value', //    used in report when userContactRole is missing
+        'field_suggest', //          plain text how fill field
         // created_at                reserved
         // updated_at                reserved
         // deleted_at                reserved
     ];
 
-    protected function casts()
+    protected function casts(): array
     {
         return [
+            'id' => 'integer',
+            'federation_id' => 'string',
+            'referenced_table' => 'string',
+            'field_name' => 'string',
+            'field_label' => 'string',
+            'field_validation_rules' => 'string',
+            'field_default_value' => 'string',
+            'field_suggest' => 'string',
+            //
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
@@ -86,15 +100,22 @@ class FederationMore extends Model
     // RELATIONSHIP
 
     // federation_mores.federation_id > federations.id
-    public function federation()
+    public function federation(): BelongsTo
     {
-        $federation = $this->belongsTo(Federation::class, 'id', 'federation_id');
+        $federation = $this->belongsTo(
+            Federation::class,
+            'federation_id',
+            'id'
+        );
         // Log
         return $federation;
     }
 
+    // federation_mores.related_table > federation_mores_related_tables.referenced_table
+    // spoiler: no
+
     // federation_mores.federation_id > user_contact_mores.federation_id
-    public function userMores()
+    public function userMores(): HasMany
     {
         $moreFields = $this->hasMany(
             related: UserContactMore::class,
@@ -103,5 +124,31 @@ class FederationMore extends Model
         );
         // log
         return $moreFields;
+    }
+
+    // IS...
+
+    /**
+     * Loop over the, few but dynamically listed, referenced_table in
+     * federation_mores_referenced_tables to check if "is in use"
+     * in the table itself - first true exit true
+     */
+    public function isInUse(): bool
+    {
+        // Recuperiamo tutte le tabelle di riferimento registrate
+        $referencedTables = FederationMoresReferencedTable::all();
+
+        foreach ($referencedTables as $ref) {
+            $dataTable = $ref->referenced_table ?? null;
+
+            if ($dataTable && DB::table($dataTable)
+                ->where('federation_id', $this->federation_id)
+                ->where('field_name', $this->field_name)
+                ->exists()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

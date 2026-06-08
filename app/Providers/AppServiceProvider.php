@@ -47,12 +47,19 @@ class AppServiceProvider extends ServiceProvider
             $view->with('appVersion', $version);
         });
 
-        // TODO Remove Volt, but until
-
         // Gate Policy
         Gate::define('contest-participants-update', [ContestPaymentChangePolicy::class, 'update']);
         Gate::define('jury-panels', [JurorOnlyPolicy::class, 'grantAccess']);
         Gate::define('larecipe-dev-access', [LaRecipeServiceProvider::class, 'gate']);
+        Gate::define('access-admin', function (User $user) {
+            return $user->isAdmin();
+        });
+        Gate::define('access-juror', function (User $user) {
+            return $user->isJurorInAnyContest();
+        });
+        Gate::define('access-organization', function (User $user) {
+            return $user->isMemberOfAnyOrganization();
+        });
 
         // Observers
         User::observe(UserObserver::class);

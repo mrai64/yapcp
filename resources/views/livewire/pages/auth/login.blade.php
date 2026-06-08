@@ -11,22 +11,26 @@ use function Livewire\Volt\form;
 use function Livewire\Volt\layout;
 use App\Models\User;
 use App\Notifications\LoginDone;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Log;
 
 layout('layouts.guest');
 
 form(LoginForm::class);
 
-$login = function () {
+$login = function (): void {
     $this->validate();
 
     $this->form->authenticate();
 
     $user = User::where('email', $this->form->email)->firstOrFail();
     Log::debug( __CLASS__ . 'Validate ok, authenticate ok, adesso chiamo notify per: '. $user->email);
-    // was: $user->notify(new LoginDone($user));
+
     try {
-        $user->notify(new LoginDone($user));
+        // Usiamo resolve() per evitare che il parser di Volt inietti un 'return' 
+        // davanti alla parola chiave 'new'.
+        $notification = resolve(LoginDone::class, ['user' => $user]);
+        Notification::send($user, $notification);
     } catch (\Throwable $th) {
         Log::error('Error sending notification to user: ' . $user->email . ' for: ' . $th->getMessage());
     }

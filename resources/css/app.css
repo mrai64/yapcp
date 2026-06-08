@@ -2,5 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'tailwindcss';
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@font-face {
+    font-family: 'Figtree';
+    src: url('../fonts/Figtree-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Figtree';
+    src: url('../fonts/Figtree-Bold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../fonts/Roboto-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Yanone Kaffeesatz';
+    src: url('../fonts/YanoneKaffeesatz-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Colleghiamo la classe fyk al font Yanone */
+.fyk {
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+/* personalizzazioni */
+.h-24 {
+    height:6rem
+}

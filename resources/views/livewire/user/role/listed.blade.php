@@ -22,11 +22,11 @@
 
             @if ($role['organization'])
             <strong class="fyk text-xl">
-                Organization: {{$role['organization']}}
+                {{ __("Organization") }}: {{ $role['organization'] }}
             </strong>
             <br />
             <span class="small">
-                {{$role['start']}} ------- {{$role['end']}}
+                {{ $role['start'] }} ------- {{ $role['end'] }}
             </span>
             <br />
             <div class="inline-flex h-16 w-auto sm:px-3 lg:px-4">
@@ -48,7 +48,7 @@
 
             @if ($role['federation'])
             <strong class="fyk text-xl">
-                Federation: {{$role['federation']}}
+                {{ __("Federation") }}: {{$role['federation']}}
             </strong>
             <br />
             <span class="small">
@@ -74,7 +74,7 @@
 
             @if ($role['contest'])
             <strong class="fyk text-xl">
-                Contest: {{$role['contest']}}
+                {{ __("Contest") }}: {{$role['contest']}}
             </strong>
             <br />
             <span class="small">

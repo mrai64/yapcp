@@ -102,17 +102,16 @@ class User extends Authenticatable implements MustVerifyEmail
     /** @use HasFactory<UserFactory> */
     use HasFactory;
     use HasUuids;
-    use HasProfilePhoto;
+    use HasProfilePhoto; // unused
     use Notifiable;
     use SoftDeletes;
     use TwoFactorAuthenticatable;
 
-    public const TABLENAME = 'users'; // MAYBE $this->table_name()
+    public const TABLENAME = 'users'; // MAYBE $this->table_name() but User::TABLENAME
 
     protected $primaryKey = 'id'; //  default but
     protected $keyType = 'string'; // uuid char(36)
     public $incrementing = false; //  with no increment
-
 
     /**
      * The attributes that are mass assignable.
@@ -347,7 +346,8 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * Determine if the user is member of any Organization
+     * Determine if the user is member of any Organization,
+     *   except admin
      *
      * @return bool
      */
@@ -355,6 +355,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->userRoles()
             ->whereNotNull('organization_id')
+            ->whereNot('role', UserRole::ADMINGROUP)
             ->where('role_opening', '<=', now())
             ->where('role_closing', '>=', now())
             ->exists();
@@ -412,6 +413,18 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Determine if the user is registered as juror in any contest
+     */
+    public function isJurorInAnyContest(): bool
+    {
+        return $this->userRoles()
+            ->where('role', UserRole::JUROR)
+            ->where('role_opening', '<=', now())
+            ->where('role_closing', '>=', now())
+            ->exists();
+    }
+
+    /**
      * Determine how many works are available in user gallery
      *
      * @return int
@@ -425,6 +438,4 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->userWorks()->count();
     }
-
-
 }

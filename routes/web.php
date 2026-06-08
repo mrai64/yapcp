@@ -52,6 +52,7 @@ use App\Livewire\Federation;
 use App\Livewire\Juror;
 use App\Livewire\Organization;
 use App\Livewire\User;
+use Livewire\Volt\Volt;
 use App\Models\Contest as ModelsContest;
 use App\Models\ContestAward as ModelsContestAward;
 use App\Models\ContestJury as ModelsContestJury;
@@ -60,6 +61,7 @@ use App\Models\ContestSection as ModelsContestSection;
 use App\Models\ContestVote as ModelsContestVote;
 use App\Models\ContestWork as ModelsContestWork;
 use App\Models\Federation as ModelsFederation;
+use App\Models\FederationMore as ModelsFederationMore;
 use App\Models\FederationSection as ModelsFederationSection;
 use App\Models\UserContact as ModelsUserContact;
 use App\Models\UserRole as ModelsUserRole;
@@ -70,7 +72,6 @@ use Illuminate\Support\Facades\Route;
 /**
  * 1. no model - guest
  */
-
 Route::view('/', 'welcome')
     ->name('welcome.aboard');
 Route::view('/credits', 'credits')
@@ -79,8 +80,7 @@ Route::view('/credits', 'credits')
 /**
  * 2. User, platform registration - user
  */
-// user dashboard
-Route::view('/user/dashboard', 'dashboard')
+Volt::route('/user/dashboard/{user?}', 'user.⚡️dashboard')
     ->middleware(['auth', 'verified'])
     ->name('user.dashboard');
 // change email and password
@@ -219,12 +219,25 @@ Route::delete('/admin/federation/section/remove/{federation-section}', Federatio
 
 /**
  * FederationMores - admin only
+ * note: volt route from/for livewire 4
  *
- * TODO - build routes n views
  */
-// /admin/federation-more.add
-// /admin/federation-more.modify
-// /admin/federation-more.remove
+// federation-more list
+Volt::route('/federation-more/list/{federation}', 'federation-more.⚡listed') // pick name from filesystem
+    ->middleware(['auth', 'verified'])
+    ->name('federation-more.list');
+// federation-more add
+Volt::route('/admin/federation-more/add/{federation}', 'federation-more.⚡add')
+    ->middleware(['auth', 'verified', 'can:create,' . ModelsFederationMore::class])
+    ->name('federation-more.add');
+// federation-more modify
+Volt::route('/admin/federation-more/modify/{federation_more}', 'federation-more.⚡modify')
+    ->middleware(['auth', 'verified'])
+    ->name('federation-more.modify');
+// federation-more remove
+Volt::route('/admin/federation-more/remove/{federation_more}', 'federation-more.⚡remove')
+    ->middleware(['auth', 'verified'])
+    ->name('federation-more.delete');
 
 /**
  * User - Organization blueprint
@@ -457,9 +470,8 @@ Route::get(
     ->name('contest-report-fiaf2');
 
 /**
- * end of list
+ * jetstream added
  */
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -469,3 +481,14 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+/**
+ * admin
+ */
+Volt::route('/admin/dashboard', 'admin.⚡️dashboard')
+    ->middleware(['auth', 'verified', 'can:access-admin'])
+    ->name('admin.dashboard');
+
+/**
+ * end of list
+ */

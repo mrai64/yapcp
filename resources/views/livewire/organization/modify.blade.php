@@ -51,7 +51,7 @@
             <label for="name"
                 class="block mt-4 font-medium text-sm text-gray-700"
                 >
-                {{__('name')}}
+                {{ __('Name') }}
             </label>
             <input
                 class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full"

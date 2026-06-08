@@ -11,13 +11,13 @@
     <header>
         <h1 class="fyk text-2xl">
             {{__("Coded Section for Federation")}}: 
-            {{$federation->id}} |
-            {{$federation->name_en}} 
+            {{$federation->id}} 
+            | {{$federation->name_en}} 
         </h1>
         <p class="small">
             {{ __("Federation(s) wrote Contest Regulatory doc(s), that must be followed by sponsored Contest Organizations.")}}
             {{ __("Then, when your Organization choose to follow any Federation Auspices / Patronage / Sponsorship")}}
-            {{ __("that lst help them to follow right way when build a contest blueprint.")}}
+            {{ __("that list help them to follow right way when build a contest blueprint.")}}
             <br />
             {{ __("When, for the competition, you choose the sponsorship of two federations,")}}
             {{ __("you will have to apply, for the overlapping rules, the more restrictive one.")}}

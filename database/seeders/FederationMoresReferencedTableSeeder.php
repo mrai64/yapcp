@@ -14,10 +14,10 @@ class FederationMoresReferencedTableSeeder extends Seeder
     {
         // fixed set - table name
         FederationMoresReferencedTable::factory()->create([
-            'referenced_table' => 'user_contacts',
+            'referenced_table' => 'user_contact_mores',
         ]);
         FederationMoresReferencedTable::factory()->create([
-            'referenced_table' => 'user_works',
+            'referenced_table' => 'user_work_mores',
         ]);
     }
 }

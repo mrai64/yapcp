@@ -56,7 +56,7 @@ Because contest have winners.
 ![yaPCP mark](/docs/overview_favicon.png)
 
 WARN: 💬 That docs are based on dev version so base address is <http://yapcp.test/>,  
-when i put "in production" the base address change.
+when i put "in production" the base address change. Most of them are in italian lang.
 
 ---
 
