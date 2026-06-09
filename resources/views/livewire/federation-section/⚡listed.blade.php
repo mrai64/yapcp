@@ -38,23 +38,25 @@ mount(function (Federation $federation): void {
             {{ __("Then, when your Organization choose to follow any Federation Auspices / Patronage / Sponsorship")}}
             {{ __("that list help them to follow right way when build a contest blueprint.")}}
             <br />
-            {{ __("When, for the competition, you choose the sponsorship of two federations,")}}
+            {{ __("When, for the competition, you choose the sponsorship of more than one federation,")}}
             {{ __("you will have to apply, for the overlapping rules, the more restrictive one.")}}
             <br />
-            {{ __("When you see some difference say us for a fast alignment.")}} </small>
+            {{ __("When you see some difference with Federation official rules, please contact platform management for a for a fast alignment.")}} </small>
         </p>
         <hr />
         <p class="fyk text-xl mb-4">
             [ 
             <a href="{{ route('federation.list') }}" 
                 rel="noopener noreferrer">
+                &larr; 
                 {{ __('Back to Federation list') }} 
             </a>
             ]
-            <br />
+            . .
             [ 
             <a href="{{ route('federation-section.add', ['federation' => $federation ]) }}" 
                 rel="noopener noreferrer">
+                + 
                 {{ __('Add New Federation Section') }} 
             </a>
             ]
@@ -78,12 +80,16 @@ mount(function (Federation $federation): void {
             {{ __('No section defined for this federation. Add first now.') }}
         </div>
         @else
-        <div class="table-responsive">
+        <div class="table-responsive max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <table class="table table-primary table-striped w-full"        >
                 <thead>
                     <tr>
-                        <th scope="col">{{ __('Code') }}</th>
-                        <th scope="col">{{ __('Description') }}</th>
+                        <th scope="col">
+                            {{ __('Code') }}
+                        </th>
+                        <th scope="col">
+                            {{ __('Description') }}
+                        </th>
                         <th scope="col">
                             {{ __('Actions') }}
                         </th>
@@ -97,14 +103,19 @@ mount(function (Federation $federation): void {
                     </tr>
                     @foreach ($sectionsSet as $sec)
                     <tr class="border my-2 py-2">
-                        <td scope="row">{{ $sec->code }}</td>
-                        <td >{{ $sec->name_en }}<br />{{ $sec->rule_definition }}</td>
+                        <td scope="row">
+                            {{ $sec->code }}
+                        </td>
+                        <td >
+                            {{ $sec->name_en }}
+                            <br />
+                            {{ $sec->rule_definition }}
+                        </td>
                         <td nowrap>
-                            <!-- TODO change string w/objects -->
                             <a href="{{ route('federation-section.modify', ['federation-section' => $sec] )}}">
                                 [ {{ __("Modify") }} ]
                             </a>
-                            &nbsp;|&nbsp;
+                            <br /
                             <a href="{{ route('federation-section.delete', ['federation-section' => $sec] )}}">
                                 [ {{ __("Remove") }} ]
                             </a>
