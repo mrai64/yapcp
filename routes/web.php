@@ -198,8 +198,9 @@ Route::delete('/admin/federation/remove/{federation}', Federation\Remove::class)
 /**
  * FederationSection - admin only
  */
-// federation-section list - guest no admin
-Route::get('/federation/section/list/{federation}', Federation\Section\Listed::class)
+// federation-section list - no admin required
+Volt::route('/federation-section/list/{federation}', 'federation-section.⚡listed') // removed volt char
+    ->middleware(['auth', 'verified'])
     ->name('federation-section.list');
 // federation-section add  - admin
 Route::get('/admin/federation/section/add/{federation}', Federation\Section\Add::class)

@@ -25,7 +25,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-
 /**
  * @property int $id
  * @property string $federation_id
