@@ -1,7 +1,7 @@
 <?php
 
 /**
- * FederationSection containd the set of section n themes defined from
+ * FederationSection contain the set of section n themes defined from
  * federations in own contest regulation docs. Every section is keyed
  * by a code and a set of rules.
  *
@@ -35,12 +35,12 @@ use Illuminate\Support\Facades\Log;
  * @property string $file_formats list of ext, comma separated
  * @property int $min_works greater zero == portfolio
  * @property int $max_works
- * @property int $min_short_side px
- * @property int $max_long_side px
- * @property int $max_weight Bytes
+ * @property int $short_size_max px
+ * @property int $long_size_max px
+ * @property int $file_size_max Bytes
  * @property int $monochromatic_required 0 == false, 1 == true
  * @property int $raw_required 0 == false, 1 == true
- * @property int $only_one 0 = only one prize per section per person not required
+ * @property int $unique_prize 0 = only one prize per section per person not required
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -93,8 +93,8 @@ class FederationSection extends Model
         'file_formats', //           list of file extension jpg, png, webp etc
         'min_works', //              unsigned int
         'max_works', //              unsigned int >= min_works
-        'min_short_side', //         unsigned int pixel
-        'max_long_side', //          unsigned int >= min_short_side
+        'short_size_max', //         unsigned int pixel
+        'long_size_max', //          unsigned int >= short_size_max
         'monochromatic_required', // 1 true
         'raw_required', //           1 true
         // 'created_at',             reserved
