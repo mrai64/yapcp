@@ -203,11 +203,10 @@ Volt::route('/federation-section/list/{federation}', 'federation-section.⚡list
     ->middleware(['auth', 'verified'])
     ->name('federation-section.list');
 // federation-section add  - admin
-Route::get('/admin/federation/section/add/{federation}', Federation\Section\Add::class)
+Volt::route('/admin/federation-section/add/{federation}', 'federation-section.add')
     ->middleware(['auth', 'verified', 'can:create,' . ModelsFederationSection::class])
     ->name('federation-section.add');
-// federation-section show - no
-// federation-section edit
+// federation-section modify
 Route::get('/admin/federation/section/modify/{federation-section}', Federation\Section\Modify::class)
     ->middleware(['auth', 'verified', 'can:update,federation-section'])
     ->name('federation-section.modify');

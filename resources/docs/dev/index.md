@@ -20,4 +20,5 @@ in 🇬🇧 english
 
 - ## (D) Refactor
 
+  - [#133 federation sections](/{{route}}/dev/refactor/0133-federation-section-fields)
   - [#89 regions](/{{route}}/dev/refactor/89-regions-lookup-table)
