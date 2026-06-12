@@ -39,7 +39,7 @@ class FederationSectionPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, FederationSection $federationSection): bool
+    public function update(User $user, FederationSection $federationSection = null): bool
     {
         // only for user in admin group
         Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
@@ -51,7 +51,7 @@ class FederationSectionPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, FederationSection $federationSection): bool
+    public function delete(User $user, FederationSection $federationSection = null): bool
     {
         // only for user in admin group
         Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');

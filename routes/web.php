@@ -199,7 +199,7 @@ Route::delete('/admin/federation/remove/{federation}', Federation\Remove::class)
  * FederationSection - admin only
  */
 // federation-section list - no admin required
-Volt::route('/federation-section/list/{federation}', 'federation-section.⚡listed') // removed volt char
+Volt::route('/federation-section/list/{federation}', 'federation-section.listed') // removed volt char
     ->middleware(['auth', 'verified'])
     ->name('federation-section.list');
 // federation-section add  - admin
@@ -207,14 +207,14 @@ Volt::route('/admin/federation-section/add/{federation}', 'federation-section.ad
     ->middleware(['auth', 'verified', 'can:create,' . ModelsFederationSection::class])
     ->name('federation-section.add');
 // federation-section modify
-Route::get('/admin/federation/section/modify/{federation-section}', Federation\Section\Modify::class)
-    ->middleware(['auth', 'verified', 'can:update,federation-section'])
+Volt::route('/admin/federation-section/modify/{federation_section}', 'federation-section.modify')
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsFederationSection::class])
     ->name('federation-section.modify');
 // federation-section remove
-Route::get('/admin/federation/section/remove/{federation-section}', Federation\Section\Remove::class)
+Route::get('/admin/federation/section/remove/{federation_section}', Federation\Section\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,federation-section'])
     ->name('federation-section.delete');
-Route::delete('/admin/federation/section/remove/{federation-section}', Federation\Section\Remove::class)
+Route::delete('/admin/federation/section/remove/{federation_section}', Federation\Section\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,federation-section']);
 
 /**
