@@ -211,11 +211,9 @@ Volt::route('/admin/federation-section/modify/{federation_section}', 'federation
     ->middleware(['auth', 'verified', 'can:update,' . ModelsFederationSection::class])
     ->name('federation-section.modify');
 // federation-section remove
-Route::get('/admin/federation/section/remove/{federation_section}', Federation\Section\Remove::class)
-    ->middleware(['auth', 'verified', 'can:delete,federation-section'])
+Volt::route('/admin/federation-section/remove/{federation_section}', 'federation-section.remove')
+    ->middleware(['auth', 'verified', 'can:delete,' . ModelsFederationSection::class])
     ->name('federation-section.delete');
-Route::delete('/admin/federation/section/remove/{federation_section}', Federation\Section\Remove::class)
-    ->middleware(['auth', 'verified', 'can:delete,federation-section']);
 
 /**
  * FederationMores - admin only

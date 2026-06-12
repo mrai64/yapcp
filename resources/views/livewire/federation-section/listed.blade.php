@@ -112,11 +112,11 @@ mount(function (Federation $federation): void {
                             {{ $sec->rule_definition }}
                         </td>
                         <td nowrap>
-                            <a href="{{ route('federation-section.modify', ['federation_section' => $sec] )}}">
+                            <a href="{{ route('federation-section.modify', ['federation_section' => $sec] ) }}">
                                 [ {{ __("Modify") }} ]
                             </a>
-                            <br /
-                            <a href="{{ route('federation-section.delete', ['federation_section' => $sec] )}}">
+                            <br />
+                            <a href="{{ route('federation-section.delete', ['federation_section' => $sec] ) }}">
                                 [ {{ __("Remove") }} ]
                             </a>
                         </td>
