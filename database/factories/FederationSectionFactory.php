@@ -35,11 +35,12 @@ class FederationSectionFactory extends Factory
             // file formats
             // min_works
             // max_works
-            // min_short_side
-            // max_long_side
-            // max_weight
+            // short_size_max
+            // long_size_max
+            // file_size_max
             // monochromatic_required
             // raw_required
+            // unique_prize
             // created_at
             // updated_at
             // deleted_at

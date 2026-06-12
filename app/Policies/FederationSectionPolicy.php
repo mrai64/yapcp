@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\FederationSection;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class FederationSectionPolicy
 {
@@ -29,33 +30,33 @@ class FederationSectionPolicy
     public function create(User $user): bool
     {
         // only for user in admin group
-        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
+        Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
         $evaluate = $user->isAdmin();
-        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
         return $evaluate;
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, FederationSection $federationSection): bool
+    public function update(User $user, FederationSection $federationSection = null): bool
     {
         // only for user in admin group
-        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
+        Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
         $evaluate = $user->isAdmin();
-        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
         return $evaluate;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, FederationSection $federationSection): bool
+    public function delete(User $user, FederationSection $federationSection = null): bool
     {
         // only for user in admin group
-        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
+        Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
         $evaluate = $user->isAdmin();
-        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
         return $evaluate;
     }
 
@@ -65,9 +66,9 @@ class FederationSectionPolicy
     public function restore(User $user, FederationSection $federationSection): bool
     {
         // only for user in admin group
-        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
+        Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
         $evaluate = $user->isAdmin();
-        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
         return $evaluate;
     }
 
@@ -77,9 +78,9 @@ class FederationSectionPolicy
     public function forceDelete(User $user, FederationSection $federationSection): bool
     {
         // only for user in admin group
-        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
+        Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
         $evaluate = $user->isAdmin();
-        ds('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
         return $evaluate;
     }
 }

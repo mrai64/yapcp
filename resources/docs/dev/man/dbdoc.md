@@ -177,7 +177,7 @@ php artisan db:doc
 | **rule_max** | int unsigned | *maximum works-per-section* | NO |  | 4 |
 | **rule_min_size** | int unsigned | *minimum short_side px* | NO |  | 1024 |
 | **rule_max_size** | int unsigned | *maximum long_side px* | NO |  | 2500 |
-| **rule_max_weight** | int unsigned | *file weight in KB* | NO |  | 6000 |
+| **rule_file_size_max** | int unsigned | *file weight in KB* | NO |  | 6000 |
 | **rule_monochromatic** | tinyint(1) | *BW / M only* | NO |  | 0 |
 | **rule_raw_required** | tinyint(1) | *RAW required* | NO |  | 0 |
 | **rule_only_one** | tinyint(1) | *unique award per person per section-theme* | NO |  | 0 |
@@ -412,12 +412,12 @@ php artisan db:doc
 | **file_formats** | varchar(255) | *list of ext, comma separated* | NO |  | jpg,tif,raw,raf,nef,cr2 |
 | **min_works** | int unsigned | *greater zero == portfolio* | NO |  | 0 |
 | **max_works** | int unsigned | *-* | NO |  | 4 |
-| **min_short_side** | int unsigned | *px* | NO |  | 1080 |
-| **max_long_side** | int unsigned | *px* | NO |  | 2500 |
-| **max_weight** | int | *Bytes* | NO |  | 6000000 |
+| **short_size_max** | int unsigned | *px* | NO |  | 1080 |
+| **long_size_max** | int unsigned | *px* | NO |  | 2500 |
+| **file_size_max** | int | *Bytes* | NO |  | 6000000 |
 | **monochromatic_required** | tinyint(1) | *0 == false, 1 == true* | NO |  | 0 |
 | **raw_required** | tinyint(1) | *section require raw original works (not only)* | NO |  | 0 |
-| **only_one** | tinyint(1) | *required only one prize / author n section* | NO |  | 0 |
+| **unique_prize** | tinyint(1) | *required only one prize / author n section* | NO |  | 0 |
 | **created_at** | datetime | *-* | NO |  | CURRENT_TIMESTAMP |
 | **updated_at** | datetime | *-* | NO | MUL | CURRENT_TIMESTAMP |
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
