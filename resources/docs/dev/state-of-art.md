@@ -9,6 +9,7 @@ Ultimo aggiornamento last update: 2026-03-06
 
 | data  | link | testo |
 | ---   |   ---| ---   |
+| 14 giugno 2026 | [#134](/{{route}}/dev/refactor/0134-contest-section) | (A) refactor: ContestSection field names alignment [id:2026-06-09.02] |
 | 10 giugno 2026 | [#133](/{{route}}/dev/refactor/0133-federation-section-fields) | #133 (A) refactor: FederationSection field names alignment \[id:2026-06-09.01] |
 | 7 marzo 2026 | [#111](/{{route}}/dev/feat/111-user-role-review) | #111 (B) feat: UserRole review [id:2026-03-07.01] |
 | 6 marzo 2026 | [#107](/{{route}}/dev/fix/107-user-role-seeder-ko) | #107 (A) fix: UserRoleSeeder bring an integrity constrain violation [id:2026-03-06.01] |
