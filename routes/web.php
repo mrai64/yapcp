@@ -80,7 +80,7 @@ Route::view('/credits', 'credits')
 /**
  * 2. User, platform registration - user
  */
-Volt::route('/user/dashboard/{user?}', 'user.⚡️dashboard')
+Volt::route('/user/dashboard/{user?}', 'user.dashboard')
     ->middleware(['auth', 'verified'])
     ->name('user.dashboard');
 // change email and password
@@ -131,17 +131,15 @@ Route::get('/user/contact/modify5/{federation}/{userContact?}', User\Contact\Mod
 /**
  * 4. UserRole
  *
- * user herself/himself and admin
- *
  */
-Route::get('/user/dashboard/role', User\Role\Listed::class)
-    ->middleware(['auth', 'verified', 'can:view,' . ModelsUserRole::class])
+Route::get('/user/user_role/listed', User\Role\Listed::class)
+    ->middleware(['auth', 'verified'])
     ->name('user-role.list');
-Route::get('/user/dashboard/role/federation/add', User\Role\Federation\Add::class)
-    ->middleware(['auth', 'verified', 'can:update,' . ModelsUserRole::class])
+Route::get('/user/user_role/federation/add', User\Role\Federation\Add::class)
+    ->middleware(['auth', 'verified'])
     ->name('user-role.add.federation');
-Route::get('/user/dashboard/role/organization/add', User\Role\Organization\Add::class)
-    ->middleware(['auth', 'verified', 'can:update,' . ModelsUserRole::class])
+Route::get('/user/user_role/organization/add', User\Role\Organization\Add::class)
+    ->middleware(['auth', 'verified'])
     ->name('user-role.add.organization');
 // TODO /user/dashboard/federation/list
 // TODO /federation/member/list
@@ -160,13 +158,13 @@ Route::get('/user/work/list', User\Work\Listed::class)
 Route::get('/user/work/add', User\Work\Add::class)
     ->middleware(['auth', 'verified', 'can:create,' . ModelsUserWork::class])
     ->name('photo-box-add');
-Route::get('/user/work/modify/{wid}', User\Work\Modify::class, ['wid'])
+Route::get('/user/work/modify/{wid}', User\Work\Modify::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsUserWork::class])
     ->name('photo-box-modify');
-Route::get('/user/work/remove/{wid}', User\Work\Remove::class, ['wid'])
+Route::get('/user/work/remove/{wid}', User\Work\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,' . ModelsUserWork::class])
     ->name('delete-photo-box');
-Route::delete('/user/work/remove/{wid}', User\Work\Remove::class, ['wid'])
+Route::delete('/user/work/remove/{wid}', User\Work\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,' . ModelsUserWork::class]);
 
 
@@ -185,7 +183,7 @@ Route::post('/admin/federation/store', [FederationController::class, 'store'])
     ->name('federation.store');
 // TODO federation show
 // federation edit update, livewire - admin
-Route::get('/admin/federation/modify/{federation}', Federation\Modify::class, ['fid'])
+Route::get('/admin/federation/modify/{federation}', Federation\Modify::class)
     ->middleware(['auth', 'verified', 'can:update,federation'])
     ->name('federation.modify');
 // TODO federation remove only in maintenance mode
@@ -193,7 +191,7 @@ Route::get('/admin/federation/remove/{federation}', Federation\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,federation'])
     ->name('federation.delete');
 Route::delete('/admin/federation/remove/{federation}', Federation\Remove::class)
-    ->middleware(['auth', 'livewire', 'can:delete,federation']);
+    ->middleware(['auth', 'web', 'can:delete,federation']);
 
 /**
  * FederationSection - admin only
@@ -221,19 +219,19 @@ Volt::route('/admin/federation-section/remove/{federation_section}', 'federation
  *
  */
 // federation-more list
-Volt::route('/federation-more/list/{federation}', 'federation-more.⚡listed') // pick name from filesystem
+Volt::route('/federation-more/list/{federation}', 'federation-more.listed') // pick name from filesystem
     ->middleware(['auth', 'verified'])
     ->name('federation-more.list');
 // federation-more add
-Volt::route('/admin/federation-more/add/{federation}', 'federation-more.⚡add')
+Volt::route('/admin/federation-more/add/{federation}', 'federation-more.add')
     ->middleware(['auth', 'verified', 'can:create,' . ModelsFederationMore::class])
     ->name('federation-more.add');
 // federation-more modify
-Volt::route('/admin/federation-more/modify/{federation_more}', 'federation-more.⚡modify')
+Volt::route('/admin/federation-more/modify/{federation_more}', 'federation-more.modify')
     ->middleware(['auth', 'verified'])
     ->name('federation-more.modify');
 // federation-more remove
-Volt::route('/admin/federation-more/remove/{federation_more}', 'federation-more.⚡remove')
+Volt::route('/admin/federation-more/remove/{federation_more}', 'federation-more.remove')
     ->middleware(['auth', 'verified'])
     ->name('federation-more.delete');
 
@@ -334,7 +332,7 @@ Route::get('/organization/design/contest/jury/add/{section}', Contest\Jury\Add::
  * organization members
  *
  */
-Route::get('/organization/design/contest/award/add/{contest}', Contest\Award\Add::class, ['cid'])
+Route::get('/organization/design/contest/award/add/{contest}', Contest\Award\Add::class)
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-award.add');
 // TODO organization.contest-award.modify
@@ -354,7 +352,7 @@ Route::get('/user/contest/add-work/{contest}/{user-work}', Contest\Subscribe\Add
     ->middleware(['auth', 'verified', 'can:create,' . ModelsContestWork::class])
     ->name('user.contest.add-work');
 // user and contest organization
-Route::delete('/user/contest/remove/{contest-work}', Contest\Subscribe\Remove::class, ['pid'])
+Route::delete('/user/contest/remove/{contest-work}', Contest\Subscribe\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,' . ModelsContestWork::class])
     ->name('user.contest.remove-work');
 
@@ -458,8 +456,7 @@ Route::get('/organization/contest/report-works/{contest}', Organization\Reports\
 // FIAF report export - author participants
 Route::get(
     '/contest/export/FIAF1/{cid}/{fid}',
-    [Fiaf1ParticipantsController::class, 'exportFiaf1Participants'],
-    ['cid', 'fid']
+    [Fiaf1ParticipantsController::class, 'exportFiaf1Participants']
 )
     ->middleware(['auth', 'verified'])
     ->name('contest-report-fiaf1');
@@ -467,8 +464,7 @@ Route::get(
 // FIAF report export - works participants - job
 Route::get(
     '/contest/export/FIAF2/{cid}/{fid}',
-    [Fiaf2WorksController::class, 'exportFiaf2Works'],
-    ['cid', 'fid']
+    [Fiaf2WorksController::class, 'exportFiaf2Works']
 )
     ->middleware(['auth', 'verified'])
     ->name('contest-report-fiaf2');
@@ -489,7 +485,7 @@ Route::middleware([
 /**
  * admin
  */
-Volt::route('/admin/dashboard', 'admin.⚡️dashboard')
+Volt::route('/admin/dashboard', 'admin.dashboard')
     ->middleware(['auth', 'verified', 'can:access-admin'])
     ->name('admin.dashboard');
 

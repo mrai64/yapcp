@@ -4,11 +4,12 @@
  * User dashboard
  *
  */
-use function Livewire\Volt\{state, with};
+use function Livewire\Volt\with;
 
 // Pass the authenticated user to the Blade view
 with([
     'user' => auth()->user(),
+    'appVersion' => (string) config('app.version', '1.0.0'),
 ]);
 
 ?>
@@ -140,4 +141,3 @@ with([
         &copy; {{ date('Y')}} - {{ config('app.name') }} - version {{ $appVersion }} guest
     </footer>
 </div>
-

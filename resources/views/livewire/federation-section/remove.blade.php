@@ -96,7 +96,7 @@ $removeFederationSection = function () {
             {{ __('Maybe a contest running, or starting or recently ended, that make the remove harmful')}}
         </p>
         <p class="fyk text-xl font-medium mb-4">
-            <a href="{{ route('federation-section.list', ['federation' => $federationSection->federation_id] ) }}"
+            <a href="{{ route('federation-section.list', ['federation' => $federationSection->federation] ) }}"
                 rel="noopener noreferrer">
                 [ {{ __("Back to Federation Section list") }} ]
             </a>

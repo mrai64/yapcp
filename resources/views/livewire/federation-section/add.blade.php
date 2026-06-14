@@ -111,7 +111,7 @@ $saveNewFederationSection = function () {
             {{ __("I.e. the federation card id si a federation-more field, when surname not, it´s a common field.") }}
         </p>
         <p class="fyk text-xl font-medium mb-4">
-            <a href="{{ route('federation-section.list', ['federation' => $federation] ) }}"
+            <a href="{{ route('federation-section.list', ['federation' => $federation] ) }}"
                 rel="noopener noreferrer">
                 [ {{ __("Back to Federation Section list") }} ]
             </a>
