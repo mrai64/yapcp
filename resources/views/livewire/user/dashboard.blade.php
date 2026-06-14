@@ -4,13 +4,14 @@
  * User dashboard
  *
  */
+
 use App\Models\User;
 use function Livewire\Volt\{state, mount, with};
 
 state(['user']);
 
-mount(function (User $user = null) {
-    // Se il parametro {user} è passato (admin), usa quello, altrimenti usa l'utente autenticato
+mount(function (?User $user = null) {
+    // Se il parametro user è passato sei admin, e usa quello, altrimenti usa l'utente autenticato
     $this->user = $user ?? auth()->user();
 });
 
