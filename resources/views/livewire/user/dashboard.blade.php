@@ -4,11 +4,18 @@
  * User dashboard
  *
  */
-use function Livewire\Volt\with;
+use App\Models\User;
+use function Livewire\Volt\{state, mount, with};
+
+state(['user']);
+
+mount(function (User $user = null) {
+    // Se il parametro {user} è passato (admin), usa quello, altrimenti usa l'utente autenticato
+    $this->user = $user ?? auth()->user();
+});
 
 // Pass the authenticated user to the Blade view
 with([
-    'user' => auth()->user(),
     'appVersion' => (string) config('app.version', '1.0.0'),
 ]);
 
