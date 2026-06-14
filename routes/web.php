@@ -249,18 +249,18 @@ Route::get('/user/organization/add', Organization\Add::class)
     ->name('user.organization.add');
 // organization dashboard - admin | user member(organization)
 Route::get('/organization/dashboard/{organization}', Organization\Dashboard::class)
-    ->middleware(['auth', 'verified', 'can:update,' . ModelsOrganization::class])
+    ->middleware(['auth', 'verified', 'can:update,organization'])
     ->name('organization.dashboard'); // no user.organization.dashboard
 // organization edit modify - admin | user member(organization)
 Route::get('/user/organization/modify/{organization}', Organization\Modify::class)
-    ->middleware(['auth', 'verified', 'can:update,' . ModelsOrganization::class])
+    ->middleware(['auth', 'verified', 'can:update,organization'])
     ->name('user.organization.modify');
 // organization remove - admin
 Route::get('/user/organization/remove/{organization}', Organization\Remove::class)
-    ->middleware(['auth', 'verified', 'can:delete,' . ModelsOrganization::class])
+    ->middleware(['auth', 'verified', 'can:delete,organization'])
     ->name('user.organization.delete');
 Route::delete('/user/organization/remove/{organization}', Organization\Remove::class)
-    ->middleware(['auth', 'verified', 'can:delete,' . ModelsOrganization::class]);
+    ->middleware(['auth', 'verified', 'can:delete,organization']);
 // no name()
 
 /**
