@@ -61,9 +61,7 @@ $removeFederationMore = function (){
     }
 
     // Usiamo l'istanza già caricata per fare il delete
-    $this->federationMore->delete([
-        'id' => $this->federationMore->id,
-    ]);
+    $this->federationMore->delete();
 
     Log::info('Component ' . __FILE__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ 
         . ' federationMore:' . json_encode($this->federationMore) );
