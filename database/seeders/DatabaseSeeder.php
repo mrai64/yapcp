@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
             OrganizationSeeder::class,
             UserSeeder::class,
             // UserContactSeeder::class, // in UserSeeder
-            // UserRoleSeeder::class,
+            UserRoleSeeder::class,
             // UserWorkSeeder::class,
             // ContestSeeder::class,
             // ContestSectionSeeder::class,
