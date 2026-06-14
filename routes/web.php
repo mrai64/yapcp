@@ -264,7 +264,7 @@ Route::delete('/user/organization/remove/{organization}', Organization\Remove::c
 // no name()
 
 /**
- * Organization Contest blueprint - define
+ * Organization design Contest - define
  * - contest
  * - contest section
  * - contest jury
@@ -273,36 +273,42 @@ Route::delete('/user/organization/remove/{organization}', Organization\Remove::c
  * organization member and admin
  *
  * Contest
- * TODO /contest/listed for guest version - see up
  */
-
+// for all participants
 Route::get('/contest/listed', Contest\Listed::class)
     ->middleware(['auth', 'verified'])
     ->name('contest.list');
-Route::get('/organization/contest/add/{organization}', Contest\Add::class)
+// TODO
+//    R_oute::get('/organization/design/contest/listed', Contest\Listed::class)
+//    ->middleware(['auth', 'verified'])
+//    ->name('organization.contest.list');
+Route::get('/organization/design/contest/add/{organization}', Contest\Add::class)
     ->middleware(['auth', 'verified', 'can:create,' . ModelsContest::class])
     ->name('organization.contest.add');
-Route::get('/organization/contest/modify/{contest}', Contest\Modify::class)
+Route::get('/organization/design/contest/modify/{contest}', Contest\Modify::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContest::class])
     ->name('organization.contest.modify');
 // no contest delete, after backup it's soft-deleted then removed after years
 
 /**
- * Organization Contest blueprint
- *
+ * Organization design Contest
  * ContestSection
  *
  */
-Route::get('/organization/contest/section/add/{contest}', Contest\Section\Add::class)
+// list
+Volt::route('/organization/design/contest-section/listed/{contest}', 'organization.design.contest.section.listed')
+    ->middleware(['auth', 'verified', 'can:viewAny,' . ModelsContestSection::class])
+    ->name('organization.design.contest-section.listed');
+Route::get('/organization/design/contest-section/add/{contest}', Contest\Section\Add::class)
     ->middleware(['auth', 'verified', 'can:create,' . ModelsContestSection::class])
     ->name('organization.contest-section.add');
-Route::get('/organization/contest/section/modify/{section}', Contest\Section\Modify::class)
+Route::get('/organization/design/contest-section/modify/{section}', Contest\Section\Modify::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContestSection::class])
     ->name('organization.contest-section.modify');
-Route::get('/organization/contest/section/remove/{section}', Contest\Section\Remove::class)
+Route::get('/organization/design/contest-section/remove/{section}', Contest\Section\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,' . ModelsContestSection::class])
     ->name('organization.contest-section.remove');
-Route::delete('/organization/contest/section/remove/{section}', Contest\Section\Remove::class)
+Route::delete('/organization/design/contest-section/remove/{section}', Contest\Section\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,' . ModelsContestSection::class]);
 // no name
 
@@ -314,7 +320,7 @@ Route::delete('/organization/contest/section/remove/{section}', Contest\Section\
  * organization members and admin
  *
  */
-Route::get('/organization/contest/jury/add/{section}', Contest\Jury\Add::class)
+Route::get('/organization/design/contest/jury/add/{section}', Contest\Jury\Add::class)
     ->middleware(['auth', 'verified', 'can:create,' . ModelsContestJury::class])
     ->name('organization.contest-jury.add');
 // TODO Contest jury modify organization.contest-jury.modify
@@ -328,7 +334,7 @@ Route::get('/organization/contest/jury/add/{section}', Contest\Jury\Add::class)
  * organization members
  *
  */
-Route::get('/organization/contest/award/add/{contest}', Contest\Award\Add::class, ['cid'])
+Route::get('/organization/design/contest/award/add/{contest}', Contest\Award\Add::class, ['cid'])
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-award.add');
 // TODO organization.contest-award.modify
