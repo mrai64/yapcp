@@ -189,14 +189,6 @@ class Contest extends Model
         // deleted_at                   reserved
     ];
 
-    // uuid as pk
-    public static function booted()
-    {
-        static::creating(function ($model) {
-            $model->id = Str::uuid7();
-        });
-    }
-
     protected function casts(): array
     {
         return [
