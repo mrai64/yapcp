@@ -4141,7 +4141,7 @@ namespace PHPSTORM_META {
 'livewire.preview-file','welcome.aboard','credits.notice',
 'user.dashboard','user-contact.listed','profile.show','user-contact.show','user-contact.modify1',
 'user-contact.modify2','user-contact.modify3','user-contact.modify4','user-contact.modify5','user-role.list',
-'user-role.add.federation','user-role.add.organization','user.gallery','photo-box-add','photo-box-modify',
+'user_role.add.federation','user_role.organization.add','user.gallery','photo-box-add','photo-box-modify',
 'delete-photo-box','federation.list','federation.add','federation.store',
 'federation.modify','federation.delete','federation-section.list','federation-section.add',
 'federation-section.modify','federation-section.delete','organization.list','user.organization.add',

@@ -6,20 +6,21 @@
  */
 
 use App\Models\User;
-use function Livewire\Volt\{state, mount, with};
-
-state(['user']);
-
-mount(function (?User $user = null) {
-    // Se il parametro user è passato sei admin, e usa quello, altrimenti usa l'utente autenticato
-    $this->user = $user ?? auth()->user();
-});
+use function Livewire\Volt\state;
+use function Livewire\Volt\mount;
+use function Livewire\Volt\with;
 
 // Pass the authenticated user to the Blade view
-with([
-    'appVersion' => (string) config('app.version', '1.0.0'),
-]);
-
+with(function (?User $targetUser = null) {
+    // Se targetUser è passato via route model binding lo usiamo, altrimenti usiamo l'autenticato
+    $currentUser = $targetUser ?? auth()->user();
+    
+    return [
+        'user' => $currentUser, // Questo diventerà $user nel blade
+        'userContactId' => $currentUser->userContact?->id,
+        'appVersion' => (string) config('app.version', '1.0.0'),
+    ];
+});
 ?>
 
 <div>
@@ -55,7 +56,9 @@ with([
             </div>
 
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
-                <h3 class="fyk text-xl font-bold mb-4">{{ __("About you") }}</h3>
+                <h3 class="fyk text-xl font-bold mb-4">
+                    {{ __("About you") }}
+                </h3>
                 <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
                     <a href="{{ route('user.gallery') }}">
                         [ {{ __("Your Uffizi´ Gallery") }} ]
@@ -63,7 +66,7 @@ with([
                 </div>
                 . .
                 <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-                    <a  href="{{ route('user-contact.modify1', ['userContact' => $user->userContact ]) }}"
+                    <a  href="{{ $userContactId ? route('user-contact.modify1', ['userContact' => $userContactId]) : '#' }}"
                         rel="noopener noreferrer">
                         [ {{ __('Change contact infos') }} ]
                     </a>
@@ -84,68 +87,12 @@ with([
                 </div>
                 . .
                 <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-                    <a href="{{ route('user-role.add.organization') }}">
+                    <a href="{{ route('user_role.organization.add') }}">
                         [ {{ __("Add you in an Org") }} ]
                     </a>
                 </div>
                 . .
-                <br />
-                <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-                    <a href="{{ route('user-role.add.federation') }}">
-                        [ {{ __("Add you in a Fed") }} ]
-                    </a>
-                </div>
-                . .
             </div>
-
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
-                <h3 class="fyk text-xl font-bold mb-4">{{ __("Role(s) assigned to you") }}</h3>
-                <livewire:user.role.listed />
-            </div>
-
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
-                <h3 class="fyk text-xl font-bold mb-4">{{ __("As Contest(s) participant") }}</h3>
-                <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-                    <a href="{{ route('contest.list') }}">
-                        [ {{ __("Open Contest List") }} ]
-                    </a>
-                </div>
-            </div>
-
-            @can('access-juror')
-            <div class="bg-indigo-50 border-l-4 border-indigo-500 overflow-hidden shadow-xl sm:rounded-lg p-6">
-                <h3 class="fyk text-xl font-bold mb-4">{{ __("As Jury member") }}</h3>
-                <livewire:contest.jury.listed />
-            </div>
-            @endcan
-
-            @can('access-organization')
-            <div class="bg-green-50 border-l-4 border-green-500 overflow-hidden shadow-xl sm:rounded-lg p-6">
-                <h3 class="fyk text-xl font-bold mb-4">{{ __("As Organization member") }}</h3>
-                <livewire:organization.dashboard />
-            </div>
-            @endcan
-
-            @can('access-admin')
-            <div class="bg-green-50 border-l-4 border-green-500 overflow-hidden shadow-xl sm:rounded-lg p-6">
-                <h3 class="fyk text-xl font-bold mb-4">{{ __("As Admins member") }}</h3>
-                <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-                    <a href="{{ route('admin.dashboard') }}" 
-                        class="mt-2 inline-block bg-red-600 text-white px-4 py-2 rounded">
-                        [ {{ __("Admin Dashboard") }} ]
-                    </a>
-                </div>
-                <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-                    <a href="{{ route('federation.add') }}">
-                        [ {{ __("Add a new Fed") }} ]
-                    </a>
-                </div>
-                . .
-            </div>
-            @endcan
-
     </div>
-    <footer class="py-16 text-center text-sm text-black dark:text-white/70 text-muted">
-        &copy; {{ date('Y')}} - {{ config('app.name') }} - version {{ $appVersion }} guest
-    </footer>
+    <x-footer-app />
 </div>

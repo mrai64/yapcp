@@ -4,6 +4,8 @@
  * The Route board
  *
  * TODO dont' sort route by uri,
+ * TODO Mixed old livewire 3 Route() become one at time livewire 4 Volt::route() SFC
+ * 
  * use the 5+2
  * 1. index
  * 2. create + store
@@ -47,11 +49,10 @@ use App\Http\Controllers\Contest\JuryMinuteDraft;
 use App\Http\Controllers\Contest\Report\Fiaf1ParticipantsController;
 use App\Http\Controllers\Contest\Report\Fiaf2WorksController;
 use App\Http\Controllers\FederationController;
-use App\Livewire\Contest;
-use App\Livewire\Federation;
-use App\Livewire\Juror;
-use App\Livewire\Organization;
-use App\Livewire\User;
+use App\Livewire\Contest as ContestComponents;
+use App\Livewire\Federation as FederationComponents;
+use App\Livewire\Juror as JurorComponents;
+use App\Livewire\Organization as OrganizationComponents;
 use Livewire\Volt\Volt;
 use App\Models\Contest as ModelsContest;
 use App\Models\ContestAward as ModelsContestAward;
@@ -83,7 +84,7 @@ Route::view('/credits', 'credits')
 Volt::route('/user/dashboard/{user?}', 'user.dashboard')
     ->middleware(['auth', 'verified'])
     ->name('user.dashboard');
-// change email and password
+// livewire 3 change email and password - dont change 
 Route::view('/user/profile', 'profile')
     ->middleware(['auth'])
     ->name('user.profile');
@@ -96,34 +97,34 @@ Route::view('/user/profile', 'profile')
  */
 // TODO user-contact list must be a user directory for admin use
 // user-contact list - admin only
-Route::get('/admin/user/contact/listed', User\Contact\Listed::class)
+Route::get('/admin/user/contact/listed', \App\Livewire\User\Contact\Listed::class)
     ->middleware(['auth', 'verified', 'can:viewAny,' . ModelsUserContact::class])
     ->name('user-contact.listed');
 // user-contact add - no,
 
 // Alias per compatibilità con i componenti Jetstream (Navigation)
-Route::get('/user/contact/profile', User\Contact\Show::class)
+Route::get('/user/contact/profile', \App\Livewire\User\Contact\Show::class)
     ->middleware(['auth', 'verified', 'can:view,' . ModelsUserContact::class])
     ->name('profile.show');
 
 // user-contact show - user | admin
-Route::get('/user/contact/show/{userContact?}', User\Contact\Show::class)
+Route::get('/user/contact/show/{userContact?}', \App\Livewire\User\Contact\Show::class)
 ->middleware(['auth', 'verified', 'can:view,' . ModelsUserContact::class])
 ->name('user-contact.show');
 // user contact/ modify* - user herself/himself n admin
-Route::get('/user/contact/modify1/{userContact?}', User\Contact\Modify1YouAre::class)
+Route::get('/user/contact/modify1/{userContact?}', \App\Livewire\User\Contact\Modify1YouAre::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsUserContact::class])
     ->name('user-contact.modify1');
-Route::get('/user/contact/modify2/{userContact?}', User\Contact\Modify2PostAddress::class)
+Route::get('/user/contact/modify2/{userContact?}', \App\Livewire\User\Contact\Modify2PostAddress::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsUserContact::class])
     ->name('user-contact.modify2');
-Route::get('/user/contact/modify3/{userContact?}', User\Contact\Modify3Phones::class)
+Route::get('/user/contact/modify3/{userContact?}', \App\Livewire\User\Contact\Modify3Phones::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsUserContact::class])
     ->name('user-contact.modify3');
-Route::get('/user/contact/modify4/{userContact?}', User\Contact\Modify4Socials::class)
+Route::get('/user/contact/modify4/{userContact?}', \App\Livewire\User\Contact\Modify4Socials::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsUserContact::class])
     ->name('user-contact.modify4');
-Route::get('/user/contact/modify5/{federation}/{userContact?}', User\Contact\Modify5Feds::class)
+Route::get('/user/contact/modify5/{federation}/{userContact?}', \App\Livewire\User\Contact\Modify5Feds::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsUserContact::class])
     ->name('user-contact.modify5'); // Add "federation more" required fields
 // user-contact remove - no
@@ -132,15 +133,15 @@ Route::get('/user/contact/modify5/{federation}/{userContact?}', User\Contact\Mod
  * 4. UserRole
  *
  */
-Route::get('/user/user_role/listed', User\Role\Listed::class)
+Route::get('/user/user_role/listed', \App\Livewire\User\Role\Listed::class)
     ->middleware(['auth', 'verified'])
     ->name('user-role.list');
-Route::get('/user/user_role/federation/add', User\Role\Federation\Add::class)
+Route::get('/user/user_role/federation/add', \App\Livewire\User\Role\Federation\Add::class)
     ->middleware(['auth', 'verified'])
-    ->name('user-role.add.federation');
-Route::get('/user/user_role/organization/add', User\Role\Organization\Add::class)
+    ->name('user_role.add.federation');
+Route::get('/user/user_role/organization/add', \App\Livewire\User\Role\Organization\Add::class)
     ->middleware(['auth', 'verified'])
-    ->name('user-role.add.organization');
+    ->name('user_role.organization.add');
 // TODO /user/dashboard/federation/list
 // TODO /federation/member/list
 // TODO /user/dashboard/organization/list
@@ -152,19 +153,19 @@ Route::get('/user/user_role/organization/add', User\Role\Organization\Add::class
  * user herself/himself and admin
  *
  */
-Route::get('/user/work/list', User\Work\Listed::class)
+Route::get('/user/work/list', \App\Livewire\User\Work\Listed::class)
     ->middleware(['auth', 'verified', 'can:view,' . ModelsUserWork::class])
     ->name('user.gallery');
-Route::get('/user/work/add', User\Work\Add::class)
+Route::get('/user/work/add', \App\Livewire\User\Work\Add::class)
     ->middleware(['auth', 'verified', 'can:create,' . ModelsUserWork::class])
     ->name('photo-box-add');
-Route::get('/user/work/modify/{wid}', User\Work\Modify::class)
+Route::get('/user/work/modify/{wid}', \App\Livewire\User\Work\Modify::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsUserWork::class])
     ->name('photo-box-modify');
-Route::get('/user/work/remove/{wid}', User\Work\Remove::class)
+Route::get('/user/work/remove/{wid}', \App\Livewire\User\Work\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,' . ModelsUserWork::class])
     ->name('delete-photo-box');
-Route::delete('/user/work/remove/{wid}', User\Work\Remove::class)
+Route::delete('/user/work/remove/{wid}', \App\Livewire\User\Work\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,' . ModelsUserWork::class]);
 
 
@@ -183,14 +184,14 @@ Route::post('/admin/federation/store', [FederationController::class, 'store'])
     ->name('federation.store');
 // TODO federation show
 // federation edit update, livewire - admin
-Route::get('/admin/federation/modify/{federation}', Federation\Modify::class)
+Route::get('/admin/federation/modify/{federation}', \App\Livewire\Federation\Modify::class) // was: Federation\Modify::class)
     ->middleware(['auth', 'verified', 'can:update,federation'])
     ->name('federation.modify');
 // TODO federation remove only in maintenance mode
-Route::get('/admin/federation/remove/{federation}', Federation\Remove::class)
+Route::get('/admin/federation/remove/{federation}', \App\Livewire\Federation\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,federation'])
     ->name('federation.delete');
-Route::delete('/admin/federation/remove/{federation}', Federation\Remove::class)
+Route::delete('/admin/federation/remove/{federation}', \App\Livewire\Federation\Remove::class)
     ->middleware(['auth', 'web', 'can:delete,federation']);
 
 /**
@@ -239,25 +240,25 @@ Volt::route('/admin/federation-more/remove/{federation_more}', 'federation-more.
  * User - Organization blueprint
  */
 // organization list - guest
-Route::get('/organization/listed', Organization\Listed::class)
+Route::get('/organization/listed', \App\Livewire\Organization\Listed::class)
     ->name('organization.list');
 // organization add - admin | user member(organization)
-Route::get('/user/organization/add', Organization\Add::class)
+Route::get('/user/organization/add', \App\Livewire\Organization\Add::class)
     ->middleware(['auth', 'verified', 'can:create,' . ModelsOrganization::class])
     ->name('user.organization.add');
 // organization dashboard - admin | user member(organization)
-Route::get('/organization/dashboard/{organization}', Organization\Dashboard::class)
+Route::get('/organization/dashboard/{organization}', \App\Livewire\Organization\Dashboard::class)
     ->middleware(['auth', 'verified', 'can:update,organization'])
     ->name('organization.dashboard'); // no user.organization.dashboard
 // organization edit modify - admin | user member(organization)
-Route::get('/user/organization/modify/{organization}', Organization\Modify::class)
+Route::get('/user/organization/modify/{organization}', \App\Livewire\Organization\Modify::class)
     ->middleware(['auth', 'verified', 'can:update,organization'])
     ->name('user.organization.modify');
 // organization remove - admin
-Route::get('/user/organization/remove/{organization}', Organization\Remove::class)
+Route::get('/user/organization/remove/{organization}', \App\Livewire\Organization\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,organization'])
     ->name('user.organization.delete');
-Route::delete('/user/organization/remove/{organization}', Organization\Remove::class)
+Route::delete('/user/organization/remove/{organization}', \App\Livewire\Organization\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,organization']);
 // no name()
 
@@ -273,17 +274,17 @@ Route::delete('/user/organization/remove/{organization}', Organization\Remove::c
  * Contest
  */
 // for all participants
-Route::get('/contest/listed', Contest\Listed::class)
+Route::get('/contest/listed', \App\Livewire\Contest\Listed::class)
     ->middleware(['auth', 'verified'])
     ->name('contest.list');
 // TODO
-//    R_oute::get('/organization/design/contest/listed', Contest\Listed::class)
+//    R_oute::get('/organization/design/contest/listed', \App\Livewire\Contest\Listed::class)
 //    ->middleware(['auth', 'verified'])
 //    ->name('organization.contest.list');
-Route::get('/organization/design/contest/add/{organization}', Contest\Add::class)
+Route::get('/organization/design/contest/add/{organization}', \App\Livewire\Contest\Add::class)
     ->middleware(['auth', 'verified', 'can:create,' . ModelsContest::class])
     ->name('organization.contest.add');
-Route::get('/organization/design/contest/modify/{contest}', Contest\Modify::class)
+Route::get('/organization/design/contest/modify/{contest}', \App\Livewire\Contest\Modify::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContest::class])
     ->name('organization.contest.modify');
 // no contest delete, after backup it's soft-deleted then removed after years
@@ -297,16 +298,16 @@ Route::get('/organization/design/contest/modify/{contest}', Contest\Modify::clas
 Volt::route('/organization/design/contest-section/listed/{contest}', 'organization.design.contest.section.listed')
     ->middleware(['auth', 'verified', 'can:viewAny,' . ModelsContestSection::class])
     ->name('organization.design.contest-section.listed');
-Route::get('/organization/design/contest-section/add/{contest}', Contest\Section\Add::class)
+Route::get('/organization/design/contest-section/add/{contest}', \App\Livewire\Contest\Section\Add::class)
     ->middleware(['auth', 'verified', 'can:create,' . ModelsContestSection::class])
     ->name('organization.contest-section.add');
-Route::get('/organization/design/contest-section/modify/{section}', Contest\Section\Modify::class)
+Route::get('/organization/design/contest-section/modify/{section}', \App\Livewire\Contest\Section\Modify::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContestSection::class])
     ->name('organization.contest-section.modify');
-Route::get('/organization/design/contest-section/remove/{section}', Contest\Section\Remove::class)
+Route::get('/organization/design/contest-section/remove/{section}', \App\Livewire\Contest\Section\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,' . ModelsContestSection::class])
     ->name('organization.contest-section.remove');
-Route::delete('/organization/design/contest-section/remove/{section}', Contest\Section\Remove::class)
+Route::delete('/organization/design/contest-section/remove/{section}', \App\Livewire\Contest\Section\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,' . ModelsContestSection::class]);
 // no name
 
@@ -318,7 +319,7 @@ Route::delete('/organization/design/contest-section/remove/{section}', Contest\S
  * organization members and admin
  *
  */
-Route::get('/organization/design/contest/jury/add/{section}', Contest\Jury\Add::class)
+Route::get('/organization/design/contest/jury/add/{section}', \App\Livewire\Contest\Jury\Add::class)
     ->middleware(['auth', 'verified', 'can:create,' . ModelsContestJury::class])
     ->name('organization.contest-jury.add');
 // TODO Contest jury modify organization.contest-jury.modify
@@ -332,7 +333,7 @@ Route::get('/organization/design/contest/jury/add/{section}', Contest\Jury\Add::
  * organization members
  *
  */
-Route::get('/organization/design/contest/award/add/{contest}', Contest\Award\Add::class)
+Route::get('/organization/design/contest/award/add/{contest}', \App\Livewire\Contest\Award\Add::class)
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-award.add');
 // TODO organization.contest-award.modify
@@ -344,15 +345,15 @@ Route::get('/organization/design/contest/award/add/{contest}', Contest\Award\Add
  *
  * user, and organization members
  */
-Route::get('/user/contest/subscribe/{contest}', Contest\Subscribe\Subscribe::class)
+Route::get('/user/contest/subscribe/{contest}', \App\Livewire\Contest\Subscribe\Subscribe::class)
     ->middleware(['auth', 'verified', 'can:view,' . ModelsContestWork::class])
     ->name('user.contest.participate');
 // user only
-Route::get('/user/contest/add-work/{contest}/{user-work}', Contest\Subscribe\Add::class)
+Route::get('/user/contest/add-work/{contest}/{user-work}', \App\Livewire\Contest\Subscribe\Add::class)
     ->middleware(['auth', 'verified', 'can:create,' . ModelsContestWork::class])
     ->name('user.contest.add-work');
 // user and contest organization
-Route::delete('/user/contest/remove/{contest-work}', Contest\Subscribe\Remove::class)
+Route::delete('/user/contest/remove/{contest-work}', \App\Livewire\Contest\Subscribe\Remove::class)
     ->middleware(['auth', 'verified', 'can:delete,' . ModelsContestWork::class])
     ->name('user.contest.remove-work');
 
@@ -362,45 +363,45 @@ Route::delete('/user/contest/remove/{contest-work}', Contest\Subscribe\Remove::c
  * organization members, admin
  */
 // Contest live - Organization contest dashboard
-Route::get('/contest/dashboard/{contest}', Contest\Dashboard::class)
+Route::get('/contest/dashboard/{contest}', \App\Livewire\Contest\Dashboard::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContest::class])
     ->name('contest.dashboard');
 
 // Contest live - Organization review Participant User list _fee payment completed_
-Route::get('/contest/participants/listed/{contest}', Contest\Participants\Listed::class)
+Route::get('/contest/participants/listed/{contest}', \App\Livewire\Contest\Participants\Listed::class)
     ->middleware(['auth', 'verified', 'can:viewAny,' . ModelsContestParticipant::class])
     ->name('contest-participant.list');
-Route::get('/contest/participants/modify/{contest}', Contest\Participants\Modify::class)
+Route::get('/contest/participants/modify/{contest}', \App\Livewire\Contest\Participants\Modify::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContestParticipant::class])
     ->name('contest-participant.modify');
 
 // Contest live - organization works before jury works
-Route::get('/organization/contest/pre-jury/section-list/{contest}', Organization\PreJury\SectionListed::class)
+Route::get('/organization/contest/pre-jury/section-list/{contest}', \App\Livewire\Organization\PreJury\SectionListed::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContest::class])
     ->name('organization-contest.list');
-Route::get('/organization/contest/pre-jury/section-review/{contest-section}', Organization\PreJury\SectionReview::class)
+Route::get('/organization/contest/pre-jury/section-review/{contest-section}', \App\Livewire\Organization\PreJury\SectionReview::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContestSection::class])
     ->name('organization-contest.review.section-list');
-Route::get('/organization/contest/pre-jury/warn/{contestWork}', Organization\PreJury\WarnEmail::class)
+Route::get('/organization/contest/pre-jury/warn/{contestWork}', \App\Livewire\Organization\PreJury\WarnEmail::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContestWork::class])
     ->name('organizaton-contest.review.warn');
-Route::get('/organization/contest/pre-jury/pass/{contestWork}', Organization\PreJury\PassNext::class)
+Route::get('/organization/contest/pre-jury/pass/{contestWork}', \App\Livewire\Organization\PreJury\PassNext::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContestWork::class])
     ->name('organizaton-contest.review.pass');
 
 /**
  * Contest live - Jury works
  */
-Route::get('/juror/section-board/{contestSection}', Juror\SectionBoard::class)
+Route::get('/juror/section-board/{contestSection}', \App\Livewire\Juror\SectionBoard::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContestVote::class])
     ->name('contest-jury.board');
-Route::get('/juror/vote/{contestSection}', Juror\Vote::class)
+Route::get('/juror/vote/{contestSection}', \App\Livewire\Juror\Vote::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContestVote::class])
     ->name('contest-jury.vote');
-Route::post('/juror/vote/{contestSection}', Juror\Vote::class)
+Route::post('/juror/vote/{contestSection}', \App\Livewire\Juror\Vote::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContestVote::class]);
 // review +1 -1
-Route::get('/juror/review-vote/{contestVote}', Juror\ReviewVote::class)
+Route::get('/juror/review-vote/{contestVote}', \App\Livewire\Juror\ReviewVote::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContestVote::class])
     ->name('contest-jury.grade-review');
 
@@ -408,20 +409,20 @@ Route::get('/juror/review-vote/{contestVote}', Juror\ReviewVote::class)
  * Contest live - Organization before last jury meeting
  */
 // Contest live - cumulative vote board for a section
-Route::get('/organization/contest/before-final/{contestSection}', Organization\Admit\BeforeFinal::class)
+Route::get('/organization/contest/before-final/{contestSection}', \App\Livewire\Organization\Admit\BeforeFinal::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContestSection::class])
     ->name('organization-contest.before-final');
 
 /**
  * Contest live - assign admin, section awards, contest awards, then jury minute, and first report.
  */
-Route::get('/organization/contest/admit/set-admit/{contestSection}', Organization\Admit\SetAdmit::class)
+Route::get('/organization/contest/admit/set-admit/{contestSection}', \App\Livewire\Organization\Admit\SetAdmit::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContest::class])
     ->name('organization-contest.set-admit');
-Route::get('/organization/award-assign/section/{contestSection}', Organization\Award\SectionAssign::class)
+Route::get('/organization/award-assign/section/{contestSection}', \App\Livewire\Organization\Award\SectionAssign::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContestAward::class])
     ->name('organization-contest.section-awards');
-Route::get('/organization/award-assign/contest/{contest}', Organization\Award\ContestAssign::class)
+Route::get('/organization/award-assign/contest/{contest}', \App\Livewire\Organization\Award\ContestAssign::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContestAward::class])
     ->name('organization-contest.contest-awards');
 // **review mark** //
@@ -437,7 +438,7 @@ Route::get('/organization/contest/jury-minute/{contest}', [JuryMinuteDraft::clas
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContestAward::class])
     ->name('organization-contest.minute-draft');
 //
-Route::get('/organization/contest/report-works/{contest}', Organization\Reports\WorksParticipant::class)
+Route::get('/organization/contest/report-works/{contest}', \App\Livewire\Organization\Reports\WorksParticipant::class)
     ->middleware(['auth', 'verified', 'can:update,' . ModelsContestAward::class])
     ->name('organization-contest.participant-works-report');
 

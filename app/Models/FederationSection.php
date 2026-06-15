@@ -72,6 +72,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationSection whereShortSizeMax($value)
  * @mixin \Eloquent
  */
 class FederationSection extends Model

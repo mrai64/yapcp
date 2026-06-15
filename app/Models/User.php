@@ -137,14 +137,6 @@ class User extends Authenticatable implements MustVerifyEmail
         'two_factor_secret',
     ];
 
-    // uuid as pk
-    public static function booted()
-    {
-        static::creating(function ($model) {
-            $model->id = Str::uuid7();
-        });
-    }
-
     /**
      * The accessors to append to the model's array form.
      *
@@ -181,7 +173,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function awardWinners(): HasMany
     {
         $awardWinnersSet = $this->hasMany(
-            related: ContestAward::class,
+            related: ModelsContestAward::class,
             foreignKey: 'winner_user_id',
             localKey: 'id'
         );
@@ -193,7 +185,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function juries(): HasMany
     {
         $juries = $this->hasMany(
-            related: ContestJury::class,
+            related: ModelsContestJury::class,
             foreignKey: 'user_contact_id',
             localKey: 'id'
         );
@@ -205,7 +197,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function contestParticipants(): HasMany
     {
         $contestParticipants = $this->hasMany(
-            related: ContestParticipant::class,
+            related: ModelsContestParticipant::class,
             foreignKey: 'user_id',
             localKey: 'id'
         );
@@ -217,7 +209,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function contestVotesJurors(): HasMany
     {
         $cvjSet = $this->hasMany(
-            related: ContestVote::class,
+            related: ModelsContestVote::class,
             foreignKey: 'juror_user_id',
             localKey: 'id'
         );
@@ -253,7 +245,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function contestWorks(): HasMany
     {
         $cwSet = $this->hasMany(
-            related: ContestWork::class,
+            related: ModelsContestWork::class,
             foreignKey: 'user_id',
             localKey: 'id'
         );
@@ -274,34 +266,23 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     // users.id > user_contacts.id
-    public function contact(): HasOne
-    {
-        $contact = $this->hasOne(
-            related: UserContact::class,
-            foreignKey: 'id',
-            localKey: 'id'
-        );
-        // log
-        return $contact;
-    }
-
+    // Rimosso contact() duplicato per usare solo userContact()
+    
     // users.id > user_contacts.id
     public function userContact(): HasOne
     {
-        $contact = $this->hasOne(
-            related: UserContact::class,
-            foreignKey: 'id',
+        return $this->hasOne(
+            related: ModelsUserContact::class,
+            foreignKey: 'user_id', // Cambiato in 'user_id' che è lo standard per relazioni 1:1
             localKey: 'id'
         );
-        // log
-        return $contact;
     }
 
     // users.id > user_roles.user_id
     public function userRoles(): HasMany
     {
         $rSet = $this->hasMany(
-            related: UserRole::class,
+            related: ModelsUserRole::class,
             foreignKey: 'user_id',
             localKey: 'id'
         );
@@ -313,7 +294,7 @@ class User extends Authenticatable implements MustVerifyEmail
     public function userWorkValidators(): HasMany
     {
         $wvSet = $this->hasMany(
-            related: UserWorkValidation::class,
+            related: ModelsUserWorkValidation::class,
             foreignKey: 'validator_user_id',
             localKey: 'id'
         );
@@ -324,7 +305,7 @@ class User extends Authenticatable implements MustVerifyEmail
     // users.id > user_works.user_id
     public function userWorks(): HasMany
     {
-        $works = $this->hasMany(UserWork::class);
+        $works = $this->hasMany(ModelsUserWork::class);
         // log
         return $works;
     }

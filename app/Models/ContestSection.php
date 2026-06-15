@@ -121,33 +121,29 @@ class ContestSection extends Model
         // deleted_at                reserved
     ];
 
-    // pk is uuid
-    public static function booted()
+    protected function casts(): array
     {
-        Log::debug('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        static::creating(function ($model) {
-            $model->id = Str::uuid();
-        });
-    }
-
-    protected function casts()
-    {
-        Log::debug('Model ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         return [
             'id' => 'string',
             'contest_id' => 'string',
             'code' => 'string',
+
             'under_patronage' => 'boolean',
             'federation_section_id' => 'string',
             'name_en' => 'string',
             'name_local' => 'string',
             'synopsis' => 'string',
+
             'file_formats' => 'string',
+
             'min_works' => 'int',
             'max_works' => 'int',
+
             'short_size_max' => 'int',
             'long_size_max' => 'int',
+
             'file_size_max' => 'int',
+            
             'monochromatic_required' => 'boolean',
             'raw_required' => 'boolean',
             'unique_prize' => 'boolean',
@@ -183,17 +179,13 @@ class ContestSection extends Model
     // contest_sections.contest_id > contests.id
     public function contest(): BelongsTo
     {
-        $contest = $this->belongsTo(Contest::class);
-
-        return $contest;
+        return $this->belongsTo(Contest::class);
     }
 
     // contest_sections.id << contest_works.section_id
     public function works(): HasMany
     {
-        $worksInSection = $this->hasMany(ContestWork::class, 'section_id', 'id');
-
-        return $worksInSection;
+        return $this->hasMany(ContestWork::class, 'section_id', 'id');
     }
 
     // section awards also in order
@@ -207,14 +199,8 @@ class ContestSection extends Model
 
     // was: federation_section()
     // contest_sections.federation_section_id > federation_sections.id
-    public function federationSection(): HasOne
+    public function federationSection(): BelongsTo
     {
-        $federationSection = $this->hasOne(
-            related: FederationSection::class,
-            foreignKey: 'id',
-            localKey: 'federation_section_id'
-        );
-
-        return $federationSection;
+        return $this->belongsTo(FederationSection::class, 'federation_section_id', 'id');
     }
 }

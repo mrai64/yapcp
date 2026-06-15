@@ -102,7 +102,7 @@
         </div>
         . .
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('user-role.add.organization') }}">
+            <a href="{{ route('user_role.organization.add') }}">
             [ {{ __("Add you in Organization") }} ]
             </a>
         </div>
@@ -121,7 +121,7 @@
         </div>
         . .
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('user-role.add.federation') }}">
+            <a href="{{ route('user_role.add.federation') }}">
                 [ {{ __("Add you in Federation") }} ]
             </a>
         </div>
