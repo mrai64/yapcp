@@ -66,13 +66,15 @@ return new class () extends Migration {
                 'role_opening'
             ], 'fed_user_idx');
             // fk
-            $table->foreign(['organization_id'])->references(['id'])->on('organizations')
+            $table->foreign(['user_id'], 'user_fk')->references(['id'])->on('users')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign(['contest_id'])->references(['id'])->on('contests')
+            $table->foreign(['organization_id'], 'org_fk')->references(['id'])->on('organizations')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign(['federation_id'])->references(['id'])->on('federations')
+            $table->foreign(['contest_id'], 'contest_fk')->references(['id'])->on('contests')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign(['role'])->references(['role'])->on('user_roles_role_sets')
+            $table->foreign(['federation_id'], 'federation_fk')->references(['id'])->on('federations')
+                ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign(['role'], 'roles_role_fk')->references(['role'])->on('user_roles_role_sets')
                 ->onUpdate('cascade')->onDelete('cascade');
         });
     }
