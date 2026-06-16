@@ -37,9 +37,9 @@ new class extends Component {
         <x-header-link-app 
             txt="Back to dashboard" 
             url="{{ route('user.dashboard') }}" />
-        <x-header-link-app 
-            txt="Update (1st of 5th)" 
-            url="#" />
+        <x-header-link-app
+            txt="Update Contact infos"
+            url="{{ route('user.contact.modify1', ['user_contact' => $userContact]) }}" />
 
     </x-slot>
     <!-- -->

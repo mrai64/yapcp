@@ -46,6 +46,10 @@ Volt::route('/user/dashboard', 'user.dashboard')
 Volt::route('/user/contact/show', 'user.contact.show')
     ->middleware(['auth', 'verified'])
     ->name('user.contact.show');
+// userContact id
+Volt::route('/user/contact/modify1/{user_contact}', 'user.contact.modify1')
+    ->middleware(['auth', 'verified'])
+    ->name('user.contact.modify1');
 
 /**
  * Contest

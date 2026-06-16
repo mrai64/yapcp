@@ -6,11 +6,13 @@
  * TODO Organization dashboard, Admin dashboard
  */
 
-use function Livewire\Volt\{state, with};
+use function Livewire\Volt\state;
+use function Livewire\Volt\with;
 
 // Pass the authenticated user to the Blade view
 with([
     'user' => auth()->user(),
+    'userContact' => auth()->user()->contact,
 ]);
 
 ?>
@@ -30,6 +32,9 @@ with([
                 <x-header-link-app 
                     txt="View Contact infos" 
                     url="{{ route('user.contact.show') }}" />
+                <x-header-link-app
+                    txt="Update Contact infos"
+                    url="{{ route('user.contact.modify1', ['user_contact' => $userContact]) }}" />
                 <x-header-link-app 
                     txt="The Manual" 
                     url="{{ url('/docs') }}" />
@@ -46,4 +51,3 @@ with([
     </div>
     <x-footer-app />
 </div>
-
