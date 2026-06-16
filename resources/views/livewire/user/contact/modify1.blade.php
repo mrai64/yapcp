@@ -3,6 +3,7 @@
 use Livewire\Volt\Component;
 use App\Models\UserContact;
 use App\Models\Country;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 
 new class extends Component {
@@ -29,12 +30,12 @@ new class extends Component {
     public function mount(UserContact $user_contact)
     {
         $this->userContact = $user_contact;
+        $this->allCountriesSet = Country::all();
         $this->firstName = $user_contact->first_name ?? 'N\A';
         $this->lastName = $user_contact->last_name ?? 'N\A';
         $this->countryId = $user_contact->country_id ?? 'ITA';
         $this->passportPhoto = $user_contact->passport_photo ?? '';
-        $this->passportPhotoImage = null;
-        $this->allCountriesSet = Country::all();
+        $this->passportPhotoImage = null; // Storage::url( $user_contact->photoBox() . '/__passport_photo.jpg' );
     }
 
     // validate rules
@@ -79,7 +80,7 @@ new class extends Component {
         $this->userContact->save();
 
         return redirect()
-            ->route('user-contact.modify2', ['userContact' => $this->userContact])
+            ->route('user.contact.modify2', ['user_contact' => $this->userContact])
             ->with('success', __("Name, Country n Pass photo updated successfully"));
 
     }
@@ -94,10 +95,10 @@ new class extends Component {
         <hr class="mb-4" />
         <x-header-link-app 
             txt="Your name n Country / 1" 
-            url="#" />
+            url="{{ route('user.contact.modify1', ['user_contact' => $this->userContact]) }}" />
         <x-header-link-app 
             txt="Postal address / 2" 
-            url="#" />
+            url="{{ route('user.contact.modify2', ['user_contact' => $this->userContact]) }}" />
         <x-header-link-app 
             txt="Cellular / 3" 
             url="#" />
@@ -176,7 +177,8 @@ new class extends Component {
                         <img src="{{ $passportPhotoImage->temporaryUrl() }}" style="float: left;" class="block w-48 me-3" />
                         <br style="clear:both;" />
                         @else
-                        <img src="{{ asset('storage/photos') . '/' . $passportPhoto }}" alt="" style="float: left;" class="block w-48 me-3">
+                        <img src="{{ asset('storage/photos') . '/' . $passportPhoto }}" 
+                            alt="" style="float: left;" class="block w-48 me-3" />
                         <br style="clear:both;" />
                         @endif
     
@@ -187,7 +189,7 @@ new class extends Component {
                             aria-describedby="photoHelp" />
                         <div wire:loading wire:target="passportPhotoImage">{{ __("Uploading...")}}</div>
                         <div class="small" id="photoHelp">
-                            {{ __("Just a little 'passport' photo, it's facultative - near 420 x 520 px, max .5MB") }}
+                            {{ __("Just a little 'passport' photo, near 420 px * 520 px, max .5MB") }}
                         </div>
                         <x-input-error for="passportPhotoImage" class="mt-2" />
                     </div>
