@@ -40,10 +40,20 @@ Volt::route('/user/dashboard', 'user.dashboard')
     ->middleware(['auth', 'verified'])
     ->name('user.dashboard');
 
+/**
+ * UserContact
+ */
+Volt::route('/user/contact/show', 'user.contact.show')
+    ->middleware(['auth', 'verified'])
+    ->name('user.contact.show');
+
+/**
+ * Contest
+ */
 // user on contests
 Volt::route('/user/contest/listed', 'user.contest.listed')
     ->middleware(['auth', 'verified'])
-    ->name('user.contest.list');
+    ->name('user.contest.listed');
 Volt::route('/user/contest/participate/{contest}', 'user.contest.participate')
     ->middleware(['auth', 'verified'])
     ->name('user.contest.participate');

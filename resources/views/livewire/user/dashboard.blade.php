@@ -3,6 +3,7 @@
 /**
  * User dashboard
  *
+ * TODO Organization dashboard, Admin dashboard
  */
 
 use function Livewire\Volt\{state, with};
@@ -25,19 +26,21 @@ with([
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
-                <h3 class="fyk text-xl font-bold mb-4">{{ __("Questions?") }}</h3>
-                <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-                    <a href="{{ url('/docs') }}">
-                    [ {{ __("The Manual") }} ]
-                    </a>
-                </div>
-                <h3 class="fyk text-xl font-bold mb-4">{{ __("Lists") }}</h3>
-                <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-                    <a href="{{ route('user.contest.list') }}">
-                        [ {{ __("Open Contest List") }} ]
-                    </a>
-                </div>
+                <h3 class="fyk text-xl font-bold mb-4">{{ __("You") }}</h3>
+                <x-header-link-app 
+                    txt="View Contact infos" 
+                    url="{{ route('user.contact.show') }}" />
+                <x-header-link-app 
+                    txt="The Manual" 
+                    url="{{ url('/docs') }}" />
+                <x-header-link-app 
+                    txt="Change password" 
+                    url="{{ url('/user/profile') }}" />
 
+                <h3 class="fyk text-xl font-bold mb-4">{{ __("Lists") }}</h3>
+                <x-header-link-app 
+                    txt="Open Contest List" 
+                    url="{{ route('user.contest.listed') }}" />
             </div>
         </div>
     </div>
