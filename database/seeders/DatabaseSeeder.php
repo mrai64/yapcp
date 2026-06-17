@@ -31,6 +31,9 @@ class DatabaseSeeder extends Seeder
             //
             FederationSeeder::class,
             FederationSectionSeeder::class,
+            FederationMoresReferencedTableSeeder::class,
+            FederationMoreSeeder::class,
+            //
             OrganizationSeeder::class,
             UserSeeder::class,
             // UserContactSeeder::class, // in UserSeeder

@@ -59,7 +59,7 @@ class UserContactMore extends Model
     // standard id
     protected $fillable = [
         'id', //                   pk bigint autoincrement
-        'user_contact_user_id', // TODO user_contacts.id
+        'user_id', //              fk user_contacts.id
         'federation_id', //        fk federations.id federation_mores.federation_id
         'field_name', //           fk                federation_mores.field_name
         'field_value', //          text
@@ -72,7 +72,7 @@ class UserContactMore extends Model
     {
         return [
             'id' => 'integer',
-            'user_contact_user_id' => 'string',
+            'user_id' => 'string',
             'federation_id' => 'string',
             'field_name' => 'string',
             'field_value' => 'string',
@@ -91,7 +91,7 @@ class UserContactMore extends Model
     {
         $uc = $this->belongsTo(
             related: UserContact::class,
-            foreignKey: 'user_contact_user_id', // ucm.user_contact_user_id
+            foreignKey: 'user_id', // ucm.user_contact_user_id
             ownerKey: 'id' //                      uc.id
         );
         // log

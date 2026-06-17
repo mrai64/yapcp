@@ -62,6 +62,10 @@ Volt::route('/user/contact/modify3/{user_contact}', 'user.contact.modify3')
 Volt::route('/user/contact/modify4/{user_contact}', 'user.contact.modify4')
     ->middleware(['auth', 'verified'])
     ->name('user.contact.modify4');
+// userContact federation_more
+Volt::route('/user/contact/modify5/{user_contact}', 'user.contact.modify5')
+    ->middleware(['auth', 'verified'])
+    ->name('user.contact.modify5');
 
 /**
  * Contest

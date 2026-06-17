@@ -17,17 +17,26 @@ class FederationMoreSeeder extends Seeder
         FederationMore::factory()->create([
             'federation_id' => 'FIAP',
             'referenced_table' => 'user_contact_mores',
-            'field_name' => 'cardId', //    may change ?personal number?
+            'field_name' => 'fiapCardId', //    may change ?personal number?
             'field_label' => 'Card Id', //  may change ?personal number?
             'field_validation_rules' => 'required|string|size:6|regex:/^[0-9]+$/',
             'field_default_value' => '000000',
             'field_suggest' => 'Only 6 digit leading zeroes',
         ]);
-
+        FederationMore::factory()->create([
+            'federation_id' => 'FIAP',
+            'referenced_table' => 'user_contact_mores',
+            'field_name' => 'fiapDistinctions',
+            'field_label' => 'FIAP Distinction(s)',
+            'field_validation_rules' => 'string|max:255',
+            'field_default_value' => '',
+            'field_suggest' => 'List of distinction(s) from FIAP, uppercase and separated by space',
+        ]);
+        // FIAF
         FederationMore::factory()->create([
             'federation_id' => 'FIAF',
             'referenced_table' => 'user_contact_mores',
-            'field_name' => 'cardId',
+            'field_name' => 'fiafCardId',
             'field_label' => "Card Id",
             'field_validation_rules' => 'required|string|size:6|regex:/^0[0-9]{5}$/',
             'field_default_value' => '000000',
@@ -38,7 +47,7 @@ class FederationMoreSeeder extends Seeder
             'referenced_table' => 'user_contact_mores',
             'field_name' => 'italianTaxId',
             'field_label' => 'Italian Tax Id',
-            'field_validation_rules' => 'required|string|size:16|regex:/^[XXXXXXXXXXXXXXXX]|[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][+$/',
+            'field_validation_rules' => 'required|string|size:16|regex:/^(X{16})|[A-Z]{6}[0-9LMNPQRSTUV]{2}[ABCDEHLMPRST][0-9LMNPQRSTUV]{2}[A-Z][0-9LMNPQRSTUV]{3}[A-Z]$/',
             'field_default_value' => 'XXXXXXXXXXXXXXXX',
             'field_suggest' => 'Even 16 chars in italian tax id form or sixteen X',
         ]);
@@ -56,7 +65,7 @@ class FederationMoreSeeder extends Seeder
             'referenced_table' => 'user_contact_mores',
             'field_name' => 'fiafDistinctions',
             'field_label' => 'FIAF Distinction(s)',
-            'field_validation_rules' => 'string|maxsize:255',
+            'field_validation_rules' => 'string|max:255',
             'field_default_value' => '',
             'field_suggest' => 'List of distinction(s) from FIAF, uppercase and separated by space',
         ]);
