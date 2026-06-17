@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * User Contact modify 1st of five
+ * 
+ */
+
 use Livewire\Volt\Component;
 use App\Models\UserContact;
 use App\Models\Country;
@@ -90,24 +95,10 @@ new class extends Component {
 <div>
     <x-slot name="header">
         <h2 class="fyk text-2xl font-medium text-gray-900">
-            {{ __(':name, Your personal info / 1st of 5th', ['name' => $userContact->first_name] ) }}
+            {{ __(':name, Your personal info / 1st of five', ['name' => $userContact->first_name] ) }}
         </h2>
         <hr class="mb-4" />
-        <x-header-link-app 
-            txt="Your name n Country / 1" 
-            url="{{ route('user.contact.modify1', ['user_contact' => $this->userContact]) }}" />
-        <x-header-link-app 
-            txt="Postal address / 2" 
-            url="{{ route('user.contact.modify2', ['user_contact' => $this->userContact]) }}" />
-        <x-header-link-app 
-            txt="Cellular / 3" 
-            url="#" />
-        <x-header-link-app 
-            txt="Web n Socials / 4" 
-            url="#" />
-        <x-header-link-app 
-            txt="Federations related / 5" 
-            url="#" />
+        <livewire:user.contact.modify-nav :user_contact="$userContact" />
         <hr class="mb-2" />
         <x-header-link-app 
             txt="Back to dashboard" 
