@@ -9,6 +9,7 @@ namespace App\Observers;
 
 use App\Models\User;
 use App\Models\UserContact;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class UserObserver
@@ -20,6 +21,8 @@ class UserObserver
      */
     public function created(User $user): void
     {
+        Log::info("UserObserver: Metodo created attivato per l'utente " . $user->id);
+
         // build a UserContact record
         if (Str::contains(haystack: $user->name, needles: ', ', ignoreCase: false)) {
             [$lastName, $firstName] = explode(', ', $user->name);
@@ -27,13 +30,19 @@ class UserObserver
             $lastName = $user->name;
             $firstName = $user->name;
         }
-        UserContact::create([
-            'id' => $user->id,
-            'last_name' => $lastName,
-            'first_name' => $firstName,
-            'country_id' => 'ITA', // as default
-            'email' => $user->email,
-        ]);
+
+        try {
+            UserContact::create([
+                'user_id' => $user->id, // Usiamo user_id (UUID) come da diario
+                'last_name' => $lastName,
+                'first_name' => $firstName,
+                'country_id' => 'ITA', // as default
+                'email' => $user->email,
+            ]);
+            Log::info("UserObserver: UserContact creato con successo per l'utente " . $user->id);
+        } catch (\Throwable $th) {
+            Log::error("UserObserver Error in created per utente {$user->id}: " . $th->getMessage());
+        }
     }
 
     /**
@@ -41,11 +50,18 @@ class UserObserver
      */
     public function updated(User $user): void
     {
+        Log::info("UserObserver: Metodo updated attivato per l'utente " . $user->id);
+
         // update UserContact record
-        if ($user->isDirty('email')) {
-            UserContact::withTrashed()
-                ->where('id', $user->id)
-                ->update(['email' => $user->email]);
+        if ($user->wasChanged('email')) {
+            try {
+                UserContact::withTrashed()
+                    ->where('user_id', $user->id)
+                    ->update(['email' => $user->email]);
+                Log::info("UserObserver: Email aggiornata in UserContact per l'utente " . $user->id);
+            } catch (\Throwable $th) {
+                Log::error("UserObserver Error in updated per utente {$user->id}: " . $th->getMessage());
+            }
         }
     }
 

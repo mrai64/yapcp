@@ -8,8 +8,10 @@
 
 namespace App\Providers;
 
+use App\Models\Organization;
 use App\Models\User;
 use App\Models\UserContact;
+use App\Observers\OrganizationObserver;
 use App\Observers\UserContactObserver;
 use App\Observers\UserObserver;
 use App\Policies\ContestPaymentChangePolicy;
@@ -64,5 +66,6 @@ class AppServiceProvider extends ServiceProvider
         // Observers
         User::observe(UserObserver::class);
         UserContact::observe(UserContactObserver::class);
+        Organization::observe(OrganizationObserver::class);
     }
 }

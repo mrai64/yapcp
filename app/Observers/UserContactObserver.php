@@ -20,6 +20,8 @@ class UserContactObserver
      */
     public function created(UserContact $userContact): void
     {
+        Log::info("UserContactObserver: Metodo created attivato per ID {$userContact->id}");
+
         $photoBox = $userContact->photoBox();
         try {
             if (!Storage::disk('public')->makeDirectory('/photos/'.$photoBox)) {
@@ -35,6 +37,8 @@ class UserContactObserver
         //
         try {
             $anonPassportPhotoFile = '/photos/anon.jpg';
+            Log::info("UserContactObserver: Tentativo di copia foto anonima per {$userContact->id}");
+
             $newPassportPhotoFile = '/photos/' . $photoBox . '/__passport_photo.jpg';
             Storage::disk('public')->copy($anonPassportPhotoFile, $newPassportPhotoFile);
             $newPassportPhotoFile = '/photos/' . $photoBox . '/300___passport_photo.jpg';
@@ -56,8 +60,11 @@ class UserContactObserver
      */
     public function updating(UserContact $userContact): void
     {
+        Log::info("UserContactObserver: Metodo updating attivato per ID {$userContact->id}");
+
         // move old > new Photobox
         if ($userContact->isDirty('country_id') || $userContact->isDirty('last_name') || $userContact->isDirty('first_name')) {
+            Log::info("UserContactObserver: Rilevato cambio dati anagrafici, sposto cartella foto.");
             $oldPhotoBox = $userContact->getOriginal('passport_photo');
             $oldPhotoBox = Str::replace(
                 search:'/__passport_photo.jpg',
