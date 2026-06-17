@@ -81,6 +81,6 @@ class OrganizationObserver
      */
     public function forceDeleted(Organization $organization): void
     {
-      //
+        //
     }
 }

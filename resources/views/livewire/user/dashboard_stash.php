@@ -4,7 +4,7 @@
  * User dashboard
  *
  */
-use function Livewire\Volt\{state, with};
+use function Livewire\Volt\{with};
 
 // Pass the authenticated user to the Blade view
 with([
