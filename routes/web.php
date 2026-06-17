@@ -2,12 +2,12 @@
 
 /**
  * reviewed web.php
- * 
+ *
  * ! No ⚡️ in Volt prefix
  *
  * Route::method() and Volt::route() are listed
  * in groups
- * 
+ *
  * TODO dont' sort route by uri,
  * use the 5+2
  * 1. index
