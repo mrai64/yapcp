@@ -1,64 +1,74 @@
 <?php
 
 /**
- * Organization List
+ * organization  list - for all
  * 
- * @see /app/Livewire/Organization/Listed.php
+ * Order by country and organization name
  * 
  */
 
-?>
+use App\Models\Organization;
+use Livewire\Volt\Component;
+
+new class extends Component {
+    use WithPagination;
+
+    // mount() no
+    // render() no
+    // with() yes
+    public function with(): array
+    {
+        return [
+            'allOrganizationSet' => Organization::query()
+                ->with(['country'])
+                ->orderBy('country_id', 'asc')
+                ->orderBy('name', 'asc')
+                ->paginate(10),
+        ];
+    }
+
+
+}; ?>
 
 <div>
-    <div class="header">
+    <x-slot name="header">
         <h2 class="fyk text-2xl font-medium text-gray-900">
-            {{ __('Organization List') }}
+            {{ __("Organizations") }}
         </h2>
-        <p class="small mb-4">
-            {{ __("Ordered by country id, then organization name") }}.
+        <p class="small">
+            {{ __("Ordered by country_id, then organization name") }}
         </p>
-        <hr class="my-4" />
-        <p class="fyk text-xl font-medium mb-4">
-            <a href="{{ route('user.organization.add')}}" 
-                class="float-end font-medium rounded-md py-2">
-                [ {{__('Add a new Organization')}} ]
-            </a>
-        </p>
-        @if (session('success'))
-        <hr class="my-4" />
-        <div class="float-end font-medium rounded-md px-4 py-2">
-            {{ session('success') }}
-        </div> 
-        @endif
-    </div>
-    <!-- organization list -->
-    @if(isset($organization_list) && count($organization_list) > 0)
-    <ul class="">
-       @foreach($organization_list as $org)
-        <li class="block p-4 mb-4 border rounded-md">
-        <strong class="fyk text-xl">{{$org->country_id}} / {{$org->name}}</strong> 
-        <br />
-        <em>{{__('email')}}:</em> {{$org->email}}<br />
-        <em>{{__('website')}}:</em> {{$org->website}}<br />
-        <em>{{__('Contact')}}:</em> {!! nl2br( e("\n" . $org->contact)) !!}<br />
-        <a href="{{route('organization.dashboard', ['organization' => $org->id ])}}" 
-            class="font-medium rounded-md px-4 py-4">
-            [ {{__('dashboard')}} ]
-        </a>
-        <a href="{{route('user.organization.modify', ['organization' => $org->id ])}}" 
-            class="font-medium rounded-md px-4 py-4">
-            [ {{__('Modify')}} ]
-        </a>
-        <a href="{{ route('user.organization.delete', ['organization' => $org ]) }}"
-            class="font-medium rounded-md px-4 py-4">
-            [ {{__('Remove')}} ]
-        </a>
-       @endforeach
-    </ul>
-    @else
-    <div class="border text-xl rounded-md px-4 py-2">
-        {{ __('Empty organization list') }}
-    </div>
-    @endif
+        <hr class="mb-4 mt-4" />
+        <x-header-link-app 
+            txt="Back to dashboard" 
+            url="{{ route('user.dashboard') }}" />
+    </x-slot>
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
+                <!-- success -->
+                @if (session('success'))
+                <div class="fyk text-2xl float-end font-medium rounded-md px-4 py-2">
+                    {{ session('success') }}
+                </div>
+                @endif
 
+                <!-- errors list -->
+                @if ($errors->any())
+                <div>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li class="text-red-600">❌ {{ $error }} 👈</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+
+                <!-- -->
+                
+            </div>
+        </div>
+    </div>
+    <!-- -->
+    <x-footer-app />
 </div>

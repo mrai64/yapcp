@@ -53,6 +53,9 @@ with([
                 <x-header-link-app 
                     txt="Open Contest List" 
                     url="{{ route('user.contest.listed') }}" />
+                <x-header-link-app 
+                    txt="Organizations List" 
+                    url="{{ route('user.organization.listed') }}" />
             </div>
         </div>
     </div>
