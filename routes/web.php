@@ -73,6 +73,9 @@ Volt::route('/user/contact/modify5/{user_contact}', 'user.contact.modify5')
 Volt::route('/user/organization/listed', 'user.organization.listed')
     ->middleware(['auth', 'verified'])
     ->name('user.organization.listed');
+Volt::route('/user/organization/add', 'user.organization.add')
+    ->middleware(['auth', 'verified'])
+    ->name('user.organization.add');
 
 
 /**

@@ -52,11 +52,12 @@ new class extends Component {
             url="{{ route('user.dashboard') }}" />
         <x-header-link-app 
             txt="Add a new Organization" 
-            url="#" />
+            url="{{ route('user.organization.add') }}" />
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
+
                 <!-- success -->
                 @if (session('success'))
                 <div class="fyk text-2xl float-end font-medium rounded-md px-4 py-2">
