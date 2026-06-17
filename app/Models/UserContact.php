@@ -23,6 +23,7 @@ use App\Casts\Country3Id;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
@@ -149,13 +150,14 @@ class UserContact extends Model
         'facebook', //         url
         'x_twitter', //        url
         'instagram', //        url
+        'linkedin', //        url
         'whatsapp', //         url
         // created_at          reserved
         // updated_at          reserved
         // deleted_at          reserved
     ];
 
-    protected function casts()
+    protected function casts(): array
     {
         return [
             'id' => 'string',
@@ -180,6 +182,7 @@ class UserContact extends Model
             'facebook' => 'string',
             'x_twitter' => 'string',
             'instagram' => 'string',
+            'linkedin' => 'string',
             'whatsapp' => 'string',
             //
             'created_at' => 'datetime',
@@ -232,7 +235,7 @@ class UserContact extends Model
     //was: get_first_last_name
     public static function getFirstLastName(string $uid): string
     {
-        ds('Model ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        // ds('Model ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         $user = self::where('id', $uid)->first();
 
         return $user->first_name . ' ' . $user->last_name . ' /' . $user->country_id;
@@ -241,7 +244,7 @@ class UserContact extends Model
     // was: get_last_first_name
     public static function getLastNFirstName(string $uid): string
     {
-        ds('Model ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' called');
+        // ds('Model ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' called');
         $user = self::where('id', $uid)->first();
 
         return $user->last_name . ' ' . $user->first_name . ' /' . $user->country_id;
@@ -250,7 +253,7 @@ class UserContact extends Model
     // was: get_email
     public static function getEmail(string $uid): string
     {
-        ds('Model ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' called');
+        // ds('Model ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' called');
         $user = self::where('id', $uid)->get('email')[0];
 
         return $user['email'];
@@ -259,7 +262,7 @@ class UserContact extends Model
     // was: get_first_name
     public static function getFirstName(string $uid): string
     {
-        ds('Model ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' called');
+        // ds('Model ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' called');
         $user = self::where('id', $uid)->get('first_name')[0];
 
         return $user['first_name'];
@@ -268,7 +271,7 @@ class UserContact extends Model
     // was: get_last_name
     public static function getLastName(string $uid): string
     {
-        ds('Model ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' called');
+        // ds('Model ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' called');
         $user = self::where('id', $uid)->get('last_name')[0];
 
         return $user['last_name'];
@@ -277,7 +280,7 @@ class UserContact extends Model
     // was: get_country_id
     public static function getCountryId(string $uid): string
     {
-        ds('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
+        // ds('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         $user = self::where('id', $uid)->get('country_id')[0];
 
         return $user['country_id'];
@@ -286,7 +289,7 @@ class UserContact extends Model
     // RELATIONSHIP
 
     // user_contacts.id > contest_awards.winner_user_id
-    public function contestAwards()
+    public function contestAwards(): HasMany
     {
         $contestAwardsWinnersSet = $this->hasMany(
             related: ContestAward::class,
@@ -298,7 +301,7 @@ class UserContact extends Model
     }
 
     // user_contacts.id > contest_juries.user_contact_id
-    public function contestJurors()
+    public function contestJurors(): HasMany
     {
         $contestJurorsSet = $this->hasMany(
             related: ContestJury::class,
@@ -309,7 +312,7 @@ class UserContact extends Model
         return $contestJurorsSet;
     }
 
-    public function juries()
+    public function juries(): HasMany
     {
         $juries = $this->hasMany(
             related: ContestJury::class,    //  ext class
@@ -321,7 +324,7 @@ class UserContact extends Model
     }
 
     // user_contacts.id > contest_participants.user_id
-    public function contestParticipants()
+    public function contestParticipants(): HasMany
     {
         $contestParticipantsSet = $this->hasMany(
             related: ContestParticipant::class,
@@ -333,7 +336,7 @@ class UserContact extends Model
     }
 
     // user_contacts.id > contest_votes.juror_user_id
-    public function contestVotesJuror()
+    public function contestVotesJuror(): HasMany
     {
         $cvjSet = $this->hasMany(
             related:  ContestVote::class,
@@ -345,7 +348,7 @@ class UserContact extends Model
     }
 
     // user_contacts.id > contest_waitings.participant_user_id
-    public function contestWaitingParticipants()
+    public function contestWaitingParticipants(): HasMany
     {
         $cwpSet = $this->hasMany(
             related: ContestWaiting::class,
@@ -357,7 +360,7 @@ class UserContact extends Model
     }
 
     // user_contacts.id > contest_waitings.organization_user_id
-    public function contestWaitingOrganizations()
+    public function contestWaitingOrganizations(): HasMany
     {
         $cwoSet = $this->hasMany(
             related: ContestWaiting::class,
@@ -369,7 +372,7 @@ class UserContact extends Model
     }
 
     // user_contacts.id > contest_works.user_id
-    public function contestWorks()
+    public function contestWorks(): HasMany
     {
         $cwSet = $this->hasMany(
             related: ContestWork::class,
@@ -393,7 +396,7 @@ class UserContact extends Model
     }
 
     // user_contacts.id > user_contact_mores.user_id
-    public function contactMores()
+    public function contactMores(): HasMany
     {
         $contactMores = $this->hasMany(
             related: UserContactMore::class, // ext
@@ -409,7 +412,7 @@ class UserContact extends Model
     // user_contacts.id > user_contacts.user_id
 
     // user_contacts.id > user_roles.user_id
-    public function userRoles()
+    public function userRoles(): HasMany
     {
         $userRoles = $this->hasMany(
             related: UserRole::class,
@@ -421,7 +424,7 @@ class UserContact extends Model
     }
 
     // user_contacts.id > users.id
-    public function user()
+    public function user(): BelongsTo
     {
         $user = $this->belongsTo(
             related: User::class,
@@ -433,7 +436,7 @@ class UserContact extends Model
     }
 
     // user_contacts.id > user_work_validations.validator_user_id
-    public function userWorkValidators()
+    public function userWorkValidators(): HasMany
     {
         $wvSet = $this->hasMany(
             related: UserWorkValidation::class,
@@ -445,7 +448,7 @@ class UserContact extends Model
     }
 
     // contest_contacts.id > user_works.user_id
-    public function userWorks()
+    public function userWorks(): HasMany
     {
         $uwSet = $this->hasMany(
             related: UserWork::class,

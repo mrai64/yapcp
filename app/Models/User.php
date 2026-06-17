@@ -138,7 +138,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     // uuid as pk
-    public static function booted()
+    public static function booted(): void
     {
         static::creating(function ($model) {
             $model->id = Str::uuid7();
