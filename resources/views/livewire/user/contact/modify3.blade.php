@@ -3,8 +3,10 @@
 /**
  * User Contact modify 3rd of five
  * 
+ * TODO apply sms check to international number
  */
 
+use App\Notifications\PhoneVerifiedSms;
 use Livewire\Volt\Component;
 use App\Models\UserContact;
 
@@ -54,8 +56,11 @@ new class extends Component {
 
         $this->userContact->save();
 
+        // Esempio: Invia SMS di conferma all'utente autenticato
+        // auth()->user()->notify(new PhoneVerifiedSms());
+
         return redirect()
-            ->route('user.contact.modify3', ['user_contact' => $this->userContact])
+            ->route('user.contact.modify4', ['user_contact' => $this->userContact])
             ->with('success', __("Contact numbers updated successfully"));
     }
 

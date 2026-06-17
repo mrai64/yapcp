@@ -16,7 +16,7 @@
         url="{{ route('user.contact.modify3', ['user_contact' => $userContact]) }}" />
     <x-header-link-app 
         txt="Web n Socials / 4" 
-        url="#" />
+        url="{{ route('user.contact.modify4', ['user_contact' => $userContact]) }}" />
     <x-header-link-app 
         txt="Federations related / 5" 
         url="#" />
