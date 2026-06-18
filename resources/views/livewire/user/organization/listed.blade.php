@@ -85,7 +85,7 @@ new class extends Component {
                 <!-- not empty / use dl dt dd instead of table tr td -->
                 <dl class="space-y-6">
                     @foreach($allOrganizationSet as $organization)
-                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 hover:border-indigo-300 transition-colors relative">
+                        <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-500 hover:border-indigo-300 transition-colors relative">
                             <dt class="fyk text-2xl font-bold text-indigo-700">
                                 {{ $organization->country?->flag_code }} {{ $organization->country?->country }} 
                                 <br />
@@ -106,6 +106,14 @@ new class extends Component {
                                 <a href="{{ $organization->website }}" target="_blank" >
                                     {{ $organization->website }}
                                 </a>
+                            </dd>
+                            <dd class="mt-2 text-sm text-gray-500 italic flex items-center">
+                                <x-inline-link-app
+                                    txt="Update"
+                                    url="{{ route('user.organization.add') }}" />
+                                <x-inline-link-app
+                                    txt="Remove"
+                                    url="{{ route('user.organization.add') }}" />
                             </dd>
 
                         </div>
