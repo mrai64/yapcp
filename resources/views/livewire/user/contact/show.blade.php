@@ -88,7 +88,7 @@ new class extends Component {
                     <br class="clear:both;" />
                     <div class="sm:col-span-1">
                         <dt class="text-sm font-medium text-gray-500">{{ __('Lang code') }}</dt>
-                        <dd class="mt-1 text-lg text-gray-900">{{ $userContact->lang_local ?: 'N\A' }}</dd>
+                        <dd class="mt-1 text-lg text-gray-900">{{ $userContact->lang_code ?: 'N\A' }}</dd>
                     </div>
                     <div class="sm:col-span-1">
                         <dt class="text-sm font-medium text-gray-500">{{ __('Timezone code') }}</dt>
