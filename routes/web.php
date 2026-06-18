@@ -79,6 +79,9 @@ Volt::route('/organization/add', 'organization.add')
 Volt::route('/organization/modify/{organization}', 'organization.modify')
     ->middleware(['auth', 'verified', 'can:update,organization'])
     ->name('organization.modify');
+Volt::route('/organization/remove/{organization}', 'organization.remove')
+    ->middleware(['auth', 'verified', 'can:delete,organization'])
+    ->name('organization.remove');
 
 
 /**

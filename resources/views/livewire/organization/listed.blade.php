@@ -108,17 +108,19 @@ new class extends Component {
                             <dd class="mt-2 text-sm text-gray-500 italic flex items-center">
                                 {{ __('website') }}: 
                                 <a href="{{ $organization->website }}" target="_blank" >
-                                    {{ $organization->website }}
-                                </a>
+                                    {{ $organization->website }} 
+                                </a> ↗️
                             </dd>
+                            @if ($organization->name > '/')
                             <dd class="mt-2 text-sm text-gray-500 italic flex items-center">
                                 <x-inline-link-app
                                     txt="Update"
                                     url="{{ route('organization.modify', ['organization' => $organization]) }}" />
                                 <x-inline-link-app
                                     txt="Remove"
-                                    url="#" />
+                                    url="{{ route('organization.remove', ['organization' => $organization]) }}" />
                             </dd>
+                            @endif
 
                         </div>
                     @endforeach

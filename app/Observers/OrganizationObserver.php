@@ -6,6 +6,7 @@ use App\Models\Organization;
 use App\Models\UserRolesRoleSet;
 use App\Models\UserRolesContextSet;
 use App\Models\UserRole; // Assumendo l'esistenza di un modello UserRole per la tabella pivot
+use App\Jobs\CascadeDeleteOrganizationJob;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
@@ -64,10 +65,17 @@ class OrganizationObserver
 
     /**
      * Handle the Organization "deleted" event.
+     * A seguito della cancellazione di Organization vanno cancellati anche tutti
+     * i record correlati, p.es. concorsi. A loro volta i concorsi dovrebberi
+     * avere degli Observer che fanno la cancellazione dei record collegati,
+     * espandendo il lavoro fino ad esaurimento.
      */
     public function deleted(Organization $organization): void
     {
-        //
+        Log::info("OrganizationObserver: Metodo deleted attivato per l'organizzazione " . $organization->id);
+        // L'organizzazione è stata eliminata tramite soft-delete,
+        // "dispatchiamo" il job mettendolo in coda per pulire le relazioni a lotti.
+        CascadeDeleteOrganizationJob::dispatch($organization);
     }
 
     /**
