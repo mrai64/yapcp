@@ -66,7 +66,7 @@ new class extends Component {
         );
 
         return redirect()
-            ->route('user.organization.listed')
+            ->route('organization.listed')
             ->with('success', __("New Organization added successfully"));
 
     }
@@ -83,7 +83,7 @@ new class extends Component {
             url="{{ route('user.dashboard') }}" />
         <x-header-link-app 
             txt="Organization List" 
-            url="{{ route('user.organization.listed') }}" />
+            url="{{ route('organization.listed') }}" />
     </x-slot>
 
     <div class="py-12">

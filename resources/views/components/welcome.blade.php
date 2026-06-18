@@ -96,7 +96,7 @@
         </div>
         . .
         <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('user.organization.add') }}">
+            <a href="{{ route('organization.add') }}">
                 [ {{ __("Add a new Org") }} ]
             </a>
         </div>
