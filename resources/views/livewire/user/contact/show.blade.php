@@ -14,6 +14,10 @@ new class extends Component {
     {
         return [
             'userContact' => Auth::user()->contact,
+            'userContactMores' => Auth::user()->userContactMores()
+                ->orderBy('federation_id')
+                ->orderBy('field_name')
+                ->get(),
         ];
     }
 }; ?>
@@ -25,12 +29,11 @@ new class extends Component {
         </h2>
         <hr />
         <p class="small mb-4">
-            {{ __("Excluding email and password, here are listed all your personal information")}}
-            {{ __("that are used to fill your ev participation to contest,") }}
-            {{ __("or fill jury minute, and you can change it anytime.") }}
+            {{ __("Excluding password, here are listed all your personal information")}}
+            {{ __("that should be used to fill your apply form to a contest,") }}
+            {{ __("or fill a jury minute. You can change it anytime.") }}
             <br />
-            {{ __("Some infos are required 'extra' from federations for sponsored contest,")}}
-            {{ __("and are reported below.")}}
+            {{ __("Some infos are an 'extra' asked from federations for sponsored contest, i.e. card id.")}}
         </p>
         <hr class="mt-4 mb-4" />
         <br />
@@ -40,6 +43,9 @@ new class extends Component {
         <x-header-link-app
             txt="Update Contact infos"
             url="{{ route('user.contact.modify1', ['user_contact' => $userContact]) }}" />
+        <x-header-link-app
+            txt="Update password, enable 2FA"
+            url="{{ route('profile.show') }}" />
 
     </x-slot>
     <!-- -->
@@ -149,6 +155,27 @@ new class extends Component {
                         <dt class="text-sm font-medium text-gray-500">{{ __('X') }}</dt>
                         <dd class="mt-1 text-lg text-gray-900">{{ $userContact->x_twitter ?: 'N\A' }}</dd>
                     </div>
+
+                    @if($userContactMores->isNotEmpty())
+                        <br class="clear:both;" />
+                        <hr class="mt-4 mb-4" />
+                        <br class="clear:both;" />
+                        <div class="sm:col-span-2">
+                            <dt class="fyk text-2xl font-medium text-gray-900">{{ __("'Federation more' fields") }}</dt>
+                        </div>
+                        <br class="clear:both;" />
+                        @foreach ($userContactMores->groupBy('federation_id') as $fedId => $fields)
+                            <div class="sm:col-span-2 mt-4">
+                                <h3 class="fyk text-lg font-semibold text-gray-700 uppercase border-l-4 border-indigo-500 pl-3">{{ $fedId }}</h3>
+                            </div>
+                            @foreach ($fields as $field)
+                                <div class="sm:col-span-1">
+                                    <dt class="text-sm font-medium text-gray-500">{{ $field->field_name }}</dt>
+                                    <dd class="mt-1 text-lg text-gray-900">{{ $field->field_value ?: 'N\A' }}</dd>
+                                </div>
+                            @endforeach
+                        @endforeach
+                    @endif
                 </dl>
             </div>
         </div>

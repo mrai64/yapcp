@@ -297,6 +297,18 @@ class User extends Authenticatable implements MustVerifyEmail
         return $contact;
     }
 
+    // users.id > user_contact_mores.user_id
+    public function userContactMores(): HasMany
+    {
+        $rSet = $this->hasMany(
+            related: UserContactMore::class,
+            foreignKey: 'user_id',
+            localKey: 'id'
+        );
+        // log
+        return $rSet;
+    }
+
     // users.id > user_roles.user_id
     public function userRoles(): HasMany
     {
