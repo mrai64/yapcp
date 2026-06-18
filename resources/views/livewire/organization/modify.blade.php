@@ -156,7 +156,7 @@ new class extends Component {
                     <br style="clear:both;" />
 
                     <x-button class="mt-2 ms-4">
-                        {{ __('Check all, then Add') }}
+                        {{ __('Check all, then Modify') }}
                     </x-button>
                 </form>
 
