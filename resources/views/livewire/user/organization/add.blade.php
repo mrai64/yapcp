@@ -79,11 +79,12 @@ new class extends Component {
             {{ __(':name, Add a new Organization', ['name' => $userContact->first_name] ) }}
         </h2>
         <hr class="mb-4" />
-        <livewire:user.contact.modify-nav :user_contact="$userContact" />
-        <hr class="mb-2" />
         <x-header-link-app 
             txt="Back to dashboard" 
             url="{{ route('user.dashboard') }}" />
+        <x-header-link-app 
+            txt="Organization List" 
+            url="{{ route('user.organization.listed') }}" />
     </x-slot>
 
     <div class="py-12">
