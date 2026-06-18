@@ -115,6 +115,8 @@ use Illuminate\Support\Str;
  * @property string $timezone_id fk: timezones.id
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereLangCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereTimezoneId($value)
+ * @property string $linkedin url to personal page
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereLinkedin($value)
  * @mixin \Eloquent
  */
 class UserContact extends Model

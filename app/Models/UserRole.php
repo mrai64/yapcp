@@ -55,6 +55,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRole whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRole withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRole withoutTrashed()
+ * @property-read \App\Models\User|null $user
  * @mixin \Eloquent
  */
 class UserRole extends Model

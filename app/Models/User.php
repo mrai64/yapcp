@@ -94,6 +94,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserContactMore> $userContactMores
+ * @property-read int|null $user_contact_mores_count
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail
