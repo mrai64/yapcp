@@ -332,12 +332,13 @@ class User extends Authenticatable implements MustVerifyEmail
     // IS?
 
     /**
-     * Determine if the user has an active admin role.
+     * Determine if the user has an active admin role. Now
      *
      * @return bool
      */
     public function isAdmin(): bool
     {
+        //was Log::info(__FUNCTION__ . ' called for ' . $this->id );
         return $this->userRoles()
             ->where('role', UserRole::ADMINGROUP)
             ->where('role_opening', '<=', now())
@@ -347,7 +348,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     /**
      * Determine if the user is member of any Organization,
-     *   except admin
+     *   except admin role
      *
      * @return bool
      */
@@ -423,6 +424,8 @@ class User extends Authenticatable implements MustVerifyEmail
             ->where('role_closing', '>=', now())
             ->exists();
     }
+
+    // COUNTERS
 
     /**
      * Determine how many works are available in user gallery

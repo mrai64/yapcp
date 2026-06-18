@@ -42,18 +42,15 @@ class OrganizationPolicy
      */
     public function update(User $user, Organization $organization): bool
     {
+        // was: Log::info("Policy Organization@update: User {$user->id} checking Org {$organization->id}");
+
         // admin can
-        $admin = $user->isAdmin();
-        if ($admin) {
+        if ($user->isAdmin()) {
             return true;
         }
-        // check if a userRole is present
-        $evaluate = UserRole::whereUserId($user->id)
-            ->whereOrganizationId($organization->id)
-            ->exists();
-        Log::info('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__
-            . ' evaluated:' . $evaluate);
-        return $evaluate;
+
+        // Utilizziamo il metodo isMemberOfOrganization già definito in User
+        return $user->isMemberOfOrganization($organization);
     }
 
     /**

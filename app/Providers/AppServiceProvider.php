@@ -17,6 +17,7 @@ use App\Observers\UserObserver;
 use App\Policies\ContestPaymentChangePolicy;
 use App\Policies\JurorOnlyPolicy;
 use BinaryTorch\LaRecipe\LaRecipeServiceProvider;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\View;
@@ -48,6 +49,12 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with('appVersion', $version);
         });
+
+        // Forza il binding esplicito per le rotte che usano {organization}
+        Route::model('organization', Organization::class);
+
+        // Registrazione esplicita della Policy per l'Organizzazione
+        Gate::policy(Organization::class, \App\Policies\OrganizationPolicy::class);
 
         // Gate Policy
         Gate::define('contest-participants-update', [ContestPaymentChangePolicy::class, 'update']);

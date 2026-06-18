@@ -19,6 +19,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @property int $id
@@ -83,7 +84,7 @@ class UserRole extends Model
         // deleted_at          reserved
     ];
 
-    protected function casts()
+    protected function casts(): array
     {
         return [
             'id' => 'int',
@@ -129,14 +130,23 @@ class UserRole extends Model
             ->where('role_opening', '<=', now())
             ->where('role_closing', '>=', now())
             ->exists();
-        ds($examine);
+        // was ds($examine);
         return $examine;
     }
 
     // RELATIONS
 
-    // ws: user_contact
-    public function userContact()
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(
+            User::class, // ext  class
+            'user_id', //   int  user_roles.user_id
+            'id' //         ext  users.id
+        );
+    }
+
+    // was: user_contact
+    public function userContact(): BelongsTo
     {
         $userContact = $this->belongsTo(
             UserContact::class, // ext  class
@@ -147,7 +157,7 @@ class UserRole extends Model
         return $userContact;
     }
 
-    public function federation()
+    public function federation(): BelongsTo
     {
         $federation = $this->belongsTo(
             Federation::class, //  ext  class
@@ -158,7 +168,7 @@ class UserRole extends Model
         return $federation;
     }
 
-    public function organization()
+    public function organization(): BelongsTo
     {
         $organization = $this->belongsTo(
             Organization::class, // ext class
@@ -169,7 +179,7 @@ class UserRole extends Model
         return $organization;
     }
 
-    public function contest()
+    public function contest(): BelongsTo
     {
         $contest = $this->belongsTo(
             Contest::class, //  ext  class
