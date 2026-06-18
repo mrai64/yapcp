@@ -8,7 +8,6 @@
  * 
  */
 
-use App\Models\Country;
 use App\Models\Organization;
 use App\Models\UserContact;
 use Livewire\Volt\Component;
@@ -68,7 +67,7 @@ new class extends Component {
 
         return redirect()
             ->route('user.organization.listed')
-            ->with('success', __("Your federations related data was updated successfully"));
+            ->with('success', __("New Organization added successfully"));
 
     }
 }; ?>
