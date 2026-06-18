@@ -17,9 +17,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
@@ -83,15 +85,22 @@ class Organization extends Model
         // deleted_at      reserved
     ];
 
-    // uuid as pk
-    public static function booted()
+    // uuid as pk before HasUuids
+    // public static function booted()
+    // {
+    //     static::creating(function ($model) {
+    //         $model->id = Str::uuid();
+    //     });
+    // }
+    //
+    // with HasUuids
+    public function newUniqueId(): string
     {
-        static::creating(function ($model) {
-            $model->id = Str::uuid();
-        });
+        return (string) Str::uuid7(); // was: uuid();
     }
 
-    protected function casts()
+
+    protected function casts(): array
     {
         return [
             'id'          => 'string',
@@ -110,26 +119,21 @@ class Organization extends Model
     /**
      * Organization list order by Country
      *
-     * Organization name must start with a letter or digit.
+     * Organization name must start with a letter or digit,
+     * when start with a dot it's reserverd for admin user group
      */
-    public static function countryIdSorted()
+    public static function countryIdSorted(): Collection
     {
-        $organizations = self::select()
-            ->where('name', '>', '/')
+        $organizations = self::query()
+            ->when(!auth()->user()?->isAdmin(), function ($query) {
+                return $query->where('name', '>', '/');
+            })
             ->orderBy('country_id', 'asc')
             ->orderBy('name', 'asc')
             ->orderBy('created_at', 'desc')
             ->get();
         // log
         return $organizations;
-    }
-
-    // was: organization_name
-    public static function organizationName(string $orgId): string
-    {
-        $organization = self::where('id', $orgId)->first();
-        // log
-        return $organization->name;
     }
 
     // RELATIONSHIP
@@ -143,7 +147,7 @@ class Organization extends Model
     }
 
     // organizations.id > contests.organization_id
-    public function contests()
+    public function contests(): HasMany
     {
         $contests = $this->hasMany(
             related: Contest::class,
@@ -155,16 +159,12 @@ class Organization extends Model
     }
 
     // organizations.id > user_roles.organization_id
-    public function userRoles()
+    public function userRoles(): HasMany
     {
-
-        $userRoles = $this->hasMany(
+        return $this->hasMany(
             related: UserRole::class,
             foreignKey: 'organization_id',
             localKey: 'id'
         );
-        // log
-        return $userRoles;
     }
-
 }
