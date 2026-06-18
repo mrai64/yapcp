@@ -89,6 +89,9 @@ new class extends Component {
         <x-header-link-app 
             txt="Organization List" 
             url="{{ route('organization.listed') }}" />
+        <x-header-link-app
+            txt="Org Dashboards"
+            url="{{ route('organization.dashboard', ['organization' => $organization]) }}" />
     </x-slot>
 
     <div class="py-12">
@@ -116,42 +119,41 @@ new class extends Component {
                 <form wire:submit="updateOrganization">
                     @csrf
 
-                <!-- organizationName -->
-                <div class="mb-4">
-                    <x-input-label for="organizationName" :value="__('Organization name, english')" />
-                    <x-text-input wire:model="organizationName" id="organizationName" name="organizationName" class="block mt-1 w-full" type="text" required />
-                    <x-input-error for="organizationName" class="mt-2" />
-                </div>
+                    <!-- organizationName -->
+                    <div class="mb-4">
+                        <x-input-label for="organizationName" :value="__('Organization name, english')" />
+                        <x-text-input wire:model="organizationName" id="organizationName" name="organizationName" class="block mt-1 w-full" type="text" required />
+                        <x-input-error for="organizationName" class="mt-2" />
+                    </div>
 
-                <!-- country select -->
-                <x-select-country-app wire:model="organizationCountryId" :country_id="$organizationCountryId" /> 
+                    <!-- country select -->
+                    <x-select-country-app wire:model="organizationCountryId" :country_id="$organizationCountryId" /> 
 
-                <!-- organizationContact -->
-                <div class="mb-4">
-                    <style>textarea {resize:vertical;}</style>
-                    <x-input-label for="organizationContact" :value="__('Contact info, HQ postal address, english')" />
-                    <textarea 
-                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                        type="text" name="organizationContact"
-                        wire:model="organizationContact"
-                    >{{ old('organizationContact') }}</textarea>
-                    <x-input-error for="organizationContact" class="mt-2" />
-                </div>
+                    <!-- organizationContact -->
+                    <div class="mb-4">
+                        <style>textarea {resize:vertical;}</style>
+                        <x-input-label for="organizationContact" :value="__('Contact info, HQ postal address, english')" />
+                        <textarea 
+                            class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                            type="text" name="organizationContact"
+                            wire:model="organizationContact"
+                        >{{ old('organizationContact') }}</textarea>
+                        <x-input-error for="organizationContact" class="mt-2" />
+                    </div>
 
-                <!-- organizationEmail -->
-                <div class="mb-4">
-                    <x-input-label for="organizationEmail" :value="__('Email')" />
-                    <x-text-input wire:model="organizationEmail" id="organizationEmail" name="organizationEmail" class="block mt-1 w-full" type="email" required />
-                    <x-input-error for="organizationEmail" class="mt-2" />
-                </div>
+                    <!-- organizationEmail -->
+                    <div class="mb-4">
+                        <x-input-label for="organizationEmail" :value="__('Email')" />
+                        <x-text-input wire:model="organizationEmail" id="organizationEmail" name="organizationEmail" class="block mt-1 w-full" type="email" required />
+                        <x-input-error for="organizationEmail" class="mt-2" />
+                    </div>
 
-                <!-- organizationWebsite -->
-                <div class="mb-4">
-                    <x-input-label for="organizationWebsite" :value="__('official website')" />
-                    <x-text-input wire:model="organizationWebsite" id="organizationWebsite" name="organizationWebsite" class="block mt-1 w-full" type="url" required />
-                    <x-input-error for="organizationWebsite" class="mt-2" />
-                </div>
-
+                    <!-- organizationWebsite -->
+                    <div class="mb-4">
+                        <x-input-label for="organizationWebsite" :value="__('official website')" />
+                        <x-text-input wire:model="organizationWebsite" id="organizationWebsite" name="organizationWebsite" class="block mt-1 w-full" type="url" required />
+                        <x-input-error for="organizationWebsite" class="mt-2" />
+                    </div>
 
                     <br style="clear:both;" />
 

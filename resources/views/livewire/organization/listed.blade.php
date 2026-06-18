@@ -111,16 +111,19 @@ new class extends Component {
                                     {{ $organization->website }} 
                                 </a> ↗️
                             </dd>
-                            @if ($organization->name > '/')
                             <dd class="mt-2 text-sm text-gray-500 italic flex items-center">
+                                <x-inline-link-app
+                                    txt="Org Dashboards"
+                                    url="{{ route('organization.dashboard', ['organization' => $organization]) }}" />
+                                @if ($organization->name > '/')
                                 <x-inline-link-app
                                     txt="Update"
                                     url="{{ route('organization.modify', ['organization' => $organization]) }}" />
                                 <x-inline-link-app
                                     txt="Remove"
                                     url="{{ route('organization.remove', ['organization' => $organization]) }}" />
+                                @endif
                             </dd>
-                            @endif
 
                         </div>
                     @endforeach

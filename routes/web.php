@@ -76,6 +76,9 @@ Volt::route('/organization/listed', 'organization.listed')
 Volt::route('/organization/add', 'organization.add')
     ->middleware(['auth', 'verified'])
     ->name('organization.add');
+Volt::route('/organization/dashboard/{organization}', 'organization.dashboard')
+    ->middleware(['auth', 'verified', 'can:view,organization'])
+    ->name('organization.dashboard');
 Volt::route('/organization/modify/{organization}', 'organization.modify')
     ->middleware(['auth', 'verified', 'can:update,organization'])
     ->name('organization.modify');
