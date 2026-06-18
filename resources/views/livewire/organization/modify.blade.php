@@ -72,7 +72,7 @@ new class extends Component {
 
         return redirect()
             ->route('organization.listed')
-            ->with('success', __("Your federations related data was updated successfully"));
+            ->with('success', __("Your Organization data was updated successfully"));
 
     }
 }; ?>
