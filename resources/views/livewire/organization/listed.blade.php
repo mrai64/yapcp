@@ -52,7 +52,7 @@ new class extends Component {
         </p>
         <hr class="mb-4 mt-4" />
         <x-header-link-app 
-            txt="Back to dashboard" 
+            txt="Back to User dashboard" 
             url="{{ route('user.dashboard') }}" />
         <x-header-link-app 
             txt="Add a new Organization" 
@@ -129,6 +129,10 @@ new class extends Component {
                         </div>
                     @endforeach
                 </dl>
+
+                <div class="mt-8">
+                    {{ $allOrganizationSet->links() }}
+                </div>
                 @endif
             </div>
         </div>
