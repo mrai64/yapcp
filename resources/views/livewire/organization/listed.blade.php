@@ -109,7 +109,8 @@ new class extends Component {
                                 {{ __('website') }}: 
                                 <a href="{{ $organization->website }}" target="_blank" >
                                     {{ $organization->website }} 
-                                </a> ↗️
+                                    &nbsp;&nbsp; ↗️
+                                </a> 
                             </dd>
                             <dd class="mt-2 text-sm text-gray-500 italic flex items-center">
                                 <x-inline-link-app

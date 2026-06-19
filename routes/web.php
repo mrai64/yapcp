@@ -85,6 +85,33 @@ Volt::route('/organization/modify/{organization}', 'organization.modify')
 Volt::route('/organization/remove/{organization}', 'organization.remove')
     ->middleware(['auth', 'verified', 'can:delete,organization'])
     ->name('organization.remove');
+// TODO
+Volt::route('/organization/user/listed/{organization}', 'organization.user.listed')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.user.listed');
+// TODO
+Volt::route('/organization/user/add/{organization}', 'organization.user.add')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.user.add');
+// TODO
+Volt::route('/organization/contest/listed/{organization}', 'organization.contest.listed')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.contest.listed');
+// TODO
+Volt::route('/organization/design/contest1/{organization}', 'organization.design.contest1')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.contest1');
+
+/**
+ * Federation
+ *
+ */
+Volt::route('/federation/listed', 'federation.listed')
+    ->middleware(['auth', 'verified'])
+    ->name('federation.listed');
+Volt::route('/federation/add', 'federation.add')
+    ->middleware(['auth', 'verified', 'can:create,federation'])
+    ->name('federation.add');
 
 
 /**

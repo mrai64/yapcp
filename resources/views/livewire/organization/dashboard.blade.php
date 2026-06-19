@@ -7,6 +7,7 @@
  * 
  */
 
+use App\Models\Organization;
 use App\Models\UserContact;
 use Livewire\Volt\Component;
 use Illuminate\Support\Facades\Auth;
@@ -33,11 +34,9 @@ new class extends Component {
         <x-header-link-app 
             txt="Back to User dashboard" 
             url="{{ route('user.dashboard') }}" />
-        <x-header-link-app 
-            txt="Update Org Infos" 
-            url="{{ route('organization.modify', ['organization' => $organization]) }}" />
     </x-slot>
-        <div class="py-12">
+    
+    <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
@@ -59,25 +58,32 @@ new class extends Component {
                 </div>
                 @endif
 
-                <h3 class="fyk text-2xl font-bold mb-4">{{ __("Members") }}</h3>
-                <x-header-link-app 
-                    txt="Add new Member" 
-                    url="#" />
-                <x-header-link-app 
+                <h3 class="fyk text-2xl font-bold mb-4">
+                    {{ __("Members") }}
+                </h3>
+                <x-inline-link-app 
                     txt="Members list" 
-                    url="#" />
+                    url="{{ route('organization.user.listed', ['organization' => $organization]) }}" />
+                <x-inline-link-app 
+                    txt="Add new Member" 
+                    url="{{ route('organization.user.add', ['organization' => $organization]) }}" />
 
-
-                <h3 class="fyk text-2xl font-bold mb-4">{{ __("Contest") }}</h3>
-                <x-header-link-app 
+                <h3 class="fyk text-2xl font-bold mb-4">
+                    {{ __("Contests") }}
+                </h3>
+                <x-inline-link-app 
+                    txt="Contests List" 
+                    url="{{ route('organization.contest.listed', ['organization' => $organization]) }}" />
+                <x-inline-link-app 
                     txt="Design new Contest" 
-                    url="#" />
-                <x-header-link-app 
-                    txt="Manage Open Contest" 
-                    url="#" />
-                <x-header-link-app 
-                    txt="View Past Contest" 
-                    url="#" />
+                    url="{{ route('organization.design.contest1', ['organization' => $organization]) }}" />
+
+                <h3 class="fyk text-2xl font-bold mb-4">
+                    {{ __("Organization") }}
+                </h3>
+                <x-inline-link-app 
+                    txt="Update Org Infos" 
+                    url="{{ route('organization.modify', ['organization' => $organization]) }}" />
 
             </div>
         </div>
