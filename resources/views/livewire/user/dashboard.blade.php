@@ -3,7 +3,6 @@
 /**
  * User dashboard
  *
- * TODO Organization dashboard, Admin dashboard
  */
 
 use function Livewire\Volt\state;
@@ -56,6 +55,17 @@ with([
                 <x-header-link-app 
                     txt="Organizations List" 
                     url="{{ route('organization.listed') }}" />
+
+                @if ($user->isAdmin())
+                <h3 class="fyk text-xl font-bold mb-4">{{ __("Federations [admin only]") }}</h3>
+                <x-header-link-app 
+                    txt="Federation list" 
+                    url="{{ route('federation.listed') }}" />
+                <x-header-link-app 
+                    txt="New Federation" 
+                    url="{{ route('federation.add') }}" />
+
+                @endif
             </div>
         </div>
     </div>
