@@ -28,13 +28,15 @@ class FederationPolicy
 
     /**
      * Determine whether the user can create models.
-     * 
+     *
      * TODO federation secretary can
      */
     public function create(User $user): bool
     {
-        // admin can
+        // for all federation - only for user in admin group
+        Log::info('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
         $evaluate = $user->isAdmin();
+        Log::info('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
         return $evaluate;
     }
 

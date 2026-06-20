@@ -20,6 +20,7 @@
 
 
 use App\Livewire\User;
+use App\Models\Federation as ModelsFederation;
 use Livewire\Volt\Volt;
 //
 use Illuminate\Support\Facades\Route;
@@ -109,7 +110,7 @@ Volt::route('/federation/listed', 'federation.listed')
     ->middleware(['auth', 'verified'])
     ->name('federation.listed');
 Volt::route('/federation/add', 'federation.add')
-    ->middleware(['auth', 'verified', 'can:create,federation'])
+    ->middleware(['auth', 'verified', 'can:create,' . ModelsFederation::class])
     ->name('federation.add');
 Volt::route('/federation/modify/{federation}', 'federation.modify')
     ->middleware(['auth', 'verified'])
