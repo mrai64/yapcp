@@ -18,7 +18,7 @@ new class extends Component {
     public string $federationWebsite;
     public string $federationContactInfo;
     public string $federationLocalLang;
-    public string $federationNameLocal;    
+    public string $federationNameLocal;
     public string $federationTimezoneId;
 
     // mount() yes
@@ -31,7 +31,7 @@ new class extends Component {
         $this->federationWebsite = '';
         $this->federationContactInfo = '';
         $this->federationLocalLang = '';
-        $this->federationNameLocal = '';  
+        $this->federationNameLocal = '';
         $this->federationTimezoneId = '';
     }
 
@@ -164,12 +164,13 @@ new class extends Component {
                     <br style="clear:both;" />
                     
                     <x-button class="mt-2 ms-4">
-                        {{ __('Check all, then Modify') }}
+                        {{ __('Check all, then Add') }}
                     </x-button>
                 </form>
                 
             </div>
-        <!-- -->
-        <x-footer-app />
+        </div>
     </div>
+    <!-- -->
+    <x-footer-app />
 </div>
