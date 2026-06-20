@@ -113,8 +113,11 @@ Volt::route('/federation/add', 'federation.add')
     ->middleware(['auth', 'verified', 'can:create,' . ModelsFederation::class])
     ->name('federation.add');
 Volt::route('/federation/modify/{federation}', 'federation.modify')
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'can:update,federation'])
     ->name('federation.modify');
+Volt::route('/federation/remove/{federation}', 'federation.remove')
+    ->middleware(['auth', 'verified', 'can:delete,federation'])
+    ->name('federation.remove');
 
 /**
  * Federation Section n themes

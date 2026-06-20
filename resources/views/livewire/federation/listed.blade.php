@@ -115,6 +115,9 @@ new class extends Component {
                                     txt="Update" 
                                     url="{{ route('federation.modify', ['federation' => $federation ]) }}" />
                                 <x-inline-link-app 
+                                    txt="‼️ Remove ‼️" 
+                                    url="{{ route('federation.remove', ['federation' => $federation ]) }}" />
+                                <x-inline-link-app 
                                     txt="Federation Sections" 
                                     url="{{ route('federation-section.listed', ['federation' => $federation ]) }}" />
                             </dd>
