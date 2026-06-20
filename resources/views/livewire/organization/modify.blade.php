@@ -150,7 +150,7 @@ new class extends Component {
 
                     <!-- organizationWebsite -->
                     <div class="mb-4">
-                        <x-input-label for="organizationWebsite" :value="__('official website')" />
+                        <x-input-label for="organizationWebsite" :value="__('Official website')" />
                         <x-text-input wire:model="organizationWebsite" id="organizationWebsite" name="organizationWebsite" class="block mt-1 w-full" type="url" required />
                         <x-input-error for="organizationWebsite" class="mt-2" />
                     </div>
