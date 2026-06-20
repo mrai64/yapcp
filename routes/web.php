@@ -111,13 +111,16 @@ Volt::route('/federation/listed', 'federation.listed')
 Volt::route('/federation/add', 'federation.add')
     ->middleware(['auth', 'verified', 'can:create,federation'])
     ->name('federation.add');
+Volt::route('/federation/modify/{federation}', 'federation.modify')
+    ->middleware(['auth', 'verified'])
+    ->name('federation.modify');
 
 /**
  * Federation Section n themes
  */
-Volt::route('/federation/section/listed', 'federation.section/listed')
+Volt::route('/federation-section/listed/{federation}', 'federation-section.listed')
     ->middleware(['auth', 'verified'])
-    ->name('federation.section.listed');
+    ->name('federation-section.listed');
 
 /**
  * Contest

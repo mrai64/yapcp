@@ -9,6 +9,7 @@
 namespace App\Providers;
 
 use App\Models\Federation;
+use App\Models\FederationSection;
 use App\Models\Organization;
 use App\Models\User;
 use App\Models\UserContact;
@@ -53,10 +54,12 @@ class AppServiceProvider extends ServiceProvider
 
         // Forza il binding esplicito per le rotte che usano {organization}
         Route::model('federation', Federation::class);
+        Route::model('federation-section', FederationSection::class);
         Route::model('organization', Organization::class);
 
         // Registrazione esplicita della Policy per l'Organizzazione
         Gate::policy(Federation::class, \App\Policies\FederationPolicy::class);
+        Gate::policy(FederationSection::class, \App\Policies\FederationSectionPolicy::class);
         Gate::policy(Organization::class, \App\Policies\OrganizationPolicy::class);
 
         // Gate Policy

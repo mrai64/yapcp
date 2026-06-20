@@ -112,8 +112,11 @@ new class extends Component {
 
                             <dd class="mt-2">
                                 <x-inline-link-app 
+                                    txt="Update" 
+                                    url="{{ route('federation.modify', ['federation' => $federation ]) }}" />
+                                <x-inline-link-app 
                                     txt="Federation Sections" 
-                                    url="{{ route('federation.section.listed', ['federation' => $federation ]) }}" />
+                                    url="{{ route('federation-section.listed', ['federation' => $federation ]) }}" />
                             </dd>
 
                         </div>
