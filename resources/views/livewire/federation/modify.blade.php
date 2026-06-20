@@ -1,214 +1,182 @@
-<?php 
+<?php
+
 /**
- * 2025-10-16 federations table refactored - now v.2
+ * Federation Modify by admin
  *
- * @see /app/livewire/federation/modify.php
+ * not usual, but sometimes i.e. change HQ address or new website etc
+ *
  */
 
-?> 
+use App\Models\Federation;
+use Livewire\Volt\Component;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
+
+new class extends Component {
+    public Federation $federation;
+    public string $federationId;
+    public string $federationCountryId;
+    public string $federationNameEn;
+    public string $federationWebsite;
+    public string $federationContactInfo;
+    public string $federationLocalLang;
+    public string $federationNameLocal;
+    public string $federationTimezoneId;
+
+    public function mount(Federation $federation)
+    {
+        $this->$federation = $federation;
+
+        $this->federationId = $federation->id;
+        $this->federationCountryId = $federation->country_id;
+        $this->federationNameEn = $federation->name_en;
+        $this->federationWebsite = $federation->website;
+        $this->federationContactInfo = $federation->contact_info;
+        $this->federationLocalLang = $federation->local_lang;
+        $this->federationNameLocal = $federation->name_local;
+        $this->federationTimezoneId = $federation->timezone_id;
+    }
+
+    public function rules()
+    {
+        return [
+            'federationId'          => [
+                'required', 'string', 'uppercase', 'min:2', 'max:10', 
+                Rule::unique(Federation::class, 'id')->ignore($this->federation->id) 
+                ],
+            'federationCountryId'   => 'required|string|uppercase|min:3|exists:countries,id',
+            'federationNameEn'      => 'required|string|min:3|max:255',
+            'federationWebsite'     => 'string|active_url|max:255',
+            'federationContactInfo' => 'required|string|max:2000',
+            'federationLocalLang'   => 'string|max:6',
+            'federationNameLocal'   => 'string|min:3|max:255',
+            'federationTimezoneId'  => 'required|exists:timezones,id',
+        ];
+    }
+
+    public function modifyFederation()
+    {
+        $validated = $this->validate();
+        $validated['id'] = $validated['federationId'];
+
+        $res = Federation::updateOrCreate(
+            [
+                'id' => $validated['id'],
+            ],
+            [
+                'country_id'   => $validated['federationCountryId'],
+                'name_en'      => $validated['federationNameEn'],
+                'website'      => $validated['federationWebsite'],
+                'local_lang'   => $validated['federationLocalLang'],
+                'name_local'   => $validated['federationNameLocal'],
+                'timezone_id'  => $validated['federationTimezoneId'],
+                'contact_info' => $validated['federationContactInfo'],
+            ]
+        );
+
+        return redirect()
+            ->route('federation.listed')
+            ->with('success', __("New federations was added successfully"));
+    }
+}; ?>
 
 <div>
     <x-slot name="header">
         <h2 class="fyk text-2xl font-medium text-gray-900">
-            {{ __('Modify few Federation infos') }}
+            {{ __('Modify Federation infos') }}
         </h2>
-
-        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ url('/docs') }}">
-                [ {{ __("The Manual") }} ]
-            </a>
-        </div>
-        . .
-        @if (isset($federation))
-        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('federation-section.list', ['federation' => $federation])}}" 
-                target="_blank"
-                rel="noopener noreferrer">
-                [ {{ __("Federation' Coded Sections List") }} 🗒️ ]
-            </a>
-        </div>
-        . .
-        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a  href="{{ route('federation-more.list', ['federation' => $federation]) }}"
-                target="_blank"
-                rel="noopener noreferrer">
-                [ {{ __("'Federation more' fields list") }} ]
-            </a>
-        </div>
-        . .
-        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a  href="{{ route('federation-more.add', ['federation' => $federation]) }}"
-                target="_blank"
-                rel="noopener noreferrer">
-                [ {{ __("'Federation more' field add") }} ]
-            </a>
-        </div>
-        . .
-        @else
-        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="#" 
-                target="_blank"
-                rel="noopener noreferrer">
-                [ {{ __("Federation' Coded Sections List") }} 🗒️ ]
-            </a>
-        </div>
-        . .
-        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a  href="#"
-                target="_blank"
-                rel="noopener noreferrer">
-                [ {{ __("'Federation more' fields list") }} ]
-            </a>
-        </div>
-        . .
-        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a  href="#"
-                target="_blank"
-                rel="noopener noreferrer">
-                [ {{ __("'Federation more' field add") }} ]
-            </a>
-        </div>
-        . .
-        @endif
-        <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-            <a href="{{ route('federation.list') }}">
-                [ {{ __("Federation List") }} ]
-            </a>
-        </div>
-        . .
+        <hr class="mb-4" />
+        <x-header-link-app 
+            txt="Back to User dashboard" 
+            url="{{ route('user.dashboard') }}" />
+		<x-header-link-app 
+			txt="Federation list" 
+			url="{{ route('federation.listed') }}" />
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+            
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
+                <!-- success -->
+                @if (session('success'))
+                <div class="fyk text-2xl float-end font-medium rounded-md px-4 py-2">
+                    {{ session('success') }}
+                </div>
+                @endif
+                
+                <!-- errors list -->
+                @if ($errors->any())
+                <div>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li class="text-red-600">❌ {{ $error }} 👈</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
 
-    <form wire:submit="updateFederation">
-        @csrf 
+                <form wire:submit="modifyFederation">
+                    @csrf
+                    
+                    <!-- federationId -->
+                    <div class="mb-4">
+                        <x-input-label for="federationId" :value="__('Federation ID')" />
+                        <x-text-input wire:model="federationId" id="federationId" name="federationId" class="block mt-1 w-full" type="text" required />
+                        <p class="small">{{ __('Uppercase acronym, if there is already the same acronym for another federation in list, use country code as prefix, i.e. ARG:FAF, AND:FAF') }}</p>
+                        <x-input-error for="federationId" class="mt-2" />
+                    </div>
 
-        <div class="mb-4">
-            <label for="federationId"
-                class="block fyk font-medium text-xl text-gray-700" >
-                {{ __('Federation Shortcode')}}
-                | {{__('required')}}
-                  {{__('unique')}}
-            </label>
-            <div class="suggest">{{__('Remember: must be a unique value in platform, uppercase letters, upto 10 chars')}}</div>
-            <input
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-48"
-                type="text" name="federationId"
-                wire:model.live.debounce.500ms="federationId" 
-                value="{{ old('federationId') }}"
-                required="required"
-                />
-            @error('federationId')
-            <div class="alert alert-danger small">{{ $message }} </div>
-            @enderror
-        </div><!-- federationId -->
+                    <!-- country select -->
+                    <x-select-country-app wire:model="federationCountryId" :country_id="$federationCountryId" /> 
 
-        <div class="mb-4">
-            <label for="federationNameEn"
-                class="block fyk font-medium text-xl text-gray-700" >
-                {{ __('Federation Name [en]') }}
-                | {{__('required')}}
-            </label>
-            <input 
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="federationNameEn"
-                wire:model.live.debounce.500ms="federationNameEn" 
-                value="{{ old('federationNameEn') }}"
-                required="required" 
-            />
-            @error('federationNameEn')
-            <div class="alert alert-danger small">{{ $message }} </div>
-            @enderror
-        </div><!-- international federation name -->
+                    <!-- federationNameEn -->
+                    <div class="mb-4">
+                        <x-input-label for="federationNameEn" :value="__('Federation Name, english')" />
+                        <x-text-input wire:model="federationNameEn" id="federationNameEn" name="federationNameEn" class="block mt-1 w-full" type="text" required />
+                        <x-input-error for="federationNameEn" class="mt-2" />
+                    </div>
 
-        <div class="mb-4">
-            <label for="website"
-                class="block fyk font-medium text-xl text-gray-700" >
-                {{__('Official website')}}
-            </label>
-            <input 
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                wire:model.live="website" 
-                type="text" name="website" 
-                value="{{ old('website') }}"
-                >
-            @error('website')
-            <div class="alert alert-danger small">{{ $message }} </div>
-            @enderror
-        </div><!-- website -->
+                    <!-- federationWebsite -->
+                    <div class="mb-4">
+                        <x-input-label for="federationWebsite" :value="__('Official website')" />
+                        <x-text-input wire:model="federationWebsite" id="federationWebsite" name="federationWebsite" class="block mt-1 w-full" type="url" required />
+                        <x-input-error for="federationWebsite" class="mt-2" />
+                    </div>
 
-        <div class="mb-4">
-            <label for="countryId"
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" >
-                {{ __('Country') }}
-                | {{__('required')}}
-            </label>
-            <select 
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                wire:model.live="countryId"
-                name="countryId"
-                required="required"
-                >
-            @foreach ($countries as $country)
-                <option value="{{ trim($country->id) }}" {{ ($country->id === $countryId ) ? 'selected' : '' }}> {{ $country->country }} </option>
-            @endforeach
-            </select>
-            @error('countryId')
-            <div class="alert alert-danger small">{{ $message }} </div>
-            @enderror
-        </div><!-- country id -->
+                    <!-- federationLocalLang -->
+                    <div class="mb-4">
+                        <x-input-label for="federationLocalLang" :value="__('Local lang code')" />
+                        <x-text-input wire:model="federationLocalLang" id="federationLocalLang" name="federationNameEn" class="block mt-1 w-full" type="text" required />
+                        <x-input-error for="federationLocalLang" class="mt-2" />
+                    </div>
+                    
+                    <!-- timezone select -->
+                    <x-select-timezone-app wire:model="federationTimezoneId" :country_id="$federationTimezoneId" /> 
 
-        <div class="mb-4">
-            <label for="timezoneId"
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto max-w-7xl" >
-                {{ __('Timezone') }}
-            </label>
-            <div class="suggest">
-                {{ __('As worldwide platform we need to manage correctly time.') }}
-                {{ __('List is in alphabetically order A>Z') }}
+                    <!-- federationContactInfo -->
+                    <div class="mb-4">
+                        <style>textarea {resize:vertical;}</style>
+                        <x-input-label for="federationContactInfo" :value="__('Contact info, HQ postal address, english')" />
+                        <textarea 
+                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                        type="text" name="federationContactInfo"
+                        wire:model="federationContactInfo"
+                        >{{ old('federationContactInfo') }}</textarea>
+                        <x-input-error for="federationContactInfo" class="mt-2" />
+                    </div>
+                    
+                    
+                    <br style="clear:both;" />
+                    
+                    <x-button class="mt-2 ms-4">
+                        {{ __('Check all, then Modify') }}
+                    </x-button>
+                </form>
+                
             </div>
-            <select 
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                wire:model="timezoneId"
-                name="timezoneId" 
-                required="required"
-                >
-                @foreach ($timezoneSet as $timezone_item)
-                <option value="{{ $timezone_item }}" {{ ($timezone_item == $timezoneId) ? 'selected' : '' }}> {{ $timezone_item }} </option>
-                @endforeach
-            </select>
-            @error('timezoneId')
-            <div class="alert alert-danger small">{{ $message }} </div>
-            @enderror
-        </div>
-
-
-        <div class="mb-4">
-            <style>textarea {resize:vertical;}</style>
-            <label for="federationContact"
-                class="block fyk font-medium text-xl text-gray-700" >
-                {{ __('Federation Contacts') }}
-            </label>
-            <div class="suggest">{{ __('HQ address, postal addess, email, international whatsapp number...') }}</div>
-            <textarea 
-                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                type="text" name="federationContact"
-                wire:model="federationContact"
-                >{{ old('federationContact') }}</textarea>
-            @error('federationContact')
-            <div class="alert alert-danger small">{{ $message }} </div>
-            @enderror
-        </div><!-- contact info -->
-        <p>&nbsp;</p>
-        <hr />
-        <p>&nbsp;</p>
-        <button type="submit" 
-            class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-3"
-            >
-            {{ __('Update') }}
-        </button>
-    </form>
         </div>
     </div>
+    <!-- -->
+    <x-footer-app />
 </div>
