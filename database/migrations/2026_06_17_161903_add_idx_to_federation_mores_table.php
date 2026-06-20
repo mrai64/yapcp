@@ -12,6 +12,7 @@ return new class () extends Migration {
     {
         Schema::table('federation_mores', function (Blueprint $table) {
             $table->unique('field_name', 'field_name_idx');
+            $table->index(['federation_id', 'field_name'], 'alt_primary_fk_idx');
             $table->dropUnique('alt_primary_idx');
         });
     }
@@ -22,8 +23,9 @@ return new class () extends Migration {
     public function down(): void
     {
         Schema::table('federation_mores', function (Blueprint $table) {
-            $table->dropUnique('field_name_idx');
             $table->unique(['federation_id', 'field_name'], 'alt_primary_idx');
+            $table->dropIndex('alt_primary_fk_idx');
+            $table->dropUnique('field_name_idx');
         });
     }
 };
