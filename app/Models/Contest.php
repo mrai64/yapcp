@@ -160,7 +160,7 @@ class Contest extends Model
         'organization_id', //           fk organizations.id
         'contest_mark', //              path n file
         'contact_info', //              free text
-        'is_circuit', //                0/1 N/Y limited set
+        'is_circuit', //                boolean
         'circuit_id',  //               fk contests.id | NULL
         'federation_list', //           TODO build validation rule
         'url_1_rule', //                web url
@@ -194,7 +194,7 @@ class Contest extends Model
             'id' => 'string',
             'name_en' => 'string',
 
-            'is_circuit' => 'string',
+            'is_circuit' => 'boolean',
             'circuit_id' => 'string',
 
             'country_id' => 'string',
@@ -248,7 +248,7 @@ class Contest extends Model
     public static function getCircuitSet()
     {
         $circuitSet = self::select('id', 'name_en')
-            ->where('is_circuit', 'Y')
+            ->where('is_circuit', true)
             ->orderBy('name_en')
             ->get();
 
@@ -258,14 +258,13 @@ class Contest extends Model
     // for validation?
     public function contestIsInCircuit(): bool
     {
-        $isIn = ($this->circuit_id !== null);
-        return $isIn;
+        return $this->is_circuit;
     }
 
     // fr validation?
     public function isACircuit(): bool
     {
-        return ($this->is_circuit === 'Y');
+        return $this->is_circuit;
     }
 
 
