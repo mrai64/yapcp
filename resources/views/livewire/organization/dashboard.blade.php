@@ -76,7 +76,7 @@ new class extends Component {
                     url="{{ route('organization.contest.listed', ['organization' => $organization]) }}" />
                 <x-inline-link-app 
                     txt="Design new Contest" 
-                    url="{{ route('organization.design.contest1', ['organization' => $organization]) }}" />
+                    url="{{ route('organization.design.contest.make', ['organization' => $organization]) }}" />
 
                 <h3 class="fyk text-2xl font-bold mb-4">
                     {{ __("Organization") }}
