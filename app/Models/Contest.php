@@ -232,6 +232,19 @@ class Contest extends Model
         ];
     }
 
+    // INLINE check n replace 
+    protected static function booted(): void
+    {
+        // because '' is '', not null
+        static::saving(function (Contest $contest): void {
+            if (empty($contest->circuit_id)) {
+                $contest->circuit_id = null;
+            }
+        });
+    }
+
+
+
     // GETTERs
 
     public static function getNameEn(string $contestId): string
@@ -339,8 +352,8 @@ class Contest extends Model
     {
         $contests = $this->hasMany(
             related: static::class,
-            foreignKey: 'id',
-            localKey: 'circuit_id'
+            foreignKey: 'circuit_id',
+            localKey: 'id'
         );
 
         return $contests;
@@ -475,8 +488,8 @@ class Contest extends Model
     {
         $contests = $this->hasMany(
             related: static::class, //    contests
-            foreignKey: 'id', //          contests.id
-            localKey: 'circuit_id' //     contests.circuit_id
+            foreignKey: 'circuit_id', //  contests.circuit_id
+            localKey: 'id' //             contests.id
         );
 
         return $contests;

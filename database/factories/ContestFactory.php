@@ -35,7 +35,7 @@ class ContestFactory extends Factory
             'contact_info' => 'HQ ' . $organization->name . '\n'
                 . 'email: ' . $organization->email . '\n'
                 . 'website: ' . $organization->website,
-            'is_circuit' => 'N',
+            'is_circuit' => false, // was: 'N',
             'timezone_id' => 'Europe/Rome',
             'day_1_opening'      => $opening,
             'day_2_closing'      => $opening->addMonths(2),
