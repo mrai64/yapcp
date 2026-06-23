@@ -36,14 +36,14 @@ new class extends Component {
                 // url_3_admit_n_award_list
                 // url_4_catalogue
                 'timezone_id'        => $userContact->timezone_id,
-                'day_1_opening'      => CarbonImmutable::now()->addYear(),
-                'day_2_closing'      => CarbonImmutable::now()->addYear()->addMonths(3),
-                'day_3_jury_opening' => CarbonImmutable::now()->addYear()->addMonths(3)->addDays(15),
-                'day_4_jury_closing' => CarbonImmutable::now()->addYear()->addMonths(4),
-                'day_5_revelations'  => CarbonImmutable::now()->addYear()->addMonths(4)->addWeek(),
-                'day_6_awards'       => CarbonImmutable::now()->addYear()->addMonths(4)->addWeeks(3),
-                'day_7_catalogues'   => CarbonImmutable::now()->addYear()->addMonths(5),
-                'day_8_closing'      => CarbonImmutable::now()->addYear()->addMonths(6),
+                'day_1_opening'      => CarbonImmutable::now()->addYear()->startOfDay(),
+                'day_2_closing'      => CarbonImmutable::now()->addYear()->addMonths(3)->endOfDay(),
+                'day_3_jury_opening' => CarbonImmutable::now()->addYear()->addMonths(3)->addDays(15)->startOfDay(),
+                'day_4_jury_closing' => CarbonImmutable::now()->addYear()->addMonths(4)->endOfDay(),
+                'day_5_revelations'  => CarbonImmutable::now()->addYear()->addMonths(4)->addWeek()->endOfDay(),
+                'day_6_awards'       => CarbonImmutable::now()->addYear()->addMonths(4)->addWeeks(3)->endOfDay(),
+                'day_7_catalogues'   => CarbonImmutable::now()->addYear()->addMonths(5)->endOfDay(),
+                'day_8_closing'      => CarbonImmutable::now()->addYear()->addMonths(6)->endOfDay(),
             ]);
 
         return redirect()

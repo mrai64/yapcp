@@ -105,7 +105,7 @@ new class extends Component {
             url="{{ route('user.dashboard') }}" />
 		<x-header-link-app 
 			txt="Organization dashboard" 
-			url="{{ route('federation.listed') }}" />
+            url="{{ route('organization.dashboard', ['organization' => $organization]) }}" />
     </x-slot>
 
     <div class="py-12">

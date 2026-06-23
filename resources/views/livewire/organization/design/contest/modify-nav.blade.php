@@ -2,18 +2,21 @@
 
 <div>
     <x-header-link-app 
-        txt="Name n Infos / 1" 
+        txt="Name n Infos" 
         url="{{ route('organization.design.contest.modify1', ['contest' => $contest]) }}" />
     <x-header-link-app 
-        txt="Calendar / 2" 
+        txt="Calendar" 
+        url="{{ route('organization.design.contest.modify2', ['contest' => $contest]) }}" />
+    <x-header-link-app 
+        txt="Web links" 
         url="{{ route('organization.design.contest.modify1', ['contest' => $contest]) }}" />
     <x-header-link-app 
-        txt="Themes n Sections / 3" 
+        txt="Themes n Sections" 
         url="{{ route('organization.design.contest.modify1', ['contest' => $contest]) }}" />
     <x-header-link-app 
-        txt="Juries / 4" 
+        txt="Juries" 
         url="{{ route('organization.design.contest.modify1', ['contest' => $contest]) }}" />
     <x-header-link-app 
-        txt="Awards / 5" 
+        txt="Awards" 
         url="{{ route('organization.design.contest.modify1', ['contest' => $contest]) }}" />
 </div>

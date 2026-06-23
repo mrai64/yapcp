@@ -98,12 +98,16 @@ Volt::route('/organization/user/add/{organization}', 'organization.user.add')
 Volt::route('/organization/contest/listed/{organization}', 'organization.contest.listed')
     ->middleware(['auth', 'verified'])
     ->name('organization.contest.listed');
+// Contest design
 Volt::route('/organization/design/contest/make/{organization}', 'organization.design.contest.make')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest.make');
 Volt::route('/organization/design/contest/modify1/{contest}', 'organization.design.contest.modify1')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest.modify1');
+Volt::route('/organization/design/contest/modify2/{contest}', 'organization.design.contest.modify2')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.contest.modify2');
 
 /**
  * Federation
