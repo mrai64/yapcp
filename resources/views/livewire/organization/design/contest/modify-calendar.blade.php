@@ -109,26 +109,26 @@ new class extends Component {
         $validated = $this->validate();
 
         // Funzione helper interna o ripetuta per convertire e salvare
-        $this->contest->day_1_opening = CarbonImmutable::createFromFormat('Y-m-d', $this->day1Opening, $this->contest->timezone_id)->startOfDay();
-        $this->contest->day_2_closing = CarbonImmutable::createFromFormat('Y-m-d', $this->day2Closing, $this->contest->timezone_id)->endOfDay();
+        $this->contest->day_1_opening = CarbonImmutable::createFromFormat('Y-m-d', $validated['day1Opening'], $this->contest->timezone_id)->startOfDay();
+        $this->contest->day_2_closing = CarbonImmutable::createFromFormat('Y-m-d', $validated['day2Closing'], $this->contest->timezone_id)->endOfDay();
 
-        $this->contest->day_3_jury_opening = CarbonImmutable::createFromFormat('Y-m-d', $this->day3JuryOpening, $this->contest->timezone_id)->startOfDay();
-        $this->contest->day_4_jury_closing = CarbonImmutable::createFromFormat('Y-m-d', $this->day4JuryClosing, $this->contest->timezone_id)->endOfDay();
+        $this->contest->day_3_jury_opening = CarbonImmutable::createFromFormat('Y-m-d', $validated['day3JuryOpening'], $this->contest->timezone_id)->startOfDay();
+        $this->contest->day_4_jury_closing = CarbonImmutable::createFromFormat('Y-m-d', $validated['day4JuryClosing'], $this->contest->timezone_id)->endOfDay();
 
-        $this->contest->day_5_revelations = CarbonImmutable::createFromFormat('Y-m-d', $this->day5Revelations, $this->contest->timezone_id)->endOfDay();
+        $this->contest->day_5_revelations = CarbonImmutable::createFromFormat('Y-m-d', $validated['day5Revelations'], $this->contest->timezone_id)->endOfDay();
 
-        $this->contest->day_6_awards = CarbonImmutable::createFromFormat('Y-m-d', $this->day6Awards, $this->contest->timezone_id)->endOfDay();
+        $this->contest->day_6_awards = CarbonImmutable::createFromFormat('Y-m-d', $validated['day6Awards'], $this->contest->timezone_id)->endOfDay();
 
-        $this->contest->day_7_catalogues = CarbonImmutable::createFromFormat('Y-m-d', $this->day7Catalogues, $this->contest->timezone_id)->endOfDay();
+        $this->contest->day_7_catalogues = CarbonImmutable::createFromFormat('Y-m-d', $validated['day7Catalogues'], $this->contest->timezone_id)->endOfDay();
 
-        $this->contest->day_8_closing = CarbonImmutable::createFromFormat('Y-m-d', $this->day8Closing, $this->contest->timezone_id)->endOfDay();
+        $this->contest->day_8_closing = CarbonImmutable::createFromFormat('Y-m-d', $validated['day8Closing'], $this->contest->timezone_id)->endOfDay();
 
 
         $this->contest->save();
 
         // redirect itself
         return redirect()
-            ->route('organization.design.contest.modify2', ['contest' => $this->contest])
+            ->route('organization.design.contest.modify-calendar', ['contest' => $this->contest])
             ->with('success', __('Contest infos updated.'));
     }
 }; ?>

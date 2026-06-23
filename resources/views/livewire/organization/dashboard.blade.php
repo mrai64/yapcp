@@ -146,7 +146,7 @@ new class extends Component {
                     @foreach ($designContestsSet as $contest)
                     <x-inline-link-app 
                         txt="{{ ($contest->name_en) ? $contest->name_en : $contest->id }}" 
-                        url="{{ route('organization.design.contest.modify1', ['contest' => $contest]) }}" />
+                        url="{{ route('organization.design.contest.modify-name', ['contest' => $contest]) }}" />
                     @endforeach
                 @endif
 

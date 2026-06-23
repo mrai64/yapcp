@@ -86,7 +86,7 @@ new class extends Component {
 
         // redirect itself
         return redirect()
-            ->route('organization.design.contest.modify1', ['contest' => $this->contest])
+            ->route('organization.design.contest.modify-name', ['contest' => $this->contest])
             ->with('success', __('Contest infos updated.'));
 
     }
