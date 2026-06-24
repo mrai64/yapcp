@@ -232,7 +232,7 @@ class Contest extends Model
         ];
     }
 
-    // INLINE check n replace 
+    // INLINE check n replace
     protected static function booted(): void
     {
         // because '' is '', not null
