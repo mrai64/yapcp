@@ -100,6 +100,8 @@ new class extends Component {
         <hr class="mb-4" />
         <livewire:organization.design.contest.modify-nav :contest="$contest" />
         <hr class="mb-2" />
+        <livewire:organization.design.contest-nav :contest="$contest" />
+        <hr class="mb-2" />
         <x-header-link-app 
             txt="Back to User dashboard" 
             url="{{ route('user.dashboard') }}" />

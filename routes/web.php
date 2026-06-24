@@ -111,6 +111,18 @@ Volt::route('/organization/design/contest/modify-calendar/{contest}', 'organizat
 Volt::route('/organization/design/contest/modify-url/{contest}', 'organization.design.contest.modify-url')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest.modify-url');
+Volt::route('/organization/design/contest-section/listed/{contest}', 'organization.design.contest-section.listed')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.contest-section.listed');
+Volt::route('/organization/design/contest-section/modify/{contest}', 'organization.design.contest-section.add')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.contest-section.add');
+Volt::route('/organization/design/contest-section/modify/{contest-section}', 'organization.design.contest-section.modify')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.contest-section.modify');
+Volt::route('/organization/design/contest-section/remove/{contest-section}', 'organization.design.contest-section.remove')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.contest-section.remove');
 
 /**
  * Federation
