@@ -91,7 +91,7 @@ class ContestWork extends Model
         'user_id', //         fk user_contacts.user_id
         'user_work_id', //    fk works.id
         'is_admit', //        0 false 1 true
-        'portfolio_sequence', // 1..contest_sections.rule_max
+        'portfolio_sequence', // 1..contest_sections.max_works
         // created_at         reserved
         // updated_at         reserved
         // deleted_at         reserved

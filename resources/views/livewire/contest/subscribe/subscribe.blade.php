@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Log;
 
         <!-- Contest section list w/counter -->
         @foreach($contestSectionSet as $section)
-        <p class="small">[  {{$section->code}} {{($section->rule_min > 0) ? "Portfolio min:".$section->rule_min : "" }} max:{{$section->rule_max}} short_side:{{$section->rule_min_size}}  long_side:{{$section->rule_max_size}}  mono:{{($section->rule_monochromatic === 'Y') ? 'Y' : 'N' }}  raw:{{($section->rule_raw === 'Y') ? 'Y' : 'N' }}  ]</p>
+        <p class="small">[  {{$section->code}} {{($section->min_works > 0) ? "Portfolio min:".$section->min_works : "" }} max:{{$section->max_works}} short_side:{{$section->short_size_max}}  long_side:{{$section->long_size_max}}  mono:{{($section->monochoromatic_required === 'Y') ? 'Y' : 'N' }}  raw:{{($section->rule_raw === 'Y') ? 'Y' : 'N' }}  ]</p>
         @endforeach
 
         <hr />
@@ -32,7 +32,7 @@ use Illuminate\Support\Facades\Log;
         <!-- Contest work list w/counter only -->
         <div class="fyk text-xl">{{__("Your counter")}}:
         @foreach($contestSectionSet as $section)
-        <p class="inline-flex small">[ {{$section->code}} your:{{ ContestWork::sectionWorksCounter($section->id, $userId) }} / {{$section->rule_max}}]</p>
+        <p class="inline-flex small">[ {{$section->code}} your:{{ ContestWork::sectionWorksCounter($section->id, $userId) }} / {{$section->max_works}}]</p>
         @endforeach
         </div>
 

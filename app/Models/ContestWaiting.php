@@ -80,7 +80,7 @@ class ContestWaiting extends Model
         'section_id', //           fk contest_sections.id
         'participant_user_id', //  fk user_contacts.user_id
         'user_work_id', //              fk user_works.work_id
-        'portfolio_sequence', //   1..contest_sections.rule_max
+        'portfolio_sequence', //   1..contest_sections.max_works
         'email', //                user_contacts.email of participant
         'because', //              warning text
         'organization_user_id', // fk user_contacts.user_id

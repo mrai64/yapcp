@@ -39,15 +39,15 @@ use Illuminate\Support\Str;
  * @property int|null $federation_section_id fk: federation_sections.id
  * @property string $name_en international
  * @property string|null $name_local in local lang - see contests.lang_local
- * @property string $rule_format list of permitted extension
- * @property int $rule_min minimum works-per-section
- * @property int $rule_max maximum works-per-section
- * @property int $rule_min_size minimum short_side px
- * @property int $rule_max_size maximum long_side px
- * @property int $rule_max_weight file weight in KB
- * @property string $rule_monochromatic maybe boolean 0/N=false, 1/Y=true
- * @property int $rule_raw_required 0 == false; 1 == true
- * @property int $rule_only_one 0 = only one prize per section per person not required
+ * @property string $file_formats list of permitted extension
+ * @property int $min_works minimum works-per-section
+ * @property int $max_works maximum works-per-section
+ * @property int $short_size_max minimum short_side px
+ * @property int $long_size_max maximum long_side px
+ * @property int $file_size_max file weight in KB
+ * @property string $monochoromatic_required maybe boolean 0/N=false, 1/Y=true
+ * @property int $raw_required 0 == false; 1 == true
+ * @property int $unique_prize 0 = only one prize per section per person not required
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -102,15 +102,16 @@ class ContestSection extends Model
         'federation_section_id', //  fk federation_sections.id
         'name_en',
         'name_local',
-        'rule_format', //            list of extension file
-        'rule_min', //               int # of works
-        'rule_max', //               int
-        'rule_min_size', //          int px size
-        'rule_max_size', //
-        'rule_max_weight', //        int MB
-        'rule_monochromatic', //     0/No, color 1/monochromatic
-        'rule_raw_required', //      0/No, 1/Raw required
-        'rule_only_one', //          0/More than an award per secton 1/only one award per section
+        'synopsis',
+        'file_formats', //            list of extension file
+        'min_works', //               int # of works
+        'max_works', //               int
+        'short_size_max', //          int px size
+        'long_size_max', //
+        'file_size_max', //        int MB
+        'monochoromatic_required', //     0/No, color 1/monochromatic
+        'raw_required', //      0/No, 1/Raw required
+        'unique_prize', //          0/More than an award per secton 1/only one award per section
         // created_at                reserved
         // updated_at                reserved
         // deleted_at                reserved
@@ -136,15 +137,16 @@ class ContestSection extends Model
             'federation_section_id' => 'string',
             'name_en' => 'string',
             'name_local' => 'string',
-            'rule_format' => 'string',
-            'rule_min' => 'int',
-            'rule_max' => 'int',
-            'rule_min_size' => 'int',
-            'rule_max_size' => 'int',
-            'rule_max_weight' => 'int',
-            'rule_monochromatic' => 'boolean',
-            'rule_raw_required' => 'boolean',
-            'rule_only_one' => 'boolean',
+            'synopsis' => 'string',
+            'file_formats' => 'string',
+            'min_works' => 'int',
+            'max_works' => 'int',
+            'short_size_max' => 'int',
+            'long_size_max' => 'int',
+            'file_size_max' => 'int',
+            'monochoromatic_required' => 'boolean',
+            'raw_required' => 'boolean',
+            'unique_prize' => 'boolean',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',

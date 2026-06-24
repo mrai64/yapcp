@@ -105,7 +105,7 @@ use Illuminate\Support\Facades\Gate;
                     <td class="small kbd" nowrap>
                         <!-- works of max works -->
                         @foreach($contestSectionSet as $section)
-                        [{{$section->code}}: {{ $workCounts[$participant->user_id][$section->id] ?? 0 }} / {{$section->rule_max}}] 
+                        [{{$section->code}}: {{ $workCounts[$participant->user_id][$section->id] ?? 0 }} / {{$section->max_works}}] 
                         &nbsp;
                         @endforeach
                     </td>

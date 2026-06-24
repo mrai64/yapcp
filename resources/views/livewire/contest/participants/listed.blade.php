@@ -76,7 +76,7 @@ use App\Models\ContestWork;
                     </td>
                     <td class="small kbd" nowrap>
                         @foreach($contestSectionsSet as $section)
-                        [{{$section->code}}: {{ ContestWork::sectionWorksCounter($section->id, $participant->user_id) }} / {{$section->rule_max}}] 
+                        [{{$section->code}}: {{ ContestWork::sectionWorksCounter($section->id, $participant->user_id) }} / {{$section->max_works}}] 
                         &nbsp;
                         @endforeach
                     </td>

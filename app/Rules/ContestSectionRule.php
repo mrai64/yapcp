@@ -61,16 +61,16 @@ class ContestSectionRule implements ValidationRule
             $this->userWork = UserWork::where('id', $value)->get()[0];
             ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' work:' . json_encode($this->userWork));
 
-            if ($this->userWork->long_side > $this->section->rule_max_size) {
+            if ($this->userWork->long_side > $this->section->long_size_max) {
                 $fail('🟥 Long side');
             }
-            if ($this->userWork->short_side < $this->section->rule_min_size) {
+            if ($this->userWork->short_side < $this->section->short_size_max) {
                 $fail('🟥 Short side');
             }
-            if (($this->section->rule_monochromatic) && ($this->userWork->monochromatic != true)) {
+            if (($this->section->monochoromatic_required) && ($this->userWork->monochromatic != true)) {
                 $fail('🟥 Monochromatic');
             }
-            if (($this->section->rule_monochromatic) && ($this->userWork->raw != true)) {
+            if (($this->section->monochoromatic_required) && ($this->userWork->raw != true)) {
                 $fail('🟥 RAW unavailable');
             }
             ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' ok ok');

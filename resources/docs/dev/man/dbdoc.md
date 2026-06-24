@@ -172,15 +172,15 @@ php artisan db:doc
 | **federation_section_id** | bigint unsigned | *fk: federation_sections.id* | YES | MUL | *NULL* |
 | **name_en** | varchar(255) | *international* | NO |  | *NULL* |
 | **name_local** | varchar(255) | *in local lang - see contests.lang_local* | YES |  | *NULL* |
-| **rule_format** | varchar(255) | *list of permitted extension* | NO |  | jpg |
-| **rule_min** | int unsigned | *minimum works-per-section* | NO |  | 0 |
-| **rule_max** | int unsigned | *maximum works-per-section* | NO |  | 4 |
-| **rule_min_size** | int unsigned | *minimum short_side px* | NO |  | 1024 |
-| **rule_max_size** | int unsigned | *maximum long_side px* | NO |  | 2500 |
+| **file_formats** | varchar(255) | *list of permitted extension* | NO |  | jpg |
+| **min_works** | int unsigned | *minimum works-per-section* | NO |  | 0 |
+| **max_works** | int unsigned | *maximum works-per-section* | NO |  | 4 |
+| **short_size_max** | int unsigned | *minimum short_side px* | NO |  | 1024 |
+| **long_size_max** | int unsigned | *maximum long_side px* | NO |  | 2500 |
 | **rule_file_size_max** | int unsigned | *file weight in KB* | NO |  | 6000 |
-| **rule_monochromatic** | tinyint(1) | *BW / M only* | NO |  | 0 |
-| **rule_raw_required** | tinyint(1) | *RAW required* | NO |  | 0 |
-| **rule_only_one** | tinyint(1) | *unique award per person per section-theme* | NO |  | 0 |
+| **monochoromatic_required** | tinyint(1) | *BW / M only* | NO |  | 0 |
+| **raw_required** | tinyint(1) | *RAW required* | NO |  | 0 |
+| **unique_prize** | tinyint(1) | *unique award per person per section-theme* | NO |  | 0 |
 | **created_at** | datetime | *-* | NO |  | CURRENT_TIMESTAMP |
 | **updated_at** | datetime | *-* | NO | MUL | CURRENT_TIMESTAMP |
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
