@@ -32,7 +32,7 @@ Route::view('/credits', 'credits')
     ->name('credits.notice');
 // login - jeststream
 // register - jetstream
-// docs - funziona con login
+// docs - thru login access
 
 /**
  * User dashboard
@@ -117,10 +117,10 @@ Volt::route('/organization/design/contest-section/listed/{contest}', 'organizati
 Volt::route('/organization/design/contest-section/modify/{contest}', 'organization.design.contest-section.add')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-section.add');
-Volt::route('/organization/design/contest-section/modify/{contest-section}', 'organization.design.contest-section.modify')
+Volt::route('/organization/design/contest-section/modify/{contest_section}', 'organization.design.contest-section.modify')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-section.modify');
-Volt::route('/organization/design/contest-section/remove/{contest-section}', 'organization.design.contest-section.remove')
+Volt::route('/organization/design/contest-section/remove/{contest_section}', 'organization.design.contest-section.remove')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-section.remove');
 
