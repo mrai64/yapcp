@@ -333,7 +333,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $rSet;
     }
 
-    public function activeUserOrganizations(): HasMany 
+    public function activeUserOrganizations(): HasMany
     {
         $uOSet = $this->activeUserRoles()
             ->whereNotNull('organization_id');
