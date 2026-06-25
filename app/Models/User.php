@@ -312,6 +312,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     // users.id > user_roles.user_id
+    // warn: ALL user roles, past and future included
     public function userRoles(): HasMany
     {
         $rSet = $this->hasMany(
@@ -321,6 +322,22 @@ class User extends Authenticatable implements MustVerifyEmail
         );
         // log
         return $rSet;
+    }
+
+    public function activeUserRoles(): HasMany
+    {
+        $rSet = $this->userRoles()
+            ->where('role_opening', '<=', now())
+            ->where('role_closing', '>=', now());
+        // log
+        return $rSet;
+    }
+
+    public function activeUserOrganizations(): HasMany 
+    {
+        $uOSet = $this->activeUserRoles()
+            ->whereNotNull('organization_id');
+        return $uOSet;
     }
 
     // users.id > user_work_validators.validator_user_id
