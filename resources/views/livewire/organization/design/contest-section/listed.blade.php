@@ -83,31 +83,31 @@ new class extends Component {
                     txt="Add Section"
                     url="{{ route('organization.design.contest-section.add', ['contest' => $contest]) }}" />
                 <p class="small">{{  __('Sorted by code') }}</p>
-                    @foreach (contestSectionsSet as $section)
-                    <table class="data-table-container w-full mb-4">
+                    @foreach ($contestSectionsSet as $section)
+                    <table class="data-table-container w-full mx-4 my-4">
                         <tbody>
                             <tr>
-                                <td class="fyk text-xl font-medium ">{{ $section->code }}</td>
-                                <td class="fyk text-xl font-medium ">{{ $section->name_en }}</td>
+                                <td class="fyk text-xl font-medium nowrap">{{ $section->code }}</td>
+                                <td class="fyk text-xl font-medium w-full">{{ $section->name_en }}</td>
                             </tr>
                             <tr>
                                 <td colspan="2">
                                     <x-inline-link-app 
                                         txt="Modify"
-                                        url="{{ route('organization.design.contest-section.modify', ['contest-section' => $section]) }}" />
+                                        url="{{ route('organization.design.contest-section.modify', ['contest_section' => $section]) }}" />
                                     <x-inline-link-app 
                                         txt="Remove"
-                                        url="{{ route('organization.design.contest-section.remove', ['contest-section' => $section]) }}" />
+                                        url="{{ route('organization.design.contest-section.remove', ['contest_section' => $section]) }}" />
                                 </td>
                             </tr>
                             <tr>
-                                <td class="small">{{ __('Under Patronage') }}</td>
+                                <td class="small" nowrap>{{ __('Under Patronage') }}</td>
                                 <td class="small">
                                     {{ ($section->under_patronage) ? __('Under patronage') : __('Free of patronage') }}
                                 </td>
                             </tr>
                             <tr>
-                                <td class="small">{{ __('Accepted file extension / image type') }}</td>
+                                <td class="small" nowrap>{{ __('Accepted file extension / image type') }}</td>
                                 <td class="small">
                                     {{ $section->file_formats }}
                                 </td>
@@ -139,7 +139,7 @@ new class extends Component {
                             <tr>
                                 <td class="small">{{ __('Monochromatic') }}</td>
                                 <td class="small">
-                                    {{ ($section->monochromatic_required) ? __('Monochrome only') : __('Color') }}
+                                    {{ ($section->monochromatic_required) ? __('Monochrome only') : __('No. Color') }}
                                 </td>
                             </tr>
                             <tr>
@@ -151,7 +151,7 @@ new class extends Component {
                             <tr>
                                 <td class="small">{{ __('Unique prize for section') }}</td>
                                 <td class="small">
-                                    {{ ($section->unique_prize) ? __('YES, unique prize for section') : __('Cumulative prizes admitted') }}
+                                    {{ ($section->unique_prize) ? __('YES, unique prize for section') : __('No. Cumulative prizes admitted') }}
                                 </td>
                             </tr>
                         </tbody>
