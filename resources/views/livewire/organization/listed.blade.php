@@ -97,20 +97,19 @@ new class extends Component {
                             </dt>
 
                             <dd class="mt-2">
-                                {{ __('Contact') }}: <br/>
+                                {{ __('Contact') }}: &nbsp; <br/>
                                 {{ ($organization->contact) ? $organization->contact : 'N\A'}}
                             </dd>
 
                             <dd class="mt-2 text-gray-600 flex items-center">
-                                {{ __('email') }}: {{ $organization->email }}
+                                {{ __('email') }}: &nbsp; {{ $organization->email }}
                             </dd>
 
                             <dd class="mt-2 text-sm text-gray-500 italic flex items-center">
-                                {{ __('website') }}: 
+                                {{ __('website') }}: &nbsp;
                                 <a href="{{ $organization->website }}" target="_blank" >
-                                    {{ $organization->website }} 
-                                    &nbsp;&nbsp; ↗️
-                                </a> 
+                                    {{ $organization->website }} &nbsp;&nbsp; ↗️
+                                </a>
                             </dd>
                             <dd class="mt-2 text-sm text-gray-500 italic flex items-center">
                                 <x-inline-link-app
