@@ -83,6 +83,18 @@ use Illuminate\Support\Str;
  * @method static \Database\Factories\ContestSectionFactory factory($count = null, $state = [])
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestAward> $awards
  * @property-read int|null $awards_count
+ * @property string $synopsis
+ * @property int $monochromatic_required BW / M only
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereFileFormats($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereFileSizeMax($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereLongSizeMax($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereMaxWorks($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereMinWorks($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereMonochromaticRequired($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereRawRequired($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereShortSizeMax($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereSynopsis($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereUniquePrize($value)
  * @mixin \Eloquent
  */
 class ContestSection extends Model
