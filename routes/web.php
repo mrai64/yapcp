@@ -114,7 +114,7 @@ Volt::route('/organization/design/contest/modify-url/{contest}', 'organization.d
 Volt::route('/organization/design/contest-section/listed/{contest}', 'organization.design.contest-section.listed')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-section.listed');
-Volt::route('/organization/design/contest-section/modify/{contest}', 'organization.design.contest-section.add')
+Volt::route('/organization/design/contest-section/add/{contest}', 'organization.design.contest-section.add')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-section.add');
 Volt::route('/organization/design/contest-section/modify/{contest_section}', 'organization.design.contest-section.modify')
@@ -150,6 +150,7 @@ Volt::route('/federation-section/listed/{federation}', 'federation-section.liste
 /**
  * Contest
  */
+// build contest - see /organization/design upper
 // user on contests
 Volt::route('/user/contest/listed', 'user.contest.listed')
     ->middleware(['auth', 'verified'])
