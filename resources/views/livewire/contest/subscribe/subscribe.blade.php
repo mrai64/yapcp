@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Log;
 
         <!-- Contest section list w/counter -->
         @foreach($contestSectionSet as $section)
-        <p class="small">[  {{$section->code}} {{($section->min_works > 0) ? "Portfolio min:".$section->min_works : "" }} max:{{$section->max_works}} short_side:{{$section->short_size_max}}  long_side:{{$section->long_size_max}}  mono:{{($section->monochoromatic_required === 'Y') ? 'Y' : 'N' }}  raw:{{($section->rule_raw === 'Y') ? 'Y' : 'N' }}  ]</p>
+        <p class="small">[  {{$section->code}} {{($section->min_works > 0) ? "Portfolio min:".$section->min_works : "" }} max:{{$section->max_works}} short_side:{{$section->short_size_max}}  long_side:{{$section->long_size_max}}  mono:{{($section->monochromatic_required === 'Y') ? 'Y' : 'N' }}  raw:{{($section->rule_raw === 'Y') ? 'Y' : 'N' }}  ]</p>
         @endforeach
 
         <hr />

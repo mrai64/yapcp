@@ -94,7 +94,7 @@ new class extends Component {
                                 <td colspan="2">
                                     <x-inline-link-app 
                                         txt="Modify"
-                                        url="{{ route('organization.design.contest-section.modify', ['contest_section' => $section]) }}" />
+                                        url="{{ route('organization.design.contest-section.modify', ['contest_section' => $section->id]) }}" />
                                     <x-inline-link-app 
                                         txt="Remove"
                                         url="{{ route('organization.design.contest-section.remove', ['contest_section' => $section]) }}" />
