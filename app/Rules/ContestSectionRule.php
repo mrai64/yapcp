@@ -67,10 +67,10 @@ class ContestSectionRule implements ValidationRule
             if ($this->userWork->short_side < $this->section->short_size_max) {
                 $fail('🟥 Short side');
             }
-            if (($this->section->monochoromatic_required) && ($this->userWork->monochromatic != true)) {
+            if (($this->section->monochromatic_required) && ($this->userWork->monochromatic != true)) {
                 $fail('🟥 Monochromatic');
             }
-            if (($this->section->monochoromatic_required) && ($this->userWork->raw != true)) {
+            if (($this->section->monochromatic_required) && ($this->userWork->raw != true)) {
                 $fail('🟥 RAW unavailable');
             }
             ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' ok ok');

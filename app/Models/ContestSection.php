@@ -45,7 +45,7 @@ use Illuminate\Support\Str;
  * @property int $short_size_max minimum short_side px
  * @property int $long_size_max maximum long_side px
  * @property int $file_size_max file weight in KB
- * @property string $monochoromatic_required maybe boolean 0/N=false, 1/Y=true
+ * @property string $monochromatic_required maybe boolean 0/N=false, 1/Y=true
  * @property int $raw_required 0 == false; 1 == true
  * @property int $unique_prize 0 = only one prize per section per person not required
  * @property \Illuminate\Support\Carbon $created_at
@@ -121,7 +121,7 @@ class ContestSection extends Model
         'short_size_max', //          int px size
         'long_size_max', //
         'file_size_max', //        int MB
-        'monochoromatic_required', //     0/No, color 1/monochromatic
+        'monochromatic_required', //     0/No, color 1/monochromatic
         'raw_required', //      0/No, 1/Raw required
         'unique_prize', //          0/More than an award per secton 1/only one award per section
         // created_at                reserved
@@ -146,7 +146,7 @@ class ContestSection extends Model
             'contest_id' => 'string',
             'code' => 'string',
             'under_patronage' => 'boolean',
-            'federation_section_id' => 'string',
+            'federation_section_id' => 'int',
             'name_en' => 'string',
             'name_local' => 'string',
             'synopsis' => 'string',
@@ -156,7 +156,7 @@ class ContestSection extends Model
             'short_size_max' => 'int',
             'long_size_max' => 'int',
             'file_size_max' => 'int',
-            'monochoromatic_required' => 'boolean',
+            'monochromatic_required' => 'boolean',
             'raw_required' => 'boolean',
             'unique_prize' => 'boolean',
             'created_at' => 'datetime',

@@ -178,7 +178,7 @@ php artisan db:doc
 | **short_size_max** | int unsigned | *minimum short_side px* | NO |  | 1024 |
 | **long_size_max** | int unsigned | *maximum long_side px* | NO |  | 2500 |
 | **rule_file_size_max** | int unsigned | *file weight in KB* | NO |  | 6000 |
-| **monochoromatic_required** | tinyint(1) | *BW / M only* | NO |  | 0 |
+| **monochromatic_required** | tinyint(1) | *BW / M only* | NO |  | 0 |
 | **raw_required** | tinyint(1) | *RAW required* | NO |  | 0 |
 | **unique_prize** | tinyint(1) | *unique award per person per section-theme* | NO |  | 0 |
 | **created_at** | datetime | *-* | NO |  | CURRENT_TIMESTAMP |
