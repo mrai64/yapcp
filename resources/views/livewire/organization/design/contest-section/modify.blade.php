@@ -2,7 +2,7 @@
 
 /**
  * Organization contest design / Modify a ContestSection record
- * 
+ *
  */
 
 use App\Models\Contest;

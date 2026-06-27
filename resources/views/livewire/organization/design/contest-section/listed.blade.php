@@ -84,11 +84,12 @@ new class extends Component {
                     url="{{ route('organization.design.contest-section.add', ['contest' => $contest]) }}" />
                 <p class="small">{{  __('Sorted by code') }}</p>
                     @foreach ($contestSectionsSet as $section)
-                    <table class="data-table-container w-full mx-4 my-4">
+                    <table class="data-table-container w-half mx-4 my-4">
                         <tbody>
                             <tr>
-                                <td class="fyk text-xl font-medium nowrap">{{ $section->code }}</td>
-                                <td class="fyk text-xl font-medium w-full">{{ $section->name_en }}</td>
+                                <td colspan="2" class="fyk text-3xl font-medium nowrap">
+                                    {{ $section->code }} / {{ $section->name_en }}
+                                </td>
                             </tr>
                             <tr>
                                 <td colspan="2">
