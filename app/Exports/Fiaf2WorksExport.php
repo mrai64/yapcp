@@ -53,7 +53,7 @@ class Fiaf2WorksExport
         $this->thisYear = (string) date('Y');
 
         // contest n contest sections
-        $this->contest = Contest::with(['sections' => function ($q) {
+        $this->contest = Contest::with(['contestSections' => function ($q) {
             $q->orderBy('code');
         }])->find($cid);
 

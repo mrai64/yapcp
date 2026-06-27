@@ -22,7 +22,7 @@
             <td style="font-size:9px;font-weight:bold;text-align:center;width:120px">Autore email</td>
             <td style="font-size:9px;font-weight:bold;text-align:center;width:120px">onorificenza</td>
             <!-- for every section/theme -->
-            @foreach ($contest->sections as $section)
+            @foreach ($contest->contestSections as $section)
             <td style="font-size:9px;font-weight:bold;text-align:center;width:120px">  {{$section->name_en}} - Partecipazione - {{$section->code}}</td>
             <td style="font-size:9px;font-weight:bold;text-align:center;width:120px"> {{$section->name_en}} - Numero Ammissioni - {{$section->code}}</td>
             @endforeach 
@@ -41,7 +41,7 @@
             <td>{{ $part['region'] }}</td>
             <td><a href="mailto:{{ $part['email'] }}">{{ $part['email'] }}</a></td>
             <td>{{ $part['fed_fiafDistinctions'] }}</td>
-            @foreach ($contest->sections as $section)
+            @foreach ($contest->contestSections as $section)
             <td style="font-size:9px;font-weight:bold;text-align:center;"> {{$part['sez_'.$section->code.'_has']}}</td>
             <td style="font-size:9px;font-weight:bold;text-align:center;"> {{$part['sez_'.$section->code.'_admit']}}</td>
             @endforeach 
