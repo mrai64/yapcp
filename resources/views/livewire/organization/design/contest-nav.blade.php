@@ -9,7 +9,7 @@
         url="{{ route('organization.design.contest-section.listed', ['contest' => $contest]) }}" />
     <x-header-link-app 
         txt="Juries" 
-        url="{{ route('organization.design.contest.modify-name', ['contest' => $contest]) }}" />
+        url="{{ route('organization.design.contest-jury.listed', ['contest' => $contest]) }}" />
     <x-header-link-app 
         txt="Awards" 
         url="{{ route('organization.design.contest.modify-name', ['contest' => $contest]) }}" />
