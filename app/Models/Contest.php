@@ -18,7 +18,6 @@
  * related to ✅ ContestAward
  * related to ✅ ContestParticipant
  * related to ✅ ContestSection
- * related to ✅ ContestJury
  * related to ✅ ContestVote
  * related to ✅ ContestWaiting
  * related to ✅ ContestWork
@@ -391,6 +390,13 @@ class Contest extends Model
     {
         $sec = $this->hasMany(ContestSection::class);
 
+        return $sec;
+    }
+
+    public function sections(): HasMany
+    {
+        $sec = $this->hasMany(ContestSection::class);
+        // Log
         return $sec;
     }
 

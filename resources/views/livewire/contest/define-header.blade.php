@@ -21,7 +21,7 @@
     </p>
     <h3 class="fyk text-2xl"><strong> {{ __("Section list")}}</strong></h3>
     <ul >
-        @foreach( $section->contest->contestSections as $section_item)
+        @foreach( $section->contest->sections as $section_item)
         <li class="small border p-1" style="width:48%;">
             {{$section_item->code}} {{$section_item->name_en }} __ #{{ $section_item->works->count() }} {{ __(" works") }}
             __ <a href="{{ route('organization-contest.review.section-list', ['contest-secton' => $section_item]) }}"> [ {{ __("Review") }} ] </a>

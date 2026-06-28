@@ -57,7 +57,7 @@
     </header>
     <div>
         <ul>
-            @foreach($contest->contestSections as $section)
+            @foreach($contest->sections as $section)
             <li class="small border rounded-md mb-4 px-4 py-2">
                 <span class="fyk text-2xl">{{$section->code}}|{{$section->name_en }} </span>
                 <br />

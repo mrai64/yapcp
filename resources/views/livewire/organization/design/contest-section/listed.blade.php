@@ -20,7 +20,7 @@ new class extends Component {
     {
         $this->contest = $contest;
         $this->organization = $contest->organization;
-        $this->contestSectionsSet = $contest->contestSections;
+        $this->contestSectionsSet = $contest->sections;
     }
 }; ?>
 

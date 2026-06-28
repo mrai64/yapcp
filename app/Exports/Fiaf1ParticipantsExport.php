@@ -38,7 +38,7 @@ final class Fiaf1ParticipantsExport
         $this->federationId = $fid;
 
         // 1. 2. pick contest n contest_sections
-        $this->contest = Contest::with(['contestSections' => function ($q) {
+        $this->contest = Contest::with(['sections' => function ($q) {
             $q->orderBy('code');
         }])->findOrFail($this->contestId);
 
@@ -83,7 +83,7 @@ final class Fiaf1ParticipantsExport
             // number and admission number  / section
             $worksBySection = $participant->works->groupBy('section.code');
 
-            foreach ($this->contest->contestSections as $section) {
+            foreach ($this->contest->sections as $section) {
                 $works = $worksBySection->get($section->code, collect());
 
                 $row["sez_{$section->code}_has"] = $works->count() ? 'S' : 'N'; // Y/N in italian 0 not participant >0 yes
