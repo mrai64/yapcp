@@ -43,6 +43,8 @@ new class extends Component {
     }
     public function addContestJury()
     {
+        // maybe insert contestJury, then thru observer add userRoles
+        // but that solution is atomic, "all or nothing"
         $data = [
             'contestId' => $this->contest->id,
             'sectionId' => $this->contestSection->id,
