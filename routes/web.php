@@ -145,6 +145,15 @@ Volt::route('/organization/design/contest-jury/remove/{contest_jury}', 'organiza
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-jury.remove');
 
+// ContestAwards design
+Volt::route('/organization/design/contest-award/listed/{contest}', 'organization.design.contest-award.listed')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.contest-award.listed');
+// NOte: when contest_section is missing, prize is general
+Volt::route('/organization/design/contest-award/add/{contest}/{contest_section?}', 'organization.design.contest-award.add')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.contest-award.add');
+
 
 /**
  * Federation

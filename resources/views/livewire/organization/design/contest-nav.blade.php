@@ -12,5 +12,5 @@
         url="{{ route('organization.design.contest-jury.listed', ['contest' => $contest]) }}" />
     <x-header-link-app 
         txt="Awards" 
-        url="{{ route('organization.design.contest.modify-name', ['contest' => $contest]) }}" />
+        url="{{ route('organization.design.contest-award.listed', ['contest' => $contest]) }}" />
 </div>
