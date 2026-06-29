@@ -2,7 +2,7 @@
 
 /**
  * User Observer
- * When User is created
+ *
  */
 
 namespace App\Observers;
@@ -22,6 +22,7 @@ class UserObserver
     public function created(User $user): void
     {
         Log::info("UserObserver: Metodo created attivato per l'utente " . $user->id);
+        if (UserContact::where('email', $user->email)->exists()) return;
 
         // build a UserContact record
         if (Str::contains(haystack: $user->name, needles: ', ', ignoreCase: false)) {

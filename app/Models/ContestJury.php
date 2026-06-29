@@ -22,36 +22,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-/**
- * @property string $id uuid assigned
- * @property string $section_id fx: contest_section.id 1:N
- * @property string $user_contact_id fx: user_contact.user_id
- * @property string $is_president N/Y flag
- * @property \Illuminate\Support\Carbon $created_at
- * @property \Illuminate\Support\Carbon $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Models\ContestSection|null $contestSection
- * @property-read \App\Models\UserContact|null $userContact
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereIsPresident($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereSectionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereUserContactId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury withoutTrashed()
- * @property string $contest_id fk: contests.id
- * @property string $user_id fk: user_contacts.id - juror
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereContestId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereUserId($value)
- * @method static \Database\Factories\ContestJuryFactory factory($count = null, $state = [])
- * @mixin \Eloquent
- */
 class ContestJury extends Model
 {
     use HasFactory;
@@ -67,9 +37,10 @@ class ContestJury extends Model
 
     protected $fillable = [
         'id', //               pk but contest_juries.id IS NOT juror user_id
+        'contest_id', //       fk contest.id
         'section_id', //       fk contest_sections.id
-        'user_contact_id', //  fk user_contacts.user_id juror
-        'is_president', //     Y/N not boolean
+        'user_id', //          fk user_contacts.user_id juror
+        'is_president', //     boolean
         // created_at          reserved
         // updated_at          reserved
         // deleted_at          reserved
@@ -92,6 +63,10 @@ class ContestJury extends Model
     protected function casts()
     {
         return [
+            'id' => 'string',
+            'contest_id' => 'string',
+            'section_id' => 'string',
+            'user_id' => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
@@ -103,17 +78,13 @@ class ContestJury extends Model
     // was: is_valid_is_president
     public static function checkIsPresident(ContestJury $juror): bool
     {
-        return in_array(
-            needle: $juror->is_president,
-            haystack: self::VALID_YN,
-            strict: true
-        );
+        return (bool) $juror->is_president;
     }
 
     // was: is_juror
     public static function checkIsJuror()
     {
-        $check = self::where('user_contact_id', Auth::id())->count();
+        $check = self::where('user_id', Auth::id())->count();
 
         return $check > 0;
     }
@@ -162,8 +133,8 @@ class ContestJury extends Model
     {
         $contact = $this->belongsTo(
             related: UserContact::class, //   user_contacts
-            foreignKey: 'user_contact_id', // contest_juries.user_contact_id
-            ownerKey: 'id' //            user_contacts.id
+            foreignKey: 'user_id', //         contest_juries.user_contact_id
+            ownerKey: 'id' //                 user_contacts.id
         );
 
         return $contact;
