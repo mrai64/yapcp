@@ -94,9 +94,6 @@ new class extends Component {
                         <x-inline-link-app 
                             txt="Add Juror" 
                             url="{{ route('organization.design.contest-jury.add1', ['contest_section' => $section]) }}" />
-                        <x-inline-link-app 
-                            txt="Modify" 
-                            url="{{ route('organization.design.contest-jury.add1', ['contest_section' => $section]) }}" />
                         @if ($section->contestJuries->isEmpty())
                             <dd>
                                 {{ __('❌ No jurors for that section - theme, add ASAP')}}
@@ -104,12 +101,15 @@ new class extends Component {
                         @else
                             @foreach ($section->contestJuries as $juror)
                             <dd class="w-auto inline-float">
-                                {{ ($juror->is_president) ? __("Jury President") : __("Juror") }}<br>
+                                {{ ($juror->is_president) ? __("Jury President") : __("Juror") }} 
                                 {{ __("From") }}
                                 {{ $juror->userContact->country->flag_code }} 
                                 {{ $juror->userContact->country->country }} <br>
                                 {{ $juror->userContact->last_name }}, 
                                 {{ $juror->userContact->first_name }}<br>
+                                <x-inline-link-app
+                                    txt="Remove" 
+                                    url="{{ route('organization.design.contest-jury.remove', ['contest_jury' => $juror]) }}" />
                             </dd>
                             @endforeach
                         @endif

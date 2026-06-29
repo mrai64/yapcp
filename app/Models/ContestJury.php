@@ -119,6 +119,13 @@ class ContestJury extends Model
 
     // RELATIONS
 
+    // can also be contest_juries N>1 contest_sections N>1 contests
+    // contest_juries N>1 contests
+    public function contest(): BelongsTo
+    {
+        return $this->belongsTo(Contest::class);
+    }
+
     // was: contest_section
     // contest_juries.section_id > contest_sections.id
     public function contestSection(): BelongsTo

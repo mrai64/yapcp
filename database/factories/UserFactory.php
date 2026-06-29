@@ -41,7 +41,9 @@ class UserFactory extends Factory
         $first = fake()->firstName();
         $last = fake()->lastName();
         $name = $last . ', ' . $first;
-        $email = $first . '.' . $last . '@example.com';
+        // De Lucia, Paco > paco.de_lucia@example.com
+        $email = strtolower($first . '.' . $last . '@example.com');
+        $email = str_ireplace([' ', "'", '__'], '_', $email);
         return [
             'name' => $name,
             'email' => $email,
