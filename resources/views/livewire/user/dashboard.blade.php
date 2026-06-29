@@ -12,6 +12,7 @@ use function Livewire\Volt\with;
 with([
     'user' => auth()->user(),
     'userContact' => auth()->user()->contact,
+    'userRolesOrganizations' => auth()->user()->activeUserOrganizations,
 ]);
 
 ?>
@@ -55,6 +56,17 @@ with([
                 <x-header-link-app 
                     txt="Organizations List" 
                     url="{{ route('organization.listed') }}" />
+
+                @if ($userRolesOrganizations->isNotEmpty())
+                <h3 class="fyk text-xl font-bold mb-4">
+                    {{ __("Member of ...") }}
+                </h3>
+                    @foreach ($userRolesOrganizations as $userRole)
+                    <x-inline-link-app 
+                        txt="{{ $userRole->organization->name }}" 
+                        url="{{ route('organization.dashboard', ['organization' => $userRole->organization]) }}" />
+                    @endforeach
+                @endif
 
                 @if ($user->isAdmin())
                 <h3 class="fyk text-xl font-bold mb-4">{{ __("Federations [admin only]") }}</h3>
