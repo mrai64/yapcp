@@ -131,9 +131,15 @@ Volt::route('/organization/design/contest-section/remove/{contest_section}', 'or
 Volt::route('/organization/design/contest-jury/listed/{contest}', 'organization.design.contest-jury.listed')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-jury.listed');
-Volt::route('/organization/design/contest-section/add/{contest_section}', 'organization.design.contest-jury.add')
+Volt::route('/organization/design/contest-jury/add1/{contest_section}', 'organization.design.contest-jury.add1')
     ->middleware(['auth', 'verified'])
-    ->name('organization.design.contest-jury.add');
+    ->name('organization.design.contest-jury.add1');
+Volt::route('/organization/design/contest-jury/add2/{contest_section}', 'organization.design.contest-jury.add2')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.contest-jury.add2');
+Volt::route('/organization/design/contest-jury/add3/{contest_section}', 'organization.design.contest-jury.add3')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.contest-jury.add3');
 
 
 /**
