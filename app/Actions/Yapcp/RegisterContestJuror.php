@@ -1,9 +1,10 @@
-<?php 
+<?php
+
 
 /**
  * Action required bu Organization Contest Design
  * when an added juror in Contest become a platform registered user
- * 
+ *
  */
 
 namespace App\Actions\Yapcp;
