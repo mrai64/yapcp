@@ -62,70 +62,38 @@
                 <hr />
 
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-                        <a href="{{ route('user-contact.modify1') }}">
-                        [ {{ __("Your Contact info") }} ]
-                        </a>
-                    </div>
-                    . .
-                    <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-                        <a  href="{{ route('user.profile') }}"
-                            rel="noopener noreferrer">
-                        [ {{ __('Email, password') }} ]
-                        </a>
-                    </div>
-                    . .
-                    <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-                        <a href="{{ route('user.gallery') }}">
-                        [ {{ __("Your Uffizi' Gallery") }} ]
-                        </a>
-                    </div>
-                    . .
-                    <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-                        <!-- Open Contest list -->
-                        <a href="{{ route('contest.list') }}">
-                        [ {{ __("Open Contest List") }} ]
-                        </a>
-                    </div>
-                    . .
+                    <x-yapcp.inline-link 
+                        txt="Your Contact Info" 
+                        url="{{ route('user-contact.modify1') }}" />
+                    <x-yapcp.inline-link 
+                        txt="Email, password" 
+                        url="{{ route('user.profile') }}" />
+                    <x-yapcp.inline-link 
+                        txt="Your Uffizi Gallery" 
+                        url="{{ route('user.gallery') }}" />
+                    <x-yapcp.inline-link 
+                        txt="Open Contest List" 
+                        url="{{ route('contest.list') }}" />
                     <br />
-                    <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-                        <a href="{{ route('organization.list') }}">
-                        [ {{ __("Organization List") }} ]
-                        </a>
-                    </div>
-                    . .
-                    <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-                        <a href="{{ route('organization.add') }}">
-                            [ {{ __("Add a new Org") }} ]
-                        </a>
-                    </div>
-                    . .
-                    <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-                        <a href="{{ route('user-role.add.organization') }}">
-                        [ {{ __("Add you in Organization") }} ]
-                        </a>
-                    </div>
-                    . .
+                    <x-yapcp.inline-link 
+                        txt="Organization List" 
+                        url="{{ route('organization.list') }}" />
+                    <x-yapcp.inline-link 
+                        txt="Add a new Org" 
+                        url="{{ route('organization.add') }}" />
+                    <x-yapcp.inline-link 
+                        txt="Add YOU in an Org" 
+                        url="{{ route('user-role.add.organization') }}" />
                     <br />
-                    <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-                        <a href="{{ route('federation.list') }}">
-                            [ {{ __("Federation List") }} ]
-                        </a>
-                    </div>
-                    . .
-                    <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-                        <a href="{{ route('federation.add') }}">
-                            [ {{ __("Add a new Fed") }} ]
-                        </a>
-                    </div>
-                    . .
-                    <div class="mb-4 fyk text-xl w-48 text-center inline-flex">
-                        <a href="{{ route('user-role.add.federation') }}">
-                            [ {{ __("Add you in Federation") }} ]
-                        </a>
-                    </div>
-                    . .
+                    <x-yapcp.inline-link 
+                        txt="Federation List" 
+                        url="{{ route('federation.list') }}" />
+                    <x-yapcp.inline-link 
+                        txt="Add a new Fed" 
+                        url="{{ route('federation.add') }}" />
+                    <x-yapcp.inline-link 
+                        txt="Add YOU in a Fed" 
+                        url="{{ route('user-role.add.federation') }}" />
                     <br style="clear:both;" />
                     <p class="small">
                         {{ __("Your personal data will be used when you want to register") }}
@@ -146,10 +114,8 @@
                     </section>
                 </div>
             </main>
-
-            <footer class="py-16 text-center text-sm text-black dark:text-white/70 text-muted">
-                &copy; {{ date('Y')}} - {{ config('app.name') }} - version {{ $appVersion }} guest
-            </footer>
         </div>
     </div>
+    <!-- -->
+    <x-footer-app />
 </div>
