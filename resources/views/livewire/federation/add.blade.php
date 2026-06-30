@@ -80,10 +80,10 @@ new class extends Component {
             {{ __('Add a new Fed') }}
         </h2>
         <hr class="mb-4" />
-        <x-header-link-app 
+        <x-yapcp.header-link 
             txt="Back to dashboard" 
             url="{{ route('user.dashboard') }}" />
-		<x-header-link-app 
+		<x-yapcp.header-link 
 			txt="Federation list" 
 			url="{{ route('federation.listed') }}" />
     </x-slot>

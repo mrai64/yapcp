@@ -83,13 +83,13 @@ new class extends Component {
             {{ __(':name, Modify Organization', ['name' => $userContact->first_name] ) }}
         </h2>
         <hr class="mb-4" />
-        <x-header-link-app 
+        <x-yapcp.header-link 
             txt="Back to dashboard" 
             url="{{ route('user.dashboard') }}" />
-        <x-header-link-app 
+        <x-yapcp.header-link 
             txt="Organization List" 
             url="{{ route('organization.listed') }}" />
-        <x-header-link-app
+        <x-yapcp.header-link
             txt="Org Dashboards"
             url="{{ route('organization.dashboard', ['organization' => $organization]) }}" />
     </x-slot>

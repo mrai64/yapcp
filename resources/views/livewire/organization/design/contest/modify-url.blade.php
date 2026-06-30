@@ -68,10 +68,10 @@ new class extends Component {
         <hr class="mb-4" />
         <livewire:organization.design.contest.modify-nav :contest="$contest" />
         <hr class="mb-2" />
-        <x-header-link-app 
+        <x-yapcp.header-link 
             txt="Back to User dashboard" 
             url="{{ route('user.dashboard') }}" />
-		<x-header-link-app 
+		<x-yapcp.header-link 
 			txt="Organization dashboard" 
             url="{{ route('organization.dashboard', ['organization' => $organization]) }}" />
     </x-slot>

@@ -37,13 +37,13 @@ new class extends Component {
         </p>
         <hr class="mt-4 mb-4" />
         <br />
-        <x-header-link-app 
+        <x-yapcp.header-link 
             txt="Back to dashboard" 
             url="{{ route('user.dashboard') }}" />
-        <x-header-link-app
+        <x-yapcp.header-link
             txt="Update Contact infos"
             url="{{ route('user.contact.modify1', ['user_contact' => $userContact]) }}" />
-        <x-header-link-app
+        <x-yapcp.header-link
             txt="Update password, enable 2FA"
             url="{{ route('profile.show') }}" />
 

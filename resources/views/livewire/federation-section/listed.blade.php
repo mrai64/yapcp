@@ -45,10 +45,10 @@ new class extends Component {
 			{{ $federation->name_en }}
 		</p>
 		<hr class="mb-4 mt-4" />
-		<x-header-link-app 
+		<x-yapcp.header-link 
 			txt="Back to User dashboard" 
 			url="{{ route('user.dashboard') }}" />
-		<x-header-link-app 
+		<x-yapcp.header-link 
 			txt="Federation list" 
 			url="{{ route('federation.listed') }}" />
 	</x-slot>

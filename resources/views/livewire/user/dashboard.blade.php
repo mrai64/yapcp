@@ -36,24 +36,24 @@ with([
                 @endif
 
                 <h3 class="fyk text-xl font-bold mb-4">{{ __("You") }}</h3>
-                <x-header-link-app 
+                <x-yapcp.header-link 
                     txt="View Contact infos" 
                     url="{{ route('user.contact.show') }}" />
-                <x-header-link-app
+                <x-yapcp.header-link
                     txt="Update Contact infos"
                     url="{{ route('user.contact.modify1', ['user_contact' => $userContact]) }}" />
-                <x-header-link-app 
+                <x-yapcp.header-link 
                     txt="The Manual" 
                     url="{{ url('/docs') }}" />
-                <x-header-link-app 
+                <x-yapcp.header-link 
                     txt="Change password" 
                     url="{{ url('/user/profile') }}" />
 
                 <h3 class="fyk text-xl font-bold mb-4">{{ __("Lists") }}</h3>
-                <x-header-link-app 
+                <x-yapcp.header-link 
                     txt="Open Contest List" 
                     url="{{ route('user.contest.listed') }}" />
-                <x-header-link-app 
+                <x-yapcp.header-link 
                     txt="Organizations List" 
                     url="{{ route('organization.listed') }}" />
 
@@ -62,7 +62,7 @@ with([
                     {{ __("Member of ...") }}
                 </h3>
                     @foreach ($userRolesOrganizations as $userRole)
-                    <x-inline-link-app 
+                    <x-yapcp.inline-link 
                         txt="{{ $userRole->organization->name }}" 
                         url="{{ route('organization.dashboard', ['organization' => $userRole->organization]) }}" />
                     @endforeach
@@ -70,10 +70,10 @@ with([
 
                 @if ($user->isAdmin())
                 <h3 class="fyk text-xl font-bold mb-4">{{ __("Federations [admin only]") }}</h3>
-                <x-header-link-app 
+                <x-yapcp.header-link 
                     txt="Federation list" 
                     url="{{ route('federation.listed') }}" />
-                <x-header-link-app 
+                <x-yapcp.header-link 
                     txt="New Federation" 
                     url="{{ route('federation.add') }}" />
 

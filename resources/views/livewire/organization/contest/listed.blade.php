@@ -28,10 +28,10 @@ new class extends Component {
             {{ __(':name Contest List' , ['name' => $organization->name] ) }}
         </h2>
         <hr class="mb-4" />
-        <x-header-link-app 
+        <x-yapcp.header-link 
             txt="Back to User dashboard" 
             url="{{ route('user.dashboard') }}" />
-        <x-header-link-app 
+        <x-yapcp.header-link 
             txt="Back to Org Dashboard" 
             url="{{ route('organization.dashboard', ['organization' => $organization]) }}" />
     </x-slot>

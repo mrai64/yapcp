@@ -83,7 +83,7 @@ new class extends Component {
             {{ __(':name Dashboard' , ['name' => $organization->name] ) }}
         </h2>
         <hr class="mb-4" />
-        <x-header-link-app 
+        <x-yapcp.header-link 
             txt="Back to User dashboard" 
             url="{{ route('user.dashboard') }}" />
     </x-slot>
@@ -113,10 +113,10 @@ new class extends Component {
                 <h3 class="fyk text-2xl font-bold mb-4">
                     {{ __("Members") }}
                 </h3>
-                <x-inline-link-app 
+                <x-yapcp.inline-link 
                     txt="Members list" 
                     url="{{ route('organization.user.listed', ['organization' => $organization]) }}" />
-                <x-inline-link-app 
+                <x-yapcp.inline-link 
                     txt="Add new Member" 
                     url="{{ route('organization.user.add', ['organization' => $organization]) }}" />
                 <dl class="space-y-6">
@@ -133,10 +133,10 @@ new class extends Component {
                 <h3 class="fyk text-2xl font-bold mb-4">
                     {{ __("Contests") }}
                 </h3>
-                <x-inline-link-app 
+                <x-yapcp.inline-link 
                     txt="Contests List" 
                     url="{{ route('organization.contest.listed', ['organization' => $organization]) }}" />
-                <x-inline-link-app 
+                <x-yapcp.inline-link 
                     txt="Design new Contest" 
                     url="{{ route('organization.design.contest.make', ['organization' => $organization]) }}" />
                 @if ($designContestsSet->isNotEmpty())
@@ -144,7 +144,7 @@ new class extends Component {
                     {{ __("Future Contests") }}
                 </h3>
                     @foreach ($designContestsSet as $contest)
-                    <x-inline-link-app 
+                    <x-yapcp.inline-link 
                         txt="{{ ($contest->name_en) ? $contest->name_en : $contest->id }}" 
                         url="{{ route('organization.design.contest.modify-name', ['contest' => $contest]) }}" />
                     @endforeach
@@ -155,7 +155,7 @@ new class extends Component {
                 <h3 class="fyk text-2xl font-bold mb-4">
                     {{ __("Organization") }}
                 </h3>
-                <x-inline-link-app 
+                <x-yapcp.inline-link 
                     txt="Update Org Infos" 
                     url="{{ route('organization.modify', ['organization' => $organization]) }}" />
 

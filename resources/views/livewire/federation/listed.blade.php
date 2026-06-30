@@ -39,10 +39,10 @@ new class extends Component {
             {{ __("Below the federations are the sections and themes defined by the federations, which are binding only for competitions sponsored by the federations.") }}
         </p>
         <hr class="mb-4 mt-4" />
-        <x-header-link-app 
+        <x-yapcp.header-link 
             txt="Back to User dashboard" 
             url="{{ route('user.dashboard') }}" />
-        <x-header-link-app 
+        <x-yapcp.header-link 
             txt="Add New Federation" 
             url="{{ route('federation.add') }}" />
     </x-slot>
@@ -111,13 +111,13 @@ new class extends Component {
                             </dd>
 
                             <dd class="mt-2">
-                                <x-inline-link-app 
+                                <x-yapcp.inline-link 
                                     txt="Update" 
                                     url="{{ route('federation.modify', ['federation' => $federation ]) }}" />
-                                <x-inline-link-app 
+                                <x-yapcp.inline-link 
                                     txt="‼️ Remove ‼️" 
                                     url="{{ route('federation.remove', ['federation' => $federation ]) }}" />
-                                <x-inline-link-app 
+                                <x-yapcp.inline-link 
                                     txt="Federation Sections" 
                                     url="{{ route('federation-section.listed', ['federation' => $federation ]) }}" />
                             </dd>

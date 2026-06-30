@@ -34,10 +34,10 @@ new class extends Component {
         <hr class="mb-2" />
         <livewire:organization.design.contest-nav :contest="$contest" />
         <hr class="mb-2" />
-        <x-header-link-app 
+        <x-yapcp.header-link 
             txt="Back to User dashboard" 
             url="{{ route('user.dashboard') }}" />
-		<x-header-link-app 
+		<x-yapcp.header-link 
 			txt="Organization dashboard" 
             url="{{ route('organization.dashboard', ['organization' => $organization]) }}" />
     </x-slot>
@@ -71,14 +71,14 @@ new class extends Component {
                 <h3>
                     {{ __('Add first Section n theme to your Contest') }}
                 </h3>
-                <x-inline-link-app 
+                <x-yapcp.inline-link 
                     txt="Add Section"
                     url="{{ route('organization.design.contest-section.add', ['contest' => $contest]) }}" />
                 @else
                 <h3>
                     {{ __('Section n themes List') }}
                 </h3>
-                <x-inline-link-app 
+                <x-yapcp.inline-link 
                     class="fyk text-2xl float-end font-medium rounded-md px-4 py-2"
                     txt="Add Section"
                     url="{{ route('organization.design.contest-section.add', ['contest' => $contest]) }}" />
@@ -93,10 +93,10 @@ new class extends Component {
                             </tr>
                             <tr>
                                 <td colspan="2">
-                                    <x-inline-link-app 
+                                    <x-yapcp.inline-link 
                                         txt="Modify"
                                         url="{{ route('organization.design.contest-section.modify', ['contest_section' => $section->id]) }}" />
-                                    <x-inline-link-app 
+                                    <x-yapcp.inline-link 
                                         txt="Remove"
                                         url="{{ route('organization.design.contest-section.remove', ['contest_section' => $section]) }}" />
                                 </td>

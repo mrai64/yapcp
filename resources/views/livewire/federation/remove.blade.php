@@ -53,13 +53,13 @@ new class extends Component {
         <hr class="mb-4" />
         <p class="small text-red-600">‼️ {{ __('LAST LAST CALL. Are you SURE to delete that?') }}</p>
         <hr class="mb-4" />
-        <x-header-link-app 
+        <x-yapcp.header-link 
             txt="Back to User dashboard" 
             url="{{ route('user.dashboard') }}" />
-		<x-header-link-app 
+		<x-yapcp.header-link 
 			txt="Federation list" 
 			url="{{ route('federation.listed') }}" />
-		<x-header-link-app 
+		<x-yapcp.header-link 
 			txt="Federation Update" 
 			url="{{ route('federation.modify', ['federation' => $federation]) }}" />
     </x-slot>

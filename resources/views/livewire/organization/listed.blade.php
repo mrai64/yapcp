@@ -51,10 +51,10 @@ new class extends Component {
             {{ __("Ordered by country_id, then organization name") }}
         </p>
         <hr class="mb-4 mt-4" />
-        <x-header-link-app 
+        <x-yapcp.header-link 
             txt="Back to User dashboard" 
             url="{{ route('user.dashboard') }}" />
-        <x-header-link-app 
+        <x-yapcp.header-link 
             txt="Add a new Organization" 
             url="{{ route('organization.add') }}" />
     </x-slot>
@@ -112,14 +112,14 @@ new class extends Component {
                                 </a>
                             </dd>
                             <dd class="mt-2 text-sm text-gray-500 italic flex items-center">
-                                <x-inline-link-app
+                                <x-yapcp.inline-link
                                     txt="Org Dashboards"
                                     url="{{ route('organization.dashboard', ['organization' => $organization]) }}" />
                                 @if ($organization->name > '/')
-                                <x-inline-link-app
+                                <x-yapcp.inline-link
                                     txt="Update"
                                     url="{{ route('organization.modify', ['organization' => $organization]) }}" />
-                                <x-inline-link-app
+                                <x-yapcp.inline-link
                                     txt="Remove"
                                     url="{{ route('organization.remove', ['organization' => $organization]) }}" />
                                 @endif

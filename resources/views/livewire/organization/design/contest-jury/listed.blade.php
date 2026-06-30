@@ -40,10 +40,10 @@ new class extends Component {
         <hr class="mb-2" />
         <livewire:organization.design.contest-nav :contest="$contest" />
         <hr class="mb-2" />
-        <x-header-link-app 
+        <x-yapcp.header-link 
             txt="Back to User dashboard" 
             url="{{ route('user.dashboard') }}" />
-		<x-header-link-app 
+		<x-yapcp.header-link 
 			txt="Organization dashboard" 
             url="{{ route('organization.dashboard', ['organization' => $organization]) }}" />
     </x-slot>
@@ -77,7 +77,7 @@ new class extends Component {
                 <h3>
                     {{ __('Add first Section n theme to your Contest') }}
                 </h3>
-                <x-inline-link-app 
+                <x-yapcp.inline-link 
                     txt="Add Section"
                     url="{{ route('organization.design.contest-section.add', ['contest' => $contest]) }}" />
                 @else
@@ -91,7 +91,7 @@ new class extends Component {
                             {{ $section->code }}
                             {{ $section->name_en }}
                         </dt>
-                        <x-inline-link-app 
+                        <x-yapcp.inline-link 
                             txt="Add Juror" 
                             url="{{ route('organization.design.contest-jury.add1', ['contest_section' => $section]) }}" />
                         @if ($section->contestJuries->isEmpty())
@@ -107,7 +107,7 @@ new class extends Component {
                                 {{ $juror->userContact->country->country }} <br>
                                 {{ $juror->userContact->last_name }}, 
                                 {{ $juror->userContact->first_name }}<br>
-                                <x-inline-link-app
+                                <x-yapcp.inline-link
                                     txt="Remove" 
                                     url="{{ route('organization.design.contest-jury.remove', ['contest_jury' => $juror]) }}" />
                             </dd>

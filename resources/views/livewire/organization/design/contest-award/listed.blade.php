@@ -46,10 +46,10 @@ new class extends Component {
         <hr class="mb-2" />
         <livewire:organization.design.contest-nav :contest="$contest" />
         <hr class="mb-2" />
-        <x-header-link-app 
+        <x-yapcp.header-link 
             txt="Back to User dashboard" 
             url="{{ route('user.dashboard') }}" />
-		<x-header-link-app 
+		<x-yapcp.header-link 
 			txt="Organization dashboard" 
             url="{{ route('organization.dashboard', ['organization' => $organization]) }}" />
     </x-slot>
@@ -83,11 +83,11 @@ new class extends Component {
                 <h3>
                     {{ __('Add first Award to your Contest') }}
                 </h3>
-                <x-inline-link-app 
+                <x-yapcp.inline-link 
                     txt="Add Award"
                     url="{{ route('organization.design.contest-award.add', ['contest' => $contest]) }}" />
                 @else
-                <x-inline-link-app 
+                <x-yapcp.inline-link 
                     txt="Add Another Award"
                     url="{{ route('organization.design.contest-award.add', ['contest' => $contest]) }}" />
                     @foreach ($contestAwardsSet as $section => $prizeSet)
