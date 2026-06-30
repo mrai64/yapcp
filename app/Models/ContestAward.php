@@ -21,51 +21,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-
-/**
- * @property string $id uuid assigned
- * @property string $contest_id fk: contests.id 1:N
- * @property string|null $section_id fk: contest_section.id
- * @property string|null $section_code from: section.id->code
- * @property string $award_code free but unique in contest
- * @property string $award_name free
- * @property string $is_award N/Y flag, Y=award prize, N=HM or other
- * @property string|null $winner_work_id fk: user_works.id
- * @property string|null $winner_user_id fk: users.id user_contacts.user_id
- * @property string $winner_name winner not in previous cols
- * @property \Illuminate\Support\Carbon $created_at
- * @property \Illuminate\Support\Carbon $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Models\Contest $contest
- * @property-read \App\Models\ContestSection|null $section
- * @property-read \App\Models\UserContact|null $userContact
- * @property-read \App\Models\UserWork|null $work
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereAwardCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereAwardName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereContestId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereIsAward($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereSectionCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereSectionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereWinnerName($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereWinnerUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereWinnerWorkId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward withoutTrashed()
- * @property-read \App\Models\ContestWork|null $contestWork
- * @method static \Database\Factories\ContestAwardFactory factory($count = null, $state = [])
- * @mixin \Eloquent
- */
 
 final class ContestAward extends Model
 {
@@ -97,35 +56,19 @@ final class ContestAward extends Model
         // deleted_at        reserved
     ];
 
-
-    protected $hidden = [
-        'created_at',
-        'updated_at',
-        'deleted_at',
-    ];
-
-    // is_award as enum set, no boolean
-    private const VALID_YN = [
-        'N', // 0 false
-        'Y', // 1 true
-    ];
-
-    // pk is uuid
-    public static function booted()
-    {
-        //dbg Log::info('Model ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
-        static::creating(function ($model) {
-            $model->id = Str::uuid();
-        });
-    }
-
     protected function casts()
     {
         //dbg Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' called');
         return [
-            'created_at' => 'datetime',
-            'updated_at' => 'datetime',
-            'deleted_at' => 'datetime',
+            'contest_id'   => 'string',
+            'section_id'   => 'string',
+            'section_code' => 'string',
+            'award_code'   => 'string',
+            'award_name'   => 'string',
+            'is_award'     => 'boolean',
+            'created_at'   => 'datetime',
+            'updated_at'   => 'datetime',
+            'deleted_at'   => 'datetime',
         ];
     }
 
@@ -133,11 +76,7 @@ final class ContestAward extends Model
 
     public static function checkIsAward(ContestAward $award): bool
     {
-        return in_array(
-            needle: $award->is_award, // as table field remain in snake_case
-            haystack: self::VALID_YN,
-            strict: true
-        );
+        return (bool) $award->is_award;
     }
 
     // GETTERS
@@ -145,21 +84,22 @@ final class ContestAward extends Model
     // RELATIONS
 
     // contest_awards.contest_id > contests.id
-    public function contest()
+    public function contest(): BelongsTo
     {
         $contest = $this->belongsTo(Contest::class);
         return $contest;
     }
 
     // contest_awards.section_id > contest_sections.id
-    public function section()
+    // TODO Will become contestSection()
+    public function section(): BelongsTo
     {
         $section = $this->belongsTo(ContestSection::class);
         return $section;
     }
 
     // contest_awards.winner_work_id > contest_works.id
-    public function contestWork()
+    public function contestWork(): BelongsTo
     {
         $work = $this->belongsTo(
             ContestWork::class, //  ext class
@@ -173,7 +113,8 @@ final class ContestAward extends Model
      * Relazione diretta con l'opera dell'utente (UserWork).
      * winner_work_id punta direttamente a pcp_user_works.id
      */
-    public function work()
+    // TODO Will become userWork()
+    public function work(): BelongsTo
     {
         return $this->belongsTo(
             UserWork::class,
@@ -183,7 +124,7 @@ final class ContestAward extends Model
     }
 
     // contest_awards.winner_user_id > user_contacts.user_id
-    public function userContact()
+    public function userContact(): BelongsTo
     {
         $userContact = $this->belongsTo(
             UserContact::class, //  ext class

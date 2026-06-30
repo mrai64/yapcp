@@ -21,14 +21,18 @@ new class extends Component {
     {
         $this->contest = $contest;
         $this->organization = $contest->organization;
+
         $contestAwardsSet = ContestAward::where('contest_id', $this->contest->id)
             ->orderBy('section_id', 'asc')
             ->orderBy('is_award', 'desc')
             ->orderBy('section_code', 'asc')
             ->get();
-        $this->contestAwardsSet = $contestAwardsSet->groupBy(function ($item){
-            return $item->section_id ?? '..';
-        });
+
+            $this->contestAwardsSet = $contestAwardsSet->groupBy(function ($item){
+                return $item->section_code ?? '..';
+            })
+            ->toArray();
+        ds($this->contestAwardsSet);
     }
 }; ?>
 
@@ -75,7 +79,7 @@ new class extends Component {
                 <br />
                 @endif
 
-                @if ($contestAwardsSet->isEmpty())
+                @if ( count($contestAwardsSet) === 0)
                 <h3>
                     {{ __('Add first Award to your Contest') }}
                 </h3>
@@ -87,17 +91,20 @@ new class extends Component {
                     txt="Add Another Award"
                     url="{{ route('organization.design.contest-award.add', ['contest' => $contest]) }}" />
                     @foreach ($contestAwardsSet as $section => $prizeSet)
-                    <div class="mb-4">
-                        {{ ($section === '') ? __("General Awards") : __("Section Code: :code ", ['code' => $section])}}
-                    </div>
-                    <dl>
+                    <div class="my-4 border ">
+                        <div class="fyk text-2xl mb-4">
+                            {{ ($section == '..') ? __("Contest Awards") : __("Section Code: :code", ['code' => $section])}}
+                        </div>
+                        <ul>
                         @foreach ($prizeSet as $contestAward)
-                        <dt>{{ $contestAward->award_code }} {{ $contestAward->award_name }}</dt>
-                        <dd>
-                            {{ $contestAward->is_award ? '🏆' : '📜' }}
-                        </dd>
+                        <li class="font-mono">
+                            {{ $contestAward['is_award'] ? '🏆' : '📜' }}
+                            {{ $contestAward['award_code'] }} 
+                            {{ $contestAward['award_name'] }}
+                        </li>
                         @endforeach
-                    </dl>
+                        </ul>
+                    </div>
                     @endforeach
                 @endif
             </div>
