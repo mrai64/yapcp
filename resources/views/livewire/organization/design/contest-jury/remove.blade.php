@@ -73,9 +73,9 @@ new class extends Component {
             {{ __('Modify Contest infos') }}
         </h2>
         <hr class="mb-4" />
-        <livewire:organization.design.contest.modify-nav :contest="$contest" />
+        <x-yapcp.organization.design.contest-nav :contest="$contest" active="juries" />
         <hr class="mb-2" />
-        <livewire:organization.design.contest-nav :contest="$contest" />
+        <livewire:organization.design.contest-jury.jury-nav :contest="$contest" />
         <hr class="mb-2" />
         <x-yapcp.header-link 
             txt="Back to User dashboard" 
