@@ -154,6 +154,11 @@ Volt::route('/organization/design/contest-award/add/{contest}/{contest_section?}
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-award.add');
 
+// Last: Contest details
+Volt::route('/organization/design/contest/detail/{contest}', 'organization.design.contest.detail')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.contest.detail');
+
 
 /**
  * Federation

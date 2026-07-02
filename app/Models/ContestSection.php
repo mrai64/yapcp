@@ -95,6 +95,8 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereShortSizeMax($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereSynopsis($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereUniquePrize($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestJury> $contestJuries
+ * @property-read int|null $contest_juries_count
  * @mixin \Eloquent
  */
 class ContestSection extends Model

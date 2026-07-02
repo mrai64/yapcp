@@ -7,7 +7,6 @@
 
 use App\Models\Contest;
 use App\Models\ContestAward;
-use App\Models\ContestSection;
 use App\Models\Organization;
 use Livewire\Volt\Component;
 
@@ -32,7 +31,7 @@ new class extends Component {
                 return $item->section_code ?? '..';
             })
             ->toArray();
-        ds($this->contestAwardsSet);
+
     }
 }; ?>
 

@@ -22,6 +22,35 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
+/**
+ * @property string $id reak pk section_id + juror user_id
+ * @property string $contest_id fk: contests.id
+ * @property string $section_id fk: contest_sections.id
+ * @property string $user_id fk: user_contacts.id - juror
+ * @property bool $is_president used to put first in juror list
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Contest|null $contest
+ * @property-read \App\Models\ContestSection|null $contestSection
+ * @property-read \App\Models\UserContact|null $userContact
+ * @method static \Database\Factories\ContestJuryFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereContestId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereIsPresident($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereSectionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury withoutTrashed()
+ * @mixin \Eloquent
+ */
 class ContestJury extends Model
 {
     use HasFactory;
@@ -46,20 +75,6 @@ class ContestJury extends Model
         // deleted_at          reserved
     ];
 
-    // no boolean
-    private const VALID_YN = [
-        'N', // 0 false
-        'Y', // 1 true
-    ];
-
-    // pk is uuid
-    public static function booted()
-    {
-        static::creating(function ($model) {
-            $model->id = Str::uuid(); // uuid generator
-        });
-    }
-
     protected function casts()
     {
         return [
@@ -67,6 +82,7 @@ class ContestJury extends Model
             'contest_id' => 'string',
             'section_id' => 'string',
             'user_id' => 'string',
+            'is_president' => 'boolean',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',

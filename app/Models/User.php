@@ -96,6 +96,10 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserContactMore> $userContactMores
  * @property-read int|null $user_contact_mores_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $activeUserOrganizations
+ * @property-read int|null $active_user_organizations_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $activeUserRoles
+ * @property-read int|null $active_user_roles_count
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail

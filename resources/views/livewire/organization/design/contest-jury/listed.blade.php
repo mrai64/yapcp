@@ -5,15 +5,14 @@
  */
 
 use App\Models\Contest;
-use App\Models\ContestSection;
 use App\Models\Organization;
 use Livewire\Volt\Component;
 
 new class extends Component {
     
     public Contest $contest;
-    public         $contestWithData;
     public Organization $organization;
+    public         $contestWithData;
     public bool $noSections;
     //
     public function mount(Contest $contest)
