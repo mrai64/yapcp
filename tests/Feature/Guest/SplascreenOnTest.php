@@ -1,10 +1,11 @@
 <?php
 
 /**
- * Pest test learning
- * naming with a numbering prefix ITS facultative
+ * Basic test with Pest
  *
- * that's: 01_HomepageOnTest.php
+ * Not only page show but also a check for dummy db creation,
+ * even if not used
+ *
  * Memo: remember AAA
  * A arrange
  * A act
@@ -13,7 +14,8 @@
 
 use function Pest\Laravel\get;
 
-// uses(Illuminate\Foundation\Testing\RefreshDatabase::class);
+// no uses(Illuminate\Foundation\Testing\RefreshDatabase::class);
+// because we had TestCase.php
 
 it('check homepage response ok', function () {
     // arrange
