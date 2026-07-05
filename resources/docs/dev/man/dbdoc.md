@@ -36,7 +36,7 @@ php artisan db:doc
 - [password_reset_tokens](#-tabella-password_reset_tokens)
 - [personal_access_tokens](#-tabella-personal_access_tokens)
 - [sessions](#-tabella-sessions)
-- [timezone_region_sets](#-tabella-timezone_region_sets)
+- [timezones_region_sets](#-tabella-timezones_region_sets)
 - [timezones](#-tabella-timezones)
 - [user_contact_mores](#-tabella-user_contact_mores)
 - [user_contacts](#-tabella-user_contacts)
@@ -584,7 +584,7 @@ php artisan db:doc
 
 ---
 
-## 📋 Tabella: `timezone_region_sets` 
+## 📋 Tabella: `timezones_region_sets` 
 **Descrizione:** timezones lookup table
 
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
@@ -605,13 +605,13 @@ php artisan db:doc
 | Campo | Tipo | Descrizione | Null | Chiave | Default |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **id** | varchar(40) | *valid for php_timezones* | NO | PRI | *NULL* |
-| **region_id** | char(12) | *fk timezone_region_sets.id* | NO | MUL | *NULL* |
+| **region_id** | char(12) | *fk timezones_region_sets.id* | NO | MUL | *NULL* |
 | **created_at** | datetime | *-* | NO |  | CURRENT_TIMESTAMP |
 | **updated_at** | datetime | *-* | NO | MUL | CURRENT_TIMESTAMP |
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
 
 ### **Relazioni (Foreign Keys):**
-- 🔗 `region_id` → `timezone_region_sets(id)` 
+- 🔗 `region_id` → `timezones_region_sets(id)` 
 
 ---
 

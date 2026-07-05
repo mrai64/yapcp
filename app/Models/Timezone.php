@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Log;
 
 /**
  * @property string $id valid for php_timezones
- * @property string $region_id fk timezone_region_sets.id
+ * @property string $region_id fk timezones_region_sets.id
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -60,7 +60,7 @@ class Timezone extends Model
     // fields list
     protected $fillable = [
         'id', //           pk
-        'region_id', //    fk timezone_region_sets.id
+        'region_id', //    fk timezones_region_sets.id
         // created_at,     reserved
         // updated_at,     reserved
         // deleted_at,     reserved
@@ -85,7 +85,7 @@ class Timezone extends Model
     {
         $region = $this->hasOne(
             related: TimezoneRegionSet::class, // ext class
-            foreignKey: 'id', //                  ext timezone_region_sets.id
+            foreignKey: 'id', //                  ext timezones_region_sets.id
             localKey: 'region_id' //              int timezone.region_id
         );
         // log
