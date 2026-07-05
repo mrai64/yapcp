@@ -29,7 +29,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes; //  uuid booted()
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 
 /**
  * @property string $id uuid assigned
@@ -122,23 +121,14 @@ class ContestSection extends Model
         'max_works', //               int
         'short_size_max', //          int px size
         'long_size_max', //
-        'file_size_max', //        int MB
-        'monochromatic_required', //     0/No, color 1/monochromatic
-        'raw_required', //      0/No, 1/Raw required
-        'unique_prize', //          0/More than an award per secton 1/only one award per section
+        'file_size_max', //           int B
+        'monochromatic_required', //  bool 0/No, color 1/monochromatic
+        'raw_required', //            bool 0/No, 1/Raw required
+        'unique_prize', //            bool 0/More than an award per secton 1/only one award per section
         // created_at                reserved
         // updated_at                reserved
         // deleted_at                reserved
     ];
-
-    // pk is uuid
-    public static function booted()
-    {
-        ds('Model '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
-        static::creating(function ($model) {
-            $model->id = Str::uuid();
-        });
-    }
 
     protected function casts()
     {

@@ -4,6 +4,9 @@
  * ContestAward define the award list for section(s),
  * and contest, using a filled/empty section_code.
  *
+ * id is pk, but "real" pk is composed by
+ * contest_id, section_code, award_code, (and deleted_at because of SofDelete)
+ *
  * is_award mean that some prize are A prize, i.e. valid for some federations distinctions, others are "simple" prize.
  *
  * 2025-12-05 Log
@@ -75,7 +78,7 @@ final class ContestAward extends Model
     public const TABLENAME = 'contest_awards';
 
     // primary key
-    protected $primaryKey = 'id'; //  default, but 'real' pk is contest_id.award_code
+    protected $primaryKey = 'id'; //  'alt' pk is contest_id + section_id + award_code
     protected $keyType = 'string'; // uuid char(36)
     public $incrementing = false; //  with no increment
 
@@ -100,12 +103,16 @@ final class ContestAward extends Model
     {
         //dbg Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' called');
         return [
+            'id'           => 'string',
             'contest_id'   => 'string',
             'section_id'   => 'string',
             'section_code' => 'string',
             'award_code'   => 'string',
             'award_name'   => 'string',
             'is_award'     => 'boolean',
+            'winner_work_id' => 'string',
+            'winner_user_id' => 'string',
+            'winner_name'    => 'string',
             'created_at'   => 'datetime',
             'updated_at'   => 'datetime',
             'deleted_at'   => 'datetime',
