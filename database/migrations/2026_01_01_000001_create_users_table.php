@@ -15,21 +15,27 @@ return new class () extends Migration {
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->charset('ascii')->collation('ascii_general_ci')
-                ->primary()->comment('lowercase uuid');
+                ->primary()->comment('uuid fk user_contacts.id');
             $table->string('name')->index()
                 ->comment('surname, name - not used for access');
             $table->string('email')->unique();
             $table->dateTime('email_verified_at')->nullable();
             //
             $table->string('password')->comment('hashed obv');
+            $table->text('two_factor_secret')
+                ->nullable();
+            $table->text('two_factor_recovery_codes')
+                ->nullable();
+            $table->dateTime('two_factor_confirmed_at')
+                ->nullable();
             $table->rememberToken();
-            $table->foreignId('current_team_id')->nullable(); // TODO REMOVE
-            $table->string('profile_photo_path', 2048)->nullable(); // TODO REMOVE
-            //
+            $table->foreignId('current_team_id')->nullable(); // jetstream
+            $table->string('profile_photo_path', 2048)->nullable(); // jetstream
+            // softdeletes
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent()->index();
             $table->dateTime('deleted_at')->nullable()->index();
-
+            //
             $table->comment('Laravel reserved table for users - platform entry only');
         });
     }
