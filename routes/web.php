@@ -18,25 +18,22 @@
  *
  */
 
-
-use App\Livewire\User;
 use App\Models\Federation as ModelsFederation;
-use Livewire\Volt\Volt;
-//
 use Illuminate\Support\Facades\Route;
+use Livewire\Volt\Volt;
 
-// 1. welcome and credits
+// 1. Guest welcome and credits
 Route::view('/', 'welcome')
-    ->name('welcome.aboard');
+    ->name('welcome.aboard'); // ✅
 Route::view('/credits', 'credits')
-    ->name('credits.notice');
-// login - jeststream
-// register - jetstream
+    ->name('credits.notice'); // ✅
 // docs - thru login access
 
 /**
- * User dashboard
+ * User
  */
+// login - jeststream job
+// register - jetstream job
 Volt::route('/user/dashboard', 'user.dashboard')
     ->middleware(['auth', 'verified'])
     ->name('user.dashboard');
@@ -44,6 +41,7 @@ Volt::route('/user/dashboard', 'user.dashboard')
 /**
  * UserContact
  */
+// UserContact Add build with user registration
 Volt::route('/user/contact/show', 'user.contact.show')
     ->middleware(['auth', 'verified'])
     ->name('user.contact.show');
@@ -67,6 +65,9 @@ Volt::route('/user/contact/modify4/{user_contact}', 'user.contact.modify4')
 Volt::route('/user/contact/modify5/{user_contact}', 'user.contact.modify5')
     ->middleware(['auth', 'verified'])
     ->name('user.contact.modify5');
+// userContact remove no - remove is a job after n month of inactivity
+//   and require also removing user works after backup
+// TODO userContact paginated list - for admin
 
 /**
  * Organization
@@ -120,10 +121,16 @@ Volt::route('/organization/design/contest-section/listed/{contest}', 'organizati
 Volt::route('/organization/design/contest-section/add/{contest}', 'organization.design.contest-section.add')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-section.add');
-Volt::route('/organization/design/contest-section/modify/{contest_section}', 'organization.design.contest-section.modify')
+Volt::route(
+    '/organization/design/contest-section/modify/{contest_section}',
+    'organization.design.contest-section.modify'
+)
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-section.modify');
-Volt::route('/organization/design/contest-section/remove/{contest_section}', 'organization.design.contest-section.remove')
+Volt::route(
+    '/organization/design/contest-section/remove/{contest_section}',
+    'organization.design.contest-section.remove'
+)
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-section.remove');
 
@@ -149,12 +156,16 @@ Volt::route('/organization/design/contest-jury/remove/{contest_jury}', 'organiza
 Volt::route('/organization/design/contest-award/listed/{contest}', 'organization.design.contest-award.listed')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-award.listed');
-// NOte: when contest_section is missing, prize is general
+// Note: when contest_section is missing, prize is for contest
 Volt::route('/organization/design/contest-award/add/{contest}/{contest_section?}', 'organization.design.contest-award.add')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-award.add');
-
-// Last: Contest details
+Volt::route('/organization/design/contest-award/modify/{contest_award}', 'organization.design.contest-award.modify')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.contest-award.modify');
+Volt::route('/organization/design/contest-award/remove/{contest_award}', 'organization.design.contest-award.remove')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.contest-award.remove');
 Volt::route('/organization/design/contest/detail/{contest}', 'organization.design.contest.detail')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest.detail');
@@ -184,9 +195,9 @@ Volt::route('/federation-section/listed/{federation}', 'federation-section.liste
     ->name('federation-section.listed');
 
 /**
- * Contest
+ * User Contest
  */
-// build contest - see /organization/design upper
+// to build contest - see /organization/design upper
 // user on contests
 Volt::route('/user/contest/listed', 'user.contest.listed')
     ->middleware(['auth', 'verified'])

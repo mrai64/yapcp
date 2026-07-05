@@ -6,7 +6,6 @@
         class="mb-4 fyk text-xl w-48 text-center inline-flex" >
         {{ __('Main data') }}
     </x-nav-link>
-    . .
     <x-nav-link :href="route('organization.design.contest-section.listed', $contest)" 
         :active="$active == 'sections'"
         class="mb-4 fyk text-xl w-48 text-center inline-flex" >

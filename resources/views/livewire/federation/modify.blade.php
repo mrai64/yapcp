@@ -42,7 +42,9 @@ new class extends Component {
         return [
             'federationId'          => [
                 'required', 'string', 'uppercase', 'min:2', 'max:10', 
-                Rule::unique(Federation::class, 'id')->ignore($this->federation->id) 
+                Rule::unique(Federation::class, 'id')
+                    ->whereNull('delete_at')
+                    ->ignore($this->federation->id) 
                 ],
             'federationCountryId'   => 'required|string|uppercase|min:3|exists:countries,id',
             'federationNameEn'      => 'required|string|min:3|max:255',

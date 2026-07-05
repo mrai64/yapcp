@@ -1,98 +1,71 @@
 <?php
 
 /**
- * Organization Contest Design / add Award to Contest or ContestSection
+ * Organization Contest Design / Modify Award to Contest or ContestSection
  *
  */
 
 use App\Models\Contest;
 use App\Models\ContestAward;
-use App\Models\ContestSection;
 use App\Models\Organization;
-use Livewire\Attributes\Computed;
+use Illuminate\Validation\Rule;
 use Livewire\Volt\Component;
 
 new class extends Component {
     public Contest $contest;
     public Organization $organization;
+    public ContestAward $contestAward;
     // contest_id
     public string $contestAwardSectionId; //   section_id     nullable
     public string $contestAwardSectionName; // section_code   nullable
     public string $contestAwardAwardCode; //   award_code     sortable
     public string $contestAwardAwardName; //   award_name
     public bool   $contestAwardIsAward; //     is_award       bool
-    // winner_work_id reserved for contest manage
-    // winner_user_id reserved for contest manage
-    // winner_name    reserved for contest manage
-
-    #[Computed]
-    public function getSectionsSet()
-    {
-        if (!$this->contest){
-            return collect();
-        }
-        return ContestSection::where('contest_id', $this->contest->id)
-            ->orderBy('name_en')
-            ->get();
-    }
-
     //
-    public function mount(Contest $contest)
+
+    public function mount(ContestAward $contest_award)
     {
-        $this->contest = $contest;
-        $this->organization = $contest->organization;
-        // form fields
-        $this->contestAwardSectionId = '';
-        $this->contestAwardSectionCode = '';
-        $this->contestAwardAwardCode = '';
-        $this->contestAwardAwardName = '';
-        $this->contestAwardIsAward = false;
+        $this->contestAward = $contest_award;
+        $this->contest = $contest_award->contest;
+        $this->organization = $this->contest->organization;
+
+        $this->contestAwardAwardCode = $this->contestAward->award_code;
+        $this->contestAwardAwardName = $this->contestAward->award_name;
+        $this->contestAwardIsAward   = (bool) $this->contestAward->is_award;
     }
 
     public function rules()
     {
         return [
-            'contestAwardSectionId'   => 'nullable|exists:contest_sections,id',
             'contestAwardAwardCode'   => [
                 'required',
                 'uppercase',
                 'max:10',
                 Rule::unique(ContestAward::TABLENAME, 'award_code')
-                    ->where('contest_id' $this->contest->id)
+                    ->where('contest_id', $this->contest->id)
                     ->when($this->contestAwardSectionId, function($query) {
-                        return $query->Where('section_id', $this->contestAwardSectionId)
+                        return $query->Where('section_id', $this->contestAwardSectionId);
                     }, function ($query) {
-                        return $query->whereNull('section_id')
+                        return $query->whereNull('section_id');
                     })
                     ->whereNull('delete_at')
-                    ->ignore($this->contestAward-id ?? null),
+                    ->ignore($this->contestAward->id ?? null),
             ],
             'contestAwardAwardName'   => 'required|string|max:255',
             'contestAwardIsAward'     => 'nullable|boolean',
         ];
     }
 
-    public function addContestAward()
+    public function modifyContestAward()
     {
         $validated = $this->validate();
-        if ($validated['contestAwardSectionId']){
-            $validated['contestAwardSectionCode'] = ContestSection::where('id', $validated['contestAwardSectionId'])
-                ->where('contest_id', $this->contest->id)
-                ->pluck('code')
-                ->first();
-        } else {
-            $validated['contestAwardSectionId']   = null;
-            $validated['contestAwardSectionCode'] = null;
-        }
 
         $contestAward = ContestAward::withTrashed()->updateOrCreate(
             [
                 'contest_id' => $this->contest->id,
-                'section_id' => $validated['contestAwardSectionId'],
                 'award_code' => strtoupper($validated['contestAwardAwardCode']),
             ],
             [
-                'section_code' => $validated['contestAwardSectionCode'] ?? null,
                 'award_name' => $validated['contestAwardAwardName'],
                 'is_award'   => (bool) $validated['contestAwardIsAward'],
                 'deleted_at' => null, // Fondamentale: ripristina il record se era cancellato
@@ -101,7 +74,7 @@ new class extends Component {
 
         return redirect()
             ->route('organization.design.contest-award.listed', ['contest' => $this->contest ])
-            ->with('success', __('Award added'));
+            ->with('success', __('Award Modified'));
     }
 }; ?>
 
@@ -149,26 +122,9 @@ new class extends Component {
                 @endif
 
                 <!--  -->
-                <form wire:submit="addContestAward">
+                <form wire:submit="modifyContestAward">
                     @csrf
-
-                    <!-- Section Id / Code -->
-                    <div class="mb-4">
-                        <x-input-label for="contestAwardSectionId" :value="__('Contest or Section')" />
-                        <select id="contestAwardSectionId"
-                            name="contestAwardSectionId"
-                            wire:model.live="contestAwardSectionId"
-                            class='border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-auto'>
-                            <option value="">{{ __("Contest Award") }}</option>
-                            @foreach ($this->getSectionsSet as $section)
-                            <option value="{{ $section->id }}" {{ (($section->id == $contestAwardSectionId) ? 'selected' : '') }}>
-                                {{ __("Section :code, :name", ['code' => $section->code, 'name' => $section->name_en]) }}
-                            </option>
-                            @endforeach
-                        </select>
-                        <x-input-error for="contestAwardSectionId" class="mt-2" />
-                    </div>
-
+                    
                     <div class="mb-4">
                         <x-input-label for="contestAwardAwardCode" :value="__('Award / HM Code')" />
                         <x-text-input wire:model="contestAwardAwardCode" id="contestAwardAwardCode" name="contestAwardAwardCode" 
@@ -196,11 +152,10 @@ new class extends Component {
                     <br style="clear:both;" />
 
                     <x-button class="mt-2 ms-4">
-                        {{ __('Check if present, then Add') }}
+                        {{ __('Save Changes') }}
                     </x-button>
                 </form>
                 <!--/ -->
-
             </div>
         </div>
     </div>

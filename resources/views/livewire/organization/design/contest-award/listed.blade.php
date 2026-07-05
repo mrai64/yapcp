@@ -90,16 +90,22 @@ new class extends Component {
                     txt="Add Another Award"
                     url="{{ route('organization.design.contest-award.add', ['contest' => $contest]) }}" />
                     @foreach ($contestAwardsSet as $section => $prizeSet)
-                    <div class="my-4 border ">
+                    <div class="my-4 border">
                         <div class="fyk text-2xl mb-4">
                             {{ ($section == '..') ? __("Contest Awards") : __("Section Code: :code", ['code' => $section])}}
                         </div>
                         <ul>
                         @foreach ($prizeSet as $contestAward)
-                        <li class="font-mono">
+                        <li class="font-mono my-2 px-4 py-2">
                             {{ $contestAward['is_award'] ? '🏆' : '📜' }}
                             {{ $contestAward['award_code'] }} 
-                            {{ $contestAward['award_name'] }}
+                            {{ $contestAward['award_name'] }}<br />
+                            <x-yapcp.inline-link
+                                txt="Modify"
+                                url="{{ route('organization.design.contest-award.modify', ['contest_award' => $contestAward['id']]) }}" />
+                            <x-yapcp.inline-link
+                                txt="Remove"
+                                url="{{ route('organization.design.contest-award.remove', ['contest_award' => $contestAward['id']]) }}" />
                         </li>
                         @endforeach
                         </ul>

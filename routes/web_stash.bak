@@ -2,7 +2,9 @@
 
 /**
  * old web.php at 2026-06-15
- *
+ * Whatever has been moved to the other file is removed 
+ *   from this one; the goal is to empty it.
+ * 
  */
 
 
@@ -75,24 +77,7 @@ use App\Models\UserWork as ModelsUserWork;
 use App\Models\Organization as ModelsOrganization;
 use Illuminate\Support\Facades\Route;
 
-/**
- * 1. no model - guest
- */
-Route::view('/', 'welcome')
-    ->name('welcome.aboard');
-Route::view('/credits', 'credits')
-    ->name('credits.notice');
 
-/**
- * 2. User, platform registration - user
- */
-Volt::route('/user/dashboard/{user?}', 'user.⚡️dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('user.dashboard');
-// change email and password
-Route::view('/user/profile', 'profile')
-    ->middleware(['auth'])
-    ->name('user.profile');
 
 /**
  * 3. UserContact - user and admin
@@ -112,27 +97,6 @@ Route::get('/user/contact/profile', User\Contact\Show::class)
     ->middleware(['auth', 'verified', 'can:view,' . ModelsUserContact::class])
     ->name('profile.show');
 
-// user-contact show - user | admin
-Route::get('/user/contact/show/{userContact?}', User\Contact\Show::class)
-->middleware(['auth', 'verified', 'can:view,' . ModelsUserContact::class])
-->name('user-contact.show');
-// user contact/ modify* - user herself/himself n admin
-Route::get('/user/contact/modify1/{userContact?}', User\Contact\Modify1YouAre::class)
-    ->middleware(['auth', 'verified', 'can:update,' . ModelsUserContact::class])
-    ->name('user-contact.modify1');
-Route::get('/user/contact/modify2/{userContact?}', User\Contact\Modify2PostAddress::class)
-    ->middleware(['auth', 'verified', 'can:update,' . ModelsUserContact::class])
-    ->name('user-contact.modify2');
-Route::get('/user/contact/modify3/{userContact?}', User\Contact\Modify3Phones::class)
-    ->middleware(['auth', 'verified', 'can:update,' . ModelsUserContact::class])
-    ->name('user-contact.modify3');
-Route::get('/user/contact/modify4/{userContact?}', User\Contact\Modify4Socials::class)
-    ->middleware(['auth', 'verified', 'can:update,' . ModelsUserContact::class])
-    ->name('user-contact.modify4');
-Route::get('/user/contact/modify5/{federation}/{userContact?}', User\Contact\Modify5Feds::class)
-    ->middleware(['auth', 'verified', 'can:update,' . ModelsUserContact::class])
-    ->name('user-contact.modify5'); // Add "federation more" required fields
-// user-contact remove - no
 
 /**
  * 4. UserRole
