@@ -132,7 +132,7 @@ class Add extends Component
         $validated['long_side'] = ($wh[0] >= $wh[1]) ? $wh[0] : $wh[1];
         $validated['short_side'] = ($wh[0] <= $wh[1]) ? $wh[0] : $wh[1];
         $validated['monochromatic'] = ($validated['monochromatic'] === 'Y') ? 'Y' : 'N';
-        $validated['work_file'] = 'anon.jpg';
+        $validated['work_file'] = '/photos/anon.jpg';
 
         // 1. insert and give uuid, then update with uuid
         // was: with snake_case fields $this->work = Work::create($validated);
