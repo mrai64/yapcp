@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class TimezoneRegionSetFactory extends Factory
+class TimezonesRegionSetFactory extends Factory
 {
     /**
      * Define the model's default state.

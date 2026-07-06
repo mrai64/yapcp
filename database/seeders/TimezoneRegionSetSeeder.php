@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\TimezoneRegionSet;
+use App\Models\TimezonesRegionSet;
 use Illuminate\Database\Seeder;
 
-class TimezoneRegionSetSeeder extends Seeder
+class TimezonesRegionSetSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,15 +13,15 @@ class TimezoneRegionSetSeeder extends Seeder
     public function run(): void
     {
         //
-        TimezoneRegionSet::factory()->create(['id' => 'Africa']);
-        TimezoneRegionSet::factory()->create(['id' => 'America']);
-        TimezoneRegionSet::factory()->create(['id' => 'Antarctica']);
-        TimezoneRegionSet::factory()->create(['id' => 'Arctic']);
-        TimezoneRegionSet::factory()->create(['id' => 'Asia']);
-        TimezoneRegionSet::factory()->create(['id' => 'Atlantic']);
-        TimezoneRegionSet::factory()->create(['id' => 'Australia']);
-        TimezoneRegionSet::factory()->create(['id' => 'Europe']);
-        TimezoneRegionSet::factory()->create(['id' => 'Indian']);
-        TimezoneRegionSet::factory()->create(['id' => 'Pacific']);
+        TimezonesRegionSet::factory()->create(['id' => 'Africa']);
+        TimezonesRegionSet::factory()->create(['id' => 'America']);
+        TimezonesRegionSet::factory()->create(['id' => 'Antarctica']);
+        TimezonesRegionSet::factory()->create(['id' => 'Arctic']);
+        TimezonesRegionSet::factory()->create(['id' => 'Asia']);
+        TimezonesRegionSet::factory()->create(['id' => 'Atlantic']);
+        TimezonesRegionSet::factory()->create(['id' => 'Australia']);
+        TimezonesRegionSet::factory()->create(['id' => 'Europe']);
+        TimezonesRegionSet::factory()->create(['id' => 'Indian']);
+        TimezonesRegionSet::factory()->create(['id' => 'Pacific']);
     }
 }

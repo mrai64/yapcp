@@ -43,7 +43,7 @@ class UserRolesRoleContext extends Model
     protected $fillable = [
         'id', //         pk bigint autoincrement
         'role', //       string
-        'context', //    string
+        'context_type', // string
         'green', //      boolean
         // created_at    reserved
         // updated_at    reserved
@@ -55,7 +55,7 @@ class UserRolesRoleContext extends Model
         return [
             'id' => 'int',
             'role' => 'string',
-            'context' => 'string',
+            'context_type' => 'string',
             'green' => 'int',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',

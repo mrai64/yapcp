@@ -21,17 +21,16 @@ class DatabaseSeeder extends Seeder
         $this->call([
             // lookup tables
             CountrySeeder::class,
-            TimezoneRegionSetSeeder::class,
+            TimezonesRegionSetSeeder::class,
             TimezonesSeeder::class,
             UserRolesContextSetSeeder::class,
             UserRolesRoleSetSeeder::class,
-            // UserRolesRoleContextSeeder::class,
-            UserRolesRoleContextsTableSeeder::class,
+            UserRolesRoleContextsSeeder::class,
             ContestsVoteRuleSetSeeder::class,
             //
             FederationSeeder::class,
             FederationSectionSeeder::class,
-            FederationMoresReferencedTableSeeder::class,
+            FederationMoresReferencedSetsSeeder::class,
             FederationMoreSeeder::class,
             //
             OrganizationSeeder::class,
@@ -46,6 +45,5 @@ class DatabaseSeeder extends Seeder
             // ContestWorkSeeder::class,
             // ContestParticipantSeeder::class,
         ]);
-        $this->call(UserRolesRoleContextsTableSeeder::class);
     }
 }

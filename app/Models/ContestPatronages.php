@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @method static \Database\Factories\ContestPatronagesFactory factory($count = null, $state = [])
@@ -30,4 +31,5 @@ class ContestPatronages extends Model
 {
     /** @use HasFactory<\Database\Factories\ContestPatronagesFactory> */
     use HasFactory;
+    use SoftDeletes;
 }

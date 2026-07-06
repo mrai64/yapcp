@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @method static \Database\Factories\UserRolesContextSetFactory factory($count = null, $state = [])
@@ -26,4 +27,5 @@ class UserRolesContextSet extends Model
 {
     /** @use HasFactory<\Database\Factories\UserRolesContextSetFactory> */
     use HasFactory;
+    use SoftDeletes;
 }

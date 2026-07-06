@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @method static \Database\Factories\FederationMoresReferencedSetsFactory factory($count = null, $state = [])
@@ -26,6 +27,7 @@ class FederationMoresReferencedSets extends Model
 {
     /** @use HasFactory<\Database\Factories\FederationMoresReferencedSetsFactory> */
     use HasFactory;
+    use SoftDeletes;
 
     public $incrementing = false; // Fondamentale
     protected $keyType = 'string'; // Fondamentale

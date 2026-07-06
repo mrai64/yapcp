@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\FederationMoresReferencedTable>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\FederationMoresReferencedSets>
  */
 class FederationMoresReferencedSetsFactory extends Factory
 {

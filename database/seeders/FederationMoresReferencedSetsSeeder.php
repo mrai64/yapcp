@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\FederationMoresReferencedTable;
+use App\Models\FederationMoresReferencedSets;
 use Illuminate\Database\Seeder;
 
 class FederationMoresReferencedSetsSeeder extends Seeder

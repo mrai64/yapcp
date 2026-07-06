@@ -30,7 +30,7 @@ abstract class TestCase extends BaseTestCase
         $this->seed(\Database\Seeders\CountrySeeder::class);
 
         // timezone' regions
-        $this->seed(\Database\Seeders\TimezoneRegionSetSeeder::class);
+        $this->seed(\Database\Seeders\TimezonesRegionSetSeeder::class);
 
         // timezones
         $this->seed(\Database\Seeders\TimezonesSeeder::class);
@@ -51,7 +51,7 @@ abstract class TestCase extends BaseTestCase
         $this->seed(\Database\Seeders\FederationSeeder::class);
 
         // federations more fields
-        $this->seed(\Database\Seeders\FederationMoresReferencedTableSeeder::class);
+        $this->seed(\Database\Seeders\FederationMoresReferencedSetsSeeder::class);
 
         // federations more fields
         $this->seed(\Database\Seeders\FederationMoreSeeder::class);

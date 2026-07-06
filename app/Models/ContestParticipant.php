@@ -80,7 +80,7 @@ class ContestParticipant extends Model
     protected $fillable = [
         'id', //                     pk unsigned bigint a+
         'contest_id', //             fk contests.id
-        'user_id', //                fk user_contacts.user_id
+        'user_contact_id', //        fk user_contacts.id
         'fee_payment_completed', //  Y/N become 1/0
         // created_at                reserved
         // updated_at                reserved
@@ -92,7 +92,7 @@ class ContestParticipant extends Model
         return [
             'id' => 'int',
             'contest_id' => 'string',
-            'user_id' => 'string',
+            'user_contact_id' => 'string',
             'fee_payment_completed' => 'boolean',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -118,19 +118,19 @@ class ContestParticipant extends Model
         }
 
         $results = ContestParticipant::query()
-            ->leftJoin('pcp_user_contacts', 'pcp_contest_participants.user_id', '=', 'pcp_user_contacts.user_id')
+            ->leftJoin('pcp_user_contacts', 'pcp_contest_participants.user_contact_id', '=', 'pcp_user_contacts.id')
             ->where('contest_id', 'e8ac5674-c3d1-4afa-adaf-a7d5ed82d292')
             ->select([
                 'pcp_user_contacts.country_id',
                 'pcp_user_contacts.last_name',
                 'pcp_user_contacts.first_name',
-                'pcp_user_contacts.user_id',
+                'pcp_user_contacts.id as user_id',
                 'pcp_contest_participants.fee_payment_completed'
             ])
             ->orderBy('pcp_user_contacts.country_id')
             ->orderBy('pcp_user_contacts.last_name')
             ->orderBy('pcp_user_contacts.first_name')
-            ->orderBy('pcp_user_contacts.user_id')
+            ->orderBy('pcp_user_contacts.id')
             ->get();
         // sort array
         $contestParticipantsArray = collect($results)->sortBy(['country_id', 'last_name', 'first_name'])->toArray();
@@ -151,12 +151,12 @@ class ContestParticipant extends Model
         // in base ai campi della tabella user_contacts.
         return self::where('contest_id', $contestId)
             ->with('contact')
-            ->join('user_contacts', 'contest_participants.user_id', '=', 'user_contacts.id')
+            ->join('user_contacts', 'contest_participants.user_contact_id', '=', 'user_contacts.id')
             ->select('contest_participants.*') // Assicuriamoci di prendere i campi di partecipazione
             ->orderBy('user_contacts.country_id')
             ->orderBy('user_contacts.last_name')
             ->orderBy('user_contacts.first_name')
-            ->orderBy('user_contacts.user_id')
+            ->orderBy('user_contacts.id')
             ->get();
     }
 
@@ -177,8 +177,8 @@ class ContestParticipant extends Model
     {
         $contestWorks = $this->hasMany(
             ContestWork::class, //
-            'user_id', //           contests.user_id
-            'user_id' //            contest_works.user_id
+            'user_id', //           contest_works.user_id
+            'user_contact_id' //    contest_participants.user_contact_id
         );
 
         return $contestWorks;
@@ -189,7 +189,7 @@ class ContestParticipant extends Model
         $contestWorks = $this->hasMany(
             ContestWork::class,
             'user_id',
-            'user_id'
+            'user_contact_id'
         );
 
         return $contestWorks;
@@ -227,7 +227,7 @@ class ContestParticipant extends Model
         $userContactMores = $this->hasMany(
             UserContactMore::class,
             'user_id', //               user_contact_mores.user_id
-            'user_id' //                contest_participants.user_id
+            'user_contact_id' //        contest_participants.user_contact_id
         );
 
         return $userContactMores;
@@ -239,7 +239,7 @@ class ContestParticipant extends Model
         $userContactMores = $this->hasMany(
             UserContactMore::class,
             'user_id',
-            'user_id'
+            'user_contact_id'
         );
 
         return $userContactMores;

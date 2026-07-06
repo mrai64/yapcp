@@ -11,6 +11,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * @method static \Database\Factories\UserWorkMoreFactory factory($count = null, $state = [])
@@ -24,7 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $field_value following rules when updated
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
- * @property string|null $deleted_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkMore whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkMore whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkMore whereFederationId($value)
@@ -39,4 +40,5 @@ class UserWorkMore extends Model
 {
     /** @use HasFactory<\Database\Factories\UserWorkMoreFactory> */
     use HasFactory;
+    use SoftDeletes;
 }

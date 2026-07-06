@@ -16,7 +16,7 @@ class FederationMoreSeeder extends Seeder
         // run after FederationSeeder
         FederationMore::factory()->create([
             'federation_id' => 'FIAP',
-            'referenced_table' => 'user_contact_mores',
+            'referenced' => 'user_contact_mores',
             'field_name' => 'fiapCardId', //    may change ?personal number?
             'field_label' => 'Card Id', //  may change ?personal number?
             'field_validation_rules' => 'required|string|size:6|regex:/^[0-9]+$/',
@@ -25,7 +25,7 @@ class FederationMoreSeeder extends Seeder
         ]);
         FederationMore::factory()->create([
             'federation_id' => 'FIAP',
-            'referenced_table' => 'user_contact_mores',
+            'referenced' => 'user_contact_mores',
             'field_name' => 'fiapDistinctions',
             'field_label' => 'FIAP Distinction(s)',
             'field_validation_rules' => 'string|max:255',
@@ -35,7 +35,7 @@ class FederationMoreSeeder extends Seeder
         // FIAF
         FederationMore::factory()->create([
             'federation_id' => 'FIAF',
-            'referenced_table' => 'user_contact_mores',
+            'referenced' => 'user_contact_mores',
             'field_name' => 'fiafCardId',
             'field_label' => "Card Id",
             'field_validation_rules' => 'required|string|size:6|regex:/^0[0-9]{5}$/',
@@ -44,7 +44,7 @@ class FederationMoreSeeder extends Seeder
         ]);
         FederationMore::factory()->create([
             'federation_id' => 'FIAF',
-            'referenced_table' => 'user_contact_mores',
+            'referenced' => 'user_contact_mores',
             'field_name' => 'italianTaxId',
             'field_label' => 'Italian Tax Id',
             'field_validation_rules' => 'required|string|size:16|regex:/^(X{16})|[A-Z]{6}[0-9LMNPQRSTUV]{2}[ABCDEHLMPRST][0-9LMNPQRSTUV]{2}[A-Z][0-9LMNPQRSTUV]{3}[A-Z]$/',
@@ -53,7 +53,7 @@ class FederationMoreSeeder extends Seeder
         ]);
         FederationMore::factory()->create([
             'federation_id' => 'FIAF',
-            'referenced_table' => 'user_work_mores',
+            'referenced' => 'user_work_mores',
             'field_name' => 'reference_year',
             'field_label' => 'First admit year',
             'field_validation_rules' => 'required|string|size:4|regex:/^[0-9]+$/',
@@ -62,7 +62,7 @@ class FederationMoreSeeder extends Seeder
         ]);
         FederationMore::factory()->create([
             'federation_id' => 'FIAF',
-            'referenced_table' => 'user_contact_mores',
+            'referenced' => 'user_contact_mores',
             'field_name' => 'fiafDistinctions',
             'field_label' => 'FIAF Distinction(s)',
             'field_validation_rules' => 'string|max:255',

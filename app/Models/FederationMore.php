@@ -66,7 +66,7 @@ class FederationMore extends Model
     protected $fillable = [
         'id', //                     pk standard bigint
         'federation_id', //          fk federations.id
-        'referenced_table', //       real pk - lowercase
+        'referenced', //             real pk - lowercase
         'field_name', //             code
         'field_label', //            label
         'field_validation_rules', // use in rules()
@@ -82,7 +82,7 @@ class FederationMore extends Model
         return [
             'id' => 'integer',
             'federation_id' => 'string',
-            'referenced_table' => 'string',
+            'referenced' => 'string',
             'field_name' => 'string',
             'field_label' => 'string',
             'field_validation_rules' => 'string',
@@ -136,10 +136,10 @@ class FederationMore extends Model
     public function isInUse(): bool
     {
         // Recuperiamo tutte le tabelle di riferimento registrate
-        $referencedTables = FederationMoresReferencedTable::all();
+        $referencedTables = FederationMoresReferencedSets::all();
 
         foreach ($referencedTables as $ref) {
-            $dataTable = $ref->referenced_table ?? null;
+            $dataTable = $ref->id ?? null;
 
             if ($dataTable && DB::table($dataTable)
                 ->where('federation_id', $this->federation_id)

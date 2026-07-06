@@ -146,7 +146,7 @@ class UserContact extends Model
         'city', //             postal
         'region', //           postal
         'postal_code', //      postal
-        'lang_local', //       reserved TODO future use
+        'lang_code', //        reserved TODO future use
         'timezone_id', //      fk timezones.id
         'website', //          url
         'facebook', //         url
@@ -177,7 +177,7 @@ class UserContact extends Model
             'city' => 'string',
             'region' => 'string',
             'postal_code' => 'string',
-            'lang_local' => 'string',
+            'lang_code' => 'string',
             'timezone_id' => 'string',
             //
             'website' => 'string',

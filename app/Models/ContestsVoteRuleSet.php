@@ -56,7 +56,8 @@ class ContestsVoteRuleSet extends Model
 
     // field list
     protected $fillable = [
-        'vote_role',
+        'vote_rule',
+        'synopsis',
         // created_at
         // updated_at
         // deleted_at

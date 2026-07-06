@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreTimezoneRegionSetRequest;
-use App\Http\Requests\UpdateTimezoneRegionSetRequest;
-use App\Models\TimezoneRegionSet;
+use App\Http\Requests\StoreTimezonesRegionSetRequest;
+use App\Http\Requests\UpdateTimezonesRegionSetRequest;
+use App\Models\TimezonesRegionSet;
 
-class TimezoneRegionSetController extends Controller
+class TimezonesRegionSetController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class TimezoneRegionSetController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTimezoneRegionSetRequest $request)
+    public function store(StoreTimezonesRegionSetRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class TimezoneRegionSetController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(TimezoneRegionSet $timezoneRegionSet)
+    public function show(TimezonesRegionSet $TimezonesRegionSet)
     {
         //
     }
@@ -43,7 +43,7 @@ class TimezoneRegionSetController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(TimezoneRegionSet $timezoneRegionSet)
+    public function edit(TimezonesRegionSet $TimezonesRegionSet)
     {
         //
     }
@@ -51,7 +51,7 @@ class TimezoneRegionSetController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTimezoneRegionSetRequest $request, TimezoneRegionSet $timezoneRegionSet)
+    public function update(UpdateTimezonesRegionSetRequest $request, TimezonesRegionSet $TimezonesRegionSet)
     {
         //
     }
@@ -59,7 +59,7 @@ class TimezoneRegionSetController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TimezoneRegionSet $timezoneRegionSet)
+    public function destroy(TimezonesRegionSet $TimezonesRegionSet)
     {
         //
     }
