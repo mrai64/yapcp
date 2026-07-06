@@ -2,7 +2,7 @@
 
 /**
  * UserContact for federationMore fields
- *
+ * shoud be user_contacts_custom_fields
  *
  */
 use Illuminate\Database\Migrations\Migration;
@@ -16,14 +16,18 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('user_contact_mores', function (Blueprint $table) {
-            $table->id()->comment('real pk is user_contact_id n federation_id n field_name');
-            $table->char('user_id', 36)->charset('ascii')->collation('ascii_general_ci')
-                ->comment('fk for user_contact id');
-
-            $table->string('federation_id', 10)->charset('ascii')->collation('ascii_general_ci')
+            $table->id()->comment('real pk: user_id + federation_id + field_name');
+            //
+            $table->char('user_id', 36)
+                ->charset('ascii')->collation('ascii_general_ci')
+                ->comment('fk user_contacts.id');
+            $table->string('federation_id', 10)
+                ->charset('ascii')->collation('ascii_general_ci')
+                ->comment('fk federations_mores.federation_id');
+            $table->string('field_name', 20)
+                ->charset('ascii')->collation('ascii_general_ci')
                 ->comment('fk federation_mores');
-            $table->string('field_name', 20)->charset('ascii')->collation('ascii_general_ci')
-                ->comment('fk federation_mores');
+            //
             $table->string('field_value')->default('')->comment('following rules when updated');
             //
             $table->dateTime('created_at')->useCurrent();
@@ -33,10 +37,12 @@ return new class () extends Migration {
             $table->unique(['user_id', 'federation_id', 'field_name'], 'alt_primary_idx');
             $table->index(['federation_id', 'field_name'], 'federation_idx');
             // fk
-            $table->foreign(['user_id'])->references(['id'])->on('user_contacts')
+            $table->foreign(['user_id'], 'fk_user_contacts')
+                ->references(['id'])->on('user_contacts')
                 ->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['federation_id', 'field_name'])->references(['federation_id', 'field_name'])
-                ->on('federation_mores')->onUpdate('restrict')->onDelete('restrict');
+            $table->foreign(['federation_id', 'field_name'], 'fk_federation_mores')
+                ->references(['federation_id', 'field_name'])->on('federation_mores')
+                ->onUpdate('restrict')->onDelete('restrict');
             //
             $table->comment('additional values for user_contacts based on federation_mores');
         });

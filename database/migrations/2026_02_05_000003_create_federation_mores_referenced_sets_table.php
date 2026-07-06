@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Lookup table for: federation_mores.referenced_table
+ * Lookup table for: federation_mores.referenced
  */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,17 +13,16 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::create('federation_mores_referenced_tables', function (Blueprint $table) {
-            $table->id();
-            $table->char('referenced_table', 40)
+        Schema::create('federation_mores_referenced_sets', function (Blueprint $table) {
+            $table->char('id', 40)
                 ->charset('ascii')->collation('ascii_general_ci')
-                ->unique()->comment('real pk - lowercase');
+                ->primary()->comment('table');
             //
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent()->index();
             $table->dateTime('deleted_at')->nullable()->index();
             //
-            $table->comment('lookup table for: federation_mores.referenced_table');
+            $table->comment('lookup table for: federation_mores.referenced');
         });
     }
 
@@ -32,6 +31,6 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('federation_mores_referenced_tables');
+        Schema::dropIfExists('federation_mores_referenced_sets');
     }
 };

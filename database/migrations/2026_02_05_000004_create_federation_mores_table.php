@@ -23,33 +23,45 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('federation_mores', function (Blueprint $table) {
-            $table->id()->comment('the real pk is federation_id + field_name');
-
-            $table->char('referenced_table', 40)
+            $table->id()->comment('std bigint ai');
+            //
+            $table->char('referenced', 40)
                 ->charset('ascii')->collation('ascii_general_ci')
-                ->unique()->comment('real pk - lowercase');
+                ->comment('fk federation_mores_referenced_sets.id');
 
-            $table->string('federation_id', 10)->charset('ascii')->collation('ascii_general_ci')
+            $table->string('federation_id', 10)
+                ->charset('ascii')->collation('ascii_general_ci')
                 ->comment('fk federations.id');
-            $table->string('field_name', 20)->charset('ascii')->collation('ascii_general_ci')
-                ->comment('lowercase');
 
+            $table->string('field_name', 20)
+                ->charset('ascii')->collation('ascii_general_ci')
+                ->unique()
+                ->comment('lowercase');
+            //
             $table->string('field_label')->comment('label for the field');
-            $table->string('field_validation_rules')->default('string|max:255')->comment('string or function(), validation rules for the field, nullable if none');
-            $table->string('field_default_value')->default('')->comment('empty string as default default value');
-            $table->string('field_suggest')->default('')->comment('message to explain what insert');
+            $table->string('field_validation_rules')
+                ->default('string|max:255')
+                ->comment('string or function(), validation rules for the field, nullable if none');
+            $table->string('field_default_value')
+                ->default('')
+                ->comment('empty string as default default value');
+            $table->string('field_suggest')
+                ->default('')
+                ->comment('message to explain what insert');
 
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate()->index();
             $table->dateTime('deleted_at')->nullable()->index();
-
-            $table->unique(['federation_id', 'field_name'], 'alt_primary_idx');
-
-            $table->foreign(['referenced_table'], 'reference_fk')
-                ->references(['referenced_table'])->on('federation_mores_referenced_tables')
+            // idx
+            $table->index(['referenced', 'federation_id', 'field_name'], 'general_idx');
+            $table->index(['federation_id', 'field_name'], 'fed_fld_idx');
+            // fk
+            $table->foreign(['referenced'], 'reference_fk')
+                ->references(['id'])->on('federation_mores_referenced_sets')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign(['federation_id'])->references(['id'])->on('federations')
-                ->onUpdate('restrict')->onDelete('restrict');
+            $table->foreign(['federation_id'])
+                ->references(['id'])->on('federations')
+                ->onUpdate('cascade')->onDelete('cascade');
             //
         });
     }
