@@ -9,7 +9,7 @@ namespace Database\Factories;
 use App\Models\Contest;
 use App\Models\Federation;
 use App\Models\Organization;
-use App\Models\User;
+use App\Models\UserContact;
 use App\Models\UserRolesRoleSet;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -28,10 +28,14 @@ class UserRoleFactory extends Factory
      */
     public function definition(): array
     {
-        $user = DB::table(User::TABLENAME)
+        $user = DB::table(UserContact::TABLENAME)
             ->select('id')->whereNull('deleted_at')->inRandomOrder()->first();
 
+        if (!$user->id) {
+            throw new \Exception("Nessun utente trovato nel database. Esegui UserSeeder prima di UserRoleSeeder.");
+        }
         $userId = (string) Str::limit($user->id, 36);
+
 
         $roleSet = UserRolesRoleSet::validRoles();
         $role = $roleSet[array_rand($roleSet)];
@@ -60,7 +64,7 @@ class UserRoleFactory extends Factory
                 break;
         }
         // set a value if all are empty
-        if ((! $organization) && (! $contest) && (! $federation)) {
+        if (($organization == '') && ($contest == '') && ($federation == '')) {
             $federation = 'FIAP';
         }
 

@@ -36,7 +36,7 @@ class UserObserver
 
         try {
             UserContact::create([
-                'user_id' => $user->id, // Usiamo user_id (UUID) come da diario
+                'id' => $user->id, // Usiamo user_id (UUID) come da diario
                 'last_name' => $lastName,
                 'first_name' => $firstName,
                 'country_id' => 'ITA', // as default

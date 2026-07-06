@@ -41,8 +41,8 @@ abstract class TestCase extends BaseTestCase
         // user role roles
         $this->seed(\Database\Seeders\UserRolesRoleSetSeeder::class);
 
-        // user roles context role matrix w/green
-        $this->seed(\Database\Seeders\UserRolesRoleContextsTableSeeder::class);
+        // user roles pivot table context vs role w/ green/red flag
+        $this->seed(\Database\Seeders\UserRolesRoleContextSeeder::class);
 
         // contest vote rules
         $this->seed(\Database\Seeders\ContestsVoteRuleSetSeeder::class);

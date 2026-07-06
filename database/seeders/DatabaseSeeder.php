@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
             TimezonesSeeder::class,
             UserRolesContextSetSeeder::class,
             UserRolesRoleSetSeeder::class,
-            UserRolesRoleContextsSeeder::class,
+            UserRolesRoleContextSeeder::class,
             ContestsVoteRuleSetSeeder::class,
             //
             FederationSeeder::class,

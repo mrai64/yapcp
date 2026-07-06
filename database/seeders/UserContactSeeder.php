@@ -6,6 +6,7 @@ use App\Models\Country;
 use App\Models\User;
 use App\Models\UserContact;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -38,7 +39,7 @@ class UserContactSeeder extends Seeder
             }
             Log::info('Seeder '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' ADD id:'.$user->id);
             UserContact::create([
-                'user_id'       => $user->id,
+                'id'            => $user->id,
                 'first_name'    => $user->name,
                 'last_name'     => $user->name,
                 'email'         => $user->email,
