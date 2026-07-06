@@ -12,7 +12,8 @@ return new class () extends Migration {
     {
         Schema::create('user_roles', function (Blueprint $table) {
             $table->id(); // standard
-            $table->char('user_id', 36)->charset('ascii')->collation('ascii_general_ci')
+            $table->char('user_id', 36)
+                ->charset('ascii')->collation('ascii_general_ci')
                 ->index('user_idx')->comment('fk: user_contacts.id');
 
             $table->string('role', 25)->default('member')
