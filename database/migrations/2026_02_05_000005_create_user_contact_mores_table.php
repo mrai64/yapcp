@@ -36,6 +36,7 @@ return new class () extends Migration {
             // idx
             $table->unique(['user_id', 'federation_id', 'field_name'], 'alt_primary_idx');
             $table->index(['federation_id', 'field_name'], 'federation_idx');
+            $table->index('user_id', 'user_idx');
             // fk
             $table->foreign(['user_id'], 'fk_user_contacts')
                 ->references(['id'])->on('user_contacts')

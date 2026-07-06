@@ -18,9 +18,9 @@ return new class () extends Migration {
         Schema::create('user_works', function (Blueprint $table) {
             $table->uuid('id')->charset('ascii')->collation('ascii_general_ci')
                 ->primary()->comments('author works depot id');
+            //
             $table->char('user_id', 36)->charset('ascii')->collation('ascii_general_ci')
                 ->index()->comments('fk. user_contacts.id');
-
             $table->string('work_file')->default('')->unique()
                 ->comment('path n filename internal');
             $table->char('extension', 6)->charset('ascii')->collation('ascii_general_ci')
@@ -35,12 +35,18 @@ return new class () extends Migration {
                 ->comment('declared BW monochromatic');
             $table->boolean('raw')->default(false)
                 ->comment('Original RAW available');
-            // reference_year
+            // Should be a user_work_mores field, should
+            $table->unsignedInteger('reference_year')
+                ->comment('first admit year, format: Y');
 
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate()->index();
             $table->dateTime('deleted_at')->nullable()->index();
-
+            // idx 
+            $table->index(['user_id', 'work_file'], 'generic1_idx');
+            $table->index(['user_id', 'title_en'], 'generic2_idx');
+            $table->index(['user_id', 'updated_at' => 'desc'], 'generic3_idx');
+            // fk
             $table->foreign(['user_id'])->references(['id'])->on('user_contacts')
                 ->onUpdate('restrict')->onDelete('restrict');
         });

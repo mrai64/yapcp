@@ -12,15 +12,22 @@ return new class () extends Migration {
     {
         Schema::create('user_roles_role_sets', function (Blueprint $table) {
             $table->id();
-            $table->string('role', 25)->unique('role_idx')->comment('the real pk');
+            $table->string('role', 25)
+                ->unique('role_idx')->comment('the real pk');
             // add 2026-03-09 - uncomment if reorg migration' files
-            // $table->unsignedTinyInteger('role_weight')->default(0)
-            //     ->comment('higher to admin, 0 guest');
-
+            // TODO ACTUALLY UNUSED
+            $table->unsignedTinyInteger('role_weight')->default(0)
+                ->comment('higher to admin, 0 guest');
+            // softdelete for backup
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent()->index();
             $table->dateTime('deleted_at')->nullable()->index();
-
+            // idx
+            $table->index([
+                'role_weigth' => 'desc', 
+                'role' => 'asc'], 
+                'general_idx');
+            // table comment
             $table->comment('lookup table for: user_roles.role');
         });
     }
