@@ -45,7 +45,7 @@ return new class () extends Migration {
             // idx 
             $table->index(['user_id', 'work_file'], 'generic1_idx');
             $table->index(['user_id', 'title_en'], 'generic2_idx');
-            $table->index(['user_id', 'updated_at' => 'desc'], 'generic3_idx');
+            $table->index(['user_id', 'updated_at'], 'generic3_idx');
             // fk
             $table->foreign(['user_id'])->references(['id'])->on('user_contacts')
                 ->onUpdate('restrict')->onDelete('restrict');

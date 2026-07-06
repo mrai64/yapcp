@@ -26,10 +26,12 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('user_roles_context_sets', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // unused primary key
 
-            $table->char('context_type', 16)->charset('ascii')->collation('ascii_general_ci')
-                ->unique()->comment('the real pk');
+            $table->char('context_type', 16)
+                ->charset('ascii')->collation('ascii_general_ci')
+                ->unique()
+                ->comment('the real pk');
 
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent()->index();

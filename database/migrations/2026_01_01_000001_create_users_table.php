@@ -1,7 +1,13 @@
 <?php
 
 /**
- * For platform entry only
+ * 1st table even for laravel starter kit
+ *
+ * Reserved for platform entrance
+ * other user infos as contact data are in user_contacts
+ * user_roles
+ * user_works
+ *
  */
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

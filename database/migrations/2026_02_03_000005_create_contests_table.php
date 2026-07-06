@@ -17,32 +17,45 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('contests', function (Blueprint $table) {
-            $table->uuid('id')->charset('ascii')->collation('ascii_general_ci')->primary();
+            $table->uuid('id')
+                ->charset('ascii')->collation('ascii_general_ci')
+                ->primary();
 
-            $table->char('country_id', 3)->charset('ascii')->collation('ascii_general_ci')
-                ->index()->comment('fk: countries.id');
+            $table->char('country_id', 3)
+                ->charset('ascii')->collation('ascii_general_ci')
+                ->index()
+                ->comment('fk: countries.id');
 
             $table->string('name_en')->index();
             $table->string('name_local')->nullable()->index();
-            $table->string('lang_local', 5)->charset('ascii')->collation('ascii_general_ci')
+            $table->string('lang_local', 5)
+                ->charset('ascii')->collation('ascii_general_ci')
                 ->default('en')->comment('dev: in LangList[]');
 
-            $table->char('organization_id', 36)->charset('ascii')->collation('ascii_general_ci')
+            $table->char('organization_id', 36)
+                ->charset('ascii')->collation('ascii_general_ci')
                 ->index()->comment('fk: organizations.id');
 
-            // TODO convert to boolean 0/1
-            $table->char('is_circuit', 1)->default('N')->comment('Y/N, N when not Y');
-            $table->char('circuit_id', 36)->charset('ascii')->collation('ascii_general_ci')
-                ->nullable()->index()->comment('null or self fk: contests.id');
+            $table->boolean('is_circuit')->default(false)
+                ->comment('contests joined in circuit');
+            $table->char('circuit_id', 36)
+                ->charset('ascii')->collation('ascii_general_ci')
+                ->nullable()
+                ->index()
+                ->comment('null or self fk: contests.id');
 
-            $table->string('federation_list')->nullable()->comment('under patronage of federation code[]');
+            $table->string('federation_list')
+                ->default('')
+                ->comment('free text for federation patronages');
             $table->string('contest_mark')->nullable()->comment('The contest or organization passport photo - mark');
 
             $table->text('contact_info')->comment('contest headquarter, email and so on');
             $table->text('award_ceremony_info')->nullable()->comment('Site and date, or link to broadcast platform');
             $table->text('fee_info')->nullable()->comment('only text description of fee for participation');
 
-            $table->string('vote_rule')->default('num:1..10')->index('vote_rule_idx')
+            $table->string('vote_rule')
+                ->default('num:1..10')
+                ->index('vote_rule_idx')
                 ->comment('fk: contests_vote_rule_sets.vote_rule');
 
             $table->string('url_1_rule')->nullable()->comment('how read english rules and subscribe link');
