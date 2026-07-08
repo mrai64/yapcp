@@ -8,6 +8,8 @@
 
 namespace App\Providers;
 
+
+
 use App\Models\Federation;
 use App\Models\FederationSection;
 use App\Models\Organization;
@@ -19,6 +21,9 @@ use App\Observers\UserObserver;
 use App\Policies\ContestPaymentChangePolicy;
 use App\Policies\JurorOnlyPolicy;
 use BinaryTorch\LaRecipe\LaRecipeServiceProvider;
+use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
@@ -50,6 +55,11 @@ class AppServiceProvider extends ServiceProvider
             }
 
             $view->with('appVersion', $version);
+        });
+
+        // impostazione rate limit - dovrebbe essere anche nel RouteServiceProvider
+        RateLimiter::for('welcome-page', function (Request $request) {
+            return Limit::perMinute(60)->by($request->ip());
         });
 
         // Forza il binding esplicito per le rotte che usano {organization}

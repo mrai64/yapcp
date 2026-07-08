@@ -73,16 +73,21 @@ return new class () extends Migration {
             // idx
             $table->index(['country_id', 'last_name', 'first_name', 'id'], 'general_idx');
             // fk
-            $table->foreign(['country_id'], 'user_contacts_fk1')->references(['id'])->on('countries')
+            $table->foreign(['country_id'], 'fk_user_contacts_country_id')
+                ->references(['id'])->on('countries')
                 ->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['timezone_id'], 'user_contacts_fk2')->references(['id'])->on('timezones')
+            $table->foreign(['timezone_id'], 'fk_user_contacts_timezone_id')
+                ->references(['id'])->on('timezones')
                 ->onUpdate('restrict')->onDelete('restrict');
-            $table->foreign(['id'], 'user_contacts_fk3')->references(['id'])->on('users')
+            $table->foreign(['id'], 'fk_user_contacts_user_id')
+                ->references(['id'])->on('users')
+                ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreign(['email'], 'user_contacts_fk4')->references(['email'])->on('users')
+            $table->foreign(['email'], 'fk_user_contacts_email')
+                ->references(['email'])->on('users')
                 ->onUpdate('cascade')->onDelete('restrict');
 
-            $table->comment('the real users info table');
+            $table->comment('users contact infos table');
         });
     }
 
