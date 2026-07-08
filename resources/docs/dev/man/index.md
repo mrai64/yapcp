@@ -3,15 +3,17 @@
 The developer index about yaPCP - Photographic Contests platform.
 
 - &nbsp;
+<!-- no index -->
 
 ---
 
 ## About a Photographic Contest Platform
 
-Core of platform are Users and Contests. Users should be
-only contest participants, or also members of Contest
-organizer, or Contest Juror, or member of Federation that
-define role of conduct for Contest sponsored.
+Core of platform are *Users*, *Organization*, and *Contests*.  
+Users should be: *contest participants*, or also members of *Contest
+organizer*, or nominated *Contest Juror*, 
+or *member of Federation that sponsored a contest* to check contest works
+in some way.
 Contest have an organization that make the Contest
 definition, choose section and themes, define jury
 composition, define award list and run the contest
@@ -19,20 +21,22 @@ in its form.
 
 ### [Users](/{{route}}/dev/man/users)
 
-Tables:
+Can access and modify these tables:
 
+> <!-- avoid index -->
 - users: name, last name, email, password
-- user_contacts: name, lastname, email, postal address, passport photo, timezone
+- user_contacts: name, last name, email address, mail address, passport photo, timezone
 - user_roles: users involved in any organization OR federation OR contest as juror
-- user_works: set of images loaded in a personal space, available for
+- user_works: set of images loaded in a personal reserved space, available for
   contest participation
-- contest_works: set of images loaded to any contest, with first result on/off of isAdmin()
-- contest_awards: when iser_id and contest_owrks are inserted by last jury minute.
+- contest_works: set of images loaded to any contest, when user "isAdmin()"
+- contest_awards: readonly after user_id and contest_works are inserted during last jury reunion.
 
 Can Do:
 
 - register
-- confirm 
+- confirm email
+- update user contacts
 
 ### [Admins](/{{route}}/man/admins)
 

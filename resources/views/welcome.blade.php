@@ -43,7 +43,7 @@
                             <br />
                             <br />
                             <ul>
-                                <li>- As participant,<br /> 
+                                <li>- As <strong>participant</strong>,<br /> 
                                     you can search and subscribe photo contest organized by 
                                     national or international photo organization, hosted by yaPCP.
                                     <br /><em>But also</em> you can leave your works in place if you plan
@@ -54,7 +54,12 @@
                                     <br />
                                     <br />
                                 </li>
-                                <li>- As photo contest organizer,<br /> 
+                                <li>- As <strong>Juror nominated</strong>,<br>
+                                    we are honoured of your presence and contribute to
+                                    our contest platform. We hope you appreciate the way we prepared
+                                    for a easy contest vote work.
+                                </li>
+                                <li>- As <strong>photo contest organizer</strong>,<br /> 
                                     you can plan and manage in yaPCP your own photo contest, 
                                     following national and international photo 
                                     organization rules with the help of yaPCP.
@@ -68,28 +73,29 @@
                         @php session()->put('welcome_shown', true); @endphp
                         <!--/one time message -->
                         @else
-                        <p class="mb-4 text-center text-xl text-muted dark:text-white/70">
+                        <p class="fyk text-2xl text-center text-muted dark:text-white/70 mb-4">
                             {{ __('Welcome back to Photo Contest Platform') }}
                         </p>
                         @endif
 
                         @auth
-                        <p class="fyk text-2xl text-center my-6">
+                        <p class="h-4">&nbsp;</p>
+                        <p class="fyk text-2xl text-center my-4">
                             <a href="{{ route('user.dashboard') }}">
                                 {{ __('Your Dashboard') }}
                             </a>
                         </p>
 
                         @else
-                        <p class="h-6">&nbsp;</p>
-                        <p class="fyk text-2xl text-center my-6">
+                        <p class="h-4">&nbsp;</p>
+                        <p class="fyk text-2xl text-center my-4">
                             <a href="{{ route('login') }}">
                                 {{ __('Log in') }}
                             </a>
                         </p>
                             @if (Route::has('register'))
-                        <p class="h-6">&nbsp;</p>
-                        <p class="fyk text-2xl text-center my-6">
+                        <p class="h-4">&nbsp;</p>
+                        <p class="fyk text-2xl text-center my-4">
                             <a href="{{ route('register') }}">
                                 {{ __('Register') }}
                             </a>
@@ -97,10 +103,16 @@
                             @endif
                         @endauth
 
-                        <p class="h-6">&nbsp;</p>
-                        <p class="fyk text-2xl text-center my-6">
+                        <p class="h-4">&nbsp;</p>
+                        <p class="fyk text-2xl text-center my-4">
                             <a href="{{ url('/docs') }}">
                                 {{ __('The Manual') }}
+                            </a>
+                        </p>
+                        <p class="h-4">&nbsp;</p>
+                        <p class="fyk text-2xl text-center my-4">
+                            <a href="{{ url('/credits') }}">
+                                {{ __('Thanks to contributors') }}
                             </a>
                         </p>
 
