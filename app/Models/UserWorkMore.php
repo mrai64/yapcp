@@ -34,6 +34,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkMore whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkMore whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkMore whereUserWorkId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkMore onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkMore withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWorkMore withoutTrashed()
  * @mixin \Eloquent
  */
 class UserWorkMore extends Model

@@ -26,6 +26,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleContext whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleContext withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleContext withoutTrashed()
+ * @property int $id
+ * @property string $context_type fk user_roles_context_set.id
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleContext whereContextType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserRolesRoleContext whereId($value)
  * @mixin \Eloquent
  */
 class UserRolesRoleContext extends Model

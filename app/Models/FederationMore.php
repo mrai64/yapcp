@@ -1,14 +1,13 @@
 <?php
 
 /**
- * Federation More reunite the One More Field
+ * Federation More reunite the customs "One More Field"
  * that federation ask over the UserContact fields.
- * because a FIAP card_id, a PSA card_id, IAAP id etc.
+ * Their may be a FIAP card_id, a PSA card_id, IAAP id etc.
  *
  * related to Federation
  * related to UserContactMore
  *
- * 2026-01-21 PSR-12
  */
 
 namespace App\Models;
@@ -53,6 +52,8 @@ use Illuminate\Support\Facades\DB;
  * @method static \Database\Factories\FederationMoreFactory factory($count = null, $state = [])
  * @property string $referenced_table real pk - lowercase
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore whereReferencedTable($value)
+ * @property string $referenced fk federation_mores_referenced_sets.id
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore whereReferenced($value)
  * @mixin \Eloquent
  */
 class FederationMore extends Model
@@ -64,7 +65,7 @@ class FederationMore extends Model
     public const TABLENAME = 'federation_mores';
 
     protected $fillable = [
-        'id', //                     pk standard bigint
+        'id', //                     pk standard bigint unsigned autoincrement
         'federation_id', //          fk federations.id
         'referenced', //             real pk - lowercase
         'field_name', //             code
@@ -137,14 +138,12 @@ class FederationMore extends Model
     {
         // Recuperiamo tutte le tabelle di riferimento registrate
         $referencedTables = FederationMoresReferencedSets::all();
-
         foreach ($referencedTables as $ref) {
-            $dataTable = $ref->id ?? null;
-
-            if ($dataTable && DB::table($dataTable)
-                ->where('federation_id', $this->federation_id)
-                ->where('field_name', $this->field_name)
-                ->exists()) {
+            $dataTable = $ref->id;
+            if (DB::table($dataTable)
+                    ->where('federation_id', $this->federation_id)
+                    ->where('field_name', $this->field_name)
+                    ->exists() ) {
                 return true;
             }
         }
