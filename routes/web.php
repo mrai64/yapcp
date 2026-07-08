@@ -1,21 +1,21 @@
 <?php
 
 /**
- * reviewed web.php
+ * web.php
+ * livewire 4 Volt SFC with few exceptions
  *
- * ! No ⚡️ in Volt prefix
+ * Here are listed url with blade with middleware with name assigned at route
+ * so when coded route('credits.notice') platform expose /credits
+ * as relative url.
  *
- * Route::method() and Volt::route() are listed
- * in groups
- *
- * TODO dont' sort route by uri,
- * use the 5+2
+ * Routes cannot be sorted. The seven action repeated schema is
  * 1. index
  * 2. create + store
  * 3. show
  * 4. edit + update
  * 5. delete
  *
+ * Previous version is on ./web_stash.bak
  */
 
 use App\Models\Federation as ModelsFederation;
@@ -24,9 +24,11 @@ use Livewire\Volt\Volt;
 
 // 1. Guest welcome and credits
 Route::view('/', 'welcome')
-    ->name('welcome.aboard'); // ✅
+    ->middleware(['throttle:welcome-page']) // rate limit
+    ->name('welcome.aboard');
 Route::view('/credits', 'credits')
-    ->name('credits.notice'); // ✅
+    ->middleware(['throttle:welcome-page'])
+    ->name('credits.notice');
 // docs - thru login access
 
 /**

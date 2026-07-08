@@ -1,3 +1,14 @@
+<?php 
+
+/**
+ * Splash screen / welcome
+ * 
+ * As 'home' link that page show a long welcome text only first time.
+ * Next, show only main link to user dashboard or user manual.
+ * 
+ */
+
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
