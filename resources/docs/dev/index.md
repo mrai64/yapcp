@@ -1,11 +1,11 @@
 # &nbsp;
+<!-- No title but that is the tech manual, explain what when who why -->
+<!-- absolute links are /resources/docs/dev/    -->
+<!-- larecipe links are /{{route}}/dev/ -->
+<!-- images must be uploaded in /storage/app/public/docs/dev/ then url prefixed by /docs/dev/ -->
 
-Dev docs  
-from 2026-03-04,  
-in 🇮🇹 italian and/or  
-in 🇬🇧 english
+- ## [Overview](/{{route}}/dev/overview)
 
-- ## [Readme](/{{route}}/dev/README)
 - ## [🇮🇹 La piattaforma](/{{route}}/dev/man/index)
 
 - ## (A) Problemi / Issues

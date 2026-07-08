@@ -1,6 +1,7 @@
 # Overview
 
-<!-- remember: address must be prefixed by /{{route}}/{{version}}/ and are md without extension -->
+<!-- absolute links are /resources/docs/1.0/    -->
+<!-- larecipe links are /{{route}}/{{version}}/ -->
 <!-- images must be uploaded in /storage/app/public/docs/ and url prefixed by /docs/ -->
 <!-- that file real path /resources/docs/1.0/overview.md -->
 <!-- addressed as   /{{route}}/{{version}}/overview.md -->
@@ -14,22 +15,23 @@
 
 ## First Visit? What is yaPCP?
 
-Well, you are landed on "The User Docs of yaPCP".  
-First: what mean `Y A P C P`?  
-It's like
-[YMCA](https://en.wikipedia.org/wiki/YMCA)?
-[YAML](https://en.wikipedia.org/wiki/YAML)?  
-In My Humble words: "Yeah, an *Amazing* Photo Contest Platform".
-
-What you can do in yaPCP, *a photo contest platform*?
-
-You can register in and play as *Contest participant*, and/or (with some restrictions) *Contest organizer*, and/or *Contest juror*, and/or Platform manager, and act as *Federation refer*.
+What you can do in yaPCP | *yeah, an amazing photo contest platform*?  
+You should register in, and with your best images be a *Contest participant*,  
+and/or become in your Organization *Contest organizer*,  
+and/or vote as *Contest juror*,  
+and/or admin as Platform manager,  
+and act as *Federation refer*.  
 
 ### Contest Participant
 
-- Register to our platform and upload your photos.
-- See the contest list, and easy participate to one or more.
-- Be quiet, no anytime reinsert your data to participate next contest. Change anytime their change.
+- Register to our platform.
+- Upload your best photos.
+- See the open contest list, and easy participate to one, or more.
+- We do our best to help you avoid fault. If a section
+  is monochromatic only and you upload a colored
+  image, we warn you before organization 🟨 card.
+- In next future we, yapcp, plan to federate various contest platform,
+  with a way to apply for an external contest with the yapcp interface.
 
 ### Member of Contest Organizer
 
@@ -56,8 +58,9 @@ Because contest have winners.
 ![yaPCP mark](/docs/overview_favicon.png)
 
 WARN: 💬 That docs are based on dev version so base address is <http://yapcp.test/>,  
-when i put "in production" the base address change. Most of them are in italian lang.
+when i put "in production" the base address change. Most of them are totally or partially translated in italian lang.
 
 ---
 
-First step: [Registration on yaPCP](/{{route}}/{{version}}/users/registration)
+[Registration on yaPCP](/{{route}}/{{version}}/users/registration)  
+[User Dashboard](/{{route}}/{{version}}/users/dashboard)  
