@@ -1,3 +1,13 @@
+<?php 
+
+/**
+ * Credits
+ *
+ * Start with one only: Massimo Rainato, pioneer. But not for more...
+ *
+ */
+
+?>
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
