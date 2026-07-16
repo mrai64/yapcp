@@ -13,40 +13,53 @@ is hosted in yaPCP the few operation needed
 are the same of every photo contest in the
 digital world.
 
-*WARN:* images are reflecting development version
-and may change from real use.
+*WARN: Pages images are reflecting development version,*
+*MUST be changed before release 1.0.*
 
 Start from address <https://yapcp.test> you see the
 welcome page, then link for log in, or Register, the
 open contests and a link to that manual. Log in
-and register link are also in top-end of browser.
+and register link are available also in top-end of browser window.
 
 ![Splashscreeen image](/docs/users/registration_img01.png)
 
 ## Registration
 
-We require data asked from all the contests form,
-starting from a name, an email address, and a
-password. Pay attention to e-mail address because
-a message is sended to check email address and s
-with password your unique entry key.
+Your registration is subject
 
-For a good password we say the
-usual sysadmin recommendations: use some non-sense phrases
-joining 5-6 short words and with '-', i.e.
-*dont-hack-my-yapcp-26-entry-pass-phrase* 😁.
-Size matters, specially for passwords.
-We can't recover your password anyway, and you
-and solely you are responsible etc.
+
+We require few data, just for platform entry.
+data asked are: Lastname, name and email. We ask email twice
+to avoid refuse. The same for password.
+
+For *a good password* we say the
+newest sysadmin recommendations: build a nonsense phrases
+joining 4, or 5 short words, joined by '-', i.e.
+*dont-hack-my-yapcp-entry* 😁 (not that, isn't casual).
+Break a 5 casual words ([diceware](https://www.eff.org/dice) ) is hard, really hard.
+*We can't recover your password anyway, and you*
+*and solely you are responsible* etc (see [terms and cond]).
 
 ![Registration entry form](/docs/users/registration_img02.png)
 
-Check carefully all your data before submit, as usual.  
-First field is labeled Surname, Name. Plz use the comma to separate surname and name, i.e. Hill, Benny. That and email field became the seed of your Contact cards.
+Check carefully all your data before submit, *as usual*.  
+First field is labeled Surname, Name. Plz use the comma to separate surname and name, i.e. Smith, John; or: Hawthorne Hill, Alfred.  
+This information, and your email address, will be automatically entered into the contact card.
 
 ![Registration filled form](/docs/users/registration_img03.png)
 
+###  Email verification
+
+A check for your email is required, so after you register into
+the platform a verification email was sent to your email address.
+
 ![Registration after form](/docs/users/registration_img04.png)
+
+You need to open your email manager, receive email (usually in few second),
+then click over the button or copy n paste link explained
+below the button and paste in browser address bar.
+
+![Verification email](/docs/users/registration_img05.png)
 
 ---
 
@@ -56,6 +69,16 @@ Data required: your email, your password.
 Also available: link to reset password.
 
 ![Login form](/docs/users/login_img01.png)
+
+---
+
+##  Logout
+
+Don'n miss to use your logout function before exit platform.  
+Over every pages, in left upper corner a dropdown menù
+allow you to exit from platform.
+
+---
 
 ## Next stop
 
