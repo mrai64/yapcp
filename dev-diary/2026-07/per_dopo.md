@@ -31,3 +31,5 @@
   l'accesso è riservato a email <massimo.rainato@athesis77.it>, aprire al *gruppo admin*.
 - Elenco federazioni: FIAF FIAP, aggiungere PSA IAAP GPU  IIG ART PORTRAIT PSV
 - Aggiustare il footer mettendo 2025-anno
+- Attivare la verifica email
+- Attivare o realizzare un avviso di login alla piattaforma.
