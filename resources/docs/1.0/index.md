@@ -12,8 +12,11 @@
 
 - ## You as Contest Participants
 
-  - [Registration](/{{route}}/{{version}}/users/registration)  
+  - [Registration](/{{route}}/{{version}}/users/registration)
+    [Edit](/resources/docs/1.0/users/registration.md)
   - [Login](/{{route}}/{{version}}/users/registration#login)
+    [Edit](/resources/docs/1.0/users/registration.md)
+  - [VerifyEmail](./)
   - [Contact Info](/{{route}}/{{version}}/users/contact_infos)
   - [Personal Dashboard](/{{route}}/{{version}}/users/dashboard)
   - [Personal Gallery](/{{route}}/{{version}}/users/works_gallery)
