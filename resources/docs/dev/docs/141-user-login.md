@@ -19,6 +19,12 @@ serve verificare la presenza e se mancano crearli, dei test per
 gli utenti di registrazione alla piattaforma e login. Tecnicamente
 fanno parte dello starter pack jetstream, quindi già "fatti bene".  
 
+- AuthenticationTest
+- PasswordConfirmationTest
+- PasswordUpdateTest
+- RegistrationTest
+- SplashScreenOnTest
+- UpdatePasswordTest
 
 ## 🗄️ Modifiche al Database
 
@@ -28,4 +34,5 @@ fanno parte dello starter pack jetstream, quindi già "fatti bene".
 ## 🚀 Note per il Deploy
 
 > <!-- to avoid index -->
-- Eseguire i test
+- Eseguire i test  
+  `./vendor/bin/pest tests/Feature/m001/i0141/`
