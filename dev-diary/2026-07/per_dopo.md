@@ -1,13 +1,7 @@
-# Per dopo
+# Per dopo 
 
-- spostare di giorno in giorno il "per dopo", non ha senso che resti
-  a intasare il diario
-- Andare a proporre nel contratto con utente la rappresentanza
-  da parte della piattaforma, a titolo oneroso. A vostra richiesta
-  comunichiamo noi i vostri dati iscrivendovi al concorso di terzi.
-  Sono servizi di segreteria, voi cliccate e pagate, al resto.
-  - A seguito di questo vanno presi accordi con le piattaforme per definire
-    un formato di scambio e come farlo
+Tutte queste devono trovare posto nella lista delle questioni
+
 - Andare a sfilare dal vecchio [web.php](/routes/web_stash.bak)
   le funzioni che sono state ri-fatte in [web.php](/routes/web.php).  
   Le funzioni che mancano rientrano nel big rebuild
@@ -18,9 +12,9 @@
   dettagliato e completo delle cose (già fatte) e da fare.
 - Step per le prossime attività: partire dal progetto del test
   funzionale, che diventa "obiettivo", link web.php, creazione blade Volt
-  che però deve essere limitata. Se deve fare troppo serve creare un
-  Servicequalcosa. A furia di dividere e spacchettare si parte dal monolite
-  alla ghiaia alla sabbia.
+  che però deve essere limitata. Se deve *fare troppo*, serve creare un
+  Servicequalcosa. A furia di dividere e spacchettare si parte dal monolite per arrivare
+  alla ghiaia, ed alla sabbia.
 - prossimo step: 8. user carica foto sul suo spazio
 - ContestPatronages deve gestire padre-figlio l'elenco dei patrocini delle N federazioni,
   attualmente è sostituito da un testo libero e potrebbe anche restare tale
@@ -33,3 +27,14 @@
 - Aggiustare il footer mettendo 2025-anno
 - Attivare la verifica email
 - Attivare o realizzare un avviso di login alla piattaforma.
+- Va pensata o ripensata l'iscrizione a concorso con l'indicazione 
+  del gruppo di appartenenza, per il premio "gruppo più numeroso"
+  che viene assegnato in alcuni concorsi.
+- Va pensata la gestione delle RED list, per esempio se un soggetto
+  è bloccato dalla FIAP può continuare a partecipare a concorsi
+  in cui la FAP non è sponsor. E quindi vedere esclusi i concorsi
+  FIAP o sponsorizzati FIAP dalla lista dei concorsi.
+- I cataloghi dei concorsi devono essere basati sulle opere del cocnorso e 
+  indipendenti dalle cartelle utente, che possono csì essere cancellate mantenendo il
+  catalogo concorso intatto.
+  
