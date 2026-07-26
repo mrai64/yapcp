@@ -18,6 +18,12 @@ pest()->extend(TestCase::class)
     ->use(RefreshDatabase::class)
     ->in('Feature');
 
+// one time at all
+beforeAll(function () {
+    $pdo = DB::connection()->getPdo();
+    expect($pdo)->not->toBeNull();
+});
+
 /*
 |--------------------------------------------------------------------------
 | Expectations
