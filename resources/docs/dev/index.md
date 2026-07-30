@@ -8,17 +8,26 @@
 
 - ## [🇮🇹 La piattaforma](/{{route}}/dev/man/index)
 
-- ## (A) Problemi / Issues
+- ## Fix
 
-  - [#107](/{{route}}/dev/fix/107-user-role-seeder-ko)
+<!-- newest first -->
+  - [#142](/{{route}}/dev/fix/0142-register-test)
+  - [#107](/{{route}}/dev/fix/0107-user-role-seeder-ko)
 
-- ## (B) Documentazione / Docs
+- ## Docs
 
-- ## (C) Funzioni / Features
+  - [#141](/{{route}}/dev/docs/141-user-login)
 
-  - [#93](/{{route}}/dev/feat/93-language-translation)
+- ## Funzioni / Features
 
-- ## (D) Refactor
+  - [#148](/{{route}}/dev/feat/0148-federations)
+  - [#128](/{{route}}/dev/feat/0128-breeze-remove)
+  - [#116](/{{route}}/dev/feat/0116-federation-more-crud)
+  - [#111](/{{route}}/dev/feat/0111-user-role-review)
+  - [#93](/{{route}}/dev/feat/0093-language-translation)
 
-  - [#133 federation sections](/{{route}}/dev/refactor/0133-federation-section-fields)
-  - [#89 regions](/{{route}}/dev/refactor/89-regions-lookup-table)
+- ## Refactor
+
+  - [#140](/{{route}}/dev/refactor/0140-big-rebuild)
+  - [#133](/{{route}}/dev/refactor/0133-federation-section-fields)
+  - [#89](/{{route}}/dev/refactor/0089-regions-lookup-table)
