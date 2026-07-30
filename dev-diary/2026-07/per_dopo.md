@@ -38,4 +38,5 @@ Tutte queste devono trovare posto nella lista delle questioni,
 - I cataloghi dei concorsi devono essere basati sulle opere del cocnorso e 
   indipendenti dalle cartelle utente, che possono csì essere cancellate mantenendo il
   catalogo concorso intatto.
+- Se il concorso lo consente, caricare le opere in più sezioni e temi del concorso
   
