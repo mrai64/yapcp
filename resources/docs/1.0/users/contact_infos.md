@@ -8,18 +8,16 @@
 
 ---
 
-## The Contact cards
+## The Contact (five) cards
 
-To participate at every contest you must insert *eeeveeeeryyytiiiimeeee*
-your personal data, and even here. But, as we hosting also
-some contest, you enter infos only first time, and
-no more. Then participate to more contest and
-update your data when you need. Sounds good? It's REAL.
+To participate at every contest you must insert *every, every, everytime*
+your personal data, but not here. All platform contests based
+give your data from only once form fill. And, if you sign a explicit agreement,
+authorize us to represent your data to contests outer the platform.
 
-And that's not all, only if you sign an agreement with yaPCP, we can
-do that work for you. Our plan is to create trust relation with
-other contest platform to send them your data and works when and only
-when you ask us to do. Sounds good?
+Our plan is to create trust relations with other contest platform,
+to send them your data and works when and only when you ask us to do. 
+Sounds good? At same way we require 
 
 After you register in yaPCP platform we provide a space how
 record your personal data: first name, surname / family name,
@@ -33,7 +31,7 @@ we use to send your participation to any Contest hosted in yaPCP,
 completed with extra data required from national/international Federation
 for internal report and distinctions management.
 
-## You are
+## 1/5. You are
 
 After Login to platform thru yur personal Dashboard, first up n left
 you find [ Your Contact Infos ],
@@ -49,7 +47,7 @@ Mandatory field are indicated as 'required' (not minimal invisible asterisk, cle
 
 When you fill the fields and click on bottom button data are updated and if there's no error you land in second page
 
-## Postal address
+## 2/5. Postal address
 
 Here we require info to pass to contest
 organizer for send you medal, HM and all
@@ -57,7 +55,7 @@ you win (first: be optimist).
 
 ![User Contact Modify 2nd: Postal coordinates ](/docs/users/contact_infos/modify2_img01.png)
 
-## Cell numbers
+## 3/5. Cell numbers
 
 Here we require (facultative) how contact you
 in a faster and reliable way than email.
@@ -66,7 +64,7 @@ but in case of email fails we ask how contact you thru sms or whatsapp messages.
 
 ![User Contact Modify 3rd: Cell numbers ](/docs/users/contact_infos/modify3_img01.png)
 
-## Show your
+## 4/5 Social and portfolio
 
 Facultative web address and social pages, for future use we offer
 you some link to add to your presentation
@@ -74,21 +72,18 @@ in report and catalogues.
 
 ![User Contact Modify 4th: web url ](/docs/users/contact_infos/modify4_img01.png)
 
-## One more
+## 5/5. One more...
 
-Most contest have a federation sponsorship,
-aka *Patronage*, but for catalogue and reports the federation require some data infos, *One more info* i.e. federation card id.
-
-For every federation that have an identifiable
-set of fields required, we propose a panel
-(all of facultative fields) to insert if you have.
+There are infos required from all the contests, and others
+required only by federation sponsorship requirement, i.e. federation card id.
+So, in that form we ask the "one more" fields required from
+federation to federation.
 
 In that sample Italian federation FIAF
 ask for it's card id and a personal tax identification, in italian: *codice fiscale*.
 
 Field name, label, suggestion and default value
-are proposed. Only a suggestion: if you
-want remove a previous or wrong value,
+are proposed. **Trick**: to remove a value,
 insert the *default* value.
 
 ![User Contact Modify 5th: federation fields ](/docs/users/contact_infos/modify5_img01.png)
