@@ -30,7 +30,7 @@ new class extends Component {
         // Carichiamo le definizioni dei campi ordinate per etichetta (field_label)
         // Puoi usare orderBy a livello di query (più efficiente) 
         // o ->all()->sortBy('field_label') sulla collection.
-        $this->fieldDefinitions = FederationMore::where('referenced_table', 'user_contact_mores')
+        $this->fieldDefinitions = FederationMore::where('referenced', 'user_contact_mores')
             ->orderBy('federation_id')
             ->orderBy('field_label')->get();
 

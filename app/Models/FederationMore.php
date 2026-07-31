@@ -50,7 +50,7 @@ use Illuminate\Support\Facades\DB;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore withoutTrashed()
  * @method static \Database\Factories\FederationMoreFactory factory($count = null, $state = [])
- * @property string $referenced_table real pk - lowercase
+ * @property string $referenced real pk - lowercase
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore whereReferencedTable($value)
  * @property string $referenced fk federation_mores_referenced_sets.id
  * @method static \Illuminate\Database\Eloquent\Builder<static>|FederationMore whereReferenced($value)
@@ -112,7 +112,7 @@ class FederationMore extends Model
         return $federation;
     }
 
-    // federation_mores.related_table > federation_mores_related_tables.referenced_table
+    // federation_mores.related_table > federation_mores_related_tables.referenced
     // spoiler: no
 
     // federation_mores.federation_id > user_contact_mores.federation_id
@@ -130,8 +130,8 @@ class FederationMore extends Model
     // IS...
 
     /**
-     * Loop over the, few but dynamically listed, referenced_table in
-     * federation_mores_referenced_tables to check if "is in use"
+     * Loop over the, few but dynamically listed, referenced in
+     * federation_mores_referenceds to check if "is in use"
      * in the table itself - first true exit true
      */
     public function isInUse(): bool
@@ -143,7 +143,7 @@ class FederationMore extends Model
             if (DB::table($dataTable)
                     ->where('federation_id', $this->federation_id)
                     ->where('field_name', $this->field_name)
-                    ->exists() ) {
+                    ->exists()) {
                 return true;
             }
         }
