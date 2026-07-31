@@ -3,16 +3,16 @@
 <!-- absolute links are /resources/docs/1.0/    -->
 <!-- larecipe links are /{{route}}/{{version}}/ -->
 <!-- images must be uploaded in /storage/app/public/docs/1.0/ then url prefixed by /docs/1.0/ -->
-<!-- that's a md file not a blade. no @if() or {{ if() }} -->
+<!-- that's a md file not a blade. no @if... or {{ if... }} -->
 
 - ## Get Started
 
   - [Overview](/{{route}}/{{version}}/overview)
   - [ReserDEV](/{{route}}/dev/state-of-art)
 
-- ## You as Contest Participants
+- ## You, as Contest Participants
 
-  - [Registration](/{{route}}/{{version}}/users/registration.md#registration-to-yapcp)
+  - [Registration](/{{route}}/{{version}}/users/registration#registration-to-yapcp)
   - [Login](/{{route}}/{{version}}/users/registration#login)
   - [VerifyEmail](/{{route}}/{{version}}/users/registration.md#email-verification)
   - [Contact Info](/{{route}}/{{version}}/users/contact_infos)
