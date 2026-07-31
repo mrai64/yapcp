@@ -24,7 +24,7 @@ class UserWorkMoreSeeder extends Seeder
 
         // 3. Trova una definizione FederationMore che faccia riferimento alla tabella 'user_works'
         // Ad esempio quella per 'reference_year' definita nel FederationMoreSeeder
-        $fedMore = FederationMore::where('referenced_table', 'user_works')->inRandomOrder()->first();
+        $fedMore = FederationMore::where('referenced', 'user_works')->inRandomOrder()->first();
 
         if ($fedMore) {
             UserWorkMore::updateOrCreate([

@@ -6,7 +6,6 @@ use App\Models\UserRolesContextSet;
 use App\Models\UserRolesRoleContext;
 use App\Models\UserRolesRoleSet;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Schema;
 
 class UserRolesRoleContextSeeder extends Seeder
 {
@@ -16,9 +15,7 @@ class UserRolesRoleContextSeeder extends Seeder
     public function run(): void
     {
         // empty table
-        Schema::disableForeignKeyConstraints();
-        UserRolesRoleContext::truncate();
-        Schema::enableForeignKeyConstraints();
+        UserRolesRoleContext::query()->delete();
 
         // Standard fill with all 'green' false
         // // pivot table with N x M rows
@@ -26,7 +23,7 @@ class UserRolesRoleContextSeeder extends Seeder
         // // ds($rolesSet);
         // $contextSet = UserRolesContextSet::all();
         // // ds($contextSet);
-        // 
+        //
         // foreach ($rolesSet as $role) {
         //     foreach ($contextSet as $context) {
         //         // ds('role: ' . $role->role . ' context:' . $context->context_type);

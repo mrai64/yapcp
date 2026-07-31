@@ -1,15 +1,24 @@
-# Per dopo 
+# Per dopo
 
-**31. | One More Task**
-Tutte queste devono trovare posto nella lista delle questioni,
-*fatto trenta, far trentuno*
+1. scrivere qui le idee e pensate prima che spariscano
+1. tornare a fare quello che si faceva
+1. a lavoro finito passare di qua e *fare 31*,
+  ovvero tutti i punti qui sotto vanno espansi,
+  gli va assegnata una questione con  una priorità e un id
+1. si passa alla pagina di progetto per il prossimo step
 
-- Andare a sfilare dal vecchio [web.php](/routes/web_stash.bak)
+---
+
+[Già pianificate](https://github.com/users/mrai64/projects/1/views/1?filterQuery=is%3Aopen&sortedBy%5Bdirection%5D=asc&sortedBy%5BcolumnId%5D=352635177&sortedBy%5Bdirection%5D=desc&sortedBy%5BcolumnId%5D=226158474)
+
+---
+
+- \[No issue] Andare a sfilare dal vecchio [web.php](/routes/web_stash.bak)
   le funzioni che sono state ri-fatte in [web.php](/routes/web.php).  
   Le funzioni che mancano rientrano nel big rebuild
   ma devono avere un loro record in progetto? Non necessariamente,
   però se ne esiste uno a task finito va chiuso.
-- Realizzare i test per quanto già fatto, a sigillo [come dice Gemini](./2026-07-05_gemini_say_1.md)
+- \[No issue] Realizzare i test per quanto già fatto, a sigillo [come dice Gemini](./2026-07-05_gemini_say_1.md)
 - Realizzare la colonna di tutti i diagrammi di Gantt, ovvero l'elenco
   dettagliato e completo delle cose (già fatte) e da fare.
 - Step per le prossime attività: partire dal progetto del test
@@ -28,14 +37,14 @@ Tutte queste devono trovare posto nella lista delle questioni,
 - Aggiustare il footer mettendo 2025-anno
 - Attivare la verifica email
 - Attivare o realizzare un avviso di login alla piattaforma.
-- Va pensata o ripensata l'iscrizione a concorso con l'indicazione 
+- Va pensata o ripensata l'iscrizione a concorso con l'indicazione
   del gruppo di appartenenza, per il premio "gruppo più numeroso"
   che viene assegnato in alcuni concorsi.
 - Va pensata la gestione delle RED list, per esempio se un soggetto
   è bloccato dalla FIAP può continuare a partecipare a concorsi
   in cui la FAP non è sponsor. E quindi vedere esclusi i concorsi
   FIAP o sponsorizzati FIAP dalla lista dei concorsi.
-- I cataloghi dei concorsi devono essere basati sulle opere del cocnorso e 
+- I cataloghi dei concorsi devono essere basati sulle opere del cocnorso e
   indipendenti dalle cartelle utente, che possono csì essere cancellate mantenendo il
   catalogo concorso intatto.
 - Se il concorso lo consente, caricare le opere in più sezioni e temi del concorso

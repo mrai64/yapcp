@@ -22,6 +22,8 @@ and/or vote as *Contest juror*,
 and/or admin as Platform manager,  
 and act as *Federation refer*.  
 
+---
+
 ### Contest Participant
 
 - Register to our platform.
@@ -33,6 +35,8 @@ and act as *Federation refer*.
 - In next future we, yapcp, plan to federate various contest platform,
   with a way to apply for an external contest with the yapcp interface.
 
+---
+
 ### Member of Contest Organizer
 
 - Add and manage your planned photo contest, in a way compliant for your sponsor federation.
@@ -42,6 +46,8 @@ and act as *Federation refer*.
 - You give automatic report and zip with photo ready for catalogue.
 - List of participants, and list of photo in nicely order.
 
+---
+
 ### Contest Juror
 
 - For the period preceding the final meeting, you can assign and manage assigned vote for every section-n-theme.
@@ -49,6 +55,8 @@ and act as *Federation refer*.
 
 and others like *participate as Juror*, or as collaborator
 for local translations or develop.
+
+---
 
 ### The yaPCP mark
 
@@ -59,6 +67,15 @@ Because contest have winners.
 
 WARN: 💬 That docs are based on dev version so base address is <http://yapcp.test/>,  
 when i put "in production" the base address change. Most of them are totally or partially translated in italian lang.
+
+---
+
+### Welcome aboard 
+
+The welcome page when reach platoform first time.
+Message wil not repat twice.
+
+![Pagina di benvenuto](/docs/1.0/welcome_aboard_01.png)
 
 ---
 

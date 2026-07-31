@@ -42,7 +42,7 @@ test('an admin can add a federation-more-field record', function () {
 
     $this->assertDatabaseHas('federation_mores', [
         'federation_id' => $this->federation->id,
-        'referenced_table' => 'user_contact_mores',
+        'referenced' => 'user_contact_mores',
         'field_label' => 'Codice Fiscale',
     ]);
 });
@@ -51,7 +51,7 @@ test('an admin can reach federation-more-field modify page', function () {
     $federationMore = FederationMore::factory()->create(
         [
             'federation_id' => $this->federation->id,
-            'referenced_table' => 'user_contact_mores',
+            'referenced' => 'user_contact_mores',
             'field_name' => 'ItalianTaxId',
             'field_label' => 'Codice Fiscale',
             'field_validation_rules' => 'string',
@@ -70,7 +70,7 @@ test('an admin can update a federation-more-field record', function () {
     $federationMore = FederationMore::factory()->create(
         [
             'federation_id' => $this->federation->id,
-            'referenced_table' => 'user_contact_mores',
+            'referenced' => 'user_contact_mores',
             'field_name' => 'ItalianTaxId',
             'field_label' => 'Codice Fiscale',
             'field_validation_rules' => 'string',
@@ -94,7 +94,7 @@ test('an admin can remove a federation-more-field record', function () {
     $federationMore = FederationMore::factory()->create(
         [
             'federation_id' => $this->federation->id,
-            'referenced_table' => 'user_contact_mores',
+            'referenced' => 'user_contact_mores',
             'field_name' => 'ItalianTaxId',
             'field_label' => 'Codice Fiscale',
             'field_validation_rules' => 'string',
