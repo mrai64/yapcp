@@ -21,7 +21,7 @@ class FederationSeeder extends Seeder
     public function run(): void
     {
         //
-        Schema::disableForeignKeyConstraints();
+        // Schema::disableForeignKeyConstraints();
         //
         Federation::firstOrCreate(
             [ 'id' => 'FIAP', ],
@@ -33,8 +33,9 @@ class FederationSeeder extends Seeder
             'timezone_id' => 'Europe/Luxembourg',
             'website' => 'https://www.fiap.net/en/',
             'contact_info' => ' ',
-        ]
+            ]
         );
+
         Federation::firstOrCreate(
             [ 'id' => 'FIAF', ],
             [
@@ -45,8 +46,9 @@ class FederationSeeder extends Seeder
             'timezone_id' => 'Europe/Rome',
             'website' => 'https://www.fiaf.net/',
             'contact_info' => "Via Vallaraita, 3\n10126 Torino TO",
-        ]
+            ]
         );
+
         Federation::firstOrCreate(
             [ 'id' => 'UIF', ],
             [
@@ -57,26 +59,31 @@ class FederationSeeder extends Seeder
             'timezone_id' => 'Europe/Rome',
             'website' => 'https://www.unioneitalianafotoamatori.it/',
             'contact_info' => "Via Acque 9\n17045 Mallare SV",
-        ]
-        );
-        Federation::firstOrCreate(
-            [ 'id' => 'GPU', ],
-            [
-            'country_id' => 'GRC',
-            'name_en' => 'Global Photographic Union',
-            'website' => 'https://www.gpuphoto.com/',
-            'timezone_id' => 'Europe/Athens',
             ]
         );
+
         Federation::firstOrCreate(
-            [ 'id' => 'PAA', ],
+            ['id' => 'GPU'],
             [
-            'country_id' => 'USA',
-            'name_en' => 'Photographic Alliance of America',
-            'website' => 'https://www.paausa.org/',
-            'timezone_id' => 'America/Chicago',
-        ]
+                'country_id' => 'GRC',
+                'name_en' => 'Global Photographic Union',
+                'website' => 'https://www.gpuphoto.com/',
+                'timezone_id' => 'Europe/Athens',
+                'contact_info' => ' ',
+            ]
         );
+
+        Federation::firstOrCreate(
+            ['id' => 'PAA'],
+            [
+                'country_id' => 'USA',
+                'name_en' => 'Photographic Alliance of America',
+                'website' => 'https://www.paausa.org/',
+                'timezone_id' => 'America/Chicago',
+                'contact_info' => ' ',
+            ]
+        );
+
         Federation::firstOrCreate(
             [ 'id' => 'IAAP', ],
             [
@@ -85,8 +92,9 @@ class FederationSeeder extends Seeder
             'website' => 'https://theiaap.com/',
             'timezone_id' => 'Europe/Skopje',
             'contact_info' => 'e: officeiaap@gmail.com, t: +389 78240006',
-        ]
+            ]
         );
+
         Federation::firstOrCreate(
             [ 'id' => 'RPS', ],
             [
@@ -97,6 +105,7 @@ class FederationSeeder extends Seeder
             'contact_info' => 'HERE _ 470 Bath Road - Bristol - United Kingdom, t: +44 117 316 4450',
             ]
         );
+
         Federation::firstOrCreate(
             [ 'id' => 'IIG', ],
             [
@@ -105,10 +114,11 @@ class FederationSeeder extends Seeder
             'website' => 'https://indiainternationalgroup.com/',
             'timezone_id' => 'Asia/Kolkata', // formerly Asia/Calcutta
             'contact_info' => 'e: email@threedots.in, t: +91 880 116 6930',
-        ]
+            ]
         );
+
         //
-        Schema::enableForeignKeyConstraints();
+        // Schema::enableForeignKeyConstraints();
         //
     }
 }
