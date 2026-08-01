@@ -7,6 +7,8 @@
   gli va assegnata una questione con  una priorità e un id
 1. si passa alla pagina di progetto per il prossimo step
 
+Ogni mese si posta nel mese corrente.
+
 ---
 
 [Già pianificate](https://github.com/users/mrai64/projects/1/views/1?filterQuery=is%3Aopen&sortedBy%5Bdirection%5D=asc&sortedBy%5BcolumnId%5D=352635177&sortedBy%5Bdirection%5D=desc&sortedBy%5BcolumnId%5D=226158474)
@@ -48,4 +50,6 @@
   indipendenti dalle cartelle utente, che possono csì essere cancellate mantenendo il
   catalogo concorso intatto.
 - Se il concorso lo consente, caricare le opere in più sezioni e temi del concorso
+- La gestione circuiti, sviluppare.  
+  Sono già presenti 5 questioni in sospeso, tutte classificate C, o D.
   
