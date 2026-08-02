@@ -26,8 +26,6 @@ Homestead.yaml
 Thumbs.db
 laradumps.yaml
 !storage/app/private/version.json
-!/storage/app/public/docs
-!/storage/app/public/docs/****
 boost.json
 /.agents
 /.gemini
@@ -36,3 +34,6 @@ boost.json
 /.github/skills
 /_ide_helper
 .phpstorm.meta.php
+storage/app/public/docs/.DS_Store
+storage/app/public/docs/admin/.DS_Store
+storage/app/public/docs/users/.DS_Store
