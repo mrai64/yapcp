@@ -8,8 +8,6 @@
 
 namespace App\Providers;
 
-
-
 use App\Models\Federation;
 use App\Models\FederationSection;
 use App\Models\Organization;

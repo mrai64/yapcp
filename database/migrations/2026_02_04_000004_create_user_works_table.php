@@ -42,7 +42,7 @@ return new class () extends Migration {
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate()->index();
             $table->dateTime('deleted_at')->nullable()->index();
-            // idx 
+            // idx
             $table->index(['user_id', 'work_file'], 'generic1_idx');
             $table->index(['user_id', 'title_en'], 'generic2_idx');
             $table->index(['user_id', 'updated_at'], 'generic3_idx');
