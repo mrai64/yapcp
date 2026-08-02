@@ -26,6 +26,8 @@ Homestead.yaml
 Thumbs.db
 laradumps.yaml
 !storage/app/private/version.json
+!/storage/app/public/docs
+!/storage/app/public/docs/****
 boost.json
 /.agents
 /.gemini
