@@ -15,10 +15,9 @@ class UserRoleSeeder extends Seeder
      */
     public function run(): void
     {
-        ds('Class ' . __CLASS__ . ' Rainato Massimo admin creating');
         $userId = UserContact::where('last_name', 'Rainato')
                 ->where('first_name', 'Massimo')->pluck('id')->first();
-        ds('Class ' . __CLASS__ . ' userId' . json_encode($userId) );
+
         // 1st as admin - read
         $adminRole = UserRole::factory()->make([
             'user_id' => $userId,
@@ -29,8 +28,7 @@ class UserRoleSeeder extends Seeder
             // 'role_opening' => CarbonImmutable::now(),
             // 'role_closing' => CarbonImmutable::parse('9999-12-31T23:59:59'),
         ])->toArray();
-        ds('Class ' . __CLASS__ . ' adminRole' . json_encode($adminRole) );
-        
+
         $adminCreate = UserRole::updateOrCreate(
             [
                 'user_id'         => $adminRole['user_id'],
@@ -39,7 +37,6 @@ class UserRoleSeeder extends Seeder
             ],
             $adminRole
         );
-        ds('Class ' . __CLASS__ . ' Rainato massimo admin created');
         UserRole::factory()->count(25)->create();
     }
 }
