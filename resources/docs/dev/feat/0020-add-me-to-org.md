@@ -7,10 +7,10 @@
 > **Titolo e urgenza:** (A) feat: User dashboard / Add me to Organization already in  
 > **Project/issue link:** [#20](https://github.com/mrai64/yapcp/issues/20)
 
-Dal suo cruscotto l'utente passa all'elenco delle organizzazioni
-e per ciascuna un pulsante "add me to" gli consente di passare per un
+Dal *suo cruscotto* l'utente passa all'*elenco delle organizzazioni*,
+e per ciascuna un link / pulsante "add me to" gli consente di passare per un
 pannello di richiesta conferma, e quindi andare ad aggiungersi
-come "member" o un altro ruolo all'organizzazione.
+come "member", o un altro ruolo tra quelli consentiti, all'Organizzazione.
 
 - [🏠 index](/{{route}}/dev/state-of-art)
 - [template](/{{route}}/dev/template)
@@ -31,18 +31,21 @@ Non sono previste modifiche al database
 
 ## 👮‍♂️ Pre Merge check
 
-Va creato un test che per un utente creato e per una organizzazone creata
-propone il pannello di conferma, e uno in cui al pannello di conferma 
-viene dato ok
+niente da dichiarare.
 
-- [ ] **Test:** Tutti i test (nuovi ed esistenti) passano in verde (`php artisan test`)?
-- [ ] **Docs:** Il file in `/resources/docs/dev/` è aggiornato?
-- [ ] **Manual:** Il manuale utente riflette le modifiche introdotte?
-- [ ] **Cleanup:** Ho rimosso eventuali `dd()` o `dump()` dimenticati?
-- [ ] **Commit:** I messaggi dei commit sono chiari?
+> <!-- to avoid index -->
+- [x] **Test:** Tutti i test (nuovi ed esistenti) passano in verde (`php artisan test`)?
+- [X] **Docs:** Il file in `/resources/docs/dev/` è aggiornato?  
+  Sì.
+- [X] **Manual:** Il manuale utente riflette le modifiche introdotte?  
+  Sì, mancavano e sono stati realizzati. Con l'occasione è stato
+  aggiornato gitignore per aggiungerli anche in futuro
+- [X] **Cleanup:** Ho rimosso eventuali `dd()` o `dump()` dimenticati?  
+  Non sono stati usati dd(), o ds(), o se c'erano sono stati rimossi.
+- [X] **Commit:** I messaggi dei commit sono chiari?
+  Sì.
 
 ## 🚀 Note per il Deploy
 
 > <!-- to avoid index -->
-- Eseguire `php artisan migrate`
-- Aggiungere `STRIPE_SECRET` nel file .env
+niente in particolare
