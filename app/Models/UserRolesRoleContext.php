@@ -71,5 +71,4 @@ class UserRolesRoleContext extends Model
 
     // RELATIONS
 
-
 }
