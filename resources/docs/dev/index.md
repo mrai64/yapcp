@@ -10,24 +10,25 @@
 
 - ## Fix
 
-<!-- newest first -->
   - [#142](/{{route}}/dev/fix/0142-register-test)
   - [#107](/{{route}}/dev/fix/0107-user-role-seeder-ko)
 
-- ## Docs
+- ## Doc
 
   - [#141](/{{route}}/dev/docs/141-user-login)
 
-- ## Funzioni / Features
+- ## Feature
 
+  - [#150](/{{route}}/dev/feat/0150-referenced)
   - [#148](/{{route}}/dev/feat/0148-federations)
   - [#128](/{{route}}/dev/feat/0128-breeze-remove)
   - [#116](/{{route}}/dev/feat/0116-federation-more-crud)
   - [#111](/{{route}}/dev/feat/0111-user-role-review)
   - [#93](/{{route}}/dev/feat/0093-language-translation)
+  - [#20](/{{route}}/dev/feat/0020-add-me-to-org)
 
 - ## Refactor
 
-  - [#140](/{{route}}/dev/refactor/0140-big-rebuild)
+  - [**#140 Big Refactor**](/{{route}}/dev/refactor/0140-big-rebuild)
   - [#133](/{{route}}/dev/refactor/0133-federation-section-fields)
   - [#89](/{{route}}/dev/refactor/0089-regions-lookup-table)

@@ -52,4 +52,5 @@ Ogni mese si posta nel mese corrente.
 - Se il concorso lo consente, caricare le opere in più sezioni e temi del concorso
 - La gestione circuiti, sviluppare.  
   Sono già presenti 5 questioni in sospeso, tutte classificate C, o D.
-  
+- Modificare la barra di navigazione andando ad aggiungere Manuale con un link a /docs
+

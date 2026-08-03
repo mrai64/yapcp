@@ -7,16 +7,16 @@
 
 - ## Get Started
 
-  - [Overview](/{{route}}/{{version}}/overview)
+  - [✅Overview](/{{route}}/{{version}}/overview)
   - [ReserDEV](/{{route}}/dev/state-of-art)
 
 - ## You, as Contest Participants
 
-  - [Registration](/{{route}}/{{version}}/users/registration#registration-to-yapcp)
-  - [Login](/{{route}}/{{version}}/users/registration#login)
-  - [VerifyEmail](/{{route}}/{{version}}/users/registration.md#email-verification)
-  - [Contact Info](/{{route}}/{{version}}/users/contact_infos)
-  - [Personal Dashboard](/{{route}}/{{version}}/users/dashboard)
+  - [✅Registration](/{{route}}/{{version}}/users/registration#registration-to-yapcp)
+  - [✅Login](/{{route}}/{{version}}/users/registration#login)
+  - [✅VerifyEmail](/{{route}}/{{version}}/users/registration.md#email-verification)
+  - [✅Contact Info](/{{route}}/{{version}}/users/contact_infos)
+  - [✍️Personal Dashboard](/{{route}}/{{version}}/users/dashboard)
   - [Personal Gallery](/{{route}}/{{version}}/users/works_gallery)
   - [Participate to contest](#)
 
