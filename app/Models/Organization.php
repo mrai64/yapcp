@@ -120,7 +120,7 @@ class Organization extends Model
      * Organization list order by Country
      *
      * Organization name must start with a letter or digit,
-     * when start with a dot it's reserverd for admin user group
+     * when start with a dot it's reserved for admin user group
      */
     public static function countryIdSorted(): Collection
     {

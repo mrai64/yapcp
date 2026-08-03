@@ -93,7 +93,6 @@ Volt::route('/organization/remove/{organization}', 'organization.remove')
 Volt::route('/organization/user/listed/{organization}', 'organization.user.listed')
     ->middleware(['auth', 'verified'])
     ->name('organization.user.listed');
-// TODO
 Volt::route('/organization/user/add/{organization}', 'organization.user.add')
     ->middleware(['auth', 'verified'])
     ->name('organization.user.add');

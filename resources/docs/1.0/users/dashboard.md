@@ -7,6 +7,7 @@
 - [Contact infos](#personal-contact-info)
 - [Your Gallery](#your-uffizi-gallery)
 - [Open Contest list](#open-contest-list)
+- [Organization List](#organization-list)
 
 ---
 
@@ -35,6 +36,7 @@ in federation sponsored contests.
 
 ### [Update Contact infos]
 
+>
 - [Update your personal contact info](/{{route}}/{{version}}/users/contact_infos)
   even during a contest run.
 
@@ -55,6 +57,7 @@ easily add to the right section - Theme just with a pair of click.
 Some check are done automatically and other manually to ensure
 in the next contest your works are already ok.
 
+>
 - [Your Gallery](/{{route}}/{{version}}/users/personal_gallery)
 
 ### Open Contest List
@@ -65,8 +68,13 @@ your organization dashboard.
 
 ### Organization List
 
-In that space you can find the organization list, if missing
-use the add organization link
+In that space you can find the organization list, if your Organization isn't
+in the list, and you wanna add t, you can. And if you want add yourself as
+member of a listed organization (one or more, one at time)... You can.
+
+>
+- [Add an organization](/{{route}}/{{version}}/users/add_organization)
+- [Add yourself to an existing organization](/{{route}}/{{version}}/organizations/add_me_to)
 
 ### Federation List
 

@@ -31,4 +31,34 @@ class UserRolesContextSet extends Model
     /** @use HasFactory<\Database\Factories\UserRolesContextSetFactory> */
     use HasFactory;
     use SoftDeletes;
+    //
+    public const TABLENAME = 'user_roles_context_sets';
+
+    // protected $primaryKey 'id'        standard
+    // protected $keyType = unsigned int standard
+    // public $incrementing = true       standard
+
+    protected $fillable = [
+        'id', // pk bigint unsigned autoincrement
+        'context_type', // the real pk
+        // created_at          reserved
+        // updated_at          reserved
+        // deleted_at          reserved
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'id' => 'int',
+            'context_type' => 'string',
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
+            'deleted_at' => 'datetime',
+        ];
+    }
+
+    // GETTERS
+
+    // RELATIONS
+
 }

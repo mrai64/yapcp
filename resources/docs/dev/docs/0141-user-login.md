@@ -1,8 +1,8 @@
 # Docs: Registrazione e login utente
 
 > **Branch:** `docs/0141-user-login`  
-> **Stato:** In Corso
-> **priorità:** A   
+> **Stato:** Chiuso
+> **priorità:** A  
 > **id assegnato:** 2026-07-14.01  
 > **Titolo e urgenza:** (A) docs: Participant User / login and other things  
 > **Project/issue link:** [#141](https://github.com/mrai64/yapcp/issues/141)

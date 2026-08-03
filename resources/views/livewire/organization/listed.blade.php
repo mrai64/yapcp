@@ -117,6 +117,9 @@ new class extends Component {
                                     url="{{ route('organization.dashboard', ['organization' => $organization]) }}" />
                                 @if ($organization->name > '/')
                                 <x-yapcp.inline-link
+                                    txt="Add me to"
+                                    url="{{ route('organization.user.add', ['organization' => $organization]) }}" />
+                                <x-yapcp.inline-link
                                     txt="Update"
                                     url="{{ route('organization.modify', ['organization' => $organization]) }}" />
                                 <x-yapcp.inline-link

@@ -2,10 +2,11 @@
 
 /**
  * For future use
- * 
+ *
  * Will replace the federation
- * 
+ *
  */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -67,6 +68,6 @@ class ContestPatronages extends Model
     }
 
     // RELATIONS
-    
+
 
 }

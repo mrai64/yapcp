@@ -20,6 +20,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 /**
  * @property int $id
@@ -112,6 +114,57 @@ class UserRole extends Model
         // log
         return ($present === 1);
     }
+
+    /**
+     * Crea un nuovo ruolo aggiustando i margini di quelli esistenti ed evitando sovrapposizioni.
+     */
+    public static function createWithOverlaps(array $attributes): self
+    {
+        return DB::transaction(function () use ($attributes) {
+            $newOpening = Carbon::parse($attributes['role_opening']);
+            $newClosing = Carbon::parse($attributes['role_closing']);
+
+            // 1. Identifica il contesto (user + uno tra organization, contest o federation)[cite: 1]
+            $userId = $attributes['user_id'];
+            $orgId  = $attributes['organization_id'] ?? null;
+            $contId = $attributes['contest_id'] ?? null;
+            $fedId  = $attributes['federation_id'] ?? null;
+
+            // Query base per isolare i ruoli dello stesso utente nel medesimo contesto
+            $query = self::where('user_id', $userId)
+                ->where('organization_id', $orgId)
+                ->where('contest_id', $contId)
+                ->where('federation_id', $fedId);
+
+            // CASO 1: Vecchio record che inizia PRIMA del nuovo e finisce DOPO la sua apertura
+            // (record_vecchio.role_closing > record_nuovo.role_opening)
+            // Soluzione: Il vecchio record deve chiudersi esattamente quando il nuovo apre.
+            $query->clone()
+                ->where('role_opening', '<', $newOpening)
+                ->where('role_closing', '>', $newOpening)
+                ->update(['role_closing' => $newOpening]);
+
+            // CASO 2: Vecchio record che inizia PRIMA della chiusura del nuovo e finisce DOPO di essa
+            // (record_vecchio.role_opening < record_nuovo.role_closing)
+            // Soluzione: Il vecchio record deve iniziare esattamente quando il nuovo chiude.
+            $query->clone()
+                ->where('role_opening', '<', $newClosing)
+                ->where('role_closing', '>', $newClosing)
+                ->update(['role_opening' => $newClosing]);
+
+            // CASO EXTRA: Vecchio record completamente inglobato nel nuovo periodo
+            // (role_opening >= newOpening AND role_closing <= newClosing)
+            // Opzionale: elimini/soft-delete i ruoli resi totalmente obsoleti dal nuovo
+            $query->clone()
+                ->where('role_opening', '>=', $newOpening)
+                ->where('role_closing', '<=', $newClosing)
+                ->delete();
+
+            // 2. Crea il nuovo record
+            return self::create($attributes);
+        });
+    }
+
 
     // GETTERS
 

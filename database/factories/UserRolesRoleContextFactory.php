@@ -18,7 +18,8 @@ class UserRolesRoleContextFactory extends Factory
     {
         return [
             'role' => fake()->text(10),
-            'context' => fake()->text(10),
+            'context_type' => fake()->text(10),
+            'green' => fake()->boolean(),
         ];
     }
 }
