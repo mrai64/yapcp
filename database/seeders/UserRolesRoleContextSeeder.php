@@ -17,26 +17,6 @@ class UserRolesRoleContextSeeder extends Seeder
         // empty table
         UserRolesRoleContext::query()->delete();
 
-        // Standard fill with all 'green' false
-        // // pivot table with N x M rows
-        // $rolesSet = UserRolesRoleSet::all();
-        // // ds($rolesSet);
-        // $contextSet = UserRolesContextSet::all();
-        // // ds($contextSet);
-        //
-        // foreach ($rolesSet as $role) {
-        //     foreach ($contextSet as $context) {
-        //         // ds('role: ' . $role->role . ' context:' . $context->context_type);
-        //         UserRolesRoleContext::factory()->create([
-        //             'role' => $role->role,
-        //             'context' => $context->context_type,
-        //         ]);
-        //     }
-        // }
-
-        // real start values
-        // \DB::table('user_roles_role_contexts')->delete();
-
         \DB::table('user_roles_role_contexts')->insert(array(
             0 =>
             array(
@@ -223,6 +203,33 @@ class UserRolesRoleContextSeeder extends Seeder
                 'role' => 'winner',
                 'context_type' => 'federations',
                 'green' => 0,
+                'created_at' => '2026-03-08 00:07:59',
+                'updated_at' => '2026-03-08 00:07:59',
+                'deleted_at' => null,
+            ),
+            21 =>
+            array(
+                'role' => 'inspector',
+                'context_type' => 'contests',
+                'green' => 0,
+                'created_at' => '2026-03-08 00:07:59',
+                'updated_at' => '2026-03-08 00:07:59',
+                'deleted_at' => null,
+            ),
+            22 =>
+            array(
+                'role' => 'inspector',
+                'context_type' => 'organizations',
+                'green' => 0,
+                'created_at' => '2026-03-08 00:07:59',
+                'updated_at' => '2026-03-08 00:07:59',
+                'deleted_at' => null,
+            ),
+            23 =>
+            array(
+                'role' => 'inspector',
+                'context_type' => 'federation',
+                'green' => 1,
                 'created_at' => '2026-03-08 00:07:59',
                 'updated_at' => '2026-03-08 00:07:59',
                 'deleted_at' => null,

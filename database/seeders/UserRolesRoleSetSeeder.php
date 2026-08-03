@@ -23,8 +23,9 @@ class UserRolesRoleSetSeeder extends Seeder
         UserRolesRoleSet::factory()->create(['role' => 'juror']); //     contest
         UserRolesRoleSet::factory()->create(['role' => 'member']); //    organization
         UserRolesRoleSet::factory()->create(['role' => 'president']); // organization
-        UserRolesRoleSet::factory()->create(['role' => 'secretary']); // organization
+        UserRolesRoleSet::factory()->create(['role' => 'secretary']); // federation, organization
         UserRolesRoleSet::factory()->create(['role' => 'winner']); //    contest
+        UserRolesRoleSet::factory()->create(['role' => 'inspector']); // federation
 
     }
 }
