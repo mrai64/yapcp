@@ -37,7 +37,7 @@ return new class () extends Migration {
                 ->comment('path n complete filename, complete');
 
             $table->char('file_format', 6)
-                ->charset('ascii')->collation('ascii_general_ci')    
+                ->charset('ascii')->collation('ascii_general_ci')
                 ->default('')->index()
                 ->comment('file extension lowercase');
 
