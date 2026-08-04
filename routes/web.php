@@ -69,7 +69,20 @@ Volt::route('/user/contact/modify5/{user_contact}', 'user.contact.modify5')
     ->name('user.contact.modify5');
 // userContact remove no - remove is a job after n month of inactivity
 //   and require also removing user works after backup
-// TODO userContact paginated list - for admin
+// TODO admin.user.listed userContact paginated list - for admin
+
+/**
+ * UserWork
+ */
+// aka user.gallery.add
+Volt::route('/user/gallery/add', 'user.work.add')
+    ->middleware(['auth', 'verified'])
+    ->name('user.work.add');
+// TODO user.work.listed as table
+// TODO user.work.listed as miniatures grid
+// TODO user.work.detail for {user_work}
+// TODO user.work.remove/{user_work}
+
 
 /**
  * Organization
