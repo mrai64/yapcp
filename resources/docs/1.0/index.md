@@ -16,8 +16,8 @@
   - [✅Login](/{{route}}/{{version}}/users/registration#login)
   - [✅VerifyEmail](/{{route}}/{{version}}/users/registration.md#email-verification)
   - [✅Contact Info](/{{route}}/{{version}}/users/contact_infos)
-  - [✍️Personal Dashboard](/{{route}}/{{version}}/users/dashboard)
-  - [Personal Gallery](/{{route}}/{{version}}/users/works_gallery)
+  - [✍️](/resources/docs/1.0/users/dashboard.md) [Personal Dashboard](/{{route}}/{{version}}/users/dashboard)
+  - [✍️](/resources/docs/1.0/users/personal_gallery.md) [Personal Gallery](/{{route}}/{{version}}/users/personal_gallery) 
   - [Participate to contest](#)
 
 - ## You as Contest Organizer

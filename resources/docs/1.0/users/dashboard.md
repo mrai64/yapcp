@@ -5,7 +5,7 @@
 <!-- images must be uploaded in /storage/app/public/docs/1.0/ then url prefixed by /docs/ -->
 
 - [Contact infos](#personal-contact-info)
-- [Your Gallery](#your-uffizi-gallery)
+- [Your Gallery](#your-gallery)
 - [Open Contest list](#open-contest-list)
 - [Organization List](#organization-list)
 
