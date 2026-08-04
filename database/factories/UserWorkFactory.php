@@ -34,15 +34,15 @@ class UserWorkFactory extends Factory
         return [
             'id' => $userWorkId, // image user work id
             'user_id' => $user->id,
-            'work_file' => $photoBox . '/' . $userWorkId . '.jpg',
-            'extension' => 'jpg',
-            // 'reference_year' => date('Y'),
             'title_en' => fake()->text(80),
             'title_local' => '',
-            'long_side' => 1920,
-            'short_side' => 1080,
-            'monochromatic' => false,
-            'raw' => false,
+            'file_path' => $photoBox . '/' . $userWorkId . '.jpg',
+            'file_format' => 'jpg',
+            'file_size' => fake()->numberBetween(200000, 9000000), 
+            'long_size' => fake()->numberBetween(1920, 5000),
+            'short_side' => fake()->numberBetween(800,1920),
+            'is_monochromatic' => false,
+            'has_raw_file' => false,
         ];
     }
 }
