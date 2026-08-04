@@ -27,20 +27,20 @@ class UserWorkFactory extends Factory
      */
     public function definition(): array
     {
-        $user = UserContact::inRandomOrder()->first() ?? UserContact::factory()->create();
+        $userContact = UserContact::inRandomOrder()->first() ?? UserContact::factory()->create();
         $photoBox = method_exists($user, 'photoBox') ? $user->photoBox() : 'photoBox';
         $userWorkId = Str::uuid7();
 
         return [
             'id' => $userWorkId, // image user work id
-            'user_id' => $user->id,
+            'user_id' => $userContact->id,
             'title_en' => fake()->text(80),
             'title_local' => '',
             'file_path' => $photoBox . '/' . $userWorkId . '.jpg',
             'file_format' => 'jpg',
-            'file_size' => fake()->numberBetween(200000, 9000000), 
+            'file_size' => fake()->numberBetween(200000, 9000000),
             'long_size' => fake()->numberBetween(1920, 5000),
-            'short_side' => fake()->numberBetween(800,1920),
+            'short_side' => fake()->numberBetween(800, 1920),
             'is_monochromatic' => false,
             'has_raw_file' => false,
         ];
