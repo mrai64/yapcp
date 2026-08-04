@@ -9,6 +9,47 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
+/**
+ * @property string $id
+ * @property string $user_id
+ * @property string $title_en english title
+ * @property string $title_local user_contacts.local_lang title
+ * @property string $file_path path n complete filename, complete
+ * @property string $file_format file extension lowercase
+ * @property int $file_size Bytes
+ * @property int $long_size pixels
+ * @property int $short_size pixels
+ * @property bool $is_monochromatic declared BW / monochromatic
+ * @property bool $has_raw_file author has raw file, of work
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\UserContact|null $userContact
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWorkMore> $userWorkMore
+ * @property-read int|null $user_work_more_count
+ * @method static \Database\Factories\UserWorkFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFileFormat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFilePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFileSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereHasRawFile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereIsMonochromatic($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereLongSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereShortSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereTitleEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereTitleLocal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork withoutTrashed()
+ * @mixin \Eloquent
+ */
 class UserWork extends Model
 {
     /** @use HasFactory<\Database\Factories\UserWorkFactory> */
