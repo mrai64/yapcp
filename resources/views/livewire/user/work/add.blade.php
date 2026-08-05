@@ -75,6 +75,9 @@ new class extends Component {
 
     public function addUserWork()
     {
+        // 1st check
+        $validated = $this->validate();
+
         // store image
         $tmpId = Str::uuid();
         $fileTempImage = $this->userWorkTempImage->getRealPath();
@@ -94,9 +97,6 @@ new class extends Component {
         $jpegMiniature = $miniature->encode(new JpegEncoder(quality: 80));
         $miniatureStorePath = 'photos/' . $this->userContact->photoBox() . '/300_' . $tmpId . '.' . $imgFormat;
         Storage::disk('public')->put($miniatureStorePath, (string) $jpegMiniature);
-
-        // make record
-        $validated = $this->validate();
 
         $this->userWork = UserWork::create(
             [
