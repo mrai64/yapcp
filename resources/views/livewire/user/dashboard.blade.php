@@ -43,6 +43,12 @@ with([
                     txt="Update Contact infos"
                     url="{{ route('user.contact.modify1', ['user_contact' => $userContact]) }}" />
                 <x-yapcp.header-link 
+                    txt="Add Work to Gallery" 
+                    url="{{ route('user.work.add') }}" />
+                <x-yapcp.header-link 
+                    txt="Your Gallery" 
+                    url="{{ route('user.work.listed1') }}" />
+                <x-yapcp.header-link 
                     txt="The Manual" 
                     url="{{ url('/docs') }}" />
                 <x-yapcp.header-link 
