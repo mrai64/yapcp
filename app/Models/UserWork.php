@@ -70,7 +70,7 @@ class UserWork extends Model
         'long_size', //        file side pixel
         'short_size', //       file side pixel
         'is_monochromatic', // true/false
-        'has_raw_fiile', //    true/false
+        'has_raw_file', //     true/false
         // created_at        reserved
         // updated_at        reserved
         // deleted_at        reserved
