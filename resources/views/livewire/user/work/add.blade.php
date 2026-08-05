@@ -67,7 +67,7 @@ new class extends Component {
     {
         return [
             'userWorkTitleEn' => 'required|string|max:250',
-            'userWorkTempImage' => 'required|image|mimes:jpg,|max:9000', // KB
+            'userWorkTempImage' => 'required|image|mimes:jpg,jpeg|max:9000', // KB
             'userWorkIsMonochromatic' => 'nullable|boolean',
             'userWorkRawAvailable' => 'nullable|boolean',
         ];
@@ -75,16 +75,27 @@ new class extends Component {
 
     public function addUserWork()
     {
+        // store image
         $tmpId = Str::uuid();
         $fileTempImage = $this->userWorkTempImage->getRealPath();
         $imgInfo = getimagesize($fileTempImage);
         $imgFormat = image_type_to_extension($imgInfo[2], false); // no dot
         $imgStorePath = $this->userContact->photoBox() . '/' . $tmpId . '.' . $imgFormat;
         $this->userWorkTempImage->storeAs('photos', $imgStorePath, 'public');
+
         $imgWidth = $imgInfo[0];
         $imgHeight = $imgInfo[1];
         $imgSize = filesize($fileTempImage);
 
+        // make miniature
+        $imgManager = new ImageManager(new Driver());
+        $miniature  = $imgManager->read($fileTempImage);
+        $miniature->scaleDown(width: 300, height: 300);
+        $jpegMiniature = $miniature->encode(new JpegEncoder(quality: 80));
+        $miniatureStorePath = 'photos/' . $this->userContact->photoBox() . '/300_' . $tmpId . '.' . $imgFormat;
+        Storage::disk('public')->put($miniatureStorePath, (string) $jpegMiniature);
+
+        // make record
         $validated = $this->validate();
 
         $this->userWork = UserWork::create(
@@ -102,8 +113,6 @@ new class extends Component {
                 'has_raw_file'     => (bool) $validated['userWorkRawAvailable'],
             ]
         );
-
-        // make miniature
 
         // redirect to itself
         return redirect()
