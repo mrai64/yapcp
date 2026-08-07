@@ -88,6 +88,35 @@ automatically, while compliance with a theme or section will be
 verified later by members of the contest organization
 or by the admin team.
 
+### Quite simple 
+
+Starting from your personal dashboard choose add Work to your Gallery
+![loading_img_1](/docs/users/works_gallery/loading_img01.png)
+
+&nbsp;
+
+Here you have an empty form with a miniature as placeholder. Choose a file from your local device.
+![loading_img_2](/docs/users/works_gallery/loading_img02.png)
+
+&nbsp;
+
+Choosed file, assign a title, and complete with a pair of infos
+![loading_img_3](/docs/users/works_gallery/loading_img03.png)
+
+&nbsp;
+
+Fullfilled form, complete upload.
+![loading_img_4](/docs/users/works_gallery/loading_img04.png)
+
+&nbsp;
+Goal! 
+![loading_img_5](/docs/users/works_gallery/loading_img05.png)
+
+&nbsp;
+Sample for monochromatic images
+![loading_img_6](/docs/users/works_gallery/loading_img06.png)
+
+
 🇮🇹 Tecnicamente non andiamo a controllare se abbiate caricato 4 copie della stessa opera, per quanto ci riguarda potete caricare
 una foto in grande, la stessa foto in monocromatico, la stessa foto ridimensionata, la stessa foto con cornici e marchi.
 Sono le vostre foto, punto. Quando le andrete a usare per un
