@@ -39,7 +39,7 @@ new class extends Component {
                 {{ __('My Works Gallery') }}
         </h2>
         <p class="small">
-            {{ __("Ordered by country_id, then organization name") }}
+            {{ __("Ordered by international title") }}
         </p>
         <hr class="mb-4 mt-4" />
         <x-yapcp.header-link 
@@ -84,9 +84,10 @@ new class extends Component {
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b">
                             <tr>
                                 <th scope="col" class="px-6 py-3">{{ __('Title (EN)') }}</th>
-                                <th scope="col" class="px-6 py-3 text-center">{{ __('Width (px)') }}</th>
-                                <th scope="col" class="px-6 py-3 text-center">{{ __('Height (px)') }}</th>
-                                <th scope="col" class="px-6 py-3 text-center">{{ __('Updated At') }}</th>
+                                <th scope="col" class="px-6 py-3 text-right">{{ __('Width (px)') }}</th>
+                                <th scope="col" class="px-6 py-3 text-right">{{ __('Height (px)') }}</th>
+                                <th scope="col" class="px-6 py-3 text-start">{{ __('Updated At') }}</th>
+                                <th scope="col" class="px-6 py-3"> &nbsp; </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
@@ -105,19 +106,27 @@ new class extends Component {
                                     </td>
 
                                     <!-- Width -->
-                                    <td class="px-6 py-4 text-center">
+                                    <td class="px-6 py-4 text-right">
                                         {{ number_format($width) }} px
                                     </td>
 
                                     <!-- Height -->
-                                    <td class="px-6 py-4 text-center">
+                                    <td class="px-6 py-4 text-right">
                                         {{ number_format($height) }} px
                                     </td>
 
                                     <!-- Updated At -->
-                                    <td class="px-6 py-4 text-center whitespace-nowrap">
+                                    <td class="px-6 py-4 text-start whitespace-nowrap">
                                         {{ $work->updated_at?->format('Y-m-d H:i') ?? 'N\A' }}
                                     </td>
+                                    <!-- action -->
+                                    <td class="px-6 py-4 font-medium text-gray-900">
+                                        <x-yapcp.inline-link 
+                                            class="w-auto"
+                                            txt="Details" 
+                                            url="{{ url('#') }}" />
+                                    </td>
+
                                 </tr>
                             @endforeach
                         </tbody>
@@ -131,6 +140,7 @@ new class extends Component {
                 @endif
 
             </div>
+            <x-footer-app />
         </div>
     </div>
 </div>

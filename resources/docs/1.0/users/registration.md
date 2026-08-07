@@ -1,16 +1,20 @@
 # User participants | Registration
 
 - [Registration](#registration)
+- [Email check](#email-verification)
+- [Lost Password](#lost-password)
 - [Login](#login)
+- [Logout](#logout)
 
 ---
 
 ## Registration to yaPCP
 
 It's obvious that you can look some platform pages as a guest,
-but when you decide to participate in a contest you need to 
+but when you decide to participate in a contest you need to
 registrate to platform, fill a form with your name, email and a password.  
-- *Only nanem, email and password?*   
+
+- *Only nanem, email and password?*
 - Yes, it's a starting point.  
 
 **WARN: Pages images are reflecting development version,**
@@ -32,7 +36,7 @@ a new password and confirm your email, instead of do the usual registration.
 ### Registration for participants
 
 As you see in next image, form fields are 1 + 2 + 2.
-Only: 
+Only:
 
 - LastName, Name
 - Email
@@ -48,16 +52,16 @@ First field is labeled *Surname, Name*. Plz use only a comma to separate surname
 there are pages that extract 5 or 6 words from a list of 7776
 then combine nonsense words in a really strong pass-prase,
 i.e. *dont-hack-my-yapcp-entry* 😁.
-Break a real 5 casual words ([diceware](https://www.eff.org/dice) ) is hard, really hard. 
+Break a real 5 casual words ([diceware](https://www.eff.org/dice) ) is hard, really hard.
 
 **BTW**: yaPCP, the Platform, store passwords in a hashed, scrambled mode. So if you miss the password,
-you can *insert a new password*, but cannot ask us *to find your password* and/or set your password. 
+you can *insert a new password*, but cannot ask us *to find your password* and/or set your password.
 
 ![Registration entry form](/docs/users/registration_img02.png)
 
 ---
 
-###  Email verification
+### Email verification
 
 A check for your email is required, so after you register into
 the platform a verification email was sent to your email address.
@@ -84,11 +88,47 @@ Also available: link to reset password.
 
 ---
 
-##  Logout
+## Logout
 
 Don'n miss to use your logout function before exit platform.  
 Over every pages, in left upper corner a dropdown menù
 allow you to exit from platform.
+
+---
+
+## Lost password?
+
+![_1](/docs/users/recovery_img01.png)
+
+Give us the email used for previous registration, we send you
+an email containig the usual recovery link and, voilà,
+you have access to a form for insert a new password.
+
+‼️ *Remember: your email is under your responsibility, if anyone*
+*has access to your email even for a limited window time,*
+*can change your password, your data and stole your entire gallery.*
+*It's your email.*
+![_2](/docs/users/recovery_img02.png)
+
+&nbsp;
+
+Fill with email
+![_3](/docs/users/recovery_img03.png)
+
+&nbsp;
+
+Email sent 
+![_4](/docs/users/recovery_img04.png)
+
+&nbsp;
+
+A sample of email you receive
+![_5](/docs/users/recovery_img05.png)
+
+&nbsp;
+
+Insert new password, next use new password 
+![_6](/docs/users/recovery_img06.png)
 
 ---
 
