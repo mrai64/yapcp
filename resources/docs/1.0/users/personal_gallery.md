@@ -19,7 +19,7 @@ contest entrant should be taking good photos and enhancing them
 in post-production. _Entering contests_ shouldn’t be an obstacle course.  
 That’s why we created this platform,
 where you upload your personal information just once,
-and submit your entries *temporarily* just once
+and submit your entries _temporarily_ just once
 to participate in photography contests. By “temporarily,”
 we don’t mean a few hours, or a few weeks, we’re
 offering you months of free storage.  
@@ -33,7 +33,7 @@ the platform, this rush shouldn’t even exist.
 The photographer chooses to participate, assigns the already-uploaded entries
 to your wonderful themes and sections—once the photographer is done, you already have everything ready.
 
-*Translated with DeepL.com (free version)*
+_Translated with DeepL.com (free version)_
 
 🇮🇹 Riteniamo che l'impegno maggiore per un
 concorrente di concorsi debba essere scattare buone foto e migliorarle
@@ -119,13 +119,13 @@ Sample for monochromatic images
 
 🇮🇹 Tecnicamente non andiamo a controllare se abbiate caricato 4 copie della stessa opera, per quanto ci riguarda potete caricare
 una foto in grande, la stessa foto in monocromatico, la stessa foto ridimensionata, la stessa foto con cornici e marchi.
-Sono le vostre foto, punto. Quando le andrete a usare per un 
+Sono le vostre foto, punto. Quando le andrete a usare per un
 concorso andrete a controllare voi per primi la corrispondenza
 con quanto richiesto dai temi e sezioni, anche se qualche
 controllo p.es. sulla dimensione o la monocromaticità possiamo
 già farlo in automatico, altri devono per forza essere
 delegati a un controllo manuale. Evitate sanzioni e reprimende
-degli organizzatori e delle federazioni, anche per guadagnare 
+degli organizzatori e delle federazioni, anche per guadagnare
 rispetto dagli altri concorrenti.
 
 ## Visionare la galleria
@@ -133,11 +133,14 @@ rispetto dagli altri concorrenti.
 Caricate una dieci cento opere, nella vostra galleria saranno presentate delle miniature di lato lngo 300px,
 le riteniamo sufficienti per avere una idea precisa
 della foto caricata spostando meno dati.
-La galleria sarà sottoposta a copia di backup e archiviazione al 
+La galleria sarà sottoposta a copia di backup e archiviazione al
 solo fine di ripristinare la piattaforma in caso di problemi.
 Le opere non saranno mai cedute o inviate a terzi senza l vostro esplicito consenso, ma non dovete considerare questo come
 il vostro spazio pubblico online, e vi sconsigliamo fortemente
 di mettere in piattaforma opere d cui non avete nessun'altra copia.
+
+Vista 1: elenco dei titoli internazionali
+![gallery listed by international title](/docs/users/gallery_title_img01.png)
 
 ## Cancellare dalla galleria
 

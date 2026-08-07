@@ -204,7 +204,7 @@ new class extends Component {
                 </form>
 
             </div>
+            <x-footer-app />
         </div>
     </div>
-    <x-footer-app />
 </div>
