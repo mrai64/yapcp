@@ -20,6 +20,7 @@ in post-production. _Entering contests_ shouldn’t be an obstacle course.
 That’s why we created this platform,
 where you upload your personal information just once,
 and submit your entries _temporarily_ just once
+and submit your entries _temporarily_ just once
 to participate in photography contests. By “temporarily,”
 we don’t mean a few hours, or a few weeks, we’re
 offering you months of free storage.  
@@ -33,6 +34,7 @@ the platform, this rush shouldn’t even exist.
 The photographer chooses to participate, assigns the already-uploaded entries
 to your wonderful themes and sections—once the photographer is done, you already have everything ready.
 
+_Translated with DeepL.com (free version)_
 _Translated with DeepL.com (free version)_
 
 🇮🇹 Riteniamo che l'impegno maggiore per un
@@ -139,17 +141,8 @@ Le opere non saranno mai cedute o inviate a terzi senza l vostro esplicito conse
 il vostro spazio pubblico online, e vi sconsigliamo fortemente
 di mettere in piattaforma opere d cui non avete nessun'altra copia.
 
-### Come elenco
-
-Pratico se volete una verifica veloce di un titolo opera "già usato"
-![gallery as listed titles](/docs/users/gallery1_listed_img01.png)
-
-### Miniature
-
-Pratico se volete vedere una opera già caricata magari con un taglio diverso
-![gallery as miniature grid](/docs/users/gallery2_miniature_img01.png)
-*Attualmente sono tutte larghe 300px, stiamo lavorando per fare lato lungo 300px*
-*anche in verticale.*
+Vista 1: elenco dei titoli internazionali
+![gallery listed by international title](/docs/users/gallery_title_img01.png)
 
 ## Cancellare dalla galleria
 
