@@ -78,11 +78,12 @@ Volt::route('/user/contact/modify5/{user_contact}', 'user.contact.modify5')
 Volt::route('/user/work/add', 'user.work.add')
     ->middleware(['auth', 'verified'])
     ->name('user.work.add');
-// TODO user.work.listed as table
 Volt::route('/user/work/listed1', 'user.work.listed1')
     ->middleware(['auth', 'verified'])
     ->name('user.work.listed1');
-// TODO user.work.listed as miniatures grid
+Volt::route('/user/work/listed2', 'user.work.listed2')
+        ->middleware(['auth', 'verified'])
+        ->name('user.work.listed2');
 // TODO user.work.detail for {user_work}
 // TODO user.work.remove/{user_work}
 
