@@ -130,7 +130,7 @@ rispetto dagli altri concorrenti.
 
 ## Visionare la galleria
 
-Caricate una dieci cento opere, nella vostra galleria saranno presentate delle miniature di lato lngo 300px,
+Caricate una, dieci, cento opere, nella vostra galleria saranno presentate delle miniature di lato lngo 300px,
 le riteniamo sufficienti per avere una idea precisa
 della foto caricata spostando meno dati.
 La galleria sarà sottoposta a copia di backup e archiviazione al
@@ -139,8 +139,17 @@ Le opere non saranno mai cedute o inviate a terzi senza l vostro esplicito conse
 il vostro spazio pubblico online, e vi sconsigliamo fortemente
 di mettere in piattaforma opere d cui non avete nessun'altra copia.
 
-Vista 1: elenco dei titoli internazionali
-![gallery listed by international title](/docs/users/gallery_title_img01.png)
+### Come elenco
+
+Pratico se volete una verifica veloce di un titolo opera "già usato"
+![gallery as listed titles](/docs/users/gallery1_listed_img01.png)
+
+### Miniature
+
+Pratico se volete vedere una opera già caricata magari con un taglio diverso
+![gallery as miniature grid](/docs/users/gallery2_miniature_img02.png)
+*Attualmente sono tutte larghe 300px, stiamo lavorando per fare lato lungo 300px*
+*anche in verticale.*
 
 ## Cancellare dalla galleria
 

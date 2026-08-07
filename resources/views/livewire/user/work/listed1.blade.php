@@ -1,7 +1,7 @@
 <?php
 
 /**
- * UserWork listed 1
+ * UserWork listed Gallery
  *
  * Order by title_en and updated_at
  *
@@ -78,6 +78,7 @@ new class extends Component {
                     {{ __("There are no Works in platform, at now. Add one?") }}
                 </h3>
                 @else
+                <!-- tabled list-->
                 <div class="overflow-x-auto">
                     <table class="w-full text-sm text-left text-gray-500">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 border-b">
