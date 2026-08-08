@@ -29,7 +29,7 @@ class UserWorkFactory extends Factory
     public function definition(): array
     {
         $userContact = UserContact::inRandomOrder()->first() ?? UserContact::factory()->create();
-        $photoBox = method_exists($user, 'photoBox') ? $user->photoBox() : 'photoBox';
+        $photoBox = method_exists($userContact, 'photoBox') ? $userContact->photoBox() : 'photoBox';
         $userWorkId = Str::uuid7();
         $fileWidth   = fake()->numberBetween(800, 5000);
         $fileHeight  = fake()->numberBetween(800, 5000);

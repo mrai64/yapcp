@@ -54,7 +54,7 @@ class FederationMoreSeeder extends Seeder
         FederationMore::factory()->create([
             'federation_id' => 'FIAF',
             'referenced' => 'user_work_mores',
-            'field_name' => 'reference_year',
+            'field_name' => 'fiafFirstAdmitYear',
             'field_label' => 'First admit year',
             'field_validation_rules' => 'required|string|size:4|regex:/^[0-9]+$/',
             'field_default_value' => '2024',

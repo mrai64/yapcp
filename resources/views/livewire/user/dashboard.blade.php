@@ -46,8 +46,11 @@ with([
                     txt="Add Work to Gallery" 
                     url="{{ route('user.work.add') }}" />
                 <x-yapcp.header-link 
-                    txt="Your Gallery" 
+                    txt="Your 📋 Gallery" 
                     url="{{ route('user.work.listed1') }}" />
+                <x-yapcp.header-link 
+                    txt="Your 🌇 Gallery" 
+                    url="{{ route('user.work.listed2') }}" />
                 <x-yapcp.header-link 
                     txt="The Manual" 
                     url="{{ url('/docs') }}" />

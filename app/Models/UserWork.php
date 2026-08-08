@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Observers\UserWorkObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
@@ -58,6 +61,8 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork withoutTrashed()
  * @mixin \Eloquent
  */
+
+#[ObservedBy([UserWorkObserver::class])]
 class UserWork extends Model
 {
     /** @use HasFactory<\Database\Factories\UserWorkFactory> */
@@ -155,7 +160,7 @@ class UserWork extends Model
     // build and use shortcode:
     // user_works.user_id > user_contacts.id
     // was: user_contact
-    public function user()
+    public function user(): BelongsTo
     {
         $user = $this->belongsTo(
             User::class,
@@ -169,7 +174,7 @@ class UserWork extends Model
     // build and use shortcode:
     // user_works.user_id > user_contacts.id
     // was: user_contact
-    public function userContact()
+    public function userContact(): BelongsTo
     {
         $userContact = $this->belongsTo(
             UserContact::class,
