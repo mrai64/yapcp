@@ -84,7 +84,9 @@ Volt::route('/user/work/listed1', 'user.work.listed1')
 Volt::route('/user/work/listed2', 'user.work.listed2')
         ->middleware(['auth', 'verified'])
         ->name('user.work.listed2');
-// TODO user.work.detail for {user_work}
+Volt::route('/user/work/modify/{user_work}', 'user.work.modify')
+        ->middleware(['auth', 'verified'])
+        ->name('user.work.modify');
 // TODO user.work.remove/{user_work}
 
 
