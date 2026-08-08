@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
+
 /**
  * @property string $id
  * @property string $user_id
@@ -17,13 +18,17 @@ use Illuminate\Support\Str;
  * @property string $file_path path n complete filename, complete
  * @property string $file_format file extension lowercase
  * @property int $file_size Bytes
+ * @property int $file_width pixels
+ * @property int $file_height pixels
  * @property int $long_size pixels
  * @property int $short_size pixels
+ * @property bool $is_landscape is width >= height
  * @property bool $is_monochromatic declared BW / monochromatic
  * @property bool $has_raw_file author has raw file, of work
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\User|null $user
  * @property-read \App\Models\UserContact|null $userContact
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWorkMore> $userWorkMore
  * @property-read int|null $user_work_more_count
@@ -35,10 +40,13 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFileFormat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFileHeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFilePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFileSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFileWidth($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereHasRawFile($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereIsLandscape($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereIsMonochromatic($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereLongSize($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereShortSize($value)
@@ -58,26 +66,6 @@ class UserWork extends Model
     use SoftDeletes;
 
     public const TABLENAME = 'user_works';
-
-    protected $fillable = [
-        'id', //               pk uuid
-        'user_id', //          fk users.id
-        'file_path', //        path+filename+extension
-        'file_format', //      file extension
-        'title_en', //         photo title
-        'title_local', //      same in lang <> 'en'
-        'file_size', //        Byte
-        'long_size', //        file side pixel
-        'short_size', //       file side pixel
-        'is_monochromatic', // true/false
-        'has_raw_file', //     true/false
-        // created_at        reserved
-        // updated_at        reserved
-        // deleted_at        reserved
-    ];
-
-    // to check file extension
-    // was: valid_extensions
     public const VALIDEXT = [
         'jpeg',
         'jpg',
@@ -87,6 +75,28 @@ class UserWork extends Model
         'jfif', // future use
         'webp', // future use
     ];
+
+    protected $fillable = [
+        'id', //               pk uuid
+        'user_id', //          fk users.id
+        'file_path', //        path+filename+extension
+        'file_format', //      file extension
+        'title_en', //         photo title
+        'title_local', //      same in lang <> 'en'
+        'file_size', //        Byte
+        'width', //            pixel
+        'height', //           pixel
+        'long_size', //        file side pixel
+        'long_size', //        file side pixel
+        'short_size', //       file side pixel
+        'is_landscape', //     true/false
+        'is_monochromatic', // true/false
+        'has_raw_file', //     true/false
+        // created_at        reserved
+        // updated_at        reserved
+        // deleted_at        reserved
+    ];
+
 
     // generate id when uuid
     public static function booted()
@@ -107,11 +117,14 @@ class UserWork extends Model
 
             'file_path' => 'string',
             'file_format' => 'string',
-            'file_size' => 'int',
-            'long_size' => 'int',
-            'short_size' => 'int',
-            'is_monochromatic' => 'bool',
-            'has_raw_file' => 'bool',
+            'file_size' => 'integer',
+            'width' => 'integer',
+            'height' => 'integer',
+            'long_size' => 'integer',
+            'short_size' => 'integer',
+            'is_landscape' => 'boolean',
+            'is_monochromatic' => 'boolean',
+            'has_raw_file' => 'boolean',
 
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -128,7 +141,7 @@ class UserWork extends Model
     {
         $lastSlash = strrpos($this->file_path, '/');
         $miniature = substr($this->file_path, 0, $lastSlash)
-            . '/300px_' . substr($this->file_path, $lastSlash + 1, 50);
+            . '/300_' . substr($this->file_path, $lastSlash + 1, 50);
         // log
         return $miniature;
     }
@@ -138,6 +151,20 @@ class UserWork extends Model
 
     // RELATIONSHIP
 
+    // user_works.user_id > users.id > user_contacts.id ?
+    // build and use shortcode:
+    // user_works.user_id > user_contacts.id
+    // was: user_contact
+    public function user()
+    {
+        $user = $this->belongsTo(
+            User::class,
+            'user_id', //     user_works.user_id
+            'id' //           users.id
+        );
+        // log
+        return $user;
+    }
     // user_works.user_id > users.id > user_contacts.id ?
     // build and use shortcode:
     // user_works.user_id > user_contacts.id
