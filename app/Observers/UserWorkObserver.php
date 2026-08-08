@@ -3,8 +3,7 @@
 namespace App\Observers;
 
 use App\Models\UserWork;
-use App\Mail\WorkUpdatedNotification;
-use Illuminate\Support\Facades\Mail;
+use App\Notifications\WorkUpdatedNotification;
 
 class UserWorkObserver
 {
@@ -21,13 +20,7 @@ class UserWorkObserver
      */
     public function updated(UserWork $userWork): void
     {
-        // to:
-        $user = $userWork->userContact->user();
-
-        if ($user) {
-            // send notify
-            $user->notify(new WorkUpdatedNotification($userWork));
-        }
+        $userWork->user->notify(new WorkUpdatedNotification($userWork));
     }
 
     /**

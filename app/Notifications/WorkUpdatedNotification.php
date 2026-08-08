@@ -15,10 +15,9 @@ class WorkUpdatedNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct()
-    {
-        //
-    }
+    public function __construct(
+        public UserWork $userWork
+    ) {}
 
     /**
      * Get the notification's delivery channels.
@@ -36,11 +35,11 @@ class WorkUpdatedNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('Activity in yaPCP platform')
-            ->line('We inform you that one of your works had updated now.')
+            ->subject('Activity in your yaPCP Gallery')
+            ->line('We would like to inform you that one of the works displayed in your gallery has just been updated.')
             ->line('Join yaPCP than see your Gallery.')
+            ->line('Note: For security reasons, we have not included any clickable links in this message.')
             ->line('Thank you for using our application!');
-            //->action('Join yaPCP than see your Gallery', route('user.work.listed1'))
     }
 
     /**
