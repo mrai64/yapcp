@@ -5,10 +5,12 @@
 
 <!-- images must be uploaded in /storage/app/public/docs/1.0/ then url prefixed by /docs/ -->
 
-- [Contact infos](#)
-- [Your Gallery](#your-gallery)
-- [Open Contest list](#open-contest-list)
-- [Organization List](#organization-list)
+- [About](#about)
+- [Caricamento](#caricamento)
+- [Galleria come elenco](#come-elenco)
+- [Galleria miniature](#miniature)
+- [Modificare](/{{route}}/{{version}}/users/work_modify)
+
 
 ---
 
@@ -56,7 +58,7 @@ piattaforma questa corsa non dovrebbe nemmeno esserci.
 L'autore sceglie di partecipare, assegna le opere già caricate
 ai vostri bellissimi temi e sezioni, ha finito l'autore e avete già pronto tutto voi.
 
-## Caricamento
+## [Caricamento](/{{route}}/{{version}}/users/work_add)
 
 🇮🇹 Le opere vanno caricate una alla volta perché per ogni opera
 vengono subito registrati dei dati essenziali per la partecipazione
@@ -90,34 +92,7 @@ automatically, while compliance with a theme or section will be
 verified later by members of the contest organization
 or by the admin team.
 
-### Quite simple 
-
-Starting from your personal dashboard choose add Work to your Gallery
-![loading_img_1](/docs/users/works_gallery/loading_img01.png)
-
-&nbsp;
-
-Here you have an empty form with a miniature as placeholder. Choose a file from your local device.
-![loading_img_2](/docs/users/works_gallery/loading_img02.png)
-
-&nbsp;
-
-Choosed file, assign a title, and complete with a pair of infos
-![loading_img_3](/docs/users/works_gallery/loading_img03.png)
-
-&nbsp;
-
-Fullfilled form, complete upload.
-![loading_img_4](/docs/users/works_gallery/loading_img04.png)
-
-&nbsp;
-Goal! 
-![loading_img_5](/docs/users/works_gallery/loading_img05.png)
-
-&nbsp;
-Sample for monochromatic images
-![loading_img_6](/docs/users/works_gallery/loading_img06.png)
-
+### [Quite simple](/{{route}}/{{version}}/users/work_add)
 
 🇮🇹 Tecnicamente non andiamo a controllare se abbiate caricato 4 copie della stessa opera, per quanto ci riguarda potete caricare
 una foto in grande, la stessa foto in monocromatico, la stessa foto ridimensionata, la stessa foto con cornici e marchi.
@@ -141,8 +116,20 @@ Le opere non saranno mai cedute o inviate a terzi senza l vostro esplicito conse
 il vostro spazio pubblico online, e vi sconsigliamo fortemente
 di mettere in piattaforma opere d cui non avete nessun'altra copia.
 
-Vista 1: elenco dei titoli internazionali
-![gallery listed by international title](/docs/users/gallery_title_img01.png)
+### Come elenco
+
+Pratico se volete una verifica veloce di un titolo opera "già usato". Con l'occasione vi suggeriamo di non usare "senza titolo" nelle sue varie forme per il titolo di una foto, è una pratica lecita però malvista da molti concorsi e da importanti Federazioni internazionali.
+![gallery as listed titles](/docs/users/gallery1_listed_img01.png)
+
+### Miniature
+
+Pratico se volete vedere una opera già caricata magari con un taglio diverso. Si raccomanda di non dare lo stesso titolo a due foto diverse, anche se sono "tagli diversi" della stessa foto originaria. È sì anche questa una pratica lecita, però malvista da molti concorsi e da importanti Federazioni internazionali.  
+![gallery as miniature grid](/docs/users/gallery2_miniature_img01.png)
+
+## Modificare un elemento dalle gallerie
+
+Avrete notato che in entrambe le gallerie è presente un Link Details, quello va usato per vedere e modificare alcuni, non tutti i dettagli dell'opera.  
+Segui le facili indicazioni della [pagina dedicata](/{{route}}/{{version}}/users/work_modify)
 
 ## Cancellare dalla galleria
 
