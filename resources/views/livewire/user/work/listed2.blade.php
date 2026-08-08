@@ -83,7 +83,7 @@ new class extends Component {
                             $height = $isLandscape ? $work->short_size : $work->long_size;
 
                             // URL dell'immagine o placeholder
-                            $imageUrl = $work->file_path ?? $work->miniature() ?? asset('images/placeholder.webp');
+                            $imageUrl = $work->file_path ? $work->miniature() : asset('images/placeholder.webp');
                         @endphp
 
                         <div class="bg-gray-50 border border-gray-200 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
@@ -92,7 +92,7 @@ new class extends Component {
                                 <img
                                     src="{{ asset('storage/photos') . '/' . $imageUrl }}"
                                     alt="{{ $work->title_en }}"
-                                    class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                                    class="w-full h-full max-w-300 max-h-300 object-cover transition-transform duration-300 hover:scale-105"
                                     loading="lazy"
                                 />
                             </div>
