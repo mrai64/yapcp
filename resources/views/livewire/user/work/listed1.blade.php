@@ -92,13 +92,6 @@ new class extends Component {
                         </thead>
                         <tbody class="divide-y divide-gray-200">
                             @foreach ($userWorks as $work)
-                                @php
-                                    // Calcolo delle dimensioni (width / height) basato sui dati in DB (long_size / short_size)
-                                    // Se non specificato diversamente, assumiamo landscape o adattiamo in base alla risoluzione
-                                    $isLandscape = $work->long_size >= $work->short_size;
-                                    $width = $isLandscape ? $work->long_size : $work->short_size;
-                                    $height = $isLandscape ? $work->short_size : $work->long_size;
-                                @endphp
                                 <tr class="hover:bg-gray-50">
                                     <!-- Title EN -->
                                     <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
@@ -107,12 +100,12 @@ new class extends Component {
 
                                     <!-- Width -->
                                     <td class="px-6 py-4 text-right">
-                                        {{ number_format($width) }} px
+                                        {{ number_format($work->width) }} px
                                     </td>
 
                                     <!-- Height -->
                                     <td class="px-6 py-4 text-right">
-                                        {{ number_format($height) }} px
+                                        {{ number_format($work->height) }} px
                                     </td>
 
                                     <!-- Updated At -->
