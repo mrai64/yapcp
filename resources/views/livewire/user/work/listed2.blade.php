@@ -77,11 +77,6 @@ new class extends Component {
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                     @foreach ($userWorks as $work)
                         @php
-                            // Calcolo delle dimensioni (width / height)
-                            $isLandscape = $work->long_size >= $work->short_size;
-                            $width = $isLandscape ? $work->long_size : $work->short_size;
-                            $height = $isLandscape ? $work->short_size : $work->long_size;
-
                             // URL dell'immagine o placeholder
                             $imageUrl = $work->file_path ?? $work->miniature() ?? asset('images/placeholder.webp');
                         @endphp
@@ -104,7 +99,7 @@ new class extends Component {
                                         {{ $work->title_en }}
                                     </h4>
                                     <p class="text-xs text-gray-500 mt-1">
-                                        {{ number_format($width) }} &times; {{ number_format($height) }} px
+                                        {{ number_format($work->width) }} &times; {{ number_format($work->height) }} px
                                     </p>
                                 </div>
 
