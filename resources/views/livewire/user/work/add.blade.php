@@ -107,8 +107,11 @@ new class extends Component {
                 'file_path'        => $imgStorePath,
                 'file_format'      => $imgFormat,
                 'file_size'        => $imgSize,
+                'width'            => $imgWidth,
+                'height'           => $imgHeight,
                 'long_size'        => ($imgWidth >= $imgHeight) ? $imgWidth : $imgHeight,
                 'short_size'       => ($imgWidth <= $imgHeight) ? $imgWidth : $imgHeight,
+                'is_landscape'     => (bool) ($imgWidth >= $imgHeight),
                 'is_monochromatic' => (bool) $validated['userWorkIsMonochromatic'],
                 'has_raw_file'     => (bool) $validated['userWorkRawAvailable'],
             ]
