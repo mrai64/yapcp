@@ -19,6 +19,8 @@
 
 - ## Feature
 
+  - [#164](/{{route}}/dev/feat/0164-user-work-modify)
+  - [#167](/{{route}}/dev/feat/0167-user-work-wnh)
   - [#150](/{{route}}/dev/feat/0150-referenced)
   - [#148](/{{route}}/dev/feat/0148-federations)
   - [#128](/{{route}}/dev/feat/0128-breeze-remove)
