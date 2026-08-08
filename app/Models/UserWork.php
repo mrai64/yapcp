@@ -159,7 +159,7 @@ class UserWork extends Model
     // build and use shortcode:
     // user_works.user_id > user_contacts.id
     // was: user_contact
-    public function user()
+    public function user(): BelongsTo
     {
         $user = $this->belongsTo(
             User::class,
@@ -173,7 +173,7 @@ class UserWork extends Model
     // build and use shortcode:
     // user_works.user_id > user_contacts.id
     // was: user_contact
-    public function userContact()
+    public function userContact(): BelongsTo
     {
         $userContact = $this->belongsTo(
             UserContact::class,
@@ -182,17 +182,6 @@ class UserWork extends Model
         );
         // log
         return $userContact;
-    }
-
-    public function user(): BelongsTo
-    {
-        $user = $this->belongsTo(
-            User::class,
-            'user_id', //     user_works.user_id
-            'id' //           user.id
-        );
-        // log
-        return $user;
     }
 
     // user_works.id > user_work_mores.user_work_id
