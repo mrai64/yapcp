@@ -45,13 +45,25 @@ return new class () extends Migration {
                 ->default(0)
                 ->comment('Bytes');
 
+            $table->unsignedInteger('width')
+                ->default(0)
+                ->comment('pixels');
+            $table->unsignedInteger('height')
+                ->default(0)
+                ->comment('pixels');
+
             $table->unsignedInteger('long_size')
                 ->default(0)
                 ->comment('pixels');
             $table->unsignedInteger('short_size')
                 ->default(0)
                 ->comment('pixels');
+
             // other infos
+            $table->boolean('is_landscape')
+                ->default(false)
+                ->comment('is width >= height');
+
             $table->boolean('is_monochromatic')
                 ->default(false)->index()
                 ->comment('declared BW / monochromatic');
