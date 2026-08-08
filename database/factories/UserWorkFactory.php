@@ -30,6 +30,8 @@ class UserWorkFactory extends Factory
         $userContact = UserContact::inRandomOrder()->first() ?? UserContact::factory()->create();
         $photoBox = method_exists($user, 'photoBox') ? $user->photoBox() : 'photoBox';
         $userWorkId = Str::uuid7();
+        $fileWidth   = fake()->numberBetween(800, 5000);
+        $fileHeight  = fake()->numberBetween(800, 5000);
 
         return [
             'id' => $userWorkId, // image user work id
@@ -37,10 +39,13 @@ class UserWorkFactory extends Factory
             'title_en' => fake()->text(80),
             'title_local' => '',
             'file_path' => $photoBox . '/' . $userWorkId . '.jpg',
-            'file_format' => 'jpg',
-            'file_size' => fake()->numberBetween(200000, 9000000),
-            'long_size' => fake()->numberBetween(1920, 5000),
-            'short_side' => fake()->numberBetween(800, 1920),
+            'file_format'      => 'jpg',
+            'file_size'        => fake()->numberBetween(200000, 9000000),
+            'width'            => $fileWidth,
+            'height'           => $fileHeight,
+            'long_size'        => ($fileWidth >= $fileHeight) ? $fileWidth : $fileHeight,
+            'short_size'       => ($fileWidth <= $fileHeight) ? $fileWidth : $fileHeight,
+            'is_landscape'     => (bool)($fileWidth >= $fileHeight),
             'is_monochromatic' => false,
             'has_raw_file' => false,
         ];
