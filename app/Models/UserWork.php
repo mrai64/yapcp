@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Observers\UserWorkObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
@@ -50,6 +53,8 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork withoutTrashed()
  * @mixin \Eloquent
  */
+
+#[ObservedBy([UserWorkObserver::class])]
 class UserWork extends Model
 {
     /** @use HasFactory<\Database\Factories\UserWorkFactory> */
@@ -58,6 +63,17 @@ class UserWork extends Model
     use SoftDeletes;
 
     public const TABLENAME = 'user_works';
+    // TODO use or remove
+    public const VALIDEXT = [
+        'jpeg',
+        'jpg',
+        'tiff', // future use
+        'tif', //  future use
+        'avif', // future use
+        'jfif', // future use
+        'webp', // future use
+    ];
+
 
     protected $fillable = [
         'id', //               pk uuid
@@ -74,18 +90,6 @@ class UserWork extends Model
         // created_at        reserved
         // updated_at        reserved
         // deleted_at        reserved
-    ];
-
-    // to check file extension
-    // was: valid_extensions
-    public const VALIDEXT = [
-        'jpeg',
-        'jpg',
-        'tiff', // future use
-        'tif', //  future use
-        'avif', // future use
-        'jfif', // future use
-        'webp', // future use
     ];
 
     // generate id when uuid
@@ -128,7 +132,7 @@ class UserWork extends Model
     {
         $lastSlash = strrpos($this->file_path, '/');
         $miniature = substr($this->file_path, 0, $lastSlash)
-            . '/300px_' . substr($this->file_path, $lastSlash + 1, 50);
+            . '/300_' . substr($this->file_path, $lastSlash + 1, 50);
         // log
         return $miniature;
     }
@@ -151,6 +155,17 @@ class UserWork extends Model
         );
         // log
         return $userContact;
+    }
+
+    public function user(): BelongsTo
+    {
+        $user = $this->belongsTo(
+            User::class,
+            'user_id', //     user_works.user_id
+            'id' //           user.id
+        );
+        // log
+        return $user;
     }
 
     // user_works.id > user_work_mores.user_work_id
