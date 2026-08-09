@@ -6,7 +6,7 @@
 <!-- that's a md file not a blade. no @if... or {{ if... }} -->
 
 <!-- fully qualified address -->
-[Back to dashboard](https://yapcp.test/user/dashboard)
+- ## [&larr; Your dashboard](https://yapcp.test/user/dashboard)
 
 - ## Get Started
 
@@ -20,8 +20,8 @@
   - [✅VerifyEmail](/{{route}}/{{version}}/users/registration#email-verification)
   - [✅Lost Password?](/{{route}}/{{version}}/users/registration#lost-password)
   - [✅Contact Info](/{{route}}/{{version}}/users/contact_infos)
-  - [✍️](/resources/docs/1.0/users/dashboard.md) [Personal Dashboard](/{{route}}/{{version}}/users/dashboard)
-  - [✍️](/resources/docs/1.0/users/personal_gallery.md) [Personal Gallery](/{{route}}/{{version}}/users/personal_gallery) 
+  - [✅Personal Dashboard](/{{route}}/{{version}}/users/dashboard)
+  - [✅Personal Gallery](/{{route}}/{{version}}/users/personal_gallery) 
   - [Participate to contest](#)
 
 - ## You as Contest Organizer

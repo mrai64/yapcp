@@ -11,7 +11,7 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('user_work_mores', function (Blueprint $table) {
-            $table->id(); // standard id
+            $table->id(); // standard id, not uuid
             $table->char('user_work_id', 36)->charset('ascii')->collation('ascii_general_ci')
                 ->comment('fk: user_works.id');
 
@@ -28,8 +28,20 @@ return new class () extends Migration {
             $table->index('user_work_id', 'user_work_idx');
             $table->index('federation_id', 'federation_idx');
             $table->index('field_value', 'federation_fields_idx');
-            $table->unique(['user_work_id', 'federation_id', 'field_name'], 'alt_primary_idx')->comment('real pk');
-
+            $table->unique(['user_work_id', 'federation_id', 'field_name'], 'alt_primary_idx')
+                ->comment('real pk');
+            // fk
+            $table->foreign('user_work_id', 'fk_uwm_uw')
+                ->references('id')->on('user_works')
+                ->onUpdate('cascade')->onDelete('cascade');
+            //
+            $table->foreign(['federation_id', 'field_name'], 'fk_uwm_fed_more')
+                ->references(['federation_id', 'field_name'])
+                ->on('federation_mores')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            // comm
+            $table->comment('one more field required from federations');
         });
     }
 

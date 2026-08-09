@@ -82,13 +82,22 @@ Volt::route('/user/work/listed1', 'user.work.listed1')
     ->middleware(['auth', 'verified'])
     ->name('user.work.listed1');
 Volt::route('/user/work/listed2', 'user.work.listed2')
-        ->middleware(['auth', 'verified'])
-        ->name('user.work.listed2');
+    ->middleware(['auth', 'verified'])
+    ->name('user.work.listed2');
 Volt::route('/user/work/modify/{user_work}', 'user.work.modify')
-        ->middleware(['auth', 'verified'])
-        ->name('user.work.modify');
-// TODO user.work.remove/{user_work}
+    ->middleware(['auth', 'verified'])
+    ->name('user.work.modify');
+Volt::route('/user/work/remove/{user_work}', 'user.work.remove')
+    ->middleware(['auth', 'verified'])
+    ->name('user.work.remove');
 
+/**
+ * UserWorkMore
+ */
+// TODO user.workmore.add
+// TODO user.workmore.listed no
+// TODO user.workmore.modify
+// TODO user.workmore.remove
 
 /**
  * Organization
@@ -142,15 +151,15 @@ Volt::route('/organization/design/contest-section/add/{contest}', 'organization.
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-section.add');
 Volt::route(
-    '/organization/design/contest-section/modify/{contest_section}',
-    'organization.design.contest-section.modify'
-)
+        '/organization/design/contest-section/modify/{contest_section}',
+        'organization.design.contest-section.modify'
+    )
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-section.modify');
 Volt::route(
-    '/organization/design/contest-section/remove/{contest_section}',
-    'organization.design.contest-section.remove'
-)
+        '/organization/design/contest-section/remove/{contest_section}',
+        'organization.design.contest-section.remove'
+    )
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-section.remove');
 
@@ -193,6 +202,7 @@ Volt::route('/organization/design/contest/detail/{contest}', 'organization.desig
 
 /**
  * Federation
+ * for admin
  */
 Volt::route('/federation/listed', 'federation.listed')
     ->middleware(['auth', 'verified'])
@@ -209,10 +219,20 @@ Volt::route('/federation/remove/{federation}', 'federation.remove')
 
 /**
  * Federation Section n themes
+ * for admin
  */
 Volt::route('/federation-section/listed/{federation}', 'federation-section.listed')
     ->middleware(['auth', 'verified'])
     ->name('federation-section.listed');
+
+/**
+ * FederationMore
+ * for admin
+ */
+// TODO federation.more.add
+// TODO federation.more.list
+// TODO federation.more.modify
+// TODO federation.more.remove
 
 /**
  * User Contest

@@ -110,6 +110,10 @@ new class extends Component {
                                         class="w-auto"
                                         txt="Details"
                                         url="{{ route('user.work.modify', ['user_work' => $work]) }}" />
+                                    <x-yapcp.inline-link 
+                                        class="w-auto"
+                                        txt="Remove" 
+                                        url="{{ route('user.work.remove', ['user_work' => $work]) }}" />
                                 </div>
                             </div>
                         </div>

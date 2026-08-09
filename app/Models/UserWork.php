@@ -21,8 +21,8 @@ use Illuminate\Support\Str;
  * @property string $file_path path n complete filename, complete
  * @property string $file_format file extension lowercase
  * @property int $file_size Bytes
- * @property int $file_width pixels
- * @property int $file_height pixels
+ * @property int $width pixels
+ * @property int $height pixels
  * @property int $long_size pixels
  * @property int $short_size pixels
  * @property bool $is_landscape is width >= height
@@ -48,6 +48,7 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFileSize($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFileWidth($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereHasRawFile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereHeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereIsLandscape($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereIsMonochromatic($value)
@@ -57,11 +58,11 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereTitleLocal($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereWidth($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork withoutTrashed()
  * @mixin \Eloquent
  */
-
 #[ObservedBy([UserWorkObserver::class])]
 class UserWork extends Model
 {
@@ -80,7 +81,7 @@ class UserWork extends Model
         'jfif', // future use
         'webp', // future use
     ];
-
+    //
     protected $fillable = [
         'id', //               pk uuid
         'user_id', //          fk users.id
@@ -92,8 +93,12 @@ class UserWork extends Model
         'width', //            pixel
         'height', //           pixel
         'long_size', //        file side pixel
+        'width', //            pixel
+        'height', //           pixel
+        'long_size', //        file side pixel
         'long_size', //        file side pixel
         'short_size', //       file side pixel
+        'is_landscape', //     true/false
         'is_landscape', //     true/false
         'is_monochromatic', // true/false
         'has_raw_file', //     true/false
@@ -101,7 +106,6 @@ class UserWork extends Model
         // updated_at        reserved
         // deleted_at        reserved
     ];
-
 
     // generate id when uuid
     public static function booted()
@@ -122,6 +126,14 @@ class UserWork extends Model
 
             'file_path' => 'string',
             'file_format' => 'string',
+            'file_size' => 'integer',
+            'width' => 'integer',
+            'height' => 'integer',
+            'long_size' => 'integer',
+            'short_size' => 'integer',
+            'is_landscape' => 'boolean',
+            'is_monochromatic' => 'boolean',
+            'has_raw_file' => 'boolean',
             'file_size' => 'integer',
             'width' => 'integer',
             'height' => 'integer',
@@ -151,6 +163,7 @@ class UserWork extends Model
         return $miniature;
     }
 
+    // public function photoBox() 
     // warn: photobox is based on user_contacts.country_id, user_contacts.last_name,
     //       user_contacts.first_name, so check userContact->photoBox()
 
@@ -170,6 +183,7 @@ class UserWork extends Model
         // log
         return $user;
     }
+
     // user_works.user_id > users.id > user_contacts.id ?
     // build and use shortcode:
     // user_works.user_id > user_contacts.id
