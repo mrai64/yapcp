@@ -5,6 +5,9 @@
 <!-- images must be uploaded in /storage/app/public/docs/1.0/ then url prefixed by /docs/1.0/ -->
 <!-- that's a md file not a blade. no @if... or {{ if... }} -->
 
+<!-- fully qualified address -->
+- ## [&larr; Your dashboard](https://yapcp.test/user/dashboard)
+
 - ## Get Started
 
   - [✅Overview](/{{route}}/{{version}}/overview)
@@ -14,10 +17,11 @@
 
   - [✅Registration](/{{route}}/{{version}}/users/registration#registration-to-yapcp)
   - [✅Login](/{{route}}/{{version}}/users/registration#login)
-  - [✅VerifyEmail](/{{route}}/{{version}}/users/registration.md#email-verification)
+  - [✅VerifyEmail](/{{route}}/{{version}}/users/registration#email-verification)
+  - [✅Lost Password?](/{{route}}/{{version}}/users/registration#lost-password)
   - [✅Contact Info](/{{route}}/{{version}}/users/contact_infos)
-  - [✍️](/resources/docs/1.0/users/dashboard.md) [Personal Dashboard](/{{route}}/{{version}}/users/dashboard)
-  - [✍️](/resources/docs/1.0/users/personal_gallery.md) [Personal Gallery](/{{route}}/{{version}}/users/personal_gallery) 
+  - [✅Personal Dashboard](/{{route}}/{{version}}/users/dashboard)
+  - [✅Personal Gallery](/{{route}}/{{version}}/users/personal_gallery) 
   - [Participate to contest](#)
 
 - ## You as Contest Organizer

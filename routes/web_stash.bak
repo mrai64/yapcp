@@ -124,20 +124,20 @@ Route::get('/user/dashboard/role/organization/add', User\Role\Organization\Add::
  * user herself/himself and admin
  *
  */
-Route::get('/user/work/list', User\Work\Listed::class)
-    ->middleware(['auth', 'verified', 'can:view,' . ModelsUserWork::class])
-    ->name('user.gallery');
-Route::get('/user/work/add', User\Work\Add::class)
-    ->middleware(['auth', 'verified', 'can:create,' . ModelsUserWork::class])
-    ->name('photo-box-add');
-Route::get('/user/work/modify/{wid}', User\Work\Modify::class, ['wid'])
-    ->middleware(['auth', 'verified', 'can:update,' . ModelsUserWork::class])
-    ->name('photo-box-modify');
-Route::get('/user/work/remove/{wid}', User\Work\Remove::class, ['wid'])
-    ->middleware(['auth', 'verified', 'can:delete,' . ModelsUserWork::class])
-    ->name('delete-photo-box');
-Route::delete('/user/work/remove/{wid}', User\Work\Remove::class, ['wid'])
-    ->middleware(['auth', 'verified', 'can:delete,' . ModelsUserWork::class]);
+// REPLACED | Route::get('/user/work/list', User\Work\Listed::class)
+// REPLACED |     ->middleware(['auth', 'verified', 'can:view,' . ModelsUserWork::class])
+// REPLACED |     ->name('user.gallery');
+// REPLACED | Route::get('/user/work/add', User\Work\Add::class)
+// REPLACED |     ->middleware(['auth', 'verified', 'can:create,' . ModelsUserWork::class])
+// REPLACED |     ->name('photo-box-add');
+// REPLACED | Route::get('/user/work/modify/{wid}', User\Work\Modify::class, ['wid'])
+// REPLACED |     ->middleware(['auth', 'verified', 'can:update,' . ModelsUserWork::class])
+// REPLACED |     ->name('photo-box-modify');
+// REPLACED | Route::get('/user/work/remove/{wid}', User\Work\Remove::class, ['wid'])
+// REPLACED |     ->middleware(['auth', 'verified', 'can:delete,' . ModelsUserWork::class])
+// REPLACED |     ->name('delete-photo-box');
+// REPLACED | Route::delete('/user/work/remove/{wid}', User\Work\Remove::class, ['wid'])
+// REPLACED |     ->middleware(['auth', 'verified', 'can:delete,' . ModelsUserWork::class]);
 
 
 /**

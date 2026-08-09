@@ -2,54 +2,68 @@
 
 namespace App\Models;
 
+use App\Observers\UserWorkObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
+
 /**
+ * @property string $id
+ * @property string $user_id
+ * @property string $title_en english title
+ * @property string $title_local user_contacts.local_lang title
+ * @property string $file_path path n complete filename, complete
+ * @property string $file_format file extension lowercase
+ * @property int $file_size Bytes
+ * @property int $width pixels
+ * @property int $height pixels
+ * @property int $long_size pixels
+ * @property int $short_size pixels
+ * @property bool $is_landscape is width >= height
+ * @property bool $is_monochromatic declared BW / monochromatic
+ * @property bool $has_raw_file author has raw file, of work
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\User|null $user
  * @property-read \App\Models\UserContact|null $userContact
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWorkMore> $userWorkMore
+ * @property-read int|null $user_work_more_count
  * @method static \Database\Factories\UserWorkFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork withoutTrashed()
- * @property string $id
- * @property string $user_id
- * @property string $work_file path n filename internal
- * @property string $extension
- * @property string $title_en english title
- * @property string $title_local lang title
- * @property int $long_side pixel
- * @property int $short_side pixel
- * @property bool $monochromatic declared BW monochromatic
- * @property bool $raw Original RAW available
- * @property \Illuminate\Support\Carbon $created_at
- * @property \Illuminate\Support\Carbon $updated_at
- * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWorkMore> $userWorkMore
- * @property-read int|null $user_work_more_count
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereExtension($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFileFormat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFileHeight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFilePath($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFileSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFileWidth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereHasRawFile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereHeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereLongSide($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereMonochromatic($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereRaw($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereShortSide($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereIsLandscape($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereIsMonochromatic($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereLongSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereShortSize($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereTitleEn($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereTitleLocal($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereWorkFile($value)
- * @property string $reference_year usually first admit year
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereReferenceYear($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereWidth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork withoutTrashed()
  * @mixin \Eloquent
  */
+#[ObservedBy([UserWorkObserver::class])]
 class UserWork extends Model
 {
     /** @use HasFactory<\Database\Factories\UserWorkFactory> */
@@ -58,31 +72,6 @@ class UserWork extends Model
     use SoftDeletes;
 
     public const TABLENAME = 'user_works';
-
-    // primary key
-    protected $primaryKey = 'id'; //  default but
-    protected $keyType = 'string'; // uuid char(36)
-    public $incrementing = false; //  with no increment
-
-    protected $fillable = [
-        'id', //             pk
-        'user_id', //        fk user_contacts.id, users.id
-        'work_file', //      path+filename+extension
-        'extension', //      extension
-        'reference_year', // abilitato per supporto export FIAF
-        'title_en', //       photo title
-        'title_local', //    same in lang <> 'en'
-        'long_side', //      file side pixel
-        'short_side', //     file side pixel
-        'monochromatic', //  0:'N' (color) / 1:'Y' (monochromatic)
-        'raw', //            0:'N' (not available) / 1:'Y' (available)
-        // created_at        reserved
-        // updated_at        reserved
-        // deleted_at        reserved
-    ];
-
-    // to check file extension
-    // was: valid_extensions
     public const VALIDEXT = [
         'jpeg',
         'jpg',
@@ -91,6 +80,31 @@ class UserWork extends Model
         'avif', // future use
         'jfif', // future use
         'webp', // future use
+    ];
+    //
+    protected $fillable = [
+        'id', //               pk uuid
+        'user_id', //          fk users.id
+        'file_path', //        path+filename+extension
+        'file_format', //      file extension
+        'title_en', //         photo title
+        'title_local', //      same in lang <> 'en'
+        'file_size', //        Byte
+        'width', //            pixel
+        'height', //           pixel
+        'long_size', //        file side pixel
+        'width', //            pixel
+        'height', //           pixel
+        'long_size', //        file side pixel
+        'long_size', //        file side pixel
+        'short_size', //       file side pixel
+        'is_landscape', //     true/false
+        'is_landscape', //     true/false
+        'is_monochromatic', // true/false
+        'has_raw_file', //     true/false
+        // created_at        reserved
+        // updated_at        reserved
+        // deleted_at        reserved
     ];
 
     // generate id when uuid
@@ -106,15 +120,29 @@ class UserWork extends Model
         return [
             'id' => 'string',
             'user_id' => 'string',
-            'work_file' => 'string',
-            'extension' => 'string',
-            'reference_year' => 'string',
+
             'title_en' => 'string',
             'title_local' => 'string',
-            'long_side' => 'int',
-            'short_side' => 'int',
-            'monochromatic' => 'bool',
-            'raw' => 'bool',
+
+            'file_path' => 'string',
+            'file_format' => 'string',
+            'file_size' => 'integer',
+            'width' => 'integer',
+            'height' => 'integer',
+            'long_size' => 'integer',
+            'short_size' => 'integer',
+            'is_landscape' => 'boolean',
+            'is_monochromatic' => 'boolean',
+            'has_raw_file' => 'boolean',
+            'file_size' => 'integer',
+            'width' => 'integer',
+            'height' => 'integer',
+            'long_size' => 'integer',
+            'short_size' => 'integer',
+            'is_landscape' => 'boolean',
+            'is_monochromatic' => 'boolean',
+            'has_raw_file' => 'boolean',
+
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
@@ -124,22 +152,43 @@ class UserWork extends Model
     // GETTER
 
     /**
-     * add '300px_' as prefix to works.work_file
+     * Get miniature name from file_path
      */
     public function miniature(): string
     {
-        $lastSlash = strrpos($this->work_file, '/');
-        $miniature = substr($this->work_file, 0, $lastSlash)
-            . '/300px_' . substr($this->work_file, $lastSlash + 1, 50);
+        $lastSlash = strrpos($this->file_path, '/');
+        $miniature = substr($this->file_path, 0, $lastSlash)
+            . '/300_' . substr($this->file_path, $lastSlash + 1, 50);
         // log
         return $miniature;
     }
 
+    // public function photoBox() 
+    // warn: photobox is based on user_contacts.country_id, user_contacts.last_name,
+    //       user_contacts.first_name, so check userContact->photoBox()
+
     // RELATIONSHIP
 
+    // user_works.user_id > users.id > user_contacts.id ?
+    // build and use shortcode:
     // user_works.user_id > user_contacts.id
     // was: user_contact
-    public function userContact()
+    public function user(): BelongsTo
+    {
+        $user = $this->belongsTo(
+            User::class,
+            'user_id', //     user_works.user_id
+            'id' //           users.id
+        );
+        // log
+        return $user;
+    }
+
+    // user_works.user_id > users.id > user_contacts.id ?
+    // build and use shortcode:
+    // user_works.user_id > user_contacts.id
+    // was: user_contact
+    public function userContact(): BelongsTo
     {
         $userContact = $this->belongsTo(
             UserContact::class,
@@ -150,7 +199,7 @@ class UserWork extends Model
         return $userContact;
     }
 
-    // user_works.user_id > user_work_mores.user_id
+    // user_works.id > user_work_mores.user_work_id
     public function userWorkMore(): HasMany
     {
         $userWorksMoreSet = $this->hasMany(

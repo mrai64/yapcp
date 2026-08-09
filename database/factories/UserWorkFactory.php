@@ -14,6 +14,7 @@ namespace Database\Factories;
 use App\Models\UserContact;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Override;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\UserWork>
@@ -27,22 +28,27 @@ class UserWorkFactory extends Factory
      */
     public function definition(): array
     {
-        $user = UserContact::inRandomOrder()->first() ?? UserContact::factory()->create();
-        $photoBox = method_exists($user, 'photoBox') ? $user->photoBox() : 'photoBox';
+        $userContact = UserContact::inRandomOrder()->first() ?? UserContact::factory()->create();
+        $photoBox = method_exists($userContact, 'photoBox') ? $userContact->photoBox() : 'photoBox';
         $userWorkId = Str::uuid7();
+        $fileWidth   = fake()->numberBetween(800, 5000);
+        $fileHeight  = fake()->numberBetween(800, 5000);
 
         return [
             'id' => $userWorkId, // image user work id
-            'user_id' => $user->id,
-            'work_file' => $photoBox . '/' . $userWorkId . '.jpg',
-            'extension' => 'jpg',
-            // 'reference_year' => date('Y'),
+            'user_id' => $userContact->id,
             'title_en' => fake()->text(80),
             'title_local' => '',
-            'long_side' => 1920,
-            'short_side' => 1080,
-            'monochromatic' => false,
-            'raw' => false,
+            'file_path' => $photoBox . '/' . $userWorkId . '.jpg',
+            'file_format'      => 'jpg',
+            'file_size'        => fake()->numberBetween(200000, 9000000),
+            'width'            => $fileWidth,
+            'height'           => $fileHeight,
+            'long_size'        => ($fileWidth >= $fileHeight) ? $fileWidth : $fileHeight,
+            'short_size'       => ($fileWidth <= $fileHeight) ? $fileWidth : $fileHeight,
+            'is_landscape'     => (bool)($fileWidth >= $fileHeight),
+            'is_monochromatic' => false,
+            'has_raw_file' => false,
         ];
     }
 }

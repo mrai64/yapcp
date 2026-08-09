@@ -2,9 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\UserRolesContextSet;
 use App\Models\UserRolesRoleContext;
-use App\Models\UserRolesRoleSet;
 use Illuminate\Database\Seeder;
 
 class UserRolesRoleContextSeeder extends Seeder
@@ -228,7 +226,7 @@ class UserRolesRoleContextSeeder extends Seeder
             23 =>
             array(
                 'role' => 'inspector',
-                'context_type' => 'federation',
+                'context_type' => 'federations',
                 'green' => 1,
                 'created_at' => '2026-03-08 00:07:59',
                 'updated_at' => '2026-03-08 00:07:59',
