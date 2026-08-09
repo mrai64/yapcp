@@ -6,11 +6,11 @@
 <!-- images must be uploaded in /storage/app/public/docs/1.0/ then url prefixed by /docs/ -->
 
 - [About](#about)
-- [Caricamento](#caricamento)
+- [Caricamento](/{{route}}/{{version}}/users/work_add)
 - [Galleria come elenco](#come-elenco)
 - [Galleria miniature](#miniature)
 - [Modificare](/{{route}}/{{version}}/users/work_modify)
-
+- [Rimuovere](/{{route}}/{{version}}/users/work_remove)
 
 ---
 
@@ -34,10 +34,10 @@ If you’re a contest organizer, you know how much of a “rush” there is to
 upload entries at the last minute. If the entries are already on
 the platform, this rush shouldn’t even exist.
 The photographer chooses to participate, assigns the already-uploaded entries
-to your wonderful themes and sections—once the photographer is done, you already have everything ready.
+to your wonderful themes and sections—once the photographer is done, you already have everything ready.  
+_Translated with DeepL.com (free version)_
 
-_Translated with DeepL.com (free version)_
-_Translated with DeepL.com (free version)_
+&nbsp;
 
 🇮🇹 Riteniamo che l'impegno maggiore per un
 concorrente di concorsi debba essere scattare buone foto e migliorarle
@@ -58,52 +58,16 @@ piattaforma questa corsa non dovrebbe nemmeno esserci.
 L'autore sceglie di partecipare, assegna le opere già caricate
 ai vostri bellissimi temi e sezioni, ha finito l'autore e avete già pronto tutto voi.
 
-## [Caricamento](/{{route}}/{{version}}/users/work_add)
+## Caricamento
 
-🇮🇹 Le opere vanno caricate una alla volta perché per ogni opera
-vengono subito registrati dei dati essenziali per la partecipazione
-ai concorsi. Di quello che caricate e scrivete siete e restate
-gli unici aventi diritto nonché responsabili dei contenuti.
-
-Il caricamento ha lo stesso modo di fare della tessera passaporto
-che avete eventualmente caricato nella vostra scheda anagrafica.
-Si sceglie UNA opera dal disco, e mentre questa viene caricata
-si possono assegnare: un titolo, spuntare se siete in possesso
-dell'originale in RAW (sì, viene richiesto per alcuni temi e sezioni)
-se si tratta di un monocromatico. Alcune delle informazioni
-ricavabili automaticamente come le misure vengono caricate
-in automatico, mentre la conformità a un tema o sezione sarà
-in seguito verificata dai membri dell'organizzazione concorso
-o dal gruppo degli admin.
-
-🇬🇧 Works must be uploaded one at a time because, for each work,
-essential data required for participation
-in the competitions is immediately recorded. You are and remain
-the sole rights holder and are solely responsible for the content of what you upload and write.
-
-The upload process is the same as for the passport photo
-you may have uploaded to your profile.
-Select ONE work from your hard drive, and while it is uploading,
-you can assign a title and check the box if you possess
-the original RAW file (yes, this is required for certain themes and sections)
-and indicate whether it is a monochrome image. Some of the information
-that can be automatically extracted, such as dimensions, is uploaded
-automatically, while compliance with a theme or section will be
-verified later by members of the contest organization
-or by the admin team.
-
-### [Quite simple](/{{route}}/{{version}}/users/work_add)
-
-🇮🇹 Tecnicamente non andiamo a controllare se abbiate caricato 4 copie della stessa opera, per quanto ci riguarda potete caricare
-una foto in grande, la stessa foto in monocromatico, la stessa foto ridimensionata, la stessa foto con cornici e marchi.
-Sono le vostre foto, punto. Quando le andrete a usare per un
-concorso andrete a controllare voi per primi la corrispondenza
-con quanto richiesto dai temi e sezioni, anche se qualche
-controllo p.es. sulla dimensione o la monocromaticità possiamo
-già farlo in automatico, altri devono per forza essere
-delegati a un controllo manuale. Evitate sanzioni e reprimende
-degli organizzatori e delle federazioni, anche per guadagnare
-rispetto dagli altri concorrenti.
+Potete caricare quante immagin volete, in attesa di farle partecipare a
+un concorso. Se fossero più di cento o stessero lì per più di tre anni,
+fatevi una domanda - sono lì per partecipare o per deposito?
+Si possono caricare più versioni della stessa foto? certo che sì,
+ma nel vostro interesse non date a tutte lo stesso titolo, voi per primi
+non dovete fare confusione con le vostre immagini. Se avete intenzione di 
+cambiare il titolo, o di rmuovere un doppione qui sotto c'è quello che serve a voi.  
+Segui le facili indicazioni della [pagina dedicata](/{{route}}/{{version}}/users/work_add)
 
 ## Visionare la galleria
 
@@ -136,3 +100,4 @@ Segui le facili indicazioni della [pagina dedicata](/{{route}}/{{version}}/users
 Quando in galleria, per vostra volontà, vorrete
 rimuovere un'opera vi sarà chiesto di confermare la cancellazione,
 e in caso di conferma affermativa, sparirà dalla vista della vostra Galleria.
+Segui le facili indicazioni della [pagina dedicata](/{{route}}/{{version}}/users/work_remove)
