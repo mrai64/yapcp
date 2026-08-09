@@ -14,6 +14,7 @@ namespace Database\Factories;
 use App\Models\UserContact;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Override;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\UserWork>

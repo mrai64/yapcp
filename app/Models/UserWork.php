@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
+
 /**
  * @property string $id
  * @property string $user_id
@@ -42,8 +43,10 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFileFormat($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFileHeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFilePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFileSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFileWidth($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereHasRawFile($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereHeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereId($value)

@@ -58,7 +58,7 @@ piattaforma questa corsa non dovrebbe nemmeno esserci.
 L'autore sceglie di partecipare, assegna le opere già caricate
 ai vostri bellissimi temi e sezioni, ha finito l'autore e avete già pronto tutto voi.
 
-## Caricamento
+## [Caricamento](/{{route}}/{{version}}/users/work_add)
 
 Potete caricare quante immagin volete, in attesa di farle partecipare a
 un concorso. Se fossero più di cento o stessero lì per più di tre anni,
