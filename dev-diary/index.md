@@ -2,14 +2,14 @@
 
 aka *MAD developer journal*
 Free thinking, in italian lang  
-[Project1 aka TDL](https://github.com/users/mrai64/projects/1), was ~~[ToDo List](./TDL.md)~~
+[Project](https://github.com/users/mrai64/projects/1/views/1?filterQuery=is%3Aopen&sortedBy%5Bdirection%5D=asc&sortedBy%5BcolumnId%5D=352635177&sortedBy%5Bdirection%5D=desc&sortedBy%5BcolumnId%5D=226158474), was ~~[ToDo List](./TDL.md)~~
 
 ## agosto 2026
 
 | Lun    | Mar    | Mer    | Gio    | Ven    | Sab    | Dom    | Lun    | Mar    | Mer    | Gio    | Ven    | Sab    | Dom    |
 | ---:   | ---:   | ---:   | ---:   | ---:   | ---:   | ---:   | ---:   | ---:   | ---:   | ---:   | ---:   | ---:   | ---:   |
-| ______ | ______ | ______ | ______ | ______ | [1 ago](./2026-08/2026-08-01_IT.md) | 2 ago | 3 ago | 4 ago | 5 ago | 6 ago | 7 ago | 8 ago | 9 ago |
-| 10 ago | 11 ago | 12 ago | 13 ago | 14 ago | 15 ago | 16 ago | 17 ago | 18 ago | 19 ago | 20 ago | 21 ago | 22 ago | 23 ago |
+| ______ | ______ | ______ | ______ | ______ | [1 ago](./2026-08/2026-08-01_IT.md) | [2 ago](./2026-08/2026-08-02_IT.md) | [3 ago](./2026-08/2026-08-03_IT.md) | [4 ago](./2026-08/2026-08-04_IT.md) | [5 ago](./2026-08/2026-08-05_IT.md) | [6 ago](./2026-08/2026-08-06_IT.md) | [7 ago](./2026-08/2026-08-07_IT.md) | [8 ago](./2026-08/2026-08-08_IT.md) | [9 ago](./2026-08/2026-08-09_IT.md) |
+| [10 ago](./2026-08/2026-08-10_IT.md) | [11 ago](./2026-08/2026-08-11_IT.md) | [12 ago](./2026-08/2026-08-12_IT.md) | [13 ago](./2026-08/2026-08-13_IT.md) | *14 ago* | [15 ago](./2026-08/2026-08-15_IT.md) | 16 ago | 17 ago | 18 ago | 19 ago | 20 ago | 21 ago | 22 ago | 23 ago |
 | 24 ago | 25 ago | 26 ago | 27 ago | 28 ago | 29 ago | 30 ago | 31 ago | ______ | ______ | ______ | ______ | ______ | ______ |
 | ______ | ______ | ______ | ______ | ______ | ______ | ______ | ______ | ______ | ______ | ______ | ______ | ______ | ______ |
 
