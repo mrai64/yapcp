@@ -40,7 +40,7 @@
   - [Section Awards assignments](#)
   - [Contest Awards assignments](#)
   - [Contest Board of participants](#)
-  - [Contest Board of Works partcipants](#)
+  - [Contest Board of Works participants](#)
 
 - ## You as Juror
 
@@ -48,3 +48,7 @@
   - [Simplest Vote](#)
   - [Change Vote](#)
   - [Contest Minute Sign](#)
+
+- ## You as platform minister
+
+  - [✍️ edit](/resources/docs/1.0/admin/overview.md) [What admins can do](/{{route}}/{{version}}/admin/overview)
