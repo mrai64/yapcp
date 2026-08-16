@@ -65,6 +65,9 @@ with([
                 <x-yapcp.header-link 
                     txt="Organizations List" 
                     url="{{ route('organization.listed') }}" />
+                <x-yapcp.inline-link 
+                    txt="Federation list" 
+                    url="{{ route('federation.listed') }}" />
 
                 @if ($userRolesOrganizations->isNotEmpty())
                 <h3 class="fyk text-xl font-bold mb-4">
@@ -79,9 +82,6 @@ with([
 
                 @if ($user->isAdmin())
                 <h3 class="fyk text-xl font-bold mb-4">{{ __("Federations [admin only]") }}</h3>
-                <x-yapcp.header-link 
-                    txt="Federation list" 
-                    url="{{ route('federation.listed') }}" />
                 <x-yapcp.header-link 
                     txt="New Federation" 
                     url="{{ route('federation.add') }}" />
