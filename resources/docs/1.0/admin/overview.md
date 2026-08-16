@@ -32,7 +32,7 @@ can add a user in the admin group.
 ## For Platform
 
 ### Federations
-  - [Edit](/resources/docs/1.0/admin/federation/read.md) [The Fed List](/{{route}}/{{version}}/admin/federation/read)
+  - [The Fed List](/{{route}}/{{version}}/admin/federation/read)
   - [Edit](/resources/docs/1.0/admin/federation/add.md) [Add a new Federation](/{{route}}/{{version}}/admin/federation/add)
   - Modify Federation
   - Remove Federation
