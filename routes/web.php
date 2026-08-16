@@ -202,11 +202,12 @@ Volt::route('/organization/design/contest/detail/{contest}', 'organization.desig
 
 /**
  * Federation
- * for admin
  */
+// for all 
 Volt::route('/federation/listed', 'federation.listed')
     ->middleware(['auth', 'verified'])
     ->name('federation.listed');
+// for admin group
 Volt::route('/federation/add', 'federation.add')
     ->middleware(['auth', 'verified', 'can:create,' . ModelsFederation::class])
     ->name('federation.add');
