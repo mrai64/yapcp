@@ -8,7 +8,7 @@
 ## Definition
 
 Federations are national or international photography associations that
-represent and coordinate photographers within a country or around the world.
+represent and coordinate photographers within a country, or around the world.
 Furthermore, to promote the growth of photographic culture, they establish
 rules for conducting photography competitions and, based on the results of
 these competitions, use them as a basis for awarding distinctions and
@@ -22,14 +22,16 @@ honors to the best photographers.
 In yaPCP for every Federation are exposed:
 
 > <!-- -->
-- the Country flag n English name
+- the Country flag n Country english name
 - The Federation' ID Code
 - The international Federation name
-- official web site (main or regulation page)
-- contact info as Hq address, international tel number, others
+- official web site *(main or regulation page)*
+- contact info as Hq address, email, tel number, others
 - timezone (to see difference between user office hours and HQ office hours)
 - The local code and local name
-- link to Federation list of sections n themes (as extracted from official federation docs)
+- link to Federation' *list of sections n themes* page (as extracted from official federation docs)
+
+*Note: Federation data are managed by admin group*
 
 &nbsp;
 
