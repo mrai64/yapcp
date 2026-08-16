@@ -23,7 +23,7 @@
   - [✅Personal Dashboard](/{{route}}/{{version}}/users/dashboard)
   - [✅Personal Gallery](/{{route}}/{{version}}/users/personal_gallery) 
   - [Participate to contest](#)
-  - [See Federation List](/{{route}}/{{version}}/users/federation_list)
+  - [✅See Federation List](/{{route}}/{{version}}/users/federation_list)
 
 - ## You as Contest Organizer
 
@@ -53,3 +53,5 @@
 - ## You as platform minister
 
   - [✍️ edit](/resources/docs/1.0/admin/overview.md) [What admins can do](/{{route}}/{{version}}/admin/overview)
+  - [✅Federation List](/{{route}}/{{version}}/admin/federation/read)
+  - [✅Add new federation](/{{route}}/{{version}}/admin/federation/add)
