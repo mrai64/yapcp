@@ -24,3 +24,6 @@
 
 - TODO In [LaRecipeServiceProvider](/app/Providers/LaRecipeServiceProvider.php)
   l'accesso è riservato a email <massimo.rainato@athesis77.it>, aprire al *gruppo admin*.
+
+- Dalla lista federazioni si può passare alla lista dei concorsi aperti e chiusi 
+  a loro patrocinio

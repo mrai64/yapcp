@@ -48,9 +48,15 @@
                             to facilitate participation from over all the photographic world are welcomed.<br/>
                             Next i plan to open a github repository for translation, you should
                             fork, made your file and create a pull request.<br />
+                            <br />
+                            A well-deserved thank you to the creators of the 
+                            <a href="http://www.deepl.com/it" target="_blank" rel="noopener noreferrer">Deepl™</a> 
+                            translation platform, which I encourage everyone to use. 
+                            Please seriously consider signing up for their service—they deserve it.       
                         </p>
-                        <div class="fyk text-2xl ">Languages translators</div>
+                        <div class="fyk text-2xl ">Languages writers n translators</div>
                         <ul>
+                            <li>English < Massimo Rainato - mrai64 massimo.rainato@gmail.com </li>
                             <li>Italian < Massimo Rainato - mrai64 massimo.rainato@gmail.com </li>
                         </ul>
                     </main>
