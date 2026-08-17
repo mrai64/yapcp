@@ -23,21 +23,21 @@ new class extends Component {
     public string $federationNameLocal;
     public string $federationTimezoneId;
 
-    public function mount(Federation $federation)
+    public function mount(Federation $federation): void
     {
-        $this->$federation = $federation;
+        $this->federation = $federation;
 
         $this->federationId = $federation->id;
         $this->federationCountryId = $federation->country_id;
         $this->federationNameEn = $federation->name_en;
-        $this->federationWebsite = $federation->website;
+        $this->federationWebsite = $federation->website ?? '';
         $this->federationContactInfo = $federation->contact_info;
-        $this->federationLocalLang = $federation->local_lang;
-        $this->federationNameLocal = $federation->name_local;
+        $this->federationLocalLang = $federation->local_lang ?? '';
+        $this->federationNameLocal = $federation->name_local ?? '';
         $this->federationTimezoneId = $federation->timezone_id;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'federationId'          => [
@@ -149,7 +149,7 @@ new class extends Component {
                     <!-- federationLocalLang -->
                     <div class="mb-4">
                         <x-input-label for="federationLocalLang" :value="__('Local lang code')" />
-                        <x-text-input wire:model="federationLocalLang" id="federationLocalLang" name="federationNameEn" class="block mt-1 w-full" type="text" required />
+                        <x-text-input wire:model="federationLocalLang" id="federationLocalLang" name="federationLocalLang" class="block mt-1 w-full" type="text" />
                         <x-input-error for="federationLocalLang" class="mt-2" />
                     </div>
                     
