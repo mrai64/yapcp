@@ -55,3 +55,4 @@
   - [✍️ edit](/resources/docs/1.0/admin/overview.md) [What admins can do](/{{route}}/{{version}}/admin/overview)
   - [✅Federation List](/{{route}}/{{version}}/admin/federation/read)
   - [✅Add new federation](/{{route}}/{{version}}/admin/federation/add)
+  - [✅Modify federation](/{{route}}/{{version}}/admin/federation/modify)
