@@ -48,7 +48,7 @@ new class extends Component {
                     }, function ($query) {
                         return $query->whereNull('section_id');
                     })
-                    ->whereNull('delete_at')
+                    ->whereNull('deleted_at')
                     ->ignore($this->contestAward->id ?? null),
             ],
             'contestAwardAwardName'   => 'required|string|max:255',

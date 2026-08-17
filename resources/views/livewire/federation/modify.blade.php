@@ -23,27 +23,27 @@ new class extends Component {
     public string $federationNameLocal;
     public string $federationTimezoneId;
 
-    public function mount(Federation $federation)
+    public function mount(Federation $federation): void
     {
-        $this->$federation = $federation;
+        $this->federation = $federation;
 
         $this->federationId = $federation->id;
         $this->federationCountryId = $federation->country_id;
         $this->federationNameEn = $federation->name_en;
-        $this->federationWebsite = $federation->website;
+        $this->federationWebsite = $federation->website ?? '';
         $this->federationContactInfo = $federation->contact_info;
-        $this->federationLocalLang = $federation->local_lang;
-        $this->federationNameLocal = $federation->name_local;
+        $this->federationLocalLang = $federation->local_lang ?? '';
+        $this->federationNameLocal = $federation->name_local ?? '';
         $this->federationTimezoneId = $federation->timezone_id;
     }
 
-    public function rules()
+    public function rules(): array
     {
         return [
             'federationId'          => [
                 'required', 'string', 'uppercase', 'min:2', 'max:10', 
                 Rule::unique(Federation::class, 'id')
-                    ->whereNull('delete_at')
+                    ->whereNull('deleted_at')
                     ->ignore($this->federation->id) 
                 ],
             'federationCountryId'   => 'required|string|uppercase|min:3|exists:countries,id',
@@ -125,7 +125,7 @@ new class extends Component {
                     <div class="mb-4">
                         <x-input-label for="federationId" :value="__('Federation ID')" />
                         <x-text-input wire:model="federationId" id="federationId" name="federationId" class="block mt-1 w-full" type="text" required />
-                        <p class="small">{{ __('Uppercase acronym, if there is already the same acronym for another federation in list, use country code as prefix, i.e. ARG:FAF, AND:FAF') }}</p>
+                        <p class="small">{{ __('Uppercase acronym, if there is already the same acronym for another federation in list, use country code as suffix with double in the middle, i.e. FAF:ARG, FAF:AND') }}</p>
                         <x-input-error for="federationId" class="mt-2" />
                     </div>
 
@@ -149,7 +149,7 @@ new class extends Component {
                     <!-- federationLocalLang -->
                     <div class="mb-4">
                         <x-input-label for="federationLocalLang" :value="__('Local lang code')" />
-                        <x-text-input wire:model="federationLocalLang" id="federationLocalLang" name="federationNameEn" class="block mt-1 w-full" type="text" required />
+                        <x-text-input wire:model="federationLocalLang" id="federationLocalLang" name="federationLocalLang" class="block mt-1 w-full" type="text" />
                         <x-input-error for="federationLocalLang" class="mt-2" />
                     </div>
                     
