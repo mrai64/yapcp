@@ -43,7 +43,7 @@ new class extends Component {
             'federationId'          => [
                 'required', 'string', 'uppercase', 'min:2', 'max:10', 
                 Rule::unique(Federation::class, 'id')
-                    ->whereNull('delete_at')
+                    ->whereNull('deleted_at')
                     ->ignore($this->federation->id) 
                 ],
             'federationCountryId'   => 'required|string|uppercase|min:3|exists:countries,id',
@@ -125,7 +125,7 @@ new class extends Component {
                     <div class="mb-4">
                         <x-input-label for="federationId" :value="__('Federation ID')" />
                         <x-text-input wire:model="federationId" id="federationId" name="federationId" class="block mt-1 w-full" type="text" required />
-                        <p class="small">{{ __('Uppercase acronym, if there is already the same acronym for another federation in list, use country code as prefix, i.e. ARG:FAF, AND:FAF') }}</p>
+                        <p class="small">{{ __('Uppercase acronym, if there is already the same acronym for another federation in list, use country code as suffix with double in the middle, i.e. FAF:ARG, FAF:AND') }}</p>
                         <x-input-error for="federationId" class="mt-2" />
                     </div>
 
