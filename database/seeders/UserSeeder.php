@@ -23,13 +23,22 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        echo "\n  Create 25 users, plus 1 founder admin";
+        echo "\n  Create 25 users, plus 1 founder admin and 1 know user";
         if (!User::whereEmail('massimo.rainato@athesis77.it')->exists()) {
             User::create([
                 'name' => 'Rainato, Massimo',
                 'email' => 'massimo.rainato@athesis77.it',
                 'email_verified_at' => now(),
                 'password' => Hash::make('massimo.rainato@athesis77.it'),
+                'remember_token' => Str::random(10),
+            ]);
+        }
+        if (!User::whereEmail('maria.rossi@athesis77.it')->exists()) {
+            User::create([
+                'name' => 'Rossi, Maria',
+                'email' => 'maria.rossi@athesis77.it',
+                'email_verified_at' => now(),
+                'password' => Hash::make('maria.rossi@athesis77.it'),
                 'remember_token' => Str::random(10),
             ]);
         }
