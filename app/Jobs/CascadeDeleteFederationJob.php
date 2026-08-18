@@ -23,6 +23,12 @@ class CascadeDeleteFederationJob implements ShouldQueue
 
     public function __construct(protected Federation $federation)
     {
+        $this->federation = $federation;
+    }
+
+    public function getFederation(): Federation
+    {
+        return $this->federation;
     }
 
     public function handle(): void

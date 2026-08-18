@@ -119,6 +119,6 @@ test('deleting a federation dispatches cascade delete federation job', function 
     $federation->delete();
 
     Queue::assertPushed(CascadeDeleteFederationJob::class, function ($job) use ($federation) {
-        return $job->federation->id === $federation->id;
+        return $job->getFederation()->id === $federation->id;
     });
 });
