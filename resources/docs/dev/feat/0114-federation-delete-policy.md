@@ -30,7 +30,8 @@ Si richiede che la cancellazione di una `Federation` sia consentita **solo a un 
 
 ## 🗄️ Modifiche al Database
 
-Nessuna modifica alle migrazioni o allo schema del database.
+> <!-- to avoid index -->
+Nessuna
 
 ## 👮‍♂️ Pre Merge check
 
@@ -40,6 +41,8 @@ Nessuna modifica alle migrazioni o allo schema del database.
 - [x] **Cleanup:** Ho rimosso eventuali `dd()` o `dump()` dimenticati?
 - [x] **Commit:** I messaggi dei commit sono chiari?
 
+
 ## 🚀 Note per il Deploy
 
-Nessuna nota specifica per il deploy.
+> <!-- to avoid index -->
+Niente da segnalare
