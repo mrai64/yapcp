@@ -2,7 +2,7 @@
 
 /**
  * User_roles is a 3d matrix table between
- *  users - user_contacts 
+ *  users - user_contacts
  *  and user_roles_role_sets
  *  and a time windows valid role_opening .. role_closing
  *
@@ -82,7 +82,7 @@ return new class () extends Migration {
                 ->onUpdate('cascade')->onDelete('cascade'); // TODO cascade -> restrict
             $table->foreign(['contest_id'], 'contest_fk')->references(['id'])->on('contests')
                 ->onUpdate('cascade')->onDelete('cascade'); // TODO cascade -> restrict
-            $table->foreign(['federation_id'], 'federation_fk')
+            $table->foreign(['federation_id'], 'use_rol_fed_fk')
                 ->references(['id'])->on('federations')
                 ->onUpdate('restrict')
                 ->onDelete('restrict');
