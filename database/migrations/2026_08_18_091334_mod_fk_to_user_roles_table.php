@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::table('user_roles', function (Blueprint $table) {
             // reset onUpdate onDelete to restrict
-            $table->dropForeign('federation_fk');
+            $table->dropForeign('use_rol_fed_fk');
             //
-            $table->foreign(['federation_id'], 'federation_fk')
+            $table->foreign(['federation_id'], 'use_rol_fed_fk')
                 ->references(['id'])->on('federations')
                 ->onUpdate('restrict')
                 ->onDelete('restrict');
@@ -29,9 +29,9 @@ return new class extends Migration
     {
         Schema::table('user_roles', function (Blueprint $table) {
             // reset onUpdate onDelete to restrict
-            $table->dropForeign('federation_fk');
+            $table->dropForeign('use_rol_fed_fk');
             //
-            $table->foreign(['federation_id'], 'federation_fk')
+            $table->foreign(['federation_id'], 'use_rol_fed_fk')
                 ->references(['id'])->on('federations')
                 ->onUpdate('restrict')
                 ->onDelete('restrict');

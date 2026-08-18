@@ -3,7 +3,7 @@
 /**
  * Contest_patronages replace a field in contests
  *   table with a child table, which offer flexibility
- *   to manage a data actually informational only 
+ *   to manage a data actually informational only
  * TODO Implement n contest design and contest management
  */
 use Illuminate\Database\Migrations\Migration;
@@ -38,7 +38,7 @@ return new class () extends Migration {
             // TODO   evaluate only ['federation_id', 'patronage_code']
             $table->unique(['contest_id', 'federation_id', 'patronage_code'], 'alt_primary_idx');
             // fk
-            $table->foreign('federation_id', 'federation_fk')
+            $table->foreign('federation_id', 'con_pat_fed_fk')
                 ->references('id')->on('federations')
                 ->onUpdate('restrict')
                 ->onDelete('restrict');
