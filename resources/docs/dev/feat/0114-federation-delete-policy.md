@@ -44,6 +44,7 @@ Nessuna modifica alle migrazioni o allo schema del database.
 * [x] **Cleanup:** Ho rimosso eventuali `dd()` o `dump()` dimenticati?
 * [x] **Commit:** I messaggi dei commit sono chiari?
 
+
 ## 🚀 Note per il Deploy
 
 Nessuna nota specifica per il deploy.
