@@ -30,6 +30,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
@@ -135,7 +136,7 @@ class Federation extends Model
     // REALATIONSHIPS
 
     // federations.country_id > countries.id
-    public function country()
+    public function country(): BelongsTo
     {
         $country = $this->belongsTo(Country::class);
         // log
@@ -151,7 +152,7 @@ class Federation extends Model
     }
 
     // federations.id > federation_mores.federation_id
-    public function moreFedFields()
+    public function moreFedFields(): HasMany
     {
         $moreFields = $this->hasMany(FederationMore::class, 'federation_id', 'id');
         // log
@@ -159,7 +160,7 @@ class Federation extends Model
     }
 
     // federations.id > user_contact_mores.federation_id
-    public function moreUserFields()
+    public function moreUserFields(): HasMany
     {
         $moreFields = $this->hasMany(
             related: UserContactMore::class,
@@ -171,7 +172,7 @@ class Federation extends Model
     }
 
     // federations.id > user_role.federation_id
-    public function userRoles()
+    public function userRoles(): HasMany
     {
         $userRoles = $this->hasMany(
             related: UserRole::class,
@@ -182,4 +183,15 @@ class Federation extends Model
         return $userRoles;
     }
 
+    // federations.id > user_work_mores.federation_id
+    public function moreWorkFields(): HasMany
+    {
+        $moreFields = $this->hasMany(
+            related: UserWorkMore::class,
+            foreignKey: 'federation_id',
+            localKey: 'id'
+        );
+        // log
+        return $moreFields;
+    }
 }
