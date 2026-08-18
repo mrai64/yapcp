@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('federation_mores', function (Blueprint $table) {
             // reset onUpdate onDelete to restrict
-            $table->dropForeign('federation_mores_federation_id_foreign');
+            $table->dropForeign('fed_mor_fed_fk');
             //
             $table->foreign(['federation_id'], 'fed_mor_fed_fk')
                 ->references(['id'])->on('federations')
