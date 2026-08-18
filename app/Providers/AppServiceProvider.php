@@ -13,6 +13,7 @@ use App\Models\FederationSection;
 use App\Models\Organization;
 use App\Models\User;
 use App\Models\UserContact;
+use App\Observers\FederationObserver;
 use App\Observers\OrganizationObserver;
 use App\Observers\UserContactObserver;
 use App\Observers\UserObserver;
@@ -88,5 +89,6 @@ class AppServiceProvider extends ServiceProvider
         User::observe(UserObserver::class);
         UserContact::observe(UserContactObserver::class);
         Organization::observe(OrganizationObserver::class);
+        Federation::observe(FederationObserver::class);
     }
 }
