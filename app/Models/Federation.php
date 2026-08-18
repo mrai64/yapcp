@@ -133,7 +133,7 @@ class Federation extends Model
         return $federationSet;
     }
 
-    // REALATIONSHIPS
+    // RELATIONSHIPS
 
     // federations.country_id > countries.id
     public function country(): BelongsTo
