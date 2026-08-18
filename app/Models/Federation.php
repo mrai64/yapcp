@@ -225,7 +225,7 @@ class Federation extends Model
         return $contestsSet;
     }
 
-    public function activeContest(): BelongsToMany
+    public function activeContests(): BelongsToMany
     {
         $today = now()->startOfDay(); // mezzanotte UTC
         $activeContestSet = $this->contests()
