@@ -1,7 +1,7 @@
 # Feature: Nome Funzione
 
 > **Branch:** `feat/nome-funzione`  
-> **Stato:** In Corso / Revisione
+> **Stato:** In Corso / Revisione / Chiuso
 > **priorità:** A B C D E  
 > **id assegnato:** aaaa-mm-gg.nn  
 > **Titolo e urgenza:** Quello riportato nel project, solo senza [id...]  
