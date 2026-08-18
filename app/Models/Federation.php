@@ -31,27 +31,34 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 
 /**
- * @property string $id when code are equals add :country_id to both
- * @property string $country_id follow iso-3166 3 ascii uppercase
+ * @property string $id UPPER, when code are equals add :country_id to both
+ * @property string $country_id fk countries.id
  * @property string $name_en official name in english
- * @property string $local_lang follow iso-3166 2 ascii lowercase
- * @property string $name_local
- * @property string $timezone_id reserved
  * @property string $website official website or fb info page
+ * @property string $local_lang follow iso-3166 2 ascii lowercase
+ * @property string $name_local when differ from official english
+ * @property string $timezone_id HQ address
  * @property string $contact_info HQ address, email, and other infos
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Models\Country $country
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestPatronages> $contestPatronages
+ * @property-read int|null $contest_patronages_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Contest> $contests
+ * @property-read int|null $contests_count
+ * @property-read \App\Models\Country|null $country
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\FederationMore> $moreFedFields
  * @property-read int|null $more_fed_fields_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserContactMore> $moreUserFields
  * @property-read int|null $more_user_fields_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWorkMore> $moreWorkFields
+ * @property-read int|null $more_work_fields_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\FederationSection> $sections
  * @property-read int|null $sections_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $userRoles
@@ -193,5 +200,38 @@ class Federation extends Model
         );
         // log
         return $moreFields;
+    }
+
+    // federations.id > contest_patronages.federation_id
+    public function contestPatronages(): HasMany
+    {
+        $contestPatronagedSet = $this->hasMany(ContestPatronages::class);
+        // Log
+        return $contestPatronagedSet;
+    }
+
+    // federations.id > contest_patronages.federation_id > contest_patronages.contest_id > contests.id
+    public function contests(): BelongsToMany
+    {
+        $contestsSet = $this->belongsToMany(
+            related: Contest::class,
+            table: 'contest_patronages',
+            foreignPivotKey: 'federation_id',
+            relatedPivotKey: 'contest_id'
+        )
+            ->withPivot('patronage_code')
+            ->withTimestamps();
+        // Log
+        return $contestsSet;
+    }
+
+    public function activeContests(): BelongsToMany
+    {
+        $today = now()->startOfDay(); // mezzanotte UTC
+        $activeContestSet = $this->contests()
+            ->whereDate('day_1_opening', '<=', $today)
+            ->whereDate('day_8_closing', '>=', $today);
+        // Log
+        return $activeContestSet;
     }
 }
