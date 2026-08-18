@@ -48,7 +48,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $organization_id fk: organizations.id
  * @property bool $is_circuit contests joined in circuit
  * @property string|null $circuit_id null or self fk: contests.id
- * @property string|null $federation_list under patronage of federation code[]
+ * @property string $federation_list free text for federation patronages
  * @property string|null $contest_mark The contest or organization passport photo - mark
  * @property string $contact_info contest headquarter, email and so on
  * @property string|null $award_ceremony_info Site and date, or link to broadcast platform
@@ -77,6 +77,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read int|null $contest_awards_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Contest> $contestInCircuit
  * @property-read int|null $contest_in_circuit_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestPatronages> $contestPatronage
+ * @property-read int|null $contest_patronage_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestSection> $contestSections
  * @property-read int|null $contest_sections_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestVote> $contestVotes
@@ -514,5 +516,15 @@ class Contest extends Model
             ->orderBy('award_code');
         // Log::debug("Richiesta relazione globalAwards per contest: " . $this->id);
         return $awards;
+    }
+
+    /**
+     * Replace contests.federation_ist
+     */
+    public function contestPatronage(): HasMany
+    {
+        $contestPatronageSet = $this->hasMany(ContestPatronages::class);
+        // Log
+        return $contestPatronageSet;
     }
 }
