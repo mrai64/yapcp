@@ -27,19 +27,23 @@ return new class () extends Migration {
             // idx
             $table->index('user_work_id', 'user_work_idx');
             $table->index('federation_id', 'federation_idx');
-            $table->index('field_value', 'federation_fields_idx');
+            $table->index(['federation_id', 'field_value'], 'federation_fields_idx');
             $table->unique(['user_work_id', 'federation_id', 'field_name'], 'alt_primary_idx')
                 ->comment('real pk');
             // fk
             $table->foreign('user_work_id', 'fk_uwm_uw')
                 ->references('id')->on('user_works')
-                ->onUpdate('cascade')->onDelete('cascade');
+                ->onUpdate('restrict')->onDelete('restrict');
+            //
+            $table->foreign('federation_id', 'fk_uwm_fed')
+                ->references('id')->on('federations')
+                ->onUpdate('restrict')
+                ->onDelete('restrict');
             //
             $table->foreign(['federation_id', 'field_name'], 'fk_uwm_fed_more')
-                ->references(['federation_id', 'field_name'])
-                ->on('federation_mores')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->references(['federation_id', 'field_name'])->on('federation_mores')
+                ->onUpdate('restrict')
+                ->onDelete('restrict');
             // comm
             $table->comment('one more field required from federations');
         });
