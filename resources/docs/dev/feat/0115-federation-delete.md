@@ -10,10 +10,10 @@
 
 ## 📚 Documentazione Correlata
 
-- [🏠 Index](/dev/index)
-- [Federation Create](/dev/docs/0185-federation-add)
-- [Federation Read](/dev/docs/0184-federation-read)
-- [Federation Update](/dev/docs/0186-federation-update)
+- [🏠 Index](/{{route}}/dev/index)
+- [Federation Create](/{{route}}/dev/docs/0185-federation-add)
+- [Federation Read](/{{route}}/dev/docs/0184-federation-read)
+- [Federation Update](/{{route}}/dev/docs/0186-federation-update)
 
 ---
 
@@ -31,6 +31,7 @@ La cancellazione di una federazione utilizza un **Job asincrono** anziché una e
 ### Vincoli Foreign Key
 
 Tutte le foreign key sono state sistematizzate con:
+
 - `onUpdate(restrict)` - Impedisce l'aggiornamento di record correlati
 - `onDelete(restrict)` - Impedisce l'eliminazione di record correlati
 
@@ -62,9 +63,9 @@ Le seguenti migration sono state create e aggiornate per gestire i vincoli FK:
 federation
 ├── federation_sections (onDelete: restrict)
 ├── federation_mores (onDelete: restrict)
-└── user_contact_mores (onDelete: restrict via FK indiretti)
-    └── user_roles (onDelete: restrict)
-    └── user_work_mores (onDelete: restrict)
+├── user_contact_mores (onDelete: restrict via FK indiretti)
+├── user_roles (onDelete: restrict)
+└── user_work_mores (onDelete: restrict)
 ```
 
 ## 🔧 Implementazione
@@ -102,6 +103,7 @@ Tutti i seguenti controlli sono stati completati:
 ### Pre-Deploy
 
 1. **Backup Database** - Eseguire un backup completo prima di procedere
+
    ```bash
    php artisan backup:run
    ```
@@ -109,27 +111,30 @@ Tutti i seguenti controlli sono stati completati:
 2. **Esegui Migrations**
    - Ambiente di produzione: `php artisan migrate`
    - Ambiente di sviluppo: `php artisan migrate:fresh` (con seed se necessario)
+
    ```bash
    php artisan migrate
    ```
 
 3. **Verifica Integrità Database**
+
    ```bash
    php artisan db:check-constraints
    ```
 
 ### Post-Deploy
 
-4. **Esegui Suite di Test**
+1. **Esegui Suite di Test**
+
    ```bash
    php artisan test
    ```
 
-5. **Verifica Job Queue**
+2. **Verifica Job Queue**
    - Assicurarsi che il queue worker sia in esecuzione: `php artisan queue:work`
    - Monitorare i job in fallimento
 
-6. **Monitoraggio**
+3. **Monitoraggio**
    - Verificare i log per eventuali errori di eliminazione
    - Monitorare le performance del database dopo le operazioni di delete
 
@@ -142,7 +147,7 @@ Nessuna nuova variabile d'ambiente richiesta per questa feature.
 ## 📊 Stato Feature
 
 | Aspetto | Status |
-|---------|--------|
+| --------- | -------- |
 | Sviluppo | ✅ Completato |
 | Test | ✅ Passati |
 | Documentazione | ✅ Completa |
@@ -153,4 +158,4 @@ Nessuna nuova variabile d'ambiente richiesta per questa feature.
 ---
 
 **Ultima Aggiornamento:** 18 Agosto 2026  
-**Autore:** mrai64
+**Autore:** copilot per mrai64, e mrai64
