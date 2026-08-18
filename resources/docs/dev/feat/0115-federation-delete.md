@@ -31,7 +31,6 @@ La cancellazione di una federazione utilizza un **Job asincrono** anziché una e
 ### Vincoli Foreign Key
 
 Tutte le foreign key sono state sistematizzate con:
-
 - `onUpdate(restrict)` - Impedisce l'aggiornamento di record correlati
 - `onDelete(restrict)` - Impedisce l'eliminazione di record correlati
 
@@ -103,7 +102,6 @@ Tutti i seguenti controlli sono stati completati:
 ### Pre-Deploy
 
 1. **Backup Database** - Eseguire un backup completo prima di procedere
-
    ```bash
    php artisan backup:run
    ```
@@ -111,13 +109,11 @@ Tutti i seguenti controlli sono stati completati:
 2. **Esegui Migrations**
    - Ambiente di produzione: `php artisan migrate`
    - Ambiente di sviluppo: `php artisan migrate:fresh` (con seed se necessario)
-
    ```bash
    php artisan migrate
    ```
 
 3. **Verifica Integrità Database**
-
    ```bash
    php artisan db:check-constraints
    ```
