@@ -21,6 +21,13 @@ new class extends Component {
             'isAdmin' => Auth::user()->isAdmin(),
             'allFederationsSet' => Federation::query()
                 ->with(['country'])
+                ->withCount([
+                    'contests as active_contests_count' => function ($q) {
+                        $today = now()->startOfDay();
+                        $q->whereDate('day_1_opening', '<=', $today)
+                          ->whereDate('day_8_closing', '>=', $today);
+                    }
+                ])
                 ->orderBy('country_id', 'asc')
                 ->orderBy('name_en', 'asc')
                 ->paginate(10),
@@ -139,9 +146,15 @@ new class extends Component {
                                             <x-yapcp.inline-link 
                                                 txt="Update" 
                                                 url="{{ route('federation.modify', ['federation' => $federation ]) }}" />
+                                            @if ($federation->active_contests_count)
                                             <x-yapcp.inline-link 
-                                                txt="‼️ Remove ‼️" 
+                                                txt="Disabled Remove for Open contests now" 
+                                                url="#" />
+                                            @else
+                                            <x-yapcp.inline-link 
+                                                txt="0 contest open - Removable" 
                                                 url="{{ route('federation.remove', ['federation' => $federation ]) }}" />
+                                            @endif
                                         </td>
                                     </tr>
                                     @endif
