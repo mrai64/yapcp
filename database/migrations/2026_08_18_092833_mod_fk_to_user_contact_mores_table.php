@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::table('user_contact_mores', function (Blueprint $table) {
             // reset onUpdate onDelete to restrict
-            $table->dropForeign('fk_federation_mores');
-            $table->index(['federation_id', 'field_name'], 'fed_fld_nam_idx');
+            $table->dropForeign('use_con_mor_fed_fk');
+            $table->dropForeign('use_con_mor_fed_mor_fk');
             //
-            $table->foreign(['federation_id'], 'fk_federation')
+            $table->foreign(['federation_id'], 'use_con_mor_fed_fk')
                 ->references(['id'])->on('federations')
                 ->onUpdate('restrict')
                 ->onDelete('restrict');
-            $table->foreign(['federation_id', 'field_name'], 'fk_federation_mores')
+            $table->foreign(['federation_id', 'field_name'], 'use_con_mor_fed_mor_fk')
                 ->references(['federation_id', 'field_name'])->on('federation_mores')
                 ->onUpdate('restrict')
                 ->onDelete('restrict');
@@ -34,13 +34,14 @@ return new class extends Migration
     {
         Schema::table('user_contact_mores', function (Blueprint $table) {
             // reset onUpdate onDelete to restrict
-            $table->dropForeign('fk_federation');
+            $table->dropForeign('use_con_mor_fed_fk');
+            $table->dropForeign('use_con_mor_fed_mor_fk');
             //
-            $table->foreign(['federation_id'], 'fk_federation')
+            $table->foreign(['federation_id'], 'use_con_mor_fed_fk')
                 ->references(['id'])->on('federations')
                 ->onUpdate('restrict')
                 ->onDelete('restrict');
-            $table->foreign(['federation_id', 'field_name'], 'fk_federation_mores')
+            $table->foreign(['federation_id', 'field_name'], 'use_con_mor_fed_mor_fk')
                 ->references(['federation_id', 'field_name'])->on('federation_mores')
                 ->onUpdate('restrict')
                 ->onDelete('restrict');

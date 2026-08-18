@@ -43,11 +43,11 @@ return new class () extends Migration {
                 ->references(['id'])->on('user_contacts')
                 ->onUpdate('restrict')
                 ->onDelete('restrict');
-            $table->foreign(['federation_id'], 'fk_federation')
+            $table->foreign(['federation_id'], 'use_con_mor_fed_fk')
                 ->references(['id'])->on('federations')
                 ->onUpdate('restrict')
                 ->onDelete('restrict');
-            $table->foreign(['federation_id', 'field_name'], 'fk_federation_mores')
+            $table->foreign(['federation_id', 'field_name'], 'use_con_mor_fed_mor_fk')
                 ->references(['federation_id', 'field_name'])->on('federation_mores')
                 ->onUpdate('restrict')
                 ->onDelete('restrict');
