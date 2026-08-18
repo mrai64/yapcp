@@ -18,13 +18,16 @@ return new class () extends Migration {
     {
         Schema::create('contest_patronages', function (Blueprint $table) {
             $table->id();
-            $table->char('contest_id', 36)->charset('ascii')->collation('ascii_general_ci')
+            $table->char('contest_id', 36)
+                ->charset('ascii')->collation('ascii_general_ci')
                 ->index()
                 ->comment('fk for contests id');
-            $table->string('federation_id', 10)->charset('ascii')->collation('ascii_general_ci')
+            $table->string('federation_id', 10)
+                ->charset('ascii')->collation('ascii_general_ci')
                 ->index()
                 ->comment('fk federations id');
-            $table->string('patronage_code', 20)->charset('ascii')->collation('ascii_general_ci')
+            $table->string('patronage_code', 20)
+                ->charset('ascii')->collation('ascii_general_ci')
                 ->comment('');
             //
             $table->dateTime('created_at')->useCurrent();
@@ -33,17 +36,20 @@ return new class () extends Migration {
             // idx
             // contest_idx
             // federation_idx
-            // TODO review: as is the same fed patronage code should be assigned twice
-            // TODO   from same federation for 2 contest
-            // TODO   evaluate only ['federation_id', 'patronage_code']
-            $table->unique(['contest_id', 'federation_id', 'patronage_code'], 'alt_primary_idx');
+            $table->unique(['contest_id', 'federation_id'], 'con_fed_idx');
+            $table->unique(['federation_id', 'patronage_code'], 'fed_cod_idx');
             // fk
+            $table->foreign('contest_id', 'con_pat_con_fk')
+                ->references('id')->on('contests')
+                ->onUpdate('restrict')
+                ->onDelete('restrict');
+            //
             $table->foreign('federation_id', 'con_pat_fed_fk')
                 ->references('id')->on('federations')
                 ->onUpdate('restrict')
                 ->onDelete('restrict');
             //
-            $table->comment('additional values for user_contacts based on federation_mores');
+            $table->comment('list of federation sponsor code');
         });
     }
 
