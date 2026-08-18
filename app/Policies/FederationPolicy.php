@@ -52,6 +52,12 @@ class FederationPolicy
         Log::info('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
         $evaluate = $user->isAdmin();
         Log::info('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        if (!$evaluate) {
+            return false;
+        }
+        //
+        $evaluate = ($federation->activeContests()->exists());
+        Log::info('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
         return $evaluate;
     }
 
@@ -67,6 +73,12 @@ class FederationPolicy
         // for all federation - only for user in admin group
         Log::info('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
         $evaluate = $user->isAdmin();
+        Log::info('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        if (!$evaluate) {
+            return false;
+        }
+        //
+        $evaluate = ($federation->activeContests()->exists());
         Log::info('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
         return $evaluate;
     }
