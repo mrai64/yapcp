@@ -58,8 +58,9 @@ class FederationPolicy
     /**
      * Determine whether the user can delete the model.
      *
-     * TODO Cannot remove federation with contest sponsored running
-     * TODO check there is no running contest sponsored by federation id.
+     * Must be both
+     * - user is admin
+     * - zero running contest sponsored by federation
      */
     public function delete(User $user, Federation $federation): bool
     {
