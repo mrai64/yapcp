@@ -59,9 +59,10 @@ return new class () extends Migration {
             $table->foreign(['referenced'], 'reference_fk')
                 ->references(['id'])->on('federation_mores_referenced_sets')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign(['federation_id'])
+            $table->foreign(['federation_id'], 'federation_fk')
                 ->references(['id'])->on('federations')
-                ->onUpdate('cascade')->onDelete('cascade');
+                ->onUpdate('restrict')
+                ->onDelete('restrict');
             //
         });
     }
