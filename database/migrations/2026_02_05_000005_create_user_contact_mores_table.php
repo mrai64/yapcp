@@ -35,15 +35,22 @@ return new class () extends Migration {
             $table->dateTime('deleted_at')->nullable()->index();
             // idx
             $table->unique(['user_id', 'federation_id', 'field_name'], 'alt_primary_idx');
-            $table->index(['federation_id', 'field_name'], 'federation_idx');
-            $table->index('user_id', 'user_idx');
+            $table->index(['user_id'], 'user_idx');
+            $table->index(['federation_id'], 'federation_idx');
+            $table->index(['federation_id', 'field_name'], 'fed_fld_nam_idx');
             // fk
             $table->foreign(['user_id'], 'fk_user_contacts')
                 ->references(['id'])->on('user_contacts')
-                ->onUpdate('restrict')->onDelete('restrict');
+                ->onUpdate('restrict')
+                ->onDelete('restrict');
+            $table->foreign(['federation_id'], 'fk_federation')
+                ->references(['id'])->on('federations')
+                ->onUpdate('restrict')
+                ->onDelete('restrict');
             $table->foreign(['federation_id', 'field_name'], 'fk_federation_mores')
                 ->references(['federation_id', 'field_name'])->on('federation_mores')
-                ->onUpdate('restrict')->onDelete('restrict');
+                ->onUpdate('restrict')
+                ->onDelete('restrict');
             //
             $table->comment('additional values for user_contacts based on federation_mores');
         });
