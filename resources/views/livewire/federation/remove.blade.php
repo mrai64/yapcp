@@ -2,7 +2,7 @@
 
 /**
  * Federation remove by admin
- * 
+ *
  */
 
 use App\Models\Federation;
@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Livewire\Volt\Component;
 
-new class extends Component {
-    
+new class () extends Component {
     public Federation $federation;
     public string $federationId;
     public string $federationCountryId;
@@ -38,7 +37,9 @@ new class extends Component {
 
     public function removeFederation()
     {
-        Log::info('User admin ['. Auth::user()->id . ' ' . Auth::user()->name . '] request remove of federation: ' . json_encode($federation));
+        Log::info('User admin ['. Auth::user()->id . ' ' . Auth::user()->name
+            . '] request remove of federation: '
+            . json_encode($this->federation));
         $this->federation->delete();
 
         return redirect()
@@ -53,7 +54,9 @@ new class extends Component {
             {{ __('Remove Federation') }}
         </h2>
         <hr class="mb-4" />
-        <p class="small text-red-600">‼️ {{ __('LAST LAST CALL. Are you SURE to delete that?') }}</p>
+        <p class="fyk text-2xl font-medium text-red-600">
+            ‼️ {{ __('WAIT A MINUTE. Are you SURE to delete that?') }}
+        </p>
         <hr class="mb-4" />
         <x-yapcp.header-link 
             txt="Back to User dashboard" 
@@ -62,7 +65,7 @@ new class extends Component {
 			txt="Federation list" 
 			url="{{ route('federation.listed') }}" />
 		<x-yapcp.header-link 
-			txt="Federation Update" 
+			txt="Update" 
 			url="{{ route('federation.modify', ['federation' => $federation]) }}" />
     </x-slot>
 
@@ -90,7 +93,7 @@ new class extends Component {
 
                 <form wire:submit="removeFederation">
                     @csrf
-                    
+
                     <!-- federationId -->
                     <div class="mb-4">
                         <x-input-label for="federationId" :value="__('Federation ID')" />
@@ -132,23 +135,28 @@ new class extends Component {
                         <style>textarea {resize:vertical;}</style>
                         <x-input-label for="federationContactInfo" :value="__('Contact info, HQ postal address, english')" />
                         <textarea 
-                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
-                        type="text" name="federationContactInfo"
-                        wire:model="federationContactInfo"
-                        disabled
+                            class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                            type="text" name="federationContactInfo"
+                            wire:model="federationContactInfo"
+                            disabled
                         >{{ old('federationContactInfo') }}</textarea>
                     </div>
 
                     <br style="clear:both;" />
 
+                    @if ($federation->activeContests()->exists())
+                    <x-yapcp.inline-link 
+                        txt="Disabled Remove for Open contests now" 
+                        url="#" />
+                    @else
                     <x-button class="mt-2 ms-4">
                         {{ __('LAST CALL. Are you SURE to delete that?') }}
                     </x-button>
+                    @endif
                 </form>
-
             </div>
         </div>
+        <!-- -->
+        <x-footer-app />
     </div>
-    <!-- -->
-    <x-footer-app />
 </div>
