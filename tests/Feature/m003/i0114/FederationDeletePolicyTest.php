@@ -88,7 +88,6 @@ test('delete endpoint returns 403 for non-admin user', function () {
 
     // Il middleware 'can:delete,federation' blocca con 403
     $response->assertStatus(403);
-
     // Verifica che la federazione non sia stata eliminata
     $this->assertDatabaseHas('federations', ['id' => $this->federation->id]);
 });
@@ -104,7 +103,6 @@ test('delete endpoint access allowed when no active contests and user is admin',
 
 test('delete endpoint returns 403 when active contests are present even for admin', function () {
     $now = now();
-
     // Crea concorso attivo legato alla federazione
     $contest = Contest::factory()->create([
         'organization_id' => Organization::factory()->create()->id,
