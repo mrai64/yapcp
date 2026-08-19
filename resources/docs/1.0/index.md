@@ -56,3 +56,4 @@
   - [✅Federation List](/{{route}}/{{version}}/admin/federation/read)
   - [✅Add new federation](/{{route}}/{{version}}/admin/federation/add)
   - [✅Modify federation](/{{route}}/{{version}}/admin/federation/modify)
+  - [✅Remove a federation](/{{route}}/{{version}}/admin/federation/remove)
