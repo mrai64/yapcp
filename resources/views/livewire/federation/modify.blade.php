@@ -12,7 +12,7 @@ use Livewire\Volt\Component;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 
-new class extends Component {
+new class () extends Component {
     public Federation $federation;
     public string $federationId;
     public string $federationCountryId;
@@ -41,10 +41,10 @@ new class extends Component {
     {
         return [
             'federationId'          => [
-                'required', 'string', 'uppercase', 'min:2', 'max:10', 
+                'required', 'string', 'uppercase', 'min:2', 'max:10',
                 Rule::unique(Federation::class, 'id')
                     ->whereNull('deleted_at')
-                    ->ignore($this->federation->id) 
+                    ->ignore($this->federation->id)
                 ],
             'federationCountryId'   => 'required|string|uppercase|min:3|exists:countries,id',
             'federationNameEn'      => 'required|string|min:3|max:255',
