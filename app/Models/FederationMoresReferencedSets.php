@@ -32,4 +32,8 @@ class FederationMoresReferencedSets extends Model
 
     public $incrementing = false; // Fondamentale
     protected $keyType = 'string';
+
+    protected $fillable = [
+        'id',
+    ];
 }

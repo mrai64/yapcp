@@ -1,7 +1,7 @@
 # Feature: Nome Funzione
 
 > **Branch:** `feat/nome-funzione`  
-> **Stato:** In Corso / Revisione
+> **Stato:** In Corso / Revisione / Chiuso
 > **priorità:** A B C D E  
 > **id assegnato:** aaaa-mm-gg.nn  
 > **Titolo e urgenza:** Quello riportato nel project, solo senza [id...]  
@@ -21,7 +21,7 @@ Spiega qui il "perché" hai scelto una certa soluzione (es. "Uso un Job invece d
 
 > <!-- to avoid index -->
 - [x] Creata migration `create_xxx_table`
-- [ ] Aggiunto campo `status` a `users`
+- [ ] Lorem ipsum
 - [ ] Lorem ipsum
 
 ## 👮‍♂️ Pre Merge check
