@@ -2,7 +2,7 @@
 
 /**
  * Federation listed
- * 
+ *
  */
 
 use App\Models\Federation;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Volt\Component;
 use Livewire\WithPagination;
 
-new class extends Component {
+new class () extends Component {
     use WithPagination;
 
     // mount() no

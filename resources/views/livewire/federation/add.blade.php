@@ -8,8 +8,8 @@
 use App\Models\Federation;
 use Livewire\Volt\Component;
 
-new class extends Component {
 
+new class () extends Component {
     public Federation $federation;
 
     public string $federationId;
