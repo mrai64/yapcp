@@ -30,9 +30,7 @@ Si richiede che la cancellazione di una `Federation` sia consentita **solo a un 
 
 ## 🗄️ Modifiche al Database
 
-> <!-- to avoid index -->
-Nessuna modifica prevista. Se decidete di aggiungere indici per performance, si aggiungerà una migration.
-
+Nessuna modifica alle migrazioni o allo schema del database.
 
 ## 👮‍♂️ Pre Merge check
 
@@ -45,10 +43,4 @@ Nessuna modifica prevista. Se decidete di aggiungere indici per performance, si 
 
 ## 🚀 Note per il Deploy
 
-> <!-- to avoid index -->
-Niente da segnalare
-
-
----
-
-Co-autore: GitHub Copilot <copilot@github.com>
+Nessuna nota specifica per il deploy.
