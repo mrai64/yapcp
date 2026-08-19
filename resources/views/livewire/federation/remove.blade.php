@@ -6,8 +6,9 @@
  */
 
 use App\Models\Federation;
-use Livewire\Volt\Component;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Livewire\Volt\Component;
 
 new class extends Component {
     
@@ -37,6 +38,7 @@ new class extends Component {
 
     public function removeFederation()
     {
+        Log::info('User admin ['. Auth::user()->id . ' ' . Auth::user()->name . '] request remove of federation: ' . json_encode($federation));
         $this->federation->delete();
 
         return redirect()
