@@ -27,7 +27,7 @@ new class extends Component {
 			->where('federation_id', $this->federation->id)
 			->orderBy('code')
 			->get();
-		$this->isAdmin = Auth::user()->isAdmin();
+        $this->isAdmin = Auth::user()->isAdmin();
 	}
 
 }; ?>
@@ -54,7 +54,7 @@ new class extends Component {
 		<x-yapcp.header-link 
 			txt="Federation list" 
 			url="{{ route('federation.listed') }}" />
-			@if ($this->isAdmin)
+		@if ($this->isAdmin)
 		<x-yapcp.header-link 
 			txt="Add a Federation Section" 
 			url="{{ route('federation-section.add', ['federation' => $this->federation]) }}" />
@@ -153,8 +153,8 @@ new class extends Component {
 					<br />
 					{{ __('No section n themes registered for that.' ) }}
 				</p>
-				@endif
-			</div>
+        @endif
+    </div>
 		</div>
 	</div>
 	<!-- -->
