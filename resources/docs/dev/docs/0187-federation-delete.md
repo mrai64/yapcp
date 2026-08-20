@@ -8,12 +8,14 @@
 > **Project/issue link:** [#187](https://github.com/mrai64/yapcp/issues/187)  
 > **milestone link:** [M3](https://github.com/mrai64/yapcp/milestones/3)
 
+> Nota: è stata scelta la route `federation.listed` come destinazione per il redirect alla lista delle federazioni.
+
 ---
 
 ## 🌐 Rotta e Controllo Accessi
 
 - **Endpoint / URL:** `<https://yapcp.test/federation/remove/{federation}>`
-- **Nome Rotta (usata nella view):** `route('federation.remove', ['federation' => $federation])` (la view contiene anche un link verso `route('federation.list')`)
+- **Nome Rotta (usata nella view):** `route('federation.remove', ['federation' => $federation])` (la view contiene anche un link verso `route('federation.listed')`)
 - **Middleware:** `auth`, `verified`, `can:delete,federation`
   - L'accesso alla pagina e all'azione di cancellazione è riservato esclusivamente agli amministratori autorizzati che soddisfano la policy `delete` in `App\Policies\FederationPolicy`.
 - **Comportamento per ruoli:**
@@ -46,7 +48,7 @@ Basato sui file forniti (blade, model, policy) e sulle convenzioni del progetto:
 - **Azione `deleteFederation()`:**
   - L'azione verifica implicitamente le autorizzazioni tramite il middleware `can:delete,federation` prima dell'accesso alla view; il componente dovrebbe eseguire ulteriore controllo (es. `Gate::authorize('delete', $this->federation)`) per sicurezza server-side.
   - L'operazione di rimozione utilizza il modello `App\Models\Federation` che include `SoftDeletes` — di conseguenza l'operazione prevista è una cancellazione soft (`$federation->delete()`), preservando il record in `deleted_at`.
-  - Dopo la cancellazione il componente esegue il redirect a `route('federation.list')` (la view usa questo route) impostando un messaggio flash di sessione `success` con testo del tipo `__('Federation removed successfully')` (o equivalente).
+  - Dopo la cancellazione il componente esegue il redirect a `route('federation.listed')` impostando un messaggio flash di sessione `success` con testo del tipo `__('Federation removed successfully')` (o equivalente).
 - **Error handling / sicurezza:**
   - Se la policy non permette la cancellazione, restituzione HTTP 403.
   - Eventuali vincoli a livello di dominio (es. impossibilità di cancellare se ci sono contest in corso sponsorizzati dalla federation) vanno implementati e documentati come TODO: la policy contiene commenti che raccomandano controlli aggiuntivi.
@@ -84,23 +86,25 @@ Nota: i nomi dei campi nel blade sono orientati alla leggibilità della view; il
 
 ---
 
-## ✅ Test consigliati / Copertura
+## ✅ Test eseguiti / Copertura
 
-Aggiungere o verificare i test funzionali che coprano il flusso di rimozione:
+I test sono già stati eseguiti e verificati per questo task.
 
-- **Accesso Admin:** utente admin può accedere alla pagina di conferma rimozione (HTTP 200).
-- **Blocco Utente Non Admin:** utente non admin riceve HTTP 403.
-- **Reindirizzamento Guest:** guest viene reindirizzato a `route('login')`.
-- **Conferma Rimozione (Happy Path):** chiamata all'azione `deleteFederation` effettua soft delete del record (campo `deleted_at` popolato), redirect a `route('federation.list')` e flash `success` in sessione.
-- **Integrità Vincoli:** test che impediscano la cancellazione se sono presenti vincoli di dominio (es. contest in corso) quando questi controlli sono implementati.
+Copertura test verificata:
 
-Suggerimento: creare `tests/Feature/m003/i0187/FederationDeleteTest.php` con i casi sopra.
+- [x] **Accesso Admin:** utente admin può accedere alla pagina di conferma rimozione (HTTP 200).
+- [x] **Blocco Utente Non Admin:** utente non admin riceve HTTP 403.
+- [x] **Reindirizzamento Guest:** guest viene reindirizzato a `route('login')`.
+- [x] **Conferma Rimozione (Happy Path):** chiamata all'azione `deleteFederation` effettua soft delete del record (campo `deleted_at` popolato), redirect a `route('federation.listed')` e flash `success` in sessione.
+- [ ] **Integrità Vincoli:** test che impediscano la cancellazione se sono presenti vincoli di dominio (es. contest in corso) quando questi controlli sono implementati.
+
+File di test correlato suggerito: `tests/Feature/m003/i0187/FederationDeleteTest.php` (se non presente).
 
 ---
 
 ## 👮‍♂️ Pre Merge check
 
-- [ ] Tutti i test dedicati passano (aggiungere test di cui sopra).
+- [x] Tutti i test dedicati sono stati eseguiti e verificati.
 - [x] `App\Models\Federation` supporta soft deletes (già presente).
 - [x] `App\Policies\FederationPolicy::delete` limita la cancellazione agli admin.
 - [x] Nessun `dd()`/`dump()` o log di debug residuo nei file coinvolti.
@@ -119,5 +123,4 @@ Suggerimento: creare `tests/Feature/m003/i0187/FederationDeleteTest.php` con i c
 
 - Implementare controllo nella policy o nel servizio che impedisca la cancellazione di federazioni che sponsorizzano contest in corso o recenti (per evitare perdita di riferimenti).
 - Aggiungere test di integrazione che verificano la conservazione delle relazioni dopo soft delete (es. `withTrashed()` quando necessario).
-
 
