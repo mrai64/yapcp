@@ -134,6 +134,9 @@ class ContestVote extends Model
 
     // RELATIONSHIPs
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne<\App\Models\Contest, $this>
+     */
     public function contest(): HasOne
     {
         $contest = $this->hasOne(
@@ -146,6 +149,9 @@ class ContestVote extends Model
     }
 
     // was: contest_section
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne<\App\Models\ContestSection, $this>
+     */
     public function contestSection(): HasOne
     {
         $contestSection = $this->hasOne(
@@ -157,6 +163,9 @@ class ContestVote extends Model
         return $contestSection;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\ContestWork, $this>
+     */
     public function contestWork(): BelongsTo
     {
         $work = $this->belongsTo(
@@ -169,6 +178,9 @@ class ContestVote extends Model
     }
 
     // was: user_contact
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne<\App\Models\UserContact, $this>
+     */
     public function userContact(): HasOne
     {
         $userContact = $this->hasOne(

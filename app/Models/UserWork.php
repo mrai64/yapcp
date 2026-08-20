@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Author' works, that be holded to participate in Contest
+ *
+ */
 namespace App\Models;
 
 use App\Observers\UserWorkObserver;
@@ -42,10 +46,8 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFileFormat($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFileHeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFilePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFileSize($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereFileWidth($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereHasRawFile($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereHeight($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserWork whereId($value)
@@ -132,15 +134,7 @@ class UserWork extends Model
             'short_size' => 'integer',
             'is_landscape' => 'boolean',
             'is_monochromatic' => 'boolean',
-            'has_raw_file' => 'boolean',
-            'file_size' => 'integer',
-            'width' => 'integer',
-            'height' => 'integer',
-            'long_size' => 'integer',
-            'short_size' => 'integer',
-            'is_landscape' => 'boolean',
-            'is_monochromatic' => 'boolean',
-            'has_raw_file' => 'boolean',
+            'has_raw_file'     => 'boolean',
 
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -172,6 +166,9 @@ class UserWork extends Model
     // build and use shortcode:
     // user_works.user_id > user_contacts.id
     // was: user_contact
+    /**
+     * @property User $user
+     */
     public function user(): BelongsTo
     {
         $user = $this->belongsTo(
@@ -187,6 +184,9 @@ class UserWork extends Model
     // build and use shortcode:
     // user_works.user_id > user_contacts.id
     // was: user_contact
+    /**
+     * @property UserContact $userContact
+     */
     public function userContact(): BelongsTo
     {
         $userContact = $this->belongsTo(
@@ -199,6 +199,9 @@ class UserWork extends Model
     }
 
     // user_works.id > user_work_mores.user_work_id
+    /**
+     * @property UserWorkMore $userWorksMoreSet
+     */
     public function userWorkMore(): HasMany
     {
         $userWorksMoreSet = $this->hasMany(
