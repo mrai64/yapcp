@@ -1,9 +1,9 @@
 <?php
 
 /**
- * For future use
+ * ContestPatronage define the list of almost one Federation
+ *   sponsoring a contest, with its code
  *
- * Will replace the federation
  *
  */
 
@@ -11,7 +11,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Log;
 
 /**
  * @method static \Database\Factories\ContestPatronagesFactory factory($count = null, $state = [])
@@ -37,6 +39,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronages withoutTrashed()
  * @mixin \Eloquent
  */
+
 class ContestPatronages extends Model
 {
     /** @use HasFactory<\Database\Factories\ContestPatronagesFactory> */
@@ -68,6 +71,16 @@ class ContestPatronages extends Model
     }
 
     // RELATIONS
-
-
+    public function contest(): BelongsTo
+    {
+        $contest = $this->belongsTo(Contest::class);
+        // Log
+        return $contest;
+    }
+    public function federation(): BelongsTo
+    {
+        $federation = $this->belongsTo(Federation::class);
+        // Log
+        return $federation;
+    }
 }

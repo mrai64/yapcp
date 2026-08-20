@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * User_roles is a 3d matrix table between
+ *  users - user_contacts
+ *  and user_roles_role_sets
+ *  and a time windows valid role_opening .. role_closing
+ *
+ */
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -66,17 +74,20 @@ return new class () extends Migration {
                 'role',
                 'role_opening'
             ], 'fed_user_idx');
+            //
             // fk
             $table->foreign(['user_id'], 'user_fk')->references(['id'])->on('users')
-                ->onUpdate('cascade')->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('cascade'); // TODO cascade -> restrict
             $table->foreign(['organization_id'], 'org_fk')->references(['id'])->on('organizations')
-                ->onUpdate('cascade')->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('cascade'); // TODO cascade -> restrict
             $table->foreign(['contest_id'], 'contest_fk')->references(['id'])->on('contests')
-                ->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign(['federation_id'], 'federation_fk')->references(['id'])->on('federations')
-                ->onUpdate('cascade')->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('cascade'); // TODO cascade -> restrict
+            $table->foreign(['federation_id'], 'use_rol_fed_fk')
+                ->references(['id'])->on('federations')
+                ->onUpdate('restrict')
+                ->onDelete('restrict');
             $table->foreign(['role'], 'roles_role_fk')->references(['role'])->on('user_roles_role_sets')
-                ->onUpdate('cascade')->onDelete('cascade');
+                ->onUpdate('cascade')->onDelete('cascade'); // TODO cascade -> restrict
         });
     }
 

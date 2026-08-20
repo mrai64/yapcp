@@ -2,7 +2,7 @@
 
 /**
  * Federation listed
- * 
+ *
  */
 
 use App\Models\Federation;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Volt\Component;
 use Livewire\WithPagination;
 
-new class extends Component {
+new class () extends Component {
     use WithPagination;
 
     // mount() no
@@ -18,8 +18,16 @@ new class extends Component {
     public function with()
     {
         return [
+            'isAdmin' => Auth::user()->isAdmin(),
             'allFederationsSet' => Federation::query()
                 ->with(['country'])
+                ->withCount([
+                    'contests as active_contests_count' => function ($q) {
+                        $today = now()->startOfDay();
+                        $q->whereDate('day_1_opening', '<=', $today)
+                          ->whereDate('day_8_closing', '>=', $today);
+                    }
+                ])
                 ->orderBy('country_id', 'asc')
                 ->orderBy('name_en', 'asc')
                 ->paginate(10),
@@ -42,11 +50,13 @@ new class extends Component {
         <x-yapcp.header-link 
             txt="Back to User dashboard" 
             url="{{ route('user.dashboard') }}" />
+        @if ($isAdmin)
         <x-yapcp.header-link 
             txt="Add New Federation" 
             url="{{ route('federation.add') }}" />
+        @endif
     </x-slot>
-    
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
@@ -77,50 +87,86 @@ new class extends Component {
                 <dl class="space-y-6">
                     @foreach ($allFederationsSet as $federation)
                         <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-500 hover:border-indigo-300 transition-colors relative">
-                            <dt class="fyk text-2xl font-bold text-indigo-700">
-                                {{ $federation->country?->flag_code }} {{ $federation->country?->country }} 
-                                <br />
-                                {{ $federation->name_en }}
-                            </dt>
 
-                            <dd class="mt-2">
-                                {{ __('Official website') }}: <br/>
-                                {{ ($federation->website) ? $federation->website : 'N\A'}}
-                            </dd>
-
-                            <dd class="mt-2">
-                                {{ __('Contact Info') }}: <br/>
-                                {{ $federation->contact_info ? $federation->contact_info : 'N\A' }}
-                            </dd>
-
-                            <dd class="mt-2">
-                                {{ __('Language code') }}: <br/>
-                                {{ ($federation->local_lang) ? $federation->local_lang : 'N\A'}}
-                            </dd>
-
-                            <dd class="mt-2">
-                                {{ __('Local Name') }}: <br/>
-                                <span lang="{{$federation->local_lang}}">
-                                    {{ ($federation->name_local) ? $federation->name_local : 'N\A'}}
-                                </span>
-                            </dd>
-
-                            <dd class="mt-2">
-                                {{ __('Timezone') }}: <br/>
-                                {{ ($federation->timezone_id) ? $federation->timezone_id : 'N\A'}}
-                            </dd>
-
-                            <dd class="mt-2">
-                                <x-yapcp.inline-link 
-                                    txt="Update" 
-                                    url="{{ route('federation.modify', ['federation' => $federation ]) }}" />
-                                <x-yapcp.inline-link 
-                                    txt="‼️ Remove ‼️" 
-                                    url="{{ route('federation.remove', ['federation' => $federation ]) }}" />
-                                <x-yapcp.inline-link 
-                                    txt="Federation Sections" 
-                                    url="{{ route('federation-section.listed', ['federation' => $federation ]) }}" />
-                            </dd>
+                            <table class="data-table-container w-full">
+                                <tbody>
+                                    <tr>
+                                        <td class="fyk text-2xl font-bold w-60">
+                                            {{ $federation->country?->flag_code }} {{ $federation->country?->country }}
+                                        </td>
+                                        <td class="fyk text-2xl font-bold w-auto">
+                                            {{ $federation->id }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="">
+                                            &nbsp;
+                                        </td>
+                                        <td class="fyk text-2xl font-bold">
+                                            {{ $federation->name_en }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="w-60">
+                                            {{ __('Official website') }}:
+                                        </td>
+                                        <td class="w-auto">
+                                            {{ ($federation->website) ? $federation->website : 'N\A'}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="w-60">
+                                            {{ __('Contact Info') }}:
+                                        </td>
+                                        <td class="w-auto">
+                                            {{ $federation->contact_info ? $federation->contact_info : 'N\A' }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="w-60">
+                                            {{ __('Timezone') }}:
+                                        </td>
+                                        <td class="w-auto">
+                                            {{ ($federation->timezone_id) ? $federation->timezone_id : 'N\A'}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="w-60">
+                                            {{ __('Local Name') }} [ {{ ($federation->local_lang) ? $federation->local_lang : 'N\A'}} ]: 
+                                        </td>
+                                        <td class="w-auto">
+                                            <span lang="{{$federation->local_lang}}">
+                                                {{ ($federation->name_local) ? $federation->name_local : 'N\A'}}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    @if ($isAdmin)
+                                    <tr>
+                                        <td colspan="2">
+                                            <x-yapcp.inline-link 
+                                                txt="Update" 
+                                                url="{{ route('federation.modify', ['federation' => $federation ]) }}" />
+                                            @if ($federation->active_contests_count)
+                                            <x-yapcp.inline-link 
+                                                txt="Disabled Remove for Open contests now" 
+                                                url="#" />
+                                            @else
+                                            <x-yapcp.inline-link 
+                                                txt="0 contest open - Removable" 
+                                                url="{{ route('federation.remove', ['federation' => $federation ]) }}" />
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @endif
+                                    <tr>
+                                        <td colspan="2">
+                                            <x-yapcp.inline-link 
+                                                txt="Federation Sections" 
+                                                url="{{ route('federation-section.listed', ['federation' => $federation ]) }}" />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
 
                         </div>
                     @endforeach

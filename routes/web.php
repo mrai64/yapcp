@@ -151,15 +151,15 @@ Volt::route('/organization/design/contest-section/add/{contest}', 'organization.
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-section.add');
 Volt::route(
-        '/organization/design/contest-section/modify/{contest_section}',
-        'organization.design.contest-section.modify'
-    )
+    '/organization/design/contest-section/modify/{contest_section}',
+    'organization.design.contest-section.modify'
+)
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-section.modify');
 Volt::route(
-        '/organization/design/contest-section/remove/{contest_section}',
-        'organization.design.contest-section.remove'
-    )
+    '/organization/design/contest-section/remove/{contest_section}',
+    'organization.design.contest-section.remove'
+)
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-section.remove');
 
@@ -202,11 +202,12 @@ Volt::route('/organization/design/contest/detail/{contest}', 'organization.desig
 
 /**
  * Federation
- * for admin
  */
+// for all
 Volt::route('/federation/listed', 'federation.listed')
     ->middleware(['auth', 'verified'])
     ->name('federation.listed');
+// for admin group
 Volt::route('/federation/add', 'federation.add')
     ->middleware(['auth', 'verified', 'can:create,' . ModelsFederation::class])
     ->name('federation.add');

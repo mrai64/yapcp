@@ -67,6 +67,7 @@ E se manca qualcosa, [ditelo 📧](mailto:massimo.rainato@gmail.com).
 - ## Amministratori
 
   - il primo utente censito in piattaforma fa parte di un gruppo organization denominata admin, di seguito viene indicato come utente admin o solamente admin
+  - utente admin può vedere una versione della lista federazioni arricchita con pulsanti azione, e può aggiungere, modificare, rimuovere federazioni quando queste non sono più attive e non hanno in corso concorsi a loro patrocinio.
   - utente admin può accedere all'elenco degli iscritti alla piattaforma
   - utente admin può modificare alcuni dati degli utenti della piattaforma
   - utente admin può chiudere l'accredito di alcuni utenti della piattaforma
