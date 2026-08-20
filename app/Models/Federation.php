@@ -143,6 +143,9 @@ class Federation extends Model
     // RELATIONSHIPS
 
     // federations.country_id > countries.id
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Country, $this>
+     */
     public function country(): BelongsTo
     {
         $country = $this->belongsTo(Country::class);
@@ -151,6 +154,9 @@ class Federation extends Model
     }
 
     // federations.id > federation_sections.federation_id
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\FederationSection, $this>
+     */
     public function sections(): HasMany
     {
         $federationSectionsSet = $this->hasMany(FederationSection::class, 'federation_id', 'id');
@@ -159,6 +165,9 @@ class Federation extends Model
     }
 
     // federations.id > federation_mores.federation_id
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\FederationMore, $this>
+     */
     public function moreFedFields(): HasMany
     {
         $moreFields = $this->hasMany(FederationMore::class, 'federation_id', 'id');
@@ -167,6 +176,9 @@ class Federation extends Model
     }
 
     // federations.id > user_contact_mores.federation_id
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\UserContactMore, $this>
+     */
     public function moreUserFields(): HasMany
     {
         $moreFields = $this->hasMany(
@@ -179,6 +191,9 @@ class Federation extends Model
     }
 
     // federations.id > user_role.federation_id
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\UserRole, $this>
+     */
     public function userRoles(): HasMany
     {
         $userRoles = $this->hasMany(
@@ -191,6 +206,9 @@ class Federation extends Model
     }
 
     // federations.id > user_work_mores.federation_id
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\UserWorkMore, $this>
+     */
     public function moreWorkFields(): HasMany
     {
         $moreFields = $this->hasMany(
@@ -203,6 +221,9 @@ class Federation extends Model
     }
 
     // federations.id > contest_patronages.federation_id
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ContestPatronages, $this>
+     */
     public function contestPatronages(): HasMany
     {
         $contestPatronagedSet = $this->hasMany(ContestPatronages::class);
