@@ -91,7 +91,7 @@ $saveNewFederationSection = function () {
         . ' federationSection:' . json_encode($federationSection) );
     // redirect
     return redirect()
-        ->route('federation-section.list', ['federation' => $this->federation])
+        ->route('federation-section.listed', ['federation' => $this->federation])
         ->with('success', __('New federation-section added, well done!'));
 
 }; 
@@ -111,7 +111,7 @@ $saveNewFederationSection = function () {
             {{ __("I.e. the federation card id si a federation-more field, when surname not, it´s a common field.") }}
         </p>
         <p class="fyk text-xl font-medium mb-4">
-            <a href="{{ route('federation-section.list', ['federation' => $federation] ) }}"
+            <a href="{{ route('federation-section.listed', ['federation' => $federation] ) }}"
                 rel="noopener noreferrer">
                 [ {{ __("Back to Federation Section list") }} ]
             </a>
