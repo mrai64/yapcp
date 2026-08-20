@@ -10,7 +10,7 @@
 
 ---
 
-## Matrice dei permessi 
+##  Matrice dei permessi
 
 | Ruolo / Gruppo | Lista delle Federazioni \_R\__ | Accesso ai Form C\_UD | Sottomissione Form |
 | :--- | :---: | :---: | :---: |
@@ -20,7 +20,7 @@
 
 ## 🌐 Rotta e Controllo Accessi
 
-### Read - Lista delle Federazioni
+###  Read - Lista delle Federazioni
 
 - **Endpoint / URL:** `<https://yapcp.test/federation/listed>`
 - **Nome Rotta:** `route('federation.listed')`
@@ -85,6 +85,14 @@
       - **"Back to User dashboard"** (`route('user.dashboard')`) per tornare alla dashboard utente.
       - **"Federation list"** (`route('federation.listed')`) per tornare all'elenco delle federazioni.
 
-## Protezione CSRF obbligatoria
+##  Protezione CSRF obbligatoria
 
 È presente in tutti i form di scrittura/modifica/eliminazione.
+
+## Controlli nelle blade per mostrare / nascondere
+
+- resources/views/livewire/federation/listed.blade.php — elemento: pulsante "Add New Federation" e pulsanti link "Update", "Remove"  — condizione Blade: direttiva (@if) presente nel template — visibilità: il pulsante viene visualizzato a condizione che sia ($user->isAdmin()); l'autorizzazione viene gestita lato server/Livewire (vedi: <https://github.com/mrai64/yapcp/blob/64600eabe3d669dfe613e7fb92d8c22c25c7b1dc/resources/views/livewire/federation/listed.blade.php>).
+
+- resources/views/livewire/federation/modify.blade.php — elemento: form di modifica + pulsante "Update" — condizione Blade: nessuna direttiva (@if/@can/@role) presente nel template — visibilità: il controllo UI è reso incondizionatamente; l'autorizzazione deve essere gestita lato server/Livewire (vedi: <https://github.com/mrai64/yapcp/blob/64600eabe3d669dfe613e7fb92d8c22c25c7b1dc/resources/views/livewire/federation/modify.blade.php>).
+
+- resources/views/livewire/federation/remove.blade.php — elemento: form di rimozione + pulsante "Confirm" — condizione Blade: nessuna direttiva (@if/@can/@role) presente nel template — visibilità: il controllo UI è reso incondizionatamente; l'autorizzazione deve essere gestita lato server/Livewire (vedi: <https://github.com/mrai64/yapcp/blob/64600eabe3d669dfe613e7fb92d8c22c25c7b1dc/resources/views/livewire/federation/remove.blade.php>).
