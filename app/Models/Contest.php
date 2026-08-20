@@ -226,6 +226,7 @@ class Contest extends Model
             'day_6_awards'       => 'immutable_datetime',
             'day_7_catalogues'   => 'immutable_datetime',
             'day_8_closing'      => 'immutable_datetime',
+
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
@@ -309,6 +310,9 @@ class Contest extends Model
     // RELATIONSHIPs
 
     // contests.country_id > countries.id
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Country, $this>
+     */
     public function country(): BelongsTo
     {
         $country = $this->belongsTo(
@@ -321,8 +325,12 @@ class Contest extends Model
     }
 
     // federation list
+    // TODO ContestPatronage
 
     // contests.timezone_id > timezones.id
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Timezone, $this>
+     */
     public function timezone(): BelongsTo
     {
         //  = $this->belongsTo(Timezone::class);
@@ -336,6 +344,9 @@ class Contest extends Model
     }
 
     // contests.organization_id > organizations.id
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo<\App\Models\Organization, $this>
+     */
     public function organization(): BelongsTo
     {
         $organization = $this->belongsTo(
@@ -362,6 +373,9 @@ class Contest extends Model
     // contest_juries.section_id > contest_sections.id > contests.id
 
     // contest_awards.contest_id > contests.id
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ContestAward, $this>
+     */
     public function contestAwards(): HasMany
     {
         $contestAwardsSet = $this->hasMany(
@@ -374,6 +388,9 @@ class Contest extends Model
     }
 
     // contest_participants.contest_id > contests.id
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ContestParticipant, $this>
+     */
     public function participants(): HasMany
     {
         $participants = $this->hasMany(
@@ -386,6 +403,9 @@ class Contest extends Model
     }
 
     // contest_sections.contest_id > contests.id
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ContestSection, $this>
+     */
     public function contestSections(): HasMany
     {
         $sec = $this->hasMany(ContestSection::class);
@@ -393,6 +413,9 @@ class Contest extends Model
         return $sec;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ContestSection, $this>
+     */
     public function sections(): HasMany
     {
         $sec = $this->hasMany(ContestSection::class);
@@ -402,6 +425,9 @@ class Contest extends Model
 
     //
     // contest_votes
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ContestVote, $this>
+     */
     public function contestVotes(): HasMany
     {
         $contestVotes = $this->hasMany(
@@ -414,6 +440,9 @@ class Contest extends Model
     }
 
     // contest_waitings.contest_id contests.id
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ContestWaiting, $this>
+     */
     public function contestWaitings(): HasMany
     {
         $contestWaitings = $this->hasMany(
@@ -426,6 +455,9 @@ class Contest extends Model
     }
 
     // contest_waitings.contest_id contests.id
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ContestWaiting, $this>
+     */
     public function waitings(): HasMany
     {
         $contestWaitings = $this->hasMany(
@@ -438,6 +470,9 @@ class Contest extends Model
     }
 
     // contest_works
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ContestWork, $this>
+     */
     public function contestWorks(): HasMany
     {
         $contestWorksSet = $this->hasMany(
@@ -450,6 +485,9 @@ class Contest extends Model
     }
 
     // user_contests.contest_id contests.id
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\UserRole, $this>
+     */
     public function userRoles(): HasMany
     {
         $userRoles = $this->hasMany(
@@ -496,6 +534,9 @@ class Contest extends Model
     }
 
     // all the awards
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ContestAward, $this>
+     */
     public function awards(): HasMany
     {
         $awards = $this->hasMany(ContestAward::class)
@@ -509,6 +550,9 @@ class Contest extends Model
     /**
      * Only the Contest award (no section == global award)
      */
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ContestAward, $this>
+     */
     public function globalAwards(): HasMany
     {
         $awards = $this->hasMany(ContestAward::class)
@@ -520,6 +564,9 @@ class Contest extends Model
 
     /**
      * Replace contests.federation_ist
+     */
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ContestPatronages, $this>
      */
     public function contestPatronage(): HasMany
     {
