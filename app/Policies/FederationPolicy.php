@@ -22,7 +22,8 @@ class FederationPolicy
      */
     public function view(User $user, Federation $federation): bool
     {
-        // view for all
+        // for all federation - view for all
+        Log::info('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
         return true;
     }
 
