@@ -12,7 +12,6 @@ use App\Models\Contest;
 use App\Models\Federation;
 use App\Models\Organization;
 use App\Models\User;
-use App\Models\UserRole;
 use Illuminate\Support\Facades\Log;
 
 beforeEach(function () {
