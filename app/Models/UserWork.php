@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
-
 /**
  * @property string $id
  * @property string $user_id
@@ -163,7 +162,7 @@ class UserWork extends Model
         return $miniature;
     }
 
-    // public function photoBox() 
+    // public function photoBox()
     // warn: photobox is based on user_contacts.country_id, user_contacts.last_name,
     //       user_contacts.first_name, so check userContact->photoBox()
 

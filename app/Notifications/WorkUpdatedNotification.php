@@ -4,7 +4,6 @@ namespace App\Notifications;
 
 use App\Models\UserWork;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -17,7 +16,8 @@ class WorkUpdatedNotification extends Notification
      */
     public function __construct(
         public UserWork $userWork
-    ) {}
+    ) {
+    }
 
     /**
      * Get the notification's delivery channels.
@@ -34,7 +34,7 @@ class WorkUpdatedNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        return (new MailMessage)
+        return (new MailMessage())
             ->subject('Activity in your yaPCP Gallery')
             ->line('We would like to inform you that one of the works displayed in your gallery has just been updated.')
             ->line('Join yaPCP than see your Gallery.')
