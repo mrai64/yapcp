@@ -169,8 +169,8 @@ new class extends Component {
 					<br />
 					{{ __('No section n themes registered for that.' ) }}
 				</p>
-				@endif
-			</div>
+        @endif
+    </div>
 		</div>
 	</div>
 	<!-- -->
