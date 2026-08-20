@@ -115,15 +115,10 @@ $modifyFederationSection = function () {
             {{ __("I.e. the federation card id si a federation-more field, when surname not, it´s a common field.") }}
         </p>
         <p class="fyk text-xl font-medium mb-4">
-            <x-yapcp.header-link 
-                txt="Back to User dashboard" 
-                url="{{ route('user.dashboard') }}" />
-            <x-yapcp.header-link 
-                txt="Federation list" 
-                url="{{ route('federation.listed') }}" />
-            <x-yapcp.header-link 
-                txt="Federation Section list" 
-                url="{{ route('federation-section.listed', ['federation' => $federation] ) }}" />
+            <a href="{{ route('federation-section.list', ['federation' => $federationSection->federation_id] ) }}"
+                rel="noopener noreferrer">
+                [ {{ __("Back to Federation Section list") }} ]
+            </a>
         </p>
     </x-slot>
     <div class="py-12">
