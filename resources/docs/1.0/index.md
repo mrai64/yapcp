@@ -24,6 +24,7 @@
   - [✅Personal Gallery](/{{route}}/{{version}}/users/personal_gallery) 
   - [Participate to contest](#)
   - [✅See Federation List](/{{route}}/{{version}}/users/federation_list)
+  - [✅See Federation Section List](/{{route}}/{{version}}/users/federation_section_list)
 
 - ## You as Contest Organizer
 
