@@ -4,7 +4,7 @@
  * ContestPatronage define the list of almost one Federation
  *   sponsoring a contest, with its code
  *
- *
+ * !!! it's ContestPatronage! not ContestPatronages, ContestPatronage.
  */
 
 namespace App\Models;

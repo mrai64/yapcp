@@ -139,6 +139,9 @@ class Organization extends Model
     // RELATIONSHIP
 
     // organizations.country_id > countries.id
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne<\App\Models\Country, $this>
+     */
     public function country(): HasOne
     {
         $country = $this->hasOne(Country::class, 'id', 'country_id');
@@ -147,6 +150,9 @@ class Organization extends Model
     }
 
     // organizations.id > contests.organization_id
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\Contest, $this>
+     */
     public function contests(): HasMany
     {
         $contests = $this->hasMany(
@@ -159,6 +165,9 @@ class Organization extends Model
     }
 
     // organizations.id > user_roles.organization_id
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\UserRole, $this>
+     */
     public function userRoles(): HasMany
     {
         return $this->hasMany(
