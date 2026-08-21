@@ -32,15 +32,18 @@ can add a user in the admin group.
 ## For Platform
 
 ### Federations
-  - [The Fed List](/{{route}}/{{version}}/admin/federation/read)
-  - [Edit](/resources/docs/1.0/admin/federation/add.md) [Add a new Federation](/{{route}}/{{version}}/admin/federation/add)
-  - Modify Federation
-  - Remove Federation
 
-### Federation Sections
-  - New Federation Section
-  - Modify Federation Section
+- [The Fed List](/{{route}}/{{version}}/admin/federation/read)
+- [Add a new Federation](/{{route}}/{{version}}/admin/federation/add)
+- Modify Federation
+- Remove Federation
+
+###  Federation Sections
+
+- New Federation Section
+- Modify Federation Section
 
 ### Others for Platform
-  - New Admin nominee
-  - Admin
+
+- New Admin nominee
+- Admin
