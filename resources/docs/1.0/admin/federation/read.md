@@ -19,6 +19,7 @@ honors to the best photographers.
 
 In yaPCP for every Federation are exposed:
 
+><!-- -->
 - the Country flag n English name
 - The Federation' ID Code
 - The international Federation name
@@ -32,10 +33,12 @@ In yaPCP for every Federation are exposed:
 
 And over all, for admin only, an Add New Federation link.
 
-Not admin user view 
+&nbsp;  
 
+*Not admin* user view
 ![Federation List not admin view](/docs/federations/read_img01.png)
 
-Admin user view 
+&nbsp; 
 
+*Admin* user view
 ![Federation List admin view](/docs/federations/read_img02.png)

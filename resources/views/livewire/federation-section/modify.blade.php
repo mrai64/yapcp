@@ -94,7 +94,7 @@ $modifyFederationSection = function () {
         . ' federationSection updated' );
     // redirect
     return redirect()
-        ->route('federation-section.list', ['federation' => $this->federation])
+        ->route('federation-section.listed', ['federation' => $this->federation])
         ->with('success', __('Federation section updated, well done!'));
 
 }; 
@@ -113,7 +113,7 @@ $modifyFederationSection = function () {
             {{ __("I.e. the federation card id si a federation-more field, when surname not, it´s a common field.") }}
         </p>
         <p class="fyk text-xl font-medium mb-4">
-            <a href="{{ route('federation-section.list', ['federation' => $federationSection->federation_id] ) }}"
+            <a href="{{ route('federation-section.listed', ['federation' => $federationSection->federation_id] ) }}"
                 rel="noopener noreferrer">
                 [ {{ __("Back to Federation Section list") }} ]
             </a>
