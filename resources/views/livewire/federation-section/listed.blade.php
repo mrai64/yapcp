@@ -142,7 +142,7 @@ new class extends Component {
                 <dd class="px-5">
                     {{ $section->unique_prize ? '✅ YES' : '❌ NO' }}
                     | 
-                    {{ __('Not cumulable prizes in section') }} 
+                    {{ __('Not cumulabile prizes in section') }} 
                 </dd>
             </div>
             @endforeach
