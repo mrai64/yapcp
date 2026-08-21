@@ -100,7 +100,6 @@ new class extends Component {
 								<x-yapcp.inline-link 
 										txt="‼️ Remove" 
 										url="{{ route('federation-section.delete', ['federation_section' => $section]) }}" />
-
 								</dd>
 								@endif
 
@@ -129,7 +128,7 @@ new class extends Component {
 								</dd>
 
 								<dd class="px-5">
-										{{ $section->monochrome_required ? '✅ YES' : '❌ NO' }}
+										{{ $section->monochromatic_required ? '✅ YES' : '❌ NO' }}
 										| 
 										{{ __('Monochrome only') }}
 								</dd>
