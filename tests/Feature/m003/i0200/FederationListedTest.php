@@ -27,7 +27,7 @@ test('regular user can access federation listed page via HTTP get', function () 
         ->assertDontSee(__('Add New Federation'))
         ->assertDontSee(route('federation.add'))
         ->assertDontSee('Update')
-        ->assertDontSee('‼️ Remove ‼️');
+        ->assertDontSee('Removable');
 });
 
 test('admin user can access federation listed page via HTTP get and sees admin controls', function () {
@@ -45,7 +45,7 @@ test('admin user can access federation listed page via HTTP get and sees admin c
         ->assertSee(route('federation.add'))
         ->assertSee('Update')
         ->assertSee(route('federation.modify', ['federation' => $firstFederation]))
-        ->assertSee('‼️ Remove ‼️')
+        ->assertSee('Removable')
         ->assertSee(route('federation.remove', ['federation' => $firstFederation]));
 });
 
@@ -72,7 +72,7 @@ test('regular user renders Volt component with federations but without modificat
         // Update and Remove links must NOT be visible for regular users
         ->assertDontSee('Update')
         ->assertDontSee(route('federation.modify', ['federation' => $firstFederation]))
-        ->assertDontSee('‼️ Remove ‼️')
+        ->assertDontSee('Removable')
         ->assertDontSee(route('federation.remove', ['federation' => $firstFederation]));
 });
 
@@ -90,7 +90,7 @@ test('admin user renders Volt component with federations and with modification a
         // Update and Remove links MUST be visible for admin users
         ->assertSee('Update')
         ->assertSee(route('federation.modify', ['federation' => $firstFederation]))
-        ->assertSee('‼️ Remove ‼️')
+        ->assertSee('Removable')
         ->assertSee(route('federation.remove', ['federation' => $firstFederation]));
 });
 
