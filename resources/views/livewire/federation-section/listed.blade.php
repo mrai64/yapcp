@@ -54,11 +54,11 @@ new class extends Component {
 		<x-yapcp.header-link 
 			txt="Federation list" 
 			url="{{ route('federation.listed') }}" />
-        @if ($this->isAdmin)
+			@if ($this->isAdmin)
 		<x-yapcp.header-link 
 			txt="Add a Federation Section" 
 			url="{{ route('federation-section.add', ['federation' => $this->federation]) }}" />
-        @endif
+		@endif
 	</x-slot>
 
 	<div class="py-12">
