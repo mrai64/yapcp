@@ -94,12 +94,12 @@ new class extends Component {
 
 								@if ($this->isAdmin)
 								<dd class="px-5">
-								<x-yapcp.inline-link 
-										txt="Update" 
-										url="{{ route('federation-section.modify', ['federation_section' => $section]) }}" />
-								<x-yapcp.inline-link 
-										txt="‼️ Remove" 
-										url="{{ route('federation-section.delete', ['federation_section' => $section]) }}" />
+                  <x-yapcp.inline-link 
+                      txt="Update" 
+                      url="{{ route('federation-section.modify', ['federation_section' => $section]) }}" />
+                  <x-yapcp.inline-link 
+                      txt="‼️ Remove" 
+                      url="{{ route('federation-section.delete', ['federation_section' => $section]) }}" />
 								</dd>
 								@endif
 
@@ -153,8 +153,8 @@ new class extends Component {
 					<br />
 					{{ __('No section n themes registered for that.' ) }}
 				</p>
-				@endif
-			</div>
+        @endif
+    </div>
 		</div>
 	</div>
 	<!-- -->
