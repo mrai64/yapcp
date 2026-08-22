@@ -66,3 +66,4 @@
 
   - [✅List](/{{route}}/{{version}}/admin/federation_section/listed)
   - [✅Add](/{{route}}/{{version}}/admin/federation_section/add)
+  - [✅Modify](/{{route}}/{{version}}/admin/federation_section/modify)
