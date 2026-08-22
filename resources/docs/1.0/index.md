@@ -57,11 +57,12 @@
 
 - ## Federations
 
-  - [✅Federation List](/{{route}}/{{version}}/admin/federation/read)
-  - [✅Add new federation](/{{route}}/{{version}}/admin/federation/add)
-  - [✅Modify federation](/{{route}}/{{version}}/admin/federation/modify)
-  - [✅Remove a federation](/{{route}}/{{version}}/admin/federation/remove)
+  - [✅List](/{{route}}/{{version}}/admin/federation/read)
+  - [✅Add](/{{route}}/{{version}}/admin/federation/add)
+  - [✅Modify](/{{route}}/{{version}}/admin/federation/modify)
+  - [✅Remove](/{{route}}/{{version}}/admin/federation/remove)
 
 - ## Federation' Sections
 
-  - [✅Federation Section List](/{{route}}/{{version}}/admin/federation_section/listed)
+  - [✅List](/{{route}}/{{version}}/admin/federation_section/listed)
+  - [✅Add](/{{route}}/{{version}}/admin/federation_section/add)
