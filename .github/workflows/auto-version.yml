@@ -6,6 +6,8 @@ on:
       # era: - main  # Si attiva solo quando invii modifiche al ramo main
       # diventa:
       - '**' # qualsiasi push su qualsiasi branch
+    tags-ignore:
+      - '**' # ingora creazione invio di tag
 
 jobs:
   bump-version:
