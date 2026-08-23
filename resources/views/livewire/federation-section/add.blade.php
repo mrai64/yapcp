@@ -48,7 +48,7 @@ rules( function (){
         'min_works' => 'required|integer|min:0|max:20',
         'max_works' => 'required|integer|min:1|max:20',
         'short_size_max' => 'required|integer|min:1080|max:2500',
-        'long_size_max' => 'required|integer|min:1080|max:2500',
+        'long_size_max' => 'required|integer|min:1080|max:4000',
         'file_size_max' => 'required|integer|min:100000|max:6000000',
         'monochromatic_required' => 'boolean:strict',
         'raw_required' => 'boolean:strict',
@@ -91,7 +91,7 @@ $saveNewFederationSection = function () {
         . ' federationSection:' . json_encode($federationSection) );
     // redirect
     return redirect()
-        ->route('federation-section.list', ['federation' => $this->federation])
+        ->route('federation-section.listed', ['federation' => $this->federation])
         ->with('success', __('New federation-section added, well done!'));
 
 }; 
@@ -111,10 +111,15 @@ $saveNewFederationSection = function () {
             {{ __("I.e. the federation card id si a federation-more field, when surname not, it´s a common field.") }}
         </p>
         <p class="fyk text-xl font-medium mb-4">
-            <a href="{{ route('federation-section.list', ['federation' => $federation] ) }}"
-                rel="noopener noreferrer">
-                [ {{ __("Back to Federation Section list") }} ]
-            </a>
+            <x-yapcp.header-link 
+                txt="Back to User dashboard" 
+                url="{{ route('user.dashboard') }}" />
+            <x-yapcp.header-link 
+                txt="Federation list" 
+                url="{{ route('federation.listed') }}" />
+            <x-yapcp.header-link 
+                txt="Federation Section list" 
+                url="{{ route('federation-section.listed', ['federation' => $federation] ) }}" />
         </p>
     </x-slot>
     <div class="py-12">
@@ -126,7 +131,7 @@ $saveNewFederationSection = function () {
                 <!-- federation-section code -->
                 <div class="mb-4">
                     <x-input-label for="code" :value="__('Section Id, Code')" />
-                    <x-text-input wire:model="code" id="code" class="block mt-1 w-full" type="text" name="code" required placeholder="{{ __('Only uppercase chars, upto 10 chars') }}"/>
+                    <x-text-input wire:model="code" id="code" class="block mt-1 w-60" type="text" name="code" required placeholder="{{ __('Only uppercase chars, 2 upto 10 chars') }}"/>
                     <x-input-error for="code" class="mt-2" />
                 </div>
                 <!--/federation-section code -->
@@ -141,17 +146,23 @@ $saveNewFederationSection = function () {
 
 
                 <!-- federation-section synopsis -->
-                <div class="mb-4">
-                    <x-input-label for="synopsis" :value="__('Section definition, Synopsis')" />
-                    <x-text-input wire:model="synopsis" id="synopsis" class="block mt-1 w-full" type="text" name="synopsis" required placeholder="{{ __('From official docs, ev. translated in english text') }}" />
-                    <x-input-error for="synopsis" class="mt-2" />
-                </div>
+                    <div class="mb-4">
+                        <style>textarea {resize:vertical;}</style>
+                        <x-input-label for="synopsis" :value="__('Section definition, Synopsis')" />
+                        <textarea 
+                        class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                        type="text" name="synopsis"
+                        wire:model="synopsis"
+                        required placeholder="{{ __('From official docs, ev. translated in english text') }}"
+                        >{{ old('synopsis') }}</textarea>
+                        <x-input-error for="synopsis" class="mt-2" />
+                    </div>
                 <!--/federation-section synopsis -->
 
                 <!-- federation-section min works number-->
                 <div class="mb-4">
                     <x-input-label for="min_works" :value="__('Minimum works number for Section - from 0 to 20')" />
-                    <x-text-input wire:model="min_works" id="min_works" class="block mt-1 w-full" type="number" name="min_works" required placeholder="{{ __('Integer, from 0 to 20') }}" min="0" max="20" />
+                    <x-text-input wire:model="min_works" id="min_works" class="block mt-1 w-60" type="number" name="min_works" required placeholder="{{ __('Integer, from 0 to 20') }}" min="0" max="20" />
                     <x-input-error for="min_works" class="mt-2" />
                 </div>
                 <!--/federation-section min works number-->
@@ -159,7 +170,7 @@ $saveNewFederationSection = function () {
                 <!-- federation-section max works number-->
                 <div class="mb-4">
                     <x-input-label for="max_works" :value="__('Maximum works number for Section - from 1 to 20')" />
-                    <x-text-input wire:model="max_works" id="max_works" class="block mt-1 w-full" type="number" name="max_works" required placeholder="{{ __('Integer, from 1 to 20') }}" min="0" max="20" />
+                    <x-text-input wire:model="max_works" id="max_works" class="block mt-1 w-60" type="number" name="max_works" required placeholder="{{ __('Integer, from 1 to 20') }}" min="1" max="20" />
                     <x-input-error for="max_works" class="mt-2" />
                 </div>
                 <!--/federation-section max works number-->
@@ -167,7 +178,7 @@ $saveNewFederationSection = function () {
                 <!-- federation-section short side size px -->
                 <div class="mb-4">
                     <x-input-label for="short_size_max" :value="__('Max size for shortest side - px')" />
-                    <x-text-input wire:model="short_size_max" id="short_size_max" class="block mt-1 w-full" type="number" name="short_size_max" required placeholder="{{ __('Integer, from 1 to 20') }}" min="1080" max="2500" />
+                    <x-text-input wire:model="short_size_max" id="short_size_max" class="block mt-1 w-60" type="number" name="short_size_max" required placeholder="{{ __('Integer, from 1080 .. 2500') }}" min="1080" max="2500" />
                     <x-input-error for="short_size_max" class="mt-2" />
                 </div>
                 <!-- federation-section short side size px -->
@@ -175,7 +186,7 @@ $saveNewFederationSection = function () {
                 <!-- federation-section long side size px -->
                 <div class="mb-4">
                     <x-input-label for="long_size_max" :value="__('Max size for longest side - px')" />
-                    <x-text-input wire:model="long_size_max" id="long_size_max" class="block mt-1 w-full" type="number" name="long_size_max" required placeholder="{{ __('Integer, from 1 to 20') }}" min="1080" max="2500" />
+                    <x-text-input wire:model="long_size_max" id="long_size_max" class="block mt-1 w-60" type="number" name="long_size_max" required placeholder="{{ __('Integer, from 1080 .. 4000') }}" min="1080" max="4000" />
                     <x-input-error for="long_size_max" class="mt-2" />
                 </div>
                 <!-- federation-section short side size px -->
@@ -183,7 +194,7 @@ $saveNewFederationSection = function () {
                 <!-- federation-section file-size Bytes -->
                 <div class="mb-4">
                     <x-input-label for="file_size_max" :value="__('Max size for file size - B')" />
-                    <x-text-input wire:model="file_size_max" id="file_size_max" class="block mt-1 w-full" type="number" name="file_size_max" required placeholder="{{ __('Integer, from 100000     to 6000000') }}" min="100000" max="6000000" />
+                    <x-text-input wire:model="file_size_max" id="file_size_max" class="block mt-1 w-60" type="number" name="file_size_max" required placeholder="{{ __('Integer, from 100000 (for 100KB) .. 6000000 (for 6MB)') }}" min="100000" max="6000000" />
                     <x-input-error for="file_size_max" class="mt-2" />
                 </div>
                 <!--/federation-section file-size Bytes -->
@@ -192,7 +203,7 @@ $saveNewFederationSection = function () {
                 <div class="mb-4">
                     <label for="monochromatic_required" class="ms-2 text-sm text-gray-600">
                         <x-checkbox wire:model="monochromatic_required" id="monochromatic_required" name="monochromatic_required" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" />
-                        {{ __('Exclusively monochromatic images') }}
+                        <span class="fyk text-xl font-medium ">{{ __('Exclusively monochromatic images') }}</span>
                     </label>
                     <x-input-error for="monochromatic_required" class="mt-2" />
                 </div>
@@ -202,7 +213,7 @@ $saveNewFederationSection = function () {
                 <div class="mb-4">
                     <label for="raw_required" class="ms-2 text-sm text-gray-600">
                         <x-checkbox wire:model="raw_required" id="raw_required" name="raw_required" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" />
-                        {{ __('Original RAW should be required') }}
+                        <span class="fyk text-xl font-medium ">{{ __('Original RAW should be required') }}</span>
                     </label>
                     <x-input-error for="raw_required" class="mt-2" />
                 </div>
@@ -212,18 +223,17 @@ $saveNewFederationSection = function () {
                 <div class="mb-4">
                     <label for="unique_prize" class="ms-2 text-sm text-gray-600">
                         <x-checkbox wire:model="unique_prize" id="unique_prize" name="unique_prize" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" />
-                        {{ __('Only A prize for author in section') }}
+                        <span class="fyk text-xl font-medium ">{{ __('One prize only, per author per section') }}</span>
                     </label>
                     <x-input-error for="unique_prize" class="mt-2" />
                 </div>
                 <!-- federation-section Cumulative prizes On/Off -->
 
-                <p>&nbsp;</p>
-                <button type="submit" 
-                    class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-3"
-                    >
-                    {{ __('Add New') }}
-                </button>
+                    <br style="clear:both;" />
+
+                    <x-button class="mt-2 ms-4">
+                        {{ __('Check all, then Add') }}
+                    </x-button>
             </form>
         </div>
     </div>

@@ -21,9 +21,10 @@
   - [✅Lost Password?](/{{route}}/{{version}}/users/registration#lost-password)
   - [✅Contact Info](/{{route}}/{{version}}/users/contact_infos)
   - [✅Personal Dashboard](/{{route}}/{{version}}/users/dashboard)
-  - [✅Personal Gallery](/{{route}}/{{version}}/users/personal_gallery) 
+  - [✅Personal Gallery](/{{route}}/{{version}}/users/personal_gallery)
   - [Participate to contest](#)
   - [✅See Federation List](/{{route}}/{{version}}/users/federation_list)
+  - [✅See Federation Section List](/{{route}}/{{version}}/users/federation_section_list)
 
 - ## You as Contest Organizer
 
@@ -53,7 +54,17 @@
 - ## You as platform minister
 
   - [✍️ edit](/resources/docs/1.0/admin/overview.md) [What admins can do](/{{route}}/{{version}}/admin/overview)
-  - [✅Federation List](/{{route}}/{{version}}/admin/federation/read)
-  - [✅Add new federation](/{{route}}/{{version}}/admin/federation/add)
-  - [✅Modify federation](/{{route}}/{{version}}/admin/federation/modify)
-  - [✅Remove a federation](/{{route}}/{{version}}/admin/federation/remove)
+
+- ## Federations
+
+  - [✅List](/{{route}}/{{version}}/admin/federation/read)
+  - [✅Add](/{{route}}/{{version}}/admin/federation/add)
+  - [✅Modify](/{{route}}/{{version}}/admin/federation/modify)
+  - [✅Remove](/{{route}}/{{version}}/admin/federation/remove)
+
+- ## Federation' Sections
+
+  - [✅List](/{{route}}/{{version}}/admin/federation_section/listed)
+  - [✅Add](/{{route}}/{{version}}/admin/federation_section/add)
+  - [✅Modify](/{{route}}/{{version}}/admin/federation_section/modify)
+  - [✅Remove](/{{route}}/{{version}}/admin/federation_section/remove)

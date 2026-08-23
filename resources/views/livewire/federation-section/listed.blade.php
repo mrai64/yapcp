@@ -1,4 +1,4 @@
-'<?php
+<?php
 
 /**
  * Federation Section Listed
@@ -7,6 +7,7 @@
 
 use App\Models\Federation;
 use App\Models\FederationSection;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Volt\Component;
 use Livewire\WithPagination;
 
@@ -23,8 +24,10 @@ new class extends Component {
 	{
 		$this->federation = $federation;
 		$this->sectionSet = FederationSection::query()
+			->where('federation_id', $this->federation->id)
 			->orderBy('code')
 			->get();
+		$this->isAdmin = Auth::user()->isAdmin();
 	}
 
 }; ?>
@@ -51,11 +54,15 @@ new class extends Component {
 		<x-yapcp.header-link 
 			txt="Federation list" 
 			url="{{ route('federation.listed') }}" />
+			@if ($this->isAdmin)
+		<x-yapcp.header-link 
+			txt="Add a Federation Section" 
+			url="{{ route('federation-section.add', ['federation' => $this->federation]) }}" />
+		@endif
 	</x-slot>
-	
+
 	<div class="py-12">
 		<div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-
 			<div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
 				<!-- success -->
 				@if (session('success'))
@@ -74,61 +81,80 @@ new class extends Component {
 					</ul>
 				</div>
 				@endif
-				
+
+				@if ($sectionSet->count())
 				<dl class="space-y-6">
-					<dl>
 						@foreach ($sectionSet as $section)
 						<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-500 hover:border-indigo-300 transition-colors relative">
-							<dt class="fyk text-2xl font-bold text-indigo-700">
-								{{ __('Code et Name')}}: 
-								{{ $section->code }}
-								_
-								{{ $section->name_en }}
-							</dt>
-							
-							<dd class="mt-2">
-								{{ __('Synopsis') }}
-								__
-								{{ $section->synopsis ?? 'N\A' }}
-							</dd>
-							
-							<dd class="mt.2">
-								{{ __('List of file extension') }}:
-								{{ $section->file_formats }}
-							</dd>
-							
-							<dd class="mt-2">
-								{{ __('Min / max works') }}: 
-								{{ __('min') }}: {{ $section->min_works }}
-								{{ __('to')  }}
-								{{ __('max') }}: {{ $section->max_works }}
-							</dd>
+								<dt class="fyk text-2xl font-bold text-indigo-700">
+										{{ $section->code }}
+										_
+										{{ $section->name_en }}
+								</dt>
 
-							<dd class="mt-2">
-								{{ __('Max side size') }}: 
-								{{ __('for short side :ssize, for long side: :lsize', ['ssize' => $section->short_size_max, 'lsize' => $section->long_size_max, ] ) }}
-							</dd>
+								@if ($this->isAdmin)
+								<dd class="px-5">
+                  <x-yapcp.inline-link 
+                      txt="Update" 
+                      url="{{ route('federation-section.modify', ['federation_section' => $section]) }}" />
+                  <x-yapcp.inline-link 
+                      txt="‼️ Remove" 
+                      url="{{ route('federation-section.delete', ['federation_section' => $section]) }}" />
+								</dd>
+								@endif
 
-							<dd class="mt-2">
-								{{ $section->monochrome_required ? '✅ YES' : '❌ NO' }}
-								{{ __('Monochrome only') }}: 
-							</dd>
+								<dd class="px-5 mt-2">
+										{{ __('Synopsis') }}
+										<br />
+										{{ $section->synopsis ?? 'N\A' }}
+										<br />
+								</dd>
 
-							<dd class="mt-2">
-								{{ $section->raw_required ? '✅ YES' : '❌ NO' }}
-								{{ __('RAW when asked') }}: 
-							</dd>
+								<dd class="px-5">
+										{{ __('List of file extension') }}:
+										{{ $section->file_formats }}
+								</dd>
 
-							<dd class="mt-2">
-								{{ $section->unique_prize ? '✅ YES' : '❌ NO' }}
-								{{ __('Not cumulable prizes in section') }}: 
-							</dd>
+								<dd class="px-5">
+										{{ __('Min / max # works') }}: 
+										{{ __('min') }}: {{ $section->min_works }}
+										{{ __('to')  }}
+										{{ __('max') }}: {{ $section->max_works }}
+								</dd>
 
-						</div>
+								<dd class="px-5">
+										{{ __('Max px') }}: 
+										{{ __(':shortsize for short side, and :longsize for long side', ['shortsize' => $section->short_size_max, 'longsize' => $section->long_size_max, ] ) }}
+								</dd>
 
-						@endforeach
-					</dl>
-					</div>
+                <dd class="px-5">
+                    {{ $section->monochromatic_required ? '✅ YES' : '❌ NO' }}
+                    | 
+                    {{ __('Monochrome only') }}
+                </dd>
+
+                <dd class="px-5">
+                    {{ $section->raw_required ? '✅ YES' : '❌ NO' }}
+                    | 
+                    {{ __('RAW when asked') }}
+                </dd>
+
+                <dd class="px-5">
+                    {{ $section->unique_prize ? '✅ YES' : '❌ NO' }}
+                    | 
+                    {{ __('Not cumulable prizes in section') }} 
+                </dd>
+            </div>
+            @endforeach
+        </dl>
+        @else
+				<p class="fyk font-semibold text-2xl text-gray-800 leading-tight fyk">
+					{{ $federation->name_en }}
+					<br />
+					{{ __('No section n themes registered for that.' ) }}
+				</p>
+        @endif
+    </div>
 		</div>
 	</div>
 	<!-- -->
