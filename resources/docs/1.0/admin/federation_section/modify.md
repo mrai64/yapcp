@@ -1,11 +1,11 @@
-# Modify a Federatin Section
+# Modify a Federation Section
 
 ---
 
 Usually Federation sections don't need update, think if a
 regulation change may impact on future salons they can be coded
-as new using last two digit of year i.e. 'OC' for running
-Salons and a OC:27 for new Salons.
+as new using last two digit of year i.e. remain `OC` for running
+Salons, and a new `OC:27` for next Salons which apply.
 
 &nbsp;
 
