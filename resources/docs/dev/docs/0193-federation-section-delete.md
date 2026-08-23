@@ -40,7 +40,7 @@ La procedura gestisce la rimozione in sicurezza di una sezione federativa (`Fede
 ## 👮‍♂️ Pre Merge check
 
 > <!-- to avoid index in Larecipe -->
-- [ ] **Test:** Tutti i test (nuovi ed esistenti) passano in verde (`php artisan test`)?
+- [x] **Test:** Tutti i test (nuovi ed esistenti) passano in verde (`php artisan test`)?
 - [x] **Docs:** Il file in `/resources/docs/dev/` è aggiornato?
 - [x] **Manual:** Il manuale utente riflette le modifiche introdotte?
 - [x] **Cleanup:** Ho rimosso eventuali `dd()` o `dump()` dimenticati?
