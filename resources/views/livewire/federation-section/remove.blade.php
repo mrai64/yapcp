@@ -50,6 +50,24 @@ mount( function (FederationSection $federation_section) {
     $this->uniquePrize = $federation_section->unique_prize;
 });
 
+// to validate
+rules( function (){
+    Log::info('Component ' . __FILE__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+    return [
+        'sectionNameEn' => 'required|string|min:3|max:255',
+        'synopsis' => 'required|string',
+        'minWorks' => 'required|integer|min:0|max:20',
+        'maxWorks' => 'required|integer|min:1|max:20',
+        'shortSizeMax' => 'required|integer|min:1080|max:2500',
+        'longSizeMax' => 'required|integer|min:1080|max:2500',
+        'fileSizeMax' => 'required|integer|min:100000|max:6000000',
+        'monochromaticRequired' => 'boolean', // maybe boolean:strict but... too much
+        'rawRequired' => 'boolean',
+        'uniquePrize' => 'boolean',
+    ];
+
+});
+
 // to act
 $removeFederationSection = function () {
     Log::info('Component ' . __FILE__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
