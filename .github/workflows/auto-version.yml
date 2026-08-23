@@ -3,7 +3,9 @@ name: Auto Bump Version
 on:
   push:
     branches:
-      - main  # Si attiva solo quando invii modifiche al ramo main
+      # era: - main  # Si attiva solo quando invii modifiche al ramo main
+      # diventa:
+      - '**' # qualsiasi push su qualsiasi branch
 
 jobs:
   bump-version:
