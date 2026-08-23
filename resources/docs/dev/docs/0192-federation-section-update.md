@@ -18,7 +18,6 @@
   - Accesso inibito con errore **HTTP 403 Forbidden** per utenti sprovvisti di privilegi amministrativi.
   - Reindirizzamento automatico alla rotta `login` per utenti non autenticati (guest).
 
-
 ---
 
 ## 📝 Logica Tecnica
@@ -37,10 +36,7 @@
   - `monochromatic_required`, `raw_required`, `unique_prize`: `boolean`
 - **Azione di Salvataggio (`modifyFederationSection`):** Esegue la validazione dei dati inviati, aggiorna il record del modello `FederationSection` impostando anche `local_lang => 'en'`, `local_name => name_en` e `file_formats => 'jpg'`. Effettua il redirect alla rotta `federation-section.listed` passando il parametro `federation` e inviando un messaggio di successo (`with('success', ...)`).
 
-
 ---
-
-## 🗄️ Campi del Modulo e Mappatura Database
 
 ## 🗄️ Campi del Modulo e Mappatura Database
 
@@ -63,7 +59,6 @@
 ---
 
 ## 🗄️ Modifiche al Database
-
 
 - Nessuna nuova migrazione richiesta: le colonne utilizzate sono già definite e gestite nella tabella `federation_sections`.
 
