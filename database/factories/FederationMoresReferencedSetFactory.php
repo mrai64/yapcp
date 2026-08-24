@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\FederationMoresReferencedSets>
  */
-class FederationMoresReferencedSetsFactory extends Factory
+class FederationMoresReferencedSetFactory extends Factory
 {
     /**
      * Define the model's default state.
