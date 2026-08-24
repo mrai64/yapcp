@@ -67,7 +67,7 @@ class FederationMore extends Model
     protected $fillable = [
         'id', //                     pk standard bigint unsigned autoincrement
         'federation_id', //          fk federations.id
-        'referenced', //             real pk - lowercase
+        'referenced', //             fk federation_mores_referenced_sets.id
         'field_name', //             code
         'field_label', //            label
         'field_validation_rules', // use in rules()
@@ -116,6 +116,7 @@ class FederationMore extends Model
     // spoiler: no
 
     // federation_mores.federation_id > user_contact_mores.federation_id
+    // TODO must become userContactMores()
     public function userMores(): HasMany
     {
         $moreFields = $this->hasMany(
@@ -127,17 +128,29 @@ class FederationMore extends Model
         return $moreFields;
     }
 
+    //
+    public function federationMoresReferenced(): BelongsTo
+    {
+        $referenced = $this->belongsTo(
+            related: FederationMoresReferencedSet::class,
+            foreignKey: 'referenced', // should be federation_mores.referenced_table_id
+            ownerKey: 'id' // federation_mores_related_sets.id 
+        );
+        // Log
+        return $referenced;
+    }
+
     // IS...
 
     /**
      * Loop over the, few but dynamically listed, referenced in
-     * federation_mores_referenceds to check if "is in use"
-     * in the table itself - first true exit true
+     * federation_mores_referenced_sets to check if "is in use"
+     * in the table itself - OR sequence, first true: exit true
      */
     public function isInUse(): bool
     {
         // Recuperiamo tutte le tabelle di riferimento registrate
-        $referencedTables = FederationMoresReferencedSets::all();
+        $referencedTables = FederationMoresReferencedSet::all();
         foreach ($referencedTables as $ref) {
             $dataTable = $ref->id;
             if (DB::table($dataTable)
