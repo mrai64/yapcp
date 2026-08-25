@@ -163,6 +163,9 @@ new class () extends Component {
                                             <x-yapcp.inline-link 
                                                 txt="Federation Sections" 
                                                 url="{{ route('federation-section.listed', ['federation' => $federation ]) }}" />
+                                            <x-yapcp.inline-link 
+                                                txt="Federation More fields" 
+                                                url="{{ route('federation-more.listed', ['federation' => $federation ]) }}" />
                                         </td>
                                     </tr>
                                 </tbody>
