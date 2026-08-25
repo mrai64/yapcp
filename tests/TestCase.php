@@ -52,7 +52,7 @@ abstract class TestCase extends BaseTestCase
         $this->seed(\Database\Seeders\FederationSeeder::class);
 
         // federations more fields
-        $this->seed(\Database\Seeders\FederationMoresReferencedSetsSeeder::class);
+        $this->seed(\Database\Seeders\FederationMoresReferencedSetSeeder::class);
 
         // federations more fields
         $this->seed(\Database\Seeders\FederationMoreSeeder::class);

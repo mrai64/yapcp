@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\FederationMoresReferencedSet;
 use Illuminate\Database\Seeder;
 
-class FederationMoresReferencedSetsSeeder extends Seeder
+class FederationMoresReferencedSetSeeder extends Seeder
 {
     /**
      * Run the database seeds.
