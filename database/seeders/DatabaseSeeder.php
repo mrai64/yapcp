@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             //
             FederationSeeder::class,
             FederationSectionSeeder::class,
-            FederationMoresReferencedSetsSeeder::class,
+            FederationMoresReferencedSetSeeder::class,
             FederationMoreSeeder::class,
             //
             OrganizationSeeder::class,
