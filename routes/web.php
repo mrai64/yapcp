@@ -239,7 +239,7 @@ Volt::route('/federation-section/remove/{federation_section}', 'federation-secti
     ->name('federation-section.delete');
 
 /**
- * FederationMore
+ * Federation More fields
  */
 // for all registered user
 Volt::route('/federation-more/listed/{federation}', 'federation-more.listed')
