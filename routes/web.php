@@ -19,6 +19,7 @@
  */
 
 use App\Models\Federation as ModelsFederation;
+use App\Models\FederationSection as ModelsFederationSection;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -151,15 +152,15 @@ Volt::route('/organization/design/contest-section/add/{contest}', 'organization.
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-section.add');
 Volt::route(
-        '/organization/design/contest-section/modify/{contest_section}',
-        'organization.design.contest-section.modify'
-    )
+    '/organization/design/contest-section/modify/{contest_section}',
+    'organization.design.contest-section.modify'
+)
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-section.modify');
 Volt::route(
-        '/organization/design/contest-section/remove/{contest_section}',
-        'organization.design.contest-section.remove'
-    )
+    '/organization/design/contest-section/remove/{contest_section}',
+    'organization.design.contest-section.remove'
+)
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-section.remove');
 
@@ -202,11 +203,12 @@ Volt::route('/organization/design/contest/detail/{contest}', 'organization.desig
 
 /**
  * Federation
- * for admin
  */
+// for all registered user
 Volt::route('/federation/listed', 'federation.listed')
     ->middleware(['auth', 'verified'])
     ->name('federation.listed');
+// for admin group
 Volt::route('/federation/add', 'federation.add')
     ->middleware(['auth', 'verified', 'can:create,' . ModelsFederation::class])
     ->name('federation.add');
@@ -221,16 +223,30 @@ Volt::route('/federation/remove/{federation}', 'federation.remove')
  * Federation Section n themes
  * for admin
  */
+// for all registered user
 Volt::route('/federation-section/listed/{federation}', 'federation-section.listed')
     ->middleware(['auth', 'verified'])
     ->name('federation-section.listed');
+// for admin group
+Volt::route('/federation-section/add/{federation}', 'federation-section.add')
+    ->middleware(['auth', 'verified', 'can:create,' . ModelsFederationSection::class])
+    ->name('federation-section.add');
+Volt::route('/federation-section/modify/{federation_section}', 'federation-section.modify')
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsFederationSection::class])
+    ->name('federation-section.modify');
+Volt::route('/federation-section/remove/{federation_section}', 'federation-section.remove')
+    ->middleware(['auth', 'verified', 'can:delete,' . ModelsFederationSection::class])
+    ->name('federation-section.delete');
 
 /**
  * FederationMore
- * for admin
  */
+// for all registered user
+Volt::route('/federation-more/listed/{federation}', 'federation-more.listed')
+    ->middleware(['auth', 'verified'])
+    ->name('federation-more.listed');
+// for admin group
 // TODO federation.more.add
-// TODO federation.more.list
 // TODO federation.more.modify
 // TODO federation.more.remove
 
