@@ -3,10 +3,12 @@
 > **Branch:** `feat/0195-federation-more-read`  
 > **Stato:** chiuso
 > **priorità:** A  
-> **id assegnato:** aaaa-mm-gg.nn  
-> **Titolo e urgenza:** Quello riportato nel project, solo senza [id...]  
+> **id assegnato:** 2026-08-16.06  
+> **Titolo e urgenza:** (A) docs: documentazione vista di consultazione e navigazione per FederationMore  
 > **Project/issue link:** [#195](https://github.com/mrai64/yapcp/issues/195)
 > **milestone link:** [M3](https://github.com/mrai64/yapcp/milestones/3)
+
+Nota: feat/0915-federation-more-listed è questo: feat/0195-federation-more-read
 
 ---
 
@@ -25,11 +27,9 @@ La vista espone esclusivamente i campi destinati alla consultazione pubblica, na
 
 > <!-- to avoid index -->
 - [x] Tabella `federation_mores` già creata (dalla macro-issue #183)
-- [x] Campi di base: `id`, `federation_id`, `field_name`, `field_value`, `field_type`, `is_required`, `visibility`
-- [x] Timestamp: `created_at`, `updated_at`
-- [x] Tracciabilità: `created_by` (FK su `users`)
-- [ ] Aggiunto indice su `federation_id` per query optimization
-- [ ] Aggiunto indice su `visibility` per filtri pubblici
+- [x] Campi di base: `id`, `referenced` (table name), `federation_id`, `field_name`, `field_label`, `field_validation_rules`, `field_default_value`, `field_suggestion`
+- [x] Timestamp: `created_at`, `updated_at`, `deleted_at`
+- [x] Aggiunto indice su `federation_id` per query optimization
 
 ## 👮‍♂️ Pre Merge check
 
@@ -42,19 +42,17 @@ La vista espone esclusivamente i campi destinati alla consultazione pubblica, na
 ## 🚀 Note per il Deploy
 
 > <!-- to avoid index -->
-- Nessuna nuova migration richiesta (il modello è stato creato in #183)
+- Verificare l'esistenza di un index sulla fk federation_id,
+  se manca crearlo con `2026_08_25_100738_add_idx_to_federation_mores_table`
 - Verificare la route di consultazione in `routes/web.php`:
-  - `GET /federation` → lista paginata
-  - `GET /federation/{id}` → dettaglio singolo record
-- Assicurare che i middleware di autenticazione NON siano applicati a queste rotte
-- Cache: valutare il caching della lista con TTL di 5 minuti (`@cache`)
+  - `GET /federation-more/listed/{federation_id}` → lista non paginata
 
 ---
 
 ## 🎯 Checklist di Dettaglio
 
-- [ ] Documentare la rotta web di consultazione (es. `/federation` o `/federation/{id}`)
-- [ ] Elencare i campi visualizzati a schermo per l'utente standard
+- [x] Documentare la rotta web di consultazione (es. `/federation` o `/federation/{id}`)
+- [x] Elencare i campi visualizzati a schermo per l'utente standard
   - [ ] Titolo della federation
   - [ ] Nome del campo aggiuntivo (`field_name`)
   - [ ] Valore del campo (`field_value`)
