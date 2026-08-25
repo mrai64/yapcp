@@ -239,11 +239,14 @@ Volt::route('/federation-section/remove/{federation_section}', 'federation-secti
     ->name('federation-section.delete');
 
 /**
- * FederationMore
- * for admin
+ * Federation More fields
  */
+// for all registered user
+Volt::route('/federation-more/listed/{federation}', 'federation-more.listed')
+    ->middleware(['auth', 'verified'])
+    ->name('federation-more.listed');
+// for admin group
 // TODO federation.more.add
-// TODO federation.more.list
 // TODO federation.more.modify
 // TODO federation.more.remove
 

@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\FederationMoresReferencedSets;
+use App\Models\FederationMoresReferencedSet;
 use Illuminate\Database\Seeder;
 
-class FederationMoresReferencedSetsSeeder extends Seeder
+class FederationMoresReferencedSetSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,10 +13,10 @@ class FederationMoresReferencedSetsSeeder extends Seeder
     public function run(): void
     {
         // fixed set - table name
-        FederationMoresReferencedSets::factory()->create([
+        FederationMoresReferencedSet::factory()->create([
             'id' => 'user_contact_mores',
         ]);
-        FederationMoresReferencedSets::factory()->create([
+        FederationMoresReferencedSet::factory()->create([
             'id' => 'user_work_mores',
         ]);
     }

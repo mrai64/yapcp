@@ -54,7 +54,7 @@ new class extends Component {
 		<x-yapcp.header-link 
 			txt="Federation list" 
 			url="{{ route('federation.listed') }}" />
-			@if ($this->isAdmin)
+		@if ($this->isAdmin)
 		<x-yapcp.header-link 
 			txt="Add a Federation Section" 
 			url="{{ route('federation-section.add', ['federation' => $this->federation]) }}" />
@@ -109,6 +109,12 @@ new class extends Component {
 										{{ $section->synopsis ?? 'N\A' }}
 										<br />
 								</dd>
+								<dd class="px-5 mt-2">
+										{{ __('Synopsis') }}
+										<br />
+										{{ $section->synopsis ?? 'N\A' }}
+										<br />
+								</dd>
 
 								<dd class="px-5">
 										{{ __('List of file extension') }}:
@@ -121,7 +127,17 @@ new class extends Component {
 										{{ __('to')  }}
 										{{ __('max') }}: {{ $section->max_works }}
 								</dd>
+								<dd class="px-5">
+										{{ __('Min / max # works') }}: 
+										{{ __('min') }}: {{ $section->min_works }}
+										{{ __('to')  }}
+										{{ __('max') }}: {{ $section->max_works }}
+								</dd>
 
+								<dd class="px-5">
+										{{ __('Max px') }}: 
+										{{ __(':shortsize for short side, and :longsize for long side', ['shortsize' => $section->short_size_max, 'longsize' => $section->long_size_max, ] ) }}
+								</dd>
 								<dd class="px-5">
 										{{ __('Max px') }}: 
 										{{ __(':shortsize for short side, and :longsize for long side', ['shortsize' => $section->short_size_max, 'longsize' => $section->long_size_max, ] ) }}
