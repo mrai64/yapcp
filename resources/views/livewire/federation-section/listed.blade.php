@@ -25,7 +25,6 @@ new class extends Component {
 		$this->federation = $federation;
 		$this->sectionSet = FederationSection::query()
 			->where('federation_id', $this->federation->id)
-			->where('federation_id', $this->federation->id)
 			->orderBy('code')
 			->get();
 		$this->isAdmin = Auth::user()->isAdmin();
@@ -117,10 +116,6 @@ new class extends Component {
 										<br />
 								</dd>
 
-								<dd class="px-5">
-										{{ __('List of file extension') }}:
-										{{ $section->file_formats }}
-								</dd>
 								<dd class="px-5">
 										{{ __('List of file extension') }}:
 										{{ $section->file_formats }}
