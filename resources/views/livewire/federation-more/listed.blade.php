@@ -131,7 +131,7 @@ new class extends Component {
 					@endforeach
 				</dl>
 				@endif
-    		</div>
+			</div>
 		</div>
 	</div>
 	<!-- -->
