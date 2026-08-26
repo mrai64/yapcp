@@ -56,7 +56,7 @@ new class extends Component {
 		@if ($isAdmin)
 		<x-yapcp.header-link 
 			txt="Add a More field" 
-			url="#" />
+			url="{{ route('federation-more.add', ['federation' => $federation]) }}" />
 		@endif
 	</x-slot>
 	

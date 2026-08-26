@@ -20,6 +20,7 @@
 
 use App\Models\Federation as ModelsFederation;
 use App\Models\FederationSection as ModelsFederationSection;
+use App\Models\FederationMore as ModelsFederationMore;
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
@@ -246,7 +247,9 @@ Volt::route('/federation-more/listed/{federation}', 'federation-more.listed')
     ->middleware(['auth', 'verified'])
     ->name('federation-more.listed');
 // for admin group
-// TODO federation.more.add
+Volt::route('/federation-more/add/{federation}', 'federation-more.add')
+    ->middleware(['auth', 'verified', 'can:create,' . ModelsFederationMore::class])
+    ->name('federation-more.add');
 // TODO federation.more.modify
 // TODO federation.more.remove
 
