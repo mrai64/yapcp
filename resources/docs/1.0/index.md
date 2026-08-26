@@ -72,3 +72,4 @@
 - ## Federation' More fields
 
   - [✅List](/{{route}}/{{version}}/admin/federation_more/listed)
+  - [✅add](/{{route}}/{{version}}/admin/federation_more/add)
