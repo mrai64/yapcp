@@ -89,45 +89,44 @@ new class extends Component {
 				@else
 				<dl>
 					@foreach ($federationMoreSet as $federationMore)
-                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-500 hover:border-indigo-300 transition-colors relative">
-                        <dt class="fyk text-2xl font-bold text-indigo-700">
-                            {{ $federationMore->referenced }}
-                            / Referenced table
-                            <br />
-                            {{ $federationMore->field_label }}
-                            / Field label
-                        </dt>
+						<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-500 hover:border-indigo-300 transition-colors relative">
+								<dt class="fyk text-2xl font-bold text-indigo-700">
+									Referenced table / {{ $federationMore->referenced }}
+									<br />
+									Field label / {{ $federationMore->field_label }}
+								</dt>
 
-                        <dd class="mt-2">
-                            {{ __('field id') }}: <br/>
-                            <span class="font-mono">{{ $federationMore->field_name }}</span>
-                            
-                        </dd>
+								<dd class="mt-2">
+										{{ __('field id') }}: <br/>
+										<span class="font-mono">{{ $federationMore->field_name }}</span>
+								</dd>
 
-                        <dd class="mt-2">
-                            {{ __('validation rules') }}: <br/>
-                            <span class="font-mono">{{ $federationMore->field_validation_rules }}</span>
-                        </dd>
+								<dd class="mt-2">
+										{{ __('validation rules') }}: <br/>
+										<span class="font-mono">{{ $federationMore->field_validation_rules }}</span>
+								</dd>
 
-                        <dd class="mt-2">
-                            {{ __('default rules') }}: <br/>
-                            <span class="font-mono">{{ ($federationMore->field_default_rules) ? ($federationMore->field_default_rules) : '" " (space)' }}</span>
-                        </dd>
+								<dd class="mt-2">
+										{{ __('default rules') }}: <br/>
+										<span class="font-mono">{{ ($federationMore->field_default_value) ? ($federationMore->field_default_value) : '" " (space)' }}</span>
+								</dd>
 
-                        <dd class="mt-2">
-                            {{ __('Suggestion phrase') }}: <br/>
-                            {{ $federationMore->field_suggest }}
-                        </dd>
+								<dd class="mt-2">
+										{{ __('Suggestion phrase') }}: <br/>
+										<span class="font-mono">{{ $federationMore->field_suggest }}</span>
+								</dd>
 
-                        @if ($isAdmin)
-                        <x-yapcp.inline-link 
-                            txt="Update" 
-                            url="#" />
-                        <x-yapcp.inline-link 
-                            txt="‼️ Remove ‼️" 
-                            url="#" />
-                        @endif
-                    </div>
+								@if ($isAdmin)
+								<dd class="mt-2">
+									<x-yapcp.inline-link 
+											txt="Update" 
+											url="#" />
+									<x-yapcp.inline-link 
+											txt="‼️ Remove ‼️" 
+											url="#" />
+								</dd>
+								@endif
+						</div>
 					@endforeach
 				</dl>
 				@endif
