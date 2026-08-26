@@ -37,7 +37,7 @@ new class extends Component {
 		<h2 class="fyk font-semibold text-2xl text-gray-800 leading-tight fyk">
 			{{ $federation->name_en }}
 			<br />
-			{{ __('Federation More fields List' ) }}der
+			{{ __('Federation More fields List' ) }}
 		</h2>
 		<p class="small">
 			{{ __("There is a set of data that is common to all competitions and all federations, and some additional data that each federation requests.")}}
@@ -87,48 +87,72 @@ new class extends Component {
 					{{ __('No "more field" registered for that federation. Add one?' ) }}
 				</div>
 				@else
-				<dl>
 					@foreach ($federationMoreSet as $federationMore)
-						<div class="bg-white p-6 rounded-lg shadow-sm border border-gray-500 hover:border-indigo-300 transition-colors relative">
-								<dt class="fyk text-2xl font-bold text-indigo-700">
-									Referenced table / {{ $federationMore->referenced }}
-									<br />
-									Field label / {{ $federationMore->field_label }}
-								</dt>
-
-								<dd class="mt-2">
-										{{ __('field id') }}: <br/>
-										<span class="font-mono">{{ $federationMore->field_name }}</span>
-								</dd>
-
-								<dd class="mt-2">
-										{{ __('validation rules') }}: <br/>
-										<span class="font-mono">{{ $federationMore->field_validation_rules }}</span>
-								</dd>
-
-								<dd class="mt-2">
-										{{ __('default rules') }}: <br/>
-										<span class="font-mono">{{ ($federationMore->field_default_value) ? ($federationMore->field_default_value) : '" " (space)' }}</span>
-								</dd>
-
-								<dd class="mt-2">
-										{{ __('Suggestion phrase') }}: <br/>
-										<span class="font-mono">{{ $federationMore->field_suggest }}</span>
-								</dd>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-500 hover:border-indigo-300 transition-colors relative">
+                        <table class="data-table-container w-full">
+                            <tbody>
+                                <tr>
+                                    <td class="fyk text-2xl font-bold w-60">
+    									{{ __("Referenced table name") }}
+                                    </td>
+                                    <td class="fyk text-2xl font-bold w-auto  text-indigo-700">
+                                        {{ $federationMore->referenced }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="fyk text-2xl font-bold w-60">
+                                        {{ __("Field Label") }}
+                                    </td>
+                                    <td class="fyk text-2xl font-bold  text-indigo-700">
+                                        {{ $federationMore->field_label }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="">
+                                        {{ __("Field Id") }}
+                                    </td>
+                                    <td class="font-mono">
+                                        {{ $federationMore->field_name }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="">
+                                        {{ __("Validation rules") }}
+                                    </td>
+                                    <td class="font-mono">
+                                        {{ $federationMore->field_validation_rules }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="">
+                                        {{ __("Default value") }}
+                                    </td>
+                                    <td class="font-mono">
+                                        {{ ($federationMore->field_default_value) ? ($federationMore->field_default_value) : '" " (space)' }}                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="">
+                                        {{ __("Suggest") }}
+                                    </td>
+                                    <td class="font-mono">
+                                        {{ $federationMore->field_suggest }}
+                                    </td>
+                                </tr>
 
 								@if ($isAdmin)
-								<dd class="mt-2">
+                                <tr><td colspan="2">
+                                    <x-yapcp.inline-link 
+                                    txt="Update" 
+                                    url="#" />
 									<x-yapcp.inline-link 
-											txt="Update" 
-											url="#" />
-									<x-yapcp.inline-link 
-											txt="‼️ Remove ‼️" 
-											url="#" />
-								</dd>
+                                    txt="‼️ Remove ‼️" 
+                                    url="#" />
+                                </td></tr>
 								@endif
-						</div>
+                            </tbody>
+                        </table>
+                    </div>
 					@endforeach
-				</dl>
 				@endif
 			</div>
 		</div>
