@@ -12,10 +12,10 @@ use App\Models\FederationMore;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Volt\Component;
 
-new class extends Component {
+new class () extends Component {
     //
     public Federation $federation;
-    public            $federationMoreSet;
+    public $federationMoreSet;
     public bool       $isAdmin;
     //
     public function mount(Federation $federation)
@@ -87,7 +87,7 @@ new class extends Component {
 					{{ __('No "more field" registered for that federation. Add one?' ) }}
 				</div>
 				@else
-					@foreach ($federationMoreSet as $federationMore)
+					@foreach ($federationMoreSet as $fedMore)
                     <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-500 hover:border-indigo-300 transition-colors relative">
                         <table class="data-table-container w-full">
                             <tbody>
@@ -96,7 +96,7 @@ new class extends Component {
     									{{ __("Referenced table name") }}
                                     </td>
                                     <td class="fyk text-2xl font-bold w-auto  text-indigo-700">
-                                        {{ $federationMore->referenced }}
+                                        {{ $fedMore->referenced }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -104,7 +104,7 @@ new class extends Component {
                                         {{ __("Field Label") }}
                                     </td>
                                     <td class="fyk text-2xl font-bold  text-indigo-700">
-                                        {{ $federationMore->field_label }}
+                                        {{ $fedMore->field_label }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -112,7 +112,7 @@ new class extends Component {
                                         {{ __("Field Id") }}
                                     </td>
                                     <td class="font-mono">
-                                        {{ $federationMore->field_name }}
+                                        {{ $fedMore->field_name }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -120,7 +120,7 @@ new class extends Component {
                                         {{ __("Validation rules") }}
                                     </td>
                                     <td class="font-mono">
-                                        {{ $federationMore->field_validation_rules }}
+                                        {{ $fedMore->field_validation_rules }}
                                     </td>
                                 </tr>
                                 <tr>
@@ -128,14 +128,14 @@ new class extends Component {
                                         {{ __("Default value") }}
                                     </td>
                                     <td class="font-mono">
-                                        {{ ($federationMore->field_default_value) ? ($federationMore->field_default_value) : '" " (space)' }}                                    </td>
+                                        {{ ($fedMore->field_default_value) ? ($fedMore->field_default_value) : '" " (space)' }}                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="">
                                         {{ __("Suggest") }}
                                     </td>
                                     <td class="font-mono">
-                                        {{ $federationMore->field_suggest }}
+                                        {{ $fedMore->field_suggest }}
                                     </td>
                                 </tr>
 
@@ -143,7 +143,7 @@ new class extends Component {
                                 <tr><td colspan="2">
                                     <x-yapcp.inline-link 
                                     txt="Update" 
-                                    url="#" />
+                        			url="{{ route('federation-more.modify', ['federation_more' => $fedMore]) }}" />
 									<x-yapcp.inline-link 
                                     txt="‼️ Remove ‼️" 
                                     url="#" />

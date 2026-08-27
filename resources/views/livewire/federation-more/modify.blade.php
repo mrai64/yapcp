@@ -1,7 +1,7 @@
 <?php
 
 /**
- * FederationMore - Add of a Federation "more fields"
+ * FederationMore - Modify a present Federation "more fields"
  *   required over user_contact_mores, user_work_mores, and
  *   other <table>_mores in future
  *
@@ -12,6 +12,7 @@ use App\Models\FederationMore;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Log;
 use Livewire\Volt\Component;
 
 new class () extends Component {
@@ -27,26 +28,26 @@ new class () extends Component {
     public string         $fedMoreValidationRules;
     public string         $fedMoreDefaultValue;
     public string         $fedMoreSuggest;
-    //
-    public function mount(Federation $federation)
+    // from routes/web
+    public function mount(FederationMore $federation_more)
     {
+        $this->federationMore = $federation_more;
+        $this->federation     = $federation_more->federation;
         $this->isAdmin = Auth::user()->isAdmin() ?? false;
-        $this->federation = $federation;
         //
-        $this->fedMoreReferencedId = '';
-        $this->fedMoreFederationId = $this->federation->id;
-        $this->fedMoreFieldName = '';
-        $this->fedMoreFieldLabel = '';
-        $this->fedMoreValidationRules = '';
-        $this->fedMoreDefaultValue = '';
-        $this->fedMoreSuggest = '';
+        $this->fedMoreReferencedId = $this->federationMore->referenced;
+        $this->fedMoreFederationId = $this->federationMore->federation_id;
+        $this->fedMoreFieldName    = $this->federationMore->field_name;
+        $this->fedMoreFieldLabel   = $this->federationMore->field_label;
+        $this->fedMoreValidationRules = $this->federationMore->field_validation_rules;
+        $this->fedMoreDefaultValue = $this->federationMore->field_default_value;
+        $this->fedMoreSuggest      = $this->federationMore->field_suggest;
     }
     //
     public function rules(): array
     {
         return [
             'fedMoreReferencedId' => 'required|string|exists:federation_mores_referenced_sets,id',
-            'fedMoreFieldName' => 'required|string|max:20|unique:federation_mores,field_name',
             'fedMoreFieldLabel' => 'required|string|max:255',
             'fedMoreValidationRules' => 'required|string|max:255',
             'fedMoreDefaultValue' => 'required|string|max:255',
@@ -54,7 +55,7 @@ new class () extends Component {
         ];
     }
     //
-    public function addFederationMore()
+    public function modifyFederationMore()
     {
         Log::debug('Component ' . __FILE__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         Log::debug('Component ' . __FILE__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' input: ' . json_encode($this));
@@ -78,9 +79,9 @@ new class () extends Component {
             . json_encode($validated));
         $fedMore = FederationMore::withTrashed()->updateOrCreate(
             [
-                'referenced' => $validated['fedMoreReferencedId'],
-                'federation_id' => $this->federation->id,
-                'field_name' => $validated['fedMoreFieldName'],
+                'referenced'       => $validated['fedMoreReferencedId'],
+                'federation_id'    => $this->federation->id,
+                'field_name'       => $this->federationMore->field_name,
             ],
             [
                 'field_label' => $validated['fedMoreFieldLabel'],
@@ -93,7 +94,7 @@ new class () extends Component {
         return redirect()
             ->route('federation-more.listed', ['federation' => $this->federation ])
             ->with('success', __('Federation More Field added. Good Luck!'));
-    } // add FederationMore
+    }
 }; ?>
 
 <div>
@@ -102,20 +103,23 @@ new class () extends Component {
 			{{ $federation->name_en }}
 			<br />
             <span class="text-red-600">
-                {{ __('Federation More fields Risky Add' ) }}
+                {{ __('Federation More fields Risky Modify') }}
             </span>
 		</h2>
 		<hr class="mb-4 mt-4" />
 		<x-yapcp.header-link 
-			txt="Back to User dashboard" 
+			txt="User dashboard" 
 			url="{{ route('user.dashboard') }}" />
 		<x-yapcp.header-link 
 			txt="Federation list" 
 			url="{{ route('federation.listed') }}" />
+		<x-yapcp.header-link 
+			txt="Federation More list" 
+			url="{{ route('federation-more.listed', ['federation' => $federation]) }}" />
 		@if ($isAdmin)
 		<x-yapcp.header-link 
 			txt="Add a More field" 
-			url="#" />
+			url="{{ route('federation-more.add', ['federation' => $federation]) }}" />
 		@endif
 	</x-slot>
 
@@ -144,21 +148,19 @@ new class () extends Component {
                 <div class="fyk text-2xl text-red-600">
                     {{ __("Do not use this module unless you know exactly what you're doing; any mistake here will cause part of the platform to crash. Think of it as performing surgery on a bare nerve.") }}
                 </div>
-                <form wire:submit="addFederationMore">
+
+                <div class="fyk font-semibold text-2xl text-gray-800 leading-tight fyk">
+                    {{ __("Field Name") }}:
+                    <br />
+                    {{ $fedMoreFieldName }}
+                </div>
+                <p class="small">{{ __("Instead of change field name you can add a new field name and unuse, or delete that.")}}</p>
+
+                <form wire:submit="modifyFederationMore">
                     @csrf
 
                     <!-- referenced table select -->
                     <x-select-referenced-app wire:model="fedMoreReferencedId" :referenced_id="$fedMoreReferencedId" /> 
-
-                    <!-- internal field name -->
-                    <div class="mb-4">
-                        <x-input-label for="fedMoreFieldName" :value="__('Software Field Name')" />
-                        <x-text-input wire:model="fedMoreFieldName" id="fedMoreFieldName" class="block mt-1 w-full" type="text" name="fedMoreFieldName" required placeholder="{{ __('camelCaseVariableName') }}"/>
-                        <p class="small">
-                            {{ __("That variable name MUST BE unique in platform, camelCase, upto 20 char long, maybe prefix with federation id in lowercase.") }}
-                        </p>
-                        <x-input-error for="fedMoreFieldName" class="mt-2" />
-                    </div>
 
                     <!-- form field label -->
                     <div class="mb-4">
@@ -204,7 +206,7 @@ new class () extends Component {
                     <br style="clear:both;" />
 
                     <x-button class="mt-2 ms-4">
-                        {{ __('Check all, then Add') }}
+                        {{ __('Check all, then Modify') }}
                     </x-button>
                 </form>
 			</div>
