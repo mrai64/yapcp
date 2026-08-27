@@ -12,30 +12,58 @@
 
 ## 📝 Logica Tecnica
 
-Realizzare concorsi fotografici sponsorizzati da diverse federazioni richiede
-in alcuni punti la richiesta di informazioni "in più" rispetto al minimo
-comune richiesto da tutti i concorsi, anche non patrocinati.  
-Si è scelto di creare un archivio dei campi in più richiesti dalla Federazione e questo modulo si occupa di questi dati di definizione di moduli. Chiave univoca è
-il field_name che non può essere variato.
+Il componente `modify.blade.php` è un Livewire Volt component che gestisce la modifica di campi aggiuntivi richiesti dalle federazioni (FederationMore). 
 
-...
+**Scopo:** Permettere ai soli amministratori di modificare i metadati di un campo "more" già esistente (label, regole di validazione, valore di default, suggerimento), mantenendo immutato il `field_name` (chiave univoca).
+
+**Scelta tecnologica:** Utilizziamo Livewire Volt per:
+- Validazione in tempo reale con wire:model
+- Test delle regole di validazione Laravel prima di salvare (`Validator::make()` su un valore temporaneo)
+- Feedback immediato all'utente tramite `$this->validate()`
+- Redirect post-salvataggio con session flash message
+
+**Flusso:**
+1. Mount carica i dati attuali di FederationMore
+2. Form binds i campi agli state properties tramite `wire:model`
+3. Submit chiama `modifyFederationMore()` che:
+   - Valida prima la sintassi delle regole di validazione Laravel
+   - Esegue la validazione completa del form
+   - Usa `updateOrCreate()` con chiave univoca (referenced, federation_id, field_name)
+   - Redirige alla lista con messaggio di successo
+
+---
 
 ## 🗄️ Modifiche al Database
 
 > <!-- to avoid index -->
-Non sono state eseguite modifiche al database
+- [x] Nessuna modifica al database (aggiornamento di record FederationMore esistenti)
+- [x] Colonna `field_name` è immutabile (non in validazione, preservata in updateOrCreate)
 
-## 👮‍♂️ Pre Merge check
-
-> <!-- to avoid index -->
-- [ ] **Test:** Tutti i test (nuovi ed esistenti) passano in verde (`php artisan test`)?
-- [x] **Docs:** Il file in `/resources/docs/dev/` è aggiornato?
-- [ ] **Manual:** Il manuale utente riflette le modifiche introdotte?
-- [x] **Cleanup:** Ho rimosso eventuali `dd()` o `dump()` dimenticati?
-- [x] **Commit:** I messaggi dei commit sono chiari?
+---
 
 ## 🚀 Note per il Deploy
 
 > <!-- to avoid index -->
-- Nessuna migrazione da eseguire.
-- Nessun parametro `.env` aggiuntivo richiesto.
+- Nessuna migrazione da eseguire
+- Nessun parametro `.env` aggiuntivo richiesto
+- Componente accessibile solo agli utenti con ruolo admin (`Auth::user()->isAdmin()`)
+- Avviso visivo in rosso nel template per enfatizzare i rischi di modifica errata
+
+---
+
+## ⚠️ Considerazioni di Sicurezza
+
+- **Admin-only:** Accesso limitato a `isAdmin()`
+- **Validazione doppia:** Regole di validazione testate prima del salvataggio
+- **Field name protected:** Non modificabile tramite form (immutabile nella logica)
+- **Log audit:** Loggati ID e nome utente admin che effettuano modifiche
+
+---
+
+## 📋 Checklist Pre-Merge
+
+- [x] **Test:** Tutti i test passano
+- [x] **Docs:** File `/resources/docs/dev/feat/0233-federation-more-modify.md` aggiornato
+- [x] **Manual:** Documentazione utente non richiesta (sezione admin ristretta)
+- [x] **Cleanup:** Rimossi `dd()` e `dump()`
+- [x] **Commit:** Messaggi chiari
