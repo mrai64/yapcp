@@ -128,7 +128,8 @@ new class () extends Component {
                                         {{ __("Default value") }}
                                     </td>
                                     <td class="font-mono">
-                                        {{ ($fedMore->field_default_value) ? ($fedMore->field_default_value) : '" " (space)' }}                                    </td>
+                                        {{ ($fedMore->field_default_value) ? ($fedMore->field_default_value) : '" " (space)' }}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td class="">
@@ -146,7 +147,7 @@ new class () extends Component {
                         			url="{{ route('federation-more.modify', ['federation_more' => $fedMore]) }}" />
 									<x-yapcp.inline-link 
                                     txt="‼️ Remove ‼️" 
-                                    url="#" />
+                        			url="{{ route('federation-more.remove', ['federation_more' => $fedMore]) }}" />
                                 </td></tr>
 								@endif
                             </tbody>
