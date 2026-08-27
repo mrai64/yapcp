@@ -12,9 +12,10 @@ use App\Models\FederationMore;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Log;
 use Livewire\Volt\Component;
 
-new class extends Component {
+new class () extends Component {
     //
     public Federation     $federation;
     public FederationMore $federationMore;
@@ -47,7 +48,6 @@ new class extends Component {
     {
         return [
             'fedMoreReferencedId' => 'required|string|exists:federation_mores_referenced_sets,id',
-            'fedMoreFieldName' => 'required|string|max:20|unique:federation_mores,field_name',
             'fedMoreFieldLabel' => 'required|string|max:255',
             'fedMoreValidationRules' => 'required|string|max:255',
             'fedMoreDefaultValue' => 'required|string|max:255',
@@ -55,6 +55,46 @@ new class extends Component {
         ];
     }
     //
+    public function modifyFederationMore()
+    {
+        Log::debug('Component ' . __FILE__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        Log::debug('Component ' . __FILE__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' input: ' . json_encode($this));
+        // validiamo la regola di validazione
+        $testValidationRules = Validator::make(
+            ['temporary_test' => 'test'],
+            ['temporary_test' => $this->fedMoreValidationRules]
+        );
+        // try catch ci vuole
+        try {
+            $testValidationRules->validate();
+        } catch (\InvalidArgumentException $e) {
+            // regola errata
+            $this->addError('fedMoreValidationRules', "Inserted Laravel validation rules is wrong b: " . $e->getMessage());
+            return;
+        }
+        // test passato - test del resto
+        $validated = $this->validate();
+        Log::info('User admin ['. Auth::user()->id . ' ' . Auth::user()->name
+            . '] request add: '
+            . json_encode($validated));
+        $fedMore = FederationMore::withTrashed()->updateOrCreate(
+            [
+                'referenced'       => $validated['fedMoreReferencedId'],
+                'federation_id'    => $this->federation->id,
+                'field_name'       => $this->federationMore->field_name,
+            ],
+            [
+                'field_label' => $validated['fedMoreFieldLabel'],
+                'field_validation_rules' => $validated['fedMoreValidationRules'],
+                'field_default_value' => $validated['fedMoreDefaultValue'],
+                'field_suggest' => $validated['fedMoreSuggest'],
+            ]
+        );
+        //
+        return redirect()
+            ->route('federation-more.listed', ['federation' => $this->federation ])
+            ->with('success', __('Federation More Field added. Good Luck!'));
+    }
 }; ?>
 
 <div>
