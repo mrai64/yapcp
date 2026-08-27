@@ -250,7 +250,9 @@ Volt::route('/federation-more/listed/{federation}', 'federation-more.listed')
 Volt::route('/federation-more/add/{federation}', 'federation-more.add')
     ->middleware(['auth', 'verified', 'can:create,' . ModelsFederationMore::class])
     ->name('federation-more.add');
-// TODO federation.more.modify
+Volt::route('/federation-more/modify/{federation_more}', 'federation-more.modify')
+    ->middleware(['auth', 'verified', 'can:update,' . ModelsFederationMore::class])
+    ->name('federation-more.modify');
 // TODO federation.more.remove
 
 /**

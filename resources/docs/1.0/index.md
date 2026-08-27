@@ -72,4 +72,5 @@
 - ## Federation' More fields
 
   - [✅List](/{{route}}/{{version}}/admin/federation_more/listed)
-  - [✅add](/{{route}}/{{version}}/admin/federation_more/add)
+  - [✅Add](/{{route}}/{{version}}/admin/federation_more/add)
+  - [✅Modify](/{{route}}/{{version}}/admin/federation_more/modify)

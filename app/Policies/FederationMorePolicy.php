@@ -6,7 +6,6 @@ use App\Models\FederationMore;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
 
-
 class FederationMorePolicy
 {
     /**
@@ -33,59 +32,58 @@ class FederationMorePolicy
     public function create(User $user): bool
     {
         // only for user in admin group
-        Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
+        Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
         $evaluate = $user->isAdmin();
-        Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
         return $evaluate;
-
         // TODO if not admin, can be a federation member, but that pages are admin-only
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, FederationMore $federation_more): bool
+    public function update(User $user, ?FederationMore $federation_more = null): bool
     {
         // only for user in admin group
-        Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
+        Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
         $evaluate = $user->isAdmin();
-        Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
         return $evaluate;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, FederationMore $federation_more): bool
+    public function delete(User $user, ?FederationMore $federation_more = null): bool
     {
         // only for user in admin group
-        Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
+        Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
         $evaluate = $user->isAdmin();
-        Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' line:' . __LINE__ . ' isAdmin() evaluated:' . $evaluate);
         return $evaluate;
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, $federation_more): bool
+    public function restore(User $user, FederationMore $federation_more): bool
     {
         // only for user in admin group
-        Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
+        Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
         $evaluate = $user->isAdmin();
-        Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
         return $evaluate;
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, $federation_more): bool
+    public function forceDelete(User $user, FederationMore $federation_more): bool
     {
         // only for user in admin group
-        Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
+        Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
         $evaluate = $user->isAdmin();
-        Log::debug('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
         return $evaluate;
     }
 }
