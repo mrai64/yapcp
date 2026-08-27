@@ -251,9 +251,11 @@ Volt::route('/federation-more/add/{federation}', 'federation-more.add')
     ->middleware(['auth', 'verified', 'can:create,' . ModelsFederationMore::class])
     ->name('federation-more.add');
 Volt::route('/federation-more/modify/{federation_more}', 'federation-more.modify')
-    ->middleware(['auth', 'verified', 'can:update,' . ModelsFederationMore::class])
+    ->middleware(['auth', 'verified', 'can:update,federation_more'])
     ->name('federation-more.modify');
-// TODO federation.more.remove
+Volt::route('/federation-more/remove/{federation_more}', 'federation-more.remove')
+    ->middleware(['auth', 'verified', 'can:delete,federation_more'])
+    ->name('federation-more.remove');
 
 /**
  * User Contest

@@ -74,3 +74,4 @@
   - [✅List](/{{route}}/{{version}}/admin/federation_more/listed)
   - [✅Add](/{{route}}/{{version}}/admin/federation_more/add)
   - [✅Modify](/{{route}}/{{version}}/admin/federation_more/modify)
+  - [✅Remove](/{{route}}/{{version}}/admin/federation_more/remove)
