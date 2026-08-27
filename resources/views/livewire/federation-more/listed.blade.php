@@ -12,10 +12,10 @@ use App\Models\FederationMore;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Volt\Component;
 
-new class extends Component {
+new class () extends Component {
     //
     public Federation $federation;
-    public            $federationMoreSet;
+    public $federationMoreSet;
     public bool       $isAdmin;
     //
     public function mount(Federation $federation)
