@@ -7,7 +7,7 @@ on:
       # diventa:
       - '**' # qualsiasi push su qualsiasi branch
     tags-ignore:
-      - '**' # ingora creazione invio di tag
+      - '**' # ignora creazione invio di tag
 
 jobs:
   bump-version:

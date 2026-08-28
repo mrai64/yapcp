@@ -68,3 +68,10 @@
   - [✅Add](/{{route}}/{{version}}/admin/federation_section/add)
   - [✅Modify](/{{route}}/{{version}}/admin/federation_section/modify)
   - [✅Remove](/{{route}}/{{version}}/admin/federation_section/remove)
+
+- ## Federation' More fields
+
+  - [✅List](/{{route}}/{{version}}/admin/federation_more/listed)
+  - [✅Add](/{{route}}/{{version}}/admin/federation_more/add)
+  - [✅Modify](/{{route}}/{{version}}/admin/federation_more/modify)
+  - [✅Remove](/{{route}}/{{version}}/admin/federation_more/remove)

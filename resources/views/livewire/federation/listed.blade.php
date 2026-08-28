@@ -84,7 +84,7 @@ new class () extends Component {
                     {{ __("There are no Federation in platform, at now. Check the manual to run Federation*Seeker or add first manually.") }}
                 </h3>
                 @else
-                <dl class="space-y-6">
+                <div class="space-y-6">
                     @foreach ($allFederationsSet as $federation)
                         <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-500 hover:border-indigo-300 transition-colors relative">
 
@@ -163,6 +163,9 @@ new class () extends Component {
                                             <x-yapcp.inline-link 
                                                 txt="Federation Sections" 
                                                 url="{{ route('federation-section.listed', ['federation' => $federation ]) }}" />
+                                            <x-yapcp.inline-link 
+                                                txt="Federation More fields" 
+                                                url="{{ route('federation-more.listed', ['federation' => $federation ]) }}" />
                                         </td>
                                     </tr>
                                 </tbody>
@@ -175,7 +178,7 @@ new class () extends Component {
                         {{ $allFederationsSet->links() }}
                     </div>
 
-                </dl>
+                </div>
                 @endif
                 <!-- -->
 

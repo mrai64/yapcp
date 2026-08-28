@@ -25,6 +25,7 @@ new class extends Component {
 		$this->federation = $federation;
 		$this->sectionSet = FederationSection::query()
 			->where('federation_id', $this->federation->id)
+			->where('federation_id', $this->federation->id)
 			->orderBy('code')
 			->get();
 		$this->isAdmin = Auth::user()->isAdmin();
@@ -54,7 +55,7 @@ new class extends Component {
 		<x-yapcp.header-link 
 			txt="Federation list" 
 			url="{{ route('federation.listed') }}" />
-			@if ($this->isAdmin)
+		@if ($this->isAdmin)
 		<x-yapcp.header-link 
 			txt="Add a Federation Section" 
 			url="{{ route('federation-section.add', ['federation' => $this->federation]) }}" />
@@ -109,7 +110,17 @@ new class extends Component {
 										{{ $section->synopsis ?? 'N\A' }}
 										<br />
 								</dd>
+								<dd class="px-5 mt-2">
+										{{ __('Synopsis') }}
+										<br />
+										{{ $section->synopsis ?? 'N\A' }}
+										<br />
+								</dd>
 
+								<dd class="px-5">
+										{{ __('List of file extension') }}:
+										{{ $section->file_formats }}
+								</dd>
 								<dd class="px-5">
 										{{ __('List of file extension') }}:
 										{{ $section->file_formats }}
@@ -121,7 +132,17 @@ new class extends Component {
 										{{ __('to')  }}
 										{{ __('max') }}: {{ $section->max_works }}
 								</dd>
+								<dd class="px-5">
+										{{ __('Min / max # works') }}: 
+										{{ __('min') }}: {{ $section->min_works }}
+										{{ __('to')  }}
+										{{ __('max') }}: {{ $section->max_works }}
+								</dd>
 
+								<dd class="px-5">
+										{{ __('Max px') }}: 
+										{{ __(':shortsize for short side, and :longsize for long side', ['shortsize' => $section->short_size_max, 'longsize' => $section->long_size_max, ] ) }}
+								</dd>
 								<dd class="px-5">
 										{{ __('Max px') }}: 
 										{{ __(':shortsize for short side, and :longsize for long side', ['shortsize' => $section->short_size_max, 'longsize' => $section->long_size_max, ] ) }}
@@ -142,7 +163,7 @@ new class extends Component {
                 <dd class="px-5">
                     {{ $section->unique_prize ? '✅ YES' : '❌ NO' }}
                     | 
-                    {{ __('Not cumulable prizes in section') }} 
+                    {{ __('Not cumulabile prizes in section') }} 
                 </dd>
             </div>
             @endforeach
@@ -153,8 +174,8 @@ new class extends Component {
 					<br />
 					{{ __('No section n themes registered for that.' ) }}
 				</p>
-        @endif
-    </div>
+				@endif
+			</div>
 		</div>
 	</div>
 	<!-- -->
