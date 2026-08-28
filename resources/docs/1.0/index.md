@@ -23,6 +23,7 @@
   - [✅Personal Dashboard](/{{route}}/{{version}}/users/dashboard)
   - [✅Personal Gallery](/{{route}}/{{version}}/users/personal_gallery)
   - [Participate to contest](#)
+  - [Send requested RAWs](#)
   - [✅See Federation List](/{{route}}/{{version}}/users/federation_list)
   - [✅See Federation Section List](/{{route}}/{{version}}/users/federation_section_list)
 
@@ -32,6 +33,7 @@
   - [Add yourself to a registered Organization](#)
   - [Howto open a Contest](#)
   - [Main info n Calendar](#)
+  - [Patronages r Sponsorships](#)
   - [Section n Themes](#)
   - [Jury members](#)
   - [Section Awards](#)
@@ -51,7 +53,7 @@
   - [Change Vote](#)
   - [Contest Minute Sign](#)
 
-- ## You as platform minister
+- ## You as *platform minister*
 
   - [✍️ edit](/resources/docs/1.0/admin/overview.md) [What admins can do](/{{route}}/{{version}}/admin/overview)
 
@@ -75,3 +77,17 @@
   - [✅Add](/{{route}}/{{version}}/admin/federation_more/add)
   - [✅Modify](/{{route}}/{{version}}/admin/federation_more/modify)
   - [✅Remove](/{{route}}/{{version}}/admin/federation_more/remove)
+
+- ## Federation' Members
+
+  - [List](#)
+  - [Add](#)
+  - [Modify](#)
+  - [Remove](#)
+
+- ## Platform members
+
+  - [List](#)
+  - [Add](#)
+  - [Modify](#)
+  - [Remove](#)
