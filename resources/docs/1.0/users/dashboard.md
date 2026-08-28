@@ -30,13 +30,13 @@ contest that your federation sponsorship.
 Platform access data (with passowrd) and Contact infos are separated space.  
 Contact Infos are all the data usually you send thru contest application form.
 I'ts composed by a five card about you, your postal address, online address,
-and orges like your personal page (reserved, for future use) and 
+and others like your personal page (reserved, for future use) and 
 infos requested only by a federation (one more field) that can be requested
 in federation sponsored contests.
 
 ### [Update Contact infos]
 
->
+> <!-- to avoid index for Larecipe -->
 - [Update your personal contact info](/{{route}}/{{version}}/users/contact_infos)
   even during a contest run.
 
@@ -46,18 +46,18 @@ Link here
 
 ### Change password
 
-As indicate prevously, Contact infos are separated from platform access data,
+As indicate previously, Contact infos are separated from platform access data,
 here you can change password.
 
 ### Your Gallery
 
-Here you can upload and define your best works before appling for a contest.
+Here you can upload and define your best works before registering for a contest.
 So, when you apply for a contest are already uploaded and can
 easily add to the right section - Theme just with a pair of click.  
 Some check are done automatically and other manually to ensure
 in the next contest your works are already ok.
 
->
+> <!-- to avoid index for Larecipe -->
 - [Your Gallery](/{{route}}/{{version}}/users/personal_gallery)
 
 ### Open Contest List
@@ -72,7 +72,7 @@ In that space you can find the organization list, if your Organization isn't
 in the list, and you wanna add t, you can. And if you want add yourself as
 member of a listed organization (one or more, one at time)... You can.
 
->
+> <!-- to avoid index for Larecipe -->
 - [Add an organization](/{{route}}/{{version}}/users/add_organization)
 - [Add yourself to an existing organization](/{{route}}/{{version}}/organizations/add_me_to)
 
@@ -84,6 +84,7 @@ association that build some rule about photographic contest,
 and become sponsor for some of them, and base
 the contest results as base for distinction and others.
 
+> <!-- to avoid index for Larecipe -->
 - Add a role in existing Organization
 - Add your organization
 - Add a role in existing Federation

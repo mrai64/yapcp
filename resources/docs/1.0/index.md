@@ -29,8 +29,8 @@
 
 - ## You as Contest Organizer
 
-  - [Define your Organization](#)
-  - [Add yourself to a registered Organization](#)
+  - [✅Define your Organization](/{{route}}/{{version}}/users/add_organization)
+  - [✅Add yourself to a registered Organization](/{{route}}/{{version}}/users/add_organization)
   - [Howto open a Contest](#)
   - [Main info n Calendar](#)
   - [Patronages r Sponsorships](#)
