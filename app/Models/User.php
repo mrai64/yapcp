@@ -18,6 +18,7 @@ use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -289,6 +290,17 @@ class User extends Authenticatable implements MustVerifyEmail
         );
         // log
         return $contact;
+    }
+
+    // users.id -> user_roles.user_id -> user_roles.organization_id -> organizations.id
+    // valid: user_roles.role_opening <= now() <= user_roles.role_closing
+    public function organizations(): BelongsToMany
+    {
+        return $this->belongsToMany(Organization::class, 'user_roles', 'user_id', 'organization_id')
+            ->using(UserRole::class)
+            ->withPivot(['role', 'role_opening', 'role_closing'])
+            ->wherePivot('role_opening', '<=', now())
+            ->wherePivot('role_closing', '>=', now());
     }
 
     // users.id > user_contacts.id
