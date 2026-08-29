@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreContestPatronagesRequest;
-use App\Http\Requests\UpdateContestPatronagesRequest;
-use App\Models\ContestPatronages;
+use App\Http\Requests\StoreContestPatronageRequest;
+use App\Http\Requests\UpdateContestPatronageRequest;
+use App\Models\ContestPatronage;
 
-class ContestPatronagesController extends Controller
+class ContestPatronageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class ContestPatronagesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreContestPatronagesRequest $request)
+    public function store(StoreContestPatronageRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class ContestPatronagesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ContestPatronages $contestPatronages)
+    public function show(ContestPatronage $contestPatronage)
     {
         //
     }
@@ -43,7 +43,7 @@ class ContestPatronagesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ContestPatronages $contestPatronages)
+    public function edit(ContestPatronage $contestPatronage)
     {
         //
     }
@@ -51,7 +51,7 @@ class ContestPatronagesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateContestPatronagesRequest $request, ContestPatronages $contestPatronages)
+    public function update(UpdateContestPatronageRequest $request, ContestPatronage $contestPatronage)
     {
         //
     }
@@ -59,7 +59,7 @@ class ContestPatronagesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ContestPatronages $contestPatronages)
+    public function destroy(ContestPatronage $contestPatronage)
     {
         //
     }

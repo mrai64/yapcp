@@ -33,6 +33,7 @@
 
 - ## Refactor
 
+  - [#239](/{{route}}/dev/refactor/0239-contest-patronage)
   - [**#140 Big Refactor**](/{{route}}/dev/refactor/0140-big-rebuild)
   - [#133](/{{route}}/dev/refactor/0133-federation-section-fields)
   - [#89](/{{route}}/dev/refactor/0089-regions-lookup-table)

@@ -2,10 +2,10 @@
 
 namespace App\Policies;
 
-use App\Models\ContestPatronages;
+use App\Models\ContestPatronage;
 use App\Models\User;
 
-class ContestPatronagesPolicy
+class ContestPatronagePolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -18,7 +18,7 @@ class ContestPatronagesPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, ContestPatronages $contestPatronages): bool
+    public function view(User $user, ContestPatronage $contestPatronage): bool
     {
         return false;
     }
@@ -34,7 +34,7 @@ class ContestPatronagesPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, ContestPatronages $contestPatronages): bool
+    public function update(User $user, ContestPatronage $contestPatronage): bool
     {
         return false;
     }
@@ -42,7 +42,7 @@ class ContestPatronagesPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, ContestPatronages $contestPatronages): bool
+    public function delete(User $user, ContestPatronage $contestPatronage): bool
     {
         return false;
     }
@@ -50,7 +50,7 @@ class ContestPatronagesPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, ContestPatronages $contestPatronages): bool
+    public function restore(User $user, ContestPatronage $contestPatronage): bool
     {
         return false;
     }
@@ -58,7 +58,7 @@ class ContestPatronagesPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, ContestPatronages $contestPatronages): bool
+    public function forceDelete(User $user, ContestPatronage $contestPatronage): bool
     {
         return false;
     }

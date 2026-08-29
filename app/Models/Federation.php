@@ -48,7 +48,7 @@ use Illuminate\Support\Facades\Log;
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestPatronages> $contestPatronages
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestPatronage> $contestPatronage
  * @property-read int|null $contest_patronages_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Contest> $contests
  * @property-read int|null $contests_count
@@ -222,11 +222,11 @@ class Federation extends Model
 
     // federations.id > contest_patronages.federation_id
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ContestPatronages, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ContestPatronage, $this>
      */
-    public function contestPatronages(): HasMany
+    public function contestPatronage(): HasMany
     {
-        $contestPatronagedSet = $this->hasMany(ContestPatronages::class);
+        $contestPatronagedSet = $this->hasMany(ContestPatronage::class);
         // Log
         return $contestPatronagedSet;
     }

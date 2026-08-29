@@ -5,7 +5,7 @@
  */
 
 use App\Models\Contest;
-use App\Models\ContestPatronages;
+use App\Models\ContestPatronage;
 use App\Models\Federation;
 use Illuminate\Support\Carbon;
 
@@ -49,9 +49,9 @@ it('counts active contests where today is between day1_opening and day8_closing'
         'day_8_closing' => '2026-05-31 23:59:59',
     ]);
 
-    // 4. Associamo i concorsi alla federazione tramite la pivot ContestPatronages
+    // 4. Associamo i concorsi alla federazione tramite la pivot ContestPatronage
     foreach ([$openContest1, $openContest2, $openContest3, $futureContest, $pastContest] as $contest) {
-        ContestPatronages::factory()->create([
+        ContestPatronage::factory()->create([
             'federation_id'  => $federation->id,
             'contest_id'     => $contest->id,
             'patronage_code' => fake()->regexify('[A-Z0-9]{' . fake()->numberBetween(4, 6) . '}'),
