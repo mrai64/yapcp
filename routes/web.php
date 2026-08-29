@@ -9,13 +9,16 @@
  * as relative url.
  *
  * Routes cannot be sorted. The seven action repeated schema is
- * 1. index
- * 2. create + store
- * 3. show
- * 4. edit + update
- * 5. delete
+ * 1. index           (listed)
+ * 2. create + store  (add)
+ * 3. show            (listed)
+ * 4. edit + update   (modify)
+ * 5. delete          (remove)
  *
- * Previous version is on ./web_stash.bak
+ * Previous version of route list is on ./web_stash.bak
+ * !
+ * ! Check App\Providers\AppServiceProvider for model-submodel
+ * !
  */
 
 use App\Models\Federation as ModelsFederation;
