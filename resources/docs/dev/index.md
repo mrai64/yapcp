@@ -10,6 +10,7 @@
 
 - ## Fix
 
+  - [#253](/{{route}}/dev/fix/0253-organization-update-not-for-all)
   - [#142](/{{route}}/dev/fix/0142-register-test)
   - [#107](/{{route}}/dev/fix/0107-user-role-seeder-ko)
 
