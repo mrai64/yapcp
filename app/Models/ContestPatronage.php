@@ -4,7 +4,7 @@
  * ContestPatronage define the list of almost one Federation
  *   sponsoring a contest, with its code
  *
- * !!! it's ContestPatronage! not ContestPatronages, ContestPatronage.
+ * !!! it's ContestPatronage! not ContestPatronage, ContestPatronage.
  */
 
 namespace App\Models;
@@ -16,10 +16,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 
 /**
- * @method static \Database\Factories\ContestPatronagesFactory factory($count = null, $state = [])
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronages newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronages newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronages query()
+ * @method static \Database\Factories\ContestPatronageFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronage newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronage newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronage query()
  * @property int $id
  * @property string $contest_id fk for contests id
  * @property string $federation_id fk federations id
@@ -27,22 +27,22 @@ use Illuminate\Support\Facades\Log;
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property string|null $deleted_at
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronages whereContestId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronages whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronages whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronages whereFederationId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronages whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronages wherePatronageCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronages whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronages onlyTrashed()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronages withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronages withoutTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronage whereContestId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronage whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronage whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronage whereFederationId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronage whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronage wherePatronageCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronage whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronage onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronage withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestPatronage withoutTrashed()
  * @mixin \Eloquent
  */
 
-class ContestPatronages extends Model
+class ContestPatronage extends Model
 {
-    /** @use HasFactory<\Database\Factories\ContestPatronagesFactory> */
+    /** @use HasFactory<\Database\Factories\ContestPatronageFactory> */
     use HasFactory;
     use SoftDeletes;
 

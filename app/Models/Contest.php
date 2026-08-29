@@ -77,7 +77,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read int|null $contest_awards_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Contest> $contestInCircuit
  * @property-read int|null $contest_in_circuit_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestPatronages> $contestPatronage
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestPatronage> $contestPatronage
  * @property-read int|null $contest_patronage_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestSection> $contestSections
  * @property-read int|null $contest_sections_count
@@ -566,11 +566,11 @@ class Contest extends Model
      * Replace contests.federation_ist
      */
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ContestPatronages, $this>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ContestPatronage, $this>
      */
     public function contestPatronage(): HasMany
     {
-        $contestPatronageSet = $this->hasMany(ContestPatronages::class);
+        $contestPatronageSet = $this->hasMany(ContestPatronage::class);
         // Log
         return $contestPatronageSet;
     }
