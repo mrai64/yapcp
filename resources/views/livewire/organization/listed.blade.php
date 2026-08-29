@@ -2,9 +2,9 @@
 
 /**
  * organization  list - for all
- * 
+ *
  * Order by country and organization name
- * 
+ *
  */
 
 use App\Models\Organization;
@@ -28,15 +28,24 @@ new class extends Component {
      */
     public function with(): array
     {
+        $user = Auth::user();
+        // solo se l'utente non è admin escludo i gruppi .qualcosa
+        $allOrganizationSet = Organization::query()
+            ->with(['country'])
+            ->when(!Auth::user()?->isAdmin(), function ($query) {
+                $query->where('name', '>', '/');
+            })
+            ->orderBy('country_id', 'asc')
+            ->orderBy('name', 'asc')
+            ->paginate(10);
+        // solo se utente non è admin crea un array delle organization in cui è
+        $userOrgIds = $user && !$user->isAdmin()
+            ? $user->activeUserRoles()->whereNotNull('organization_id')->pluck('organization_id')->toArray()
+            : [];
+
         return [
-            'allOrganizationSet' => Organization::query()
-                ->with(['country'])
-                ->when(!Auth::user()?->isAdmin(), function ($query) {
-                    $query->where('name', '>', '/');
-                })
-                ->orderBy('country_id', 'asc')
-                ->orderBy('name', 'asc')
-                ->paginate(10),
+            'allOrganizationSet' => $allOrganizationSet,
+            'userOrgIds'         => $userOrgIds,
         ];
     }
 
@@ -112,19 +121,30 @@ new class extends Component {
                                 </a>
                             </dd>
                             <dd class="mt-2 text-sm text-gray-500 italic flex items-center">
-                                <x-yapcp.inline-link
-                                    txt="Org Dashboards"
-                                    url="{{ route('organization.dashboard', ['organization' => $organization]) }}" />
                                 @if ($organization->name > '/')
+                                <!-- all normal organization -->
+                                <!-- all registered user -->
+                                @if (!in_array($organization->id, $userOrgIds))
                                 <x-yapcp.inline-link
                                     txt="Add me to"
                                     url="{{ route('organization.user.add', ['organization' => $organization]) }}" />
-                                <x-yapcp.inline-link
-                                    txt="Update"
-                                    url="{{ route('organization.modify', ['organization' => $organization]) }}" />
+                                    @endif
+                                    @if (auth()->user()?->isAdmin())
+                                <!-- admin only -->
                                 <x-yapcp.inline-link
                                     txt="Remove"
                                     url="{{ route('organization.remove', ['organization' => $organization]) }}" />
+                                    @endif
+                                @endif
+                                @if (auth()->user()?->isAdmin() || in_array($organization->id, $userOrgIds))
+                                <!-- organization member or admin -->
+                                <x-yapcp.inline-link
+                                    txt="Org Dashboards"
+                                    url="{{ route('organization.dashboard', ['organization' => $organization]) }}" />
+                                <!-- organization member or admin -->
+                                <x-yapcp.inline-link
+                                    txt="Update"
+                                    url="{{ route('organization.modify', ['organization' => $organization]) }}" />
                                 @endif
                             </dd>
 

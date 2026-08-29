@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -175,5 +176,15 @@ class Organization extends Model
             foreignKey: 'organization_id',
             localKey: 'id'
         );
+    }
+
+    // organizations.id > user_roles.organizations_id > user_roles.user_id > users.id
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'user_roles', 'organization_id', 'user_id')
+            ->using(UserRole::class)
+            ->withPivot(['role', 'role_opening', 'role_closing'])
+            ->wherePivot('role_opening', '<=', now())
+            ->wherePivot('role_closing', '>=', now());
     }
 }
