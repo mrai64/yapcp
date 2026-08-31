@@ -74,6 +74,12 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read int|null $user_work_validators_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWork> $userWorks
  * @property-read int|null $user_works_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Organization> $organizations
+ * @property-read int|null $organizations_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $activeUserOrganizations
+ * @property-read int|null $active_user_organizations_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $activeUserRoles
+ * @property-read int|null $active_user_roles_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newQuery()
@@ -101,6 +107,14 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read int|null $active_user_organizations_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $activeUserRoles
  * @property-read int|null $active_user_roles_count
+ * @method bool isAdmin()
+ * @method bool isMemberOfAnyOrganization()
+ * @method bool isMemberOfOrganization(\App\Models\Organization|string $organization)
+ * @method bool isMemberOfFederation(\App\Models\Federation|string $federation)
+ * @method bool isJurorInAContest(\App\Models\ContestSection|string $section)
+ * @method bool isJurorInAnyContest()
+ * @method int worksCount()
+ * @method int userWorksCount()
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail
