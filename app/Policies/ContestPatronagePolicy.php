@@ -7,6 +7,7 @@
 
 namespace App\Policies;
 
+use App\Models\Contest;
 use App\Models\ContestPatronage;
 use App\Models\User;
 

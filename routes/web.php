@@ -157,13 +157,13 @@ Volt::route('/organization/design/contest-patronage/listed/{contest}', 'organiza
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-patronage.listed');
 Volt::route('/organization/design/contest-patronage/add/{contest}', 'organization.design.contest-patronage.add')
-    ->middleware(['auth', 'verified,can:create' . ContestPatronage::class . ',contest'])
+    ->middleware(['auth', 'verified']) // authorize in mount()
     ->name('organization.design.contest-patronage.add');
 Volt::route('/organization/design/contest-patronage/modify/{contest_patronage}', 'organization.design.contest-patronage.modify')
-    ->middleware(['auth', 'verified,can:create' . ContestPatronage::class . ',contest'])
+    ->middleware(['auth', 'verified', 'can:modify,contest-patronage,contest'])
     ->name('organization.design.contest-patronage.modify');
 Volt::route('/organization/design/contest-patronage/remove/{contest_patronage}', 'organization.design.contest-patronage.remove')
-    ->middleware(['auth', 'verified,can:create' . ContestPatronage::class . ',contest'])
+    ->middleware(['auth', 'verified', 'can:delete,contest-patronage,contest'])
     ->name('organization.design.contest-patronage.remove');
 
 // ContestSection design
