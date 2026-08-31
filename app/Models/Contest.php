@@ -11,12 +11,13 @@
  * 2026-01-15 refactor for PSR-12 function n variables in camelCase
  *
  * related to ✅ Country
- * related to ❌ Federation (it's a federationId[patronageCode] list)
+ * related to ✅ Federation (thru ContestPatronage)
  * related to ✅ Timezone
  * related to ✅ Organization
  * related to 🚧 Contest (for circuit)
  * related to ✅ ContestAward
  * related to ✅ ContestParticipant
+ * related to ✅ ContestPatronage
  * related to ✅ ContestSection
  * related to ✅ ContestVote
  * related to ✅ ContestWaiting
@@ -162,12 +163,12 @@ class Contest extends Model
         'contact_info', //              free text
         'is_circuit', //                boolean
         'circuit_id',  //               fk contests.id | NULL
-        'federation_list', //           TODO build validation rule
+        'federation_list', //           ! REMOVE after ContestPatronage works
         'url_1_rule', //                web url
         'url_2_concurrent_list', //     web url
         'url_3_admit_n_award_list', //  web url
         'url_4_catalogue', //           web url
-        'timezone_id', //                  fk timezones.id
+        'timezone_id', //               fk timezones.id
         'day_1_opening', //             datetime yyyy-mm-dd hh.mm UTC
         'day_2_closing', //             datetime yyyy-mm-dd hh.mm UTC
         'day_3_jury_opening', //        datetime yyyy-mm-dd hh.mm UTC

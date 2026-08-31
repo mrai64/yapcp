@@ -3,8 +3,6 @@
 /**
  * ContestPatronage define the list of almost one Federation
  *   sponsoring a contest, with its code
- *
- * !!! it's ContestPatronage! not ContestPatronage, ContestPatronage.
  */
 
 namespace App\Models;

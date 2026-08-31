@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * ContestPatronage is under Contest and reply
+ *   all the ContestPolicy methods
+ */
+
 namespace App\Policies;
 
 use App\Models\ContestPatronage;
@@ -12,7 +17,7 @@ class ContestPatronagePolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -20,15 +25,21 @@ class ContestPatronagePolicy
      */
     public function view(User $user, ContestPatronage $contestPatronage): bool
     {
-        return false;
+        return true;
     }
 
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(User $user, ?Contest $contest = null): bool
     {
-        return false;
+        if ($user->isAdmin()) {
+            return true;
+        }
+        $evaluate = $contest && $contest->organization_id !== null
+            && $user->isMemberOfOrganization($contest->organization_id);
+        // Log
+        return $evaluate;
     }
 
     /**
@@ -36,7 +47,14 @@ class ContestPatronagePolicy
      */
     public function update(User $user, ContestPatronage $contestPatronage): bool
     {
-        return false;
+        if ($user->isAdmin()) {
+            return true;
+        }
+        $contest = $contestPatronage->contest;
+        $evaluate = $contest && $contest->organization_id !== null
+            && $user->isMemberOfOrganization($contest->organization_id);
+        // Log
+        return $evaluate;
     }
 
     /**
@@ -44,7 +62,14 @@ class ContestPatronagePolicy
      */
     public function delete(User $user, ContestPatronage $contestPatronage): bool
     {
-        return false;
+        if ($user->isAdmin()) {
+            return true;
+        }
+        $contest = $contestPatronage->contest;
+        $evaluate = $contest && $contest->organization_id !== null
+            && $user->isMemberOfOrganization($contest->organization_id);
+        // Log
+        return $evaluate;
     }
 
     /**
