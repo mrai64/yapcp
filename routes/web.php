@@ -21,6 +21,7 @@
  * !
  */
 
+use App\Models\ContestPatronage;
 use App\Models\Federation as ModelsFederation;
 use App\Models\FederationSection as ModelsFederationSection;
 use App\Models\FederationMore as ModelsFederationMore;
@@ -150,6 +151,20 @@ Volt::route('/organization/design/contest/modify-calendar/{contest}', 'organizat
 Volt::route('/organization/design/contest/modify-url/{contest}', 'organization.design.contest.modify-url')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest.modify-url');
+
+// ContestPatronage design
+Volt::route('/organization/design/contest-patronage/listed/{contest}', 'organization.design.contest-patronage.listed')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.contest-patronage.listed');
+Volt::route('/organization/design/contest-patronage/add/{contest}', 'organization.design.contest-patronage.add')
+    ->middleware(['auth', 'verified']) // authorize in mount()
+    ->name('organization.design.contest-patronage.add');
+Volt::route('/organization/design/contest-patronage/modify/{contest_patronage}', 'organization.design.contest-patronage.modify')
+    ->middleware(['auth', 'verified', 'can:modify,contest-patronage,contest'])
+    ->name('organization.design.contest-patronage.modify');
+Volt::route('/organization/design/contest-patronage/remove/{contest_patronage}', 'organization.design.contest-patronage.remove')
+    ->middleware(['auth', 'verified', 'can:delete,contest-patronage,contest'])
+    ->name('organization.design.contest-patronage.remove');
 
 // ContestSection design
 Volt::route('/organization/design/contest-section/listed/{contest}', 'organization.design.contest-section.listed')

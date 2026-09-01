@@ -33,7 +33,7 @@
   - [✅Add yourself to a registered Organization](/{{route}}/{{version}}/users/add_organization)
   - [Howto open a Contest](#)
   - [Main info n Calendar](#)
-  - [Patronages r Sponsorships](#)
+  - [Patronages](/{{route}}/{{version}}/contest_design/patronages/listed)
   - [Section n Themes](#)
   - [Jury members](#)
   - [Section Awards](#)

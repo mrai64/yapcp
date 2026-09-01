@@ -8,6 +8,7 @@
 
 namespace App\Providers;
 
+use App\Models\ContestPatronage;
 use App\Models\Federation;
 use App\Models\FederationMore;
 use App\Models\FederationSection;
@@ -67,8 +68,11 @@ class AppServiceProvider extends ServiceProvider
         Route::model('federation-more', FederationMore::class);
         Route::model('federation-section', FederationSection::class);
         Route::model('organization', Organization::class);
+        // contest
+        Route::model('contest-patronage', ContestPatronage::class);
 
         // Registrazione esplicita della Policy
+        Gate::policy(ContestPatronage::class, \App\Policies\ContestPatronagePolicy::class);
         Gate::policy(Federation::class, \App\Policies\FederationPolicy::class);
         Gate::policy(FederationMore::class, \App\Policies\FederationMorePolicy::class);
         Gate::policy(FederationSection::class, \App\Policies\FederationSectionPolicy::class);

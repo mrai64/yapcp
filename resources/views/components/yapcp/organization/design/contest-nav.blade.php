@@ -1,10 +1,16 @@
 @props(['contest', 'active' => ''])
 
 <nav class="flex space-x-6 pb-2">
+    <!-- Organization Contest Design / main nav bar -->
     <x-nav-link :href="route('organization.design.contest.modify-name', $contest)" 
         :active="$active == 'general'"
         class="mb-4 fyk text-xl w-48 text-center inline-flex" >
         {{ __('Main data') }}
+    </x-nav-link>
+    <x-nav-link :href="route('organization.design.contest-patronage.listed', $contest)" 
+        :active="$active == 'patronages'"
+        class="mb-4 fyk text-xl w-48 text-center inline-flex" >
+        {{ __('Patronages') }}
     </x-nav-link>
     <x-nav-link :href="route('organization.design.contest-section.listed', $contest)" 
         :active="$active == 'sections'"

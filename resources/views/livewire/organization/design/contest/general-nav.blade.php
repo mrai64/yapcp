@@ -1,6 +1,7 @@
 @props(['contest'])
 
 <div>
+    <!-- Organization Contest Design / Contest page nav bar -->
     <x-yapcp.header-link 
         txt="Name n Infos" 
         url="{{ route('organization.design.contest.modify-name', ['contest' => $contest]) }}" />
