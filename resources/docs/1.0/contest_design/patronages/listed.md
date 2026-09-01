@@ -2,7 +2,7 @@
 
 - [Add new](/{{route}}/{{version}}/contest_design/patronages/add)
 - [Modify](/{{route}}/{{version}}/contest_design/patronages/modify)
-- [Remove](/{{route}}/{{version}}/contest_design/patronages/add)
+- [Remove](/{{route}}/{{version}}/contest_design/patronages/remove)
 
 ---
 
