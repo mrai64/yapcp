@@ -77,32 +77,33 @@ new class extends Component {
                 @endif
 
                 @if (count($contestPatronagesSet))
-                    <div class="fyk text-2xl font-medium text-gray-900">
-                        {{ __('Federation Patronage assigned to ') }}
-                        <br />
-                        {{ $contest->name_en }}
-                    </div>
-                    <p class="small">{{ __("Not in priority order") }}</p>
-                    <br />
-                    <hr />
-                    <ul>
-                    @foreach ($contestPatronagesSet as $contestPatronage)
-                        <li class="font-mono">
-                            {{ $contestPatronage->federation->country->flag_code}}
-                            {{ $contestPatronage->federation->id}}
-                            {{ $contestPatronage->patronage_code}}
-                            |
-                            {{ $contestPatronage->federation->name_en}}
-                        </li>
-                    @endforeach
-                    </ul>
-                    <br />
-                @else
                 <div class="fyk text-2xl font-medium text-gray-900">
+                    {{ __('Federation Patronage assigned to ') }}
+                    <br />
+                    {{ $contest->name_en }}
+                </div>
+                <p class="small">{{ __("Not in priority order") }}</p>
+                <br />
+                <hr />
+                <ul>
+                @foreach ($contestPatronagesSet as $contestPatronage)
+                    <li class="font-mono">
+                        {{ $contestPatronage->federation->country->flag_code}}
+                        {{ $contestPatronage->federation->id}}
+                        {{ $contestPatronage->patronage_code}}
+                        |
+                        {{ $contestPatronage->federation->name_en}}
+                    </li>
+                @endforeach
+                </ul>
+                <br />
+            @else
+                <div class="fyk text-2xl font-medium text-gray-900">
+                    {{ $contest->name_en }}
+                    <br />
                     {{ __("Missing Patronage, but they are facultative... Add one?") }}
                 </div>
-                @endif
-
+            @endif
             </div>
         </div>
     </div>
