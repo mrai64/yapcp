@@ -10,7 +10,7 @@ use App\Models\Federation;
 use App\Models\Organization;
 use Livewire\Volt\Component;
 
-new class extends Component {
+new class () extends Component {
     public Contest $contest;
     public Organization $organization;
     public $contPatrFederationIdsSet;
@@ -57,7 +57,6 @@ new class extends Component {
     }
 }; ?>
 
-<div>
 <div>
     <x-slot name="header">
         <h2 class="fyk text-2xl font-medium text-gray-900">
