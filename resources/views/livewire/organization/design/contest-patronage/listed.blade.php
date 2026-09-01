@@ -11,7 +11,7 @@ use App\Models\Federation;
 use App\Models\Organization;
 use Livewire\Volt\Component;
 
-new class extends Component {
+new class () extends Component {
     //
     public Contest $contest;
     public Organization $organization;
@@ -93,6 +93,11 @@ new class extends Component {
                         {{ $contestPatronage->patronage_code}}
                         |
                         {{ $contestPatronage->federation->name_en}}
+                        <br />
+                        <x-yapcp.inline-link 
+                            txt="Modify" 
+                            url="{{ route('organization.design.contest-patronage.modify', ['contest_patronage' => $contestPatronage]) }}" />
+                        <hr />
                     </li>
                 @endforeach
                 </ul>

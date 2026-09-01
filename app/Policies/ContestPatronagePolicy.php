@@ -10,6 +10,7 @@ namespace App\Policies;
 use App\Models\Contest;
 use App\Models\ContestPatronage;
 use App\Models\User;
+use Illuminate\Support\Facades\Log;
 
 class ContestPatronagePolicy
 {
@@ -46,12 +47,13 @@ class ContestPatronagePolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, ContestPatronage $contestPatronage): bool
+    public function update(User $user, ContestPatronage $contest_patronage): bool
     {
         if ($user->isAdmin()) {
             return true;
         }
-        $contest = $contestPatronage->contest;
+        // Log::info('typeof: ' . gettype($contest_patronage));
+        $contest = $contest_patronage->contest;
         $evaluate = $contest && $contest->organization_id !== null
             && $user->isMemberOfOrganization($contest->organization_id);
         // Log
