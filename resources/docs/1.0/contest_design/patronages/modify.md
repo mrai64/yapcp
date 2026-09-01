@@ -1,5 +1,11 @@
 # Contest Federation Patronages | Contest Design | Organization
 
+- [Add new](/{{route}}/{{version}}/contest_design/patronages/add)
+- [Modify](/{{route}}/{{version}}/contest_design/patronages/modify)
+- [Remove](/{{route}}/{{version}}/contest_design/patronages/add)
+
+---
+
 Uhm. Wrong inserted Contest Patronage? You can easily modify.
 
 &nbsp;

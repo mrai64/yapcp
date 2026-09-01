@@ -1,5 +1,11 @@
 # Contest Federation Patronages | Contest Design | Organization
 
+- [Add new](/{{route}}/{{version}}/contest_design/patronages/add)
+- [Modify](/{{route}}/{{version}}/contest_design/patronages/modify)
+- [Remove](/{{route}}/{{version}}/contest_design/patronages/add)
+
+---
+
 That's not a MUST HAVE, but in most cases Photographic
 Salon had interest to receive Federation Patronages.
 The fact that Federation impose some requirements, and
@@ -33,14 +39,3 @@ From personal dashboard follow
 ...The Patronages link...
 ![_](/docs/contest_patronages/list_img04.png)
 
-## Add a Contest Patronage
-
-[Simplest way](/{{route}}/{{version}}/contest_design/patronages/add)
-
-## Correct - modify a Contest Patronage
-
-[Simplest way](/{{route}}/{{version}}/contest_design/patronages/modify)
-
-## Remove wrong patronage
-
-[Simplest way](/{{route}}/{{version}}/contest_design/patronages/add)
