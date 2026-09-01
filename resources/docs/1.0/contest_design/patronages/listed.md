@@ -13,9 +13,9 @@ Initially the *patronage federation code* was only a
 information text, but later appears more useful obtain
 a structured relation between federation, and contest.
 
-## Reach Contest Patronage page
+##  Reach Contest Patronage page
 
-From personal dashboard follow 
+From personal dashboard follow
 ![_](/docs/contest_patronages/list_img01.png)
 
 &nbsp;
@@ -33,3 +33,14 @@ From personal dashboard follow
 ...The Patronages link...
 ![_](/docs/contest_patronages/list_img04.png)
 
+## Add a Contest Patronage
+
+[Simplest way](/{{route}}/{{version}}/contest_design/patronages/add)
+
+## Correct - modify a Contest Patronage
+
+[Simplest way](/{{route}}/{{version}}/contest_design/patronages/add)
+
+## Remove wrong patronage
+
+[Simplest way](/{{route}}/{{version}}/contest_design/patronages/add)
