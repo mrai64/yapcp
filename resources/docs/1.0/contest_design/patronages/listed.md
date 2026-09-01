@@ -39,7 +39,7 @@ From personal dashboard follow
 
 ## Correct - modify a Contest Patronage
 
-[Simplest way](/{{route}}/{{version}}/contest_design/patronages/add)
+[Simplest way](/{{route}}/{{version}}/contest_design/patronages/modify)
 
 ## Remove wrong patronage
 
