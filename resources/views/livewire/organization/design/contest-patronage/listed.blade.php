@@ -97,6 +97,9 @@ new class () extends Component {
                         <x-yapcp.inline-link 
                             txt="Modify" 
                             url="{{ route('organization.design.contest-patronage.modify', ['contest_patronage' => $contestPatronage]) }}" />
+                        <x-yapcp.inline-link 
+                            txt="Remove" 
+                            url="{{ route('organization.design.contest-patronage.remove', ['contest_patronage' => $contestPatronage]) }}" />
                         <hr />
                     </li>
                 @endforeach
