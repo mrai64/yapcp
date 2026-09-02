@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Organization Contest Design 1 / name and other infos
- * 
+ * Organization Contest Design / Step 1 - Name and other infos
+ *
  */
 
 use App\Models\Contest;
@@ -11,7 +11,7 @@ use App\Models\UserContact;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Volt\Component;
 
-new class extends Component {
+new class () extends Component {
     public Contest $contest;
     public Organization $organization;
     public UserContact $creator;
@@ -88,7 +88,6 @@ new class extends Component {
         return redirect()
             ->route('organization.design.contest.modify-name', ['contest' => $this->contest])
             ->with('success', __('Contest infos updated.'));
-
     }
 }; ?>
 

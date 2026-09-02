@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Organization design contest - Step 0
+ * Organization Design Contest - Step 0
  * build contest for organization_id
  * then pass to modify1
  */
@@ -12,7 +12,7 @@ use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Volt\Component;
 
-new class extends Component {
+new class () extends Component {
     public function mount(Organization $organization)
     {
         $userContact = Auth::user()->contact;
@@ -25,7 +25,7 @@ new class extends Component {
                 'organization_id' => $organization->id,
                 // 'is_circuit' => 'N'
                 // circuit_id => null
-                'federation_list' => '',
+                'federation_list' => '', // TODO Remove - replaced by ContestPatronage
                 'contest_mark' => '',
                 'contact_info' => '',
                 'award_ceremony_info' => '',
@@ -54,5 +54,5 @@ new class extends Component {
 }; ?>
 
 <div>
-    //
+    // <!-- no web -->
 </div>
