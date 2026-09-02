@@ -34,7 +34,7 @@
   - [✅Howto open a Contest](/{{route}}/{{version}}/contest_design/contest/add)
   - [✅Calendar](/{{route}}/{{version}}/contest_design/contest/calendar)
   - [✅Patronages](/{{route}}/{{version}}/contest_design/patronages/listed)
-  - [Section n Themes](#)
+  - [Section n Themes](/{{route}}/{{version}}/contest_design/section/add)
   - [Jury members](#)
   - [Section Awards](#)
   - [Contest Awards](#)
