@@ -30,8 +30,8 @@
 - ## You as Contest Organizer
 
   - [✅Define your Organization](/{{route}}/{{version}}/users/add_organization)
-  - [✅Add yourself to a registered Organization](/{{route}}/{{version}}/users/add_organization)
-  - [Howto open a Contest](#)
+  - [✅Add to an Organization](/{{route}}/{{version}}/users/add_organization)
+  - [✅Howto open a Contest](/{{route}}/{{version}}/contest_design/contest/add)
   - [Main info n Calendar](#)
   - [Patronages](/{{route}}/{{version}}/contest_design/patronages/listed)
   - [Section n Themes](#)
