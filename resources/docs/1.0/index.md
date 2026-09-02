@@ -30,11 +30,11 @@
 - ## You as Contest Organizer
 
   - [✅Define your Organization](/{{route}}/{{version}}/users/add_organization)
-  - [✅Add yourself to a registered Organization](/{{route}}/{{version}}/users/add_organization)
-  - [Howto open a Contest](#)
-  - [Main info n Calendar](#)
-  - [Patronages](/{{route}}/{{version}}/contest_design/patronages/listed)
-  - [Section n Themes](#)
+  - [✅Add to an Organization](/{{route}}/{{version}}/users/add_organization)
+  - [✅Howto open a Contest](/{{route}}/{{version}}/contest_design/contest/add)
+  - [✅Calendar](/{{route}}/{{version}}/contest_design/contest/calendar)
+  - [✅Patronages](/{{route}}/{{version}}/contest_design/patronages/listed)
+  - [Section n Themes](/{{route}}/{{version}}/contest_design/section/add)
   - [Jury members](#)
   - [Section Awards](#)
   - [Contest Awards](#)

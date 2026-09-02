@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Organization contest design 3 / some ulr
- * 
+ * Organization Contest Design / Step 3 - Some url
+ *
  */
 
 use App\Models\Contest;
@@ -87,7 +87,7 @@ new class extends Component {
                 </div>
                 <hr />
                 @endif
-                
+
                 <!-- errors list -->
                 @if ($errors->any())
                 <br />
@@ -148,7 +148,7 @@ new class extends Component {
                     </x-button>
 
                 </form>
-                
+
             </div>
         </div>
     </div>
