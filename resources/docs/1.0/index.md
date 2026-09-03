@@ -32,7 +32,7 @@
   - [✅Define your Organization](/{{route}}/{{version}}/users/add_organization)
   - [✅Add to an Organization](/{{route}}/{{version}}/users/add_organization)
   - [✅Howto open a Contest](/{{route}}/{{version}}/contest_design/contest/add)
-  - [✅Calendar](/{{route}}/{{version}}/contest_design/contest/calendar)
+  - [✅Calendar](/{{route}}/{{version}}/contest_design/calendar/modify)
   - [✅Patronages](/{{route}}/{{version}}/contest_design/patronages/listed)
   - [Section n Themes](/{{route}}/{{version}}/contest_design/section/add)
   - [Jury members](#)
