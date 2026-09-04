@@ -3,7 +3,7 @@
 use App\Jobs\CascadeDeleteFederationJob;
 use App\Models\Federation;
 use App\Models\FederationMore;
-use App\Models\FederationMoresReferencedSets;
+use App\Models\FederationMoresReferencedSet;
 use App\Models\FederationSection;
 use App\Models\User;
 use App\Models\UserContact;
@@ -15,8 +15,8 @@ use App\Models\UserWorkMore;
 use Illuminate\Support\Facades\Queue;
 
 beforeEach(function () {
-    FederationMoresReferencedSets::firstOrCreate(['id' => 'user_contact_mores']);
-    FederationMoresReferencedSets::firstOrCreate(['id' => 'user_works']);
+    FederationMoresReferencedSet::firstOrCreate(['id' => 'user_contact_mores']);
+    FederationMoresReferencedSet::firstOrCreate(['id' => 'user_works']);
 
     UserRolesRoleSet::firstOrCreate(['role' => 'secretary']);
     UserRolesRoleSet::firstOrCreate(['role' => 'inspector']);
