@@ -295,6 +295,24 @@ class Contest extends Model
         return $contestSet;
     }
 
+    // substitute federation_list
+    public function getPatronages(): string
+    {
+        $contestPatronageSet = $this->contestPatronage()
+            ->orderBy('federation_id')
+            ->orderBY('patronage_code')
+            ->get(['federation_id', 'patronage_code']);
+        if ($contestPatronageSet->isEmpty()) {
+            return "";
+        }
+        $patronageList = '';
+        foreach ($contestPatronageSet as $patronage) {
+            $patronageList .= ' ' . $patronage->federation_id
+                . ':' . $patronage->patronage_code;
+        }
+        return $patronageList;
+    }
+
     // SCOPE - used to add filter to query
 
     /**
@@ -326,7 +344,7 @@ class Contest extends Model
     }
 
     // federation list
-    // TODO ContestPatronage
+    // see ContestPatronage
 
     // contests.timezone_id > timezones.id
     /**
