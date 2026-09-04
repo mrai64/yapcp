@@ -146,6 +146,7 @@
     "Calendar": "Calendar",
     "camelCase, english": "camelCase, english",
     "camelCaseVariableName": "camelCaseVariableName",
+    "Can't update Federation with active contest": "Can't update Federation with active contest",
     "Cancel": "Cancel",
     "Cannot change reference table once data is associated.": "Cannot change reference table once data is associated.",
     "Cannot delete: this field is already associated with existing data.": "Cannot delete: this field is already associated with existing data.",
