@@ -22,11 +22,12 @@ new class () extends Component {
     public string $federationLocalLang;
     public string $federationNameLocal;
     public string $federationTimezoneId;
+    public bool $activeContestExists;
 
     public function mount(Federation $federation): void
     {
         $this->federation = $federation;
-
+        $this->activeContestExists = (bool) $federation->activeContests()->exists();
         $this->federationId = $federation->id;
         $this->federationCountryId = $federation->country_id;
         $this->federationNameEn = $federation->name_en;
@@ -98,15 +99,15 @@ new class () extends Component {
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
+
+        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                 <!-- success -->
                 @if (session('success'))
                 <div class="fyk text-2xl float-end font-medium rounded-md px-4 py-2">
                     {{ session('success') }}
                 </div>
                 @endif
-                
+
                 <!-- errors list -->
                 @if ($errors->any())
                 <div>
@@ -167,15 +168,20 @@ new class () extends Component {
                         >{{ old('federationContactInfo') }}</textarea>
                         <x-input-error for="federationContactInfo" class="mt-2" />
                     </div>
-                    
-                    
+
                     <br style="clear:both;" />
-                    
+
+                    @if ($activeContestExists)
+                    <div class="fyk text-2xl font-medium text-red-600">
+                        {{ __("Can't update Federation with active contest") }}
+                    </div>
+                    @else
                     <x-button class="mt-2 ms-4">
                         {{ __('Check all, then Modify') }}
                     </x-button>
+                    @endif
                 </form>
-                
+
             </div>
         </div>
     </div>
