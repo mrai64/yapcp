@@ -296,7 +296,7 @@ class Contest extends Model
     }
 
     // substitute federation_list
-    public function getPatronages(): string
+    public function getContestPatronages(): string
     {
         $contestPatronageSet = $this->contestPatronage()
             ->orderBy('federation_id')
