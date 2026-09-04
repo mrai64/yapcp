@@ -589,8 +589,12 @@ class Contest extends Model
      */
     public function contestPatronage(): HasMany
     {
-        $contestPatronageSet = $this->hasMany(ContestPatronage::class);
+        $contestPatronagesSet = $this->hasMany(
+            related: ContestPatronage::class,
+            foreignKey: 'contest_id', //      contest_patronages.contest_id
+            localKey: 'id' //                 contests.id
+        );
         // Log
-        return $contestPatronageSet;
+        return $contestPatronagesSet;
     }
 }
