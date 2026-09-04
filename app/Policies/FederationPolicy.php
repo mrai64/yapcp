@@ -44,21 +44,12 @@ class FederationPolicy
     /**
      * Determine whether the user can update the model.
      *
-     * TODO Modify federation can cause mistake on running contest,
-     * TODO add some check that there is no running contest
      */
     public function update(User $user, Federation $federation): bool
     {
         // for all federation - only for user in admin group
         Log::info('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' called');
-        $evaluate = $user->isAdmin();
-        Log::info('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
-        if (!$evaluate) {
-            return false;
-        }
-        //
-        $evaluate = ($federation->activeContests()->exists());
-        Log::info('Policy: ' . __CLASS__ . ' ' . __FUNCTION__ . ' line:' . __LINE__ . ' evaluated:' . $evaluate);
+        $evaluate = (bool) $user->isAdmin();
         return $evaluate;
     }
 
