@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Organization contest design 2 / calendar
+ * Organization Contest Design / Step 2 - calendar
  *
  */
 
@@ -271,7 +271,7 @@ new class extends Component {
                     </x-button>
 
                 </form>
-                
+
             </div>
         </div>
     </div>
