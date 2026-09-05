@@ -6,7 +6,7 @@
 > **id assegnato:** aaaa-mm-gg.nn  
 > **Titolo e urgenza:** Quello riportato nel project, solo senza [id...]  
 > **Project/issue link:** [#89](https://github.com/mrai64/yapcp/issues/89)  
-> **Milestone link:** [M1](https://github.com/mrai64/yapcp/milestones/1)
+> **Milestone link:** [M4](https://github.com/mrai64/yapcp/milestones/4)
 
 - [📝 Logica Tecnica](#-logica-tecnica)
 - [🗄️ Modifiche al Database](#️-modifiche-al-database)
