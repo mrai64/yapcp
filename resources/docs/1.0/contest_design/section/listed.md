@@ -4,8 +4,11 @@
 <!-- larecipe links are /{{route}}/{{version}}/ -->
 <!-- images must be uploaded in /storage/app/public/docs/1.0/ then url prefixed by /docs/1.0/ -->
 
-- [Add new](/{{route}}/{{version}}/contest_design/section/add)
-- [Modify](/{{route}}/{{version}}/contest_design/section/modify)
+- [Section Index](/{{route}}/{{version}}/contest_design/section/listed)
+- [Add FP free](/{{route}}/{{version}}/contest_design/section/add1)
+- [Add with FP](/{{route}}/{{version}}/contest_design/section/add2)
+- [Modify FP free](/{{route}}/{{version}}/contest_design/section/modify1)
+- [Modify with FP](/{{route}}/{{version}}/contest_design/section/modify2)
 - [Remove](/{{route}}/{{version}}/contest_design/section/remove)
 
 ---
@@ -45,29 +48,20 @@ to the contest, where you can enter the details that define the contest section.
 &nbsp;
 
 Contest Design page, under the page title the contest design main navigation menù with "Section" tab
-![_](/docs/contest_sections/add_img01.png)  
+![_](/docs/contest_sections/listed_img01.png)  
 
 &nbsp;
 
 When empty, only add is suggested, then
-![_](/docs/contest_sections/add_img02.png)  
+![_](/docs/contest_sections/listed_img02.png)  
 
 &nbsp;
 
-Thats' the form, folks! (1st of 2)
-![_](/docs/contest_sections/add_img03.png)  
+---
 
-&nbsp;
-
-and remainig
-![_](/docs/contest_sections/add_img04.png)  
-
-## Data required
-
-- Under a Federation Patronage
-- federation patronage federation id
-- federation patronage section id
-- Section code
-
-##  Add a theme - section free, from federation section sample
-
+> <!-- to avoid index in Larecipe -->
+- [Add a ContestSection without Federation Patronage](/{{route}}/{{version}}/contest_design/section/add1)
+- [Add a ContestSection with Federation Patronages](/{{route}}/{{version}}/contest_design/section/add2)
+- [Modify a ContestSection with no Federation Patronage](/{{route}}/{{version}}/contest_design/section/modify1)
+- [Modify a ContestSection with Federation Patronage](/{{route}}/{{version}}/contest_design/section/modify2)
+- [Remove a ContestSection](/{{route}}/{{version}}/contest_design/section/remove)
