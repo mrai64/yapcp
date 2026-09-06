@@ -170,7 +170,7 @@ new class () extends Component {
                 : 'nullable',
             //
             'contestSectionCode'           => $this->contestSectionUnderPatronage
-                ? 'required|string|uppercase|exists:federation_sections,id'
+                ? 'required|string|uppercase|exists:federation_sections,code'
                 : 'nullable|string|uppercase:max:10',
             //
             'contestSectionNameEn' => 'required|string|max:250',
