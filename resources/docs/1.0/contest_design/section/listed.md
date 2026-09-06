@@ -57,6 +57,11 @@ When empty, only add is suggested, then
 
 &nbsp;
 
+Otherwise the loaded Contest Section n theme are listed
+![_](/docs/contest_sections/listed_img03.png)  
+
+&nbsp;
+
 ---
 
 > <!-- to avoid index in Larecipe -->
