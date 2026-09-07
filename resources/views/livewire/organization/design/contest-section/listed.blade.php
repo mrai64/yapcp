@@ -40,11 +40,13 @@ new class extends Component {
 		<x-yapcp.header-link 
 			txt="Organization dashboard" 
             url="{{ route('organization.dashboard', ['organization' => $organization]) }}" />
+        <x-yapcp.header-link 
+            txt="Add Section"
+            url="{{ route('organization.design.contest-section.add', ['contest' => $contest]) }}" />
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                 <!-- success -->
                 @if (session('success'))
@@ -53,7 +55,7 @@ new class extends Component {
                 </div>
                 <hr />
                 @endif
-                
+
                 <!-- errors list -->
                 @if ($errors->any())
                 <br />
@@ -79,7 +81,7 @@ new class extends Component {
                     {{ __('Section n themes List') }}
                 </h3>
                 <x-yapcp.inline-link 
-                    class="fyk text-2xl float-end font-medium rounded-md px-4 py-2"
+                    class="text-2xl"
                     txt="Add Section"
                     url="{{ route('organization.design.contest-section.add', ['contest' => $contest]) }}" />
                 <p class="small">{{  __('Sorted by code') }}</p>
@@ -146,7 +148,7 @@ new class extends Component {
                             <tr>
                                 <td class="small">{{ __('RAW required') }}</td>
                                 <td class="small">
-                                    {{ ($section->raw_required) ? __('Required') : __('NOT required') }}
+                                    {{ ($section->raw_required) ? __('Required') : __('No, NOT required') }}
                                 </td>
                             </tr>
                             <tr>
