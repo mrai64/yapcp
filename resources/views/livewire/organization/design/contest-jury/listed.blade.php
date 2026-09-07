@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Organization Contest Design / list for every section the jury list
+ * Organization Contest Design / ContestJury list for every section the jury list
  */
 
 use App\Models\Contest;
@@ -24,7 +24,6 @@ new class extends Component {
         // contest > contestSections > contestJuries > userContact
         $this->contestWithData = Contest::with(['contestSections.contestJuries.userContact'])
             ->find($contest->id);
-
     }
     // that's all, folks!
 }; ?>
@@ -49,7 +48,7 @@ new class extends Component {
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            
+
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                 <!-- success -->
                 @if (session('success'))
