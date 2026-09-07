@@ -6,6 +6,7 @@
  */
 
 use App\Models\Contest;
+use App\Models\ContestPatronage;
 use App\Models\ContestSection;
 use App\Models\Federation;
 use App\Models\FederationSection;
@@ -14,18 +15,20 @@ use App\Rules\ValidFileFormats;
 use Livewire\Attributes\Computed;
 use Livewire\Volt\Component;
 
-new class extends Component {
+new class () extends Component {
     //
     public Contest $contest;
+    public Federation $federation;
     public ContestSection $contestSection;
+    public FederationSection $federationSectionsSet;
     public Organization $organization;
+    public bool $hasContestPatronages;
     // form fields
-    public string $contestSectionCode;
+    public string $contestSectionFederationId; // contest_sections.federation_id
+    public bool   $contestSectionUnderPatronage;
+    public int    $contestSectionFederationSectionId;
     //
-    public string $contestSectionUnderPatronage;
-    public string $contestSectionFederationId;
-    public        $contestSectionFederationSectionId;
-    //
+    public string $contestSectionCode; // contest_sections.code
     public string $contestSectionNameEn;
     public string $contestSectionNameLocal;
     public string $contestSectionSynopsis;
@@ -41,6 +44,8 @@ new class extends Component {
     // used in separated form
     public ?string $selectedFederationId = null;
     public ?string $selectedSectionCode = null;
+
+    // ON UPDATE
 
     // reset prima select
     // viene richiamata all'updated della proprietà
@@ -84,14 +89,29 @@ new class extends Component {
         return true;
     }
 
-    // la lista delle Federaton
+    // viene richiamata all'updated della proprietà
+    // Viene richiamata quando cambia lo stato del patrocinio
+    public function updatedContestSectionUnderPatronage($value): void
+    {
+        if (!$value) {
+            // Se tolgo il patrocinio, pulisco i campi legati alla federazione
+            $this->selectedFederationId = null;
+            $this->selectedSectionCode = null;
+            $this->contestSectionFederationId = '';
+            $this->contestSectionFederationSectionId = 0;
+        }
+    }
+
+    // GETTERS
+
+    // la lista delle Federation
     #[Computed]
     public function getFederationsSet()
     {
         return Federation::orderBy('id')->get();
     }
 
-    // la lista delle section
+    // la lista delle FederationSection
     #[Computed]
     public function getFederationSectionSet()
     {
@@ -103,39 +123,62 @@ new class extends Component {
             ->get();
     }
 
-
+    // CLASSIC
+    // mount - rules - act
     public function mount(ContestSection $contest_section)
     {
-        // was from add
-        // $this->contest = $contest;
-        // $this->organization = $contest->organization;
-        $this->contest = $contest_section->contest;
-        $this->organization = $this->contest->organization;
-        $this->contestSectionUnderPatronage = $contest_section->under_patronage;
-        $this->contestSectionFederationId = $contest_section->federation_id ?? '';
-        $this->contestSectionFederationSectionId = $contest_section->federation_section_id;
-        $this->contestSectionCode = $contest_section->code;
-        $this->contestSectionNameEn = $contest_section->name_en;
+        /** @use ContestSectionPolicy<\App\Policies\ContestSectionPolicy> */
+        $this->authorize('update', [ContestSection::class, $contest_section]);
+
+        $this->contest = $contest_section->contest;         
+        $this->organization = $this->contest->organization; 
+        $this->hasContestPatronages = $this->contest->contestPatronage()->exists();
+        // campi modulo
+        $this->contestSectionUnderPatronage      = $contest_section->under_patronage;
+        if ($this->contestSectionUnderPatronage){
+            $this->contestSectionFederationId        = $contest_section->federationSection->federation_id ?? '';
+            $this->contestSectionFederationSectionId = $contest_section->federationSection->id ?? 0;
+            $this->selectedFederationId              = $this->contestSectionFederationId;
+            $this->selectedSectionCode               = $contest_section->federationSection->code ?? '';
+        } else {
+            $this->contestSectionFederationId        = '';
+            $this->contestSectionFederationSectionId = '';
+            $this->selectedFederationId              = '';
+            $this->selectedSectionCode               = '';
+        }
+        $this->contestSectionCode                = $contest_section->code;
+        $this->contestSectionNameEn              = $contest_section->name_en;
         // $this->contestSectionLocalLang = ...;
-        $this->contestSectionSynopsis = $contest_section->synopsis ?? '';
-        $this->contestSectionFileFormats = $contest_section->file_formats;
-        $this->contestSectionMinWorks = $contest_section->min_works;
-        $this->contestSectionMaxWorks = $contest_section->max_works;
-        $this->contestSectionShortSizeMax = $contest_section->short_size_max;
-        $this->contestSectionLongSizeMax = $contest_section->long_size_max;
-        $this->contestSectionFileSizeMax = $contest_section->file_size_max;
+        $this->contestSectionSynopsis            = $contest_section->synopsis ?? '';
+        $this->contestSectionFileFormats         = $contest_section->file_formats;
+        $this->contestSectionMinWorks            = $contest_section->min_works;
+        $this->contestSectionMaxWorks            = $contest_section->max_works;
+        $this->contestSectionShortSizeMax        = $contest_section->short_size_max;
+        $this->contestSectionLongSizeMax         = $contest_section->long_size_max;
+        $this->contestSectionFileSizeMax         = $contest_section->file_size_max;
         $this->contestSectionMonochromaticRequired = (bool) $contest_section->monochromatic_required;
-        $this->contestSectionRawRequired = (bool) $contest_section->raw_required;
-        $this->contestSectionUniquePrize = (bool) $contest_section->unique_prize;
+        $this->contestSectionRawRequired           = (bool) $contest_section->raw_required;
+        $this->contestSectionUniquePrize           = (bool) $contest_section->unique_prize;
     }
 
+    // regole dipendenti dal valore di un campo
     public function rules()
     {
         return [
-            'contestSectionFederationId'   => 'nullable|string|uppercase|exists:federations,id',
-            'contestSectionCode'           => 'required|string|uppercase',
-            'contestSectionUnderPatronage' => 'nullable|boolean',
-            'contestSectionFederationSectionId' => 'nullable|exists:federation_sections,id',
+            'contestSectionUnderPatronage' => 'boolean:strict',
+            //                                dipende
+            'contestSectionFederationId'   => $this->contestSectionUnderPatronage
+                ? 'required|string|uppercase|exists:federations,id'
+                : 'nullable',
+            //
+            'contestSectionFederationSectionId' => $this->contestSectionUnderPatronage
+                ? 'required|exists:federation_sections,id'
+                : 'nullable',
+            //
+            'contestSectionCode'           => $this->contestSectionUnderPatronage
+                ? 'required|string|uppercase|exists:federation_sections,code'
+                : 'nullable|string|uppercase:max:10',
+            //
             'contestSectionNameEn' => 'required|string|max:250',
             'contestSectionNameLocal' => 'nullable|string|max:250',
             'contestSectionSynopsis' => 'nullable|string|max:2000',
@@ -156,13 +199,12 @@ new class extends Component {
         ];
     }
 
-    public function addContestSection()
+    public function modifyContestSection()
     {
         $validated = $this->validate();
 
         // 0 vale null
         $federationSectionId = $validated['contestSectionFederationSectionId'];
-
         if (empty($federationSectionId) || $federationSectionId == 0) {
             $federationSectionId = null;
         }
@@ -174,7 +216,7 @@ new class extends Component {
             'under_patronage'        => (bool) $this->contestSectionUnderPatronage,
             'federation_section_id'  => $federationSectionId, // was: $validated['contestSectionFederationSectionId'],
             'name_en'                => $validated['contestSectionNameEn'],
-            'name_local'             => $validated['contestSectionNameLocal'],
+            'name_local'             => $validated['contestSectionNameLocal'] ?? '', // null became empty string
             'synopsis'               => $validated['contestSectionSynopsis'],
             'file_formats'           => $validated['contestSectionFileFormats'],
             'min_works'              => $validated['contestSectionMinWorks'],
@@ -190,7 +232,7 @@ new class extends Component {
         // redirect itself
         return redirect()
             ->route('organization.design.contest-section.listed', ['contest' => $contestSection->contest ])
-            ->with('success', __('Section modifed, enjoy!'));
+            ->with('success', __('Section modified, enjoy!'));
 
     }
 }; ?>
@@ -201,9 +243,13 @@ new class extends Component {
             {{ __('Modify Contest infos') }}
         </h2>
         <hr class="mb-4" />
-        <x-yapcp.organization.design.contest-nav :contest="$contest" active="sections" />        
+        <x-yapcp.organization.design.contest-nav :contest="$contest" active="sections" />
         <hr class="mb-2" />
         <livewire:organization.design.contest-section.section-nav :contest="$contest" />
+        <hr class="mb-2" />
+        <p class="small">
+            {{ __("When a contest is also under federation patronage, some theme n section are already defined by federation and should follow federation section parms.") }}
+        </p>
         <hr class="mb-2" />
         <x-yapcp.header-link 
             txt="Back to User dashboard" 
@@ -215,7 +261,6 @@ new class extends Component {
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                 <!-- success -->
                 @if (session('success'))
@@ -242,9 +287,10 @@ new class extends Component {
                     {{ __('Contest Section n theme') }}
                 </h3>
                 <hr class="mb-4" />
-                <form wire:submit="addContestSection">
+                <form wire:submit="modifyContestSection">
                     @csrf
 
+                    @if ($hasContestPatronages)
                     <!-- Under Patronage -->
                     <div class="mb-4">
                         <x-input-label for="contestSectionUnderPatronage" :value="__('That section is...')" />
@@ -254,10 +300,10 @@ new class extends Component {
                         <x-input-error for="contestSectionUnderPatronage" class="mt-2" />
                     </div>
                     <!--/Under Patronage -->
-                    
-                    @if ($contestSectionUnderPatronage)
+                    @endif
+
+                    @if ($hasContestPatronages && $contestSectionUnderPatronage)
                     <div>
-                        
                         <h3 class="fyk text-2xl font-medium text-gray-900">
                             {{ __('Under patronage, easy choice from FederationSections') }}
                         </h3>
@@ -268,33 +314,34 @@ new class extends Component {
                                 <option value="{{ $fed->id }}">{{ $fed->id }} {{ $fed->name_en }}</option>
                                 @endforeach
                             </select>
-                            
+
                             <select wire:model.live="selectedSectionCode" 
                                 class="mb-4 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
                                 @disabled(!$this->selectedFederationId)>
                                 <option class="font-mono" value="">
                                     {{ $this->selectedFederationId ? __('Select a Section') : __('No sections. Before, select a Federation') }}
                                 </option>
-                                
+
                                 @foreach($this->getFederationSectionSet as $section)
                                 <option class="font-mono" value="{{ $section->code }}">{{ $section->code }} - {{ $section->name_en }}</option>
                                 @endforeach
                             </select>
                     </div>
                     @else
-                    <div>
+                    <div class="mb-4">
                         <h3 class="fyk text-2xl font-medium text-gray-900">
                             {{ __('Free from Federations sections grid') }}
                         </h3>
                     </div>
                     @endif
 
+                    @if ($hasContestPatronages)
                     <!-- contestSectionFederationId -->
                     <div class="mb-4">
                         <x-input-label for="contestSectionFederationId" :value="__('Federation Id')" />
                         <x-text-input wire:model="contestSectionFederationId" id="contestSectionFederationId" 
                             class="block mt-1 w-60" type="text" readonly />
-                        <p class="text-sm">{{ __('For info only') }}</p>
+                        <p class="text-sm">{{ __('Managed automatically by patronage. Readonly') }}</p>
                         <x-input-error for="contestSectionFederationId" class="mt-2" />
                     </div>
 
@@ -303,16 +350,23 @@ new class extends Component {
                         <x-input-label for="contestSectionFederationSectionId" :value="__('Federation Section Code')" />
                         <x-text-input wire:model="contestSectionFederationSectionId" id="contestSectionFederationSectionId" 
                             class="block mt-1 w-48" type="text" readonly />
-                        <p class="text-sm">{{ __('For info only') }}</p>
+                        <p class="text-sm">{{ __('Managed automatically by patronage. Readonly') }}</p>
                         <x-input-error for="contestSectionFederationSectionId" class="mt-2" />
                     </div>
+                    @endif
 
                     <!-- contestSectionCode -->
                     <div class="mb-4">
                         <x-input-label for="contestSectionCode" :value="__('Section Code')" />
                         <x-text-input wire:model="contestSectionCode" id="contestSectionCode" name="contestSectionCode" 
                             class="block mt-1 w-48" type="text" required />
-                        <p class="text-sm">{{ __("Only uppercase chars, upto 10 chars") }}</p>
+                        <p class="text-sm">
+                            @if($hasContestPatronages && $contestSectionUnderPatronage)
+                                {{ __("Auto-filled from federation section. Readonly.") }}
+                            @else
+                                {{ __("Only uppercase chars, up to 10 chars. Required") }}
+                            @endif
+                        </p>
                         <x-input-error for="contestSectionCode" class="mt-2" />
                     </div>
 
@@ -329,6 +383,7 @@ new class extends Component {
                         <x-input-label for="contestSectionNameLocal" :value="__('Section name, local lang')" />
                         <x-text-input wire:model="contestSectionNameLocal" id="contestSectionNameLocal" name="contestSectionNameLocal" 
                             class="block mt-1 w-full" type="text" />
+                        <p class="test-sm">{{ __("Section n theme international name. Required")}}</p>
                         <x-input-error for="contestSectionNameLocal" class="mt-2" />
                     </div>
 
@@ -341,6 +396,7 @@ new class extends Component {
                         type="text" name="contestSectionSynopsis"
                         wire:model="contestSectionSynopsis"
                         >{{ old('contestSectionSynopsis') }}</textarea>
+                        <p class="test-sm">{{ __("Input area can be resized. Facultative")}}</p>
                         <x-input-error for="contestSectionSynopsis" class="mt-2" />
                     </div>
 
@@ -349,8 +405,8 @@ new class extends Component {
                         <x-input-label for="contestSectionFileFormats" :value="__('File extension List, english')" />
                         <x-text-input wire:model="contestSectionFileFormats" id="contestSectionFileFormats" name="contestSectionFileFormats" 
                             class="block mt-1 w-full" type="text" required />
-                        <p class="text-sm">{{ __('Almost a file extension, comma separated i.e.: jpg,jpeg,tif') }}</p>
-                        <p class="text-sm">✅ {{ implode(', ', config('app-yapcp.formats.allowed')) }} </p>
+                        <p class="text-sm">{{ __('Almost a file extension, comma separated i.e.: jpg,webp,tif. Required') }}</p>
+                        <p class="text-sm">{{ __("Accepted one or more of:") }}  {{ implode(', ', config('app-yapcp.formats.allowed')) }} </p>
                         <x-input-error for="contestSectionFileFormats" class="mt-2" />
                     </div>
 
@@ -360,7 +416,7 @@ new class extends Component {
                         <x-text-input wire:model="contestSectionMinWorks" id="contestSectionMinWorks" 
                             class="block mt-1 w-48" type="number" name="contestSectionMinWorks" required 
                             min="0" max="12" />
-                        <p class="text-sm">{{ __('Between 0 and 12, included') }}</p>
+                        <p class="text-sm">{{ __('Between 0 and 12, included. Required') }}</p>
                         <x-input-error for="contestSectionMinWorks" class="mt-2" />
                     </div>
                     <!--/contestSectionMinWorks -->
@@ -371,7 +427,7 @@ new class extends Component {
                         <x-text-input wire:model="contestSectionMaxWorks" id="contestSectionMaxWorks" 
                             class="block mt-1 w-48" type="number" name="contestSectionMaxWorks" required 
                             min="0" max="12" />
-                        <p class="text-sm">{{ __('Between 0 and 12, included. Not less min works.') }}</p>
+                        <p class="text-sm">{{ __('Between 0 and 12, included. Not less previous field. Required') }}</p>
                         <x-input-error for="contestSectionMaxWorks" class="mt-2" />
                     </div>
                     <!--/contestSectionMaxWorks -->
@@ -382,7 +438,7 @@ new class extends Component {
                         <x-text-input wire:model="contestSectionShortSizeMax" id="contestSectionShortSizeMax" 
                             class="block mt-1 w-48" type="number" name="contestSectionShortSizeMax" required 
                             min="1000" max="4000" />
-                        <p class="text-sm">{{ __('Between 1000 and 4000, included') }}</p>
+                        <p class="text-sm">{{ __('Between 1000 and 4000, included. Required') }}</p>
                         <x-input-error for="contestSectionShortSizeMax" class="mt-2" />
                     </div>
                     <!--/contestSectionShortSizeMax -->
@@ -393,7 +449,7 @@ new class extends Component {
                         <x-text-input wire:model="contestSectionLongSizeMax" id="contestSectionLongSizeMax" 
                             class="block mt-1 w-48" type="number" name="contestSectionLongSizeMax" required 
                             min="1000" max="4000" />
-                        <p class="text-sm">{{ __('Between 1000 and 4000, included') }}</p>
+                        <p class="text-sm">{{ __('Between 1000 and 4000, included. Not less previous field. Required') }}</p>
                         <x-input-error for="contestSectionLongSizeMax" class="mt-2" />
                     </div>
                     <!--/contestSectionLongSizeMax -->
@@ -404,7 +460,7 @@ new class extends Component {
                         <x-text-input wire:model="contestSectionFileSizeMax" id="contestSectionFileSizeMax" 
                             class="block mt-1 w-60" type="number" name="contestSectionFileSizeMax" required 
                             min="100000" max="6000000" />
-                        <p class="text-sm">{{ __('Between 100000 and 6000000, included') }}</p>
+                        <p class="text-sm">{{ __('Between 100000 and 6000000, included. Required') }}</p>
                         <x-input-error for="contestSectionFileSizeMax" class="mt-2" />
                     </div>
                     <!--/contestSectionFileSizeMax -->
