@@ -129,6 +129,9 @@ new class () extends Component {
     // mount - rules - act
     public function mount(Contest $contest)
     {
+        /** @use ContestSectionPolicy<\App\Policies\ContestSectionPolicy> */
+        $this->authorize('create', [ContestSection::class, $contest]);
+
         $this->contest = $contest;
         $this->organization = $contest->organization;
         $this->hasContestPatronages = $this->contest->contestPatronage()->exists();

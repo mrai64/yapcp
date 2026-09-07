@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Contest;
 use App\Models\ContestSection;
 use App\Models\User;
 
@@ -12,7 +13,7 @@ class ContestSectionPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -20,23 +21,23 @@ class ContestSectionPolicy
      */
     public function view(User $user, ContestSection $contestSection): bool
     {
-        if ($user->isAdmin()) {
-            return true;
-        }
-
-        if ($user->isMemberOfOrganization($contestSection->contest->organization_id)) {
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(User $user, ?Contest $contest = null): bool
     {
-        return true;
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        if ($contest && $user->isMemberOfOrganization($contest->organization_id)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
