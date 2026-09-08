@@ -17,21 +17,28 @@
 
 ## 📝 Logica Tecnica
 
-Se per un qualsiasi motivo un giurato rinuncia, o è stato inserito un dato sbagliato serve la funzione
-di modifica del record. La rinuncia, assimilabile alla cancellazione, esclude
-ma mantiene attiva nella userRole la relazione spostando le date inizio e fine
-al momento della rinuncia. Mentre il record di ContestJury viene cancellato,
-ma con softdelete.
-Alternativa, la modifica dei dati viene normalmente registrata, la qualifica e la presidenza di giuria.
+Gestione della modifica dei dati e della rinuncia di un giurato associato a una sezione di concorso (`ContestJury`).
+
+### Operazioni Disponibili
+
+1. **Modifica Giurato (`modifyContestJury`):**
+   - Consente di aggiornare il titolo/qualifica (`qualify`) e lo stato di Presidente di Giuria (`is_president`).
+   - Applica la validazione sui dati inseriti (`qualify` obbligatorio tra 2 e 255 caratteri, `is_president` booleano).
+
+2. **Rinuncia Giurato (`resignContestJury`):**
+   - Esegue la rimozione del giurato garantendo consistenza del database tramite transazione (`DB::transaction`).
+   - Rimuove l'assegnazione attiva chiudendo la finestra di validità del ruolo in `UserRole` (impostando `role_opening` e `role_closing` all'orario attuale `now()`).
+   - Applica la cancellazione logica (`softDelete`) sul record corrispondente in `ContestJury`.
 
 ## 🗄️ Modifiche al Database
 
-Nessuna
+> <!-- to avoid index in Larecipe -->
+- Nessuna modifica alle tabelle esistenti (sfrutta i campi e la cancellazione soft già presenti su `contest_juries` e `user_roles`).
 
 ## 👮‍♂️ Pre Merge check
 
 > <!-- to avoid index in Larecipe -->
-- [ ] **Test:** Tutti i test (nuovi ed esistenti) passano in verde (`php artisan test`)?
+- [x] **Test:** Tutti i test (nuovi ed esistenti) passano in verde (`php artisan test`)?
 - [x] **Docs:** Il file in `/resources/docs/dev/` è aggiornato?
 - [x] **Manual:** Il manuale utente riflette le modifiche introdotte?
 - [x] **Cleanup:** Ho rimosso eventuali `dd()` o `dump()` dimenticati?
@@ -40,4 +47,4 @@ Nessuna
 ## 🚀 Note per il Deploy
 
 > <!-- to avoid index in Larecipe -->
-Niente di particolare.
+Nessuna operazione straordinaria richiesta per il deploy.
