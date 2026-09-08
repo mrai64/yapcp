@@ -13,6 +13,7 @@ use App\Models\Organization;
 use App\Models\User;
 use App\Models\UserContact;
 use App\Models\UserRole;
+use App\Policies\ContestJuryPolicy;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Session;
 
@@ -22,12 +23,15 @@ new class extends Component {
     public Contest $contest;
     public ContestSection $contestSection;
     public Organization $organization;
-    // form fields
+    //
     public UserContact $userContact;
     public string $contestJurorEmail;
     public string $contestJurorFirstName;
     public string $contestJurorLastName;
     public string $contestJurorCountryId;
+    // form fields
+    public string $contestJurorIsPresident;
+    public string $contestJurorQualify;
 
     public function mount(ContestSection $contest_section)
     {
@@ -38,11 +42,24 @@ new class extends Component {
         // form fields
         $user_contact_id = session()->get('contest_juror_id');
         $this->userContact = UserContact::where('id', $user_contact_id)->first();
-
-
+        $this->contestJurorIsPresident = false;
+        $this->contestJurorQualify = '';
     }
+    //
+    public function rules()
+    {
+        return [
+            'contestJurorIsPresident'  => 'nullable|boolean',
+            'contestJurorQualify'  => 'required|string|min:2|max:255',
+        ];
+    }
+    //
     public function addContestJury()
     {
+        $validated = $this->validate();
+        // if null become false
+        $validated['contestJurorIsPresident'] = $validated['contestJurorIsPresident'] ?? false;
+
         // maybe insert contestJury, then thru observer add userRoles
         // but that solution is atomic, "all or nothing"
         $data = [
@@ -51,6 +68,8 @@ new class extends Component {
             'userId' => $this->userContact->id,
             'opening' => $this->contest->day_3_jury_opening,
             'closing' => $this->contest->day_4_jury_closing,
+            'is_president' => (bool) $validated['contestJurorIsPresident'],
+            'qualify' => $validated['contestJurorQualify'],
         ];
 
         $res = DB::transaction(function () use ($data) {
@@ -60,7 +79,8 @@ new class extends Component {
                 'contest_id' => $data['contestId'],
                 'section_id' => $data['sectionId'],
                 'user_id' => $data['userId'],
-                'is_president' => false,
+                'is_president' => $data['is_president'],
+                'qualify' => $data['qualify'],
             ]);
 
             // 2. creazione userRole
@@ -173,16 +193,34 @@ new class extends Component {
                     </tbody>
                 </table>
 
-                <!--  -->
+                <hr class="mb-4" />
+
+                <h3 class="fyk text-2xl font-medium text-gray-900">
+                    {{ __('Just a latest req') }}
+                </h3>
+
                 <form wire:submit="addContestJury">
                     @csrf
+
+                    <div class="mb-4">
+                        <x-input-label for="contestJurorQualify" :value="__('Juror qualifing status')" />
+                        <x-text-input wire:model="contestJurorQualify" id="contestJurorQualify" name="contestJurorQualify" 
+                            class="block mt-1 w-full" type="text" required />
+                        <x-input-error for="contestJurorQualify" class="mt-2" />
+                    </div>
+
+                    <div class="mb-4">
+                        <x-input-label for="contestJurorIsPresident" :value="__('Is Jury President?')" />
+                            <x-checkbox wire:model.live="contestJurorIsPresident" id="contestJurorIsPresident" name="contestJurorIsPresident" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" />
+                            {{ __('Yes, only and unique Jury President') }}
+                        </label>
+                        <x-input-error for="contestJurorIsPresident" class="mt-2" />
+                    </div>
 
                     <x-button class="mt-2 ms-4">
                         {{ __('Check then Add') }}
                     </x-button>
                 </form>
-                <!--/ -->
-
             </div>
         </div>
     </div>

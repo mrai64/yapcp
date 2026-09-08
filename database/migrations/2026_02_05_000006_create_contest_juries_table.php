@@ -12,7 +12,7 @@ return new class () extends Migration {
     {
         Schema::create('contest_juries', function (Blueprint $table) {
             $table->uuid('id')->charset('ascii')->collation('ascii_general_ci')
-                ->primary()->comment('reak pk section_id + juror user_id');
+                ->primary()->comment('real pk section_id + juror user_id');
             $table->char('contest_id', 36)->charset('ascii')->collation('ascii_general_ci')
                 ->index()->comment('fk: contests.id');
             $table->char('section_id', 36)->charset('ascii')->collation('ascii_general_ci')
@@ -21,6 +21,7 @@ return new class () extends Migration {
                 ->index()->comment('fk: user_contacts.id - juror');
             $table->boolean('is_president')->default(false)
                 ->comment('used to put first in juror list');
+            // add qualify string default ''
             //
             $table->dateTime('created_at')->useCurrent();
             $table->dateTime('updated_at')->useCurrentOnUpdate()->useCurrent()->index();
