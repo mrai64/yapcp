@@ -105,6 +105,7 @@ new class extends Component {
                             {{ $juror->userContact->country->country }} <br>
                             {{ $juror->userContact->last_name }}, 
                             {{ $juror->userContact->first_name }}<br>
+                            {{ ($juror->qualify) ? $juror->qualify : 'Juror' }}<br>
                             <x-yapcp.inline-link
                                 txt="Modify" 
                                 url="{{ route('organization.design.contest-jury.modify', ['contest_jury' => $juror]) }}" />
