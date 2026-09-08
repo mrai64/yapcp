@@ -22,11 +22,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * @property string $id reak pk section_id + juror user_id
+ * @property string $id but real pk section_id + juror user_id
  * @property string $contest_id fk: contests.id
  * @property string $section_id fk: contest_sections.id
  * @property string $user_id fk: user_contacts.id - juror
  * @property bool $is_president used to put first in juror list
+ * @property string $qualify president of... professional ...
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -43,6 +44,7 @@ use Illuminate\Support\Facades\Auth;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereIsPresident($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereQualify($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereSectionId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestJury whereUserId($value)
@@ -69,6 +71,7 @@ class ContestJury extends Model
         'section_id', //       fk contest_sections.id
         'user_id', //          fk user_contacts.user_id juror
         'is_president', //     boolean
+        'qualify', //          free text
         // created_at          reserved
         // updated_at          reserved
         // deleted_at          reserved
@@ -82,9 +85,10 @@ class ContestJury extends Model
             'section_id' => 'string',
             'user_id' => 'string',
             'is_president' => 'boolean',
-            'created_at' => 'datetime',
-            'updated_at' => 'datetime',
-            'deleted_at' => 'datetime',
+            'qualify'      => 'string',
+            'created_at'   => 'datetime',
+            'updated_at'   => 'datetime',
+            'deleted_at'   => 'datetime',
         ];
     }
 
