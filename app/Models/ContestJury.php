@@ -142,14 +142,23 @@ class ContestJury extends Model
     // contest_juries N>1 contests
     public function contest(): BelongsTo
     {
-        return $this->belongsTo(Contest::class);
+        $contest = $this->belongsTo(
+            related: Contest::class,
+            foreignKey: 'contest_id',
+            ownerKey: 'id'
+        );
+        return $contest;
     }
 
     // was: contest_section
     // contest_juries.section_id > contest_sections.id
     public function contestSection(): BelongsTo
     {
-        $section = $this->belongsTo(ContestSection::class);
+        $section = $this->belongsTo(
+            related: ContestSection::class,
+            foreignKey: 'section_id',
+            ownerKey: 'id'
+        );
 
         return $section;
     }
