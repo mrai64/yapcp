@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 /**
- * @property string $id reak pk section_id + juror user_id
+ * @property string $id but real pk section_id + juror user_id
  * @property string $contest_id fk: contests.id
  * @property string $section_id fk: contest_sections.id
  * @property string $user_id fk: user_contacts.id - juror
