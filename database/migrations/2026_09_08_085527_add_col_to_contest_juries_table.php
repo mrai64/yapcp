@@ -24,7 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('contest_juries', function (Blueprint $table) {
-            $table->removeColumn('qualify');
+            $table->dropColumn('qualify');
         });
     }
 };

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Organization Contest Design / list for every section the jury list
+ * Organization Contest Design / ContestJury list for every section the jury list
  */
 
 use App\Models\Contest;
@@ -24,7 +24,6 @@ new class extends Component {
         // contest > contestSections > contestJuries > userContact
         $this->contestWithData = Contest::with(['contestSections.contestJuries.userContact'])
             ->find($contest->id);
-
     }
     // that's all, folks!
 }; ?>
@@ -49,7 +48,7 @@ new class extends Component {
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            
+
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                 <!-- success -->
                 @if (session('success'))
@@ -94,23 +93,27 @@ new class extends Component {
                             txt="Add Juror" 
                             url="{{ route('organization.design.contest-jury.add1', ['contest_section' => $section]) }}" />
                         @if ($section->contestJuries->isEmpty())
-                            <dd>
-                                {{ __('❌ No jurors for that section - theme, add ASAP')}}
-                            </dd>
+                        <dd>
+                            {{ __('❌ No jurors for that section - theme, add ASAP')}}
+                        </dd>
                         @else
                             @foreach ($section->contestJuries as $juror)
-                            <dd class="w-auto inline-float">
-                                {{ ($juror->is_president) ? __("Jury President") : __("Juror") }} 
-                                {{ __("From") }}
-                                {{ $juror->userContact->country->flag_code }} 
-                                {{ $juror->userContact->country->country }} <br>
-                                {{ $juror->userContact->last_name }}, 
-                                {{ $juror->userContact->first_name }}<br>
-                                <x-yapcp.inline-link
-                                    txt="Remove" 
-                                    url="{{ route('organization.design.contest-jury.remove', ['contest_jury' => $juror]) }}" />
-                            </dd>
-                            @endforeach
+                        <dd class="w-auto inline-float">
+                            {{ ($juror->is_president) ? __("Jury President") : __("Juror") }} 
+                            {{ __("From") }}
+                            {{ $juror->userContact->country->flag_code }} 
+                            {{ $juror->userContact->country->country }} <br>
+                            {{ $juror->userContact->last_name }}, 
+                            {{ $juror->userContact->first_name }}<br>
+                            {{ ($juror->qualify) ? $juror->qualify : 'Juror' }}<br>
+                            <x-yapcp.inline-link
+                                txt="Modify" 
+                                url="{{ route('organization.design.contest-jury.modify', ['contest_jury' => $juror]) }}" />
+                            <x-yapcp.inline-link
+                                txt="Remove" 
+                                url="{{ route('organization.design.contest-jury.remove', ['contest_jury' => $juror]) }}" />
+                        </dd>
+                        @endforeach
                         @endif
                     </div>
                     <hr class="my-4" />
