@@ -46,9 +46,17 @@ class ContestJuryPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, ContestJury $contestJury): bool
+    public function update(User $user, ContestJury $contest_jury): bool
     {
-        return false;
+        if ($user->isAdmin()) {
+            return true;
+        }
+        $contest = $contest_jury->contest;
+        $organizationId = $contest->organization->id;
+        // Log
+        $evaluate = $user->isMemberOfOrganization($organizationId);
+        // Log
+        return $evaluate;
     }
 
     /**
