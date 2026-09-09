@@ -36,7 +36,7 @@
   - [✅Calendar](/{{route}}/{{version}}/contest_design/calendar/modify)
   - [✅Patronages](/{{route}}/{{version}}/contest_design/patronages/listed)
   - [✅Section n Themes](/{{route}}/{{version}}/contest_design/section/listed)
-  - [Jury members](#)
+  - [Jury members](/{{route}}/{{version}}/contest_design/jury/listed)
   - [Section Awards](#)
   - [Contest Awards](#)
   - [Participant Works Review](#)

@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Organization Contest Design / add a juror to ContestJury
- * last of 3 - check personal data then build
- * 
+ * Organization Contest Design / modify a juror in ContestJury
+ *
  */
+
 
 use App\Models\Contest;
 use App\Models\ContestJury;
@@ -13,17 +13,14 @@ use App\Models\Organization;
 use App\Models\User;
 use App\Models\UserContact;
 use App\Models\UserRole;
-use App\Policies\ContestJuryPolicy;
 use Illuminate\Support\Facades\DB;
-use Livewire\Attributes\Session;
-
 use Livewire\Volt\Component;
 
-new class extends Component {
+new class () extends Component {
     public Contest $contest;
+    public ContestJury $contestJury;
     public ContestSection $contestSection;
     public Organization $organization;
-    //
     public UserContact $userContact;
     public string $contestJurorEmail;
     public string $contestJurorFirstName;
@@ -33,18 +30,21 @@ new class extends Component {
     public string $contestJurorIsPresident;
     public string $contestJurorQualify;
 
-    public function mount(ContestSection $contest_section)
+    public function mount(ContestJury $contest_jury)
     {
-        // header
-        $this->contestSection = $contest_section;
-        $this->contest = $contest_section->contest;
-        $this->organization = $this->contest->organization;
-        // form fields
-        $user_contact_id = session()->get('contest_juror_id');
-        $this->userContact = UserContact::where('id', $user_contact_id)->first();
-        $this->contestJurorIsPresident = false;
-        $this->contestJurorQualify = '';
+        // policy
+        $this->authorize('update', [ContestJury::class, $contest_jury]);
+        //
+        $this->contestJury    = $contest_jury;
+        $this->contestSection = $contest_jury->contestSection;
+        $this->contest        = $contest_jury->contest;
+        $this->organization   = $this->contest->organization;
+        $this->userContact    = $this->contestJury->userContact;
+        //
+        $this->contestJurorIsPresident = $this->contestJury->is_president;
+        $this->contestJurorQualify     = $this->contestJury->qualify;
     }
+
     //
     public function rules()
     {
@@ -53,64 +53,56 @@ new class extends Component {
             'contestJurorQualify'  => 'required|string|min:2|max:255',
         ];
     }
-    //
-    public function addContestJury()
+
+    public function resignContestJury()
+    {
+        // for db::transaction()
+        $data = [
+            'userId' => $this->userContact->id,
+            'contestId' => $this->contest->id,
+            'contestJury' => $this->contestJury,
+        ];
+        $res = DB::transaction( function () use ($data){
+        // 1st of 2 the juror is out
+        $userRole = UserRole::where('user_id', $data['userId'])
+            ->where('role', 'juror')
+            ->where('contest_id', $data['contestId'])
+            ->first();
+        $userRole->update([
+            'role_opening' => now()->format('Y-m-d\TH:i'),
+            'role_closing' => now()->format('Y-m-d\TH:i'),
+        ]);
+        // 2nd of 2
+        $data['contestJury']->delete();
+        }); // db::transaction
+        //
+        redirect()
+            ->route('organization.design.contest-jury.listed', ['contest' => $this->contest])
+            ->with('success', __('Juror retired.'));
+    } // resignContestJury
+
+    public function modifyContestJury()
     {
         $validated = $this->validate();
         // if null become false
         $validated['contestJurorIsPresident'] = $validated['contestJurorIsPresident'] ?? false;
 
-        // maybe insert contestJury, then thru observer add userRoles
-        // but that solution is atomic, "all or nothing"
-        $data = [
-            'contestId' => $this->contest->id,
-            'sectionId' => $this->contestSection->id,
-            'userId' => $this->userContact->id,
-            'opening' => $this->contest->day_3_jury_opening,
-            'closing' => $this->contest->day_4_jury_closing,
+        // 1. creazione giurato
+        $this->contestJury->update([
             'is_president' => (bool) $validated['contestJurorIsPresident'],
             'qualify' => $validated['contestJurorQualify'],
-        ];
-
-        $res = DB::transaction(function () use ($data) {
-
-            // 1. creazione giurato
-            $contestJury = ContestJury::create([
-                'contest_id' => $data['contestId'],
-                'section_id' => $data['sectionId'],
-                'user_id' => $data['userId'],
-                'is_president' => $data['is_president'],
-                'qualify' => $data['qualify'],
-            ]);
-
-            // 2. creazione userRole
-            $userRole = UserRole::create([
-                'user_id' => $data['userId'],
-                'role'    => 'juror', 
-                'organization_id' => null,
-                'contest_id' => $data['contestId'],
-                'federation_id' => null,
-                'role_opening' => $data['opening'], // default: now()
-                'role_closing' => $data['closing'], // default: 9999-12-31 23:59:59
-            ]);
-
-            return $contestJury;
-        });
-
-        // clean
-        session()->forget('contest_juror_id');
-        session()->forget('contest_juror_email');
+        ]);
 
         redirect()
             ->route('organization.design.contest-jury.listed', ['contest' => $this->contest])
-            ->with('success', __('Juror added.'));
-    }
+            ->with('success', __('Juror updated.'));
+    } // modifyContestJury
 }; ?>
 
 <div>
     <x-slot name="header">
         <h2 class="fyk text-2xl font-medium text-gray-900">
-            {{ __('Add Contest Juror / last of 3') }}
+            {{ __('Modify Contest Juror / Resign or correct') }}
         </h2>
         <hr class="mb-4" />
         <x-yapcp.organization.design.contest-nav :contest="$contest" active="juries" />
@@ -127,7 +119,6 @@ new class extends Component {
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                 <!-- success -->
                 @if (session('success'))
@@ -151,7 +142,7 @@ new class extends Component {
                 @endif
 
                 <h2 class="fyk text-2xl font-medium text-gray-900">
-                    {{ __('Add Contest Juror for: :code :section', ['code' => $contestSection->code, 'section' => $contestSection->name_en]) }}
+                    {{ __('Modify Contest Juror for: :code :section', ['code' => $contestSection->code, 'section' => $contestSection->name_en]) }}
                 </h2>
 
                 <p class="small">{{ __("") }}</p>
@@ -190,16 +181,33 @@ new class extends Component {
                                 {{ $userContact->country->country }}
                             </td>
                         </tr>
+                        <tr class="border">
+                            <td class="fyk text-2xl font-medium text-gray-900 w-60" scope="row" valign="top">
+                                {{ __("Qualify") }}
+                            </td>
+                            <td class="fyk text-2xl font-medium text-gray-900 w-auto" scope="row" valign="top">
+                                {{ $contestJury->qualify }}
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
                 <hr class="mb-4" />
 
+                <form wire:submit="resignContestJury">
+                    @csrf
+                    <x-button class="mt-2 ms-4">
+                        {{ __('Juror Resign') }}
+                    </x-button>
+                </form>
+
+                <hr class="mt-4 mb-4" />
+
                 <h3 class="fyk text-2xl font-medium text-gray-900">
-                    {{ __('Just a latest req') }}
+                    {{ __("Change Juror record") }}
                 </h3>
 
-                <form wire:submit="addContestJury">
+                <form wire:submit="modifyContestJury">
                     @csrf
 
                     <div class="mb-4">
@@ -218,7 +226,7 @@ new class extends Component {
                     </div>
 
                     <x-button class="mt-2 ms-4">
-                        {{ __('Check then Add') }}
+                        {{ __('Juror modify') }}
                     </x-button>
                 </form>
             </div>
