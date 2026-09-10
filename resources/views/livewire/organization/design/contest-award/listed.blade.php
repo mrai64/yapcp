@@ -10,28 +10,27 @@ use App\Models\ContestAward;
 use App\Models\Organization;
 use Livewire\Volt\Component;
 
-new class extends Component {
+new class () extends Component {
     //
     public Contest $contest;
     public Organization $organization;
-    public $contestAwardsSet;
+    public array $contestAwardsSet;
     //
     public function mount(Contest $contest)
     {
         $this->contest = $contest;
         $this->organization = $contest->organization;
-
+        // Collection
         $contestAwardsSet = ContestAward::where('contest_id', $this->contest->id)
             ->orderBy('section_id', 'asc')
             ->orderBy('is_award', 'desc')
             ->orderBy('section_code', 'asc')
             ->get();
-
-            $this->contestAwardsSet = $contestAwardsSet->groupBy(function ($item){
+        // array group by(), with a fictional fill section_code when is missing
+        $this->contestAwardsSet = $contestAwardsSet->groupBy(function ($item){
                 return $item->section_code ?? '..';
             })
             ->toArray();
-
     }
 }; ?>
 
@@ -78,7 +77,8 @@ new class extends Component {
                 <br />
                 @endif
 
-                @if ( count($contestAwardsSet) === 0)
+                @if (!$contestAwardsSet)
+                <!-- An empty set -->
                 <h3>
                     {{ __('Add first Award to your Contest') }}
                 </h3>
@@ -86,16 +86,18 @@ new class extends Component {
                     txt="Add Award"
                     url="{{ route('organization.design.contest-award.add', ['contest' => $contest]) }}" />
                 @else
+                <!-- Not empty set -->
                 <x-yapcp.inline-link 
                     txt="Add Another Award"
                     url="{{ route('organization.design.contest-award.add', ['contest' => $contest]) }}" />
-                    @foreach ($contestAwardsSet as $section => $prizeSet)
-                    <div class="my-4 border">
-                        <div class="fyk text-2xl mb-4">
-                            {{ ($section == '..') ? __("Contest Awards") : __("Section Code: :code", ['code' => $section])}}
-                        </div>
-                        <ul>
-                        @foreach ($prizeSet as $contestAward)
+
+                @foreach ($contestAwardsSet as $section => $prizeSet)
+                <div class="my-4 border">
+                    <div class="fyk text-2xl mb-4">
+                        {{ ($section == '..') ? __("Contest Awards") : __("Section Code: :code", ['code' => $section])}}
+                    </div>
+                    <ul>
+                    @foreach ($prizeSet as $contestAward)
                         <li class="font-mono my-2 px-4 py-2">
                             {{ $contestAward['is_award'] ? '🏆' : '📜' }}
                             {{ $contestAward['award_code'] }} 
@@ -107,10 +109,16 @@ new class extends Component {
                                 txt="Remove"
                                 url="{{ route('organization.design.contest-award.remove', ['contest_award' => $contestAward['id']]) }}" />
                         </li>
-                        @endforeach
-                        </ul>
-                    </div>
                     @endforeach
+                    </ul>
+                </div>
+                @endforeach
+
+                <hr class="my-4" />
+
+                <p class="text-sm">
+                    {{ __("Legend: 🏆 / primary prize, 📜 / secondary prize")}}
+                </p>
                 @endif
             </div>
         </div>
