@@ -12,7 +12,8 @@ class ContestAwardPolicy
      */
     public function viewAny(User $user): bool
     {
-        return false;
+        // all
+        return true;
     }
 
     /**
@@ -20,14 +21,24 @@ class ContestAwardPolicy
      */
     public function view(User $user, ContestAward $contestAward): bool
     {
-        return false;
+        // all
+        return true;
     }
 
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(User $user, ?Contest $contest = null): bool
     {
+        // all
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        if ($contest && $user->isMemberOfOrganization($contest->organization_id)) {
+            return true;
+        }
+
         return false;
     }
 
@@ -36,6 +47,14 @@ class ContestAwardPolicy
      */
     public function update(User $user, ContestAward $contestAward): bool
     {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        if ($contest && $user->isMemberOfOrganization($contestAward->contest->organization_id)) {
+            return true;
+        }
+
         return false;
     }
 
@@ -44,6 +63,14 @@ class ContestAwardPolicy
      */
     public function delete(User $user, ContestAward $contestAward): bool
     {
+        if ($user->isAdmin()) {
+            return true;
+        }
+
+        if ($contest && $user->isMemberOfOrganization($contestAward->contest->organization_id)) {
+            return true;
+        }
+
         return false;
     }
 
