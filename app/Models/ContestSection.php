@@ -132,7 +132,7 @@ class ContestSection extends Model
 
     protected function casts()
     {
-        ds('Model ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        // ds('Model ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         return [
             'id' => 'string',
             'contest_id' => 'string',
@@ -172,7 +172,7 @@ class ContestSection extends Model
 
             return $firstContestSectionId->id ?? '';
         } catch (\Throwable $th) {
-            Log::error(__FUNCTION__.' '.__LINE__.' in: contestId:'.$contestId.' out: '.$th->getMessage());
+            Log::error(__FUNCTION__ . ' ' . __LINE__ . ' in: contestId:' . $contestId . ' out: ' . $th->getMessage());
 
             return '';
         }
