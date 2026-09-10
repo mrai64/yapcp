@@ -139,6 +139,9 @@ Volt::route('/organization/contest/listed/{organization}', 'organization.contest
     ->name('organization.contest.listed');
 
 // Contest design
+Volt::route('/organization/design/contest/detail/{contest}', 'organization.design.contest.detail')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.contest.detail');
 Volt::route('/organization/design/contest/make/{organization}', 'organization.design.contest.make')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest.make');
@@ -221,10 +224,6 @@ Volt::route('/organization/design/contest-award/modify/{contest_award}', 'organi
 Volt::route('/organization/design/contest-award/remove/{contest_award}', 'organization.design.contest-award.remove')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-award.remove');
-Volt::route('/organization/design/contest/detail/{contest}', 'organization.design.contest.detail')
-    ->middleware(['auth', 'verified'])
-    ->name('organization.design.contest.detail');
-
 
 /**
  * Federation
