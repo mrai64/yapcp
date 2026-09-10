@@ -15,6 +15,8 @@
 Chose the modify link, then modify, that's all.
 What you can't modify? The group. Contest prize remain
 contest prize, section prize remain section prize.
+So, if you need to change a prize from contest to section
+the regular way is a delete and a insert.
 
 &nbsp;
 
@@ -23,3 +25,7 @@ contest prize, section prize remain section prize.
 &nbsp;
 
 ![_](/docs/contest_awards/modify_img02.png)
+
+&nbsp;
+
+![_](/docs/contest_awards/modify_img03.png)
