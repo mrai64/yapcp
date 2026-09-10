@@ -33,14 +33,12 @@ Nessuna, viene usato il modello ContestAward legato al model Contest.
 ## 👮‍♂️ Pre Merge check
 
 > <!-- to avoid index in Larecipe -->
-- [ ] **Test:** Tutti i test (nuovi ed esistenti) passano in verde (`php artisan test`)?
-- [ ] **Docs:** Il file in `/resources/docs/dev/` è aggiornato?
-- [ ] **Manual:** Il manuale utente riflette le modifiche introdotte?
-- [ ] **Cleanup:** Ho rimosso eventuali `dd()` o `dump()` dimenticati?
-- [ ] **Commit:** I messaggi dei commit sono chiari?
+- [x] **Test:** Tutti i test (nuovi ed esistenti) passano in verde (`php artisan test`)?
+- [x] **Docs:** Il file in `/resources/docs/dev/` è aggiornato?
+- [x] **Manual:** Il manuale utente riflette le modifiche introdotte?
+- [x] **Cleanup:** Ho rimosso eventuali `dd()` o `dump()` dimenticati?
+- [x] **Commit:** I messaggi dei commit sono chiari?
 
 ## 🚀 Note per il Deploy
 
-> <!-- to avoid index in Larecipe -->
-- Eseguire `php artisan migrate`
-- Lorem ipsum
+Niente di particolare.
