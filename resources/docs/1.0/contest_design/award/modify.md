@@ -10,21 +10,16 @@
 
 ---
 
-## Add a Contest prize / a Section Prize
+## Modify a Contest prize / a Section Prize
 
-It's the same work, we ask 3 info:
-
-- it's a contest or section prize (no errors: choose by list)
-- an award code, sortable uppercase chars and numbers, i.e.
-  the code is the sort key, BA for best Author is over HM honorable
-  mention. Easy. 3 record for the same HM? HM1, HM2, HM3. Or HMA, HMB, HMC. Easy.
+Chose the modify link, then modify, that's all.
+What you can't modify? The group. Contest prize remain
+contest prize, section prize remain section prize.
 
 &nbsp;
 
-The insert form
-![_](/docs/contest_awards/add_img01.png)
+![_](/docs/contest_awards/modify_img01.png)
 
 &nbsp;
 
-Done
-![_](/docs/contest_awards/add_img02.png)
+![_](/docs/contest_awards/modify_img02.png)

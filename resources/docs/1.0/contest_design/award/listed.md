@@ -5,7 +5,8 @@
 
 - [Awards List](/{{route}}/{{version}}/contest_design/award/listed)
 - [Add a Prize](/{{route}}/{{version}}/contest_design/award/add)
-
+- [Modify](/{{route}}/{{version}}/contest_design/award/modify)
+- [Remove](/{{route}}/{{version}}/contest_design/award/remove)
 
 ---
 
@@ -37,5 +38,3 @@ And empty award list, add first award.
 
 After first award add
 ![_](/docs/contest_awards/listed_img04.png)
-
-
