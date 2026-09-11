@@ -5,20 +5,23 @@
  */
 
 use App\Models\Contest;
+use App\Models\ContestPatronage;
 use App\Models\Organization;
 use Carbon\CarbonImmutable;
 use Livewire\Volt\Component;
 
-new class extends Component {
+new class () extends Component {
     public Contest         $contest;
     public Organization    $organization;
+    public string          $contestPatronages;
     public CarbonImmutable $today;
 
     public function mount(Contest $contest)
     {
-        $this->contest =      $contest;
-        $this->organization = $contest->organization;
-        $this->today =        CarbonImmutable::now();
+        $this->contest           = $contest;
+        $this->organization      = $contest->organization;
+        $this->contestPatronages = $contest->getContestPatronages();
+        $this->today             = CarbonImmutable::now();
     }
 }; ?>
 
@@ -26,7 +29,7 @@ new class extends Component {
     <h3 class="fyk text-2xl font-medium text-gray-900">
         {{ __('General info') }}
     </h3>
-        <hr class="mb-4" />
+    <hr class="mb-4" />
 
     <p class="fyk text-xl">
         {{ __("We, :name, are announcing a photographic contest named", ['name' => $organization->name]) }}
@@ -41,6 +44,14 @@ new class extends Component {
             {{ __("Note: Date n time 00:00 23:59 are based on our -Organization- timezone, which is: :timezone.", ['timezone' => $contest->timezone_id ]) }}
         </em>
     </p>
+    <!-- Patronages -->
+    @if ($contestPatronages)
+    <hr class="my-4" />
+    <h3 class="fyk text-2xl font-medium text-gray-900">
+        {{ __("Under these Patronages") }}
+    </h3>
+    <div class="fyk text-2xl font-medium">{{ $contestPatronages }}</div>
+    @endif
     <div class="text-2xl">&nbsp;</div>
     <h3 class="fyk text-2xl font-medium text-gray-900">
         {{ __("Calendar") }}
