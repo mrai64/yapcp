@@ -18,6 +18,9 @@ new class () extends Component {
     //
     public function mount(Contest $contest)
     {
+        // 1st: you can:create?
+        $this->authorize('create', [ContestAward::class, $contest]);
+        //
         $this->contest = $contest;
         $this->organization = $contest->organization;
         // Collection

@@ -43,10 +43,10 @@ use Illuminate\Support\Facades\Log;
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \App\Models\Contest|null $contest
+ * @property-read \App\Models\ContestSection|null $contestSection
  * @property-read \App\Models\ContestWork|null $contestWork
- * @property-read \App\Models\ContestSection|null $section
  * @property-read \App\Models\UserContact|null $userContact
- * @property-read \App\Models\UserWork|null $work
+ * @property-read \App\Models\UserWork|null $userWork
  * @method static \Database\Factories\ContestAwardFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward newQuery()
@@ -77,11 +77,6 @@ final class ContestAward extends Model
 
     public const TABLENAME = 'contest_awards';
 
-    // primary key
-    protected $primaryKey = 'id'; //  'alt' pk is contest_id + section_id + award_code
-    protected $keyType = 'string'; // uuid char(36)
-    public $incrementing = false; //  with no increment
-
     // field list
     protected $fillable = [
         // id             pk uuid
@@ -101,7 +96,6 @@ final class ContestAward extends Model
 
     protected function casts()
     {
-        //dbg Log::info('Model '. __CLASS__ .' f:'. __FUNCTION__ .' l:'. __LINE__ . ' called');
         return [
             'id'           => 'string',
             'contest_id'   => 'string',
@@ -134,12 +128,13 @@ final class ContestAward extends Model
     public function contest(): BelongsTo
     {
         $contest = $this->belongsTo(Contest::class);
+        // Log
         return $contest;
     }
 
     // contest_awards.section_id > contest_sections.id
-    // TODO Will become contestSection()
-    public function section(): BelongsTo
+    // was: section()
+    public function contestSection(): BelongsTo
     {
         $section = $this->belongsTo(ContestSection::class);
         return $section;
@@ -149,25 +144,12 @@ final class ContestAward extends Model
     public function contestWork(): BelongsTo
     {
         $work = $this->belongsTo(
-            ContestWork::class, //  ext class
-            'winner_work_id', //    int contest_awards.winner_work_id
-            'user_work_id' //       ext contest_works.user_work_id
+            related: ContestWork::class, //  ext class
+            foreignKey: 'winner_work_id', // contest_awards.winner_work_id
+            ownerKey: 'user_work_id' //      contest_works.user_work_id
         );
+        // Log
         return $work;
-    }
-
-    /**
-     * Relazione diretta con l'opera dell'utente (UserWork).
-     * winner_work_id punta direttamente a pcp_user_works.id
-     */
-    // TODO Will become userWork()
-    public function work(): BelongsTo
-    {
-        return $this->belongsTo(
-            UserWork::class,
-            'winner_work_id',
-            'id'
-        );
     }
 
     // contest_awards.winner_user_id > user_contacts.user_id
@@ -179,5 +161,16 @@ final class ContestAward extends Model
             'id' //                 ext user_contacts.id
         );
         return $userContact;
+    }
+
+    // contest_awards.winner_work_id > user_works.id
+    // was: work()
+    public function userWork(): BelongsTo
+    {
+        return $this->belongsTo(
+            related: UserWork::class,
+            foreignKey: 'winner_work_id', //  contest_awards.winner_work_id
+            ownerKey: 'id' //                 user_works.id
+        );
     }
 }

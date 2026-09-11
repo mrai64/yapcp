@@ -8,6 +8,7 @@
 
 namespace App\Providers;
 
+use App\Models\ContestAward;
 use App\Models\ContestPatronage;
 use App\Models\Federation;
 use App\Models\FederationMore;
@@ -63,7 +64,8 @@ class AppServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by($request->ip());
         });
 
-        // Forza il binding esplicito per le rotte che usano {organization}
+        // Forza il binding esplicito per le rotte che usano {xxx-yyy}
+        Route::model('contest-award', ContestAward::class);
         Route::model('federation', Federation::class);
         Route::model('federation-more', FederationMore::class);
         Route::model('federation-section', FederationSection::class);
@@ -72,6 +74,7 @@ class AppServiceProvider extends ServiceProvider
         Route::model('contest-patronage', ContestPatronage::class);
 
         // Registrazione esplicita della Policy
+        Gate::policy(ContestAward::class, \App\Policies\ContestAwardPolicy::class);
         Gate::policy(ContestPatronage::class, \App\Policies\ContestPatronagePolicy::class);
         Gate::policy(Federation::class, \App\Policies\FederationPolicy::class);
         Gate::policy(FederationMore::class, \App\Policies\FederationMorePolicy::class);
