@@ -2,14 +2,14 @@
 
 /**
  * Organization Contest Design / Contest full detail
- * 
+ *
  */
 
 use App\Models\Contest;
 use App\Models\Organization;
 use Livewire\Volt\Component;
 
-new class extends Component {
+new class () extends Component {
     public Contest $contest;
     public Organization $organization;
 
@@ -17,7 +17,6 @@ new class extends Component {
     {
         $this->contest = $contest;
         $this->organization = $contest->organization;
-
     }
 }; ?>
 
@@ -60,19 +59,17 @@ new class extends Component {
                 <br />
                 @endif
 
-                <!-- general -->
+                <!-- 1st of 4 general -->
                 <livewire:organization.design.contest.detail-general1 :contest="$contest" />
                 <div class="text-3xl">&nbsp;</div>
-                <!-- section n themes + juries --> 
+                <!-- 2nd of 4 section n themes + juries --> 
                 <livewire:organization.design.contest-section.details :contest="$contest" />
                 <div class="text-3xl">&nbsp;</div>
-                <!-- awards --> 
+                <!-- 3rd of 4 awards --> 
                 <livewire:organization.design.contest-award.details :contest="$contest" />
-                <!-- appling info --> 
+                <!-- 4th of 4 appling info --> 
                 <livewire:organization.design.contest.detail-general2 :contest="$contest" />
                 <div class="text-3xl">&nbsp;</div>
-
-
 
             </div>
         </div>
