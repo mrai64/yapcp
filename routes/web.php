@@ -139,6 +139,9 @@ Volt::route('/organization/contest/listed/{organization}', 'organization.contest
     ->name('organization.contest.listed');
 
 // Contest design
+Volt::route('/organization/design/contest/detail/{contest}', 'organization.design.contest.detail')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.contest.detail');
 Volt::route('/organization/design/contest/make/{organization}', 'organization.design.contest.make')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest.make');
@@ -210,7 +213,8 @@ Volt::route('/organization/design/contest-jury/remove/{contest_jury}', 'organiza
 Volt::route('/organization/design/contest-award/listed/{contest}', 'organization.design.contest-award.listed')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-award.listed');
-// Note: when contest_section is missing, prize is for contest
+// Note: use of ? is for facultative value,
+//   when contest_section is missing, prize is for contest
 Volt::route('/organization/design/contest-award/add/{contest}/{contest_section?}', 'organization.design.contest-award.add')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-award.add');
@@ -220,10 +224,6 @@ Volt::route('/organization/design/contest-award/modify/{contest_award}', 'organi
 Volt::route('/organization/design/contest-award/remove/{contest_award}', 'organization.design.contest-award.remove')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-award.remove');
-Volt::route('/organization/design/contest/detail/{contest}', 'organization.design.contest.detail')
-    ->middleware(['auth', 'verified'])
-    ->name('organization.design.contest.detail');
-
 
 /**
  * Federation

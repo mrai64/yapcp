@@ -21,6 +21,7 @@ class ContestSectionPolicy
      */
     public function view(User $user, ContestSection $contestSection): bool
     {
+        // all
         return true;
     }
 

@@ -35,7 +35,7 @@ class ContestPolicy
      */
     public function create(User $user, ?Organization $organization = null): bool
     {
-        $evaluate = $user->isMemberOfOrganization($organization);
+        $evaluate = ($organization && $user->isMemberOfOrganization($organization));
         // Log
         return $evaluate;
     }

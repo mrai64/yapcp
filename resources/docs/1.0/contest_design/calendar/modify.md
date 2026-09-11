@@ -3,7 +3,7 @@
 - [Name info](/{{route}}/{{version}}/contest_design/contest/add)
 - [Calendar](/{{route}}/{{version}}/contest_design/calendar/modify)
 - [Web links](/{{route}}/{{version}}/contest_design/contest/weblink)
-- [Resume](/{{route}}/{{version}}/contest_design/contest/resume)
+- [Detail](/{{route}}/{{version}}/contest_design/contest/detail)
 
 ---
 

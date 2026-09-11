@@ -34,7 +34,7 @@ class ContestAwardFactory extends Factory
             'is_award'       => fake()->boolean(80),
             'winner_work_id' => null,
             'winner_user_id' => null,
-            'winner_name'    => null,
+            'winner_name'    => '',
         ];
     }
 }

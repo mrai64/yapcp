@@ -9,6 +9,7 @@ use App\Models\Contest;
 use App\Models\ContestAward;
 use App\Models\ContestSection;
 use App\Models\Organization;
+use Illuminate\Validation\Rule;
 use Livewire\Attributes\Computed;
 use Livewire\Volt\Component;
 
@@ -39,6 +40,9 @@ new class extends Component {
     //
     public function mount(Contest $contest)
     {
+        // 1st: you can:create?
+        $this->authorize('create', [Organization::class, $contest->organization]);
+        //
         $this->contest = $contest;
         $this->organization = $contest->organization;
         // form fields
@@ -58,14 +62,14 @@ new class extends Component {
                 'uppercase',
                 'max:10',
                 Rule::unique(ContestAward::TABLENAME, 'award_code')
-                    ->where('contest_id' $this->contest->id)
+                    ->where('contest_id', $this->contest->id)
                     ->when($this->contestAwardSectionId, function($query) {
-                        return $query->Where('section_id', $this->contestAwardSectionId)
+                        return $query->where('section_id', $this->contestAwardSectionId);
                     }, function ($query) {
-                        return $query->whereNull('section_id')
+                        return $query->whereNull('section_id');
                     })
                     ->whereNull('deleted_at')
-                    ->ignore($this->contestAward-id ?? null),
+                    ->ignore($this->contestAward->id ?? null),
             ],
             'contestAwardAwardName'   => 'required|string|max:255',
             'contestAwardIsAward'     => 'nullable|boolean',
