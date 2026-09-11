@@ -41,7 +41,7 @@ new class extends Component {
     public function mount(Contest $contest)
     {
         // 1st: you can:create?
-        $this->authorize('create', [Contest::class, $contest]);
+        $this->authorize('create', [Organization::class, $contest->organization]);
         //
         $this->contest = $contest;
         $this->organization = $contest->organization;
