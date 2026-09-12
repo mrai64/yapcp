@@ -1,0 +1,11 @@
+---
+"Contest":
+  # Questo è sia un testo che un archivio, mantenete l'indentazione di 2 spazi
+  # Quando un codice interno uuid non è noto avete 2 alternative: usare il termine 'new'
+  #   se siete sicuri che non è già presente in piattaforma, oppure il termine 'find' quando
+  #   non conoscete il codice ma siete sicuri sia già presente in piattaforma.
+  "Organization":
+    "Name": "Azerbaijan"
+    "Organization ID": find
+  "International Contest Name": ""
+...
