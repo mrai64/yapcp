@@ -26,7 +26,7 @@ test('esegue il backup completo creando il file yaml corretto', function () {
     $userContact = $user->contact;
 
     // 2. Act: Eseguiamo il Job in modo sincrono
-    UserAndRelatedBackupJob::dispatchSync(requesterUser: $user);
+    UserAndRelatedBackupJob::dispatchSync(requesterUser: $this->admin);
 
     // 3. Assert: Verifichiamo che il file sia stato generato nella cartella corretta
     $files = Storage::disk('local')->files('private/backups');
@@ -47,19 +47,25 @@ test('esegue il backup completo creando il file yaml corretto', function () {
 });
 
 test('esegue il backup incrementale filtrando per data', function () {
-    // Record vecchio (non deve comparire)
-    $oldUser = User::factory()->create(['updated_at' => now()->subDays(10)]);
+    // Record vecchio di 10gg (non deve comparire)
+    $this->travelTo(now()->subDays(10));
+    $oldUser = User::factory()->create();
 
     // Record recente (deve comparire)
-    $newUser = User::factory()->create(['updated_at' => now()]);
+    $this->travelBack(); // a dispetto del nome back torniamo al presente
+    $newUser = User::factory()->create();
 
     // Lanciamo il backup per le modifiche degli ultimi 5 giorni
-    UserAndRelatedBackupJob::dispatchSync(backupSince: now()->subDays(5));
+    UserAndRelatedBackupJob::dispatchSync(requesterUser: $this->admin, backupSince: now()->subDays(5));
 
     $files = Storage::disk('local')->files('private/backups');
     $parsedYaml = Yaml::parse(Storage::disk('local')->get($files[0]));
+    // echo "\n\n" . var_dump($parsedYaml);
 
     $exportedUserIds = collect($parsedYaml['data'][User::TABLENAME])->pluck('id')->toArray();
+    // echo "\nnew user" . ($newUser->id) . ' name:' . $newUser->name;
+    // echo "\nold user" . ($oldUser->id) . ' name:' . $oldUser->name;
+    // echo "\n\n" . var_dump($exportedUserIds);
 
     expect($exportedUserIds)->toContain($newUser->id)
         ->and($exportedUserIds)->not->toContain($oldUser->id);

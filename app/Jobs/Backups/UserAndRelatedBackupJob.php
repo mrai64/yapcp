@@ -51,10 +51,10 @@ class UserAndRelatedBackupJob implements ShouldQueue
      * @param DateTimeInterface|string|null $backupSince Data/ora opzionale per il backup incrementale
      */
     public function __construct(
-        User $requesterUser,
+        ?User $requesterUser = null,
         DateTimeInterface|string|null $backupSince = null
     ) {
-        $this->backupSince = $backupSince ? Carbon::parse($backupSince) : null;
+        $this->backupSince   = $backupSince ? Carbon::parse($backupSince) : null;
         $this->requesterUser = $requesterUser ?? Auth::user();
     }
 
@@ -65,7 +65,7 @@ class UserAndRelatedBackupJob implements ShouldQueue
     {
         Log::info('Requested job: ' . class_basename($this) . ' / 1. started');
         // 0. verifica abilitazione - no ->authorize()
-        if (! FacadesGate::forUser($this->requesterUser->allow('access-admin'))) {
+        if ($this->requesterUser && ! FacadesGate::forUser($this->requesterUser)->allows('access-admin')) {
             Log::info('Requested job: ' . class_basename($this) . ' / 2. Unauthorized');
             throw new AuthorizationException(
                 message: __("Backup unauthorized")
