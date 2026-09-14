@@ -61,7 +61,7 @@ new class extends Component {
                 @endif
 
                 <!-- Backup set-->
-                 <table class="data-table-container w-auto">
+                <table class="data-table-container w-auto">
                     <tbody>
                         <tr>
                             <td colspan="2">
@@ -81,7 +81,78 @@ new class extends Component {
                             </td>
                         </tr>
                     </tbody>
+                </table>
+
+                <hr class="my-4" />
+
+                <!-- Import set -->
+                <table class="data-table-container w-auto">
+                    <tbody>
+                        <tr>
+                            <td colspan="2">
+                                <h3 class="fyk text-2xl font-medium w-full">
+                                    {{ __("Imports")}}
+                                </h3>
+                            </td>
+                        </tr>
+                        <tr class="border">
+                            <td>
+                                <x-yapcp.inline-link 
+                                    txt="Run" 
+                                    url="{{ route('admin.import.user') }}" />
+                            </td>
+                            <td class="fyk text-xl w-4fifths">
+                                {{ __("User, userContact, UserContactMore") }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <hr class="my-4" />
+
+                <!-- other add / modify -->
+                 <table class="data-table-container w-auto">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h3 class="fyk text-2xl font-medium w-full">
+                                    {{ __("You can also...")}}
+                                </h3>
+                            </td>
+                        </tr>
+                        <tr class="border">
+                            <td>
+                                <x-yapcp.inline-link 
+                                    txt="Add Federation" 
+                                    url="{{ route('federation.add') }}" />
+                                <x-yapcp.inline-link 
+                                    txt="Modify Federation" 
+                                    url="{{ route('federation.listed') }}" />
+                            </td>
+                        </tr>
+                        <tr class="border">
+                            <td>
+                                <x-yapcp.inline-link 
+                                    txt="Add Fed Section" 
+                                    url="{{ route('federation.listed') }}" />
+                                <x-yapcp.inline-link 
+                                    txt="Modify Fed Section" 
+                                    url="{{ route('federation.listed') }}" />
+                            </td>
+                        </tr>
+                        <tr class="border">
+                            <td>
+                                <x-yapcp.inline-link 
+                                    txt="Add 'Fed More'" 
+                                    url="{{ route('federation.listed') }}" />
+                                <x-yapcp.inline-link 
+                                    txt="Modify 'Fed More'" 
+                                    url="{{ route('federation.listed') }}" />
+                            </td>
+                        </tr>
+                    </tbody>
                  </table>
+
             </div>
         </div>
     </div>

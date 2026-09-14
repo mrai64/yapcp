@@ -300,9 +300,15 @@ Volt::route('/admin/dashboard', 'admin.dashboard')
     ->middleware(['auth', 'verified', 'can:access-admin'])
     ->name('admin.dashboard');
 // TODO admin.user-contact.listed
+// Backups
 Volt::route('/admin/backup/user', 'admin.backup.user')
     ->middleware(['auth', 'verified', 'can:access-admin'])
     ->name('admin.backup.user');
+// Imports
+Volt::route('/admin/import/user', 'admin.import.user')
+    ->middleware(['auth', 'verified', 'can:access-admin'])
+    ->name('admin.import.user');
+
 
 /**
  * end of list
