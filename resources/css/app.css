@@ -36,11 +36,19 @@
 }
 /* personalizzazioni */
 .h-24 {
-    height:6rem
+    height:6rem;
 }
 .w-half {
-    width: 49.9%
+    width: 49.9%;
 }
 .max-w-half {
-    max-width: 49.9%
+    max-width: 49.9%;
+}
+.w-fifth {
+    width: 19.9% !important;
+    white-space: pre !important;
+}
+.w-4fifths {
+    width: 79.9% !important;
+    white-space: pre;
 }
