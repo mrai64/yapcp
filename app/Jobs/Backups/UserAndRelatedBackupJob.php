@@ -17,12 +17,15 @@ use App\Models\UserContact;
 use App\Models\UserContactMore;
 use Carbon\Carbon;
 use DateTimeInterface;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate as FacadesGate;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Yaml\Yaml;
@@ -61,6 +64,14 @@ class UserAndRelatedBackupJob implements ShouldQueue
     public function handle(): void
     {
         Log::info('Requested job: ' . class_basename($this) . ' / 1. started');
+        // 0. verifica abilitazione - no ->authorize()
+        if (! FacadesGate::forUser($this->requesterUser->allow('access-admin'))) {
+            Log::info('Requested job: ' . class_basename($this) . ' / 2. Unauthorized');
+            throw new AuthorizationException(
+                message: __("Backup unauthorized")
+            );
+        }
+        //
         // 1. Inizializzazione delle query per i modelli
         $jobName = class_basename($this);
         $timestamp = now()->format('Y-m-d_His');

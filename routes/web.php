@@ -297,11 +297,11 @@ Volt::route('/user/contest/participate/{contest}', 'user.contest.participate')
  *
  */
 Volt::route('/admin/dashboard', 'admin.dashboard')
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'can:access-admin'])
     ->name('admin.dashboard');
 // TODO admin.user-contact.listed
 Volt::route('/admin/backup/user', 'admin.backup.user')
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'can:access-admin'])
     ->name('admin.backup.user');
 
 /**
