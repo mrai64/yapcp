@@ -1,4 +1,4 @@
-# Feature: Nome Funzione
+# Feature: Admin - Backup Modelli User, UserContact, UserContactMore
 
 > **Branch:** `feat/0318-user-backup`  
 > **Stato:** Chiuso  
@@ -17,11 +17,29 @@
 
 ## 📝 Logica Tecnica
 
-L'utente admin attraverso il suo pannello cruscotto o admin dashboard, può selezionare ed avviare una attività di esportazione dati sui modelli User, userContact e UserContactMore. Il file creato, in formato YAML, contenente tutti i campi dei modelli, può essere riutilizzato per il ripristino dei dati e non viene inviato o condiviso con terzi ma resta all'interno della piattaforma nella sezione private dello storage. Chi ha effettuato la richiesta viene registrato nei log di sistema e anche all'interno del file esportato.
+L'utente admin attraverso il pannello di amministrazione (Admin Dashboard) può selezionare e avviare un processo di esportazione/backup dei dati relativi ai modelli:
+
+- **User**
+- **UserContact**
+- **UserContactMore**
+
+###  **Processo di esportazione:**
+
+- Il file generato è in formato **YAML** e contiene tutti i campi dei modelli specificati
+- Il file viene salvato nella sezione **private dello storage** (non condiviso con terzi)
+- L'esportazione può essere avviata manualmente tramite pulsante nel Dashboard Admin
+- L'azione è registrata nei **log di sistema**
+- Il file esportato contiene anche le informazioni su **chi ha effettuato la richiesta**
+
+### **Alternativa con scheduler (Cron):**
+
+- La stessa funzione può essere eseguita automaticamente via Cron
+- In caso di esecuzione programmata, inviare notifiche al gruppo admin
+- Notificare quando l'operazione inizia e quando si conclude
 
 ## 🗄️ Modifiche al Database
 
-Nessuna.
+Nessuna modifica necessaria al database.
 
 ## 👮‍♂️ Pre Merge check
 
@@ -34,4 +52,4 @@ Nessuna.
 
 ## 🚀 Note per il Deploy
 
-Niente di particolare.
+Niente di particolare, nessuna migrazione o azione speciale richiesta al deploy.
