@@ -57,6 +57,11 @@ with([
                 <x-yapcp.header-link 
                     txt="Change password" 
                     url="{{ url('/user/profile') }}" />
+                @if ($user->isAdmin())
+                <x-yapcp.header-link 
+                    txt="ADMIN Dashboard" 
+                    url="{{ route('admin.dashboard') }}" />
+                @endif
 
                 <h3 class="fyk text-xl font-bold mb-4">{{ __("Lists") }}</h3>
                 <x-yapcp.header-link 

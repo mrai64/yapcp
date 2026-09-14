@@ -293,5 +293,17 @@ Volt::route('/user/contest/participate/{contest}', 'user.contest.participate')
     ->name('user.contest.participate');
 
 /**
+ * Admin all about
+ *
+ */
+Volt::route('/admin/dashboard', 'admin.dashboard')
+    ->middleware(['auth', 'verified', 'can:access-admin'])
+    ->name('admin.dashboard');
+// TODO admin.user-contact.listed
+Volt::route('/admin/backup/user', 'admin.backup.user')
+    ->middleware(['auth', 'verified', 'can:access-admin'])
+    ->name('admin.backup.user');
+
+/**
  * end of list
  */
