@@ -37,9 +37,7 @@ class UserAndRelatedBackupJob implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    /**
-     * Data e ora per il backup incrementale (opzionale).
-     */
+    // Data e ora per il backup incrementale (opzionale).
     protected ?Carbon $backupSince;
     // Richiedente
     protected User $requesterUser;
