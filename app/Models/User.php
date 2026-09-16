@@ -144,7 +144,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'email_verified_at',
         'password',
+        'two_factor_secret',
+        'two_factor_recovery_codes',
+        'two_factor_confirmet_at',
         'remember_token',
+        'current_team_id',
+        'profile_photo_path',
     ];
 
     /**
@@ -162,7 +167,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public static function booted(): void
     {
         static::creating(function ($model) {
-            $model->id = Str::uuid7();
+            // avoid generate even uuid is present in restore
+            if (empty($model->id)) {
+                $model->id = (string) Str::uuid7();
+            }
         });
     }
 
@@ -182,15 +190,19 @@ class User extends Authenticatable implements MustVerifyEmail
     protected function casts(): array
     {
         return [
-            'id' => 'string',
-            'name' => 'string',
-            'email' => 'string',
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-            'remember_token' => 'string',
-            'created_at' => 'datetime',
-            'updated_at' => 'datetime',
-            'deleted_at' => 'datetime',
+            'id'                        => 'string',
+            'name'                      => 'string',
+            'email'                     => 'string',
+            'email_verified_at'         => 'datetime',
+            'password'                  => 'hashed',
+            'two_factor_secret'         => 'string',
+            'two_factor_recovery_codes' => 'string',
+            'remember_token'            => 'string',
+            'current_team_id'           => 'int',
+            'profile_photo_path'        => 'string',
+            'created_at'                => 'datetime',
+            'updated_at'                => 'datetime',
+            'deleted_at'                => 'datetime',
         ];
     }
 
@@ -199,6 +211,7 @@ class User extends Authenticatable implements MustVerifyEmail
     // RELATIONSHIPS
 
     // users.id > contest_awards.winner_user_id
+    // aka contestAwards()
     public function awardWinners(): HasMany
     {
         $awardWinnersSet = $this->hasMany(
@@ -211,6 +224,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     // users.id > contest_juries.user_contact_id
+    // aka contestJuries()
     public function juries(): HasMany
     {
         $juries = $this->hasMany(
@@ -235,6 +249,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     // users.id > contest_votes.juror_user_id
+    // aka contestVotes()
     public function contestVotesJurors(): HasMany
     {
         $cvjSet = $this->hasMany(
@@ -247,6 +262,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     // users.id > contest_waitings.participant_user_id
+    // aka contestWaitings()
     public function contestParticipantsWaiting(): HasMany
     {
         $cpwSet = $this->hasMany(

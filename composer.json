@@ -19,7 +19,8 @@
         "phpoffice/phpspreadsheet": "^2.3",
         "propaganistas/laravel-phone": "^6.0",
         "robertogallea/laravel-codicefiscale": "^2",
-        "spatie/laravel-pdf": "^2.0"
+        "spatie/laravel-pdf": "^2.0",
+        "symfony/yaml": "^8.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^4.4",
