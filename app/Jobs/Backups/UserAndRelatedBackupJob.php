@@ -37,9 +37,7 @@ class UserAndRelatedBackupJob implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    /**
-     * Data e ora per il backup incrementale (opzionale).
-     */
+    // Data e ora per il backup incrementale (opzionale).
     protected ?Carbon $backupSince;
     // Richiedente
     protected User $requesterUser;
@@ -79,6 +77,7 @@ class UserAndRelatedBackupJob implements ShouldQueue
         $relativePath = "private/backups/{$filename}";
 
         // Assicura l'esistenza della cartella di destinazione
+        // Storage::disk('local')->makeDirectory('backups');
         Storage::disk('local')->makeDirectory('private/backups');
         $fullPath = Storage::disk('local')->path($relativePath);
 

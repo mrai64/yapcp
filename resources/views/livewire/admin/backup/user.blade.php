@@ -1,7 +1,12 @@
 <?php
 
 /**
- * Start a job
+ * Start a job to backup 3 models 
+ * - User
+ * - UserContact
+ * - UserContactMore
+ * 
+ * to be stored and reused to import
  */
 
 use App\Jobs\Backups\UserAndRelatedBackupJob;
