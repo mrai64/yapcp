@@ -26,7 +26,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str; //         pk uuid
+use Illuminate\Support\Str;
+
+//         pk uuid
 
 /**
  * @property string $id uuid assigned
@@ -97,12 +99,10 @@ class ContestWork extends Model
         // deleted_at         reserved
     ];
 
-    // pk uuid
-    public static function booted()
+    // generate id only when uuid is miss
+    public function newUniqueId(): string
     {
-        static::creating(function ($model) {
-            $model->id = Str::uuid7(); // uuid generator
-        });
+        return (string) Str::uuid7();
     }
 
     protected function casts()
