@@ -77,7 +77,8 @@ class UserAndRelatedBackupJob implements ShouldQueue
         $relativePath = "private/backups/{$filename}";
 
         // Assicura l'esistenza della cartella di destinazione
-        Storage::disk('local')->makeDirectory('backups');
+        // Storage::disk('local')->makeDirectory('backups');
+        Storage::disk('local')->makeDirectory('private/backups');
         $fullPath = Storage::disk('local')->path($relativePath);
 
         // Apriamo lo stream in scrittura su file
