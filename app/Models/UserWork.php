@@ -110,13 +110,9 @@ class UserWork extends Model
     ];
 
     // generate id only when uuid is miss
-    public static function booted()
+    public function newUniqueId(): string
     {
-        static::creating(function ($model) {
-            if (empty($model->id)) {
-                $model->id = (string) Str::uuid7();
-            }
-        });
+        return (string) Str::uuid7();
     }
 
     protected function casts(): array
