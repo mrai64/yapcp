@@ -1,10 +1,10 @@
 # Fix - Generate uuid only when uuid is missing
 
-> **Branch:** `fix/0329-contest-warning-uuid`  
+> **Branch:** `fix/0329-contest-waiting-uuid`  
 > **Stato:** Chiuso  
 > **priorità:** A  
 > **id assegnato:** 2026-09-16.06  
-> **Titolo e urgenza:** (A) fix: ContestWarning / uuid booted  
+> **Titolo e urgenza:** (A) fix: ContestWaiting / uuid booted  
 > **Project/issue link:** [#329](https://github.com/mrai64/yapcp/issues/329)  
 > **Milestone link:** [M5](https://github.com/mrai64/yapcp/milestones/5)
 
@@ -17,11 +17,11 @@
 
 ## 📝 Logica Tecnica
 
-Corretto l'evento creating all'interno del metodo statico `booted()` del model ContestWarning.
+Corretto l'evento creating all'interno del metodo statico `booted()` del model ContestWaiting.
 
 In precedenza, l'UUID veniva generato incondizionatamente a ogni creazione `($model->id = Str::uuid7();)`, sovrascrivendo un eventuale UUID già esplicitamente assegnato in fase di creazione (es. durante importazioni, operazioni di backup/ripristino o flussi di upload che generano l'UUID prima della persistenza).
 
-È stato sostituito con la funzione standard newUniqueId(), che viene richiamata solo quando l'id è mancante `if (empty($model->id))` per garantire che un nuovo UUID v7 venga generato e assegnato, allineando il comportamento del model ContestWarning a quello già presente in User.
+È stato sostituito con la funzione standard newUniqueId(), che viene richiamata solo quando l'id è mancante `if (empty($model->id))` per garantire che un nuovo UUID v7 venga generato e assegnato, allineando il comportamento del model ContestWaiting a quello già presente in User.
 
 ## 🗄️ Modifiche al Database
 
