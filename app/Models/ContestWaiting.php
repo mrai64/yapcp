@@ -89,12 +89,10 @@ class ContestWaiting extends Model
         // deleted_at              reserved
     ];
 
-    // pk uuid
-    public static function booted()
+    // generate id only when uuid is miss
+    public function newUniqueId(): string
     {
-        static::creating(function ($model) {
-            $model->id = Str::uuid7(); // uuid generator
-        });
+        return (string) Str::uuid7();
     }
 
     protected function casts()
