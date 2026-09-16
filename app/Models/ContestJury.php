@@ -60,11 +60,6 @@ class ContestJury extends Model
 
     public const TABLENAME = 'contest_juries';
 
-    // primary key
-    protected $primaryKey = 'id'; //  default but
-    protected $keyType = 'string'; // uuid char(36)
-    public $incrementing = false; //  with no increment
-
     protected $fillable = [
         'id', //               pk but contest_juries.id IS NOT juror user_id
         'contest_id', //       fk contest.id
@@ -76,6 +71,12 @@ class ContestJury extends Model
         // updated_at          reserved
         // deleted_at          reserved
     ];
+
+    // generate id only when uuid is miss
+    public function newUniqueId(): string
+    {
+        return (string) Str::uuid7();
+    }
 
     protected function casts()
     {
