@@ -1,10 +1,10 @@
 # Fix - Generate uuid only when uuid is missing
 
-> **Branch:** `fix/0331-organization-uuid`  
+> **Branch:** `fix/0330-contest-work-uuid`  
 > **Stato:** Chiuso  
 > **priorità:** A  
 > **id assegnato:** 2026-09-16.07  
-> **Titolo e urgenza:** (A) fix: Organization / uuid booted  
+> **Titolo e urgenza:** (A) fix: ContestWork / uuid booted  
 > **Project/issue link:** [#330](https://github.com/mrai64/yapcp/issues/330)  
 > **Milestone link:** [M5](https://github.com/mrai64/yapcp/milestones/5)
 
