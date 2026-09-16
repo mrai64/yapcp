@@ -163,15 +163,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'two_factor_secret',
     ];
 
-    // uuid as pk
-    public static function booted(): void
+    // generate id only when uuid is miss
+    public function newUniqueId(): string
     {
-        static::creating(function ($model) {
-            // avoid generate even uuid is present in restore
-            if (empty($model->id)) {
-                $model->id = (string) Str::uuid7();
-            }
-        });
+        return (string) Str::uuid7();
     }
 
     /**

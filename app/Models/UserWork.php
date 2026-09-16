@@ -1,9 +1,10 @@
 <?php
 
 /**
- * Author' works, that be holded to participate in Contest
+ * Author' works, that be held to participate in Contest
  *
  */
+
 namespace App\Models;
 
 use App\Observers\UserWorkObserver;
@@ -108,12 +109,10 @@ class UserWork extends Model
         // deleted_at        reserved
     ];
 
-    // generate id when uuid
-    public static function booted()
+    // generate id only when uuid is miss
+    public function newUniqueId(): string
     {
-        static::creating(function ($model) {
-            $model->id = Str::uuid7();
-        });
+        return (string) Str::uuid7();
     }
 
     protected function casts(): array

@@ -130,6 +130,12 @@ class ContestSection extends Model
         // deleted_at                reserved
     ];
 
+    // generate id only when uuid is miss
+    public function newUniqueId(): string
+    {
+        return (string) Str::uuid7();
+    }
+
     protected function casts()
     {
         // ds('Model ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');

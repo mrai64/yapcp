@@ -69,11 +69,6 @@ class Organization extends Model
 
     public const TABLENAME = 'organizations';
 
-    // primary key
-    protected $primaryKey = 'id'; //  default but
-    protected $keyType = 'string'; // uuid char(36)
-    public $incrementing = false; //  with no increment
-
     protected $fillable = [
         'id', //           pk uuid
         'country_id', //   fk countries.id
@@ -86,20 +81,11 @@ class Organization extends Model
         // deleted_at      reserved
     ];
 
-    // uuid as pk before HasUuids
-    // public static function booted()
-    // {
-    //     static::creating(function ($model) {
-    //         $model->id = Str::uuid();
-    //     });
-    // }
-    //
-    // with HasUuids
+    // generate id only when uuid is miss
     public function newUniqueId(): string
     {
-        return (string) Str::uuid7(); // was: uuid();
+        return (string) Str::uuid7();
     }
-
 
     protected function casts(): array
     {

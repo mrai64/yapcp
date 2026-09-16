@@ -189,6 +189,12 @@ class Contest extends Model
         // deleted_at                   reserved
     ];
 
+    // generate id only when uuid is miss
+    public function newUniqueId(): string
+    {
+        return (string) Str::uuid7();
+    }
+
     protected function casts(): array
     {
         return [
@@ -233,19 +239,6 @@ class Contest extends Model
             'deleted_at' => 'datetime',
         ];
     }
-
-    // INLINE check n replace
-    protected static function booted(): void
-    {
-        // because '' is '', not null
-        static::saving(function (Contest $contest): void {
-            if (empty($contest->circuit_id)) {
-                $contest->circuit_id = null;
-            }
-        });
-    }
-
-
 
     // GETTERs
 
