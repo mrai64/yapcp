@@ -301,13 +301,16 @@ Volt::route('/admin/dashboard', 'admin.dashboard')
     ->name('admin.dashboard');
 // TODO admin.user-contact.listed
 // Backups
-Volt::route('/admin/backup/user', 'admin.backup.user')
-    ->middleware(['auth', 'verified', 'can:access-admin'])
-    ->name('admin.backup.user');
 Volt::route('/admin/backup/contest/1st', 'admin.backup.contest1st')
     ->middleware(['auth', 'verified', 'can:access-admin'])
     ->name('admin.backup.contest1st');
+Volt::route('/admin/backup/user', 'admin.backup.user')
+    ->middleware(['auth', 'verified', 'can:access-admin'])
+    ->name('admin.backup.user');
 // Imports
+Volt::route('/admin/import/contest/1st', 'admin.import.contest1st')
+    ->middleware(['auth', 'verified', 'can:access-admin'])
+    ->name('admin.import.contest1st');
 Volt::route('/admin/import/user', 'admin.import.user')
     ->middleware(['auth', 'verified', 'can:access-admin'])
     ->name('admin.import.user');
