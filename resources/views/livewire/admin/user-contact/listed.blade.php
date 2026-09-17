@@ -16,25 +16,17 @@ new class extends Component {
     use WithPagination;
 
     public User $userAdmin;
-    public $userContacts;
-    // mount() - only the first 
+
+    // mount() - only the first
     public function mount()
     {
         $this->userAdmin = Auth::user(); // connected user
-        // $this->authorize('update', [User::class, $this->userAdmin]);
-        if (!$this->userAdmin->isAdmin()){
-            redirect()
-                ->route('user.dashboard')
-                ->with('error', __("Sorry, you can't"));
-        }
     }
 
     // with() - with every enter
     public function with()
     {
         return [
-            'firstItem' => 1,
-            'deltaItem' => 1,
             'userContacts' => UserContact::withTrashed()
             ->with('country') // user_contacts.country()
             ->orderBy('country_id', 'asc')
@@ -52,11 +44,11 @@ new class extends Component {
             {{ __("User Contact Index | Admin only") }}
         </h2>
         <hr class="my-4" />
-        <x-yapcp.header-link 
-            txt="Back to User dashboard" 
+        <x-yapcp.header-link
+            txt="Back to User dashboard"
             url="{{ route('user.dashboard') }}" />
-        <x-yapcp.header-link 
-            txt="Back to ADMIN dashboard" 
+        <x-yapcp.header-link
+            txt="Back to ADMIN dashboard"
             url="{{ route('admin.dashboard') }}" />
     </x-slot>
 
