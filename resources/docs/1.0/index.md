@@ -98,6 +98,7 @@
 - ## Backups
 
   - [✅ User, &amp;...](/{{route}}/{{version}}/admin/backup/user)
+  - [✅ Contest, &amp;...](/{{route}}/{{version}}/admin/backup/contest1st)
 
 - ## Imports
 
