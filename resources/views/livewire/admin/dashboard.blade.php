@@ -74,20 +74,20 @@ new class extends Component {
                             <td>
                                 <x-yapcp.inline-link 
                                     txt="Run" 
-                                    url="{{ route('admin.backup.user') }}" />
+                                    url="{{ route('admin.backup.contest1st') }}" />
                             </td>
                             <td class="fyk text-xl w-4fifths">
-                                {{ __("User, userContact, UserContactMore") }}
+                                {{ __("Contest, ContestPatronage, ContestSection, ContestJury, ContestAward / 1st") }}
                             </td>
                         </tr>
                         <tr class="border">
                             <td>
                                 <x-yapcp.inline-link 
                                     txt="Run" 
-                                    url="{{ route('admin.backup.contest1st') }}" />
+                                    url="{{ route('admin.backup.user') }}" />
                             </td>
                             <td class="fyk text-xl w-4fifths">
-                                {{ __("Contest, ContestPatronage, ContestSection, ContestJury, ContestAward / 1st") }}
+                                {{ __("User, userContact, UserContactMore") }}
                             </td>
                         </tr>
                     </tbody>
@@ -103,6 +103,16 @@ new class extends Component {
                                 <h3 class="fyk text-2xl font-medium w-full">
                                     {{ __("Imports")}}
                                 </h3>
+                            </td>
+                        </tr>
+                        <tr class="border">
+                            <td>
+                                <x-yapcp.inline-link 
+                                    txt="Run" 
+                                    url="{{ route('admin.import.contest1st') }}" />
+                            </td>
+                            <td class="fyk text-xl w-4fifths">
+                                {{ __("Contest, ContestPatronage, ContestSection, ContestJury, ContestAward / 1st") }}
                             </td>
                         </tr>
                         <tr class="border">
