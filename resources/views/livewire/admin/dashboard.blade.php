@@ -143,6 +143,13 @@ new class extends Component {
                         <tr class="border">
                             <td>
                                 <x-yapcp.inline-link 
+                                    txt="User Contact Index" 
+                                    url="{{ route('admin.user-contact.listed') }}" />
+                            </td>
+                        </tr>
+                        <tr class="border">
+                            <td>
+                                <x-yapcp.inline-link 
                                     txt="Add Federation" 
                                     url="{{ route('federation.add') }}" />
                                 <x-yapcp.inline-link 
