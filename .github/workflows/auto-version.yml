@@ -5,9 +5,9 @@ on:
     branches:
       # era: - main  # Si attiva solo quando invii modifiche al ramo main
       # diventa:
-      - '**' # qualsiasi push su qualsiasi branch
+      - "**" # qualsiasi push su qualsiasi branch
     tags-ignore:
-      - '**' # ignora creazione invio di tag
+      - "**" # ignora creazione invio di tag
 
 jobs:
   bump-version:
@@ -17,14 +17,14 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.5' # Usa la tua versione di PHP
+          php-version: "8.5" # Usa la tua versione di PHP
 
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
@@ -39,7 +39,7 @@ jobs:
         run: php artisan app:release
 
       - name: Commit and Push changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "chore: bump version [skip ci]"
-          file_pattern: 'storage/app/private/version.json'
+          file_pattern: "storage/app/private/version.json"
