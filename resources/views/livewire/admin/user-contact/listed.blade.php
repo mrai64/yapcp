@@ -100,7 +100,11 @@ new class extends Component {
                         <tr class="borders my-2">
                             <td valign="top" class="small">{{ $userContacts->firstItem() + $deltaItem }}&nbsp;&nbsp;</td>
                             <td valign="top" class="small">{{ $uc->country->flag_code }} {{ $uc->country->country }}&nbsp;&nbsp;</td>
-                            <td valign="top" class="small">{{ $uc->last_name }}, {{ $uc->first_name }}</td>
+                            <td valign="top" class="small">
+                                {{ $uc->last_name }}, {{ $uc->first_name }} - {{ $uc->email }}
+                                <br />
+                                {{ ($uc->city) ? $uc->city : __('city...') }} - {{ ($uc->address) ? $uc->address : __('address...') }}
+                            </td>
                             <td valign="top" class="small">
                             @if (!$uc->trashed())
                                 <x-yapcp.inline-link
