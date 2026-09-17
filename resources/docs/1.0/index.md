@@ -95,6 +95,10 @@
   - [Modify](#)
   - [Remove](#)
 
+- ## User Contact
+
+  - [✅ Listed, &amp;...](/{{route}}/{{version}}/admin/user_contact/listed)
+
 - ## Backups
 
   - [✅ User, &amp;...](/{{route}}/{{version}}/admin/backup/user)
@@ -103,3 +107,5 @@
 - ## Imports
 
   - [✅ User, &amp;...](/{{route}}/{{version}}/admin/import/user)
+  - [✅ Contest, &amp;...](/{{route}}/{{version}}/admin/import/contest1st)
+
