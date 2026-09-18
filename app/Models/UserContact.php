@@ -442,7 +442,7 @@ class UserContact extends Model
     {
         $wvSet = $this->hasMany(
             related: UserWorkValidation::class,
-            foreignKey: ' validator_user_id',
+            foreignKey: 'validator_user_id',
             localKey: 'id'
         );
         // log
@@ -460,5 +460,4 @@ class UserContact extends Model
         // log
         return $uwSet;
     }
-
 }
