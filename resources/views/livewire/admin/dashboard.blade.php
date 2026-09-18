@@ -90,6 +90,16 @@ new class extends Component {
                                 {{ __("User, userContact, UserContactMore") }}
                             </td>
                         </tr>
+                        <tr class="border">
+                            <td>
+                                <x-yapcp.inline-link
+                                    txt="Run"
+                                    url="{{ route('admin.backup.user-work', ['backingUpUser' => 'all' ]) }}" />
+                            </td>
+                            <td class="fyk text-xl w-4fifths">
+                                {{ __("UserWork, UserContact, UserWorkMore") }}
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
@@ -123,16 +133,6 @@ new class extends Component {
                             </td>
                             <td class="fyk text-xl w-4fifths">
                                 {{ __("User, userContact, UserContactMore") }}
-                            </td>
-                        </tr>
-                        <tr class="border">
-                            <td>
-                                <x-yapcp.inline-link
-                                    txt="Run"
-                                    url="{{ route('admin.backup.user-work', ['backingUpUser' => 'all' ]) }}" />
-                            </td>
-                            <td class="fyk text-xl w-4fifths">
-                                {{ __("UserWork, UserContact, UserWorkMore") }}
                             </td>
                         </tr>
                     </tbody>
