@@ -309,7 +309,7 @@ Volt::route('/admin/backup/contest/1st', 'admin.backup.contest1st')
 Volt::route('/admin/backup/user', 'admin.backup.user')
     ->middleware(['auth', 'verified', 'can:access-admin'])
     ->name('admin.backup.user');
-Volt::route('/admin/backup/user-work/{backuppedUser}', 'admin.backup.user-work')
+Volt::route('/admin/backup/user-work/{backingUpUser}', 'admin.backup.user-work')
     ->middleware(['auth', 'verified', 'can:access-admin'])
     ->name('admin.backup.user-work');
 // Imports

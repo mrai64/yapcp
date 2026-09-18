@@ -19,11 +19,11 @@ use Illuminate\Support\Facades\Log;
 new class () extends Component {
     //
     public DateTimeImmutable $startBackupFrom;
-    public $backuppedUsers;
+    public $backingUpUser;
     //
     // TODO bisogna chiedere un array di utenti? checkbox di selezione e via
     //
-    public function mount(string $backuppedUser)
+    public function mount(string $backingUpUser)
     {   // era User $backupped, poi User|string ma arriva sempre string all|uuid
         // 0. authorized? - done in route
         if (! Auth::user()->isAdmin()) {
@@ -31,14 +31,14 @@ new class () extends Component {
             return;
         }
         // 1. whois the backupped User?
-        // $this->backuppedUsers = ($backuppedUser === 'all') ? $backuppedUser : $backuppedUser->contact;
-        if ($backuppedUser === 'all') {
-            $this->backuppedUsers = 'all';
+        // $this->backingUpUser = ($backingUpUser === 'all') ? $backingUpUser : $backingUpUser->contact;
+        if ($backingUpUser === 'all') {
+            $this->backingUpUser = 'all';
         } else {
             // pick uuid
-            $userContact = UserContact::withTrashed()->findOrFail($backuppedUser);
+            $userContact = UserContact::withTrashed()->findOrFail($backingUpUser);
             // log
-            $this->backuppedUsers = $userContact;
+            $this->backingUpUser = $userContact;
         }
     }
     //
@@ -48,16 +48,16 @@ new class () extends Component {
         // register
         Log::info('UserWorkAndRelatedSingleBackupJob requested by: ' . Auth::user()->name . ', id:' . Auth::user()->id);
 
-        if ($this->backuppedUsers === 'all') {
+        if ($this->backingUpUser === 'all') {
             Log::info('UserWorkAndRelatedSingleBackupJob requested for: all');
             UserWorkAndRelatedSingleBackupJob::dispatchSync(
                 requesterUser: Auth::user(),
             );
         } else {
-            Log::info('UserWorkAndRelatedSingleBackupJob requested for: ' . $this->backuppedUsers->user->name);
+            Log::info('UserWorkAndRelatedSingleBackupJob requested for: ' . $this->backingUpUser);
             UserWorkAndRelatedSingleBackupJob::dispatchSync(
                 requesterUser: Auth::user(),
-                backuppedUser: $this->backuppedUsers->user,
+                backingUpUser: $this->backingUpUser->user,
             );
         }
         // redirect
@@ -111,21 +111,21 @@ new class () extends Component {
 
                 <div class="fyk text-2xl font-medium text-gray-900">
                     {{ __('Start Backup Job') }}
-                    @if ($backuppedUsers === 'all')
+                    @if ($backingUpUser === 'all')
                     <br />
                     {{ __("For All, Ok, but it's a long and huge work.")}}
                     @else
                     <br />
-                    {{ $backuppedUsers->country->flag_code }}
-                    {{ $backuppedUsers->country->country }}
+                    {{ $backingUpUser->country->flag_code }}
+                    {{ $backingUpUser->country->country }}
                     <br />
-                    {{ $backuppedUsers->last_name }}
-                    {{ $backuppedUsers->first_name }}
+                    {{ $backingUpUser->last_name }}
+                    {{ $backingUpUser->first_name }}
                     <br />
-                    {{ $backuppedUsers->email }}
+                    {{ $backingUpUser->email }}
                     <br />
-                    {{ $backuppedUsers->city }}
-                    {{ $backuppedUsers->address }}
+                    {{ $backingUpUser->city }}
+                    {{ $backingUpUser->address }}
                     @endif
                 </div>
 

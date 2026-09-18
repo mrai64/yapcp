@@ -43,7 +43,7 @@ class UserWorkAndRelatedSingleBackupJob implements ShouldQueue
     // Richiedente
     protected ?User $requesterUser;
 
-    protected ?User $backuppedUser;
+    protected ?User $backingUpUser;
 
     /**
      * Create a new job instance.
@@ -53,16 +53,19 @@ class UserWorkAndRelatedSingleBackupJob implements ShouldQueue
      */
     public function __construct(
         User $requesterUser, // not null
-        User|null $backuppedUser = null,
+        User|null $backingUpUser = null,
         DateTimeInterface|string|null $backupSince = null
     ) {
         // assignment
         $this->backupSince   = $backupSince ? Carbon::parse($backupSince) : null;
         $this->requesterUser = $requesterUser ?? Auth::user();
-        $this->backuppedUser = $backuppedUser ?? null;
+        $this->backingUpUser = $backingUpUser ?? null;
+        if ($backingUpUser) {
+            $this->backingUpUser = User::withTrashed()->findOrFail($backingUpUser->id);
+        }
         // log
         $jobName = class_basename($this);
-        Log::info('Requested job: ' . $jobName . ' / construct backuppedUser  ' . json_encode($this->backuppedUser));
+        Log::info('Requested job: ' . $jobName . ' / construct backingUpUser  ' . json_encode($this->backingUpUser));
     }
 
     /**
@@ -82,7 +85,7 @@ class UserWorkAndRelatedSingleBackupJob implements ShouldQueue
         }
         Log::info('Requested job: ' . $jobName . ' / 1. since ' . ($this->backupSince ? $this->backupSince : 'ever'));
         Log::info('Requested job: ' . $jobName . ' / 1. from  ' . $this->requesterUser->name);
-        Log::info('Requested job: ' . $jobName . ' / 1. for   ' . json_encode($this->backuppedUser ?? (string) 'all'));
+        Log::info('Requested job: ' . $jobName . ' / 1. for   ' . json_encode($this->backingUpUser ?? (string) 'all'));
 
         // 1. Inizializzazione del file di output
         $jobName = class_basename($this);
@@ -105,7 +108,7 @@ class UserWorkAndRelatedSingleBackupJob implements ShouldQueue
                 'created_at' => now()->toIso8601String(),
                 'incremental' => $this->backupSince !== null,
                 'backup_since' => $this->backupSince?->toIso8601String(),
-                'for' => $this->backuppedUser->name ?? (string) 'all',
+                'for' => $this->backingUpUser->name ?? (string) 'all',
                 'requester admin' => [
                     'name' => $this->requesterUser?->name,
                     'id' => $this->requesterUser?->id,
@@ -130,10 +133,10 @@ class UserWorkAndRelatedSingleBackupJob implements ShouldQueue
             ->orderBy('first_name', 'asc')
             ->orderBy('created_at', 'asc');
 
-        if ($this->backuppedUser) {
+        if ($this->backingUpUser) {
             Log::info('Requested job: ' . $jobName . ' / 3. add query for an id');
             $contactsQuery->where(function ($q) {
-                $q->where('id', $this->backuppedUser->id);
+                $q->where('id', $this->backingUpUser->id);
             });
         }
 

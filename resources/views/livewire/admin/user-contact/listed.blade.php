@@ -98,7 +98,7 @@ new class extends Component {
                             <td colspan="4">
                                 <x-yapcp.inline-link
                                     txt="All Work Backup"
-                                    url="{{ route('admin.backup.user-work', ['backuppedUser' => 'all' ]) }}" />
+                                    url="{{ route('admin.backup.user-work', ['backingUpUser' => 'all' ]) }}" />
                             </td>
                         </tr>
                         @foreach($userContacts as $deltaItem => $uc)
@@ -122,7 +122,7 @@ new class extends Component {
                             @endif
                                 <x-yapcp.inline-link
                                     txt="Work Backup"
-                                    url="{{ route('admin.backup.user-work', ['backuppedUser' => $uc->user ]) }}" />
+                                    url="{{ route('admin.backup.user-work', ['backingUpUser' => $uc->user ]) }}" />
                             </td>
                         </tr>
                         @endforeach
