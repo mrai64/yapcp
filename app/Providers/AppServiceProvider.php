@@ -16,6 +16,7 @@ use App\Models\FederationSection;
 use App\Models\Organization;
 use App\Models\User;
 use App\Models\UserContact;
+use App\Models\UserWork;
 use App\Observers\FederationObserver;
 use App\Observers\OrganizationObserver;
 use App\Observers\UserContactObserver;
@@ -66,12 +67,12 @@ class AppServiceProvider extends ServiceProvider
 
         // Forza il binding esplicito per le rotte che usano {xxx-yyy}
         Route::model('contest-award', ContestAward::class);
-        Route::model('federation', Federation::class);
+        Route::model('contest-patronage', ContestPatronage::class);
         Route::model('federation-more', FederationMore::class);
         Route::model('federation-section', FederationSection::class);
+        Route::model('federation', Federation::class);
         Route::model('organization', Organization::class);
-        // contest
-        Route::model('contest-patronage', ContestPatronage::class);
+        Route::model('user-work', UserWork::class);
 
         // Registrazione esplicita della Policy
         Gate::policy(ContestAward::class, \App\Policies\ContestAwardPolicy::class);
@@ -80,6 +81,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(FederationMore::class, \App\Policies\FederationMorePolicy::class);
         Gate::policy(FederationSection::class, \App\Policies\FederationSectionPolicy::class);
         Gate::policy(Organization::class, \App\Policies\OrganizationPolicy::class);
+        Gate::policy(UserWork::class, \App\Policies\UserWorkPolicy::class);
 
         // Gate Policy
         Gate::define('contest-participants-update', [ContestPaymentChangePolicy::class, 'update']);
@@ -88,9 +90,11 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('access-admin', function (User $user) {
             return $user->isAdmin();
         });
+        // ! ? Check: juror in what contest?
         Gate::define('access-juror', function (User $user) {
             return $user->isJurorInAnyContest();
         });
+        // ! ? Check: member of which organization?
         Gate::define('access-organization', function (User $user) {
             return $user->isMemberOfAnyOrganization();
         });

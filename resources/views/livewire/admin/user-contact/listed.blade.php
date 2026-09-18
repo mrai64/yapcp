@@ -7,6 +7,7 @@
 
 use App\Models\User;
 use App\Models\UserContact;
+use Illuminate\Queue\Attributes\WithoutRelations;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Volt\Component;
 use Livewire\WithPagination;
@@ -28,7 +29,10 @@ new class extends Component {
     {
         return [
             'userContacts' => UserContact::withTrashed()
-            ->with('country') // user_contacts.country()
+            ->with([
+                'country', // user_contacts.country()
+                'user' => fn($query) => $query->withTrashed() // return implicito 
+            ])
             ->orderBy('country_id', 'asc')
             ->orderBy('last_name', 'asc')
             ->orderBy('first_name', 'asc')
@@ -84,12 +88,21 @@ new class extends Component {
                             <th scope="col" class="data-table-section-counter">{{ __("#")}}</td>
                             <th scope="col" class="data-table-section-country">{{ __("Country")}}</td>
                             <th scope="col" class="data-table-section-name">{{__("Surname, Name")}}</td>
-                            <th scope="col" class="data-table-section-actions">{{__("Action")}}</td>
+                            <th scope="col" class="data-table-section-actions">
+                                {{__("Action")}}
+                            </td>
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                            <td colspan="4">
+                                <x-yapcp.inline-link
+                                    txt="All Work Backup"
+                                    url="{{ route('admin.backup.user-work', ['backingUpUser' => 'all' ]) }}" />
+                            </td>
+                        </tr>
                         @foreach($userContacts as $deltaItem => $uc)
-                        <tr class="borders my-2">
+                        <tr class="border my-2">
                             <td valign="top" class="small">{{ $userContacts->firstItem() + $deltaItem }}&nbsp;&nbsp;</td>
                             <td valign="top" class="small">{{ $uc->country->flag_code }} {{ $uc->country->country }}&nbsp;&nbsp;</td>
                             <td valign="top" class="small">
@@ -97,16 +110,19 @@ new class extends Component {
                                 <br />
                                 {{ ($uc->city) ? $uc->city : __('city...') }} - {{ ($uc->address) ? $uc->address : __('address...') }}
                             </td>
-                            <td valign="top" class="small">
-                            @if (!$uc->trashed())
-                                <x-yapcp.inline-link
-                                    txt="Modify"
-                                    url="#" />
-                            @else
+                            <td valign="top" >
+                            @if ($uc->trashed())
                                 <x-yapcp.inline-link
                                     txt="Restore"
                                     url="#" />
+                            @else
+                                <x-yapcp.inline-link
+                                    txt="Modify"
+                                    url="#" />
                             @endif
+                                <x-yapcp.inline-link
+                                    txt="Work Backup"
+                                    url="{{ route('admin.backup.user-work', ['backingUpUser' => $uc->user ]) }}" />
                             </td>
                         </tr>
                         @endforeach

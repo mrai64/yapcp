@@ -16,16 +16,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Livewire\Volt\Component;
 
-new class extends Component {
+new class () extends Component {
     //
     public DateTimeImmutable $startBackupFrom;
     // mount() read a datetime
-    // rules() datetime 
+    // rules() datetime
     public function startBackupJob()
     {
         // $validated
         // register
-        Log::info('UserAndRelatedBackupJob requested by: ' . Auth::user()->name . ', id:' . Auth::user()->id );
+        Log::info('UserAndRelatedBackupJob requested by: ' . Auth::user()->name . ', id:' . Auth::user()->id);
         // accodamento
         // nota: dispatch() richiede uno sblocco dei lavori, dispatchSync() avvia subito i lavori
         $res = ContestAndRelatedBackup1stJob::dispatchSync(
