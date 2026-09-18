@@ -5,7 +5,7 @@
 
 ---
 
-## A backup is *something you ‘should have done earlier’* – so do it.
+## A backup is *something you ‘should have done earlier’* – so do it
 
 The yaPCP platform uses data, so that data must be stored and, if necessary, restored.  
 Here how an admin user can easily ask for a backup of the models
@@ -26,12 +26,12 @@ Then pass to User Index List or use the Backup Run link (for all user)
 
 &nbsp;
 
-Just to make sure you don’t start the operation by mistake
+Choose All or Single backup
 ![__](/docs/admin/backup/userwork_img03.png)
 
 &nbsp;
 
-Job started immediately
+All: Just to make sure you don’t start the operation by mistake
 ![__](/docs/admin/backup/userwork_img04.png)
 
 &nbsp;
@@ -41,6 +41,7 @@ As you see some user should be deleted but can be backup anyway.
 
 &nbsp;
 
+Choose one Single backup
 ![__](/docs/admin/backup/userwork_img06.png)
 
 &nbsp;
@@ -49,5 +50,9 @@ As you see some user should be deleted but can be backup anyway.
 
 &nbsp;
 
+You can choose also a deleted record (Restore instead of modify)
 ![__](/docs/admin/backup/userwork_img08.png)
 
+&nbsp;
+
+![__](/docs/admin/backup/userwork_img09.png)
