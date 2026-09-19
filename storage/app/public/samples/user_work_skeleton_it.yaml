@@ -1,0 +1,298 @@
+# Questo è un file Yaml,
+# va compilato per fornire alla piattaforma dati in blocco
+# tutto quello che segue il carattere di cancelletto o diesis fino a fine riga
+# viene ignorato in importazione
+# ============================================================================
+# Regole di compilazione: vedi nella piattaforma
+# manuale > admin > Import > User Work
+# ============================================================================
+# 1. User name, email, password(?)
+# 2. UserContact first name, last name, email, indirizzo postale
+# 3. UserWork titolo, link per lo scarico del file
+# Nota bene: i commenti alla fine sono commenti e si possono
+#   rimuovere per avere una idea più chiara delo contenuto.
+data:
+  users: # model 1. User
+    - email: indirizzo@email.local # [OBBLIGATORIO]
+      # riferimento unico univoco nella piattaforma, dove
+      # due Mario Rossi vengono distinti da due email diverse.
+      id: new # [FACOLTATIVO] new | uuid
+      # se si tratta di un nuovo nominativo da inserire
+      # in piattaforma usate new, altrimenti inserite l'uuid
+      # che è assegnato dalla piattaforma, facoltativo
+      # perché viene cercato lo user in base all'indirizzo email
+      name: "Rossi, Mario" # [FACOLTATIVO]
+      # diventa obbligatorio solo per id: new, va compilato nella
+      # forma Cognome, Nome
+      # ========================================================================
+      # altri campi presenti nel backup ma che NON vanno compilati
+      # - password,
+      # - two_factor_secret,
+      # - two_factor_recovery_codes,
+      # - remember_token,
+      # - current_team_id,
+      # - profile_photo_path,
+      created_at: "2026-01-01 23:59:59" # [FACOLTATIVO]
+      # datetime, iso8601 UTC
+      # Se riportato deve essere nal formato iso8601
+      # 'aaaa-mm-gg hh:mm:ss'
+      updated_at: "2026-01-01 23:59:59" # [FACOLTATIVO]
+      # datetime, iso8601 UTC
+      # Il campo updated_at viene sempre ignorato e aggiornato
+      # di sistema, inserirlo non ha alcun effetto
+      deleted_at: restore # [FACOLTATIVO]
+      # null | datetime, iso8601 UTC
+      # nella piattaforma indica quando un record è stato cancellato
+      # non fisicamente, ma resta a disposizione per il backup.
+      # Per ripristinare un record eliminato si inserisce un nuovo record
+      # mentre con deleted_at: restore si indica al sistema di importazione
+      # di resettare il campo se valorizzato.
+  user_contacts: # model 2. UserContact
+    - email: indirizzo@email.local # [OBBLIGATORIO]
+      # email, max:250
+      # crea il collegamento don user
+      first_name: "Mario" # [FACOLTATIVO]
+      # string, max:250
+      # Serve a verificare visivamente che sia lo stesso nome di users.name
+      last_name: "Rossi" # [FACOLTATIVO]
+      # string, max:250
+      # Serve a verificare visivamente che sia lo stesso cognome di users.name
+      nick_name: "" # [FACOLTATIVO]
+      # string, max:250
+      # Detto anche, aka,...
+      id: new # [FACOLTATIVO]
+      # 'new' | string, max:36
+      # new oppure uuid, si può anche omettere users
+      # perché partendo dai dati di UserContact si possono
+      # costruire i dati di User, e generare una password
+      # casuale
+      passport_photo: url # [FACOLTATIVO]
+      # string, max:255
+      # Nella esportazione della scheda personale questo file immagine
+      # viene riportato con un path che corrisponde al photo_box path
+      # e un file, di nome sempre __passport_photo.jpg
+      # Se valorizzato, deve essere un url raggiungibile
+      # e questo file va a occupare quella posizione
+      # ======================================================================
+      country_id: ITA # [OBBLIGATORIO]
+      # min:3,max:3, uppercase
+      # Va indicata in lettere maiuscole una delle
+      # nazioni elencate nella pagina https://yapcp.test/lists/country_codes
+      timezone_id: Europe/Rome # [OBBLIGATORIO]
+      #            1...+....10...+....20...+....30...+....4
+      # string, max:40
+      # Come per cuntry_id il valore da inserire va pescato tra le voci
+      # elencate nella pagina https://yapcp.test/lists/world_timezones
+      # ======================================================================
+      address: "via Roma, 1" # [FACOLTATIVO]
+      # string, max:250
+      # Sono i dati di indirizzo postale della/dello user,
+      # va seguito lo standard internazionale di spedizione,
+      # potendo però inserire anche indirizzi in caratteri non latini?
+      address_line2: "" # [FACOLTATIVO]
+      # string, max:250
+      # può essere usato se una riga non basta, o in caso di FRAZIONE
+      city: "Roma" # [FACOLTATIVO]
+      # string, max:250
+      # Località, Comune di residenza
+      region: "RM" # [FACOLTATIVO]
+      # string, max:250
+      # Provincia, regione
+      postal_code: "I-00100" # [FACOLTATIVO]
+      # string, max:10
+      # CAP, ZIP, quello lì
+      # ======================================================================
+      website: "https://example.com/personal_page/" # [FACOLTATIVO]
+      # url, max:250
+      facebook: "https://facebook.com/personal_page/" # [FACOLTATIVO]
+      # url, max:250
+      x_twitter: "https://x.com/personal_page/" # [FACOLTATIVO]
+      # url, max:250
+      instagram: "https://instagram.com/personal_page/" # [FACOLTATIVO]
+      # url, max:250
+      # ======================================================================
+      whatsapp: "https://wa.me/33031234567890" # [FACOLTATIVO]
+      # url, max:36
+      # Link per la comunicazione via whatsapp, a futuro uso.
+      linkedin: "https://linkedin.com/personal_page/" # [FACOLTATIVO]
+      # url, max:250
+      created_at: "2026-01-01 23:59:59" # [FACOLTATIVO]
+      # datetime, iso8601 UTC
+      # Se riportato deve essere nal formato iso8601
+      # 'aaaa-mm-gg hh:mm:ss'
+      updated_at: "2026-01-01 23:59:59" # [FACOLTATIVO]
+      # datetime, iso8601 UTC
+      # Il campo updated_at viene sempre ignorato e aggiornato
+      # di sistema, inserirlo non ha alcun effetto
+      deleted_at: restore # [FACOLTATIVO]
+      # null | datetime, iso8601 UTC
+      # nella piattaforma indica quando un record è stato cancellato
+      # non fisicamente, ma resta a disposizione per il backup.
+      # Per ripristinare un record eliminato si inserisce un nuovo record
+      # mentre con deleted_at: restore si indica al sistema di importazione
+      # di resettare il campo se valorizzato.
+  user_works: # model 3. UserWork
+    - id: new # [OBBLIGATORIO]
+      # 'new' | string,uuid, min:36, max:36
+      # Se si tratta di unna immagine da aggiungere, si mette il termine
+      # new, altrimenti si riporta l'uuid assegnato dalla pattaforma
+      # senza alterazioni, diventerà parte del nome file interno
+      user_id: new | uuid | email # [OBBLIGATORIO]
+      # 'new' | string,uuid, min:36, max:36 | email, max:250
+      # Essendo la chiave di aggancio tra opera e autore, va riportato
+      # l'id dell'autore, tuttavia se se non si può usare l'uuid
+      # perché l'autore è nuovo ma anche si caricano più autori,
+      # la chiave univoca affidabile è l'indirizzo email
+      title_en: "A lady Portrait" # [OBBLIGATORIO]
+      # string, max:250
+      # Va riportato un titolo in inglese internazionale che vada bene,
+      # alcune ma non tutte le federazioni chiedono di escludere
+      # titoli 'S.T.', 'senza titolo', 'untitled' eccetera.
+      # NOTA BENE: Alcune federazioni chiedono che ogni autore non
+      # assegni a due opere lo stesso titolo, che ci sia univocità
+      # di titolo, e che, a certe condizioni, il titolo non si possa cambiare.
+      title_local: "Ritratto di donna" # [FACOLTATIVO]
+      # string, max:250
+      file_path: "image.jpg" # [OBBLIGATORIO]
+      # string, max:250
+      # Consente l'accesso al file nella piattaforma,
+      # con verifica, se contiene un photo_box address può essere
+      # usato per estrarre uuid dell'immagine.
+      # NOTA BENE: deve essere univoco per caricamento, non ci possono essere
+      # due lavori dello stesso autore con lo stesso file_path e
+      # nemmeno due autori diversi con opere diverse con lo stesso file_path.
+      url_path: "" # [OBBLIGATORIO]
+      # url, max:250
+      # Pur non essendo un campo del model, consente di accedere
+      # all'immagine per trasferirla e verificarne la natura.
+      file_format: "jpeg" # [FACOLTATIVO]
+      # string, max:250
+      # Viene ricalcolato in fase di trasferimento dell'immagine,
+      # anche se presente di fatto viene ignorato.
+      file_size: 2000000 # [FACOLTATIVO]
+      # int, min:100000, max:6000000
+      # Viene ricalcolato in fase di trasferimento dell'immagine,
+      # anche se presente di fatto viene ignorato.
+      width: 2000 # [FACOLTATIVO]
+      # int, min:1080, max:4000
+      # Viene ricalcolato in fase di trasferimento dell'immagine,
+      # anche se presente di fatto viene ignorato.
+      height: 2000 # [FACOLTATIVO]
+      # int, min:1080, max:4000
+      # Viene ricalcolato in fase di trasferimento dell'immagine,
+      # anche se presente di fatto viene ignorato.
+      long_size: 2000 # [FACOLTATIVO]
+      # int, min:1080, max:4000
+      # Viene ricalcolato in fase di trasferimento dell'immagine,
+      # anche se presente di fatto viene ignorato.
+      short_size: 2000 # [FACOLTATIVO]
+      # int, min:1080, max:4000
+      # Viene ricalcolato in fase di trasferimento dell'immagine,
+      # anche se presente di fatto viene ignorato.
+      is_landscape: true # [FACOLTATIVO]
+      # bool ('true' | 'false')
+      # Dato ricalcolato come risultato dell'espressione
+      # (width >= height)
+      is_monochromatc: false # [FACOLTATIVO]
+      # bool ('true' | 'false')
+      # Il dato va verificato a vista.
+      has_raw_file: false # [FACOLTATIVO]
+      # bool ('true' | 'false')
+      # Il dato è fornito dall'autore, inserirlo solo se già noto
+      created_at: "2026-01-01 23:59:59" # [FACOLTATIVO]
+      # datetime, iso8601 UTC
+      # Se riportato deve essere nal formato iso8601
+      # 'aaaa-mm-gg hh:mm:ss'
+      updated_at: "2026-01-01 23:59:59" # [FACOLTATIVO]
+      # datetime, iso8601 UTC
+      # Il campo updated_at viene sempre ignorato e aggiornato
+      # di sistema, inserirlo non ha alcun effetto
+      deleted_at: restore # [FACOLTATIVO]
+      # null | datetime, iso8601 UTC
+      # nella piattaforma indica quando un record è stato cancellato
+      # non fisicamente, ma resta a disposizione per il backup.
+      # Per ripristinare un record eliminato si inserisce un nuovo record
+      # mentre con deleted_at: restore si indica al sistema di importazione
+      # di resettare il campo se valorizzato.
+    # Seguono altri user_works
+  # - id:
+  #   user_id:
+  #   title_en:
+  #   file_path:
+  #   url_path:
+  # - id:
+  #   user_id:
+  #   title_en:
+  #   file_path:
+  #   url_path:
+  # - id:
+  #   user_id:
+  #   title_en:
+  #   file_path:
+  #   url_path:
+  user_work_mores: # model 4. UserWorkMore
+    # Questo model è molto condizionato dalla struttura di un model esterno
+    # che è il FederationMore, che riepiloga i campi "richiesti in più"
+    # dalle Federazioni per i concorsi da loro patrocinati e che in questo
+    # caso sono elencati nella pagina https://yapcp.test/lists/federation_mores
+    - id: 1 # [FACOLTATIVO]
+      # int min:1
+      # Il model non ha id rappresentativo, di fatto è un elenco di
+      # chiavi - valori associati a user_work e federation_mores.
+      # Per inserire le T-uple federation_mores.federation_id
+      # e federation_mores.field_name serve consultare pa pagina
+      user_work_id: uuid | file_path # [OBBLIGATORIO]
+      # string, max:250
+      # Essendo l'aggancio con lo user_work, se non fosse già disponibile
+      # uno user_works.id si può ricorrere al file_path che
+      # deve essere univoco per caricamento, non ci possono essere
+      # due lavori dello stesso autore con lo stesso file_path e
+      # nemmeno due autori diversi con opere diverse con lo stesso file_path.
+      federation_id: "FIAF" # [OBBLIGATORIO]
+      # string, max:10
+      # Si tratta del codice federazioner che compare nella pagina
+      # https://yapcp.test/lists/federation_mores
+      field_name: "fiafAdmYear" # [OBBLIGATORIO]
+      # string, max:20
+      # Si tratta del codice field_name che compare nella pagina
+      # https://yapcp.test/lists/federation_mores
+      field_value: "2024" # [OBBLIGATORIO]
+      # string, max:255
+      # Si tratta del valore che deve essere associato ai tre precedenti
+      # e senza questo non ha senzo il record
+      # NOTA BENE: il contenuto del campo è regolato come indicato
+      # nella pagina https://yapcp.test/lists/federation_mores
+      created_at: "2026-01-01 23:59:59" # [FACOLTATIVO]
+      # datetime, iso8601 UTC
+      # Se riportato deve essere nal formato iso8601
+      # 'aaaa-mm-gg hh:mm:ss'
+      updated_at: "2026-01-01 23:59:59" # [FACOLTATIVO]
+      # datetime, iso8601 UTC
+      # Il campo updated_at viene sempre ignorato e aggiornato
+      # di sistema, inserirlo non ha alcun effetto
+      deleted_at: restore # [FACOLTATIVO]
+      # null | datetime, iso8601 UTC
+      # nella piattaforma indica quando un record è stato cancellato
+      # non fisicamente, ma resta a disposizione per il backup.
+      # Per ripristinare un record eliminato si inserisce un nuovo record
+      # mentre con deleted_at: restore si indica al sistema di importazione
+      # di resettare il campo se valorizzato.
+  # seguono altri user_work_mores
+  # - id: new
+  #   user_work_id: uuid
+  #   federation_id:
+  #   field_name:
+  #   field_value;
+  #   created_at:
+  # - id: new
+  #   user_work_id: uuid
+  #   federation_id:
+  #   field_name:
+  #   field_value;
+  #   created_at:
+  # - id: new
+  #   user_work_id: uuid
+  #   federation_id:
+  #   field_name:
+  #   field_value;
+  #   created_at:
