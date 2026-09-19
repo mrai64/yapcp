@@ -1,0 +1,18 @@
+# This is a YAML file,
+# should be filled as a form to load data in yapcp platform.
+# everithing after # upto newline is ignored by import parser.
+# ============================================================================
+# Compiling rules: see yaPCP
+# Manual > admin > Import > user Work
+# ============================================================================
+# Model 1. User
+# Model 2. UserContact
+# Model 3. UserWork
+# Model 4. UserWorkMore
+# NOTE: comments are comments, should be removed to obtain
+#  a clearer view of load data.
+data:
+  users:
+  user_contacts:
+  user_works:
+  user_work_mores:
