@@ -29,20 +29,22 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 /**
- * @property string $id uuid assigned
- * @property string $country_id
- * @property string $name
- * @property string $email Should became verified
- * @property string|null $website
- * @property string|null $contact postal address
+ * @property string $id
+ * @property string $country_id fk: countries.id - hq country
+ * @property string $name english official
+ * @property string $email
+ * @property string|null $website official organization website
+ * @property string|null $contact hq postal address
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Contest> $contests
+ * @property-read Collection<int, \App\Models\Contest> $contests
  * @property-read int|null $contests_count
  * @property-read \App\Models\Country|null $country
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $userRoles
+ * @property-read Collection<int, \App\Models\UserRole> $userRoles
  * @property-read int|null $user_roles_count
+ * @property-read Collection<int, \App\Models\User> $users
+ * @property-read int|null $users_count
  * @method static \Database\Factories\OrganizationFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Organization newQuery()
@@ -165,10 +167,10 @@ class Organization extends Model
     }
 
     // organizations.id > user_roles.organizations_id > user_roles.user_id > users.id
+    // no ->using(UserRole::class)
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'user_roles', 'organization_id', 'user_id')
-            ->using(UserRole::class)
             ->withPivot(['role', 'role_opening', 'role_closing'])
             ->wherePivot('role_opening', '<=', now())
             ->wherePivot('role_closing', '>=', now());
