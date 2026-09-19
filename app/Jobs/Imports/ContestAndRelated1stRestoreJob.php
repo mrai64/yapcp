@@ -15,7 +15,6 @@ use App\Models\ContestPatronage;
 use App\Models\ContestSection;
 use App\Models\Organization;
 use App\Models\User;
-use App\Models\UserContact;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -37,7 +36,7 @@ class ContestAndRelated1stRestoreJob implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param string $yamlFilePath Percorso assoluto o relativo del file YAML di backup da ripristinare
+     * @param string $relativeFilePath Percorso assoluto o relativo del file YAML di backup da ripristinare
      */
     public function __construct(
         public User $requesterUser,
@@ -224,7 +223,7 @@ class ContestAndRelated1stRestoreJob implements ShouldQueue
         if (!empty($errors)) {
             $this->writeReportLog($errors);
         } else {
-          // use the same to say No errors
+            // use the same to say No errors
             $allQuite = [];
             $allQuite[] = "All works fine. Thanks";
             $this->writeReportLog($allQuite);
