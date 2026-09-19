@@ -51,10 +51,10 @@ data:
     - email: indirizzo@email.local # [OBBLIGATORIO]
       # email, max:250
       # crea il collegamento don user
-      first_name: "Mario" # [FACOLTATIVO]
+      first_name: "Mario" # [OBBLIGATORIO]
       # string, max:250
       # Serve a verificare visivamente che sia lo stesso nome di users.name
-      last_name: "Rossi" # [FACOLTATIVO]
+      last_name: "Rossi" # [OBBLIGATORIO]
       # string, max:250
       # Serve a verificare visivamente che sia lo stesso cognome di users.name
       nick_name: "" # [FACOLTATIVO]
