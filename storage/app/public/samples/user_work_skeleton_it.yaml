@@ -193,7 +193,7 @@ data:
       # bool ('true' | 'false')
       # Dato ricalcolato come risultato dell'espressione
       # (width >= height)
-      is_monochromatc: false # [FACOLTATIVO]
+      is_monochromatic: false # [FACOLTATIVO]
       # bool ('true' | 'false')
       # Il dato va verificato a vista.
       has_raw_file: false # [FACOLTATIVO]

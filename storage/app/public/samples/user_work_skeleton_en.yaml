@@ -171,7 +171,7 @@ data:
       is_landscape: true # [OPTIONAL]
       # bool ('true' | 'false')
       # Computed value resulting from: (width >= height).
-      is_monochromatc: false # [OPTIONAL]
+      is_monochromatic: false # [OPTIONAL]
       # bool ('true' | 'false')
       # Must be visually verified.
       has_raw_file: false # [OPTIONAL]
