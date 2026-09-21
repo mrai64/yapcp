@@ -191,6 +191,9 @@ new class extends Component {
                             name="userWorkTempImage" wire:model="userWorkTempImage"
                             aria-describedby="photoHelp" />
                         <div wire:loading wire:target="userWorkTempImage">{{ __("Uploading...")}}</div>
+                        <div class="small">
+                            {{ __("Actually only jpeg max 16 MB (less than 16 MiB)")}}
+                        </div>
                         <x-input-error for="userWorkTempImage" class="mt-2" />
                     </div>
 
