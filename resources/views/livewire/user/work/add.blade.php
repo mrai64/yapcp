@@ -130,6 +130,13 @@ new class extends Component {
         <h2 class="fyk font-semibold text-xl text-gray-800 leading-tight fyk">
             {{ __(':name Add Work to Personal Gallery' , ['name' => $userContact->first_name] ) }}
         </h2>
+        <hr class="mb-4" />
+        <x-yapcp.header-link 
+            txt="Back to User dashboard" 
+            url="{{ route('user.dashboard') }}" />
+		<x-yapcp.header-link 
+			txt="Organization dashboard" 
+            url="{{ route('organization.dashboard', ['organization' => $organization]) }}" />
     </x-slot>
 
     <div class="py-12">
