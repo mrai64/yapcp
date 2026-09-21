@@ -67,7 +67,7 @@ new class extends Component {
     {
         return [
             'userWorkTitleEn' => 'required|string|max:250',
-            'userWorkTempImage' => 'required|image|mimes:jpg,jpeg|max:9000', // KB
+            'userWorkTempImage' => 'required|image|mimes:jpg,jpeg|max:16000', // KB MAX 16MB
             'userWorkIsMonochromatic' => 'nullable|boolean',
             'userWorkRawAvailable' => 'nullable|boolean',
         ];
@@ -134,9 +134,15 @@ new class extends Component {
         <x-yapcp.header-link 
             txt="Back to User dashboard" 
             url="{{ route('user.dashboard') }}" />
-		<x-yapcp.header-link 
-			txt="Organization dashboard" 
-            url="{{ route('organization.dashboard', ['organization' => $organization]) }}" />
+        <x-yapcp.header-link 
+            txt="Your 📋 Gallery" 
+            url="{{ route('user.work.listed1') }}" />
+        <x-yapcp.header-link 
+            txt="Your 🌇 Gallery" 
+            url="{{ route('user.work.listed2') }}" />
+        <x-yapcp.header-link 
+            txt="The Manual" 
+            url="{{ url('/docs') }}" />
     </x-slot>
 
     <div class="py-12">
