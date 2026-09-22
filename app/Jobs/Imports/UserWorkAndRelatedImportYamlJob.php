@@ -10,6 +10,8 @@
 
 namespace App\Jobs\Imports;
 
+use App\Models\Federation;
+use App\Models\FederationMore;
 use App\Models\User;
 use App\Models\UserContact;
 use App\Models\UserWork;
@@ -34,8 +36,6 @@ use Intervention\Image\Drivers\Imagick\Driver;
 use Intervention\Image\Encoders\JpegEncoder;
 use Throwable;
 
-use function PHPUnit\Framework\isEmpty;
-
 class UserWorkAndRelatedImportYamlJob implements ShouldQueue
 {
     use Dispatchable;
@@ -45,8 +45,8 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
 
     // email address mapped to uuid new or readd
     protected array $userEmailToUuidMap = [];
-    // file path to work id uuid new or readed
-    protected array $workPathToUuidMap = [];
+    // input work id to uuid - old or assigned
+    protected array $workIdToUuidMap = [];
 
     /**
      * Create a new job instance.
@@ -72,9 +72,9 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
     {
         return match ($model) {
             'users' => [
-                'email'      => 'required|email|max:250', //    email
-                'id'         => 'nullable|string|max:250', //   'new', uuid or email
-                'name'       => 'nullable|string|max:250',//    Surname, name
+                'email'      => 'required|email|max:250',
+                'id'         => 'nullable|string|max:250',
+                'name'       => 'nullable|string|max:250',
                 'created_at' => 'nullable|date_format:Y-m-d H:i:s',
                 'updated_at' => 'nullable|date_format:Y-m-d H:i:s',
                 'deleted_at' => 'nullable|string',
@@ -84,8 +84,9 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
                 'first_name'     => 'required|string|max:250',
                 'last_name'      => 'required|string|max:250',
                 'nick_name'      => 'nullable|string|max:250',
-                'id'             => 'nullable|string|max:250',// 'new' or uuid or email
-                'passport_photo' => 'nullable|url|max:255', //
+                'id'             => 'nullable|string|max:250',
+                'passport_photo' => 'nullable|url|max:255',
+                'url_path'       => 'nullable|url|max:250',
                 'country_id'     => 'required|string|size:3',
                 'timezone_id'    => 'required|string|max:40',
                 'address'        => 'nullable|string|max:250',
@@ -101,30 +102,30 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
                 'linkedin'       => 'nullable|url|max:250',
             ],
             'user_works' => [
-                'id'              => 'required|string',
-                'user_id'         => 'required|string|min:36|max:250', //
-                'title_en'        => 'required|string|max:250',
-                'title_local'     => 'nullable|string|max:250',
-                'file_path'       => 'required|string|max:250',
-                'url_path'        => 'required|url|max:250', // not in model
-                'file_format'     => 'nullable|string|max:250',
-                'file_size'       => 'nullable|integer|between:100000,6000000',
-                'width'           => 'nullable|integer|between:1080,4000',
-                'height'          => 'nullable|integer|between:1080,4000',
-                'long_size'       => 'nullable|integer|between:1080,4000',
-                'short_size'      => 'nullable|integer|between:1080,4000',
-                'is_landscape'    => 'nullable|boolean',
+                'id'               => 'required|string|max:250',
+                'user_id'          => 'required|string|min:36|max:250',
+                'title_en'         => 'required|string|max:250',
+                'title_local'      => 'nullable|string|max:250',
+                'file_path'        => 'nullable|string|max:250',
+                'url_path'         => 'nullable|url|max:250',
+                'file_format'      => 'nullable|string|max:250',
+                'file_size'        => 'nullable|integer|between:100000,6000000',
+                'width'            => 'nullable|integer|between:1080,4000',
+                'height'           => 'nullable|integer|between:1080,4000',
+                'long_size'        => 'nullable|integer|between:1080,4000',
+                'short_size'       => 'nullable|integer|between:1080,4000',
+                'is_landscape'     => 'nullable|boolean',
                 'is_monochromatic' => 'nullable|boolean',
-                'has_raw_file'    => 'nullable|boolean',
+                'has_raw_file'     => 'nullable|boolean',
             ],
             'user_work_mores' => [
-                'id'            => 'nullable',
+                'id'            => 'nullable|int|min:1',
                 'user_work_id'  => 'required|string|max:250',
                 'federation_id' => 'required|string|max:10',
                 'field_name'    => 'required|string|max:20',
                 'field_value'   => 'required|string|max:255',
             ],
-            default => [], // don't fill, default values set in o different way
+            default => [],
         };
     }
 
@@ -132,10 +133,10 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
      * Write a report in same folder of input file
      *
      */
-    protected function writeReportLog(array $errors): void
+    protected function writeReportLog(array $messages): void
     {
-        $directory = pathinfo(path: $this->yamlPath, flags: PATHINFO_DIRNAME);
-        $fileName = pathinfo(path: $this->yamlPath, flags: PATHINFO_FILENAME);
+        $directory = pathinfo(path:$this->yamlPath, flags: PATHINFO_DIRNAME);
+        $fileName = pathinfo(path:$this->yamlPath, flags: PATHINFO_FILENAME);
         $fileName = ($directory !== '.' ? $directory . '/' : '') . "{$fileName}_report.txt";
 
         $content = "==================================================\n";
@@ -143,182 +144,100 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
         $content .= __("Requester") . ": {$this->requesterUser->name} (ID: {$this->requesterUser->id})\n";
         $content .= __("Import Date") . ": " . now()->toDateTimeString() . "\n";
         $content .= "==================================================\n\n";
-        $content .= implode("\n", $errors) . "\n";
+        $content .= implode("\n", $messages) . "\n";
 
-        // Salva specificamente nel disk public
         Storage::disk('public')->put($fileName, $content);
     }
 
     /**
-     * Execute the job.
+     * Execute the job
+     *
      */
     public function handle(): void
     {
         $jobName = class_basename($this);
         Log::info('Job: ' . $jobName . ' / 1. started ');
-        //
+
         $errors = [];
-        // 2. find the uploaded file
         if (!Storage::disk('public')->exists($this->yamlPath)) {
-            Log::error('Job: ' . $jobName . ' / 2. file not found: ' . $this->yamlPath);
+            Log::error('Job: ' . $jobName . ' / 1. yaml file not found: ' . $this->yamlPath);
             $this->writeReportLog(["File YAML not found: {$this->yamlPath}"]);
             return;
         }
         $fullPath = Storage::disk('public')->path($this->yamlPath);
 
-        Log::info('Job: ' . $jobName . ' / 2. file found');
-        // Yaml parse
+        Log::info('Job: ' . $jobName . ' / 1. yaml file found');
+
         try {
             $parsedData = Yaml::parseFile($fullPath);
         } catch (Throwable $e) {
-            Log::info('Job: ' . $jobName . ' / 3. yaml parsed errors');
+            Log::info('Job: ' . $jobName . ' / 1. yaml parsed errors');
             $errors[] = 'Errors from yaml parser: ' . $e->getMessage();
-            $this->writeReportLog(errors: $errors);
+            $this->writeReportLog($errors);
             return;
         }
-        Log::info('Job: ' . $jobName . ' / 3. yaml file parsed ok');
+
+        Log::info('Job: ' . $jobName . ' / 1. yaml file parsed ok');
         $data = $parsedData['data'] ?? [];
-        Log::info('Job: ' . $jobName . ' / 4. yaml content ready to upsert');
+        Log::info('Job: ' . $jobName . ' / 1. yaml content ready to upsert');
+
         // ===================================================================
         // Model user - loop
         // ===================================================================
         if (!empty($data['users'])) {
             foreach ($data['users'] as $index => $userData) {
-                Log::info('Job: ' . $jobName . ' / 5. users loop / ' . $index);
+                Log::info('Job: ' . $jobName . ' / 2. users loop / ' . $index);
                 try {
-                    // validate
                     Validator::make(
                         data: $userData,
                         rules: $this->getValidationRules('users')
                     )->validate();
                 } catch (ValidationException $e) {
-                    $errors[] = "Validation errors in 5. user loop on index {$index}: "
+                    $errors[] = "Validation errors in 2. users loop on index {$index}: "
                         . implode(', ', Arr::flatten($e->errors()));
                     $this->writeReportLog($errors);
                     return;
                 }
-                // find
+
                 $user = User::withTrashed()
                     ->where('email', $userData['email'])
                     ->first();
+
                 if ($user) {
-                    // exist
                     $userId = $user->id;
                     try {
-                        DB::transaction(function () use ($userData, $userId, $user) {
-                            // restore required? restore it
+                        DB::transaction(function () use ($userData, $user) {
                             if (($userData['deleted_at'] ?? null) === 'restore') {
                                 $user->restore();
                             }
-                            unset($userData['id']);
-                            unset($userData['deleted_at']);
-                            // update
-                            $user->update(array_merge($userData, ['id' => $userId]));
+                            unset($userData['id'], $userData['deleted_at']);
+
+                            // Aggiorna tramite Query Builder per supportare i modelli soft-deleted
+                            $user->newQuery()->withTrashed()->whereKey($user->getKey())->update($userData);
                         });
                     } catch (\Throwable $e) {
-                        Log::info('Job: ' . $jobName . ' / 5. user loop / ' . $index . ' for userId:' . $userId);
+                        Log::info('Job: ' . $jobName . ' / 2. users loop / ' . $index . ' for userId:' . $userId);
                         $errors[] = 'Errors from user loop: ' . $e->getMessage();
-                        $this->writeReportLog(errors: $errors);
+                        $this->writeReportLog($errors);
                         return;
                     }
                 } else {
-                    // not found, new or physically removed
-                    $userId = ($userData['id'] ?? 'new') === 'new' ? (string) Str::uuid7() : $userData['id'];
+                    $userId = (($userData['id'] ?? 'new') === 'new')
+                        ? (string) Str::uuid7()
+                        : $userData['id'];
                     $userData['id'] = $userId;
-                    $userData['password'] = (!empty($userData['password'])) ? $userData['password'] : Hash::make(Str::random(24));
+                    $userData['password'] = (!empty($userData['password']))
+                        ? $userData['password']
+                        : Hash::make(Str::random(24));
                     unset($userData['deleted_at']);
 
                     try {
                         $user = User::create($userData);
                         $userId = $user->id;
                     } catch (\Throwable $e) {
-                        Log::info('Job: ' . $jobName . ' / 5. user loop / ' . $index . ' for userId:' . $userId);
+                        Log::info('Job: ' . $jobName . ' / 2. users loop / ' . $index . ' for userId:' . $userId);
                         $errors[] = 'Errors from user loop: ' . $e->getMessage();
-                        $this->writeReportLog(errors: $errors);
-                        return;
-                    }
-                }
-                // email - uuid
-                $this->userEmailToUuidMap[$userData['email']] = $userId;
-            } // foreach - user
-        }
-        // users
-        // ===================================================================
-        // Model UserContact - loop
-        // ===================================================================
-        // TODO import passport_photo in a file __passport_photo under photo_box()
-        if (!empty($data['user_contacts'])) {
-            foreach ($data['user_contacts'] as $index => $userData) {
-                Log::info('Job: ' . $jobName . ' / 6. user_contacts loop / ' . $index);
-                // default
-                $userData['country_id'] = !empty($userData['country_id']) ? strtoupper($userData['country_id']) : 'ITA';
-                $userData['timezone_id'] = (!empty($userData['timezone_id'])) ? $userData['timezone_id'] : 'Europe/Rome';
-                $userData['last_name'] = $userData['last_name'] ?? '';
-                $userData['first_name'] = $userData['first_name'] ?? '';
-
-                try {
-                // validate
-                    Validator::make(
-                        data: $userData,
-                        rules: $this->getValidationRules('user_contacts')
-                    )->validate();
-                } catch (ValidationException $e) {
-                    $errors[] = "Validation errors in 6. user_contacts loop on index {$index}: " . implode(', ', Arr::flatten($e->errors()));
-                    $this->writeReportLog($errors);
-                    return;
-                }
-                // find user
-                $user = User::withTrashed()
-                    ->where('email', $userData['email'])
-                    ->first();
-                // missing user - maybe
-                if (!$user) {
-                    $newUser = [];
-                    $newUser['id'] = (($userData['id'] ?? 'new') === 'new') ? (string) Str::uuid7() : $userData['id'];
-                    $newUser['email'] = $userData['email'];
-                    $newUser['name'] = trim($userData['last_name'] . ', ' . $userData['first_name']);
-                    $newUser['password'] = Hash::make(Str::random(24));
-                    // now exist
-                    $user = User::create($newUser);
-                } // missing user
-                $userId = $user->id;
-                // find UserContact
-                $contact = UserContact::withTrashed()
-                    ->where('email', $userData['email'])
-                    ->first();
-                if ($contact) {
-                    $userEmail = $contact->email;
-                    try {
-                        DB::transaction(function () use ($userData, $userId, $userEmail, $contact) {
-                            // restore required
-                            if (($userData['deleted_at'] ?? null) === 'restore') {
-                                $contact->restore();
-                            }
-                            unset($userData['id']);
-                            unset($userData['deleted_at']);
-
-                            $contact->update(array_merge($userData, [
-                                'id' => $userId,
-                            ]));
-                        });
-                        // DB transaction
-                    } catch (\Throwable $e) {
-                        Log::info('Job: ' . $jobName . ' / 6. user_contact loop / ' . $index . ' for userId:' . $userId);
-                        $errors[] = 'Errors from user_contact update: ' . $e->getMessage();
-                        $this->writeReportLog(errors: $errors);
-                        return;
-                    }
-                    // exist
-                } else {
-                    $userData['id'] = $userId;
-                    unset($userData['deleted_at']);
-
-                    try {
-                        $contact = UserContact::create($userData);
-                    } catch (\Throwable $e) {
-                        Log::info('Job: ' . $jobName . ' / 6. user_contact loop / ' . $index . ' for userId:' . $userId);
-                        $errors[] = 'Errors from user_contact create: ' . $e->getMessage();
-                        $this->writeReportLog(errors: $errors);
+                        $this->writeReportLog($errors);
                         return;
                     }
                 }
@@ -326,13 +245,104 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
                 $this->userEmailToUuidMap[$userData['email']] = $userId;
             }
         }
-        // user_contacts
-// ===================================================================
+
+        // ===================================================================
+        // Model UserContact - loop
+        // ===================================================================
+        if (!empty($data['user_contacts'])) {
+            foreach ($data['user_contacts'] as $index => $userData) {
+                Log::info('Job: ' . $jobName . ' / 3. user_contacts loop / ' . $index);
+
+                $userData['country_id'] = !empty($userData['country_id'])
+                    ? strtoupper($userData['country_id'])
+                    : 'ITA';
+                $userData['timezone_id'] = (!empty($userData['timezone_id']))
+                    ? $userData['timezone_id']
+                    : 'Europe/Rome';
+                $userData['last_name'] = $userData['last_name'] ?? '';
+                $userData['first_name'] = $userData['first_name'] ?? '';
+
+                try {
+                    Validator::make(
+                        data: $userData,
+                        rules: $this->getValidationRules('user_contacts')
+                    )->validate();
+                } catch (ValidationException $e) {
+                    $errors[] = "Validation errors in 3. user_contacts loop on index {$index}: "
+                        . implode(', ', Arr::flatten($e->errors()));
+                    $this->writeReportLog($errors);
+                    return;
+                }
+
+                $user = User::withTrashed()
+                    ->where('email', $userData['email'])
+                    ->first();
+
+                if (!$user) {
+                    $newUser = [
+                        'id'       => (($userData['id'] ?? 'new') === 'new') ? (string) Str::uuid7() : $userData['id'],
+                        'email'    => $userData['email'],
+                        'name'     => trim($userData['last_name'] . ', ' . $userData['first_name']),
+                        'password' => Hash::make(Str::random(24)),
+                    ];
+
+                    try {
+                        $user = User::create($newUser);
+                    } catch (\Throwable $e) {
+                        Log::info('Job: ' . $jobName . ' / 3. user_contacts fallback user create / ' . $index);
+                        $errors[] = 'Errors creating parent user from contact: ' . $e->getMessage();
+                        $this->writeReportLog($errors);
+                        return;
+                    }
+                }
+                $userId = $user->id;
+
+                $contact = UserContact::withTrashed()
+                    ->where('email', $userData['email'])
+                    ->first();
+
+                // Pulisce campi extra non presenti sulla tabella user_contacts prima del salvataggio
+                unset($userData['url_path']);
+
+                if ($contact) {
+                    try {
+                        DB::transaction(function () use ($userData, $contact) {
+                            if (($userData['deleted_at'] ?? null) === 'restore') {
+                                $contact->restore();
+                            }
+                            unset($userData['id'], $userData['deleted_at']);
+
+                            $contact->newQuery()->withTrashed()->whereKey($contact->getKey())->update($userData);
+                        });
+                    } catch (\Throwable $e) {
+                        Log::info('Job: ' . $jobName . ' / 3. user_contacts loop / ' . $index . ' for userId:' . $userId);
+                        $errors[] = 'Errors from user_contact update: ' . $e->getMessage();
+                        $this->writeReportLog($errors);
+                        return;
+                    }
+                } else {
+                    $userData['id'] = $userId;
+                    unset($userData['deleted_at']);
+
+                    try {
+                        $contact = UserContact::create($userData);
+                    } catch (\Throwable $e) {
+                        Log::info('Job: ' . $jobName . ' / 3. user_contacts loop / ' . $index . ' for userId:' . $userId);
+                        $errors[] = 'Errors from user_contact create: ' . $e->getMessage();
+                        $this->writeReportLog($errors);
+                        return;
+                    }
+                }
+
+                $this->userEmailToUuidMap[$userData['email']] = $userId;
+            }
+        }
+
+        // ===================================================================
         // Model UserWork - loop
         // ===================================================================
         if (!empty($data['user_works'])) {
             foreach ($data['user_works'] as $index => $userData) {
-                // Default booleans
                 $userData['is_landscape'] = !empty($userData['is_landscape']) ? (bool) $userData['is_landscape'] : false;
                 $userData['is_monochromatic'] = !empty($userData['is_monochromatic']) ? (bool) $userData['is_monochromatic'] : false;
                 $userData['has_raw_file'] = !empty($userData['has_raw_file']) ? (bool) $userData['has_raw_file'] : false;
@@ -352,55 +362,57 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
                     } catch (\Throwable $e) {
                         Log::info('Job: ' . $jobName . ' / 7. user_works loop / ' . $index . ' for userId:' . $userData['user_id']);
                         $errors[] = 'Errors from user find: ' . $e->getMessage();
-                        $this->writeReportLog(errors: $errors);
+                        $this->writeReportLog($errors);
                         return;
                     }
 
                     if (!$user) {
                         Log::info('Job: ' . $jobName . ' / 7. user_works loop / ' . $index . ' for userId:' . $userData['user_id']);
                         $errors[] = 'Errors user not found for: ' . $userData['user_id'];
-                        $this->writeReportLog(errors: $errors);
+                        $this->writeReportLog($errors);
                         return;
                     }
 
                     $userIdFound = $user->id;
                     $this->userEmailToUuidMap[$user->email] = $user->id;
                 }
-
                 $userData['user_id'] = $userIdFound;
 
                 // 2. Risoluzione dell'ID per il lavoro
-                $rawWorkId = $userData['id'] ?? 'new';
-                $userWorkId = ($rawWorkId === 'new') ? (string) Str::uuid7() : $rawWorkId;
+                $originalWorkId = $userData['id'];
+                $isUuid = (bool) (preg_match('/^[0-9a-f]{8}(?:\-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i', $userData['id']));
+                if ($isUuid) {
+                    $workIdFound = $userData['id'];
+                } else {
+                    $workIdFound = (string) Str::uuid7();
+                }
+                $userData['id'] = $workIdFound;
 
                 // 3. Scaricamento immagine da url_path e salvataggio tramite photoBox()
                 if (!empty($userData['url_path'])) {
                     try {
-                        // Recupera il contatto per ottenere la directory di destinazione
                         $userContact = UserContact::where('id', $userIdFound)->first();
                         $photoBoxDir = $userContact ? $userContact->photoBox() : 'photos/default';
 
-                        // Esegui il download
                         $response = Http::timeout(30)->get($userData['url_path']);
                         if (!$response->successful()) {
-                            Log::error('Job: ' . $jobName . ' / 7. file not dloaded: ' . $userData['url_path']);
+                            Log::error(
+                                'Job: ' . $jobName . ' / 7. user_works file not dloaded: '
+                                . $userData['url_path']
+                            );
                             $this->writeReportLog(["File not found: {$userData['url_path']}"]);
                             return;
                         }
 
                         $fileContent = $response->body();
 
-                        // Determina estensione e nome file
                         $extension = strtolower(pathinfo(parse_url($userData['url_path'], PHP_URL_PATH), PATHINFO_EXTENSION)) ?: 'jpg';
-                        $filename = $userWorkId . '.' . $extension;
+                        $filename = $workIdFound . '.' . $extension;
 
-                        // Percorso relativo interno al disk 'public'
                         $relativeFilePath = $photoBoxDir . '/' . $filename;
 
-                        // Salva l'originale
                         Storage::disk('public')->put('photos/' . $relativeFilePath, $fileContent);
 
-                        // Calcola dimensioni reali dal file scaricato
                         $tempPath = Storage::disk('public')->path('photos/' . $relativeFilePath);
                         $imgInfo = @getimagesize($tempPath);
 
@@ -413,18 +425,16 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
                             $userData['short_size'] = min($imgInfo[0], $imgInfo[1]);
                             $userData['is_landscape'] = $imgInfo[0] >= $imgInfo[1];
 
-                            // Genera la miniatura a 300px con Intervention Image
-                            $imgManager = new \Intervention\Image\ImageManager(new \Intervention\Image\Drivers\Imagick\Driver());
+                            $imgManager = new ImageManager(new Driver());
                             $miniature = $imgManager->read($tempPath);
                             $miniature->scaleDown(width: 300, height: 300);
-                            $jpegMiniature = $miniature->encode(new \Intervention\Image\Encoders\JpegEncoder(quality: 80));
+                            $jpegMiniature = $miniature->encode(new JpegEncoder(quality: 80));
 
                             $miniatureStorePath = 'photos/' . $photoBoxDir . '/300_' . $filename;
-                            Storage::disk('public')->put($miniatureStorePath, (string) $jpegMiniature);
+                            Storage::disk('public')->put($miniatureStorePath, (string)$jpegMiniature);
                         }
 
-                        // Aggiorna file_path definitivo per il DB
-                        $userData['file_path'] = $relativeFilePath;
+                        $userData['file_path'] = str_replace('photos/', '', $relativeFilePath);
                     } catch (\Throwable $e) {
                         Log::error('Job: ' . $jobName . ' / Download error / ' . $e->getMessage());
                         $errors[] = "Error downloading image for work index {$index}: " . $e->getMessage();
@@ -440,70 +450,202 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
                         rules: $this->getValidationRules('user_works')
                     )->validate();
                 } catch (ValidationException $e) {
-                    $errors[] = "Validation errors in 7. user_works loop on index {$index}: " . implode(', ', Arr::flatten($e->errors()));
+                    $errors[] = "Validation errors in 7. user_works loop on index {$index}: "
+                        . implode(', ', Arr::flatten($e->errors()));
                     $this->writeReportLog($errors);
                     return;
                 }
 
                 // 5. Cerca se l'opera esiste già su DB
                 $userWork = UserWork::withTrashed()
-                    ->where(function ($query) use ($rawWorkId, $userData) {
-                        if ($rawWorkId !== 'new') {
-                            $query->where('id', $rawWorkId);
-                        }
-                        if (!empty($userData['file_path'])) {
-                            $query->orWhere('file_path', $userData['file_path']);
-                        }
-                    })
+                    ->where('id', $workIdFound)
                     ->first();
 
-                // Unset delle chiavi che non appartengono alla tabella user_works
+                // Unset delle chiavi non appartenenti alla colonna del DB
                 unset($userData['url_path']);
 
-                // 6. Persistence su Database (Create o Update)
+                // 6. Persistence su Database
                 if ($userWork) {
                     $userWorkId = $userWork->id;
                     try {
-                        DB::transaction(function () use ($userData, $userWork, $userWorkId) {
+                        DB::transaction(function () use ($userData, $userWork) {
                             if (($userData['deleted_at'] ?? null) === 'restore') {
                                 $userWork->restore();
                             }
-                            unset($userData['deleted_at'], $userData['id']);
+                            unset($userData['id'], $userData['deleted_at']);
 
-                            $userWork->update(array_merge($userData, [
-                                'id' => $userWorkId,
-                            ]));
+                            $userWork->newQuery()->withTrashed()->whereKey($userWork->getKey())->update($userData);
                         });
                     } catch (\Throwable $e) {
-                        Log::info('Job: ' . $jobName . ' / 7. user_work loop / ' . $index . ' for userId:' . $userIdFound);
+                        Log::info(
+                            'Job: ' . $jobName . ' / 7. user_work loop / '
+                            . $index . ' for userId:' . $userIdFound
+                        );
                         $errors[] = 'Errors from user_work update: ' . $e->getMessage();
-                        $this->writeReportLog(errors: $errors);
+                        $this->writeReportLog($errors);
                         return;
                     }
                 } else {
-                    $userData['id'] = $userWorkId;
                     unset($userData['deleted_at']);
 
                     try {
                         $userWork = UserWork::create($userData);
+                        $userWorkId = $userWork->id;
                     } catch (\Throwable $e) {
-                        Log::info('Job: ' . $jobName . ' / 7. user_work loop / ' . $index . ' for userId:' . $userIdFound);
+                        Log::info(
+                            'Job: ' . $jobName . ' / 7. user_work loop / '
+                            . $index . ' for userId:' . $userIdFound
+                        );
                         $errors[] = 'Errors from user_work create: ' . $e->getMessage();
-                        $this->writeReportLog(errors: $errors);
+                        $this->writeReportLog($errors);
                         return;
                     }
                 }
 
-                // Popola la mappa per il ciclo successivo user_work_mores
-                $this->workPathToUuidMap[$userData['file_path']] = $userWorkId;
+                $this->workIdToUuidMap[$originalWorkId] = $userWorkId;
             }
         }
-        // user_works
+
         // ===================================================================
         // Model userWorkMores - loop
         // ===================================================================
+        if (!empty($data['user_work_mores'])) {
+            foreach ($data['user_work_mores'] as $index => $userData) {
+                $userWorkIdFound = false;
+                $mapUserWorkId = $userData['user_work_id'];
+                if (isset($this->workIdToUuidMap[$mapUserWorkId])) {
+                    $userWorkIdFound = $this->workIdToUuidMap[$mapUserWorkId];
+                } elseif (in_array($mapUserWorkId, $this->workIdToUuidMap, true)) {
+                    $userWorkIdFound = $mapUserWorkId;
+                } else {
+                    try {
+                        $userWork = UserWork::withTrashed()
+                            ->where('id', $mapUserWorkId)
+                            ->first();
+                        $userWorkIdFound = $userWork?->id ?? false;
+                    } catch (\Throwable $e) {
+                        Log::info(
+                            'Job: ' . $jobName . ' / 8. user_work_mores loop / '
+                            . $index . ' for userId:' . $mapUserWorkId
+                        );
+                        $errors[] = 'Errors from user find: ' . $e->getMessage();
+                        $this->writeReportLog($errors);
+                        return;
+                    }
+                }
+
+                if ($userWorkIdFound) {
+                    $userData['user_work_id'] = $userWorkIdFound;
+                } else {
+                    Log::info(
+                        'Job: ' . $jobName . ' / 8. user_work_mores loop / '
+                        . $index . ' for userId:' . $userData['user_work_id']
+                    );
+                    $errors[] = 'Errors user_work not found for: ' . $userData['user_work_id'];
+                    $this->writeReportLog($errors);
+                    return;
+                }
+
+                $federation = Federation::where('id', $userData['federation_id'])
+                    ->first();
+                if (!$federation) {
+                    Log::info(
+                        'Job: ' . $jobName . ' / 8. user_work_mores loop / '
+                        . $index . ' for federationId:' . $userData['federation_id']
+                    );
+                    $errors[] = 'Errors federation not found for: ' . $userData['federation_id'];
+                    $this->writeReportLog($errors);
+                    return;
+                }
+                $userData['federation_id'] = $federation->id;
+
+                $federationMore = FederationMore::where('federation_id', $userData['federation_id'])
+                    ->where('referenced', UserWork::TABLENAME)
+                    ->where('field_name', $userData['field_name'])
+                    ->first();
+                if (!$federationMore) {
+                    Log::info(
+                        'Job: ' . $jobName . ' / 8. user_work_mores loop / ' . $index
+                        . ' for federationId:' . $userData['federation_id']
+                        . ' value: ' . $userData['field_name']
+                    );
+                    $errors[] = 'Errors user_work_more not found for: '
+                        . ' for federationId:' . $userData['federation_id']
+                        . ' value: ' . $userData['field_name'];
+                    $this->writeReportLog($errors);
+                    return;
+                }
+
+                try {
+                    Validator::make(
+                        data: $userData,
+                        rules: $this->getValidationRules('user_work_mores')
+                    )->validate();
+                } catch (ValidationException $e) {
+                    $errors[] = "Validation errors in 8. user_work_mores loop on index {$index}: "
+                        . implode(', ', Arr::flatten($e->errors()));
+                    $this->writeReportLog($errors);
+                    return;
+                }
+
+                $validationRules = [
+                    'field_value' => $federationMore->field_validation_rules,
+                ];
+                try {
+                    Validator::make(
+                        data: $userData,
+                        rules: $validationRules
+                    )->validate();
+                } catch (ValidationException $e) {
+                    $errors[] = "Validation errors in 8. user_work_mores loop on index {$index}: "
+                        . implode(', ', Arr::flatten($e->errors()));
+                    $this->writeReportLog($errors);
+                    return;
+                }
+
+                $userWorkMore = UserWorkMore::withTrashed()
+                    ->where('user_work_id', $userData['user_work_id'])
+                    ->where('federation_id', $userData['federation_id'])
+                    ->where('field_name', $userData['field_name'])
+                    ->first();
+
+                if ($userWorkMore) {
+                    $userWorkMoreId = $userWorkMore->id;
+                    try {
+                        DB::transaction(function () use ($userData, $userWorkMore) {
+                            if (($userData['deleted_at'] ?? null) === 'restore') {
+                                $userWorkMore->restore();
+                            }
+                            unset($userData['deleted_at'], $userData['id']);
+
+                            $userWorkMore->newQuery()->withTrashed()->whereKey($userWorkMore->getKey())->update($userData);
+                        });
+                    } catch (\Throwable $e) {
+                        Log::info('Job: ' . $jobName . ' / 8. user_work_more loop / ' . $index . ' for userWorkMoreId: ' . $userWorkMoreId);
+                        $errors[] = 'Errors from user_work_more update: ' . $e->getMessage();
+                        $this->writeReportLog($errors);
+                        return;
+                    }
+                } else {
+                    unset($userData['id'], $userData['deleted_at']);
+                    try {
+                        $userWorkMore = UserWorkMore::create($userData);
+                    } catch (\Throwable $e) {
+                        Log::info('Job: ' . $jobName . ' / 8. user_work_more loop / ' . $index . ' for userWorkMore.');
+                        $errors[] = 'Errors from user_work_more create: ' . $e->getMessage();
+                        $this->writeReportLog($errors);
+                        return;
+                    }
+                }
+            }
+        }
+
+        // Report all done ok
+        Log::info('Job: ' . $jobName . ' / ended.');
+        $allDoneOk = [];
+        $allDoneOk[] = "YAML parsed and imported without errors. (maybe an empty file)";
+        $allDoneOk[] = "Anyway, a data check on database is mandatory.";
+        $this->writeReportLog($allDoneOk);
         //
     }
-    // handle()
 }
-// class
