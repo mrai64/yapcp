@@ -40,8 +40,8 @@ data:
       # datetime, iso8601 UTC
       # Il campo updated_at viene sempre ignorato e aggiornato
       # di sistema, inserirlo non ha alcun effetto
-      deleted_at: restore # [FACOLTATIVO]
-      # null | datetime, iso8601 UTC
+      deleted_at: "restore" # [FACOLTATIVO]
+      # "restore" | datetime, iso8601 UTC
       # nella piattaforma indica quando un record è stato cancellato
       # non fisicamente, ma resta a disposizione per il backup.
       # Per ripristinare un record eliminato si inserisce un nuovo record
@@ -124,21 +124,26 @@ data:
       # datetime, iso8601 UTC
       # Il campo updated_at viene sempre ignorato e aggiornato
       # di sistema, inserirlo non ha alcun effetto
-      deleted_at: restore # [FACOLTATIVO]
-      # null | datetime, iso8601 UTC
+      deleted_at: "restore" # [FACOLTATIVO]
+      # restore | datetime, iso8601 UTC
       # nella piattaforma indica quando un record è stato cancellato
       # non fisicamente, ma resta a disposizione per il backup.
       # Per ripristinare un record eliminato si inserisce un nuovo record
       # mentre con deleted_at: restore si indica al sistema di importazione
       # di resettare il campo se valorizzato.
   user_works: # model 3. UserWork
-    - id: new # [OBBLIGATORIO]
-      # 'new' | string,uuid, min:36, max:36
-      # Se si tratta di unna immagine da aggiungere, si mette il termine
-      # new, altrimenti si riporta l'uuid assegnato dalla pattaforma
-      # senza alterazioni, diventerà parte del nome file interno
-      user_id: new | uuid | email # [OBBLIGATORIO]
-      # 'new' | string,uuid, min:36, max:36 | email, max:250
+    - id: "foto1" # [OBBLIGATORIO]
+      # string | string,uuid, min:36, max:36
+      # Va indicato uno uuid se è già stato assegnato oppure un codice
+      # personale identificativo senza spazi, ✅ 'foto1' ok,  ❌'foto 1' no.
+      # Non va utilizzato il termine new, perché deve essere
+      # univoco nel file yaml. Eventualmente ci fossero
+      # dei record user_work_mores che fanno riferimento
+      # a questa, nuova, immagine, quello user_work_id dovrà
+      # essere identico a quello usato qui, per chiudere il collegamento
+      #
+      user_id: uuid | email # [OBBLIGATORIO]
+      # string,uuid, min:36, max:36 | email, max:250
       # Essendo la chiave di aggancio tra opera e autore, va riportato
       # l'id dell'autore, tuttavia se se non si può usare l'uuid
       # perché l'autore è nuovo ma anche si caricano più autori,
@@ -208,7 +213,7 @@ data:
       # Il campo updated_at viene sempre ignorato e aggiornato
       # di sistema, inserirlo non ha alcun effetto
       deleted_at: restore # [FACOLTATIVO]
-      # null | datetime, iso8601 UTC
+      # restore | datetime, iso8601 UTC
       # nella piattaforma indica quando un record è stato cancellato
       # non fisicamente, ma resta a disposizione per il backup.
       # Per ripristinare un record eliminato si inserisce un nuovo record
@@ -241,21 +246,24 @@ data:
       # chiavi - valori associati a user_work e federation_mores.
       # Per inserire le T-uple federation_mores.federation_id
       # e federation_mores.field_name serve consultare pa pagina
-      user_work_id: uuid | file_path # [OBBLIGATORIO]
+      user_work_id: uuid | foto1 # [OBBLIGATORIO]
       # string, max:250
-      # Essendo l'aggancio con lo user_work, se non fosse già disponibile
-      # uno user_works.id si può ricorrere al file_path che
-      # deve essere univoco per caricamento, non ci possono essere
-      # due lavori dello stesso autore con lo stesso file_path e
-      # nemmeno due autori diversi con opere diverse con lo stesso file_path.
+      # Se l'uuid è già stato assegnato va indicato quello, altrimenti se fosse
+      # il caricamento di dati associati a una nuova immagine
+      # per cui l'id di user_works.id viene associato a un codice inventato
+      # per esempio 'foto1', 'foto2', 'foto3' ecc, va indicato il codice
+      # inventato.
+      #
       federation_id: "FIAF" # [OBBLIGATORIO]
       # string, max:10
-      # Si tratta del codice federazioner che compare nella pagina
+      # Si tratta del codice federazione, quello che compare nella pagina
       # https://yapcp.test/lists/federation_mores
       field_name: "fiafAdmYear" # [OBBLIGATORIO]
       # string, max:20
-      # Si tratta del codice field_name che compare nella pagina
+      # Si tratta del codice field_name, quello che compare nella pagina
       # https://yapcp.test/lists/federation_mores
+      # per la federazione di cui sopra, e per la tabella di
+      # riferimento user_work
       field_value: "2024" # [OBBLIGATORIO]
       # string, max:255
       # Si tratta del valore che deve essere associato ai tre precedenti
@@ -270,8 +278,8 @@ data:
       # datetime, iso8601 UTC
       # Il campo updated_at viene sempre ignorato e aggiornato
       # di sistema, inserirlo non ha alcun effetto
-      deleted_at: restore # [FACOLTATIVO]
-      # null | datetime, iso8601 UTC
+      deleted_at: "restore" # [FACOLTATIVO]
+      # restore | datetime, iso8601 UTC
       # nella piattaforma indica quando un record è stato cancellato
       # non fisicamente, ma resta a disposizione per il backup.
       # Per ripristinare un record eliminato si inserisce un nuovo record

@@ -1,30 +1,31 @@
-# This is a YAML file.
-# It should be filled in to provide bulk data to the platform.
-# Everything following the hash character (#) up to the end of the line
-# is ignored during the import process.
+# This is a Yaml file,
+# it must be completed to provide the platform with bulk data
+# everything following the hash or sharp character up to the end of the line
+# is ignored during import
 # ============================================================================
-# Filling guidelines: see platform documentation
-# Manual > Admin > Import > User Work
+# Compilation rules: see on the platform
+# manual > admin > Import > User Work
 # ============================================================================
-# 1. User: name, email, password(?)
-# 2. UserContact: first name, last name, email, postal address
-# 3. UserWork: title, file download link
-# Please note: the comments throughout the file are explanatory and can be
-#   removed to obtain a clearer view of the actual content.
+# 1. User name, email, password(?)
+# 2. UserContact first name, last name, email, postal address
+# 3. UserWork title, link for downloading the file
+# Please note: the comments at the end are comments and can be
+#   removed to get a clearer idea of the content.
 data:
   users: # model 1. User
     - email: address@email.local # [MANDATORY]
-      # Unique reference across the platform; e.g. two users with the name
-      # John Smith are distinguished by having different email addresses.
+      # unique reference in the platform, where
+      # two Mario Rossis are distinguished by two different emails.
       id: new # [OPTIONAL] new | uuid
-      # If this is a new person to be added to the platform, use 'new'.
-      # Otherwise, enter the UUID assigned by the platform. This is optional
-      # because the system searches for users based on their email address.
-      name: "Smith, John" # [OPTIONAL]
-      # Becomes mandatory only when 'id: new' is set. Must be formatted as
-      # Surname, First Name.
+      # if this is a new name to be entered
+      # into the platform, use 'new', otherwise enter the uuid
+      # assigned by the platform; optional
+      # because the user is searched based on the email address
+      name: "Rossi, Mario" # [OPTIONAL]
+      # becomes mandatory only for id: new, must be filled in
+      # in the format Surname, First Name
       # ========================================================================
-      # Other fields present in full backups that SHOULD NOT be filled in here:
+      # other fields present in the backup that MUST NOT be filled in
       # - password,
       # - two_factor_secret,
       # - two_factor_recovery_codes,
@@ -32,161 +33,197 @@ data:
       # - current_team_id,
       # - profile_photo_path,
       created_at: "2026-01-01 23:59:59" # [OPTIONAL]
-      # datetime, ISO 8601 UTC
-      # If provided, it must follow the ISO 8601 format: 'YYYY-MM-DD HH:MM:SS'
+      # datetime, iso8601 UTC
+      # If provided, it must be in iso8601 format
+      # 'yyyy-mm-dd hh:mm:ss'
       updated_at: "2026-01-01 23:59:59" # [OPTIONAL]
-      # datetime, ISO 8601 UTC
-      # The updated_at field is always ignored and updated automatically
-      # by the system; entering a value here has no effect.
+      # datetime, iso8601 UTC
+      # The updated_at field is always ignored and updated
+      # by the system; entering it has no effect
       deleted_at: restore # [OPTIONAL]
-      # null | datetime, ISO 8601 UTC
-      # On the platform, this indicates when a record was soft-deleted
-      # (not physically removed, but kept available for backup).
-      # To restore a deleted record, add a new entry with 'deleted_at: restore',
-      # which instructs the import system to reset this field.
+      # restore | datetime, iso8601 UTC
+      # in the platform, indicates when a record was deleted
+      # non-physically, but remains available for backup.
+      # To restore a deleted record, insert a new record,
+      # while with deleted_at: restore, the import system is instructed
+      # to reset the field if populated.
   user_contacts: # model 2. UserContact
     - email: address@email.local # [MANDATORY]
-      # email, max: 250
-      # Creates the association link with the User model.
-      first_name: "John" # [MANDATORY]
-      # string, max: 250
-      # Used to visually verify that it matches users.name.
-      last_name: "Smith" # [MANDATORY]
-      # string, max: 250
-      # Used to visually verify that it matches users.name.
+      # email, max:250
+      # creates the link with user
+      first_name: "Mario" # [MANDATORY]
+      # string, max:250
+      # Used to visually verify that it is the same name as users.name
+      last_name: "Rossi" # [MANDATORY]
+      # string, max:250
+      # Used to visually verify that it is the same surname as users.name
       nick_name: "" # [OPTIONAL]
-      # string, max: 250
-      # Also known as (a.k.a.), alias, etc.
+      # string, max:250
+      # Also known as, aka,...
       id: new # [OPTIONAL]
-      # 'new' | string, max: 36
-      # Use 'new' or a UUID. The 'users' section can even be omitted
-      # because the system can construct the User record and generate
-      # a random password directly from UserContact data.
+      # 'new' | string, max:36
+      # 'new' or uuid; users can also be omitted
+      # because starting from UserContact data, User data
+      # can be constructed, and a random password generated
       passport_photo: url # [OPTIONAL]
-      # string, max: 255
-      # In personal profile exports, this image file is saved with a path
-      # corresponding to the photo_box path and named '__passport_photo.jpg'.
-      # If provided, it must be a publicly reachable URL, and the downloaded
-      # file will occupy that position.
+      # string, max:255
+      # In the personal file export, this image file
+      # is reported with a path corresponding to the photo_box path
+      # and a file, always named __passport_photo.jpg
+      # If populated, it must be an accessible URL,
+      # and this file will occupy that position
       # ======================================================================
-      country_id: GBR # [MANDATORY]
-      # min: 3, max: 3, uppercase
-      # Enter a 3-letter uppercase country code from the list available at
-      # https://yapcp.test/lists/country_codes
-      timezone_id: Europe/London # [MANDATORY]
-      # string, max: 40
-      # As with country_id, select a valid timezone string from the list at
-      # https://yapcp.test/lists/world_timezones
+      country_id: ITA # [MANDATORY]
+      # min:3,max:3, uppercase
+      # One of the countries listed on the page
+      # https://yapcp.test/lists/country_codes must be specified in capital letters
+      timezone_id: Europe/Rome # [MANDATORY]
+      #            1...+....10...+....20...+....30...+....4
+      # string, max:40
+      # As with country_id, the value to enter must be picked from the entries
+      # listed on the page https://yapcp.test/lists/world_timezones
       # ======================================================================
-      address: "1 High Street" # [OPTIONAL]
-      # string, max: 250
-      # Postal address for the user. Should follow international postal standards
-      # (non-Latin character addresses are supported).
+      address: "via Roma, 1" # [OPTIONAL]
+      # string, max:250
+      # This is the user's postal address data,
+      # international shipping standards should be followed,
+      # although addresses in non-Latin characters can also be entered
       address_line2: "" # [OPTIONAL]
-      # string, max: 250
-      # Can be used if a single line is insufficient, or for extra locality details.
-      city: "London" # [OPTIONAL]
-      # string, max: 250
-      # Town / City of residence.
-      region: "Greater London" # [OPTIONAL]
-      # string, max: 250
-      # County, state, or region.
-      postal_code: "SW1A 1AA" # [OPTIONAL]
-      # string, max: 10
-      # Postcode / ZIP code.
+      # string, max:250
+      # can be used if one line is not enough, or in case of a HAMLET/VILLAGE
+      city: "Roma" # [OPTIONAL]
+      # string, max:250
+      # Location, Municipality of residence
+      region: "RM" # [OPTIONAL]
+      # string, max:250
+      # Province, region/county
+      postal_code: "I-00100" # [OPTIONAL]
+      # string, max:10
+      # Postcode, ZIP, that one
       # ======================================================================
       website: "https://example.com/personal_page/" # [OPTIONAL]
-      # url, max: 250
+      # url, max:250
       facebook: "https://facebook.com/personal_page/" # [OPTIONAL]
-      # url, max: 250
+      # url, max:250
       x_twitter: "https://x.com/personal_page/" # [OPTIONAL]
-      # url, max: 250
+      # url, max:250
       instagram: "https://instagram.com/personal_page/" # [OPTIONAL]
-      # url, max: 250
+      # url, max:250
       # ======================================================================
-      whatsapp: "https://wa.me/447123456789" # [OPTIONAL]
-      # url, max: 36
-      # WhatsApp communication link for future integration.
+      whatsapp: "https://wa.me/33031234567890" # [OPTIONAL]
+      # url, max:36
+      # Link for WhatsApp communication, for future use.
       linkedin: "https://linkedin.com/personal_page/" # [OPTIONAL]
-      # url, max: 250
+      # url, max:250
       created_at: "2026-01-01 23:59:59" # [OPTIONAL]
-      # datetime, ISO 8601 UTC
-      # If provided, it must follow ISO 8601 format: 'YYYY-MM-DD HH:MM:SS'
+      # datetime, iso8601 UTC
+      # If provided, it must be in iso8601 format
+      # 'yyyy-mm-dd hh:mm:ss'
       updated_at: "2026-01-01 23:59:59" # [OPTIONAL]
-      # datetime, ISO 8601 UTC
-      # The updated_at field is always ignored and updated automatically
-      # by the system; entering a value here has no effect.
+      # datetime, iso8601 UTC
+      # The updated_at field is always ignored and updated
+      # by the system; entering it has no effect
       deleted_at: restore # [OPTIONAL]
-      # null | datetime, ISO 8601 UTC
-      # Indicates soft deletion status. Set to 'restore' to reset/reactivate.
+      # restore | datetime, iso8601 UTC
+      # in the platform, indicates when a record was deleted
+      # non-physically, but remains available for backup.
+      # To restore a deleted record, insert a new record,
+      # while with deleted_at: restore, the import system is instructed
+      # to reset the field if populated.
   user_works: # model 3. UserWork
-    - id: new # [MANDATORY]
-      # 'new' | string UUID, min: 36, max: 36
-      # If this is a new image being uploaded, specify 'new'. Otherwise,
-      # provide the unchanged UUID assigned by the platform; it will form part
-      # of the internal filename.
-      user_id: new | uuid | email # [MANDATORY]
-      # 'new' | string UUID, min: 36, max: 36 | email, max: 250
-      # Serves as the foreign key connecting the work to its author.
-      # If a UUID cannot be used (e.g. creating new authors in bulk),
-      # the author's email address acts as the reliable unique identifier.
-      title_en: "Portrait of a Lady" # [MANDATORY]
-      # string, max: 250
-      # Provide an appropriate title in International English. Please note:
-      # some federations request that authors do not use placeholder titles such
-      # as 'Untitled', 'N/T', etc.
-      # PLEASE NOTE: Certain federations require that an author does not assign
-      # identical titles to multiple works (requiring unique titles) and that
-      # titles cannot be altered once submitted under specific conditions.
+    - id: "foto1" # [MANDATORY]
+      # string | string,uuid, min:36, max:36
+      # A uuid must be specified if already assigned, or a personal
+      # identification code without spaces: ✅ 'foto1' ok, ❌ 'foto 1' no.
+      # The term 'new' must not be used, as it must be
+      # unique in the yaml file. If there happen to be any
+      # user_work_mores records referring to this new image,
+      # that user_work_id must be identical to the one used here
+      # to close the link.
+      #
+      user_id: uuid | email # [MANDATORY]
+      # string,uuid, min:36, max:36 | email, max:250
+      # Being the link key between work and author, the author's ID
+      # must be provided. However, if the uuid cannot be used
+      # because the author is new, or when uploading multiple authors,
+      # the reliable unique key is the email address.
+      title_en: "A lady Portrait" # [MANDATORY]
+      # string, max:250
+      # A suitable international English title must be provided;
+      # some but not all federations require excluding
+      # titles like 'N.T.', 'untitled', etc.
+      # PLEASE NOTE: Some federations require that each author does not
+      # assign the same title to two works, ensuring uniqueness
+      # of title, and that, under certain conditions, the title cannot be changed.
       title_local: "Ritratto di donna" # [OPTIONAL]
-      # string, max: 250
+      # string, max:250
       file_path: "image.jpg" # [MANDATORY]
-      # string, max: 250
-      # Allows access to the file on the platform. If it contains a photo_box
-      # address, it can be used to extract the image UUID.
-      # PLEASE NOTE: Must be unique per upload batch; two works by the same author
-      # cannot share a file_path, nor can works by different authors share it.
+      # string, max:250
+      # Allows access to the file on the platform,
+      # with verification; if it contains a photo_box address, it can be
+      # used to extract the image's uuid.
+      # PLEASE NOTE: must be unique per upload; there cannot be
+      # two works by the same author with the same file_path, nor
+      # two different authors with different works having the same file_path.
       url_path: "" # [MANDATORY]
-      # url, max: 250
-      # Although not a direct model attribute, this allows access to download
-      # and verify the image asset during the import job.
+      # url, max:250
+      # Although not a model field, it allows access to the image
+      # to transfer it and verify its nature.
       file_format: "jpeg" # [OPTIONAL]
-      # string, max: 250
-      # Recalculated during image transfer; effectively ignored if provided.
+      # string, max:250
+      # Recalculated during image transfer;
+      # even if present, it is effectively ignored.
       file_size: 2000000 # [OPTIONAL]
-      # int, min: 100000, max: 6000000
-      # Recalculated during image transfer; effectively ignored if provided.
+      # int, min:100000, max:6000000
+      # Recalculated during image transfer;
+      # even if present, it is effectively ignored.
       width: 2000 # [OPTIONAL]
-      # int, min: 1080, max: 4000
-      # Recalculated during image transfer; effectively ignored if provided.
+      # int, min:1080, max:4000
+      # Recalculated during image transfer;
+      # even if present, it is effectively ignored.
       height: 2000 # [OPTIONAL]
-      # int, min: 1080, max: 4000
-      # Recalculated during image transfer; effectively ignored if provided.
+      # int, min:1080, max:4000
+      # Recalculated during image transfer;
+      # even if present, it is effectively ignored.
       long_size: 2000 # [OPTIONAL]
-      # int, min: 1080, max: 4000
-      # Recalculated during image transfer; effectively ignored if provided.
+      # int, min:1080, max:4000
+      # Recalculated during image transfer;
+      # even if present, it is effectively ignored.
       short_size: 2000 # [OPTIONAL]
-      # int, min: 1080, max: 4000
-      # Recalculated during image transfer; effectively ignored if provided.
+      # int, min:1080, max:4000
+      # Recalculated during image transfer;
+      # even if present, it is effectively ignored.
       is_landscape: true # [OPTIONAL]
       # bool ('true' | 'false')
-      # Computed value resulting from: (width >= height).
+      # Value recalculated as the result of the expression
+      # (width >= height)
       is_monochromatic: false # [OPTIONAL]
       # bool ('true' | 'false')
-      # Must be visually verified.
+      # The value must be visually verified.
       has_raw_file: false # [OPTIONAL]
       # bool ('true' | 'false')
-      # Provided by the author; fill in only if already confirmed.
+      # Value provided by the author, enter only if already known
       created_at: "2026-01-01 23:59:59" # [OPTIONAL]
-      # datetime, ISO 8601 UTC
-      # If provided, must be in ISO 8601 format: 'YYYY-MM-DD HH:MM:SS'
+      # datetime, iso8601 UTC
+      # If provided, it must be in iso8601 format
+      # 'yyyy-mm-dd hh:mm:ss'
       updated_at: "2026-01-01 23:59:59" # [OPTIONAL]
-      # datetime, ISO 8601 UTC
-      # Always ignored and updated automatically by the system.
+      # datetime, iso8601 UTC
+      # The updated_at field is always ignored and updated
+      # by the system; entering it has no effect
       deleted_at: restore # [OPTIONAL]
-      # null | datetime, ISO 8601 UTC
-      # Soft deletion status. Set to 'restore' to reset/reactivate.
-    # Additional user_works follow below:
+      # restore | datetime, iso8601 UTC
+      # in the platform, indicates when a record was deleted
+      # non-physically, but remains available for backup.
+      # To restore a deleted record, insert a new record,
+      # while with deleted_at: restore, the import system is instructed
+      # to reset the field if populated.
+    # Other user_works follow
+  # - id:
+  #   user_id:
+  #   title_en:
+  #   file_path:
+  #   url_path:
   # - id:
   #   user_id:
   #   title_en:
@@ -198,43 +235,71 @@ data:
   #   file_path:
   #   url_path:
   user_work_mores: # model 4. UserWorkMore
-    # This model depends heavily on the structure of an external model called
-    # FederationMore, which summarises additional fields required by photographic
-    # federations for patronage contests. These fields are listed at:
-    # https://yapcp.test/lists/federation_mores
+    # This model is heavily influenced by the structure of an external model
+    # which is FederationMore, outlining the fields "further required"
+    # by Federations for contests under their patronage, and which in this
+    # case are listed on the page https://yapcp.test/lists/federation_mores
     - id: 1 # [OPTIONAL]
-      # int, min: 1
-      # This model does not have a distinct primary ID key; it effectively represents
+      # int min:1
+      # The model has no representative ID; it is effectively a list of
       # key-value pairs associated with user_work and federation_mores.
-      # Consult the admin page to populate valid federation_id and field_name pairs.
-      user_work_id: uuid | file_path # [MANDATORY]
-      # string, max: 250
-      # Foreign key linking to user_work. If a user_works.id is not yet available,
-      # use file_path (which must be unique across the import batch).
+      # To enter the tuples federation_mores.federation_id
+      # and federation_mores.field_name, please consult the page
+      user_work_id: uuid | foto1 # [MANDATORY]
+      # string, max:250
+      # If the uuid has already been assigned, it must be specified; otherwise, if
+      # uploading data associated with a new image
+      # where user_works.id is assigned an invented code
+      # such as 'foto1', 'foto2', 'foto3' etc., that invented code
+      # must be specified.
+      #
       federation_id: "FIAF" # [MANDATORY]
-      # string, max: 10
-      # Federation code as displayed on https://yapcp.test/lists/federation_mores
-      field_name: "fiafAdmYear" # [MANDATORY]
-      # string, max: 20
-      # Field key name as displayed on https://yapcp.test/lists/federation_mores
-      field_value: "2024" # [MANDATORY]
-      # string, max: 255
-      # Value associated with the three fields above.
-      # PLEASE NOTE: Field value formats are governed by guidelines specified at:
+      # string, max:10
+      # This is the federation code, the one shown on the page
       # https://yapcp.test/lists/federation_mores
+      field_name: "fiafAdmYear" # [MANDATORY]
+      # string, max:20
+      # This is the field_name code, the one shown on the page
+      # https://yapcp.test/lists/federation_mores
+      # for the federation above, and for the reference table
+      # user_work
+      field_value: "2024" # [MANDATORY]
+      # string, max:255
+      # This is the value to be associated with the three previous ones;
+      # without it, the record makes no sense
+      # PLEASE NOTE: the content of the field is governed as indicated
+      # on the page https://yapcp.test/lists/federation_mores
       created_at: "2026-01-01 23:59:59" # [OPTIONAL]
-      # datetime, ISO 8601 UTC
-      # If provided, must be in ISO 8601 format: 'YYYY-MM-DD HH:MM:SS'
+      # datetime, iso8601 UTC
+      # If provided, it must be in iso8601 format
+      # 'yyyy-mm-dd hh:mm:ss'
       updated_at: "2026-01-01 23:59:59" # [OPTIONAL]
-      # datetime, ISO 8601 UTC
-      # Always ignored and updated automatically by the system.
+      # datetime, iso8601 UTC
+      # The updated_at field is always ignored and updated
+      # by the system; entering it has no effect
       deleted_at: restore # [OPTIONAL]
-      # null | datetime, ISO 8601 UTC
-      # Soft deletion status. Set to 'restore' to reset/reactivate.
-  # Additional user_work_mores follow below:
+      # restore | datetime, iso8601 UTC
+      # in the platform, indicates when a record was deleted
+      # non-physically, but remains available for backup.
+      # To restore a deleted record, insert a new record,
+      # while with deleted_at: restore, the import system is instructed
+      # to reset the field if populated.
+  # Other user_work_mores follow
   # - id: new
   #   user_work_id: uuid
   #   federation_id:
   #   field_name:
-  #   field_value:
+  #   field_value;
+  #   created_at:
+  # - id: new
+  #   user_work_id: uuid
+  #   federation_id:
+  #   field_name:
+  #   field_value;
+  #   created_at:
+  # - id: new
+  #   user_work_id: uuid
+  #   federation_id:
+  #   field_name:
+  #   field_value;
   #   created_at:
