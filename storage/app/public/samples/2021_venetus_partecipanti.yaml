@@ -1,0 +1,2565 @@
+metadata:
+  created_at: "2026-09-14T13:42:23+02:00"
+  contributor:
+    name: "Rainato, Massimo"
+    id: 01a01507-5bf6-71bc-90c6-f12ae3453344
+#
+# From FIAF FIAP Venetus contest 2021
+#
+data:
+  users:
+    - email: "omsn.agapov@archivio.athesis77.it"
+      name: "AGAPOV, SERGEY"
+    - email: "aditagarwala@archivio.athesis77.it"
+      name: "AGARWALA, ADIT"
+    - email: "antonioaguti@archivio.athesis77.it"
+      name: "AGUTI, ANTONIO "
+    - email: "rose3218@archivio.athesis77.it"
+      name: "AKHTER, ROWSHAN"
+    - email: "paolo.albertini@archivio.athesis77.it"
+      name: "ALBERTINI, PAOLO"
+    - email: "fabrizioaleotti@archivio.athesis77.it"
+      name: "ALEOTTI, FABRIZIO"
+    - email: "gmzkeskin@archivio.athesis77.it"
+      name: "ALTINISIK KIRATLI, GAMZE "
+    - email: "stfanxiping@archivio.athesis77.it"
+      name: "AN , XIPING "
+    - email: "claudioandronico@archivio.athesis77.it"
+      name: "ANDRONICO, CLAUDIO"
+    - email: "nihalaral@archivio.athesis77.it"
+      name: "ARAL, NIHAL "
+    - email: "arestidavide@archivio.athesis77.it"
+      name: "ARESTI, DAVIDE"
+    - email: "vacitarman@archivio.athesis77.it"
+      name: "ARMAN, VACIT"
+    - email: "ritabaio1963@archivio.athesis77.it"
+      name: "BAIO, RITA"
+    - email: "rob_bat2002@archivio.athesis77.it"
+      name: "BATINI, ROBERTO"
+    - email: "marcel.beauraind@archivio.athesis77.it"
+      name: "BEAURAIND, MARCEL"
+    - email: "boschereccio@archivio.athesis77.it"
+      name: "BENUCCI, STEFANO"
+    - email: "t.berendi@archivio.athesis77.it"
+      name: "BERENDI, TIBOR"
+    - email: "bernini.giuseppe@archivio.athesis77.it"
+      name: "BERNINI, GIUSEPPE"
+    - email: "r.biagi51@archivio.athesis77.it"
+      name: "BIAGI, ROBERTO"
+    - email: "bianchi.roberto46@archivio.athesis77.it"
+      name: "BIANCHI, ROBERTO"
+    - email: "cap.vibi@archivio.athesis77.it"
+      name: "BIANCO, VINCENZO"
+    - email: "biggioroberto@archivio.athesis77.it"
+      name: "BIGGIO, ROBERTO"
+    - email: "mihairomeob@archivio.athesis77.it"
+      name: "BOGDAN, MIHAI ROMEO "
+    - email: "laurabolo@archivio.athesis77.it"
+      name: "BOLOGNESI, LAURA"
+    - email: "sokha.bonnefille@archivio.athesis77.it"
+      name: "BONNEFILLE, SOKHA"
+    - email: "vincent.bonnefille@archivio.athesis77.it"
+      name: "BONNEFILLE, VINCENT"
+    - email: "ab@archivio.athesis77.it"
+      name: "BOSCATO, ADRIANO"
+    - email: "doctorferit.fbyk@archivio.athesis77.it"
+      name: "BÖYÜK, FERIT"
+    - email: "raymond.brammall@archivio.athesis77.it"
+      name: "BRAMMALLL, RAYMOND"
+    - email: "lafenicefollonica@archivio.athesis77.it"
+      name: "BRASSI, MONICA MASSIMILIANA"
+    - email: "walterjb@archivio.athesis77.it"
+      name: "BRETT, WALTER"
+    - email: "petrus1@archivio.athesis77.it"
+      name: "BUGLI, PIETRO"
+    - email: "thachluatsu@archivio.athesis77.it"
+      name: "BUI THI, KHANH HOA"
+    - email: "albus65@archivio.athesis77.it"
+      name: "BUSINI, ALBERTO BUSINI"
+    - email: "giuseppe.caleffi@archivio.athesis77.it"
+      name: "CALEFFI, GIUSEPPE "
+    - email: "callonicarlo68@archivio.athesis77.it"
+      name: "CALLONI, CARLO"
+    - email: "nancarder310@archivio.athesis77.it"
+      name: "CARDER, NAN"
+    - email: "l.cardonati@archivio.athesis77.it"
+      name: "CARDONATI, LUCIANO"
+    - email: "maurocarli7@archivio.athesis77.it"
+      name: "CARLI, MAURO"
+    - email: "mariateresa.carniti@archivio.athesis77.it"
+      name: "CARNITI, MARIA TERESA"
+    - email: "lou557@archivio.athesis77.it"
+      name: "CASANOVA, LUIGI "
+    - email: "ibcasey@archivio.athesis77.it"
+      name: "CASEY, BRONWEN"
+    - email: "memes@archivio.athesis77.it"
+      name: "CAVALLETTI, MASSIMO"
+    - email: "robycella@archivio.athesis77.it"
+      name: "CELLA, ROBERTO"
+    - email: "robertocerrai64@archivio.athesis77.it"
+      name: "CERRAI, ROBERTO "
+    - email: "ta1cm@archivio.athesis77.it"
+      name: "CEVIK, MEHMET"
+    - email: "shermancheang@archivio.athesis77.it"
+      name: "CHEANG, SHERMAN "
+    - email: "schenkunping@archivio.athesis77.it"
+      name: "CHEN , KUNPING "
+    - email: "stfchenyue@archivio.athesis77.it"
+      name: "CHEN , YU‘E"
+    - email: "nevincig@archivio.athesis77.it"
+      name: "CIG, NEVIN"
+    - email: "alessiocipo11@archivio.athesis77.it"
+      name: "CIPOLLINI , ALESSIO "
+    - email: "gfcordella@archivio.athesis77.it"
+      name: "CORDELLA, GIANFRANCO"
+    - email: "maxcova@archivio.athesis77.it"
+      name: "COVA, MASSIMO"
+    - email: "vincenzocuna@archivio.athesis77.it"
+      name: "CUNA, VINCENZO"
+    - email: "tonycunico@archivio.athesis77.it"
+      name: "CUNICO, ANTONIO"
+    - email: "damarko@archivio.athesis77.it"
+      name: "D'AGARO, MARCO"
+    - email: "info@archivio.athesis77.it"
+      name: "D'ALIA, VALENTINA"
+    - email: "sharmali.das@archivio.athesis77.it"
+      name: "DAS, SHARMALI "
+    - email: "dkdattasiliguri100@archivio.athesis77.it"
+      name: "DATTA, DWIPARNA KUMAR"
+    - email: "kevin@archivio.athesis77.it"
+      name: "DAY, KEVIN"
+    - email: "dergim95@archivio.athesis77.it"
+      name: "DE LEONARDIS, ROBERTO "
+    - email: "luigi.derosa.0760@archivio.athesis77.it"
+      name: "DE ROSA, LUIGI"
+    - email: "lorenzo.dicandia@archivio.athesis77.it"
+      name: "DI CANDIA, LORENZO"
+    - email: "vincenzodipanfilo@archivio.athesis77.it"
+      name: "DI PANFILO, VINCENZO"
+    - email: "angelo.ditommaso75@archivio.athesis77.it"
+      name: "DI TOMMASO, ANGELO"
+    - email: "josedr1959@archivio.athesis77.it"
+      name: "DIEZ DE LOS RIOS LOPEZ, JOSE "
+    - email: "annie.dorioz@archivio.athesis77.it"
+      name: "DORIOZ, ANNIE"
+    - email: "bjengen@archivio.athesis77.it"
+      name: "ENGEN, BJORN"
+    - email: "effegi906@archivio.athesis77.it"
+      name: "FABBRI, GIOVANNI"
+    - email: "silvia-facchini@archivio.athesis77.it"
+      name: "FACCHINI, SILVIA "
+    - email: "facherisdan@archivio.athesis77.it"
+      name: "FACHERIS, DANILO"
+    - email: "maxfalsetto@archivio.athesis77.it"
+      name: "FALSETTO, MASSIMILIANO"
+    - email: "claudiofalso@archivio.athesis77.it"
+      name: "FALSO, CLAUDIO"
+    - email: "stffanjinhong@archivio.athesis77.it"
+      name: "FAN , JINHONG "
+    - email: "fangshaohua@archivio.athesis77.it"
+      name: "FANG, SHAOHUA"
+    - email: "adriziano@archivio.athesis77.it"
+      name: "FAVERO, ADRIANO"
+    - email: "afengchanghua@archivio.athesis77.it"
+      name: "FENG , YANBEN "
+    - email: "francescoferroph@archivio.athesis77.it"
+      name: "FERRO, FRANCESCO"
+    - email: "eugeniofieni13@archivio.athesis77.it"
+      name: "FIENI, EUGENIO"
+    - email: "michelefini75@archivio.athesis77.it"
+      name: "FINI, MICHELE"
+    - email: "michel.foehr@archivio.athesis77.it"
+      name: "FOEHR, MICHEL "
+    - email: "francofr59@archivio.athesis77.it"
+      name: "FRATINI, FRANCO"
+    - email: "gfrescura@archivio.athesis77.it"
+      name: "FRESCURA, GIOVANNI"
+    - email: "geom.marco.frosini@archivio.athesis77.it"
+      name: "FROSINI, MARCO"
+    - email: "rafulch@archivio.athesis77.it"
+      name: "FULCHERI, RAIMONDO"
+    - email: "gabifot@archivio.athesis77.it"
+      name: "GABERTHUEL, WALTER"
+    - email: "fabiogaruti1@archivio.athesis77.it"
+      name: "GARUTI, FABIO"
+    - email: "atagencer@archivio.athesis77.it"
+      name: "GENCER, ATA"
+    - email: "joy.ghosh000@archivio.athesis77.it"
+      name: "GHOSH, DEBOJYOTI"
+    - email: "joan@archivio.athesis77.it"
+      name: "GIL, JOAN"
+    - email: "gorsto@archivio.athesis77.it"
+      name: "GORUP, STOJAN"
+    - email: "stfguizhengquan@archivio.athesis77.it"
+      name: "GUI, ZHENGQUAN"
+    - email: "vegard.hanssen@archivio.athesis77.it"
+      name: "HANSSEN, VEGARD"
+    - email: "amh121083@archivio.athesis77.it"
+      name: "HASSAN, AHMED MOHAMED "
+    - email: "ann.healey@archivio.athesis77.it"
+      name: "HEALEY, ANN"
+    - email: "stfgaolianhuistf@archivio.athesis77.it"
+      name: "HONG , GAOCHAO "
+    - email: "yu.ting0222@archivio.athesis77.it"
+      name: "HSIAO, PI HENG"
+    - email: "stfgaofeng@archivio.athesis77.it"
+      name: "HU, LIN"
+    - email: "davidfhunt@archivio.athesis77.it"
+      name: "HUNT, DAVID"
+    - email: "andrixincerti@archivio.athesis77.it"
+      name: "INCERTI, ANDREA"
+    - email: "barbarajenkin@archivio.athesis77.it"
+      name: "JENKIN, BARBARA"
+    - email: "dave_jowitt@archivio.athesis77.it"
+      name: "JOWITT, DAVE"
+    - email: "ozerkanburoglu@archivio.athesis77.it"
+      name: "KANBUROĞLU, ÖZER"
+    - email: "stfkangjian@archivio.athesis77.it"
+      name: "KANG , JIAN "
+    - email: "lindakirkhope@archivio.athesis77.it"
+      name: "KIRKHOPE, LINDA "
+    - email: "filizkoprulu6@archivio.athesis77.it"
+      name: "KOPRULU, FILIZ"
+    - email: "jk@archivio.athesis77.it"
+      name: "KRISTENSEN, JORGEN"
+    - email: "anna.lattici@archivio.athesis77.it"
+      name: "LATTICI, ANNA"
+    - email: "bokwang1747@archivio.athesis77.it"
+      name: "LEE, CHUN WOO"
+    - email: "gracelee.123@archivio.athesis77.it"
+      name: "LEE, GRACE"
+    - email: "hanklee888@archivio.athesis77.it"
+      name: "LEE, HENGKI "
+    - email: "wrheelee@archivio.athesis77.it"
+      name: "LEE, WOORHEE "
+    - email: "dirkolaf63@archivio.athesis77.it"
+      name: "LEIMANN, DIRK-OLAF"
+    - email: "ablifeng123@archivio.athesis77.it"
+      name: "LI , FENG "
+    - email: "aliguangjian@archivio.athesis77.it"
+      name: "LI , GUANGJIAN "
+    - email: "stflihanxin@archivio.athesis77.it"
+      name: "LI , HANXIN "
+    - email: "lijianping1q1@archivio.athesis77.it"
+      name: "LI , JIANPING "
+    - email: "litaichang@archivio.athesis77.it"
+      name: "LI, TAICHANG"
+    - email: "snfanxiaolin@archivio.athesis77.it"
+      name: "LIN, SANQI"
+    - email: "stfliufang@archivio.athesis77.it"
+      name: "LIU , FANG "
+    - email: "stfliuhouyu@archivio.athesis77.it"
+      name: "LIU , HOUYU "
+    - email: "maurizio.lolli@archivio.athesis77.it"
+      name: "LOLLI, MAURIZIO"
+    - email: "marcela.lomi@archivio.athesis77.it"
+      name: "LOMI, MARCELA"
+    - email: "f.lucianetti@archivio.athesis77.it"
+      name: "LUCIANETTI, FERNANDO LUIGI"
+    - email: "lybaertdaniel@archivio.athesis77.it"
+      name: "LYBAERT, DANIEL"
+    - email: "basavarajmin@archivio.athesis77.it"
+      name: "M, BASAVARAJ "
+    - email: "smayaping@archivio.athesis77.it"
+      name: "MA , YAPING"
+    - email: "michele.macinai@archivio.athesis77.it"
+      name: "MACINAI, MICHELE"
+    - email: "madsenaage00@archivio.athesis77.it"
+      name: "MADSEN, AAGE"
+    - email: "renatomaffei1@archivio.athesis77.it"
+      name: "MAFFEI, RENATO"
+    - email: "azelio.magini@archivio.athesis77.it"
+      name: "MAGINI, AZELIO "
+    - email: "giannimaitan@archivio.athesis77.it"
+      name: "MAITAN, GIANNI"
+    - email: "m.manetti@archivio.athesis77.it"
+      name: "MANETTI, MARCO"
+    - email: "stfmlgeng@archivio.athesis77.it"
+      name: "MAO, XIAOPING"
+    - email: "mmaurizio79@archivio.athesis77.it"
+      name: "MARCACCIO, MAURIZIO"
+    - email: "star3titti@archivio.athesis77.it"
+      name: "MARCHETTI, TIZIANA"
+    - email: "sonia.marinsek@archivio.athesis77.it"
+      name: "MARINSEK, SONJA"
+    - email: "ghostjester@archivio.athesis77.it"
+      name: "MARZANO, FERDINANDO"
+    - email: "renzo.mazzola@archivio.athesis77.it"
+      name: "MAZZOLA, RENZO "
+    - email: "mazzuccogiovbattista@archivio.athesis77.it"
+      name: "MAZZUCCO, GIOV BATTISTA"
+    - email: "brian.mckeown1@archivio.athesis77.it"
+      name: "MC KEOWN, BRIAN"
+    - email: "laura.menesini@archivio.athesis77.it"
+      name: "MENESINI, LAURA MENESINI"
+    - email: "marty.meoli@archivio.athesis77.it"
+      name: "MEOLI, MARTINA"
+    - email: "merellomarco@archivio.athesis77.it"
+      name: "MERELLO, MARCO"
+    - email: "mariella@archivio.athesis77.it"
+      name: "MESITI, MARIELLA "
+    - email: "montimes@archivio.athesis77.it"
+      name: "MONTINI, GIULIO"
+    - email: "mario@archivio.athesis77.it"
+      name: "MORETTI, MARIO CORRADO"
+    - email: "mugnaipaolo@archivio.athesis77.it"
+      name: "MUGNAI, PAOLO"
+    - email: "jim@archivio.athesis77.it"
+      name: "MUNDAY, JIM"
+    - email: "geometra.murru@archivio.athesis77.it"
+      name: "MURRU, FRANCO"
+    - email: "nardi.m1597@archivio.athesis77.it"
+      name: "NARDI, MASSIMO"
+    - email: "eugen.negrea@archivio.athesis77.it"
+      name: "NEGREA, EUGEN "
+    - email: "nnbinh468@archivio.athesis77.it"
+      name: "NGUYEN, NGOC BINH"
+    - email: "niujiajun@archivio.athesis77.it"
+      name: "NIU, JIAJUN"
+    - email: "mossie@archivio.athesis77.it"
+      name: "OOSTHUIZEN, ALTA"
+    - email: "hankpariz@archivio.athesis77.it"
+      name: "PACE RIZZI, FRANCESCO"
+    - email: "silvestropaletti3@archivio.athesis77.it"
+      name: "PALETTI , SILVESTRO"
+    - email: "roberto@archivio.athesis77.it"
+      name: "PALLADINI, ROBERTO"
+    - email: "pataccaenrico@archivio.athesis77.it"
+      name: "PATACCA, ENRICO"
+    - email: "bactriancamel@archivio.athesis77.it"
+      name: "PATTERSON, IAN PATTERSON"
+    - email: "ubctn@archivio.athesis77.it"
+      name: "PELLE, FRANCESCO"
+    - email: "gibipeluffo@archivio.athesis77.it"
+      name: "PELUFFO, GIBI"
+    - email: "stfgaoshiyuan@archivio.athesis77.it"
+      name: "PENG , YUANDI "
+    - email: "mperissinotto72@archivio.athesis77.it"
+      name: "PERISSINOTTO, MASSIMO"
+    - email: "clatazzi@archivio.athesis77.it"
+      name: "PETTAZZI, CLAUDIO"
+    - email: "fotografie01@archivio.athesis77.it"
+      name: "PICHLER, THOMAS"
+    - email: "alvaropiermattei@archivio.athesis77.it"
+      name: "PIERMATTEI, ALVARO "
+    - email: "poggioni.angela@archivio.athesis77.it"
+      name: "POGGIONI, ANGELA"
+    - email: "anatolpoiata@archivio.athesis77.it"
+      name: "POIATA, ANATOLIE"
+    - email: "obiettivo.2055@archivio.athesis77.it"
+      name: "POLLICINA , FRANCESCO"
+    - email: "fotomaypomme@archivio.athesis77.it"
+      name: "POMME, MAY"
+    - email: "duiliopuosi@archivio.athesis77.it"
+      name: "PUOSI, ANTONIO DUILIO"
+    - email: "paoloraimondi1942@archivio.athesis77.it"
+      name: "RAIMONDI, PAOLO"
+    - email: "s.ramella.pollone@archivio.athesis77.it"
+      name: "RAMELLA POLLONE, SERGIO"
+    - email: "eliorandi@archivio.athesis77.it"
+      name: "RANDI, ELIO"
+    - email: "enzorigheschi@archivio.athesis77.it"
+      name: "RIGHESCHI,  ENZO"
+    - email: "dromagnoli@archivio.athesis77.it"
+      name: "ROMAGNOLI, DANIELE"
+    - email: "mauriziorossi50@archivio.athesis77.it"
+      name: "ROSSI, MAURIZIO"
+    - email: "rossimauro30@archivio.athesis77.it"
+      name: "ROSSI, MAURO"
+    - email: "pitasi2728@archivio.athesis77.it"
+      name: "ROTONDO, GIANLUCA"
+    - email: "veniero.rubboli@archivio.athesis77.it"
+      name: "RUBBOLI, VENIERO "
+    - email: "shinwryu@archivio.athesis77.it"
+      name: "RYU, SHIN WOO "
+    - email: "info@archivio.athesis77.it"
+      name: "SALERNO, BIAGIO"
+    - email: "francescasalice72@archivio.athesis77.it"
+      name: "SALICE, FRANCESCA"
+    - email: "mas3218@archivio.athesis77.it"
+      name: "SALIM, MOHAMMAD ALI"
+    - email: "gianfranco.salsi@archivio.athesis77.it"
+      name: "SALSI, GIANFRANCO "
+    - email: "samaferiano@archivio.athesis77.it"
+      name: "SAMA, FERAIANO"
+    - email: "ivi1203@archivio.athesis77.it"
+      name: "SANCANDI, IVANA "
+    - email: "silvia.sansoni7@archivio.athesis77.it"
+      name: "SANSONI, SILVIA "
+    - email: "fedesart@archivio.athesis77.it"
+      name: "SARTORI, FABIO"
+    - email: "pierosbrana@archivio.athesis77.it"
+      name: "SBRANA, PIERO"
+    - email: "franco.schianchi@archivio.athesis77.it"
+      name: "SCHIANCHI, FRANCO"
+    - email: "g_skianki@archivio.athesis77.it"
+      name: "SCHIANCHI, GIANNI "
+    - email: "scocherdomenico@archivio.athesis77.it"
+      name: "SCOCA, DOMENICO"
+    - email: "vincenzoscoglio1@archivio.athesis77.it"
+      name: "SCOGLIO, VINCENZO "
+    - email: "fotanto52@archivio.athesis77.it"
+      name: "SEMIGLIA, ANTONIO SEMIGLIA"
+    - email: "stfyuqun@archivio.athesis77.it"
+      name: "SHI , YUQUN "
+    - email: "simonesonettifoto@archivio.athesis77.it"
+      name: "SONETTI, SIMONE  "
+    - email: "diegosperi@archivio.athesis77.it"
+      name: "SPERI, DIEGO"
+    - email: "rainboww17@archivio.athesis77.it"
+      name: "STAKE, JAN-THOMAS"
+    - email: "stanleyp38@archivio.athesis77.it"
+      name: "STANLEY, PAUL"
+    - email: "73.stefanoni@archivio.athesis77.it"
+      name: "STEFANONI, STEFANO"
+    - email: "michaelstrapec@archivio.athesis77.it"
+      name: "STRAPEC, MICHAEL"
+    - email: "paolostu@archivio.athesis77.it"
+      name: "STUPPAZZONI, PAOLO "
+    - email: "stfyhsun@archivio.athesis77.it"
+      name: "SUN, ANZI"
+    - email: "susisusini@archivio.athesis77.it"
+      name: "SUSINI, SUSI"
+    - email: "atlesvee@archivio.athesis77.it"
+      name: "SVEEN, ATLE"
+    - email: "mtaccola@archivio.athesis77.it"
+      name: "TACCOLA, MARCO "
+    - email: "t.franco@archivio.athesis77.it"
+      name: "TARANTINI, FRANCESCO"
+    - email: "mail@archivio.athesis77.it"
+      name: "TERIGI, ALESSANDRO"
+    - email: "antonella.tomassi61@archivio.athesis77.it"
+      name: "TOMASSI, ANTONELLA "
+    - email: "gitomell@archivio.athesis77.it"
+      name: "TOMELLERI, GIUSEPPE "
+    - email: "massimo.tommi@archivio.athesis77.it"
+      name: "TOMMI, MASSIMO"
+    - email: "stftongjiangchuan@archivio.athesis77.it"
+      name: "TONG , JIANGCHUAN "
+    - email: "nicholas.toni@archivio.athesis77.it"
+      name: "TONI, NICHOLAS"
+    - email: "mtrifilidis@archivio.athesis77.it"
+      name: "TRIFILIDIS, MAURIZIO"
+    - email: "fotosanat@archivio.athesis77.it"
+      name: "ÜSTÜN OZEK, SIBEL"
+    - email: "bartolo1957@archivio.athesis77.it"
+      name: "VACCARINO, ROBERTO"
+    - email: "photographycvz@archivio.athesis77.it"
+      name: "VAN ZANTEN, CLAUDIA"
+    - email: "sonja.vdm10@archivio.athesis77.it"
+      name: "VANDER MEULEN, SONJA"
+    - email: "massimovannozzi@archivio.athesis77.it"
+      name: "VANNOZZI, MASSIMO "
+    - email: "info@archivio.athesis77.it"
+      name: "VEGGI, GIULIO"
+    - email: "venturizio1@archivio.athesis77.it"
+      name: "VENTURELLI, FABRIZIO"
+    - email: "davide.viglioli@archivio.athesis77.it"
+      name: "VIGLIOLI, DAVIDE ALBERTO"
+    - email: "albertvim@archivio.athesis77.it"
+      name: "VIMERCATI, ALBERTO"
+    - email: "marwiz@archivio.athesis77.it"
+      name: "VIZZONI, MARZIO"
+    - email: "stfluwenying@archivio.athesis77.it"
+      name: "WANG , HAI "
+    - email: "stfwufanhui@archivio.athesis77.it"
+      name: "WANG , HUIMIN "
+    - email: "stfwangwenwei@archivio.athesis77.it"
+      name: "WANG , WENWEI "
+    - email: "cpno20133@archivio.athesis77.it"
+      name: "WANG, YICHI"
+    - email: "stfwangyonghe@archivio.athesis77.it"
+      name: "WANG , YONGHE "
+    - email: "stfganlin@archivio.athesis77.it"
+      name: "WEI , YONG "
+    - email: "pwood.nz@archivio.athesis77.it"
+      name: "WOOD, PHILIPPA"
+    - email: "stfxujinan@archivio.athesis77.it"
+      name: "XU , JINAN "
+    - email: "stfxuping@archivio.athesis77.it"
+      name: "XU , PING "
+    - email: "stfxuzhi@archivio.athesis77.it"
+      name: "XU , ZHI "
+    - email: "stfyangshenghua@archivio.athesis77.it"
+      name: "YANG , SHENGHUA"
+    - email: "stfyuchangren@archivio.athesis77.it"
+      name: "YU , CHANGREN "
+    - email: "abyangguomei@archivio.athesis77.it"
+      name: "YU , MEI "
+    - email: "stfyuningtai@archivio.athesis77.it"
+      name: "YU , NINGTAI "
+    - email: "sandrazagolin@archivio.athesis77.it"
+      name: "ZAGOLIN, SANDRA "
+    - email: "mirko.zanetti11@archivio.athesis77.it"
+      name: "ZANETTI, MIRKO"
+    - email: "zanin.paolino@archivio.athesis77.it"
+      name: "ZANIN, PAOLO"
+    - email: "zapart60@archivio.athesis77.it"
+      name: "ZAPPITELLI, ENRICO"
+    - email: "stfzhanghaigang@archivio.athesis77.it"
+      name: "ZHANG , HAIGANG "
+    - email: "cpno20131@archivio.athesis77.it"
+      name: "ZHANG, HUI"
+    - email: "stflvweiping@archivio.athesis77.it"
+      name: "ZHANG , JINNA "
+    - email: "stfjiyuan2014@archivio.athesis77.it"
+      name: "ZHANG , JIYUAN "
+    - email: "stflvxiuxian@archivio.athesis77.it"
+      name: "ZHANG , XINGGUO "
+    - email: "stfzhangyong@archivio.athesis77.it"
+      name: "ZHANG , YONG "
+    - email: "stfzhangyongjiang@archivio.athesis77.it"
+      name: "ZHANG , YONGJIANG "
+    - email: "stfjinli2014@archivio.athesis77.it"
+      name: "ZHAO , JINLI "
+    - email: "cpno20132@archivio.athesis77.it"
+      name: "ZHAO, XIN"
+    - email: "stfzhonghui@archivio.athesis77.it"
+      name: "ZHONG , HUI "
+    - email: "huotian12@archivio.athesis77.it"
+      name: "ZHONG , TIAN "
+    - email: "stflujiancheng2014@archivio.athesis77.it"
+      name: "ZHOU , YUANYUAN "
+    - email: "zff@archivio.athesis77.it"
+      name: "ZUFFO, EMANUELE"
+  user_contacts:
+    - email: "gibipeluffo@archivio.athesis77.it"
+      first_name: "GIBI"
+      last_name: "PELUFFO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA NIFOSSE 15"
+      city: "ALBISOLA SUPERIORE"
+      postal_code: "17011"
+    - email: "maurizio.lolli@archivio.athesis77.it"
+      first_name: "MAURIZIO"
+      last_name: "LOLLI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA GIUSEPPE DI VITTORIO 9/5"
+      city: "MARZABOTTO"
+      postal_code: "40043"
+    - email: "effegi906@archivio.athesis77.it"
+      first_name: "GIOVANNI"
+      last_name: "FABBRI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA PISINO 26"
+      city: "RAVENNA"
+      postal_code: "48122"
+    - email: "clatazzi@archivio.athesis77.it"
+      first_name: "CLAUDIO"
+      last_name: "PETTAZZI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA BERGOGNONE 9"
+      city: "MILANO"
+      postal_code: "20144"
+    - email: "bokwang1747@archivio.athesis77.it"
+      first_name: "CHUN WOO"
+      last_name: "LEE"
+      country_id: KOR
+      timezone_id: Europe/Rome
+      address: "175(YEONSU-DONG) 2F. GAENGOGAE-RO."
+      city: "CHUNGJU-SI. CHUNGCHEONGBUK-DO"
+      postal_code: "27351"
+    - email: "azelio.magini@archivio.athesis77.it"
+      first_name: "AZELIO "
+      last_name: "MAGINI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "LOC. PRATANTICO, 4/B"
+      city: "PRATANTICO"
+      postal_code: "52100"
+    - email: "marcel.beauraind@archivio.athesis77.it"
+      first_name: "MARCEL"
+      last_name: "BEAURAIND"
+      country_id: BEL
+      timezone_id: Europe/Rome
+      address: "RUE JEAN JAURES 56"
+      city: "FLEMALLE"
+      postal_code: "04400"
+    - email: "r.biagi51@archivio.athesis77.it"
+      first_name: "ROBERTO"
+      last_name: "BIAGI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA IGNAZIO PERSICO, 6"
+      city: "ROMA"
+      postal_code: "00154"
+    - email: "geom.marco.frosini@archivio.athesis77.it"
+      first_name: "MARCO"
+      last_name: "FROSINI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA TANNA ALTA, 39"
+      city: "COLLESALVETTI"
+      postal_code: "57014"
+    - email: "info@archivio.athesis77.it"
+      first_name: "BIAGIO"
+      last_name: "SALERNO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "PIAZZA PRINCIPE DI CAMPOREALE 70"
+      city: "PALERMO"
+      postal_code: "90138"
+    - email: "info@archivio.athesis77.it"
+      first_name: "VALENTINA"
+      last_name: "D'ALIA"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "PIAZZA PRINCIPE DI CAMPOREALE, 70"
+      city: "PALERMO"
+      postal_code: "90138"
+    - email: "venturizio1@archivio.athesis77.it"
+      first_name: "FABRIZIO"
+      last_name: "VENTURELLI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA ILIO BARONTINI, 37, "
+      city: "PIOMBINO"
+      postal_code: "57025"
+    - email: "pitasi2728@archivio.athesis77.it"
+      first_name: "GIANLUCA"
+      last_name: "ROTONDO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA ADELASIA 111"
+      city: "ALASSIO"
+      postal_code: "17021"
+    - email: "boschereccio@archivio.athesis77.it"
+      first_name: "STEFANO"
+      last_name: "BENUCCI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA TOGLIATTI, 45"
+      city: "PIOMBINO"
+      postal_code: "57025"
+    - email: "vincenzodipanfilo@archivio.athesis77.it"
+      first_name: "VINCENZO"
+      last_name: "DI PANFILO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "STRADA GENOVA 124/BIS"
+      city: "MONCALIERI"
+      postal_code: "10024"
+    - email: "ivi1203@archivio.athesis77.it"
+      first_name: "IVANA "
+      last_name: "SANCANDI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "STRADA GENOVA, 124BIS"
+      city: "MONCALIERI"
+      postal_code: "10024"
+    - email: "damarko@archivio.athesis77.it"
+      first_name: "MARCO "
+      last_name: "D'AGARO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA COTONIFICIO 37"
+      city: "TAVAGNACCO"
+      postal_code: "33010"
+    - email: "jk@archivio.athesis77.it"
+      first_name: "JORGEN"
+      last_name: "KRISTENSEN"
+      country_id: DNK
+      timezone_id: Europe/Rome
+      address: "VESTERLD 63"
+      city: "SILKEBORG"
+      postal_code: "08600"
+    - email: "callonicarlo68@archivio.athesis77.it"
+      first_name: "CARLO"
+      last_name: "CALLONI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA TARCISIO DONATI 8"
+      city: "MONTEFOSCOLI"
+      postal_code: "56036"
+    - email: "gianfranco.salsi@archivio.athesis77.it"
+      first_name: "GIANFRANCO "
+      last_name: "SALSI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA ROSSELLI 3"
+      city: "GATTATICO"
+      postal_code: "42043"
+    - email: "susisusini@archivio.athesis77.it"
+      first_name: "SUSI"
+      last_name: "SUSINI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA TARCISIO DONATI 8"
+      city: "MONTEFOSCOLI"
+      postal_code: "56036"
+    - email: "madsenaage00@archivio.athesis77.it"
+      first_name: "AAGE"
+      last_name: "MADSEN"
+      country_id: DNK
+      timezone_id: Europe/Rome
+      address: "AAPARKEN 11 2.TV."
+      city: "ODDER"
+      postal_code: "08300"
+    - email: "marty.meoli@archivio.athesis77.it"
+      first_name: "MARTINA"
+      last_name: "MEOLI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA DEL CASTELLARE 2/A"
+      city: "S. CROCE SULL'ARNO"
+      postal_code: "56029"
+    - email: "pierosbrana@archivio.athesis77.it"
+      first_name: "PIERO"
+      last_name: "SBRANA"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA BASILICATA, 4"
+      city: "PISA"
+      postal_code: "56124"
+    - email: "marcela.lomi@archivio.athesis77.it"
+      first_name: "MARCELA"
+      last_name: "LOMI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA DEI GIRASOLI, 7"
+      city: "TIRRENIA"
+      postal_code: "56128"
+    - email: "mtaccola@archivio.athesis77.it"
+      first_name: "MARCO "
+      last_name: "TACCOLA"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA NIEVO 14"
+      city: "CASCINA"
+      postal_code: "56021"
+    - email: "bernini.giuseppe@archivio.athesis77.it"
+      first_name: "GIUSEPPE"
+      last_name: "BERNINI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA TARCISIO DONATI, 1"
+      city: "MONTEFOSCOLI"
+      postal_code: "56036"
+    - email: "dkdattasiliguri100@archivio.athesis77.it"
+      first_name: "DWIPARNA KUMAR"
+      last_name: "DATTA"
+      country_id: IND
+      timezone_id: Europe/Rome
+      address: "47 GIRISH GHOSH SARANI  HAKIMPARA NEAR JYOTSNA BAKERY, SILIGURI, WESTBENGAL"
+      city: "SILIGURI, DIST DARJEELING, WEST BENGAL"
+      postal_code: "734001"
+    - email: "dergim95@archivio.athesis77.it"
+      first_name: "ROBERTO "
+      last_name: "DE LEONARDIS"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "CASELLA POSTALE 76"
+      city: "PARABIAGO"
+      postal_code: "20015"
+    - email: "poggioni.angela@archivio.athesis77.it"
+      first_name: "ANGELA"
+      last_name: "POGGIONI"
+      country_id: USA
+      timezone_id: Europe/Rome
+      address: "6035 BROADWAY, APT 2A"
+      city: "BRONX NY"
+      postal_code: "10471"
+    - email: "eliorandi@archivio.athesis77.it"
+      first_name: "ELIO"
+      last_name: "RANDI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA GALAVOTTI 5/B"
+      city: "BAGNACAVALLO"
+      postal_code: "48012"
+    - email: "niujiajun@archivio.athesis77.it"
+      first_name: "JIAJUN"
+      last_name: "NIU"
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "15-1-2401,BAOLI CHUNTIANLI, NO.1 SIMIAO ROAD, DAXING DISTRICT, BEIJING. ADDRESS IN CHINESE：中国北京市大兴区思邈路1号保利春天里小区15-1-2401，韩珂收"
+      city: "BEIJING"
+      postal_code: "102600"
+    - email: "paoloraimondi1942@archivio.athesis77.it"
+      first_name: "PAOLO"
+      last_name: "RAIMONDI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA F. PALIOTTI 15"
+      city: "ASCOLI PICENO"
+      postal_code: "63100"
+    - email: "geometra.murru@archivio.athesis77.it"
+      first_name: "FRANCO"
+      last_name: "MURRU"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VICO PRIMO CIRENE 2"
+      city: "QUARTUCCIU"
+      postal_code: "09044"
+    - email: "silvia-facchini@archivio.athesis77.it"
+      first_name: "SILVIA "
+      last_name: "FACCHINI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA MODENA, 108/E"
+      city: "CASTELVETRO DI MODENA"
+      postal_code: "41014"
+    - email: "gfrescura@archivio.athesis77.it"
+      first_name: "GIOVANNI"
+      last_name: "FRESCURA"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA MONTANARA 33"
+      city: "CASCINA"
+      postal_code: "56021"
+    - email: "barbarajenkin@archivio.athesis77.it"
+      first_name: "BARBARA"
+      last_name: "JENKIN"
+      country_id: GBR
+      timezone_id: Europe/Rome
+      address: "22 GREENFIELD TERRACE PORTREATH REDRUTH"
+      city: "CORNWALL"
+      postal_code: "TR16 4LY"
+    - email: "mtrifilidis@archivio.athesis77.it"
+      first_name: "MAURIZIO"
+      last_name: "TRIFILIDIS"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA CALAMETTI 11"
+      city: "ORBETELLO"
+      postal_code: "10085"
+    - email: "ozerkanburoglu@archivio.athesis77.it"
+      first_name: "ÖZER"
+      last_name: "KANBUROĞLU"
+      country_id: TUR
+      timezone_id: Europe/Rome
+      address: "ACIBADEM MAH. FAIKBEY MESCIDI SOK. NO:26 ÖZ-ER APT, A BLOK DAIRE: 15  KADIKÖY"
+      city: "KADIKÖY"
+      postal_code: "34718"
+    - email: "marwiz@archivio.athesis77.it"
+      first_name: "MARZIO"
+      last_name: "VIZZONI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA U. MADDALENA, 57"
+      city: "LIDO DI CAMAIORE"
+      postal_code: "55041"
+    - email: "ta1cm@archivio.athesis77.it"
+      first_name: "MEHMET"
+      last_name: "CEVIK"
+      country_id: TUR
+      timezone_id: Europe/Rome
+      address: "PK 26"
+      city: "SULEYMANPASA TEKIRDAG"
+      postal_code: "59100"
+    - email: "fotosanat@archivio.athesis77.it"
+      first_name: "SIBEL"
+      last_name: "ÜSTÜN OZEK"
+      country_id: TUR
+      timezone_id: Europe/Rome
+      address: "PK 26 SULEYMANPASA  "
+      city: "TEKIRDAG"
+      postal_code: "59100"
+    - email: "mariella@archivio.athesis77.it"
+      first_name: "MARIELLA "
+      last_name: "MESITI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA ROMA 23"
+      city: "MARCHIROLO"
+      postal_code: "21030"
+    - email: "roberto@archivio.athesis77.it"
+      first_name: "ROBERTO"
+      last_name: "PALLADINI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA CERDOSSO, 11"
+      city: "MARCHIROLO"
+      postal_code: "21030"
+    - email: "vincenzocuna@archivio.athesis77.it"
+      first_name: "VINCENZO"
+      last_name: "CUNA"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA EMILIA, 4"
+      city: "SAN LAZZARO DI SAVENA"
+      postal_code: "40048"
+    - email: "silvestropaletti3@archivio.athesis77.it"
+      first_name: "SILVESTRO"
+      last_name: "PALETTI "
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIALE RIMEMBRANZA 103"
+      city: "GHEDI"
+      postal_code: "25016"
+    - email: "lou557@archivio.athesis77.it"
+      first_name: "LUIGI "
+      last_name: "CASANOVA"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "PUCCINI 17"
+      city: "MOGLIA"
+      postal_code: "46024"
+    - email: "rossimauro30@archivio.athesis77.it"
+      first_name: "MAURO"
+      last_name: "ROSSI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA CADUTI 39"
+      city: "PIANEZZA"
+      postal_code: "10044"
+    - email: "amh121083@archivio.athesis77.it"
+      first_name: "AHMED MOHAMED "
+      last_name: "HASSAN"
+      country_id: QAT
+      timezone_id: Europe/Rome
+      address: "((  PO BOX  8215  ))  DOHA – QATAR / 0097433628213"
+      city: "DOHA, QATAR"
+      postal_code: "00974"
+    - email: "mario@archivio.athesis77.it"
+      first_name: "MARIO CORRADO"
+      last_name: "MORETTI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA FERRERO DI CAMBIANO 31/3"
+      city: "MONCALIERI"
+      postal_code: "10024"
+    - email: "sonja.vdm10@archivio.athesis77.it"
+      first_name: "SONJA"
+      last_name: "VANDER MEULEN"
+      country_id: BEL
+      timezone_id: Europe/Rome
+      address: "DIEPENDAALSTRAAT 58"
+      city: "ELEWIJT"
+      postal_code: "19820"
+    - email: "gracelee.123@archivio.athesis77.it"
+      first_name: "GRACE"
+      last_name: "LEE"
+      country_id: AUS
+      timezone_id: Europe/Rome
+      address: "28 DARLEY ST  KATOOMBA  NSW 2780  AUSTRALIA"
+      city: "KATOOMBA"
+      postal_code: "02780"
+    - email: "giuseppe.caleffi@archivio.athesis77.it"
+      first_name: "GIUSEPPE "
+      last_name: "CALEFFI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA DELLA CHIESA, 19/10"
+      city: "MONTALE RANGONE"
+      postal_code: "41051"
+    - email: "tonycunico@archivio.athesis77.it"
+      first_name: "ANTONIO"
+      last_name: "CUNICO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA STUPARICH 83"
+      city: "VICENZA"
+      postal_code: "36100"
+    - email: "m.manetti@archivio.athesis77.it"
+      first_name: "MARCO"
+      last_name: "MANETTI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA MANIN 22"
+      city: "CALENZANO"
+      postal_code: "50041"
+    - email: "robertocerrai64@archivio.athesis77.it"
+      first_name: "ROBERTO "
+      last_name: "CERRAI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA ROMA 72"
+      city: "CASCINA"
+      postal_code: "56021"
+    - email: "gitomell@archivio.athesis77.it"
+      first_name: "GIUSEPPE "
+      last_name: "TOMELLERI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA MANTOVANA 46"
+      city: "VERONA"
+      postal_code: "37137"
+    - email: "bartolo1957@archivio.athesis77.it"
+      first_name: "ROBERTO"
+      last_name: "VACCARINO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA FIRENZE 15 B "
+      city: "CARRARA"
+      postal_code: "54033"
+    - email: "nardi.m1597@archivio.athesis77.it"
+      first_name: "MASSIMO"
+      last_name: "NARDI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA 5 CASE 42"
+      city: "MONTECALVOLI"
+      postal_code: "56020"
+    - email: "eugen.negrea@archivio.athesis77.it"
+      first_name: "EUGEN "
+      last_name: "NEGREA"
+      country_id: ROU
+      timezone_id: Europe/Rome
+      address: "STR. DR. TURNESCU NR. 6"
+      city: "BUCURESTI"
+      postal_code: "050467"
+    - email: "l.cardonati@archivio.athesis77.it"
+      first_name: "LUCIANO"
+      last_name: "CARDONATI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA BENELUX 19"
+      city: "FIGLINE E INCISA VALDARNO"
+      postal_code: "50063"
+    - email: "nnbinh468@archivio.athesis77.it"
+      first_name: "NGOC BINH"
+      last_name: "NGUYEN"
+      country_id: VNM
+      timezone_id: Europe/Rome
+      address: "IPO - BOX 37, SO 6, PHO DINH LE, QUAN HOAN KIEM"
+      city: "HANOI"
+      postal_code: "100000"
+    - email: "robycella@archivio.athesis77.it"
+      first_name: "ROBERTO"
+      last_name: "CELLA"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA DEI BOTTO 7-1"
+      city: "CHIAVARI"
+      postal_code: "16043"
+    - email: "bianchi.roberto46@archivio.athesis77.it"
+      first_name: "ROBERTO"
+      last_name: "BIANCHI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "C.SO GARIBALDI 2/B"
+      city: "VILLAFRANCA"
+      postal_code: "37069"
+    - email: "s.ramella.pollone@archivio.athesis77.it"
+      first_name: "SERGIO"
+      last_name: "RAMELLA POLLONE"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA LORENZO PEROSI 20"
+      city: "ANDORNO MICCA"
+      postal_code: "13811"
+    - email: "memes@archivio.athesis77.it"
+      first_name: "MASSIMO"
+      last_name: "CAVALLETTI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA DELLE VILLE, 71"
+      city: "LAMMARI"
+      postal_code: "55013"
+    - email: "eugeniofieni13@archivio.athesis77.it"
+      first_name: "EUGENIO"
+      last_name: "FIENI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA GATTALUPA 20"
+      city: "REGGIO EMILIA"
+      postal_code: "42122"
+    - email: "shermancheang@archivio.athesis77.it"
+      first_name: "SHERMAN "
+      last_name: "CHEANG"
+      country_id: MAC
+      timezone_id: Europe/Rome
+      address: "7TH FLOOR CENTRAL COMMERCIAL CENTRE, 60 AV.INF.D. HENRIQUE,P.O.BOX 859"
+      city: "MACAU/CHINA"
+      postal_code: "99-90-78"
+    - email: "andrixincerti@archivio.athesis77.it"
+      first_name: "ANDREA"
+      last_name: "INCERTI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA DEI CILIEGI 1"
+      city: "CORREGGIO"
+      postal_code: "42015"
+    - email: "yu.ting0222@archivio.athesis77.it"
+      first_name: "PI HENG"
+      last_name: "HSIAO"
+      country_id: TWN
+      timezone_id: Europe/Rome
+      address: "NO. 277-2, FENGSHU E. ST., NANTUN DIST., TAICHUNG CITY 408003 , TAIWAN (R.O.C.)"
+      city: "TAICHUNG "
+      postal_code: "408003"
+    - email: "maxcova@archivio.athesis77.it"
+      first_name: "MASSIMO"
+      last_name: "COVA"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA A. VOLTA, 12"
+      city: "RHO"
+      postal_code: "20017"
+    - email: "nihalaral@archivio.athesis77.it"
+      first_name: "NIHAL "
+      last_name: "ARAL"
+      country_id: TUR
+      timezone_id: Europe/Rome
+      address: "BIRLIK MAHALLESI SEHIT KURBANI, AKBOGA SOK.4/6"
+      city: "ANKARA"
+      postal_code: "06610"
+    - email: "alvaropiermattei@archivio.athesis77.it"
+      first_name: "ALVARO "
+      last_name: "PIERMATTEI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIALE LEOPARDI 8"
+      city: "SASSOFERRATO"
+      postal_code: "60041"
+    - email: "sandrazagolin@archivio.athesis77.it"
+      first_name: "SANDRA "
+      last_name: "ZAGOLIN"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA DOLOMITI,22"
+      city: "PIOVE DI SACCO"
+      postal_code: "35028"
+    - email: "duiliopuosi@archivio.athesis77.it"
+      first_name: "ANTONIO DUILIO"
+      last_name: "PUOSI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA LE VALLI 69"
+      city: "MASSAROSA"
+      postal_code: "55054"
+    - email: "mirko.zanetti11@archivio.athesis77.it"
+      first_name: "MIRKO"
+      last_name: "ZANETTI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA DINO CAMPANA"
+      city: "ANZOLA DELL'EMILIA"
+      postal_code: "40011"
+    - email: "arestidavide@archivio.athesis77.it"
+      first_name: "DAVIDE"
+      last_name: "ARESTI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIALE TASSO, NR.60 - RAVENNA (RA)"
+      city: "RAVENNA"
+      postal_code: "48122"
+    - email: "rafulch@archivio.athesis77.it"
+      first_name: "RAIMONDO"
+      last_name: "FULCHERI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA MOMBARONE 8"
+      city: "BIELLA"
+      postal_code: "13900"
+    - email: "massimo.tommi@archivio.athesis77.it"
+      first_name: "MASSIMO"
+      last_name: "TOMMI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA MACIA 104/L"
+      city: "COMEANA - CARMIGNANO "
+      postal_code: "59015"
+    - email: "maurocarli7@archivio.athesis77.it"
+      first_name: "MAURO"
+      last_name: "CARLI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA MAZZINI 174"
+      city: "SESTO FIORENTINO"
+      postal_code: "50019"
+    - email: "michelefini75@archivio.athesis77.it"
+      first_name: "MICHELE FINI"
+      last_name: "FINI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA CORATO, 78"
+      city: "SAN SEVERO"
+      postal_code: "71016"
+    - email: "petrus1@archivio.athesis77.it"
+      first_name: "PIETRO"
+      last_name: "BUGLI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA NICOLA MAGRI, 10"
+      city: "LIVORNO"
+      postal_code: "57121"
+    - email: "renzo.mazzola@archivio.athesis77.it"
+      first_name: "RENZO "
+      last_name: "MAZZOLA"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA DOGHEN 15"
+      city: "LEDRO"
+      postal_code: "38067"
+    - email: "albertvim@archivio.athesis77.it"
+      first_name: "ALBERTO"
+      last_name: "VIMERCATI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA MARCO POLO 18"
+      postal_code: "22077"
+    - email: "dromagnoli@archivio.athesis77.it"
+      first_name: "DANIELE"
+      last_name: "ROMAGNOLI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA GINO NERI N. 8"
+      city: "FERRARA"
+      postal_code: "44124"
+    - email: "hankpariz@archivio.athesis77.it"
+      first_name: "FRANCESCO"
+      last_name: "PACE RIZZI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "G. FALCONE"
+      postal_code: "85100"
+    - email: "diegosperi@archivio.athesis77.it"
+      first_name: "DIEGO"
+      last_name: "SPERI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA SCUDERLANDO 410"
+      city: "VERONA"
+      postal_code: "37135"
+    - email: "mmaurizio79@archivio.athesis77.it"
+      first_name: "MAURIZIO"
+      last_name: "MARCACCIO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA VENEZIA, 31"
+      city: "PORTO SAN GIORGIO"
+      postal_code: "63822"
+    - email: "francofr59@archivio.athesis77.it"
+      first_name: "FRANCO"
+      last_name: "FRATINI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA CAVOUR, 34"
+      city: "NOVATE MILANESE"
+      postal_code: "20026"
+    - email: "joan@archivio.athesis77.it"
+      first_name: "JOAN"
+      last_name: "GIL"
+      country_id: ESP
+      timezone_id: Europe/Rome
+      address: "MESTRAL 11 - URB.SERRAMAR"
+      city: "ALCANAR PLATJA"
+      postal_code: "43530"
+    - email: "mariateresa.carniti@archivio.athesis77.it"
+      first_name: "MARIA TERESA"
+      last_name: "CARNITI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA MULINI 49"
+      city: "CREMA"
+      postal_code: "26013"
+    - email: "pwood.nz@archivio.athesis77.it"
+      first_name: "PHILIPPA"
+      last_name: "WOOD"
+      country_id: NZL
+      timezone_id: Europe/Rome
+      address: "12 VERONICA STREET"
+      city: "WELLINGTON"
+      postal_code: "60210"
+    - email: "fedesart@archivio.athesis77.it"
+      first_name: "FABIO"
+      last_name: "SARTORI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA ALDO MORO 12"
+      city: "MASSA MARITTIMA"
+      postal_code: "58024"
+    - email: "davidfhunt@archivio.athesis77.it"
+      first_name: "DAVID"
+      last_name: "HUNT"
+      country_id: GBR
+      timezone_id: Europe/Rome
+      address: "12 LYNDON MORGAN WAY"
+      city: "LEONARD STANLEY, STONEHOUSE"
+      postal_code: "GL10 3GG"
+    - email: "gfcordella@archivio.athesis77.it"
+      first_name: "GIANFRANCO"
+      last_name: "CORDELLA"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA L. DA VINCI, 27"
+      city: "ADRIA"
+      postal_code: "45011"
+    - email: "lorenzo.dicandia@archivio.athesis77.it"
+      first_name: "LORENZO"
+      last_name: "DI CANDIA"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA VITTORIO VENETO 38"
+      city: "MANFREDONIA"
+      postal_code: "71043"
+    - email: "massimovannozzi@archivio.athesis77.it"
+      first_name: "MASSIMO "
+      last_name: "VANNOZZI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA DAVIDE LAZZERETTI N. 32"
+      city: "GROSSETO"
+      postal_code: "58100"
+    - email: "stfguizhengquan@archivio.athesis77.it"
+      first_name: "ZHENGQUAN"
+      last_name: "GUI"
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,, NO,124-136"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "mperissinotto72@archivio.athesis77.it"
+      first_name: "MASSIMO"
+      last_name: "PERISSINOTTO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA CIMA DA CONEGLIANO, 17"
+      city: "SAN DONA' DI PIAVE"
+      postal_code: "30027"
+    - email: "montimes@archivio.athesis77.it"
+      first_name: "GIULIO"
+      last_name: "MONTINI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA ROMA 40"
+      city: "CASNATE"
+      postal_code: "22070"
+    - email: "g_skianki@archivio.athesis77.it"
+      first_name: "GIANNI "
+      last_name: "SCHIANCHI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA MONS. E. COLLI, 11"
+      city: "PARMA"
+      postal_code: "43126"
+    - email: "ab@archivio.athesis77.it"
+      first_name: "ADRIANO"
+      last_name: "BOSCATO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA STADIO,22"
+      postal_code: "36020"
+    - email: "renatomaffei1@archivio.athesis77.it"
+      first_name: "RENATO"
+      last_name: "MAFFEI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA TEANO 21"
+      city: "LATINA"
+      postal_code: "04100"
+    - email: "gabifot@archivio.athesis77.it"
+      first_name: "WALTER"
+      last_name: "GABERTHUEL"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA DEI PRATI FISCALI 158"
+      postal_code: "00141"
+    - email: "antonioaguti@archivio.athesis77.it"
+      first_name: "ANTONIO "
+      last_name: "AGUTI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "-VIA FIORENTINA 8/O"
+      city: "MONTE SAN SAVINO"
+      postal_code: "-52048"
+    - email: "cpno20131@archivio.athesis77.it"
+      first_name: "HUI"
+      last_name: "ZHANG"
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "BUILDING15-4B,SHIHUA EAST ROAD NO.58 (HUAJING XIYUAN),XIANGZHOU, ZHUHAI,GUANGDONG,CHINA"
+      postal_code: "519015"
+    - email: "cap.vibi@archivio.athesis77.it"
+      first_name: "VINCENZO"
+      last_name: "BIANCO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA MONTI 7"
+      city: "SAN VINCENZO"
+      postal_code: "57027"
+    - email: "cpno20132@archivio.athesis77.it"
+      first_name: "XIN"
+      last_name: "ZHAO"
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "BUILDING15-4B,SHIHUA EAST ROAD NO.58 (HUAJING XIYUAN),XIANGZHOU, ZHUHAI,GUANGDONG,CHINA"
+      postal_code: "519015"
+    - email: "cpno20133@archivio.athesis77.it"
+      first_name: "YICHI"
+      last_name: "WANG"
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "BUILDING15-4B,SHIHUA EAST ROAD NO.58 (HUAJING XIYUAN),XIANGZHOU, ZHUHAI,GUANGDONG,CHINA"
+      postal_code: "519015"
+    - email: "mossie@archivio.athesis77.it"
+      first_name: "ALTA"
+      last_name: "OOSTHUIZEN"
+      country_id: ZAF
+      timezone_id: Europe/Rome
+      address: "953 AFGHAN AVE"
+      city: "PRETORIA"
+      postal_code: "00060"
+    - email: "lybaertdaniel@archivio.athesis77.it"
+      first_name: "DANIEL"
+      last_name: "LYBAERT"
+      country_id: NLD
+      timezone_id: Europe/Rome
+      address: "EMMAUSSTRAAT 33"
+      city: "IJZENDIJKE"
+      postal_code: "4515ED"
+    - email: "f.lucianetti@archivio.athesis77.it"
+      first_name: "FERNANDO LUIGI"
+      last_name: "LUCIANETTI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIALE EUROPA, 32/6"
+      postal_code: "71122"
+    - email: "biggioroberto@archivio.athesis77.it"
+      first_name: "ROBERTO"
+      last_name: "BIGGIO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA PRIVATA BRIGNOLE 24-18"
+      city: "CHIAVARI"
+      postal_code: "16043"
+    - email: "fotanto52@archivio.athesis77.it"
+      first_name: "ANTONIO SEMIGLIA"
+      last_name: "SEMIGLIA"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA ORTI, 15"
+      city: "TAGGIA"
+      postal_code: "18018"
+    - email: "bjengen@archivio.athesis77.it"
+      first_name: "BJORN"
+      last_name: "ENGEN"
+      country_id: NOR
+      timezone_id: Europe/Rome
+      address: "FURUHAUGEN 9"
+      city: "TVERLANDET"
+      postal_code: "08050"
+    - email: "fabrizioaleotti@archivio.athesis77.it"
+      first_name: "FABRIZIO"
+      last_name: "ALEOTTI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA BOZZENTE 29"
+      city: "RHO"
+      postal_code: "20017"
+    - email: "facherisdan@archivio.athesis77.it"
+      first_name: "DANILO"
+      last_name: "FACHERIS"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "LARGO EUROPA, 2B"
+      city: "SPIRANO"
+      postal_code: "24050"
+    - email: "vacitarman@archivio.athesis77.it"
+      first_name: "VACIT"
+      last_name: "ARMAN"
+      country_id: TUR
+      timezone_id: Europe/Rome
+      address: "OVECLER MAH.1335 CADDE NO:21/30 CANKAYA-ANKARA"
+      city: "ANKARA"
+      postal_code: "06460"
+    - email: "luigi.derosa.0760@archivio.athesis77.it"
+      first_name: "LUIGI"
+      last_name: "DE ROSA"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA DI MONTEROTONDO 68"
+      city: "LIVORNO"
+      postal_code: "57128"
+    - email: "laurabolo@archivio.athesis77.it"
+      first_name: "LAURA"
+      last_name: "BOLOGNESI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA B. BENVENUTI 26"
+      city: "LIVORNO"
+      postal_code: "57128"
+    - email: "obiettivo.2055@archivio.athesis77.it"
+      first_name: "FRANCESCO"
+      last_name: "POLLICINA "
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA NARENTE 3"
+      city: "SENIGALLIA"
+      postal_code: "60019"
+    - email: "rose3218@archivio.athesis77.it"
+      first_name: "ROWSHAN"
+      last_name: "AKHTER"
+      country_id: USA
+      timezone_id: Europe/Rome
+      address: "3218 102ND ST, EAST ELMHURST, NY"
+      city: "NEW YORK"
+      postal_code: "11369"
+    - email: "sonia.marinsek@archivio.athesis77.it"
+      first_name: "SONJA"
+      last_name: "MARINSEK"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "REPEN 161"
+      city: "MONRUPINO"
+      postal_code: "34016"
+    - email: "t.berendi@archivio.athesis77.it"
+      first_name: "TIBOR"
+      last_name: "BERENDI"
+      country_id: HUN
+      timezone_id: Europe/Rome
+      address: "MEDVES KRT. 78."
+      city: "SALGOTARJAN"
+      postal_code: "310000"
+    - email: "laura.menesini@archivio.athesis77.it"
+      first_name: "LAURA MENESINI"
+      last_name: "MENESINI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "55100 LUCCA ITALY VIA DELL ANGELO CUSTODE 16,"
+      city: "LUCCA"
+      postal_code: "55100"
+    - email: "gmzkeskin@archivio.athesis77.it"
+      first_name: "GAMZE "
+      last_name: "ALTINISIK KIRATLI"
+      country_id: TUR
+      timezone_id: Europe/Rome
+      address: "CENNET DOGA SITESI 4/15-B TURKKONUT DODURGA MAH.CANKAYA"
+      city: "ANKARA"
+      postal_code: "06810"
+    - email: "zff@archivio.athesis77.it"
+      first_name: "EMANUELE"
+      last_name: "ZUFFO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA OBERDAN 71-5"
+      city: "PIETRA LIGURE"
+      postal_code: "17027"
+    - email: "zanin.paolino@archivio.athesis77.it"
+      first_name: "PAOLO"
+      last_name: "ZANIN"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "PIAZZA PIO X 7/1"
+      city: "MEOLO"
+      postal_code: "30020"
+    - email: "lafenicefollonica@archivio.athesis77.it"
+      first_name: "MONICA MASSIMILIANA"
+      last_name: "BRASSI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA XX SETTEMBRE 26"
+      city: "MONTEMASSI"
+      postal_code: "58027"
+    - email: "omsn.agapov@archivio.athesis77.it"
+      first_name: "SERGEY"
+      last_name: "AGAPOV"
+      country_id: RUS
+      timezone_id: Europe/Rome
+      address: "M GOLOVANOVA ST, 7-32"
+      city: "MOSCOW"
+      postal_code: "109369"
+    - email: "doctorferit.fbyk@archivio.athesis77.it"
+      first_name: "FERIT"
+      last_name: "BÖYÜK"
+      country_id: TUR
+      timezone_id: Europe/Rome
+      address: "MERKEZEFENDI MAH. MEVLANA CAD. TOPKAPI PANORAMA, SITESI B BLOK K:8 D:32 ZEYTINBURNU/ISTANBUL"
+      city: "ISTANBUL"
+      postal_code: "34025"
+    - email: "thachluatsu@archivio.athesis77.it"
+      first_name: "KHANH HOA"
+      last_name: "BUI THI"
+      country_id: VNM
+      timezone_id: Europe/Rome
+      address: "15 NGO 9 NGUYEN TRI PHUONG, BA DINH, HANOI, VIETNAM"
+      city: "HANOI"
+      postal_code: "10000"
+    - email: "dirkolaf63@archivio.athesis77.it"
+      first_name: "DIRK-OLAF"
+      last_name: "LEIMANN"
+      country_id: DEU
+      timezone_id: Europe/Rome
+      address: "DÜSSELDORFER STRAßE 4"
+      city: "MOERS"
+      postal_code: "47441"
+    - email: "vincenzoscoglio1@archivio.athesis77.it"
+      first_name: "VINCENZO "
+      last_name: "SCOGLIO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "CORSO UMBERTO 1° 189, 189"
+      city: "CASOLI"
+      postal_code: "66043"
+    - email: "michel.foehr@archivio.athesis77.it"
+      first_name: "MICHEL "
+      last_name: "FOEHR"
+      country_id: LUX
+      timezone_id: Europe/Rome
+      address: "COURONNE DE CHÊNE 1"
+      city: "LUXEMBOURG"
+      postal_code: "01361"
+    - email: "ghostjester@archivio.athesis77.it"
+      first_name: "FERDINANDO"
+      last_name: "MARZANO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA VALLE MURICANA  700, B43 SECONDO PIANO"
+      city: "ROMA"
+      postal_code: "00188"
+    - email: "enzorigheschi@archivio.athesis77.it"
+      first_name: " ENZO"
+      last_name: "RIGHESCHI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA DI UCERANO 49"
+      city: "MONTEVARCHI"
+      postal_code: "52025"
+    - email: "anatolpoiata@archivio.athesis77.it"
+      first_name: "ANATOLIE"
+      last_name: "POIATA"
+      country_id: MDA
+      timezone_id: Europe/Rome
+      address: "ALEXANDRU CEL BUN 96, AP. 24"
+      city: "CHISINAU"
+      postal_code: "MD2005"
+    - email: "silvia.sansoni7@archivio.athesis77.it"
+      first_name: "SILVIA "
+      last_name: "SANSONI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIE DEI NOCI N.6"
+      city: "MONTEVARCHI"
+      postal_code: "52025"
+    - email: "franco.schianchi@archivio.athesis77.it"
+      first_name: "FRANCO"
+      last_name: "SCHIANCHI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA GIORDANO CAVESTRO 14"
+      city: "MEZZANO INFERIORE"
+      postal_code: "43058"
+    - email: "zapart60@archivio.athesis77.it"
+      first_name: "ENRICO"
+      last_name: "ZAPPITELLI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA DEI GEORGOFILI, 149"
+      city: "ROMA"
+      postal_code: "00147"
+    - email: "simonesonettifoto@archivio.athesis77.it"
+      first_name: "SIMONE  "
+      last_name: "SONETTI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA TOSCANINI 1"
+      city: "VICOPISANO"
+      postal_code: "56010"
+    - email: "brian.mckeown1@archivio.athesis77.it"
+      first_name: "BRIAN"
+      last_name: "MC KEOWN"
+      country_id: IRL
+      timezone_id: Europe/Rome
+      address: "54 MONASTERY DRIVE, CLONDALKIN"
+      city: "DUBLIN"
+      postal_code: "D22 FW59"
+    - email: "bactriancamel@archivio.athesis77.it"
+      first_name: "IAN PATTERSON"
+      last_name: "PATTERSON"
+      country_id: AUS
+      timezone_id: Europe/Rome
+      address: "453 ESPLANADE"
+      postal_code: "50220"
+    - email: "lijianping1q1@archivio.athesis77.it"
+      first_name: "JIANPING "
+      last_name: "LI "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stftongjiangchuan@archivio.athesis77.it"
+      first_name: "JIANGCHUAN "
+      last_name: "TONG "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfjinli2014@archivio.athesis77.it"
+      first_name: "JINLI "
+      last_name: "ZHAO "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "schenkunping@archivio.athesis77.it"
+      first_name: "KUNPING "
+      last_name: "CHEN "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stffanjinhong@archivio.athesis77.it"
+      first_name: "JINHONG "
+      last_name: "FAN "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stflihanxin@archivio.athesis77.it"
+      first_name: "HANXIN "
+      last_name: "LI "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "michaelstrapec@archivio.athesis77.it"
+      first_name: "MICHAEL"
+      last_name: "STRAPEC"
+      country_id: IRL
+      timezone_id: Europe/Rome
+      address: "4 BEECH GROVE, HERON'S WOOD"
+      city: "CARRIGALINE"
+      postal_code: "P43 XC93"
+    - email: "stfyuqun@archivio.athesis77.it"
+      first_name: "YUQUN "
+      last_name: "SHI "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfluwenying@archivio.athesis77.it"
+      first_name: "HAI "
+      last_name: "WANG "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfyangshenghua@archivio.athesis77.it"
+      first_name: "SHENGHUA"
+      last_name: "YANG "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfyuningtai@archivio.athesis77.it"
+      first_name: "NINGTAI "
+      last_name: "YU "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfzhangyong@archivio.athesis77.it"
+      first_name: "YONG "
+      last_name: "ZHANG "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfzhonghui@archivio.athesis77.it"
+      first_name: "HUI "
+      last_name: "ZHONG "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stflujiancheng2014@archivio.athesis77.it"
+      first_name: "YUANYUAN "
+      last_name: "ZHOU "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfchenyue@archivio.athesis77.it"
+      first_name: "YU‘E"
+      last_name: "CHEN "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "davide.viglioli@archivio.athesis77.it"
+      first_name: "DAVIDE ALBERTO"
+      last_name: "VIGLIOLI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA GIOVANNI PASCOLI 13"
+      city: "SALERANO SUL LAMBRO"
+      postal_code: "26857"
+    - email: "ritabaio1963@archivio.athesis77.it"
+      first_name: "RITA"
+      last_name: "BAIO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA PACCINI 64/1"
+      city: "ALBENGA"
+      postal_code: "17031"
+    - email: "samaferiano@archivio.athesis77.it"
+      first_name: "FERAIANO"
+      last_name: "SAMA"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA ROTTA"
+      city: "RAVENNA"
+      postal_code: "48123"
+    - email: "claudiofalso@archivio.athesis77.it"
+      first_name: "CLAUDIO"
+      last_name: "FALSO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA CALATAFIMI 20"
+      city: "LATINA"
+      postal_code: "04100"
+    - email: "mazzuccogiovbattista@archivio.athesis77.it"
+      first_name: "GIOV BATTISTA"
+      last_name: "MAZZUCCO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA CONTI D'ANAGNI,22"
+      city: "LATINA"
+      postal_code: "04100"
+    - email: "raymond.brammall@archivio.athesis77.it"
+      first_name: "RAYMOND"
+      last_name: "BRAMMALLL"
+      country_id: GBR
+      timezone_id: Europe/Rome
+      address: "BELSHAW LODGE BELSHAW LANE BELTON NORTH LINCOLNSHIRE"
+      city: "NORTH LINCOLNSHIRE"
+      postal_code: "DN91PF"
+    - email: "merellomarco@archivio.athesis77.it"
+      first_name: "MARCO"
+      last_name: "MERELLO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "MAXENA FRAZIONE CASE SPARSE N° 16 M"
+      city: "CHIAVARI"
+      postal_code: "16043"
+    - email: "ubctn@archivio.athesis77.it"
+      first_name: "FRANCESCO"
+      last_name: "PELLE"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA VERDI 4-2"
+      city: "ALBENGA"
+      postal_code: "17031"
+    - email: "vegard.hanssen@archivio.athesis77.it"
+      first_name: "VEGARD"
+      last_name: "HANSSEN"
+      country_id: NOR
+      timezone_id: Europe/Rome
+      address: "MÅRVEGEN 2"
+      city: "LYE"
+      postal_code: "04347"
+    - email: "rainboww17@archivio.athesis77.it"
+      first_name: "JAN-THOMAS"
+      last_name: "STAKE"
+      country_id: SWE
+      timezone_id: Europe/Rome
+      address: "VELAMSGATAN 8 ,, SE-681 51  KRISTINEHAMN,, SWEDEN"
+      city: "KRISTINEHAMN"
+      postal_code: "SE-68151"
+    - email: "veniero.rubboli@archivio.athesis77.it"
+      first_name: "VENIERO "
+      last_name: "RUBBOLI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA BASSANO DEL GRAPPA, 71"
+      city: "RAVENNA"
+      postal_code: "48121"
+    - email: "josedr1959@archivio.athesis77.it"
+      first_name: "JOSE "
+      last_name: "DIEZ DE LOS RIOS LOPEZ"
+      country_id: ESP
+      timezone_id: Europe/Rome
+      address: "CALLE PASILLAS 26-BAJO-B"
+      city: "ANTEQUERA"
+      postal_code: "29200"
+    - email: "lindakirkhope@archivio.athesis77.it"
+      first_name: "LINDA "
+      last_name: "KIRKHOPE"
+      country_id: GBR
+      timezone_id: Europe/Rome
+      address: "BARROW HILL HOUSE, BARROW, HILL, CHURCHDOWN, GLOUCESTER"
+      city: "GLOUCESTERSHIRE"
+      postal_code: "GL3 2LW"
+    - email: "vincent.bonnefille@archivio.athesis77.it"
+      first_name: "VINCENT"
+      last_name: "BONNEFILLE"
+      country_id: FRA
+      timezone_id: Europe/Rome
+      address: "13 RUE COLBRANT APT40"
+      postal_code: "59000"
+    - email: "sokha.bonnefille@archivio.athesis77.it"
+      first_name: "SOKHA"
+      last_name: "BONNEFILLE"
+      country_id: FRA
+      timezone_id: Europe/Rome
+      address: "13 RUE COLBRANT APT40"
+      postal_code: "59000"
+    - email: "stfzhanghaigang@archivio.athesis77.it"
+      first_name: "HAIGANG "
+      last_name: "ZHANG "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stflvxiuxian@archivio.athesis77.it"
+      first_name: "XINGGUO "
+      last_name: "ZHANG "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfxuping@archivio.athesis77.it"
+      first_name: "PING "
+      last_name: "XU "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "ablifeng123@archivio.athesis77.it"
+      first_name: "FENG "
+      last_name: "LI "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfwufanhui@archivio.athesis77.it"
+      first_name: "HUIMIN "
+      last_name: "WANG "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stflvweiping@archivio.athesis77.it"
+      first_name: "JINNA "
+      last_name: "ZHANG "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfanxiping@archivio.athesis77.it"
+      first_name: "XIPING "
+      last_name: "AN "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfgaolianhuistf@archivio.athesis77.it"
+      first_name: "GAOCHAO "
+      last_name: "HONG "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "litaichang@archivio.athesis77.it"
+      first_name: "TAICHANG"
+      last_name: "LI"
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "15-1-2401,BAOLI CHUNTIANLI, NO.1 SIMIAO ROAD, DAXING DISTRICT, BEIJING. ADDRESS IN CHINESE：中国北京市大兴区思邈路1号保利春天里小区15-1-2401，韩珂收"
+      city: "BEIJING"
+      postal_code: "102600"
+    - email: "atagencer@archivio.athesis77.it"
+      first_name: "ATA"
+      last_name: "GENCER"
+      country_id: TUR
+      timezone_id: Europe/Rome
+      address: "ATATURK MAH. ALI EMIRI C. MIMOZA 5 SITESI 5/5"
+      city: "ATASEHIR ISTANBUL"
+      postal_code: "34335"
+    - email: "stfzhangyongjiang@archivio.athesis77.it"
+      first_name: "YONGJIANG "
+      last_name: "ZHANG "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "smayaping@archivio.athesis77.it"
+      first_name: "YAPING"
+      last_name: "MA "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "huotian12@archivio.athesis77.it"
+      first_name: "TIAN "
+      last_name: "ZHONG "
+      country_id: CYM
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfwangyonghe@archivio.athesis77.it"
+      first_name: "YONGHE "
+      last_name: "WANG "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfxuzhi@archivio.athesis77.it"
+      first_name: "ZHI "
+      last_name: "XU "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "basavarajmin@archivio.athesis77.it"
+      first_name: "BASAVARAJ "
+      last_name: "M"
+      country_id: IND
+      timezone_id: Europe/Rome
+      address: "185, 5TH MAIN, 4TH BLOCK JAYANAGAR, JAYANAGAR"
+      city: "BANGALORE"
+      postal_code: "560011"
+    - email: "mugnaipaolo@archivio.athesis77.it"
+      first_name: "PAOLO"
+      last_name: "MUGNAI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA TREBBIA 24"
+      city: "MONTEVARCHI"
+      postal_code: "52025"
+    - email: "dave_jowitt@archivio.athesis77.it"
+      first_name: "DAVE"
+      last_name: "JOWITT"
+      country_id: GBR
+      timezone_id: Europe/Rome
+      address: "WEST LEA, CADOLE ROAD"
+      city: "GWERNAFFIELD"
+      postal_code: "CH7 5ED"
+    - email: "claudioandronico@archivio.athesis77.it"
+      first_name: "CLAUDIO"
+      last_name: "ANDRONICO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA MARIO BORSA 71"
+      city: "ROMA"
+      postal_code: "00159"
+    - email: "anna.lattici@archivio.athesis77.it"
+      first_name: "ANNA"
+      last_name: "LATTICI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA INGHILTERRA 72"
+      city: "LIVORNO"
+      postal_code: "57128"
+    - email: "star3titti@archivio.athesis77.it"
+      first_name: "TIZIANA"
+      last_name: "MARCHETTI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA MARTIRI P.ZZA LOGGIA 7"
+      city: "CASALECCHIO DI RENO"
+      postal_code: "40033"
+    - email: "rob_bat2002@archivio.athesis77.it"
+      first_name: "ROBERTO"
+      last_name: "BATINI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA FOSSO NUOVO 8/A"
+      city: "PONTEDERA"
+      postal_code: "56025"
+    - email: "filizkoprulu6@archivio.athesis77.it"
+      first_name: "FILIZ"
+      last_name: "KOPRULU"
+      country_id: TUR
+      timezone_id: Europe/Rome
+      address: "KARSIYAKA MAH 438 CAD 20/35 GOLBASI - AN"
+      postal_code: "06830"
+    - email: "wrheelee@archivio.athesis77.it"
+      first_name: "WOORHEE "
+      last_name: "LEE"
+      country_id: KOR
+      timezone_id: Europe/Rome
+      address: "103-202 SAMSUNG CHEREVILLE, 81 SIMGOGRO, SUJIGU, YONGGINSI"
+      postal_code: "16860"
+    - email: "73.stefanoni@archivio.athesis77.it"
+      first_name: "STEFANO"
+      last_name: "STEFANONI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA LUIGI LONGO 11"
+      city: "MAGIONE - SAN FELICIANO"
+      postal_code: "06063"
+    - email: "mihairomeob@archivio.athesis77.it"
+      first_name: "MIHAI ROMEO "
+      last_name: "BOGDAN"
+      country_id: ROU
+      timezone_id: Europe/Rome
+      address: "PTA. NUCETULUI, NR. 22, BL. BC4, AP. 610"
+      city: "ORADEA"
+      postal_code: "410419"
+    - email: "fangshaohua@archivio.athesis77.it"
+      first_name: "SHAOHUA"
+      last_name: "FANG"
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "15-1-2401,BAOLI CHUNTIANLI, NO.1 SIMIAO ROAD, DAXING DISTRICT, BEIJING. ADDRESS IN CHINESE：中国北京市大兴区思邈路1号保利春天里小区15-1-2401，韩珂收"
+      city: "BEIJING"
+      postal_code: "102600"
+    - email: "mauriziorossi50@archivio.athesis77.it"
+      first_name: "MAURIZIO"
+      last_name: "ROSSI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA FERMI 27/E"
+      city: "MONTICELLI D'ONGINA"
+      postal_code: "29010"
+    - email: "ibcasey@archivio.athesis77.it"
+      first_name: "BRONWEN"
+      last_name: "CASEY"
+      country_id: AUS
+      timezone_id: Europe/Rome
+      address: "73 MOREY ROAD, BEAUMARIS, VICTORIA"
+      postal_code: "003193"
+    - email: "nancarder310@archivio.athesis77.it"
+      first_name: "NAN"
+      last_name: "CARDER"
+      country_id: USA
+      timezone_id: Europe/Rome
+      address: "6120 EAST AVE G"
+      city: "LANCASTER CA"
+      postal_code: "93535"
+    - email: "francescasalice72@archivio.athesis77.it"
+      first_name: "FRANCESCA"
+      last_name: "SALICE"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA RONCO, 58"
+      city: "CARIMATE"
+      postal_code: "22060"
+    - email: "shinwryu@archivio.athesis77.it"
+      first_name: "SHIN WOO "
+      last_name: "RYU"
+      country_id: KOR
+      timezone_id: Europe/Rome
+      address: ""
+      postal_code: "16856"
+    - email: "francescoferroph@archivio.athesis77.it"
+      first_name: "FRANCESCO"
+      last_name: "FERRO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA E .MATTEI 8"
+      city: "PONSACCO"
+      postal_code: "56038"
+    - email: "gorsto@archivio.athesis77.it"
+      first_name: "STOJAN"
+      last_name: "GORUP"
+      country_id: SVN
+      timezone_id: Europe/Rome
+      address: "C. NA LENIVEC 18"
+      city: "SEZANA"
+      postal_code: "06210"
+    - email: "photographycvz@archivio.athesis77.it"
+      first_name: "CLAUDIA"
+      last_name: "VAN ZANTEN"
+      country_id: NLD
+      timezone_id: Europe/Rome
+      address: "JJ SLAUERHOFFLAAN 155"
+      city: "DELFT"
+      postal_code: "2624JZ"
+    - email: "giannimaitan@archivio.athesis77.it"
+      first_name: "GIANNI"
+      last_name: "MAITAN"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "C/O GEMATA VIA POSTALE VECCHIA,77"
+      city: "TRISSINO"
+      postal_code: "36070"
+    - email: "pataccaenrico@archivio.athesis77.it"
+      first_name: "ENRICO"
+      last_name: "PATACCA"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA NICOLODI 5"
+      city: "VERONA"
+      postal_code: "37124"
+    - email: "mas3218@archivio.athesis77.it"
+      first_name: "MOHAMMAD ALI"
+      last_name: "SALIM"
+      country_id: USA
+      timezone_id: Europe/Rome
+      address: "3218 102ND ST"
+      city: "NEW YORK"
+      postal_code: "11369"
+    - email: "aliguangjian@archivio.athesis77.it"
+      first_name: "GUANGJIAN "
+      last_name: "LI "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfliuhouyu@archivio.athesis77.it"
+      first_name: "HOUYU "
+      last_name: "LIU "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "afengchanghua@archivio.athesis77.it"
+      first_name: "YANBEN "
+      last_name: "FENG "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfkangjian@archivio.athesis77.it"
+      first_name: "JIAN "
+      last_name: "KANG "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfliufang@archivio.athesis77.it"
+      first_name: "FANG "
+      last_name: "LIU "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfwangwenwei@archivio.athesis77.it"
+      first_name: "WENWEI "
+      last_name: "WANG "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfganlin@archivio.athesis77.it"
+      first_name: "YONG "
+      last_name: "WEI "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfxujinan@archivio.athesis77.it"
+      first_name: "JINAN "
+      last_name: "XU "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfyuchangren@archivio.athesis77.it"
+      first_name: "CHANGREN "
+      last_name: "YU "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfjiyuan2014@archivio.athesis77.it"
+      first_name: "JIYUAN "
+      last_name: "ZHANG "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,, NO,124-136"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "fotografie01@archivio.athesis77.it"
+      first_name: "THOMAS"
+      last_name: "PICHLER"
+      country_id: AUT
+      timezone_id: Europe/Rome
+      address: "GUMPLOWICZSTRASSE 1/2/2"
+      city: "VIENNA"
+      postal_code: "01220"
+    - email: "walterjb@archivio.athesis77.it"
+      first_name: "WALTER"
+      last_name: "BRETT"
+      country_id: NZL
+      timezone_id: Europe/Rome
+      address: "24 WOODVILLE STREET, LEESTON"
+      city: "LEESTON"
+      postal_code: "07632"
+    - email: "aditagarwala@archivio.athesis77.it"
+      first_name: "ADIT"
+      last_name: "AGARWALA"
+      country_id: IND
+      timezone_id: Europe/Rome
+      address: "F-604, NIRALA EDEN PARK, AHINSA, KHAND-2, INDIRAPURAM"
+      city: "GHAZIABAD, UP"
+      postal_code: "201014"
+    - email: "nevincig@archivio.athesis77.it"
+      first_name: "NEVIN"
+      last_name: "CIG"
+      country_id: TUR
+      timezone_id: Europe/Rome
+      address: "ELMAS DENTAL DIS POLIKLINIGI  MITHATPASA MAH, DOĞRAMACI SK. NO:6-5, MERKEZ/ZONGULDAK"
+      city: "ZONGULDAK"
+      postal_code: "67020"
+    - email: "stfgaofeng@archivio.athesis77.it"
+      first_name: "LIN"
+      last_name: "HU"
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "snfanxiaolin@archivio.athesis77.it"
+      first_name: "SANQI"
+      last_name: "LIN"
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfmlgeng@archivio.athesis77.it"
+      first_name: "XIAOPING"
+      last_name: "MAO"
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stfyhsun@archivio.athesis77.it"
+      first_name: "ANZI"
+      last_name: "SUN"
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "annie.dorioz@archivio.athesis77.it"
+      first_name: "ANNIE"
+      last_name: "DORIOZ"
+      country_id: FRA
+      timezone_id: Europe/Rome
+      address: "20 ALLEE DE LA LIBERATION"
+      city: "THIONVILLE"
+      postal_code: "57100"
+    - email: "abyangguomei@archivio.athesis77.it"
+      first_name: "MEI "
+      last_name: "YU "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "stanleyp38@archivio.athesis77.it"
+      first_name: "PAUL"
+      last_name: "STANLEY"
+      country_id: IRL
+      timezone_id: Europe/Rome
+      address: "8 ELMFIELD GROVE, CLARE HALL"
+      city: "DUBLIN"
+      postal_code: "D13 V3A3"
+    - email: "hanklee888@archivio.athesis77.it"
+      first_name: "HENGKI "
+      last_name: "LEE"
+      country_id: IDN
+      timezone_id: Europe/Rome
+      address: "ANGGREK III/19A KARET BELAKANG"
+      city: "JAKARTA"
+      postal_code: "12940"
+    - email: "alessiocipo11@archivio.athesis77.it"
+      first_name: "ALESSIO "
+      last_name: "CIPOLLINI "
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA LE PIAGGE, 34/A "
+      city: "CAMUCIA "
+      postal_code: "52044 "
+    - email: "stfgaoshiyuan@archivio.athesis77.it"
+      first_name: "YUANDI "
+      last_name: "PENG "
+      country_id: CHN
+      timezone_id: Europe/Rome
+      address: "2ND FLOOR, NO.124-136 JINGZHONG ROAD, COMMERCIAL STREET, JIAOJIANG,"
+      city: "TAIZHOU"
+      postal_code: "318000"
+    - email: "maxfalsetto@archivio.athesis77.it"
+      first_name: "MASSIMILIANO"
+      last_name: "FALSETTO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA S.LUCIA 1"
+      city: "GHEDI"
+      postal_code: "25016"
+    - email: "jim@archivio.athesis77.it"
+      first_name: "JIM"
+      last_name: "MUNDAY"
+      country_id: GBR
+      timezone_id: Europe/Rome
+      address: "35 ROBINSON CLOSE, SELSEY"
+      city: "CHICHESTER"
+      postal_code: "PO20 0FD"
+    - email: "mail@archivio.athesis77.it"
+      first_name: "ALESSANDRO"
+      last_name: "TERIGI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "PIAZZA LA FRANCA 6/10"
+      city: "CHIAVARI"
+      postal_code: "16043"
+    - email: "michele.macinai@archivio.athesis77.it"
+      first_name: "MICHELE"
+      last_name: "MACINAI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA CAMPO ROMANO N. 2, FRAZ. MERCATALE VALDARNO"
+      city: "BUCINE"
+      postal_code: "52021"
+    - email: "info@archivio.athesis77.it"
+      first_name: "GIULIO"
+      last_name: "VEGGI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "CORSO ITALIA 50"
+      city: "VERCELLI"
+      postal_code: "13100"
+    - email: "paolostu@archivio.athesis77.it"
+      first_name: "PAOLO "
+      last_name: "STUPPAZZONI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA SAN GIOVANNI BOSCO 132"
+      city: "MODENA"
+      postal_code: "41121"
+    - email: "joy.ghosh000@archivio.athesis77.it"
+      first_name: "DEBOJYOTI"
+      last_name: "GHOSH"
+      country_id: IND
+      timezone_id: Europe/Rome
+      address: "SUNNY VALLEY APARTMENT,BLOCK-1,FLAT-3D GARIA,FARTABAD,SAHAPARA,KOLKATA-700084,P.O.-GARIA,WEST BENGAL,INDIA"
+      city: "KOLKATA"
+      postal_code: "700084"
+    - email: "ann.healey@archivio.athesis77.it"
+      first_name: "ANN"
+      last_name: "HEALEY"
+      country_id: GBR
+      timezone_id: Europe/Rome
+      address: "100 ELLERMAN AVENUE"
+      city: "TWICKENHAM"
+      postal_code: "TW2 6AQ"
+    - email: "atlesvee@archivio.athesis77.it"
+      first_name: "ATLE"
+      last_name: "SVEEN"
+      country_id: NOR
+      timezone_id: Europe/Rome
+      address: "REVLINGHAGAN 37"
+      city: "GAUPEN"
+      postal_code: "_2355"
+    - email: "nicholas.toni@archivio.athesis77.it"
+      first_name: "NICHOLAS"
+      last_name: "TONI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA PIETRO GERMI N°1"
+      city: "FOLLONICA"
+      postal_code: "58022"
+    - email: "angelo.ditommaso75@archivio.athesis77.it"
+      first_name: "ANGELO"
+      last_name: "DI TOMMASO"
+      country_id: FRA
+      timezone_id: Europe/Rome
+      address: "27, RUE MICHEL MONTAIGNE"
+      city: "VILLERUPT"
+      postal_code: "54190"
+    - email: "fabiogaruti1@archivio.athesis77.it"
+      first_name: "FABIO"
+      last_name: "GARUTI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIALE 4 NOVEMBRE 58"
+      city: "PONTEDERA"
+      postal_code: "56025"
+    - email: "albus65@archivio.athesis77.it"
+      first_name: "ALBERTO BUSINI"
+      last_name: "BUSINI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA ERGIZIO, 44"
+      city: "SAN SEVERO"
+      postal_code: "71016"
+    - email: "antonella.tomassi61@archivio.athesis77.it"
+      first_name: "ANTONELLA "
+      last_name: "TOMASSI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA SASSETTI 5 "
+      city: "SCANDICCI"
+      postal_code: "50018"
+    - email: "sharmali.das@archivio.athesis77.it"
+      first_name: "SHARMALI "
+      last_name: "DAS"
+      country_id: IND
+      timezone_id: Europe/Rome
+      address: "58/24, PALLISREE, KOLKATA"
+      city: "KOLKATA"
+      postal_code: "700092"
+    - email: "t.franco@archivio.athesis77.it"
+      first_name: "FRANCESCO"
+      last_name: "TARANTINI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA AMBROSOLI 2"
+      city: "COMO"
+      postal_code: "22100"
+    - email: "adriziano@archivio.athesis77.it"
+      first_name: "ADRIANO"
+      last_name: "FAVERO"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA RONCHI 9"
+      city: "LEGNARO"
+      postal_code: "35020"
+    - email: "fotomaypomme@archivio.athesis77.it"
+      first_name: "MAY"
+      last_name: "POMME"
+      country_id: NLD
+      timezone_id: Europe/Rome
+      address: "SCHAESBERGERWEG 176"
+      city: "HEERLEN"
+      postal_code: "6415AL"
+    - email: "kevin@archivio.athesis77.it"
+      first_name: "KEVIN"
+      last_name: "DAY"
+      country_id: IRL
+      timezone_id: Europe/Rome
+      address: "DAYS EUROSPAR, WHITEGATE"
+      postal_code: "P25PD25"
+    - email: "scocherdomenico@archivio.athesis77.it"
+      first_name: "DOMENICO"
+      last_name: "SCOCA"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA TEVERE 34/3"
+      city: "LAINATE"
+      postal_code: "20020"
+    - email: "paolo.albertini@archivio.athesis77.it"
+      first_name: "PAOLO"
+      last_name: "ALBERTINI"
+      country_id: ITA
+      timezone_id: Europe/Rome
+      address: "VIA MONTE MARINO 69/A VILLINO 7/A"
+      city: "RIANO"
+      postal_code: "00060"
