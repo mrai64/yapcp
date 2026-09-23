@@ -335,10 +335,29 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
                         return;
                     }
                 }
-
                 $this->userEmailToUuidMap[$userData['email']] = $userId;
+                // §*§ Spostamento cartella
+                // .1 verificare se country_id <> ITA
+                $currentCountry = $userData['country_id'] ?? 'ITA';
+                if ($currentCountry !== 'ITA') {
+                    $commonPath = Str::slug($contact->last_name, '_') . '/'
+                        . Str::slug($contact->first_name) . '_' . $contact->id;
+                    $itaPath = 'photos/ITA/' . $commonPath;
+                    $newPath = 'photos/' . $currentCountry . '/' . $commonPath;
+                    // .2 verificare se esiste /country_id/cognome/nome_uuid
+                    // .3 verificare se esiste /ITA/cognome/nome_uuid
+                    if (
+                        !Storage::disk('public')->exists($newPath)
+                            && Storage::disk('public')->exists($itaPath)
+                    ) {
+                        // .4 spostare /ITA/cognome/nome_uuid in /country_id/cognome/nome_uuid
+                        Storage::disk('public')->move($itaPath, $newPath);
+                    }
+                }
             }
+            // foreach
         }
+        // Model userContact
 
         // ===================================================================
         // Model UserWork - loop
