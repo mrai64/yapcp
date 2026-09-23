@@ -3,9 +3,6 @@
 /**
  * Admin Dashboard
  * 
- * admin user list paginated
- * - old controller /app/Livewire/User/Contact/Listed.php
- * - old blade /resources/views/livewire/user/contact/listed.php
  */
 
 use App\Models\User;
@@ -132,7 +129,17 @@ new class extends Component {
                                     url="{{ route('admin.import.user') }}" />
                             </td>
                             <td class="fyk text-xl w-4fifths">
-                                {{ __("User, userContact, UserContactMore") }}
+                                {{ __("User, UserContact, UserContactMore") }}
+                            </td>
+                        </tr>
+                        <tr class="border">
+                            <td>
+                                <x-yapcp.inline-link 
+                                    txt="Run" 
+                                    url="{{ route('admin.import.user-edited') }}" />
+                            </td>
+                            <td class="fyk text-xl w-4fifths">
+                                {{ __("EDITED User, UserContact, UserWork, UserWorkMore") }}
                             </td>
                         </tr>
                     </tbody>

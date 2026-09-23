@@ -47,6 +47,8 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
     protected array $userEmailToUuidMap = [];
     // input work id to uuid - old or assigned
     protected array $workIdToUuidMap = [];
+    // timeout seconds
+    public int $timeout = 600; // 600 secs 10 mins
 
     /**
      * Create a new job instance.
