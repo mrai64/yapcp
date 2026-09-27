@@ -1,44 +1,47 @@
 <?php
 
 /**
- * Start a job to import 3 models
- * from a yaml file written by admin.backup.user
- *
+ * Job to import an editable or edited Yaml for models:
+ * - User
+ * - UserContact
+ * - UserContactMore (TODO)
+ * - UserWork
+ * - UserWorkMore
  */
 
 use App\Models\User;
-use App\Jobs\Imports\ImportUserAndRelatedJob;
+use App\Jobs\Imports\UserWorkAndRelatedImportYamlJob;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 use Livewire\Volt\Component;
 
 new class () extends Component {
-    use WithFileUploads; // file import
     //
+    use WithFileUploads;
     public User $requesterUser;
-    public $dirtYamlFile;
-    public $dirtYamlPath;
+    public $dirtYamlFile; // file input
+    public $dirtYamlPath; // uploaded input file path
     //
     public function mount()
     {
-        $this->requesterUser = Auth::user();
-        $this->dirtYamlFile = null; // file
-        $this->dirtYamlPath = '';
+        $this->requesterUser  = Auth::user();
+        $this->dirtYamlFile   = null;
+        $this->dirtYamlPath   = '';
     }
     //
     public function rules()
     {
         return [
-            'dirtYamlFile' => 'required|file|extensions:yaml,yml,txt|max:512',
+            'dirtYamlFile' => 'required|file|extensions:yaml,yml,txt|max:768',
         ];
     }
     //
-    public function startImportUserAndRelated()
+    public function startImportUserWorkAndRelated()
     {
         // 1. Esegue la validazione delle regole ($this->rules())
-        $this->validate();
         Log::info('Import ' . __FUNCTION__ . ' 1. requested by: ' . $this->requesterUser->name . ' id:' . $this->requesterUser->id);
+        $this->validate();
         Log::info('Import ' . __FUNCTION__ . ' 2. validated');
 
         // 2. Salva il file in storage/app/public/imports
@@ -49,13 +52,13 @@ new class () extends Component {
         Log::info('Import ' . __FUNCTION__ . ' 4. path: ' . $relativePath);
 
         // 3. Dispatch del Job di importazione - avvio immediato
-        ImportUserAndRelatedJob::dispatchSync(
+        UserWorkAndRelatedImportYamlJob::dispatchSync(
             $this->requesterUser,
             $relativePath
         );
 
         Log::info('Import ' . __FUNCTION__ . ' 5. started ');
-        // 4. Feedback all'utente e reset dell'input
+        // 4. Feedback all'utente e reset dell'input - non 'salta' fuori
         session()->flash('success', __('Import started.'));
         $this->reset('dirtYamlFile');
     }
@@ -64,7 +67,7 @@ new class () extends Component {
 <div>
     <x-slot name="header">
         <h2 class="fyk text-2xl font-medium text-gray-900">
-            {{ __("A user, userContact, userContactMore importer") }}
+            {{ __("A User, UserContact, UserWork, UserWorkMore importer for an edited yaml file") }}
         </h2>
         <hr class="mb-4" />
         <x-yapcp.header-link
@@ -96,7 +99,19 @@ new class () extends Component {
                 </div>
                 @endif
 
-                <form wire:submit="startImportUserAndRelated">
+                <div class="fyk text-xl">
+                    {{ __("As member of admins group you can do backup and restore.") }}
+                    <br />
+                    {{ __("So, that form allow you to upload ad insert in platform a yaml file edited.") }}
+                    <br />
+                    {{ __("Unload the sample file from the manual, edit it than.") }}
+                    <br />
+                    <x-yapcp.inline-link
+                        txt="The Manual | Import Yaml for UserWork"
+                        url="/docs/1.0/admin/import/userwork" />
+                </div>
+
+                <form wire:submit="startImportUserWorkAndRelated">
                     @csrf
 
                     <!-- passport photo upload -->
@@ -109,7 +124,7 @@ new class () extends Component {
                             aria-describedby="yamlHelp" />
                         <div wire:loading wire:target="dirtYamlFile">{{ __("Uploading...")}}</div>
                         <div class="small" id="yamlHelp">
-                            {{ __("Upload a previously written backup User, UserContact, UserContactMore. a YAML file. See manual") }}
+                            {{ __("Upload a previously written backup User, UserContact, UserContactMore. a YAML file. See manual.") }}
                         </div>
                         <x-input-error for="dirtYamlFile" class="mt-2" />
                     </div>

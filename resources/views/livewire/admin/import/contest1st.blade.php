@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Log;
 use Livewire\Features\SupportFileUploads\WithFileUploads;
 use Livewire\Volt\Component;
 
-new class extends Component {
+new class () extends Component {
     use WithFileUploads; // file import
     //
     public User $requesterUser;
@@ -38,16 +38,16 @@ new class extends Component {
     {
         // 1. Esegue la validazione delle regole ($this->rules())
         $this->validate();
-        Log::info('Import ' . __FUNCTION__ . ' 1. requested by: ' . $this->requesterUser->name . ' id:' . $this->requesterUser->id );
-        Log::info('Import ' . __FUNCTION__ . ' 2. validated' );
+        Log::info('Import ' . __FUNCTION__ . ' 1. requested by: ' . $this->requesterUser->name . ' id:' . $this->requesterUser->id);
+        Log::info('Import ' . __FUNCTION__ . ' 2. validated');
 
         // 2. Salva il file in storage/app/public/imports
         // Restituisce un percorso relativo come "public/imports/filename.yaml"
         $filename = time() . '_' . $this->dirtYamlFile->getClientOriginalName();
-        $relativePath =$this->dirtYamlFile->storeAs('imports', $filename, 'public');
+        $relativePath = $this->dirtYamlFile->storeAs('imports', $filename, 'public');
         Log::info('Import ' . __FUNCTION__ . ' 3. file: ' . $filename);
         Log::info('Import ' . __FUNCTION__ . ' 4. path: ' . $relativePath);
-        
+
         // 3. Dispatch del Job di importazione - avvio immediato
         ContestAndRelated1stRestoreJob::dispatchSync(
             $this->requesterUser,

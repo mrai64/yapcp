@@ -319,7 +319,9 @@ Volt::route('/admin/import/contest/1st', 'admin.import.contest1st')
 Volt::route('/admin/import/user', 'admin.import.user')
     ->middleware(['auth', 'verified', 'can:access-admin'])
     ->name('admin.import.user');
-
+Volt::route('/admin/import/user-edited', 'admin.import.user-edited')
+    ->middleware(['auth', 'verified', 'can:access-admin'])
+    ->name('admin.import.user-edited');
 
 /**
  * end of list

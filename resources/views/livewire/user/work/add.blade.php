@@ -67,7 +67,7 @@ new class extends Component {
     {
         return [
             'userWorkTitleEn' => 'required|string|max:250',
-            'userWorkTempImage' => 'required|image|mimes:jpg,jpeg|max:9000', // KB
+            'userWorkTempImage' => 'required|image|mimes:jpg,jpeg|max:16000', // KB MAX 16MB
             'userWorkIsMonochromatic' => 'nullable|boolean',
             'userWorkRawAvailable' => 'nullable|boolean',
         ];
@@ -130,6 +130,19 @@ new class extends Component {
         <h2 class="fyk font-semibold text-xl text-gray-800 leading-tight fyk">
             {{ __(':name Add Work to Personal Gallery' , ['name' => $userContact->first_name] ) }}
         </h2>
+        <hr class="mb-4" />
+        <x-yapcp.header-link 
+            txt="Back to User dashboard" 
+            url="{{ route('user.dashboard') }}" />
+        <x-yapcp.header-link 
+            txt="Your 📋 Gallery" 
+            url="{{ route('user.work.listed1') }}" />
+        <x-yapcp.header-link 
+            txt="Your 🌇 Gallery" 
+            url="{{ route('user.work.listed2') }}" />
+        <x-yapcp.header-link 
+            txt="The Manual" 
+            url="{{ url('/docs') }}" />
     </x-slot>
 
     <div class="py-12">
@@ -178,6 +191,9 @@ new class extends Component {
                             name="userWorkTempImage" wire:model="userWorkTempImage"
                             aria-describedby="photoHelp" />
                         <div wire:loading wire:target="userWorkTempImage">{{ __("Uploading...")}}</div>
+                        <div class="small">
+                            {{ __("Actually only jpeg max 16 MB (less than 16 MiB)")}}
+                        </div>
                         <x-input-error for="userWorkTempImage" class="mt-2" />
                     </div>
 

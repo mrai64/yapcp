@@ -31,7 +31,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * @property string $id lowercase uuid
+ * @property string $id uuid fk user_contacts.id
  * @property string $name surname, name - not used for access
  * @property string $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
@@ -45,6 +45,10 @@ use Laravel\Sanctum\HasApiTokens;
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $activeUserOrganizations
+ * @property-read int|null $active_user_organizations_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $activeUserRoles
+ * @property-read int|null $active_user_roles_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestAward> $awardWinners
  * @property-read int|null $award_winners_count
  * @property-read \App\Models\UserContact|null $contact
@@ -64,22 +68,20 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read int|null $juries_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Organization> $organizations
+ * @property-read int|null $organizations_count
  * @property-read string $profile_photo_url
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @property-read \App\Models\UserContact|null $userContact
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserContactMore> $userContactMores
+ * @property-read int|null $user_contact_mores_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $userRoles
  * @property-read int|null $user_roles_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWorkValidation> $userWorkValidators
  * @property-read int|null $user_work_validators_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserWork> $userWorks
  * @property-read int|null $user_works_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Organization> $organizations
- * @property-read int|null $organizations_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $activeUserOrganizations
- * @property-read int|null $active_user_organizations_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $activeUserRoles
- * @property-read int|null $active_user_roles_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newQuery()
@@ -101,20 +103,6 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserContactMore> $userContactMores
- * @property-read int|null $user_contact_mores_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $activeUserOrganizations
- * @property-read int|null $active_user_organizations_count
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $activeUserRoles
- * @property-read int|null $active_user_roles_count
- * @method bool isAdmin()
- * @method bool isMemberOfAnyOrganization()
- * @method bool isMemberOfOrganization(\App\Models\Organization|string $organization)
- * @method bool isMemberOfFederation(\App\Models\Federation|string $federation)
- * @method bool isJurorInAContest(\App\Models\ContestSection|string $section)
- * @method bool isJurorInAnyContest()
- * @method int worksCount()
- * @method int userWorksCount()
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements MustVerifyEmail
@@ -130,10 +118,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public const TABLENAME = 'users'; // MAYBE $this->table_name() but User::TABLENAME
 
-    protected $primaryKey = 'id'; //  default but
-    protected $keyType = 'string'; // uuid char(36)
-    public $incrementing = false; //  with no increment
-
     /**
      * The attributes that are mass assignable.
      *
@@ -146,7 +130,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'two_factor_secret',
         'two_factor_recovery_codes',
-        'two_factor_confirmet_at',
+        'two_factor_confirmed_at',
         'remember_token',
         'current_team_id',
         'profile_photo_path',
@@ -319,10 +303,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     // users.id -> user_roles.user_id -> user_roles.organization_id -> organizations.id
     // valid: user_roles.role_opening <= now() <= user_roles.role_closing
+    // no ->using(UserRole::class)
     public function organizations(): BelongsToMany
     {
         return $this->belongsToMany(Organization::class, 'user_roles', 'user_id', 'organization_id')
-            ->using(UserRole::class)
             ->withPivot(['role', 'role_opening', 'role_closing'])
             ->wherePivot('role_opening', '<=', now())
             ->wherePivot('role_closing', '>=', now());
