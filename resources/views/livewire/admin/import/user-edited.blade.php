@@ -33,7 +33,7 @@ new class () extends Component {
     public function rules()
     {
         return [
-            'dirtYamlFile' => 'required|file|extensions:yaml,yml,txt|max:512',
+            'dirtYamlFile' => 'required|file|extensions:yaml,yml,txt|max:768',
         ];
     }
     //

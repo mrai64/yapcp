@@ -48,7 +48,7 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
     // input work id to uuid - old or assigned
     protected array $workIdToUuidMap = [];
     // timeout seconds
-    public int $timeout = 600; // 600 secs 10 mins
+    public int $timeout = 1200; // 1200 secs 20 mins
 
     /**
      * Create a new job instance.
@@ -64,6 +64,7 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
         Log::info('Job: ' . $jobName . ' called for: ' . $yamlPath);
         // $this->requesterUser = $requesterUser;
         // $this->yamlPath      = $yamlPath;
+        set_time_limit(0); // avoid php timeout
     }
 
     /**
@@ -112,10 +113,10 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
                 'url_path'         => 'nullable|url|max:250',
                 'file_format'      => 'nullable|string|max:250',
                 'file_size'        => 'nullable|integer|between:100000,6000000',
-                'width'            => 'nullable|integer|between:1080,4000',
-                'height'           => 'nullable|integer|between:1080,4000',
-                'long_size'        => 'nullable|integer|between:1080,4000',
-                'short_size'       => 'nullable|integer|between:1080,4000',
+                'width'            => 'nullable|integer|between:600,32000', // just for debug
+                'height'           => 'nullable|integer|between:600,32000',
+                'long_size'        => 'nullable|integer|between:600,32000',
+                'short_size'       => 'nullable|integer|between:600,32000',
                 'is_landscape'     => 'nullable|boolean',
                 'is_monochromatic' => 'nullable|boolean',
                 'has_raw_file'     => 'nullable|boolean',
@@ -364,6 +365,12 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
         // ===================================================================
         if (!empty($data['user_works'])) {
             foreach ($data['user_works'] as $index => $userData) {
+                if (empty($userData['id'])) {
+                    Log::info('Job: ' . $jobName . ' / 7. user_works loop / ' . $index . ' missing work id. need an unique id for file, even not an uuid');
+                    $errors[] = ' / 7. user_works loop / ' . $index . ' missing work id. need an unique id for file, even not an uuid';
+                    $this->writeReportLog($errors);
+                    return;
+                }
                 $userData['is_landscape'] = !empty($userData['is_landscape']) ? (bool) $userData['is_landscape'] : false;
                 $userData['is_monochromatic'] = !empty($userData['is_monochromatic']) ? (bool) $userData['is_monochromatic'] : false;
                 $userData['has_raw_file'] = !empty($userData['has_raw_file']) ? (bool) $userData['has_raw_file'] : false;
@@ -411,11 +418,25 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
 
                 // 3. Scaricamento immagine da url_path e salvataggio tramite photoBox()
                 if (!empty($userData['url_path'])) {
+                    Log::info('Job: ' . $jobName . ' / 7. user_works loop / ' . $index . ' try upload: ' . $userData['url_path']);
                     try {
                         $userContact = UserContact::where('id', $userIdFound)->first();
                         $photoBoxDir = $userContact ? $userContact->photoBox() : 'photos/default';
 
-                        $response = Http::timeout(30)->get($userData['url_path']);
+                        $response = Http::timeout(30)
+                            ->withHeaders([
+                                'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+                            ])
+                            ->get($userData['url_path']);
+                        // too much req? really?
+                        if ($response->status() === 429) {
+                            // Recupera i secondi di attesa forniti dal server remoto (se disponibili) oppure imposta 10 secondi
+                            $retryAfter = $response->header('Retry-After') ?? 10;
+
+                            // Rilascia il job nella coda per farlo riprovare più tardi
+                            $this->release($retryAfter);
+                            return;
+                        }
                         if (!$response->successful()) {
                             Log::error(
                                 'Job: ' . $jobName . ' / 7. user_works file not dloaded: '
@@ -433,6 +454,7 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
                         $relativeFilePath = $photoBoxDir . '/' . $filename;
 
                         Storage::disk('public')->put('photos/' . $relativeFilePath, $fileContent);
+                        Log::info('Job: ' . $jobName . ' / 7. user_works loop / ' . $index . ' stored as: ' . $relativeFilePath);
 
                         $tempPath = Storage::disk('public')->path('photos/' . $relativeFilePath);
                         $imgInfo = @getimagesize($tempPath);
@@ -453,9 +475,13 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
 
                             $miniatureStorePath = 'photos/' . $photoBoxDir . '/300_' . $filename;
                             Storage::disk('public')->put($miniatureStorePath, (string)$jpegMiniature);
+                            Log::info('Job: ' . $jobName . ' / 7. user_works loop / ' . $index . ' miniature');
                         }
 
                         $userData['file_path'] = str_replace('photos/', '', $relativeFilePath);
+                        // a random pause to avoid DOS, microseconds 800000 are .8 sec
+                        usleep(rand(800000, 1500000));
+                        //
                     } catch (\Throwable $e) {
                         Log::error('Job: ' . $jobName . ' / Download error / ' . $e->getMessage());
                         $errors[] = "Error downloading image for work index {$index}: " . $e->getMessage();
