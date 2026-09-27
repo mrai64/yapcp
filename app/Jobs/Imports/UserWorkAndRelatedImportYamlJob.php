@@ -16,6 +16,7 @@ use App\Models\User;
 use App\Models\UserContact;
 use App\Models\UserWork;
 use App\Models\UserWorkMore;
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -47,6 +48,10 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
     protected array $userEmailToUuidMap = [];
     // input work id to uuid - old or assigned
     protected array $workIdToUuidMap = [];
+    // tentativi in caso di errore
+    public int $tries = 5;
+    // tempi di attesa in secondi tra 4 tentativi
+    public array $backoff = [15, 15, 20, 20];
     // timeout seconds
     public int $timeout = 1200; // 1200 secs 20 mins
 
@@ -183,6 +188,27 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
         Log::info('Job: ' . $jobName . ' / 1. yaml file parsed ok');
         $data = $parsedData['data'] ?? [];
         Log::info('Job: ' . $jobName . ' / 1. yaml content ready to upsert');
+
+        // ===================================================================
+        // Nothing found
+        // ===================================================================
+        if (empty($data)) {
+            Log::info('Job: ' . $jobName . ' / 1. yaml parsed errors - no useful data found');
+            $errors[] = "Yaml imported but no useful data: found";
+            $this->writeReportLog($errors);
+            throw new \Exception("Yaml imported but no useful data: found");
+        }
+        if (
+            empty($data['users'])
+                && empty($data['user_contacts'])
+                && empty($data['user_works'])
+                && empty($data['user_work_mores'])
+        ) {
+            Log::info('Job: ' . $jobName . ' / 1. yaml parsed errors - no useful data found');
+            $errors[] = "Yaml imported but no useful data: found";
+            $this->writeReportLog($errors);
+            throw new \Exception("Yaml imported but no useful data: found");
+        }
 
         // ===================================================================
         // Model user - loop
@@ -427,7 +453,7 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
                             ->withHeaders([
                                 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
                             ])
-                            ->get($userData['url_path']);
+                            ->get($userData['url_path'] . '?user_work_id=' . $originalWorkId);
                         // too much req? really?
                         if ($response->status() === 429) {
                             // Recupera i secondi di attesa forniti dal server remoto (se disponibili) oppure imposta 10 secondi
@@ -437,13 +463,21 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
                             $this->release($retryAfter);
                             return;
                         }
+                        if ($response->status() === 404) {
+                            Log::error(
+                                'Job: ' . $jobName . ' / 7. user_works file not dloaded: '
+                                . $userData['url_path']
+                            );
+                            $this->writeReportLog(["File not found: {$userData['url_path']}"]);
+                            throw new Exception($jobName . " error for " . $userData['url_path'] . " cause of status 404");
+                        }
                         if (!$response->successful()) {
                             Log::error(
                                 'Job: ' . $jobName . ' / 7. user_works file not dloaded: '
                                 . $userData['url_path']
                             );
                             $this->writeReportLog(["File not found: {$userData['url_path']}"]);
-                            return;
+                            throw new Exception($jobName . " error for " . $userData['url_path'] . " cause of:" . $response->status());
                         }
 
                         $fileContent = $response->body();
@@ -480,7 +514,7 @@ class UserWorkAndRelatedImportYamlJob implements ShouldQueue
 
                         $userData['file_path'] = str_replace('photos/', '', $relativeFilePath);
                         // a random pause to avoid DOS, microseconds 800000 are .8 sec
-                        usleep(rand(800000, 1500000));
+                        usleep(rand(600000, 900000));
                         //
                     } catch (\Throwable $e) {
                         Log::error('Job: ' . $jobName . ' / Download error / ' . $e->getMessage());
