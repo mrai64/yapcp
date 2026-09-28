@@ -198,6 +198,9 @@ new class extends Component {
                                 <x-yapcp.inline-link 
                                     txt="Modify 'Fed More'" 
                                     url="{{ route('federation.listed') }}" />
+                                <x-yapcp.inline-link 
+                                    txt="'Fed More' Index" 
+                                    url="{{ route('admin.federation-more.listed') }}" />
                             </td>
                         </tr>
                     </tbody>
