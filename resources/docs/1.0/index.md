@@ -99,6 +99,10 @@
 
   - [✅ Listed, &amp;...](/{{route}}/{{version}}/admin/country/listed)
 
+- ## Timezone
+
+  - [✅ Listed, &amp;...](/{{route}}/{{version}}/admin/timezone/listed)
+
 - ## User Contact
 
   - [✅ Listed, &amp;...](/{{route}}/{{version}}/admin/user_contact/listed)

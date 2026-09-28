@@ -1,11 +1,11 @@
-# Feature: Admin Country List
+# Feature: Elenco timezone
 
-> **Branch:** `feat/0350-country-listed`  
-> **Stato:** Chiuso  
+> **Branch:** `feat/0351-timezione-listed`  
+> **Stato:** In Corso  
 > **priorità:** B  
-> **id assegnato:** 2026-09-19.01  
-> **Titolo e urgenza:** (B) feat: Country / Country code list  
-> **Project/issue link:** [#350](https://github.com/mrai64/yapcp/issues/350)  
+> **id assegnato:** 2026-09-19.02  
+> **Titolo e urgenza:** (B) feat: Timezone / World timezones list  
+> **Project/issue link:** [#351](https://github.com/mrai64/yapcp/issues/351)  
 > **Milestone link:** [M5](https://github.com/mrai64/yapcp/milestones/5)
 
 - [📝 Logica Tecnica](#-logica-tecnica)
@@ -17,11 +17,7 @@
 
 ## 📝 Logica Tecnica
 
-Viene esposta la *lookup tabel* dei paesi e nazioni, perché
-può servire indicare il codice paese corretto se si associa
-alla per esempio SWI alla Svizzera quando invece è CHE
-Confederation Helvetique.
-Esposti: id, country, flag_code, l'unicode corrispondente alla bandiera
+Elenco delle timezone per aiutare la compilazione, paginata.
 
 ## 🗄️ Modifiche al Database
 

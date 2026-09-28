@@ -163,8 +163,11 @@ new class extends Component {
                                     txt="User Contact Index" 
                                     url="{{ route('admin.user-contact.listed') }}" />
                                 <x-yapcp.inline-link 
-                                    txt="Country Index" 
+                                    txt="Countries Index" 
                                     url="{{ route('admin.country.listed') }}" />
+                                <x-yapcp.inline-link 
+                                    txt="Timezones Index" 
+                                    url="{{ route('admin.timezone.listed') }}" />
                             </td>
                         </tr>
                         <tr class="border">
