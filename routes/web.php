@@ -299,6 +299,9 @@ Volt::route('/user/contest/participate/{contest}', 'user.contest.participate')
 Volt::route('/admin/dashboard', 'admin.dashboard')
     ->middleware(['auth', 'verified', 'can:access-admin'])
     ->name('admin.dashboard');
+Volt::route('/admin/country/listed', 'admin.country.listed')
+    ->middleware(['auth', 'verified', 'can:access-admin'])
+    ->name('admin.country.listed');
 Volt::route('/admin/user-contact/listed', 'admin.user-contact.listed')
     ->middleware(['auth', 'verified', 'can:access-admin'])
     ->name('admin.user-contact.listed');
