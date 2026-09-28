@@ -95,6 +95,10 @@
   - [Modify](#)
   - [Remove](#)
 
+- ## Country
+
+  - [✅ Listed, &amp;...](/{{route}}/{{version}}/admin/country/listed)
+
 - ## User Contact
 
   - [✅ Listed, &amp;...](/{{route}}/{{version}}/admin/user_contact/listed)
