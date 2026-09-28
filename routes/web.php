@@ -302,6 +302,9 @@ Volt::route('/admin/dashboard', 'admin.dashboard')
 Volt::route('/admin/country/listed', 'admin.country.listed')
     ->middleware(['auth', 'verified', 'can:access-admin'])
     ->name('admin.country.listed');
+Volt::route('/admin/federation-more/listed', 'admin.federation-more.listed')
+    ->middleware(['auth', 'verified', 'can:access-admin'])
+    ->name('admin.federation-more.listed');
 Volt::route('/admin/timezone/listed', 'admin.timezone.listed')
     ->middleware(['auth', 'verified', 'can:access-admin'])
     ->name('admin.timezone.listed');

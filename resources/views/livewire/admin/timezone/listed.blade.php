@@ -91,11 +91,7 @@ new class extends Component {
                             <td valign="top" class="fyk text-xl px-2">{{ $timezone->region_id }} &nbsp;&nbsp;</td>
                             <td valign="top" class="fyk text-2xl px-2">{{ $timezone->id }}</td>
                             <td valign="top" class="small px-2" >
-                            @if ($timezone->trashed())
-                                {{ __("Deleted") }}
-                            @else
-                                {{ __("Active") }}
-                            @endif
+                                {{ ($timezone->trashed()) ? __("Deleted") : __("Active") }}
                             </td>
                         </tr>
                         @endforeach
