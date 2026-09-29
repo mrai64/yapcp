@@ -2,7 +2,9 @@
 
 /**
  * Organization Contest design / add a juror to ContestJury
- * 1st of 3 - check email
+ * 1st of 3 - ask and check email, if present in platform:
+ * - miss > 2nd of 3
+ * - present > 3rd of 3 (skip 2nd)
  *
  */
 

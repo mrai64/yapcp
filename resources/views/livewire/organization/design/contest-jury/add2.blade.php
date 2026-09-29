@@ -4,6 +4,7 @@
  * Organization Contest design / add a juror to ContestJury
  * 2nd of 3 - ask personal data to build user n user_contacts
  *
+ * skipped if email already n platform
  */
 
 use App\Actions\Yapcp\RegisterContestJuror;
