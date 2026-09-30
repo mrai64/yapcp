@@ -88,7 +88,7 @@ new class extends Component {
 
             'day5Revelations' => 'required|date|after:day4JuryClosing',
             'day6Awards' => 'required|date|after:day5Revelations',
-            'day7Catalogues' => 'required|date|after:day6Awards',
+            'day7Catalogues' => 'required|date|afterOrEqual:day6Awards',
             'day8Closing' => 'required|date|after:day7Catalogues',
 
             'voteRule' => 'required|string||exists:contests_vote_rule_sets,vote_rule'
