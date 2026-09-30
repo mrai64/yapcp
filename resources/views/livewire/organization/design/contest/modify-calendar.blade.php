@@ -192,7 +192,7 @@ new class extends Component {
                     @csrf
 
                     <!-- 1. Opening -->
-                    <div class="mb-4 w-60">
+                    <div class="mb-4 w-3/4">
                         <x-input-label for="day1Opening" :value="__('1 Participants Contest Opening')" />
                         <input wire:model="day1Opening" name="day1Opening" id="date-picker-1" 
                             class="form-control" type="date" required />
@@ -201,7 +201,7 @@ new class extends Component {
                     </div>
 
                     <!-- 2. Opening -->
-                    <div class="mb-4 w-60">
+                    <div class="mb-4 w-3/4">
                         <x-input-label for="day2Closing" :value="__('2 Participants Contest Deadline')" />
                         <input wire:model="day2Closing" name="day2Closing" id="date-picker-2" 
                             class="form-control" type="date" required />
@@ -210,16 +210,17 @@ new class extends Component {
                     </div>
 
                     <!-- 3. Jury works Opening -->
-                    <div class="mb-4 w-60">
+                    <div class="mb-4 w-3/4">
                         <x-input-label for="day3JuryOpening" :value="__('3 Jury working start')" />
                         <input wire:model="day3JuryOpening" name="day3JuryOpening" id="date-picker-3" 
                             class="form-control" type="date" required />
+                        <p class="small">{{ __(':daysFromDay2 days from participation deadline', ['daysFromDay2' => $this->daysBetween($day2Closing, $day3JuryOpening ) ]) }}</p>
                         <p class="small">{{ __(':daysByDay1 days from start', ['daysByDay1' => $this->daysBetween($day1Opening, $day3JuryOpening ) ]) }}</p>
                         <x-input-error for="day3JuryOpening" class="mt-2" />
                     </div>
 
                     <!-- 4. Jury works Closing -->
-                    <div class="mb-4 w-60">
+                    <div class="mb-4 w-3/4">
                         <x-input-label for="day4JuryClosing" :value="__('4 Jury last reunion')" />
                         <input wire:model="day4JuryClosing" name="day4JuryClosing" id="date-picker-4" 
                             class="form-control" type="date" required />
@@ -228,38 +229,42 @@ new class extends Component {
                     </div>
 
                     <!-- 5. Result revelations -->
-                    <div class="mb-4 w-60">
+                    <div class="mb-4 w-3/4">
                         <x-input-label for="day5Revelations" :value="__('5 Result revelation to participants and public')" />
                         <input wire:model="day5Revelations" name="day5Revelations" id="date-picker-5" 
                             class="form-control" type="date" required />
+                        <p class="small">{{ __(':daysFromDay2 days from participation deadline', ['daysFromDay2' => $this->daysBetween($day2Closing, $day5Revelations ) ]) }}</p>
                         <p class="small">{{ __(':daysByDay1 days from start', ['daysByDay1' => $this->daysBetween($day1Opening, $day5Revelations ) ]) }}</p>
                         <x-input-error for="day5Revelations" class="mt-2" />
                     </div>
 
                     <!-- 6. Award ceremony -->
-                    <div class="mb-4 w-60">
+                    <div class="mb-4 w-3/4">
                         <x-input-label for="day6Awards" :value="__('6 Awards ceremony, online or not')" />
                         <input wire:model="day6Awards" name="day6Awards" id="date-picker-6" 
                             class="form-control" type="date" required />
+                        <p class="small">{{ __(':daysFromDay2 days from participation deadline', ['daysFromDay2' => $this->daysBetween($day2Closing, $day6Awards ) ]) }}</p>
                         <p class="small">{{ __(':daysByDay1 days from start', ['daysByDay1' => $this->daysBetween($day1Opening, $day6Awards ) ]) }}</p>
                         <x-input-error for="day6Awards" class="mt-2" />
                     </div>
 
                     <!-- 7. Catalogues publication -->
-                    <div class="mb-4 w-60">
+                    <div class="mb-4 w-3/4">
                         <x-input-label for="day7Catalogues" :value="__('7 Catalogues publication, online or not')" />
                         <input wire:model="day7Catalogues" name="day7Catalogues" id="date-picker-7" 
                             class="form-control" type="date" required />
+                        <p class="small">{{ __(':daysFromDay2 days from participation deadline', ['daysFromDay2' => $this->daysBetween($day2Closing, $day7Catalogues ) ]) }}</p>
                         <p class="small">{{ __(':daysByDay1 days from start', ['daysByDay1' => $this->daysBetween($day1Opening, $day7Catalogues ) ]) }}</p>
                         <x-input-error for="day7Catalogues" class="mt-2" />
                     </div>
 
                     <!-- 8. Contest closing works -->
-                    <div class="mb-4 w-60">
+                    <div class="mb-4 w-3/4">
                         <x-input-label for="day8Closing" :value="__('8 Finish all contest activities')" />
                         <input wire:model="day8Closing" name="day8Closing" id="date-picker-8" 
                             class="form-control" type="date" required />
-                        <p class="small">{{ __(':daysByDay1 total days from start', ['daysByDay1' => $this->daysBetween($day1Opening, $day8Closing ) ]) }}</p>
+                        <p class="small">{{ __(':daysFromDay2 total days from participation deadline', ['daysFromDay2' => $this->daysBetween($day2Closing, $day8Closing ) ]) }}</p>
+                        <p class="small float-end">{{ __(':daysByDay1 total days from start', ['daysByDay1' => $this->daysBetween($day1Opening, $day8Closing ) ]) }}</p>
 
                         <x-input-error for="day8Closing" class="mt-2" />
                     </div>
