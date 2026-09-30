@@ -29,6 +29,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes; //  uuid booted()
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 /**
  * @property string $id uuid assigned
