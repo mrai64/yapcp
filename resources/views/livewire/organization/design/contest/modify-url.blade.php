@@ -136,7 +136,7 @@ new class extends Component {
 
                     <!-- url4Catalogue -->
                     <div class="mb-4">
-                        <x-input-label for="url4Catalogue" :value="__('Contest denomination, for local language')" />
+                        <x-input-label for="url4Catalogue" :value="__('Catalogue uel, when published')" />
                         <x-text-input wire:model="url4Catalogue" id="url4Catalogue" name="url4Catalogue" 
                             class="block mt-1 w-full" type="url" required />
                         <x-input-error for="url4Catalogue" class="mt-2" />
