@@ -59,7 +59,7 @@ class UserContactFactory extends Factory
             'facebook' => fake()->url(), //              url
             'x_twitter' => fake()->url(), //             url
             'instagram' => fake()->url(), //             url
-            'whatsapp' => fake()->url(), //              url
+            'whatsapp' => 'https://wa.me/' . Str::slug($attributes['cellular']), //              url
             // created_at
             // updated_at
             // deleted_at
