@@ -36,7 +36,7 @@ new class extends Component {
                 'nullable',
                 'string',
                 'regex:/^https:\/\/wa\.me\/[0-9]+$/',
-                'max:50'
+                'max:36'  // included https://wa.me/123456789012345
             ],
         ];
     }
@@ -108,8 +108,8 @@ new class extends Component {
                     <div class="mb-4">
                         <x-input-label for="cellular" :value="__('Cellular number with intl code')" />
                         <x-text-input wire:model.blur="cellular" id="cellular" name="cellular" 
-                        class="block mt-1 w-full" type="text" required 
-                        placeholder="393301234567 for Italy" />
+                        class="block mt-1 w-1/2" type="text" required 
+                        placeholder="393301234567 (example for Italy)" />
                         <p class="small" id="cellularHelp"><em>{{ __('no dots, no spaces, no commas. Only digit prefixed by your +country_code, for international text / sms.') }}</em></p>
                         <x-input-error for="cellular" class="mt-2" />
                     </div>
@@ -117,8 +117,8 @@ new class extends Component {
                     <div class="mb-4">
                         <x-input-label for="whatsapp" :value="__('Whatsapp url, facultative')" />
                         <x-text-input wire:model.blur="whatsapp" id="whatsapp" name="whatsapp" 
-                        class="block mt-1 w-full" type="text" 
-                        placeholder="https://wa.me/393301234567 for Italy" />
+                        class="block mt-1 w-1/2" type="text" 
+                        placeholder="https://wa.me/393301234567 (example for Italy)" />
                         <x-input-error for="whatsapp" class="mt-2" />
                     </div>
 
