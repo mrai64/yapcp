@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Contest;
 use App\Models\ContestWork;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -48,14 +49,24 @@ class ContestWorkPolicy
 
     /**
      * Determine whether the user can create models.
+     *
+     * We need a Contest id to evaluate both:
+     * - contest is open (now > contests.day2_closing)
+     * - user is NOT signed as member of contest organizer
+     *
      */
-    public function create(User $user): bool
+    public function create(User $user, ?Contest $contest = null): bool
     {
         Log::info('Policy: ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
-        // user herself / himself can
-        $evaluate = ($user->id == Auth::id());
-        // other cannot
-        return $evaluate;
+        // not so facultative
+        if (!$contest) {
+            return false;
+        }
+        if (!$contest->isRegistrationOpen()) {
+            return false;
+        }
+        // user is NOT involved with contest organizers
+        return (! $user->isMemberOfOrganization($contest->organization_id));
     }
 
     /**
