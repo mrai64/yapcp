@@ -48,6 +48,12 @@ new class extends Component {
         <x-yapcp.header-link 
             txt="Add a new Work" 
             url="{{ route('user.work.add') }}" />
+        <x-yapcp.header-link 
+            txt="Your 📋 Gallery" 
+            url="{{ route('user.work.listed1') }}" />
+        <x-yapcp.header-link 
+            txt="Your 🌇 Gallery" 
+            url="{{ route('user.work.listed2') }}" />
     </x-slot>
 
     <div class="py-12">

@@ -76,11 +76,11 @@ new class extends Component {
         <x-yapcp.header-link
             txt="Back to User dashboard"
             url="{{ route('user.dashboard') }}" />
-        <x-yapcp.header-link
-            txt="Back to listed Gallery"
+        <x-yapcp.header-link 
+            txt="Your 📋 Gallery" 
             url="{{ route('user.work.listed1') }}" />
-        <x-yapcp.header-link
-            txt="Back to grid Gallery"
+        <x-yapcp.header-link 
+            txt="Your 🌇 Gallery" 
             url="{{ route('user.work.listed2') }}" />
     </x-slot>
 
