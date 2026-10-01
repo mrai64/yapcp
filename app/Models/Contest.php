@@ -32,6 +32,8 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
+use Monolog\DateTimeImmutable;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -193,7 +195,6 @@ class Contest extends Model
     // generate id only when uuid is miss
     public function newUniqueId(): string
     {
-
         return (string) Str::uuid7();
     }
 
@@ -271,12 +272,27 @@ class Contest extends Model
         return $this->is_circuit;
     }
 
-    // fr validation?
+    // for validation?
     public function isACircuit(): bool
     {
         return $this->is_circuit;
     }
 
+    // for authorize
+    public function isRegistrationOpen(?DateTimeImmutable $refDate = null): bool
+    {
+        $refDate = $refDate ? Carbon::instance($refDate) : now();
+        // participation contest open
+        return $refDate->gte($this->day_1_opening) && $refDate->lte($this->day_2_closing);
+    }
+
+    // for authorize
+    public function isJuryWorking(?DateTimeInterface $refDate = null): bool
+    {
+        $refDate = $refDate ? Carbon::instance($refDate) : now();
+        // participation contest open
+        return $refDate->gte($this->day_3_jury_opening) && $refDate->lte($this->day_4_jury_closing);
+    }
 
     // for circuit: get contest in circuit
     public function getContests(): HasMany
