@@ -30,27 +30,27 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 /**
- * @property string $id
- * @property string $user_id
+ * @property string $id pk fk: users.id
  * @property mixed $country_id fk: countries.id
  * @property string $first_name
  * @property string $last_name
- * @property string|null $nick_name
- * @property string $email same as users.email
- * @property string $cellular
- * @property string $passport_photo
- * @property string $lang_local for future use - html lang
- * @property string $timezone for future use - php timezone for time math
- * @property string $address
+ * @property string $nick_name alias, aka
+ * @property string $email fk: users.email
+ * @property string $cellular completed with international prefix
+ * @property string $passport_photo as rounded avatars
+ * @property string $lang_code xx_YYY - for future use in html lang
+ * @property string $timezone_id fk: timezones.id
+ * @property string $address in latin char
  * @property string $address_line2
  * @property string $city
- * @property string $region
+ * @property string $region not timezone region
  * @property string $postal_code
- * @property string|null $website url of personal site
- * @property string|null $facebook url of personal page
- * @property string|null $x_twitter url of personal page
- * @property string|null $instagram url of personal page
- * @property string|null $whatsapp to chat into
+ * @property string $website url of personal site
+ * @property string $facebook url of personal site
+ * @property string $x_twitter url of personal site
+ * @property string $instagram url of personal site
+ * @property string $whatsapp url of personal site
+ * @property string $linkedin url of personal site
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -97,26 +97,20 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereFirstName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereInstagram($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereLangLocal($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereLangCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereLastName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereLinkedin($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereNickName($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact wherePassportPhoto($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact wherePostalCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereRegion($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereTimezone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereTimezoneId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereWebsite($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereWhatsapp($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereXTwitter($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact withoutTrashed()
- * @property string $lang_code xx_YY - for future use in html lang
- * @property string $timezone_id fk: timezones.id
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereLangCode($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereTimezoneId($value)
- * @property string $linkedin url to personal page
- * @method static \Illuminate\Database\Eloquent\Builder<static>|UserContact whereLinkedin($value)
  * @mixin \Eloquent
  */
 class UserContact extends Model
@@ -152,7 +146,7 @@ class UserContact extends Model
         'facebook', //         url
         'x_twitter', //        url
         'instagram', //        url
-        'linkedin', //        url
+        'linkedin', //         url
         'whatsapp', //         url
         // created_at          reserved
         // updated_at          reserved

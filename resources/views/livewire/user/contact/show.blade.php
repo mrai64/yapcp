@@ -9,7 +9,7 @@ use Livewire\Volt\Component;
 use Illuminate\Support\Facades\Auth;
 
 new class extends Component {
-    // 
+    //
     public function with(): array
     {
         return [
