@@ -660,7 +660,7 @@ php artisan db:doc
 | **facebook** | varchar(255) | *url of personal page* | YES |  | *NULL* |
 | **x_twitter** | varchar(255) | *url of personal page* | YES |  | *NULL* |
 | **instagram** | varchar(255) | *url of personal page* | YES |  | *NULL* |
-| **whatsapp** | varchar(255) | *url to chat into* | YES |  | *NULL* |
+| **whatsapp** | varchar(36) | *url to chat into* | YES |  | *NULL* |
 | **created_at** | datetime | *-* | NO |  | CURRENT_TIMESTAMP |
 | **updated_at** | datetime | *-* | NO | MUL | CURRENT_TIMESTAMP |
 | **deleted_at** | datetime | *-* | YES | MUL | *NULL* |
