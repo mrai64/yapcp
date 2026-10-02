@@ -98,9 +98,7 @@ class UserWork extends Model
         'width', //            pixel
         'height', //           pixel
         'long_size', //        file side pixel
-        'long_size', //        file side pixel
         'short_size', //       file side pixel
-        'is_landscape', //     true/false
         'is_landscape', //     true/false
         'is_monochromatic', // true/false
         'has_raw_file', //     true/false
@@ -198,10 +196,7 @@ class UserWork extends Model
     }
 
     // user_works.id > user_work_mores.user_work_id
-    /**
-     * @property UserWorkMore $userWorksMoreSet
-     */
-    public function userWorkMore(): HasMany
+    public function userWorkMores(): HasMany
     {
         $userWorksMoreSet = $this->hasMany(
             related: UserWorkMore::class,  //  ext class

@@ -291,6 +291,9 @@ Volt::route('/user/contest/listed', 'user.contest.listed')
 Volt::route('/user/contest/participate/{contest}', 'user.contest.participate')
     ->middleware(['auth', 'verified'])
     ->name('user.contest.participate');
+Volt::route('/user/contest/participate/remove/{contestWork}', 'user.contest-work.remove')
+    ->middleware(['auth', 'verified'])
+    ->name('user.contest-work.remove');
 
 /**
  * Admin all about

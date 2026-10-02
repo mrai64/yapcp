@@ -209,7 +209,7 @@ class UserWorkAndRelatedSingleBackupJob implements ShouldQueue
         fwrite($fileHandle, "  " . UserWorkMore::TABLENAME . ":\n");
         foreach ($contactsLazy as $contact) {
             foreach ($contact->userWorks as $work) {
-                foreach ($work->userWorkMore as $more) {
+                foreach ($work->userWorkMores as $more) {
                     $moreData = $more->getAttributes();
                     $yamlRecord = Yaml::dump([$moreData], 4, 2);
                     fwrite($fileHandle, $this->indentYamlBlock($yamlRecord, 4));
