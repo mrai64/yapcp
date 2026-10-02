@@ -39,7 +39,7 @@
   - [✅Section n Themes](/{{route}}/{{version}}/contest_design/section/listed)
   - [✅Jury members](/{{route}}/{{version}}/contest_design/jury/listed)
   - [✅Section n ContestAwards](/{{route}}/{{version}}/contest_design/award/listed)
-  - [Contest Details](/{{route}}/{{version}}/contest_design/contest/detail)
+  - [✅Contest Details](/{{route}}/{{version}}/contest_design/contest/detail)
   - **Contest Management**
   - [Participant Works Review](#)
   - [Jury vote Board](#)
