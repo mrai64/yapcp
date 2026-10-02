@@ -39,8 +39,13 @@ new class extends Component {
         // the participant in contest (if )
         $contestWorks = ContestWork::where('user_id', $this->user->id)
             ->where('contest_id', $this->contest->id)
-            ->with('userWork')
+            ->with(['userWork', 'section'])
             ->get();
+        // group then count
+        $worksCountBySectionCode = $contestWorks
+            ->groupBy(fn ($work) => $work->section->code)
+            ->map(fn ($group) => $group->count())
+            ->toArray();
         // the participant contestWork id list
         $assignedUserWorkIds = $contestWorks->pluck('user_work_id')->filter();
 
@@ -52,6 +57,7 @@ new class extends Component {
 
         return [
             'contestWorks' => $contestWorks,
+            'worksCountBySectionCode' => $worksCountBySectionCode,
             'userWorks' => $availableUserWorks,
             'contestSections' => $this->contestSections,
         ];
@@ -79,7 +85,10 @@ new class extends Component {
         </h3>
         <!-- Contest section list w/counter -->
         @foreach($contestSections as $cSec)
-        <p class="inline-flex small">[ {{ __(":code, your: :cntWork / :maxWork", [ 'code' => $cSec->code, 'cntWork' => 0 , 'maxWork' => $cSec->max_works ]) }} ]</p>
+        @php
+            $cntWork = $worksCountBySectionCode[$cSec->code] ?? 0;
+        @endphp
+        <p class="inline-flex small">[ {{ __(":code, your: :cntWork / :maxWork", [ 'code' => $cSec->code, 'cntWork' => $cntWork , 'maxWork' => $cSec->max_works ]) }} ]</p>
         @endforeach
         <hr class="mb-4" />
         <x-yapcp.header-link
