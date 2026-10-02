@@ -23,7 +23,7 @@
   - [✅Personal Dashboard](/{{route}}/{{version}}/users/dashboard)
   - [✅Personal Gallery](/{{route}}/{{version}}/users/personal_gallery)
   - [✅Open Contest List](/{{route}}/{{version}}/users/contest_list)
-  - [Participate to contest](#)
+  - [✅Participate to contest](/{{route}}/{{version}}/users/contest_subscribe)
   - [Send requested RAWs](#)
   - [✅See Federation List](/{{route}}/{{version}}/users/federation_list)
   - [✅See Federation Section List](/{{route}}/{{version}}/users/federation_section_list)
