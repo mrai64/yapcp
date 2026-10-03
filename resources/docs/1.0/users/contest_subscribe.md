@@ -35,3 +35,11 @@ Choose the section code, and only if for a portfolio add a sequence number, inst
 
 And ...done. The page refresh putting your work upper.
 ![_](/docs/users/contest_subscribe_img05.png)
+
+&nbsp;
+
+When you return in your dashboard a gentle reminder about
+contest you have subscribed, with a yellow flag
+until Contest Organization assure that your contest fee was received.  
+After the deadline the contest shift in another list.
+![_](/docs/users/contest_subscribe_img05.png)
