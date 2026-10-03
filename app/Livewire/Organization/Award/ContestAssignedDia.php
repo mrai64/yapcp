@@ -22,7 +22,7 @@ class ContestAssignedDia extends Component
     public $sectionAwarded;
 
     /**
-     * check if a path/namefile has a twin path/300px_namefile
+     * check if a path/namefile has a twin path/300_namefile
      *
      * @return string miniature|original
      *
@@ -30,27 +30,27 @@ class ContestAssignedDia extends Component
      */
     public static function miniature(string $original_file): string
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         $last_slash_pos = strrpos($original_file, '/');
         $path = substr($original_file, 0, $last_slash_pos + 1);
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' path:'.$path);
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' path:' . $path);
 
-        $name_file = '300px_'.substr($original_file, $last_slash_pos + 1);
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' name:'.$name_file);
+        $name_file = '300_' . substr($original_file, $last_slash_pos + 1);
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' name:' . $name_file);
 
-        if (Storage::disk('public')->exists('contests/'.$path.$name_file)) {
-            Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' found');
+        if (Storage::disk('public')->exists('contests/' . $path . $name_file)) {
+            Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' found');
 
-            return $path.$name_file;
+            return $path . $name_file;
         }
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' not found');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' not found');
 
         return $original_file;
     }
 
     public function mount(string $sid) // livewire
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         $this->sectionId = $sid;
 
         $this->sectionAwarded = DB::table('works')
@@ -71,8 +71,7 @@ class ContestAssignedDia extends Component
             ->where('contest_awards.section_id', $this->sectionId)
             ->orderBy('contest_awards.award_code')
             ->get();
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
     }
 
     public function render()

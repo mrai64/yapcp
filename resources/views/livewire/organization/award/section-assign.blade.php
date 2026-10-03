@@ -39,7 +39,7 @@
                 </td>
                 <td class="border md-rounded m-2">
                     @if($award->winner_work_id)
-                    <livewire:organization.award.section-assigned-dia :wid="($contest_id.'/'.$section_id.'/300px_'.$award->winner_work_id.'.jpg')" lazy />
+                    <livewire:organization.award.section-assigned-dia :wid="($contest_id.'/'.$section_id.'/300_'.$award->winner_work_id.'.jpg')" lazy />
                     @else 
                     {{ __("Unassigned, at now") }}
                     @endif
@@ -71,7 +71,7 @@
     <hr class="my-4" />
     <div class="my-4">
         @foreach($admittedWorksSet as $k => $aw)
-        <livewire:organization.award.section-assign-dia :wid="($aw->contest_id.'/'.$aw->section_id.'/300px_'.$aw->work_id.'.'.$aw->extension)" lazy />
+        <livewire:organization.award.section-assign-dia :wid="($aw->contest_id.'/'.$aw->section_id.'/300_'.$aw->work_id.'.'.$aw->extension)" lazy />
         @endforeach
     </div>
     <br style="clear:both;" />

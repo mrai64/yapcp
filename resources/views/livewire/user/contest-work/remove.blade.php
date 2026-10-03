@@ -11,7 +11,6 @@ use App\Models\Contest;
 use App\Models\ContestParticipant;
 use App\Models\ContestWork;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\DB;
 use Livewire\Volt\Component;
 
 new class extends Component {

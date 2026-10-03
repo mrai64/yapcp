@@ -126,11 +126,10 @@ class ContestWork extends Model
 
     /**
      * Get a miniature file relate to full-size by a
-     * '300px_' filename prefix, if present. The same filename otherwise.
+     * '300_' filename prefix, if present. The same filename otherwise.
      *
      * @return string miniature|original
      *
-     * TODO static?
      */
     public function miniature(string $originalFileName = ''): string
     {
@@ -142,7 +141,7 @@ class ContestWork extends Model
         }
         $lastSlashPos = strrpos($originalFileName, '/');
         $path = substr($originalFileName, 0, $lastSlashPos + 1);
-        $miniatureFileName = '300px_' . substr($originalFileName, $lastSlashPos + 1);
+        $miniatureFileName = '300_' . substr($originalFileName, $lastSlashPos + 1);
 
         if (Storage::disk('public')->exists('contests/' . $path . $miniatureFileName)) {
             Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
@@ -152,6 +151,14 @@ class ContestWork extends Model
         }
         // otherwise
         return $originalFileName;
+    }
+
+    public static function renameMiniature(string $originalFileName): string
+    {
+        $lastSlashPos = strrpos($originalFileName, '/');
+        $path = substr($originalFileName, 0, $lastSlashPos + 1);
+        $miniatureFileName = '300_' . substr($originalFileName, $lastSlashPos + 1);
+        return $path . $miniatureFileName;
     }
 
     // was: count_works_for_section_user

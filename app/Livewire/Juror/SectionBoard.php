@@ -56,7 +56,7 @@ class SectionBoard extends Component
     public $votedCounter;
 
     /**
-     * check if a path/namefile has a twin path/300px_namefile
+     * check if a path/namefile has a twin path/300_namefile
      * otherwise return original path/namefile
      *
      * @return string miniature|original
@@ -72,7 +72,7 @@ class SectionBoard extends Component
         Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
             . ' path:' . $originalPath);
 
-        $miniatureName = '300px_' . substr($originalPathName, $lastSlashPosition + 1);
+        $miniatureName = '300_' . substr($originalPathName, $lastSlashPosition + 1);
         Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
             . ' name:' . $miniatureName);
 
@@ -139,7 +139,6 @@ class SectionBoard extends Component
                 ->get();
             Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
                 . ' paginatedContestWorkSet:' . json_encode($this->paginatedContestWorkSet));
-
         } else {
             $this->paginatedContestWorkSet = ContestWork::where('contest_id', $this->contest->id)
                 ->where('section_id', $sid)

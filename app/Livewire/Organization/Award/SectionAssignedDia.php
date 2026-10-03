@@ -22,19 +22,18 @@ class SectionAssignedDia extends Component
 
     public function mount(string $wid) // livewire
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called w/wid: '.$wid);
-        // wid is composed by contest_id / section_id / ('300px_'|'') wid . extension
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called w/wid: ' . $wid);
+        // wid is composed by contest_id / section_id / ('300_'|'') wid . extension
         $this->wid = $wid;
         [$this->contest_id, $this->section_id, $namefile] = explode('/', $wid);
-        $namefile = str_ireplace('300px_', '', $namefile);
+        $namefile = str_ireplace('300_', '', $namefile);
         [$this->work_id, $extension] = explode('.', $namefile);
 
         // user owner of work_id
         $this->user_id = ContestWork::select('user_id')->where('id', $this->work_id)->first();
 
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' contest_id:'.($this->contest_id));
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' section_id:'.($this->section_id));
-
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' contest_id:' . ($this->contest_id));
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' section_id:' . ($this->section_id));
     }
 
     public function render()

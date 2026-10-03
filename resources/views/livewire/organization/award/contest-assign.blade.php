@@ -51,7 +51,7 @@ use App\Models\ContestSection;
                     </td>
                     <td class="border md-rounded m-2">
                     @if ($award->winner_work_id)
-                        <livewire:organization.award.section-assigned-dia :wid="($contestId.'/'.$section_id.'/300px_'.$award->winner_work_id.'.jpg')" lazy />
+                        <livewire:organization.award.section-assigned-dia :wid="($contestId.'/'.$section_id.'/300_'.$award->winner_work_id.'.jpg')" lazy />
                     @elseif ($award->winner_user_id) 
                         <span class="fyk text-xl font-medium">
                             {{$award->flag_code}}

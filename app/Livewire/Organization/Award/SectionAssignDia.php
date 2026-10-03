@@ -23,13 +23,13 @@ class SectionAssignDia extends Component
 
     public function mount(string $wid) // livewire
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called w/wid: '.$wid);
-        // wid is composed by contest_id / section_id / ('300px_'|'') wid . extension
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called w/wid: ' . $wid);
+        // wid is composed by contest_id / section_id / ('300_'|'') wid . extension
         $this->wid = $wid;
 
         [$this->contest_id, $this->section_id, $namefile] = explode('/', $wid);
 
-        $namefile = str_ireplace('300px_', '', $namefile);
+        $namefile = str_ireplace('300_', '', $namefile);
 
         [$this->work_id, $extension] = explode('.', $namefile);
 
@@ -46,21 +46,20 @@ class SectionAssignDia extends Component
             ->whereNull('winner_work_id')
             ->get();
 
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out:'.json_encode($this));
-
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' out:' . json_encode($this));
     }
 
     public function render()
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' out:'.json_encode($this));
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' out:' . json_encode($this));
 
         return view('livewire.organization.award.section-assign-dia');
     }
 
     public function assign_award(string $award_code) // blade wire:click
     {
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called w/in: '.$award_code);
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called w/in: ' . $award_code);
 
         $this->unassigned_award_codes = ContestAward::select('award_code')
             ->where('contest_id', $this->contest_id)
@@ -73,14 +72,14 @@ class SectionAssignDia extends Component
             ->where('section_id', $this->section_id)
             ->where('award_code', $award_code)
             ->update(['winner_work_id' => null, 'winner_user_id' => null, 'winner_name' => '']);
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' clean: '.$clean);
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' clean: ' . $clean);
 
         // second find and update assigned work_id
         $assign = ContestAward::where('contest_id', $this->contest_id)
             ->where('section_id', $this->section_id)
             ->where('award_code', $award_code)
             ->update(['winner_work_id' => $this->work_id, 'winner_user_id' => $this->user_id]);
-        Log::info('Component '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' assign: '.json_encode($assign));
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' assign: ' . json_encode($assign));
 
         // refresh award and admit list
         if ($this->unassigned_award_codes->count() > 1) {

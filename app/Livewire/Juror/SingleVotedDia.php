@@ -18,7 +18,7 @@ class SingleVotedDia extends Component
     public $contest_work;
 
     /**
-     * check if a path/namefile has a twin path/300px_namefile
+     * check if a path/namefile has a twin path/300_namefile
      *
      * @return string miniature|original
      */
@@ -28,12 +28,12 @@ class SingleVotedDia extends Component
         $last_slash_pos = strrpos($original_file, '/');
         $path = substr($original_file, 0, $last_slash_pos + 1);
         // Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' path:' . $path);
-        $name_file = '300px_'.substr($original_file, $last_slash_pos + 1);
+        $name_file = '300_' . substr($original_file, $last_slash_pos + 1);
         // Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' name:' . $name_file);
-        if (Storage::disk('public')->exists('contests/'.$path.$name_file)) {
-            Log::info('Component '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' found');
+        if (Storage::disk('public')->exists('contests/' . $path . $name_file)) {
+            Log::info('Component ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' found');
 
-            return $path.$name_file;
+            return $path . $name_file;
         }
 
         // Log::info('Component '. __CLASS__ .' f/'. __FUNCTION__.':'.__LINE__ . ' not found' );
@@ -50,7 +50,7 @@ class SingleVotedDia extends Component
      */
     public function placeholder()
     {
-        return "\n".'<div style="float:left;width:300px;height:calc(300px + 2rem);display:block;text-center;background-color:#f0f0f0;margin-top:.5rem;margin-right:.5rem;"> <p style="float:left;" class="fyk text-xl z-50">{{ __("Assigned vote: ") }}<span class="text-black font-semibold">##</span></p> <span class="inline-flex justify-end"><a href="#" >[ + / - ]</a></span> <div style="width:300px !important;height:300px !important;background-color:#f0f0f0;border:10px solid #ccc;display:flex;justify-content: center;align-items: center;box-shadow: 0 0 10px rgba(0,0,0,0.2);"> Loading </div> </div>';
+        return "\n" . '<div style="float:left;width:300px;height:calc(300px + 2rem);display:block;text-center;background-color:#f0f0f0;margin-top:.5rem;margin-right:.5rem;"> <p style="float:left;" class="fyk text-xl z-50">{{ __("Assigned vote: ") }}<span class="text-black font-semibold">##</span></p> <span class="inline-flex justify-end"><a href="#" >[ + / - ]</a></span> <div style="width:300px !important;height:300px !important;background-color:#f0f0f0;border:10px solid #ccc;display:flex;justify-content: center;align-items: center;box-shadow: 0 0 10px rgba(0,0,0,0.2);"> Loading </div> </div>';
     }
 
     public function render()

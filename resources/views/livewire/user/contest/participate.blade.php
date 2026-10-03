@@ -83,12 +83,14 @@ new class extends Component {
         <h3 class="fyk text-xl font-medium text-gray-900">
             {{ __("Your participation plate") }}
         </h3>
-        <!-- Contest section list w/counter -->
+        <!-- Contest section list w/counter for participant -->
         @foreach($contestSections as $cSec)
         @php
             $cntWork = $worksCountBySectionCode[$cSec->code] ?? 0;
         @endphp
-        <p class="inline-flex small">[ {{ __(":code, your: :cntWork / :maxWork", [ 'code' => $cSec->code, 'cntWork' => $cntWork , 'maxWork' => $cSec->max_works ]) }} ]</p>
+        <p class="inline-flex small">
+            [ {{ __(":code, your: :cntWork / :maxWork", [ 'code' => $cSec->code, 'cntWork' => $cntWork , 'maxWork' => $cSec->max_works ]) }} ]
+        </p>
         @endforeach
         <hr class="mb-4" />
         <x-yapcp.header-link
@@ -132,11 +134,11 @@ new class extends Component {
                         @foreach($contestWorks as $contestWork)
                         <tr class="border my-4">
                             <td scope="row" class="text-center" align="center">
-                                @livewire('user.contest-work.remove', ['contestWork' => $contestWork->id ])
+                                @livewire('user.contest-work.remove', ['contestWork' => $contestWork ])
                             </td>
                             <td>
                                 <!-- td work miniature TODO shadow img -->
-                                <img src="{{ asset('storage/photos') .'/'. $contestWork->userWork->file_path }}"
+                                <img src="{{ asset('storage/photos') .'/'. ContestWork::renameMiniature($contestWork->userWork->file_path) }}"
                                     style="float: left;" class="block w-48 me-3" />
                             </td>
                             <td class="small">
@@ -160,7 +162,7 @@ new class extends Component {
                 <h2 class="fyk text-2xl font-medium text-gray-900">
                     {{ __("Your Selectable Works")}}
                 </h2>
-                <p class="small">{{ __("Chhose section code, when sequence/portfolio number remain 0 is automatic assigned") }}</p>
+                <p class="small">{{ __("Choose a section code, when sequence/portfolio number remain 0 is automatic assigned") }}</p>
                 <table class="data-table-container w-full">
                     <thead>
                         <tr>
