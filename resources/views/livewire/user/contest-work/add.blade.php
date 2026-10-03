@@ -9,6 +9,7 @@
  * - contestSectionSet array of contest section codes
  *
  * Not a full page but a form
+ * @livewire('user.contest-work.add', json([contestId, workId, contestSectionSet[] ]))
  *
  */
 
