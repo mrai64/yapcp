@@ -7,7 +7,9 @@
  *
  */
 
+use App\Models\ContestParticipant;
 use App\Models\ContestWork;
+use Illuminate\Support\Facades\DB;
 use Livewire\Volt\Component;
 
 new class extends Component {
@@ -21,8 +23,20 @@ new class extends Component {
     //
     public function removeContestWork()
     {
+        $contestWork = $this->contestWork;
         $contest = $this->contestWork->contest;
-        $this->contestWork->delete();
+        DB::transaction(function () use($contest, $contestWork) {
+            $contestWork->delete();
+            $remain = ContestWork::where('contest_id', $contest->id)
+                ->where('user_id', $contestWork->user_id)
+                ->count();
+            if (! $remain) {
+                $cp = ContestParticipant::where('contest_id', $contest->id)
+                    ->where('user_contact_id', $contestWork->user_id)
+                    ->first();
+                $cp->delete();
+            }
+        });
         return redirect()
             ->route('user.contest.participate', ['contest' => $contest])
             ->with('success', __('Work Removed, Ok!'));

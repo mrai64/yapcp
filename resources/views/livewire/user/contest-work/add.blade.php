@@ -90,10 +90,14 @@ new class extends Component {
         }
         // all or nothing
         DB::transaction(function () use ($validated) {
-            ContestParticipant::firstOrCreate([
+            $participant = ContestParticipant::withTrashed()
+                ->firstOrCreate([
                 'contest_id'      => $validated['contestId'],
                 'user_contact_id' => $validated['userWork']->user_id, 
             ]);
+            if ($participant->trashed()){
+                $participant->restore();
+            }
             ContestWork::create([
                 'contest_id'         => $validated['contestId'],
                 'section_id'         => $validated['sectionId'],
