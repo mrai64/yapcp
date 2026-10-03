@@ -10,10 +10,16 @@
 
 After inserted Contest info, theme n sections, jurors, awards,
 the "grand total" or the "grand Detail" is in the LAST: Detail page,
-that represent detailed panel info for users from day_1 to day_2
+that represent detailed panel info for users from day_1 to day_2.
+
+&nbsp;
 
 ![_](/docs/contest/detail_img01.png)
 
 &nbsp;
 
 ![_](/docs/contest/detail_img02.png)
+
+&nbsp;
+
+![_](/docs/contest/detail_img03.png)

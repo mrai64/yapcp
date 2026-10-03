@@ -9,6 +9,7 @@
  *            User n UserRole    are in relationship 1:N
  *            User n (User)Work  are in relationship 1:N
  * 2026-01-22 PSR-12
+ *
  */
 
 namespace App\Models;

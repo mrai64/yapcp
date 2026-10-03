@@ -10,6 +10,7 @@ namespace App\Providers;
 
 use App\Models\ContestAward;
 use App\Models\ContestPatronage;
+use App\Models\ContestWork;
 use App\Models\Federation;
 use App\Models\FederationMore;
 use App\Models\FederationSection;
@@ -68,6 +69,7 @@ class AppServiceProvider extends ServiceProvider
         // Forza il binding esplicito per le rotte che usano {xxx-yyy}
         Route::model('contest-award', ContestAward::class);
         Route::model('contest-patronage', ContestPatronage::class);
+        Route::model('contest-work', ContestWork::class);
         Route::model('federation-more', FederationMore::class);
         Route::model('federation-section', FederationSection::class);
         Route::model('federation', Federation::class);
@@ -77,6 +79,7 @@ class AppServiceProvider extends ServiceProvider
         // Registrazione esplicita della Policy
         Gate::policy(ContestAward::class, \App\Policies\ContestAwardPolicy::class);
         Gate::policy(ContestPatronage::class, \App\Policies\ContestPatronagePolicy::class);
+        Gate::policy(ContestWork::class, \App\Policies\ContestWorkPolicy::class);
         Gate::policy(Federation::class, \App\Policies\FederationPolicy::class);
         Gate::policy(FederationMore::class, \App\Policies\FederationMorePolicy::class);
         Gate::policy(FederationSection::class, \App\Policies\FederationSectionPolicy::class);

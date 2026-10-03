@@ -42,39 +42,36 @@ class ContestSectionRule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' in: attribute:' . $attribute . ', value:' . $value);
+        //ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' in: attribute:' . $attribute . ', value:' . $value);
 
         // sectionId first
         if ($attribute === 'sectionId') {
             $this->sectionId = $value;
-            $this->section = ContestSection::where('id', $value)->get()[0];
-            $this->sectionJson = json_encode($this->section);
-            ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' section:' . $this->sectionJson);
-            session()->put('sectionJson', $this->sectionJson);
+            $this->section = ContestSection::where('id', $value)->first();
+            //ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' section:' . $this->sectionJson);
+            session()->put('sectionId', $this->sectionId);
         }
 
         // userWorkId follow
         if ($attribute === 'userWorkId') {
-            $this->section = json_decode(session()->get('sectionJson'));
-            ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' section:' . json_encode($this->section));
+            $this->sectionId  = session()->get('sectionId');
             $this->userWorkId = $value;
-            $this->userWork = UserWork::where('id', $value)->get()[0];
-            ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' work:' . json_encode($this->userWork));
+            $this->section    = ContestSection::find($this->sectionId);
+            $this->userWork   = UserWork::find($value);
 
-            if ($this->userWork->long_side > $this->section->long_size_max) {
-                $fail('🟥 Long side');
+            if ($this->userWork->long_size > $this->section->long_size_max) {
+                $fail('🟥 Long size');
             }
-            if ($this->userWork->short_side < $this->section->short_size_max) {
-                $fail('🟥 Short side');
+            if ($this->userWork->short_size < $this->section->short_size_max) {
+                $fail('🟥 Short size');
             }
-            if (($this->section->monochromatic_required) && ($this->userWork->monochromatic != true)) {
+            if (($this->section->monochromatic_required) && ($this->userWork->is_monochromatic != true)) {
                 $fail('🟥 Monochromatic');
             }
-            if (($this->section->monochromatic_required) && ($this->userWork->raw != true)) {
+            if (($this->section->monochromatic_required) && ($this->userWork->has_raw_file != true)) {
                 $fail('🟥 RAW unavailable');
             }
-            ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' ok ok');
+            //ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' ok ok');
         }
-
     }
 }

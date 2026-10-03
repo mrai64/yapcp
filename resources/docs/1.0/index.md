@@ -23,7 +23,7 @@
   - [✅Personal Dashboard](/{{route}}/{{version}}/users/dashboard)
   - [✅Personal Gallery](/{{route}}/{{version}}/users/personal_gallery)
   - [✅Open Contest List](/{{route}}/{{version}}/users/contest_list)
-  - [Participate to contest](#)
+  - [✅Participate to contest](/{{route}}/{{version}}/users/contest_subscribe)
   - [Send requested RAWs](#)
   - [✅See Federation List](/{{route}}/{{version}}/users/federation_list)
   - [✅See Federation Section List](/{{route}}/{{version}}/users/federation_section_list)
@@ -39,7 +39,7 @@
   - [✅Section n Themes](/{{route}}/{{version}}/contest_design/section/listed)
   - [✅Jury members](/{{route}}/{{version}}/contest_design/jury/listed)
   - [✅Section n ContestAwards](/{{route}}/{{version}}/contest_design/award/listed)
-  - [Contest Details](/{{route}}/{{version}}/contest_design/contest/detail)
+  - [✅Contest Details](/{{route}}/{{version}}/contest_design/contest/detail)
   - **Contest Management**
   - [Participant Works Review](#)
   - [Jury vote Board](#)
@@ -118,3 +118,12 @@
   - [✅ Contest, &amp;...](/{{route}}/{{version}}/admin/import/contest1st)
   - [✅ User, &amp;...](/{{route}}/{{version}}/admin/import/user)
   - [✅ UserWork, &amp;...](/{{route}}/{{version}}/admin/import/userwork)
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;
+
