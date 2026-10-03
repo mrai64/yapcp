@@ -7,36 +7,40 @@
  *
  */
 
+use App\Models\Contest;
 use App\Models\ContestParticipant;
 use App\Models\ContestWork;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\DB;
 use Livewire\Volt\Component;
 
 new class extends Component {
     //
-    public $contestWork;
+    public ContestWork $contestWork;
     //
     public function mount(ContestWork $contestWork) // from livewire
     {
-        $this->contestWork = $contestWork;
+        $this->contestWork = $contestWork->loadMissing(['contest', 'contestSection']);
     }
     //
     public function removeContestWork()
     {
         $contestWork = $this->contestWork;
-        $contest = $this->contestWork->contest;
-        DB::transaction(function () use($contest, $contestWork) {
+        $contestId   = $this->contestWork->contest_id;
+        $userId      = $this->contestWork->user_id;
+        DB::transaction(function () use($contestId, $userId, $contestWork) {
             $contestWork->delete();
-            $remain = ContestWork::where('contest_id', $contest->id)
-                ->where('user_id', $contestWork->user_id)
+            $remain = ContestWork::where('contest_id', $contestId)
+                ->where('user_id', $userId)
                 ->count();
-            if (! $remain) {
-                $cp = ContestParticipant::where('contest_id', $contest->id)
-                    ->where('user_contact_id', $contestWork->user_id)
+            if ($remain === 0) {
+                $cp = ContestParticipant::where('contest_id', $contestId)
+                    ->where('user_contact_id', $userId)
                     ->first();
-                $cp->delete();
+                $cp?->delete();
             }
         });
+        $contest = Contest::findOrFail($contestId);
         return redirect()
             ->route('user.contest.participate', ['contest' => $contest])
             ->with('success', __('Work Removed, Ok!'));
@@ -44,12 +48,11 @@ new class extends Component {
 }; ?>
 
 <div class="text-center">
-    [ {{ $contestWork->contestSection->code }} ]
+    [ {{ $contestWork->contestSection?->code }} ]
     / 
     {{ $contestWork->portfolio_sequence }}
     <br />
     <form wire:submit="removeContestWork">
-        @csrf
 
         <x-button class="mt-2 ms-4">
             {{ __("Leave from") }}

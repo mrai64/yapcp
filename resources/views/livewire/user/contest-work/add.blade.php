@@ -29,7 +29,7 @@ new class extends Component {
     public string $contestId;
     public string $userId;
     public $contestSectionSet;
-    public string $sectionId;
+    public string $sectionId      = '';
     public int $portfolioSequence = 0;
     //
     // first mount()
@@ -55,17 +55,19 @@ new class extends Component {
             // first sectionId, then userWorkId according w/ContesSectionRule
             'sectionId' => [
                 'string',
+                'required',
                 'exists:contest_sections,id',
                 new ContestSectionRule(),
             ],
             'userWorkId' => [
                 'string',
+                'required',
                 'exists:user_works,id',
                 new ContestSectionRule(),
             ],
-            'userId' => 'string|exists:user_contacts,id',
-            'contestId' => 'string|exists:contests,id',
-            'portfolioSequence' => 'integer|min:0|max:255',
+            // 'userId' => 'string|exists:user_contacts,id',
+            // 'contestId' => 'string|exists:contests,id',
+            'portfolioSequence' => 'integer|min:0|max:250',
         ];
     }
     //
@@ -77,40 +79,58 @@ new class extends Component {
 
         // integration
         $validated['contestId']    = $this->contestId;
-        $validated['userContact']  = UserContact::where('id', $this->userId)->first();
-        $validated['userWork']     = UserWork::where('id', $this->userWorkId)->first();
+        $validated['userContact']  = UserContact::findOrFail($this->userId);
+        $validated['userWork']     = UserWork::findOrFail($this->userWorkId);
         $validated['extension']    = $validated['userWork']->file_format;
-        // incremental if unassigned
-        if ($validated['portfolioSequence'] == 0){
-            // max+1
-            $max = ContestWork::where('section_id', $validated['sectionId'])
-                ->where('user_id', $this->userId)
-                ->count();
-            $validated['portfolioSequence'] = $max + 1; // real world no contest with more than 255 per portfolio
-        }
         // all or nothing
         DB::transaction(function () use ($validated) {
+            // incremental if unassigned
+            if ($validated['portfolioSequence'] == 0){
+                // max+1
+                $max = ContestWork::where('section_id', $validated['sectionId'])
+                    ->where('user_id', $this->userId)
+                    ->max('portfolio_sequence');
+                $validated['portfolioSequence'] = $max + 1; // real world no contest with more than 255 per portfolio
+            }
             $participant = ContestParticipant::withTrashed()
                 ->firstOrCreate([
                 'contest_id'      => $validated['contestId'],
-                'user_contact_id' => $validated['userWork']->user_id, 
+                'user_contact_id' => $validated['userContact']->id, 
             ]);
             if ($participant->trashed()){
                 $participant->restore();
             }
-            ContestWork::create([
-                'contest_id'         => $validated['contestId'],
-                'section_id'         => $validated['sectionId'],
-                'country_id'         => $validated['userContact']->country_id,
-                'user_id'            => $validated['userContact']->id,
-                'user_work_id'       => $validated['userWorkId'],
-                'extension'          => $validated['extension'],
-                'portfolio_sequence' => $validated['portfolioSequence'],
-                'is_admit'           => false, // explicit default
-            ]);
+            $contestWork = ContestWork::withTrashed()
+                ->where('user_id', $validated['userContact']->id)
+                ->where('contest_id', $validated['contestId'])
+                ->where('user_work_id', $validated['userWorkId'])
+                ->first();
+            if ($contestWork) {
+                if ($contestWork->trashed()){
+                    $contestWork->restore();
+                }
+                $contestWork->update([
+                    'section_id'         => $validated['sectionId'],
+                    'portfolio_sequence' => $validated['portfolioSequence'],
+                    'country_id'         => $validated['userContact']->country_id,
+                    'extension'          => $validated['extension'],
+                    'is_admit'           => false, // explicit default
+                ]);
+            } else {
+                ContestWork::create([
+                    'user_id'            => $validated['userContact']->id,
+                    'contest_id'         => $validated['contestId'],
+                    'section_id'         => $validated['sectionId'],
+                    'portfolio_sequence' => $validated['portfolioSequence'],
+                    'user_work_id'       => $validated['userWorkId'],
+                    'country_id'         => $validated['userContact']->country_id,
+                    'extension'          => $validated['extension'],
+                    'is_admit'           => false, // explicit default
+                ]);
+            }
         });
         // redirect - reload
-        $contest = Contest::find($this->contestId);
+        $contest = Contest::findOrFail($this->contestId);
         return redirect()
             ->route('user.contest.participate', ['contest' => $contest])
             ->with('success', __('Work added, Great!'));
@@ -129,15 +149,17 @@ new class extends Component {
     </div>
     @endif
 
-    <form wire:submit.prevent="addContestWork">
+    <form wire:submit="addContestWork">
         @csrf
 
-        <input name="userWorkId" wire:model="userWorkId" type="hidden"
-            value="{{$userWorkId}}" readonly />
+        <input name="userWorkId" 
+            wire:model="userWorkId" 
+            type="hidden"
+            readonly />
         <div>
             <select 
                 name="sectionId" 
-                wire:model.defer="sectionId"
+                wire:model="sectionId"
                 required="required"
                 class="inline-flex items-center border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block px-4 py-2 mt-4 w-48"
                 >
@@ -149,7 +171,7 @@ new class extends Component {
             <!-- portfolio sequence -->
             <input type="number" 
                 name="portfolioSequence" 
-                wire:model.defer="portfolioSequence" 
+                wire:model="portfolioSequence" 
                 min="0" max="250"
                 class="inline-flex items-center border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm px-4 py-2 mt-4 w-24"
                 />
