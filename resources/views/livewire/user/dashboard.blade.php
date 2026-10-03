@@ -90,8 +90,10 @@ with([
                 <x-yapcp.header-link 
                     txt="New Federation" 
                     url="{{ route('federation.add') }}" />
-
                 @endif
+
+                <!-- applied contest-->
+                @livewire('user.contest.applied', ['userId' => $user->id])
             </div>
         </div>
     </div>
