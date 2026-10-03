@@ -14,7 +14,7 @@
  * related to ✅ Federation (thru ContestPatronage)
  * related to ✅ Timezone
  * related to ✅ Organization
- * related to 🚧 Contest (for circuit)
+ * related to 🚧 Contest (itself for circuit)
  * related to ✅ ContestAward
  * related to ✅ ContestParticipant
  * related to ✅ ContestPatronage
@@ -41,6 +41,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 /**
@@ -418,6 +419,7 @@ class Contest extends Model
     }
 
     // contest_participants.contest_id > contests.id
+    // all participants of a contest
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ContestParticipant, $this>
      */
@@ -430,6 +432,14 @@ class Contest extends Model
         );
 
         return $participants;
+    }
+
+    // only a participant in contest, usually logged in
+    public function myParticipation(?string $userId = null): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        $userId = $userId ?? Auth::id();
+        return $this->hasOne(ContestParticipant::class, 'contest_id', 'id')
+            ->where('user_contact_id', $userId);
     }
 
     // contest_sections.contest_id > contests.id
