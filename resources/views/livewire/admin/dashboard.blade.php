@@ -81,6 +81,16 @@ new class extends Component {
                             <td>
                                 <x-yapcp.inline-link 
                                     txt="Run" 
+                                    url="{{ route('admin.backup.contest2nd') }}" />
+                            </td>
+                            <td class="fyk text-xl w-4fifths">
+                                {{ __("Contest, ContestParticipant, ContestSection, ContestWor / 2nd") }}
+                            </td>
+                        </tr>
+                        <tr class="border">
+                            <td>
+                                <x-yapcp.inline-link 
+                                    txt="Run" 
                                     url="{{ route('admin.backup.user') }}" />
                             </td>
                             <td class="fyk text-xl w-4fifths">

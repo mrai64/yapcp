@@ -320,6 +320,9 @@ Volt::route('/admin/user-contact/listed', 'admin.user-contact.listed')
 Volt::route('/admin/backup/contest/1st', 'admin.backup.contest1st')
     ->middleware(['auth', 'verified', 'can:access-admin'])
     ->name('admin.backup.contest1st');
+Volt::route('/admin/backup/contest/2nd', 'admin.backup.contest2nd')
+    ->middleware(['auth', 'verified', 'can:access-admin'])
+    ->name('admin.backup.contest2nd');
 Volt::route('/admin/backup/user', 'admin.backup.user')
     ->middleware(['auth', 'verified', 'can:access-admin'])
     ->name('admin.backup.user');
