@@ -59,6 +59,7 @@ class ContestAndRelatedBackup2ndJob implements ShouldQueue
 
     protected ?Carbon $backupSince;
     protected User $requesterUser;
+    protected string $contestId;
 
     /**
      * Create a new job instance.
@@ -68,10 +69,12 @@ class ContestAndRelatedBackup2ndJob implements ShouldQueue
      */
     public function __construct(
         ?User $requesterUser = null,
-        DateTimeInterface|string|null $backupSince = null
+        DateTimeInterface|string|null $backupSince = null,
+        string $contestId
     ) {
         $this->backupSince   = $backupSince ? Carbon::parse($backupSince) : null;
         $this->requesterUser = $requesterUser ?? Auth::user();
+        $this->contestId     = $contestId;
     }
 
     /**
@@ -79,16 +82,16 @@ class ContestAndRelatedBackup2ndJob implements ShouldQueue
      */
     public function handle(): void
     {
-        Log::info('Job: ' . class_basename($this) . ' -> Avvio processo backup contest e modelli correlati (fase 2).');
+        $jobName   = class_basename($this);
+        Log::info('Job: ' . $jobName . ' -> Avvio processo backup contest e modelli correlati (fase 2).');
 
         // 1. Controllo Autorizzazioni
         if ($this->requesterUser && !FacadesGate::forUser($this->requesterUser)->allows('access-admin')) {
-            Log::warning('Job: ' . class_basename($this) . ' -> Utente non autorizzato: ' . $this->requesterUser->id);
+            Log::warning('Job: ' . $jobName . ' -> Utente non autorizzato: ' . $this->requesterUser->id);
             throw new AuthorizationException(__("Operazione di backup non autorizzata."));
         }
 
         // 2. Definizione del Path e Stream File
-        $jobName   = class_basename($this);
         $timestamp = now()->format('Y-m-d_His');
         $filename  = "{$jobName}_{$timestamp}.yaml";
         $relativePath = "private/backups/{$filename}";
@@ -98,11 +101,11 @@ class ContestAndRelatedBackup2ndJob implements ShouldQueue
 
         $fileHandle = fopen($fullPath, 'w');
         if (!$fileHandle) {
-            Log::error('Job: ' . class_basename($this) . ' -> Impossibile aprire il file per la scrittura: ' . $fullPath);
+            Log::error('Job: ' . $jobName . ' -> Impossibile aprire il file per la scrittura: ' . $fullPath);
             return;
         }
 
-        Log::info('Job: ' . class_basename($this) . ' -> Scrittura intestazione e metadati YAML.');
+        Log::info('Job: ' . $jobName . ' -> Scrittura intestazione e metadati YAML.');
 
         // 3. Scrittura Metadati
         $metadata = [
@@ -132,6 +135,14 @@ class ContestAndRelatedBackup2ndJob implements ShouldQueue
            ])
            ->orderBy('created_at', 'desc');
 
+        // Filtro concorso - contestId già filtrato da rules()
+        Log::info('Job: ' . $jobName . ' -> contestId: (' . $this->contestId . ')');
+        if ($this->contestId && $this->contestId != 'all') {
+            $contestsQuery->where(function ($q) {
+                $q->where('id', $this->contestId);
+            });
+        }
+
         // Filtro Incrementale
         if ($this->backupSince) {
             $contestsQuery->where(function ($q) {
@@ -159,7 +170,7 @@ class ContestAndRelatedBackup2ndJob implements ShouldQueue
 
         fclose($fileHandle);
 
-        Log::info('Job: ' . class_basename($this) . ' -> Backup completato con successo. File salvato in: ' . $relativePath);
+        Log::info('Job: ' . $jobName . ' -> Backup completato con successo. File salvato in: ' . $relativePath);
     }
 
     /**

@@ -84,7 +84,7 @@ new class extends Component {
                                     url="{{ route('admin.backup.contest2nd') }}" />
                             </td>
                             <td class="fyk text-xl w-4fifths">
-                                {{ __("Contest, ContestParticipant, ContestSection, ContestWor / 2nd") }}
+                                {{ __("Contest, ContestParticipant, ContestWork / 2nd") }}
                             </td>
                         </tr>
                         <tr class="border">
