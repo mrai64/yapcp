@@ -74,7 +74,7 @@ class ContestSectionRule implements ValidationRule
                 $fail('🟥 Monochromatic');
             }
             if (($this->section->raw_required) && ($this->userWork->has_raw_file != true)) {
-                $fail('🟥 RAW unavailable');
+                $fail('🟥 RAW MUST BE available');
             }
         }
     }
