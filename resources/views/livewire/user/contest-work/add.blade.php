@@ -15,6 +15,7 @@
 
 use App\Models\Contest;
 use App\Models\ContestParticipant;
+use App\Models\ContestSection;
 use App\Models\ContestWork;
 use App\Models\UserContact;
 use App\Models\UserWork;
@@ -49,7 +50,7 @@ new class extends Component {
             . __LINE__ . ' out:' . json_encode($this));
     }
     // for validate()
-    // sequence secctionId, userWorkid under ContestSectionRule
+    // sequence sectionId, userWorkId under ContestSectionRule
     public function rules()
     {
         return [
@@ -132,6 +133,17 @@ new class extends Component {
         });
         // redirect - reload
         $contest = Contest::findOrFail($this->contestId);
+
+        $contestWorkCount = ContestWork::where('section_id', $validated['sectionId'])
+            ->where('user_id', $this->userId)
+            ->count();
+        $section = ContestSection::findOrFail($validated['sectionId']);
+        if ($contestWorkCount < $section->min_works){
+            return redirect()
+                ->route('user.contest.participate', ['contest' => $contest])
+                ->with('success', __('Work added, Great! but ⚠️ remain under the low level'));
+        }
+
         return redirect()
             ->route('user.contest.participate', ['contest' => $contest])
             ->with('success', __('Work added, Great!'));
