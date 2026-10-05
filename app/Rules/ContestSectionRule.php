@@ -17,6 +17,7 @@
 namespace App\Rules;
 
 use App\Models\ContestSection;
+use App\Models\ContestWork;
 use App\Models\UserWork;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
@@ -24,15 +25,13 @@ use Livewire\Attributes\Session;
 
 class ContestSectionRule implements ValidationRule
 {
-    public $sectionId;
-
-    public ContestSection $section;
-
     #[Session(key: 'sectionJson')]
     public $sectionJson;
 
+    public $contestWorkCount = 0;
+    public ContestSection $section;
+    public $sectionId;
     public $userWorkId;
-
     public $userWork;
 
     /**
@@ -58,7 +57,13 @@ class ContestSectionRule implements ValidationRule
             $this->userWorkId = $value;
             $this->section    = ContestSection::find($this->sectionId);
             $this->userWork   = UserWork::find($value);
+            $this->contestWorkCount = ContestWork::where('section_id', $this->sectionId)
+                ->where('user_id', $this->userWork->user_id)
+                ->count();
 
+            if ($this->contestWorkCount >= $this->section->max_works) {
+                $fail('🟥 Too much works');
+            }
             if ($this->userWork->long_size > $this->section->long_size_max) {
                 $fail('🟥 Long size');
             }
@@ -68,10 +73,9 @@ class ContestSectionRule implements ValidationRule
             if (($this->section->monochromatic_required) && ($this->userWork->is_monochromatic != true)) {
                 $fail('🟥 Monochromatic');
             }
-            if (($this->section->monochromatic_required) && ($this->userWork->has_raw_file != true)) {
+            if (($this->section->raw_required) && ($this->userWork->has_raw_file != true)) {
                 $fail('🟥 RAW unavailable');
             }
-            //ds(__CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' ok ok');
         }
     }
 }
