@@ -227,6 +227,16 @@ Volt::route('/organization/design/contest-award/remove/{contest_award}', 'organi
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-award.remove');
 
+// TODO ContestParticipant manage
+
+// ContestWork manage
+Volt::route('/organization/contest-work/listed/{contest}', 'organization.contest-work.listed')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.contest-work.listed');
+Volt::route('/organization/contest-work/review/{contestWorkId}', 'organization.contest-work.review')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.contest-work.review');
+
 /**
  * Federation
  */
