@@ -2,9 +2,11 @@
 
 /**
  * Organization dashboard
- * 
+ *
  * access granted to alla organization members and admin
- * 
+ *
+ * TODO contest query are related to link in progress
+ *
  */
 
 use App\Models\Contest;
@@ -23,9 +25,12 @@ new class extends Component {
     public Organization $organization;
     public UserContact $userContact;
     public $organizationMembersList;
+
     public $designContestsSet;
-    public $runningContestsSet;
-    public $pastContestsSet;
+    public $beforeJuryContestsSet;
+    public $juryWorkContestsSet;
+    public $afterJuryContestsSet;
+    public $pastContestsSet; 
 
     public function mount(Organization $organization)
     {
@@ -48,31 +53,40 @@ new class extends Component {
             ->orderBy('user_contacts.last_name', 'asc')
             ->orderBy('first_name', 'asc')
             ->get();
-        
-        // contest in design have now < day_1_opening
+
+        // 1. contest in design have now < day_1_opening
         $this->designContestsSet = Contest::query()
             ->where('organization_id', $organization->id)
             ->where('day_1_opening', '>', $now)
-            ->orderBy('day_1_opening')
+            ->orderBy('day_1_opening', 'desc')
             ->get();
-
-
-        // contest running have now >= day_1_opening and
-        //                      now <= day_8_closing
-        $this->runningContestsSet = Contest::query()
+        // 2. contest check before jury 
+        $this->beforeJuryContestsSet = Contest::query()
             ->where('organization_id', $organization->id)
             ->where('day_1_opening', '<=', $now)
+            ->where('day_3_jury_opening', '>', $now)
+            ->orderBy('day_1_opening', 'desc')
+            ->get();
+        // 3. contest Jury window
+        $this->juryWorkContestsSet = Contest::query()
+            ->where('organization_id', $organization->id)
+            ->where('day_3_jury_opening', '<=', $now)
+            ->where('day_4_jury_closing', '>=', $now)
+            ->orderBy('day_1_opening')
+            ->get();
+        // 4. past jury
+        $this->afterJuryContestsSet = Contest::query()
+            ->where('organization_id', $organization->id)
+            ->where('day_4_jury_closing', '<=', $now)
             ->where('day_8_closing', '>=', $now)
             ->orderBy('day_1_opening')
             ->get();
-
-        // past contest have now > day_8_closing
+        // 5. past contest have now > day_8_closing
         $this->pastContestsSet = Contest::query()
             ->where('organization_id', $organization->id)
             ->where('day_8_closing', '<', $now)
             ->orderBy('day_1_opening')
             ->get();
-
     }
 
 }; ?>
@@ -87,10 +101,9 @@ new class extends Component {
             txt="Back to User dashboard" 
             url="{{ route('user.dashboard') }}" />
     </x-slot>
-    
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                 <!-- success -->
                 @if (session('success'))
@@ -122,9 +135,13 @@ new class extends Component {
                 <dl class="space-y-6">
                     @foreach ($organizationMembersList as $organizationMember)
                     <div class="sm:col-span-1 mb-4">
-                        <dt class="mt-1 text-lg text-gray-900 font-semibold">{{ $organizationMember->last_name }}, {{ $organizationMember->first_name }}</dt>
+                        <dt class="mt-1 text-lg text-gray-900 font-semibold">
+                            {{ $organizationMember->last_name }}, {{ $organizationMember->first_name }}
+                        </dt>
                         @foreach ($organizationMember->userRoles as $userRole)
-                        <dd class="text-sm font-medium text-gray-500">{{ $userRole->role }}, {{ __('upto') }} {{ $userRole->role_closing->format('Y-m-d') }}</dd>
+                        <dd class="text-sm font-medium text-gray-500">
+                            {{ $userRole->role }}, {{ __('upto') }} {{ $userRole->role_closing->format('Y-m-d') }}
+                        </dd>
                         @endforeach
                     </div>
                     @endforeach
@@ -139,18 +156,71 @@ new class extends Component {
                 <x-yapcp.inline-link 
                     txt="Design new Contest" 
                     url="{{ route('organization.design.contest.make', ['organization' => $organization]) }}" />
+
                 @if ($designContestsSet->isNotEmpty())
                 <h3 class="fyk text-2xl font-bold mb-4">
                     {{ __("Future Contests") }}
                 </h3>
                     @foreach ($designContestsSet as $contest)
-                    <x-yapcp.inline-link 
-                        txt="{{ ($contest->name_en) ? $contest->name_en : $contest->id }}" 
-                        url="{{ route('organization.design.contest.modify-name', ['contest' => $contest]) }}" />
+                <x-yapcp.inline-link 
+                    txt="{{ ($contest->name_en) ? $contest->name_en : $contest->id }}" 
+                    url="{{ route('organization.design.contest.modify-name', ['contest' => $contest]) }}" />
+                    @endforeach
+                @else
+                <h3 class="fyk text-xl font-bold mb-4">
+                    {{ __("Future Contest, no") }}
+                </h3>
+                @endif
+
+                @if ($beforeJuryContestsSet->isNotEmpty())
+                <h3 class="fyk text-2xl font-bold mb-4">
+                    {{ __("Manage Contests / Before Jury") }}
+                </h3>
+                    @foreach ($beforeJuryContestsSet as $contest)
+                <div class="fyk text-2xl font-bold mb-4">
+                    {{ $contest->name_en }}
+                </div>
+                <x-yapcp.inline-link 
+                    txt="{{ __('Applied Works Review') }}" 
+                    url="{{ route('organization.contest-work.listed', ['contest' => $contest]) }}" />
+                <x-yapcp.inline-link 
+                    txt="{{ __('Participant Status') }}" 
+                    url="{{ route('organization.design.contest.modify-name', ['contest' => $contest]) }}" />
                     @endforeach
                 @endif
 
+                @if ($juryWorkContestsSet->isNotEmpty())
+                <h3 class="fyk text-2xl font-bold mb-4">
+                    {{ __("Manage Contests / During Jurors work") }}
+                </h3>
+                    @foreach ($juryWorkContestsSet as $contest)
+                <x-yapcp.inline-link 
+                    txt="{{ $contest->name_en }}" 
+                    url="{{ route('organization.design.contest.modify-name', ['contest' => $contest]) }}" />
+                    @endforeach
+                @endif
 
+                @if ($afterJuryContestsSet->isNotEmpty())
+                <h3 class="fyk text-2xl font-bold mb-4">
+                    {{ __("Manage Contests / After Jury work") }}
+                </h3>
+                    @foreach ($afterJuryContestsSet as $contest)
+                <x-yapcp.inline-link 
+                    txt="{{ $contest->name_en }}" 
+                    url="{{ route('organization.design.contest.modify-name', ['contest' => $contest]) }}" />
+                    @endforeach
+                @endif
+
+                @if ($pastContestsSet->isNotEmpty())
+                <h3 class="fyk text-2xl font-bold mb-4">
+                    {{ __("Closed Contests") }}
+                </h3>
+                    @foreach ($pastContestsSet as $contest)
+                <x-yapcp.inline-link 
+                    txt="{{ $contest->name_en }}" 
+                    url="{{ route('organization.design.contest.modify-name', ['contest' => $contest]) }}" />
+                    @endforeach
+                @endif
 
                 <h3 class="fyk text-2xl font-bold mb-4">
                     {{ __("Organization") }}
