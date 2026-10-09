@@ -51,6 +51,8 @@ La logica si sviluppa in tre passaggi principali:
 La funzione centrale è quindi la logica di esclusione preventiva, che riduce il Dataset a soli lavori “ancora non esaminati” e “non già validati” per la sezione federale di appartenenza. Il comportamento è progettato per evitare duplicazioni, doppie segnalazioni e revisione di opere già definite come accettabili o già allertate all’autore.
 
 Il componente non crea nuove tabelle o colonne: lavora esclusivamente sulle relazioni esistenti tra:
+
+> <!-- to avoid index in Larecipe -->
 - `contest_works`
 - `contest_waitings`
 - `user_work_validations`
@@ -59,6 +61,8 @@ Il componente non crea nuove tabelle o colonne: lavora esclusivamente sulle rela
 Questo mantiene la modifica semplice, compatibile con il modello dati attuale e senza impatto sull’import/export dei dati contestuali.
 
 Inoltre la UX è orientata a una revisione guidata:
+
+> <!-- to avoid index in Larecipe -->
 - la pagina indica “No works to review” se il filtro esclude tutto;
 - la tabella mostra il numero progressivo del lavoro e titolo dell’opera;
 - il link “Review” apre il dettaglio della singola opera per il controllo umano.
@@ -72,6 +76,8 @@ Questo approccio è coerente con il requisito del problema: la revisione umana �
 Nessuna modifica necessaria al database.
 
 La feature si appoggia alle tabelle già esistenti e non richiede nuove migrazioni:
+
+> <!-- to avoid index in Larecipe -->
 - `contest_works`: archivia le opere iscritte al contest;
 - `contest_waitings`: registra le opere messe in attesa per problemi;
 - `user_work_validations`: memorizza le validazioni già effettuate da parte dei revisori;
@@ -84,11 +90,11 @@ Il pattern è quello di utilizzare query di filtro e non di introdurre nuove ent
 ## 👮‍♂️ Pre Merge check
 
 > <!-- to avoid index in Larecipe -->
-- [ ] **Test:** Tutti i test (nuovi ed esistenti) passano in verde (`php artisan test`)?
-- [ ] **Docs:** Il file in `/resources/docs/dev/` è aggiornato?
-- [ ] **Manual:** Il manuale utente riflette le modifiche introdotte?
-- [ ] **Cleanup:** Ho rimosso eventuali `dd()` o `dump()` dimenticati?
-- [ ] **Commit:** I messaggi dei commit sono chiari?
+- [x] **Test:** Tutti i test (nuovi ed esistenti) passano in verde (`php artisan test`)?
+- [x] **Docs:** Il file in `/resources/docs/dev/` è aggiornato?
+- [x] **Manual:** Il manuale utente riflette le modifiche introdotte?
+- [x] **Cleanup:** Ho rimosso eventuali `dd()` o `dump()` dimenticati?
+- [x] **Commit:** I messaggi dei commit sono chiari?
 
 ---
 
@@ -97,6 +103,8 @@ Il pattern è quello di utilizzare query di filtro e non di introdurre nuove ent
 Niente di particolare, nessuna migrazione o azione speciale richiesta al deploy.
 
 La modifica è completamente trasparente per il runtime applicativo:
+
+> <!-- to avoid index in Larecipe -->
 - non aggiunge nuovi trigger;
 - non richiede nuovi asset front-end;
 - non richiede warm-up del database;

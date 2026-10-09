@@ -28,3 +28,19 @@ then after the list is updated.
 ![_](/docs/contest_work/work_review_img02.png)
 
 &nbsp;
+
+When a Review link is choosed, you are in a single work
+review page, with some infos, reserved to Organization members.
+![_](/docs/contest_work/work_review_img03.png)
+
+&nbsp;
+
+If you click the miniature you can check the full size
+image.
+![_](/docs/contest_work/work_review_img04.png)
+
+&nbsp;
+Then back to single work review page and choose your answer link: 
+are all ok / compliant, or you need to explain to author
+a notify about her/him work?
+

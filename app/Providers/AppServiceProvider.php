@@ -10,6 +10,7 @@ namespace App\Providers;
 
 use App\Models\ContestAward;
 use App\Models\ContestPatronage;
+use App\Models\ContestWaiting;
 use App\Models\ContestWork;
 use App\Models\Federation;
 use App\Models\FederationMore;
@@ -18,6 +19,8 @@ use App\Models\Organization;
 use App\Models\User;
 use App\Models\UserContact;
 use App\Models\UserWork;
+use App\Models\UserWorkMore;
+use App\Models\UserWorkValidation;
 use App\Observers\FederationObserver;
 use App\Observers\OrganizationObserver;
 use App\Observers\UserContactObserver;
@@ -69,11 +72,14 @@ class AppServiceProvider extends ServiceProvider
         // Forza il binding esplicito per le rotte che usano {xxx-yyy}
         Route::model('contest-award', ContestAward::class);
         Route::model('contest-patronage', ContestPatronage::class);
+        Route::model('contest-waiting', ContestWaiting::class);
         Route::model('contest-work', ContestWork::class);
         Route::model('federation-more', FederationMore::class);
         Route::model('federation-section', FederationSection::class);
         Route::model('federation', Federation::class);
         Route::model('organization', Organization::class);
+        Route::model('user-work-validation', UserWorkValidation::class);
+        Route::model('user-work-more', UserWorkMore::class);
         Route::model('user-work', UserWork::class);
 
         // Registrazione esplicita della Policy

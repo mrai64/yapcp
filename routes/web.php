@@ -230,12 +230,22 @@ Volt::route('/organization/design/contest-award/remove/{contest_award}', 'organi
 // TODO ContestParticipant manage
 
 // ContestWork manage
+// list of contest works to be reviewd
 Volt::route('/organization/contest-work/listed/{contest}', 'organization.contest-work.listed')
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-work.listed');
+// single work review
 Volt::route('/organization/contest-work/review/{contestWork}', 'organization.contest-work.review')
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-work.review');
+// single work review: OK
+Volt::route('/organization/user-work-validation/validate/{contestWork}', 'organization.user-work-validation.validate')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.user-work-validation.validate');
+// single work review: NOTIFY
+Volt::route('/organization/contest-waiting/notify/{contestWork}', 'organization.contest-waiting.notify')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.contest-waiting.notify');
 
 /**
  * Federation
