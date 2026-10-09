@@ -131,7 +131,7 @@ class ContestWork extends Model
      * @return string miniature|original
      *
      */
-    public function miniature(string $originalFileName = ''): string
+    public function miniature(?string $originalFileName = ''): string
     {
         Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         // default for contest based on

@@ -102,8 +102,14 @@ new class extends Component {
 <div>
     <x-slot name="header">
         <h2 class="fyk font-semibold text-2xl text-gray-800 leading-tight fyk">
-            {{ __("Contest participant works review") }}
+            {{ __("Contest participant works review for contest:") }}
+            <br />
+            {{ $contest->name_en }}
         </h2>
+        <hr class="my-2" />
+        <p class="small">
+            {{ __("Your org: :organization", ['organization' => $organization->name]) }}
+        </p>
         <hr class="mb-4" />
         <x-yapcp.header-link 
             txt="User dashboard" 
@@ -151,7 +157,7 @@ new class extends Component {
                         <td valign="top" >
                             <x-yapcp.header-link
                                 txt="Review"
-                                url="{{ route('organization.contest-work.review', ['contestWorkId' => $contestWork->id]) }}" />
+                                url="{{ route('organization.contest-work.review', ['contestWork' => $contestWork]) }}" />
                         </td>
                         <td valign="top" class="fyk">{{ $contestWork->userWork->title_en }}</td>
                     </tr>

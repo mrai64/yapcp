@@ -233,7 +233,7 @@ Volt::route('/organization/design/contest-award/remove/{contest_award}', 'organi
 Volt::route('/organization/contest-work/listed/{contest}', 'organization.contest-work.listed')
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-work.listed');
-Volt::route('/organization/contest-work/review/{contestWorkId}', 'organization.contest-work.review')
+Volt::route('/organization/contest-work/review/{contestWork}', 'organization.contest-work.review')
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-work.review');
 
