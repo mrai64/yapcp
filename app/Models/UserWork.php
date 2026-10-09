@@ -153,6 +153,15 @@ class UserWork extends Model
         return $miniature;
     }
 
+    public static function renameMiniature(string $originalFileName): string
+    {
+        $lastSlashPos = strrpos($originalFileName, '/');
+        $path = substr($originalFileName, 0, $lastSlashPos + 1);
+        $miniatureFileName = '300_' . substr($originalFileName, $lastSlashPos + 1);
+        return $path . $miniatureFileName;
+    }
+
+
     // public function photoBox()
     // warn: photobox is based on user_contacts.country_id, user_contacts.last_name,
     //       user_contacts.first_name, so check userContact->photoBox()
