@@ -60,60 +60,60 @@
 
   - [✍️ edit](/resources/docs/1.0/admin/overview.md) [What admins can do](/{{route}}/{{version}}/admin/overview)
 
-- ## Federations
+- ## Admin | Federations
 
   - [✅List](/{{route}}/{{version}}/admin/federation/read)
   - [✅Add](/{{route}}/{{version}}/admin/federation/add)
   - [✅Modify](/{{route}}/{{version}}/admin/federation/modify)
   - [✅Remove](/{{route}}/{{version}}/admin/federation/remove)
 
-- ## Federation' Sections
+- ## Admin | Federation' Sections
 
   - [✅List](/{{route}}/{{version}}/admin/federation_section/listed)
   - [✅Add](/{{route}}/{{version}}/admin/federation_section/add)
   - [✅Modify](/{{route}}/{{version}}/admin/federation_section/modify)
   - [✅Remove](/{{route}}/{{version}}/admin/federation_section/remove)
 
-- ## Federation' More fields
+- ## Admin | Federation' More fields
 
   - [✅List](/{{route}}/{{version}}/admin/federation_more/listed)
   - [✅Add](/{{route}}/{{version}}/admin/federation_more/add)
   - [✅Modify](/{{route}}/{{version}}/admin/federation_more/modify)
   - [✅Remove](/{{route}}/{{version}}/admin/federation_more/remove)
 
-- ## Federation' Members
+- ## Admin | Federation' Members
 
   - [List](#)
   - [Add](#)
   - [Modify](#)
   - [Remove](#)
 
-- ## Platform members
+- ## Admin | User Platform members
 
   - [List](#)
   - [Add](#)
   - [Modify](#)
   - [Remove](#)
 
-- ## Country
+- ## Admin | Country
 
   - [✅ Listed, &amp;...](/{{route}}/{{version}}/admin/country/listed)
 
-- ## Timezone
+- ## Admin | Timezone
 
   - [✅ Listed, &amp;...](/{{route}}/{{version}}/admin/timezone/listed)
 
-- ## User Contact
+- ## Admin | User Contact
 
   - [✅ Listed, &amp;...](/{{route}}/{{version}}/admin/user_contact/listed)
 
-- ## Backups
+- ## Admin | Backups
 
   - [✅ Contest, &amp;...](/{{route}}/{{version}}/admin/backup/contest1st)
   - [✅ User, &amp;...](/{{route}}/{{version}}/admin/backup/user)
   - [✅ UserWork, &amp;...](/{{route}}/{{version}}/admin/backup/userwork)
 
-- ## Imports
+- ## Admin | Imports
 
   - [✅ Contest, &amp;...](/{{route}}/{{version}}/admin/import/contest1st)
   - [✅ User, &amp;...](/{{route}}/{{version}}/admin/import/user)
@@ -126,4 +126,3 @@
 &nbsp;
 
 &nbsp;
-
