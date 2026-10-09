@@ -32,7 +32,7 @@
 
   - [✅Define your Organization](/{{route}}/{{version}}/users/add_organization)
   - [✅Add to an Organization](/{{route}}/{{version}}/users/add_organization)
-  - **Contest design**
+  - **Contest Design**
   - [✅Howto open a Contest](/{{route}}/{{version}}/contest_design/contest/add)
   - [✅Calendar](/{{route}}/{{version}}/contest_design/calendar/modify)
   - [✅Patronages](/{{route}}/{{version}}/contest_design/patronages/listed)
@@ -41,7 +41,7 @@
   - [✅Section n ContestAwards](/{{route}}/{{version}}/contest_design/award/listed)
   - [✅Contest Details](/{{route}}/{{version}}/contest_design/contest/detail)
   - **Contest Management**
-  - [Participant Works Review](#)
+  - [Participant Works Review](/{{route}}/{{version}}/organizations/contest_work_review)
   - [Jury vote Board](#)
   - [Admit status assignment](#)
   - [Section Awards assignments](#)
