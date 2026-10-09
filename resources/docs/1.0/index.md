@@ -41,7 +41,7 @@
   - [✅Section n ContestAwards](/{{route}}/{{version}}/contest_design/award/listed)
   - [✅Contest Details](/{{route}}/{{version}}/contest_design/contest/detail)
   - **Contest Management**
-  - [Participant Works Review](/{{route}}/{{version}}/organizations/contest_work_review)
+  - [✅Participant Works Review](/{{route}}/{{version}}/organizations/contest_work_review)
   - [Jury vote Board](#)
   - [Admit status assignment](#)
   - [Section Awards assignments](#)

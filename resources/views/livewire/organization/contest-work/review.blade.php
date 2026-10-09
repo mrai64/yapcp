@@ -4,7 +4,7 @@
  * Organization Contest Manage
  * Single work review for human review
  * - pass
- *   then a balde register in userWorkValidation the validated work
+ *   then a function addUserWorkValidation register in userWorkValidation the validated work
  * - don't pass
  *   there s any reason for that and reviewer send an email
  *   notification to ContestWork author
@@ -16,6 +16,8 @@ use App\Models\Contest;
 use App\Models\ContestWork;
 use App\Models\Organization;
 use App\Models\UserWork;
+use App\Models\UserWorkValidation;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Volt\Component;
 
 new class extends Component {
@@ -32,6 +34,40 @@ new class extends Component {
         $this->contest = Contest::findOrFail($contestWork->contest_id);
         $this->organization = $this->contest->organization;
         $this->userWork = $contestWork->userWork;
+    }
+    // no rules()
+    public function addUserWorkValidation()
+    {
+        $contestSection = $this->contestWork->section;
+        if ($contestSection->federation_section_id){
+            $userWorkValidation = UserWorkValidation::firstOrCreate([
+                // id
+                'user_work_id'           => $this->contestWork->user_work_id,
+                // section_id
+                'federation_section_id'  => $contestSection->federation_section_id,
+                'validator_user_id'      => Auth::id(),
+            ]);
+        } else {
+            $userWorkValidation = UserWorkValidation::firstOrCreate([
+                // id
+                'user_work_id'           => $this->contestWork->user_work_id,
+                'section_id'             => $this->contestWork->section_id,
+                // federation_section_id
+                'validator_user_id'      => Auth::id(),
+            ]);
+        }
+        // redirect
+        return redirect()
+            ->route('organization.contest-work.listed', ['contest' => $this->contestWork->contest])
+            ->with('success', __('Review done, thanks'));
+    }
+    //
+    public function dearAuthor()
+    {
+        // redirect
+        return redirect()
+            ->route('organization.contest-waiting.notify', ['contestWork' => $this->contestWork])
+            ->with('success', __("What's wrong, but wrote respectfully"));
     }
 }; ?>
 
@@ -102,15 +138,19 @@ new class extends Component {
 
                 <hr class="my-2" />
 
-                <x-yapcp.inline-link
-                    txt="✅ COMPLIANT ✅"
-                    url="{{ route('organization.user-work-validation.validate', ['contestWork' => $contestWork]) }}" />
+                <form wire:submit="addUserWorkValidation">
+                    <x-button class="mt-2 ms-4">
+                        {{ __("✅ COMPLIANT ✅") }}
+                    </x-button>
+                </form>
 
                 <hr class="my-2" />
 
-                <x-yapcp.inline-link
-                    txt="‼️ DEAR AUTHOR ✍️"
-                    url="{{ route('organization.contest-waiting.notify', ['contestWork' => $contestWork]) }}" />
+                <form wire:submit="dearAuthor">
+                    <x-button class="mt-2 ms-4">
+                        {{ __("‼️ DEAR AUTHOR ✍️") }}
+                    </x-button>
+                </form>
 
                 </div>
 
