@@ -100,6 +100,18 @@ new class extends Component {
                 </div>
                 <br style="clear:both;" />
 
+                <hr class="my-2" />
+
+                <x-yapcp.inline-link
+                    txt="✅ COMPLIANT ✅"
+                    url="{{ route('organization.user-work-validation.validate', ['contestWork' => $contestWork]) }}" />
+
+                <hr class="my-2" />
+
+                <x-yapcp.inline-link
+                    txt="‼️ DEAR AUTHOR ✍️"
+                    url="{{ route('organization.contest-waiting.notify', ['contestWork' => $contestWork]) }}" />
+
                 </div>
 
             </div>
