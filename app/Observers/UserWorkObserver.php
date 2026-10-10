@@ -12,6 +12,7 @@ class UserWorkObserver
      */
     public function created(UserWork $userWork): void
     {
+        $userWork->user->notify(new WorkUpdatedNotification($userWork));
         //
     }
 
@@ -28,7 +29,7 @@ class UserWorkObserver
      */
     public function deleted(UserWork $userWork): void
     {
-        //
+        $userWork->user->notify(new WorkUpdatedNotification($userWork));
     }
 
     /**
