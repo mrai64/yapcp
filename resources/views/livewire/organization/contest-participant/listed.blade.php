@@ -131,6 +131,7 @@ new class extends Component {
                                     {{$contestParticipant->userContact->first_name }}
                                 </p>
                                 <p class="fyk text-xl">
+                                    {{$contestParticipant->userContact->email}}<br>
                                     {{($contestParticipant->userContact->city) ? $contestParticipant->userContact->city : __("N\A") }}<br >
                                     {{($contestParticipant->userContact->address) ? $contestParticipant->userContact->address : __("N\A") }}
                                     {{($contestParticipant->userContact->address_line2) ? "<br />" . $contestParticipant->userContact->address_line2 : ""}} 
