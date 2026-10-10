@@ -42,6 +42,7 @@
   - [✅Contest Details](/{{route}}/{{version}}/contest_design/contest/detail)
   - **Contest Management**
   - [✅Participant Works Review](/{{route}}/{{version}}/organizations/contest_work_review)
+  - [✅Recover Waiters](/{{route}}/{{version}}/organizations/contest_waiting_revoke)
   - [Jury vote Board](#)
   - [Admit status assignment](#)
   - [Section Awards assignments](#)
