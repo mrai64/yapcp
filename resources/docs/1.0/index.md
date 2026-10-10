@@ -43,6 +43,7 @@
   - **Contest Management**
   - [✅Participant Works Review](/{{route}}/{{version}}/organizations/contest_work_review)
   - [✅Recover Waiters](/{{route}}/{{version}}/organizations/contest_waiting_revoke)
+  - [✅Payment fee](/{{route}}/{{version}}/organizations/switch_fee_payment_status)
   - [Jury vote Board](#)
   - [Admit status assignment](#)
   - [Section Awards assignments](#)
