@@ -130,7 +130,7 @@ class ContestWaiting extends Model
     }
 
     // contest_waitings.section_id > contest_sections.id
-    public function section()
+    public function contestSection()
     {
         $section = $this->hasOne(
             ContestSection::class, //  ext class
@@ -141,7 +141,7 @@ class ContestWaiting extends Model
     }
 
     // contest_waitings.work_id > user_contacts.id
-    public function work()
+    public function userWork()
     {
         $work = $this->hasOne(
             UserWork::class, //  ext class
@@ -150,6 +150,7 @@ class ContestWaiting extends Model
         );
         return $work;
     }
+
 
     // was: participant_user
     // contest_waitings.participant_user_id > user_contacts.id
