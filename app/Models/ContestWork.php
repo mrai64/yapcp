@@ -19,6 +19,8 @@
 
 namespace App\Models;
 
+use App\Observers\ContestWorkObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -28,30 +30,29 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-//         pk uuid
-
 /**
- * @property string $id uuid assigned
- * @property string $contest_id fk: contests.id 1:N
+ * @property string $id
+ * @property string $contest_id fk: contests.id
  * @property string $section_id fk: contest_sections.id
- * @property string $country_id fk: user_contacts.country_id
- * @property string $user_id fk: users.id
+ * @property string $country_id fk: countries.id
+ * @property string $user_id fk:user_contacts.id author
  * @property string $user_work_id fk: user_works.id
- * @property string $extension to build file name
- * @property int $portfolio_sequence valid also in section counter
+ * @property string $extension used to build file name
+ * @property int $portfolio_sequence sequence also for portfolio
  * @property int $is_admit 0 = not admit, admit otherwise
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Models\UserContact $author
+ * @property-read \App\Models\UserContact|null $author
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestAward> $award
  * @property-read int|null $award_count
- * @property-read \App\Models\Contest $contest
- * @property-read \App\Models\ContestSection $contestSection
+ * @property-read \App\Models\Contest|null $contest
+ * @property-read \App\Models\ContestSection|null $contestSection
  * @property-read \App\Models\Country|null $country
- * @property-read \App\Models\ContestSection $section
+ * @property-read \App\Models\ContestSection|null $section
  * @property-read \App\Models\UserContact|null $userContact
- * @property-read \App\Models\UserWork $work
+ * @property-read \App\Models\UserWork|null $userWork
+ * @method static \Database\Factories\ContestWorkFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork onlyTrashed()
@@ -70,12 +71,10 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereUserWorkId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork withoutTrashed()
- * @property-read \App\Models\UserWork $userWork
- * @property string $user_work_id fk: user_works.id
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestWork whereUserWorkId($value)
- * @method static \Database\Factories\ContestWorkFactory factory($count = null, $state = [])
  * @mixin \Eloquent
  */
+
+#[ObservedBy([ContestWorkObserver::class])]
 class ContestWork extends Model
 {
     use HasFactory;
