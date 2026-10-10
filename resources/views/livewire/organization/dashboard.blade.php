@@ -182,7 +182,7 @@ new class extends Component {
                 </div>
                 <x-yapcp.inline-link 
                     txt="{{ __('Participant Status') }}" 
-                    url="{{ route('organization.design.contest.modify-name', ['contest' => $contest]) }}" />
+                    url="{{ route('organization.contest-participant.listed', ['contest' => $contest]) }}" />
                 <x-yapcp.inline-link 
                     txt="{{ __('Applied Works Review') }}" 
                     url="{{ route('organization.contest-work.listed', ['contest' => $contest]) }}" />
