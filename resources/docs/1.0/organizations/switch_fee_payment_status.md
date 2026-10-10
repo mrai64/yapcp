@@ -18,21 +18,22 @@ itself; payments must therefore be made via third-party payment platforms,
 e.g. bank transfer, cash, PayPal™, and others.
 
 From The Organization dashboard you follow the "participant Status" and reach 
-a paginated list. Here the participants have a status and are ordered by
-country code, last and first name. To avoid homonyms errors, email address and 
-part of postal address is listed.
+a paginated list. 
 ![_](/docs/contest_participants/listed_img01.png)
 
 &nbsp;
 
-Click on the button
+Here the participants have a status and are ordered by
+country code, last and first name. To avoid homonyms errors, email address and 
+part of postal address is listed.
 ![_](/docs/contest_participants/listed_img02.png)
 
 &nbsp;
 
-Was the wrong line? click again on the same.
+Click on the button
 ![_](/docs/contest_participants/listed_img03.png)
 
 &nbsp;
 
-![_](/docs/contest_participants/listed_img03.png)
+Was the wrong line? click again on the same.
+![_](/docs/contest_participants/listed_img04.png)
