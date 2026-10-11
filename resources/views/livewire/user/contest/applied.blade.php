@@ -70,9 +70,10 @@ new class extends Component {
                 <th scope="col" class="fyk border text-2xl rounded-md px-2 py-2 w-1/2 text-start text-gray-500">
                     {{ __("Participant in") }}
                 </th>
-                <th scope="col" class="px-2 py-3 w-1/6 text-start">{{ __('Deadline') }}</th>
-                <th scope="col" class="px-2 py-3 w-1/6">{{ __('Rules') }}</th>
-                <th scope="col" class="px-2 py-3 w-1/6">{{ __('Link to') }}</th>
+                <th scope="col" class="px-2 py-3 w-1/8 text-start">{{ __('Deadline') }}</th>
+                <th scope="col" class="px-2 py-3 w-1/8">{{ __('Partecipate') }}</th>
+                <th scope="col" class="px-2 py-3 w-1/8">{{ __('Rules') }}</th>
+                <th scope="col" class="px-2 py-3 w-1/8">{{ __('Link to') }}</th>
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-200">
@@ -90,13 +91,19 @@ new class extends Component {
                 {{ $contest->day_2_closing->setTimezone($userTimezone)->format('Y-m-d H:i') }}
             </td>
             <td valign="top"  class="text-center">
-                <x-yapcp.header-link 
+                <x-yapcp.inline-link 
+                    class="w-auto"
+                    txt="Partecipate" 
+                    url="{{ route('user.contest.participate', ['contest' => $contest->id]) }}" />
+            </td>
+            <td valign="top"  class="text-center">
+                <x-yapcp.inline-link 
                     class="w-auto"
                     txt="Rules" 
                     url="{{$contest->url_1_rule}}" />
             </td>
             <td valign="top"  class="text-center">
-                <x-yapcp.header-link 
+                <x-yapcp.inline-link 
                     class="w-auto"
                     txt="Contest" 
                     url="{{ route('user.contest.participate', ['contest' => $contest->id]) }}" />
