@@ -228,7 +228,7 @@ Volt::route('/organization/design/contest-award/remove/{contest_award}', 'organi
     ->name('organization.design.contest-award.remove');
 
 // ContestParticipant manage
-// list of contest participants for fee_payment
+// list of contest participants for manage fee_payment
 Volt::route('/organization/contest-participant/listed/{contest}', 'organization.contest-participant.listed')
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-participant.listed');
