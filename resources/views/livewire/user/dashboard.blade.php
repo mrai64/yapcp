@@ -92,7 +92,7 @@ with([
                     url="{{ route('federation.add') }}" />
                 @endif
 
-                <!-- applied contest-->
+                <!-- PARTICIPANT IN - applied contest-->
                 @livewire('user.contest.applied', ['userId' => $user->id])
             </div>
         </div>
