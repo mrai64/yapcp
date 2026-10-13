@@ -97,6 +97,10 @@ with([
 
                 <!-- PARTICIPANT IN - applied contest-->
                 @livewire('user.contest.applied', ['userId' => $user->id])
+                <!-- PARTICIPATED IN - applied contest-->
+                @livewire('user.contest.closed', ['userId' => $user->id])
+                <!-- JUROR IN - applied contest-->
+                @livewire('user.contest.juror', ['userId' => $user->id])
             </div>
         </div>
     </div>

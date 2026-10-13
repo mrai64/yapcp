@@ -12,6 +12,7 @@ use App\Models\Contest;
 use App\Models\ContestWork;
 use App\Models\User;
 use Carbon\CarbonImmutable;
+use Illuminate\Support\Str;
 use Livewire\Volt\Component;
 use Livewire\WithPagination;
 
@@ -25,7 +26,8 @@ new class extends Component {
     // first
     public function mount(string $userId)
     {
-        $this->user = User::find($userId);
+        $this->userId    = (Str::isUuid($userId)) ? $userId : '';
+        $this->user      = User::findOrFail($this->userId);
         $this->userTimezone = $this->user->contact->timezone_id ?? config('app.timezone');
     }
     // next

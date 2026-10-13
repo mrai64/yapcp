@@ -12,6 +12,7 @@
 
 use App\Models\User;
 use Livewire\Volt\Component;
+use Illuminate\Support\Str;
 use Livewire\WithPagination;
 
 new class extends Component {
@@ -23,8 +24,8 @@ new class extends Component {
     public $contests;
     public function mount(string $userId)
     {
-        $this->userId       = $userId;
-        $this->user         = User::find($userId);
+        $this->userId    = (Str::isUuid($userId)) ? $userId : '';
+        $this->user      = User::findOrFail($this->userId);
         $this->userTimezone = $this->user->contact->timezone_id ?? config('app.timezone');
     }
     // next
