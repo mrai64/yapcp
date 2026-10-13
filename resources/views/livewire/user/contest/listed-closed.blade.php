@@ -11,6 +11,7 @@
  * Participants board
  * ContestWork results when available
  *
+ * ! WORK IN PROGRESS
  */
 
 use App\Models\Contest;
@@ -57,7 +58,7 @@ new class extends Component {
             return [
                 'userTz' => $userTz,
                 'closedContestSet' => Contest::query()
-                    ->with(['country', 'contestPatronage', 'organization', 'timezone']) 
+                    ->with(['country', 'contestPatronage', 'contestParticipants', 'organization', 'timezone']) 
                     // Usiamo il confronto tra timestamp completi, non solo date
                     ->where('day_2_closing', '<', $now)
                     ->where('day_2_closing', '>=', ($this->contestYear . '-01-01 00:00:00'))
@@ -70,7 +71,7 @@ new class extends Component {
             return [
                 'userTz' => $userTz,
                 'closedContestSet' => Contest::query()
-                    ->with(['country', 'contestPatronage', 'organization', 'timezone']) 
+                    ->with(['country', 'contestPatronage', 'contestParticipants', 'organization', 'timezone']) 
                     // Usiamo il confronto tra timestamp completi, non solo date
                     ->where('day_2_closing', '<=', ($this->contestYear . '-12-31 23:59:59'))
                     ->where('day_2_closing', '>=', ($this->contestYear . '-01-01 00:00:00'))
@@ -164,14 +165,17 @@ new class extends Component {
                             {{ __('Patronages') }}: {{ $contest->getContestPatronages() ?? __("none"); }}
                         </dd>
                         <dd class="mt-2">
-                            <!-- if not participate -->
-                            <x-yapcp.inline-link 
-                                txt="" 
-                                url="#" />
+                            <!-- if participate / not participate -->
+                             @if ($contest->myParticipation)
                             <x-yapcp.inline-link 
                                 txt="Your Results" 
                                 url="#" />
-                            <!-- if not participate -->
+                             @else
+                            <x-yapcp.inline-link 
+                                txt="not entered" 
+                                url="#" />
+                             @endif
+                            <!-- contest general -->
                             <x-yapcp.inline-link 
                                 txt="Result Board" 
                                 url="{{ route('user.contest-participant.listed-closed', ['contest' => $contest]) }}" />
