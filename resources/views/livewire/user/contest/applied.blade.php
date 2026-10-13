@@ -93,8 +93,13 @@ new class extends Component {
             <td valign="top"  class="text-center">
                 <x-yapcp.inline-link 
                     class="w-auto"
-                    txt="Partecipate" 
+                    txt="Participate" 
                     url="{{ route('user.contest.participate', ['contest' => $contest->id]) }}" />
+                <br>
+                <x-yapcp.inline-link 
+                    class="w-auto"
+                    txt="Participants" 
+                    url="{{ route('user.contest-participant.listed-open', ['contest' => $contest]) }}" />
             </td>
             <td valign="top"  class="text-center">
                 <x-yapcp.inline-link 

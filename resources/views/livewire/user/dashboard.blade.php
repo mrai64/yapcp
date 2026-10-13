@@ -36,38 +36,41 @@ with([
                 @endif
 
                 <h3 class="fyk text-xl font-bold mb-4">{{ __("You") }}</h3>
-                <x-yapcp.header-link 
+                <x-yapcp.inline-link 
                     txt="View Contact infos" 
                     url="{{ route('user.contact.show') }}" />
-                <x-yapcp.header-link
+                <x-yapcp.inline-link
                     txt="Update Contact infos"
                     url="{{ route('user.contact.modify1', ['user_contact' => $userContact]) }}" />
-                <x-yapcp.header-link 
+                <x-yapcp.inline-link 
                     txt="Add Work to Gallery" 
                     url="{{ route('user.work.add') }}" />
-                <x-yapcp.header-link 
+                <x-yapcp.inline-link 
                     txt="Your 📋 Gallery" 
                     url="{{ route('user.work.listed1') }}" />
-                <x-yapcp.header-link 
+                <x-yapcp.inline-link 
                     txt="Your 🌇 Gallery" 
                     url="{{ route('user.work.listed2') }}" />
-                <x-yapcp.header-link 
+                <x-yapcp.inline-link 
                     txt="The Manual" 
                     url="{{ url('/docs') }}" />
-                <x-yapcp.header-link 
+                <x-yapcp.inline-link 
                     txt="Change password" 
                     url="{{ url('/user/profile') }}" />
                 @if ($user->isAdmin())
-                <x-yapcp.header-link 
+                <x-yapcp.inline-link 
                     txt="ADMIN Dashboard" 
                     url="{{ route('admin.dashboard') }}" />
                 @endif
 
                 <h3 class="fyk text-xl font-bold mb-4">{{ __("Lists") }}</h3>
-                <x-yapcp.header-link 
-                    txt="Open Contest List" 
-                    url="{{ route('user.contest.listed') }}" />
-                <x-yapcp.header-link 
+                <x-yapcp.inline-link 
+                    txt="Open Contest Board" 
+                    url="{{ route('user.contest.listed-open') }}" />
+                <x-yapcp.inline-link
+                    txt="Closed Contest Board" 
+                    url="{{ route('user.contest.listed-closed', ['contestYear' => now()->year ]) }}" />
+                <x-yapcp.inline-link 
                     txt="Organizations List" 
                     url="{{ route('organization.listed') }}" />
                 <x-yapcp.inline-link 
@@ -87,7 +90,7 @@ with([
 
                 @if ($user->isAdmin())
                 <h3 class="fyk text-xl font-bold mb-4">{{ __("Federations [admin only]") }}</h3>
-                <x-yapcp.header-link 
+                <x-yapcp.inline-link 
                     txt="New Federation" 
                     url="{{ route('federation.add') }}" />
                 @endif
