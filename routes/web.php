@@ -228,7 +228,7 @@ Volt::route('/organization/design/contest-award/remove/{contest_award}', 'organi
     ->name('organization.design.contest-award.remove');
 
 // ContestParticipant manage
-// list of contest participants for fee_payment
+// list of contest participants for manage fee_payment
 Volt::route('/organization/contest-participant/listed/{contest}', 'organization.contest-participant.listed')
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-participant.listed');
@@ -317,16 +317,30 @@ Volt::route('/federation-more/remove/{federation_more}', 'federation-more.remove
  * User Contest
  */
 // to build contest - see /organization/design upper
-// user on contests
-Volt::route('/user/contest/listed', 'user.contest.listed')
+// open contest for participate
+Volt::route('/user/contest/open-listed', 'user.contest.listed-open')
     ->middleware(['auth', 'verified'])
-    ->name('user.contest.listed');
+    ->name('user.contest.listed-open');
 Volt::route('/user/contest/participate/{contest}', 'user.contest.participate')
     ->middleware(['auth', 'verified'])
     ->name('user.contest.participate');
 Volt::route('/user/contest/participate/remove/{contestWork}', 'user.contest-work.remove')
     ->middleware(['auth', 'verified'])
     ->name('user.contest-work.remove');
+// closed contest board - facultative contestYear format yyyy
+Volt::route('/user/contest/closed-listed/{contestYear?}', 'user.contest.listed-closed')
+    ->middleware(['auth', 'verified'])
+    ->name('user.contest.listed-closed');
+
+// contest-participant for open contest
+Volt::route('/user/contest-participant/open/{contest}', 'user.contest-participant.listed-open')
+    ->middleware(['auth', 'verified'])
+    ->name('user.contest-participant.listed-open');
+// contest-participant for closed contest
+Volt::route('/user/contest-participant/closed/{contest}', 'user.contest-participant.listed-closed')
+    ->middleware(['auth', 'verified'])
+    ->name('user.contest-participant.listed-closed');
+
 
 /**
  * Admin all about

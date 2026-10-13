@@ -245,7 +245,7 @@ class Contest extends Model
     }
 
     // GETTERs
-
+    // unused - remove
     public static function getNameEn(string $contestId): string
     {
         $getContest = self::find($contestId);
@@ -323,6 +323,14 @@ class Contest extends Model
                 . ':' . $patronage->patronage_code;
         }
         return $patronageList;
+    }
+
+    // only a participant in contest, usually logged in
+    public function myParticipation(?string $userId = null): \Illuminate\Database\Eloquent\Relations\HasOne
+    {
+        $userId = $userId ?? Auth::id();
+        return $this->hasOne(ContestParticipant::class, 'contest_id', 'id')
+            ->where('user_contact_id', $userId);
     }
 
     // SCOPE - used to add filter to query
@@ -423,7 +431,7 @@ class Contest extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ContestParticipant, $this>
      */
-    public function participants(): HasMany
+    public function contestParticipants(): HasMany
     {
         $participants = $this->hasMany(
             related: ContestParticipant::class,
@@ -432,14 +440,6 @@ class Contest extends Model
         );
 
         return $participants;
-    }
-
-    // only a participant in contest, usually logged in
-    public function myParticipation(?string $userId = null): \Illuminate\Database\Eloquent\Relations\HasOne
-    {
-        $userId = $userId ?? Auth::id();
-        return $this->hasOne(ContestParticipant::class, 'contest_id', 'id')
-            ->where('user_contact_id', $userId);
     }
 
     // contest_sections.contest_id > contests.id

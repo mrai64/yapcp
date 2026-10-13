@@ -109,28 +109,30 @@ class ContestParticipant extends Model
      *
      * @param string $contestId
      * @return array
-     */
+     *
+     *
     public static function contestParticipantsArray(string $contestId): array
     {
         //dbg Log::infoLog::info('Model '.__CLASS__.' f:'.__FUNCTION__.' l:'.__LINE__.' called');
-        if (!Contest::where('id', $contestId)->exists()) {
+        // no firstOrFail() - instead return empty set
+        if (! Contest::where('id', $contestId)->exists()) {
             return [];
         }
 
         $results = ContestParticipant::query()
-            ->leftJoin('pcp_user_contacts', 'pcp_contest_participants.user_contact_id', '=', 'pcp_user_contacts.id')
-            ->where('contest_id', 'e8ac5674-c3d1-4afa-adaf-a7d5ed82d292')
+            ->leftJoin('user_contacts', 'contest_participants.user_contact_id', '=', 'user_contacts.id')
+            ->where('contest_id', $contestId)
             ->select([
-                'pcp_user_contacts.country_id',
-                'pcp_user_contacts.last_name',
-                'pcp_user_contacts.first_name',
-                'pcp_user_contacts.id as user_id',
-                'pcp_contest_participants.fee_payment_completed'
+                'user_contacts.country_id',
+                'user_contacts.last_name',
+                'user_contacts.first_name',
+                'user_contacts.id as user_id',
+                'contest_participants.fee_payment_completed'
             ])
-            ->orderBy('pcp_user_contacts.country_id')
-            ->orderBy('pcp_user_contacts.last_name')
-            ->orderBy('pcp_user_contacts.first_name')
-            ->orderBy('pcp_user_contacts.id')
+            ->orderBy('user_contacts.country_id')
+            ->orderBy('user_contacts.last_name')
+            ->orderBy('user_contacts.first_name')
+            ->orderBy('user_contacts.id')
             ->get();
         // sort array
         $contestParticipantsArray = collect($results)->sortBy(['country_id', 'last_name', 'first_name'])->toArray();
@@ -139,11 +141,14 @@ class ContestParticipant extends Model
 
         return $contestParticipantsArray;
     }
+     *
+     */
 
     /**
      * Contest user Participant list (complete, no paginated),
      * sorted by country, last_name, first_name
-     */
+     *
+     *
     public static function contestParticipantsCollection(string $contestId): Collection
     {
         // Usiamo Eager Loading ('contact') per caricare i dati anagrafici in un'unica query.
@@ -159,16 +164,19 @@ class ContestParticipant extends Model
             ->orderBy('user_contacts.id')
             ->get();
     }
+     *
+     */
 
     // RELATIONSHIP
 
-    public function contest()
+    public function contest(): BelongsTo
     {
         $contest = $this->belongsTo(
             related: Contest::class,
             foreignKey: 'contest_id', //  contest_participants.contest_id
             ownerKey: 'id' //             contests.id
         );
+
         return $contest;
     }
 
@@ -179,17 +187,6 @@ class ContestParticipant extends Model
             ContestWork::class, //
             'user_id', //           contest_works.user_id
             'user_contact_id' //    contest_participants.user_contact_id
-        );
-
-        return $contestWorks;
-    }
-
-    public function works(): HasMany
-    {
-        $contestWorks = $this->hasMany(
-            ContestWork::class,
-            'user_id',
-            'user_contact_id'
         );
 
         return $contestWorks;
@@ -207,18 +204,6 @@ class ContestParticipant extends Model
         return $userContact;
     }
 
-    // doubled as used in query as contact
-    public function contact(): BelongsTo
-    {
-        //                     user_contacts.user_id contest_participants.user_id
-        $userContact = $this->belongsTo(
-            UserContact::class,
-            'user_contact_id', //   contest_participants.user_id
-            'id' //                 user_contacts.id
-        );
-
-        return $userContact;
-    }
 
     // was: user_contact_more
     public function userContactMores(): HasMany
@@ -228,18 +213,6 @@ class ContestParticipant extends Model
             UserContactMore::class,
             'user_id', //               user_contact_mores.user_id
             'user_contact_id' //        contest_participants.user_contact_id
-        );
-
-        return $userContactMores;
-    }
-
-    public function contactMores(): HasMany
-    {
-        //                       user_contact_mores.user_contact_user_id contest_participants.user_id
-        $userContactMores = $this->hasMany(
-            UserContactMore::class,
-            'user_id',
-            'user_contact_id'
         );
 
         return $userContactMores;

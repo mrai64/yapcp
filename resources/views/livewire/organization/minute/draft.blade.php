@@ -2579,7 +2579,7 @@ select {
     <div class="fyk text-2xl font-medium">
         {{ __("Juror signs")}},
     </div>
-    {{ __("for the contest named:")}}<br />
+    {{ __("for the contest named")}}:<br />
     <div class="fyk text-2xl font-medium">
         {{$contest->name_en}},
     </div>

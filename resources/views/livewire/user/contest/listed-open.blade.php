@@ -1,7 +1,7 @@
 <?php
 
 /**
- * User Contest List
+ * User Open Contest List - page
  * 
  * That blade must show, if present, the contest that are
  * in the window between contests.day1_opening ( >= ) and
@@ -9,6 +9,8 @@
  * 
  * ! Must be checked also the timezone contest vs timezone user
  *
+ * Participate link
+ * participants
  */
 
 use App\Models\Contest;
@@ -119,10 +121,12 @@ new class extends Component {
                             </dd>
 
                             <dd class="mt-4">
-                                <a href="{{ route('user.contest.participate', ['contest' => $contest->id]) }}" 
-                                class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-700 active:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
-                                    {{ __('Participate') }}
-                                </a>
+                                <x-yapcp.inline-link 
+                                    txt="✍️ Participate" 
+                                    url="{{ route('user.contest.participate', ['contest' => $contest->id]) }}" />
+                                <x-yapcp.inline-link 
+                                    txt="📋 Participants" 
+                                    url="{{ route('user.contest-participant.listed-open', ['contest' => $contest]) }}" />
                             </dd>
                         </div>
                         @endforeach
