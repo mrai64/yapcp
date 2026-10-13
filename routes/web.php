@@ -48,7 +48,8 @@ Volt::route('/user/dashboard', 'user.dashboard')
 // user add her/himself to organization see organization.user.add
 // user create new her/him organization see organization.add
 // applied contest list @livewire user.contest.applied
-// ended contest list @livewire user.contest.ended
+// ended contest list @livewire user.contest.closed
+// juror contest list @livewire user.contest.juror
 
 /**
  * UserContact

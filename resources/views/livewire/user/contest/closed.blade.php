@@ -10,21 +10,25 @@
  * ! WORK IN PROGRESS 
  */
 
+use App\Models\Contest;
 use App\Models\User;
+use Carbon\CarbonImmutable;
 use Livewire\Volt\Component;
+use Illuminate\Support\Str;
 use Livewire\WithPagination;
 
 new class extends Component {
     use WithPagination;
     //
-    public $userId;
+    public      $userId;
     public User $user;
     public      $userTimezone;
-    public $contests;
+    public      $contests;
+    // first
     public function mount(string $userId)
     {
-        $this->userId       = $userId;
-        $this->user         = User::find($userId);
+        $this->userId    = (Str::isUuid($userId)) ? $userId : '';
+        $this->user      = User::findOrFail($this->userId);
         $this->userTimezone = $this->user->contact->timezone_id ?? config('app.timezone');
     }
     // next
@@ -54,15 +58,15 @@ new class extends Component {
 
 <div>
     <!-- no header -->
-    <p class="small">
-        {{ __("Some results are not available at same day")}}
-    </p>
     <!-- component -->
     @if ($contests->isEmpty())
     <div class="fyk border text-2xl rounded-md px-4 py-6 text-center text-gray-500">
         {{ __("No closed contest w/you as participant, at now.") }}
     </div>
     @else
+    <p class="small">
+        {{ __("Some results are not available at same day")}}
+    </p>
     <div class="mt-8">
         {{ $contests->links() }}
     </div>
@@ -80,4 +84,5 @@ new class extends Component {
         <tbody class="divide-y divide-gray-200">
         </tbody>
     </table>
+    @endif
 </div>
