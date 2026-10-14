@@ -53,6 +53,7 @@
 
 - ## You as Juror
 
+  - [For new jurors](/{{route}}/{{version}}/jurors/general)
   - [Register as user](#)
   - [Simplest Vote](#)
   - [Change Vote](#)
