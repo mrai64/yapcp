@@ -196,7 +196,12 @@ class ContestSection extends Model
     }
 
     // contest_sections.id << contest_works.section_id
-    // TODO Will become contestWorks()
+    public function contestWorks(): HasMany
+    {
+        $worksInSection = $this->hasMany(ContestWork::class, 'section_id', 'id');
+        // Log
+        return $worksInSection;
+    }
     public function works(): HasMany
     {
         $worksInSection = $this->hasMany(ContestWork::class, 'section_id', 'id');
@@ -207,6 +212,13 @@ class ContestSection extends Model
     // section awards also in order
     // TODO Will become contestAwards()
     public function awards(): HasMany
+    {
+        $awards = $this->hasMany(ContestAward::class, 'section_id', 'id')
+            ->orderBy('award_code');
+        // Log
+        return $awards;
+    }
+    public function contestAwards(): HasMany
     {
         $awards = $this->hasMany(ContestAward::class, 'section_id', 'id')
             ->orderBy('award_code');
@@ -231,5 +243,15 @@ class ContestSection extends Model
     public function contestJuries(): HasMany
     {
         return $this->hasMany(ContestJury::class, 'section_id', 'id');
+    }
+
+    // contest_sections.id 1<N contest_votes.section_id
+    public function contestVotes(): HasMany
+    {
+        return $this->hasMany(
+            related: ContestVote::class,
+            foreignKey: 'section_id',    // contest_votes.section_id
+            localKey: 'id'               // contest_sections.id
+        );
     }
 }

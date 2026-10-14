@@ -342,6 +342,17 @@ Volt::route('/user/contest-participant/closed/{contest}', 'user.contest-particip
     ->middleware(['auth', 'verified'])
     ->name('user.contest-participant.listed-closed');
 
+/**
+ * Juror all
+ *
+ */
+Volt::route('/juror/contest/dashboard/{contest}', 'juror.contest.dashboard')
+    ->middleware(['auth', 'verified'])
+    ->name('juror.contest.dashboard');
+Volt::route('/juror/contest/section-vote/{sectionId}', 'juror.contest.section')
+    ->middleware(['auth', 'verified'])
+    ->name('juror.contest.section');
+
 
 /**
  * Admin all about
