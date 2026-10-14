@@ -59,3 +59,9 @@ If you have any queries or questions regarding the use of the platform, or if th
 ![__](/docs/jurors/general_img07.png)
 
 In any case, we invite you to click straight away on the ‘Update Contact Details’ link on the dashboard page, and update or correct your personal details. We would be honoured if you, as respected judges, found our platform practical and useful for taking part in competitions and also used it as competitors.
+
+&nbsp;
+
+![__](/docs/jurors/general_img08.png)
+
+Sample of (fake) contest, it' only a section.
