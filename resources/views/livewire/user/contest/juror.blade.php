@@ -37,7 +37,7 @@ new class extends Component {
                 $query->where('user_id', $this->userId)
                     ->where('role', UserRole::JUROR);
             })
-            ->where('day_3_jury_opening', '<=', $now)
+            // for test ->where('day_3_jury_opening', '<=', $now)
             ->where('day_4_jury_closing', '>', $now)
             ->get();
     }
@@ -59,8 +59,8 @@ new class extends Component {
             <td valign="top" class="w-1/8">
                 <x-yapcp.inline-link
                     class="w-auto"
-                    txt="Jury work" 
-                    url="#" />
+                    txt="Juror dashboard" 
+                    url="{{ route('juror.contest.dashboard', ['contest' => $contest]) }}" />
             </td>
             <td valign="top" class="fyk text-2xl">
                 {{ $contest->country->flag_code}}
