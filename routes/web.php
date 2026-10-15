@@ -136,7 +136,7 @@ Volt::route('/organization/user/listed/{organization}', 'organization.user.liste
 Volt::route('/organization/user/add/{organization}', 'organization.user.add')
     ->middleware(['auth', 'verified'])
     ->name('organization.user.add');
-// TODO
+// ? TODO
 Volt::route('/organization/contest/listed/{organization}', 'organization.contest.listed')
     ->middleware(['auth', 'verified'])
     ->name('organization.contest.listed');
@@ -248,7 +248,7 @@ Volt::route('/organization/user-work-validation/validate/{contestWork}', 'organi
     ->middleware(['auth', 'verified'])
     ->name('organization.user-work-validation.validate');
 
-// ContesWaiting
+// ContesWaiting manage
 // single work review: NOTIFY
 Volt::route('/organization/contest-waiting/notify/{contestWork}', 'organization.contest-waiting.notify')
     ->middleware(['auth', 'verified'])
@@ -257,6 +257,14 @@ Volt::route('/organization/contest-waiting/notify/{contestWork}', 'organization.
 Volt::route('/organization/contest-waiting/remove/{contest}', 'organization.contest-waiting.remove')
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-waiting.remove');
+
+// Contest Jury manage
+Volt::route('/organization/contest-jury/juror-board/{contest}', 'organization.contest-jury.juror-board')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.contest-jury.juror-board');
+Volt::route('/organization/contest-vote/section-scoreboard/{section}', 'organization.contest-vote.section-scoreboard')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.contest-vote.section-scoreboard');
 
 
 /**

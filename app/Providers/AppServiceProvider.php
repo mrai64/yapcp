@@ -9,8 +9,10 @@
 namespace App\Providers;
 
 use App\Models\ContestAward;
+use App\Models\ContestJury;
 use App\Models\ContestParticipant;
 use App\Models\ContestPatronage;
+use App\Models\ContestVote;
 use App\Models\ContestWaiting;
 use App\Models\ContestWork;
 use App\Models\Federation;
@@ -72,8 +74,10 @@ class AppServiceProvider extends ServiceProvider
 
         // Forza il binding esplicito per le rotte che usano {xxx-yyy}
         Route::model('contest-award', ContestAward::class);
+        Route::model('contest-jury', ContestJury::class);
         Route::model('contest-participant', ContestParticipant::class);
         Route::model('contest-patronage', ContestPatronage::class);
+        Route::model('contest-vote', ContestVote::class);
         Route::model('contest-waiting', ContestWaiting::class);
         Route::model('contest-work', ContestWork::class);
         Route::model('federation-more', FederationMore::class);
