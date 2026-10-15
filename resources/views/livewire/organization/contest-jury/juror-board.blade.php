@@ -151,7 +151,7 @@ new class extends Component {
                     {{ __("Section scoreboards" ) }}
                 </h3>
                 <p class="small">
-                    {{ __("Check ONLY when all votes was assigned in all section")}}
+                    {{ __("Check ScoreBoard and assign awards ONLY AFTER all votes was assigned, in all sections")}}
                 </p>
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
@@ -165,6 +165,9 @@ new class extends Component {
                         @forelse ($contestSections as $contestSection)
                             <tr class="p-2 my-2 border">
                                 <td valign="top" class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                                    <x-yapcp.header-link 
+                                        txt="Award assignment" 
+                                        url="#" />
                                     <x-yapcp.header-link 
                                         txt="Scoreboard" 
                                         url="{{ route('organization.contest-vote.section-scoreboard', ['section' => $contestSection]) }}" />
@@ -183,9 +186,23 @@ new class extends Component {
                                 </td>
                             </tr>
                         @endforelse
+                        <tr class="p-2 my-2 border">
+                            <td valign="top" class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                                <x-yapcp.header-link 
+                                    txt="Award assignment" 
+                                    url="#" />
+                            </td>
+                            <td valign="top" class="fyk text-xl px-6 py-4 whitespace-nowrap font-semibold text-gray-900">
+                                --
+                            </td>
+                            <td valign="top" class="fyk text-xl px-6 py-4 whitespace-nowrap font-semibold text-gray-900">
+                                {{ __("Contest Awards") }}
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
+                <!-- TODO HERE THE AWARD ASSIGN Link -->
             </div>
         </div>
     </div>
