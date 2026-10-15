@@ -49,8 +49,12 @@ new class extends Component {
     //
     public function mount(Organization $organization)
     {
+        //
+        $this->authorize('update', [Organization::class, 'organization' => $organization]);
+        //
         $this->organization = $organization;
         $this->userContact = Auth::user()->contact;
+        //
         // contest all - then filtered
         $this->contestSet = Contest::where('organization_id', $this->organization->id)
             ->orderBy('day_2_closing', 'desc')
@@ -86,11 +90,11 @@ new class extends Component {
                 <ol>
                 @foreach ($this->designSet as $contest)
                 <li class="fyk text-xl border py-2 my-2">
-                    <x-yapcp.inline-link 
-                        txt="Contest dashboard" 
-                        url="{{ route('user.dashboard') }}" />
+                    <x-yapcp.inline-link
+                        txt="Design Contest"
+                        url="{{ route('organization.design.contest.modify-name', ['contest' => $contest]) }}" />
                     {{ $contest-> name_en}} <br />
-                    {{ __("Contest start: " . \Carbon\Carbon::parse($contest->day_1_opening)->format('D j F Y') ) }}
+                    {{ __("Contest start at: " . \Carbon\Carbon::parse($contest->day_1_opening)->format('D j F Y') ) }}
                 </li>
                 @endforeach
                 </ol>
@@ -107,11 +111,11 @@ new class extends Component {
                 <ol>
                 @foreach ($this->beforeJurySet as $contest)
                 <li class="fyk text-xl border py-2 my-2">
-                    <x-yapcp.inline-link 
-                        txt="Contest dashboard" 
-                        url="{{ route('user.dashboard') }}" />
+                    <x-yapcp.header-link
+                        txt="Contest Review Dashboards"
+                        url="{{ route('organization.contest-work.listed', ['contest' => $contest]) }}" />
                     {{ $contest->name_en}} <br />
-                    {{ __("Jury works start: " . \Carbon\Carbon::parse($contest->day_3_opening)->format('D j F Y') ) }}
+                    {{ __("Jury works start: " . \Carbon\Carbon::parse($contest->day_3_jury_opening)->format('D j F Y') ) }}
                 </li>
                 @endforeach
                 </ol>
@@ -129,8 +133,8 @@ new class extends Component {
                 @foreach ($this->duringJuryWindowSet as $contest)
                 <li class="fyk text-xl border py-2 my-2">
                     <x-yapcp.inline-link 
-                        txt="Contest dashboard" 
-                        url="{{ route('user.dashboard') }}" />
+                        txt="Jury Dashboard" 
+                        url="{{ route('organization.contest-jury.juror-board', ['contest' => $contest] ) }}" />
                     {{ $contest-> name_en}} <br />
                     {{ __("Jury works end at: " . \Carbon\Carbon::parse($contest->day_4_jury_closing)->format('D j F Y') ) }}
                 </li>

@@ -197,9 +197,12 @@ new class extends Component {
                     {{ __("Manage Contests / During Jurors work") }}
                 </h3>
                     @foreach ($juryWorkContestsSet as $contest)
-                <x-yapcp.inline-link 
-                    txt="{{ $contest->name_en }}" 
-                    url="{{ route('organization.design.contest.modify-name', ['contest' => $contest]) }}" />
+                    <div class="fyk text-2xl">
+                        <x-yapcp.inline-link 
+                        txt="Jury Dashboard" 
+                        url="{{ route('organization.contest-jury.juror-board', ['contest' => $contest] ) }}" />
+                        {{ $contest-> name_en}} 
+                    </div>
                     @endforeach
                 @endif
 
