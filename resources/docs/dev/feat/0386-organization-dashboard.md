@@ -20,7 +20,8 @@
 per il concorso, durante la finestra di attività delle giurie, l'organizzazione visiona 
 i contatori opere votate / opere totali di ogni sezione e ogni giurato.
 Sono presenti anche link per la valutazione in ogni sezione del concorso
-della % di voti.
+della % di voti. E i link per assegnare premi a ciascuna sezione +
+il concorso in generale.
 
 ## 🗄️ Modifiche al Database
 
@@ -30,10 +31,10 @@ Nessuna modifica necessaria al database
 
 > <!-- to avoid index in Larecipe -->
 - [ ] **Test:** Tutti i test (nuovi ed esistenti) passano in verde (`php artisan test`)?
-- [ ] **Docs:** Il file in `/resources/docs/dev/` è aggiornato?
-- [ ] **Manual:** Il manuale utente riflette le modifiche introdotte?
-- [ ] **Cleanup:** Ho rimosso eventuali `dd()` o `dump()` dimenticati?
-- [ ] **Commit:** I messaggi dei commit sono chiari?
+- [x] **Docs:** Il file in `/resources/docs/dev/` è aggiornato?
+- [x] **Manual:** Il manuale utente riflette le modifiche introdotte?
+- [x] **Cleanup:** Ho rimosso eventuali `dd()` o `dump()` dimenticati?
+- [x] **Commit:** I messaggi dei commit sono chiari?
 
 ## 🚀 Note per il Deploy
 
