@@ -41,7 +41,7 @@ new class extends Component {
                 ->with(['contestWork'])
                 ->where('section_id', $this->contestSection->id)
                 ->where('juror_user_id', $this->juror->id)
-                ->orderBy('updated_at')
+                ->orderByDesc('updated_at')
                 ->paginate(6),
         ];
     }
@@ -58,7 +58,9 @@ new class extends Component {
             <br />
             {{ __("Organization: " . $contest->organization->country->flag_code . ' ' . $contest->organization->country_id . ' | ' . $contest->organization->name ) }}
         </h3>
-        <hr class="mb-4" />
+        <hr class="my-2" />
+        <p class="small">{{ __("Note: Last updated, first show") }}</p>
+        <hr class="my-4" />
         <x-yapcp.header-link 
             txt="Back to User dashboard" 
             url="{{ route('user.dashboard') }}" />
@@ -103,11 +105,11 @@ new class extends Component {
                         </div>
 
                         <!-- Link sottostante e centrato -->
-                        <div class="mt-2 fyk text-2xl">
-                            Vote: {{ $contestVote->vote }}
+                        <div class="mt-2 fyk text-xl">
                             <x-yapcp.inline-link 
                                 txt="Change" 
-                                url="{{ route('user.dashboard') }}" />
+                                url="{{ route('juror.contest.modify-vote', ['contestVote' => $contestVote]) }}" />
+                            Vote: {{ $contestVote->vote }}
                         </div>
                     </div>
                     @empty

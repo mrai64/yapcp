@@ -365,6 +365,10 @@ Volt::route('/juror/contest/section-vote/{contestSection}', 'juror.contest.secti
 Volt::route('/juror/contest/voted-board/{contestSection}', 'juror.contest.voted-board')
     ->middleware(['auth', 'verified'])
     ->name('juror.contest.voted-board');
+// modify previous vote
+Volt::route('/juror/contest/modify/{contestVote}', 'juror.contest.modify-vote')
+    ->middleware(['auth', 'verified'])
+    ->name('juror.contest.modify-vote');
 
 /**
  * Admin all about
