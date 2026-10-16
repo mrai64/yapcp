@@ -91,8 +91,8 @@ new class extends Component {
 
 <div>
     <!-- image here -->
-    <div class="flex justify-center items-center my-4" style="height: 75vh !important;">
-        @if ($contestWork->userWork->is_landscape)
+    <div class="flex justify-center items-center my-4 min-h-0" style="height: 75vh !important;">
+        @if (($contestWork->userWork->short_size < $contestWork->userWork->long_size) && $contestWork->userWork->is_landscape)
         <img src="{{ asset('storage/contests') .'/'. $contestWork->contest_id .'/'. $contestWork->section_id .'/'. $contestWork->id .'.'. $contestWork->userWork->file_format }}"
             class="max-w-full object-contain rounded-lg shadow-md"
             @contextmenu.prevent
@@ -100,11 +100,11 @@ new class extends Component {
         />
         @else
         <img src="{{ asset('storage/contests') .'/'. $contestWork->contest_id .'/'. $contestWork->section_id .'/'. $contestWork->id .'.'. $contestWork->userWork->file_format }}"
-            class="max-h-full object-contain rounded-lg shadow-md"
+            class="h-full max-w-full object-contain rounded-lg shadow-md"
             @contextmenu.prevent
             alt="All rights reserved"
         />
-        @endif    
+        @endif
     </div>
     <hr class="my-2"/>
     <!-- vote method here -->
