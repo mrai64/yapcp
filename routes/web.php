@@ -357,7 +357,7 @@ Volt::route('/user/contest-participant/closed/{contest}', 'user.contest-particip
 Volt::route('/juror/contest/dashboard/{contest}', 'juror.contest.dashboard')
     ->middleware(['auth', 'verified'])
     ->name('juror.contest.dashboard');
-Volt::route('/juror/contest/section-vote/{sectionId}', 'juror.contest.section')
+Volt::route('/juror/contest/section-vote/{contestSection}', 'juror.contest.section')
     ->middleware(['auth', 'verified'])
     ->name('juror.contest.section');
 
