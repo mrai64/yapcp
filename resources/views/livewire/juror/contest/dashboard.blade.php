@@ -112,7 +112,7 @@ new class extends Component {
                                 <br />
                                 <x-yapcp.header-link 
                                     txt="Vote Section" 
-                                    url="{{ route('juror.contest.section', ['sectionId', $contestSection->id]) }}" />
+                                    url="{{ route('juror.contest.section', ['contestSection' => $contestSection]) }}" />
                                 @else
                                 {{ __("All :num voted ✅", ['num' => $contestSection->participantWorksCount]) }}
                                 @endif

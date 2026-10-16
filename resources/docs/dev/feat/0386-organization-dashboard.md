@@ -1,7 +1,7 @@
 # Feature: Nome Funzione
 
 > **Branch:** `feat/0386-organization-dashboard`  
-> **Stato:** In Corso  
+> **Stato:** Chiuso  
 > **priorità:** A  
 > **id assegnato:** 2026-10-14.01  
 > **Titolo e urgenza:** (A) feat: Organization / Contest Manage w/Jury / dashboard  

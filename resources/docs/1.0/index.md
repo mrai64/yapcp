@@ -54,8 +54,7 @@
 - ## You as Juror
 
   - [✅For new jurors](/{{route}}/{{version}}/jurors/general)
-  - [The Contst Dashboard](#)
-  - [Simplest Vote](#)
+  - [✅Simplest Vote System](/{{route}}/{{version}}/jurors/vote)
   - [Change Vote](#)
   - [Contest Minute Sign](#)
 

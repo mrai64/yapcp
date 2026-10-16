@@ -12,6 +12,7 @@ use App\Models\ContestAward;
 use App\Models\ContestJury;
 use App\Models\ContestParticipant;
 use App\Models\ContestPatronage;
+use App\Models\ContestSection;
 use App\Models\ContestVote;
 use App\Models\ContestWaiting;
 use App\Models\ContestWork;
@@ -29,6 +30,7 @@ use App\Observers\OrganizationObserver;
 use App\Observers\UserContactObserver;
 use App\Observers\UserObserver;
 use App\Policies\ContestPaymentChangePolicy;
+use App\Policies\ContestJuryPolicy;
 use App\Policies\JurorOnlyPolicy;
 use BinaryTorch\LaRecipe\LaRecipeServiceProvider;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -77,6 +79,7 @@ class AppServiceProvider extends ServiceProvider
         Route::model('contest-jury', ContestJury::class);
         Route::model('contest-participant', ContestParticipant::class);
         Route::model('contest-patronage', ContestPatronage::class);
+        Route::model('contest-section', ContestSection::class);
         Route::model('contest-vote', ContestVote::class);
         Route::model('contest-waiting', ContestWaiting::class);
         Route::model('contest-work', ContestWork::class);
@@ -90,6 +93,7 @@ class AppServiceProvider extends ServiceProvider
 
         // Registrazione esplicita della Policy
         Gate::policy(ContestAward::class, \App\Policies\ContestAwardPolicy::class);
+        Gate::policy(ContestJury::class, \App\Policies\ContestJuryPolicy::class);
         Gate::policy(ContestPatronage::class, \App\Policies\ContestPatronagePolicy::class);
         Gate::policy(ContestWork::class, \App\Policies\ContestWorkPolicy::class);
         Gate::policy(Federation::class, \App\Policies\FederationPolicy::class);
@@ -112,6 +116,13 @@ class AppServiceProvider extends ServiceProvider
         // ! ? Check: member of which organization?
         Gate::define('access-organization', function (User $user) {
             return $user->isMemberOfAnyOrganization();
+        });
+        // user member of jury in section
+        Gate::define('vote-in-section', function (User $user, ContestSection $contestSection) {
+            $res = ContestJury::where('section_id', $contestSection->id)
+                ->where('user_id', $user->id)
+                ->exists();
+            return $res;
         });
 
         // Observers
