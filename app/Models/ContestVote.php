@@ -113,7 +113,6 @@ class ContestVote extends Model
         $arrayIds = array_values(collect($voteIds)->toArray());
 
         return $arrayIds;
-
     }
 
     // was: section_vote_board
@@ -126,10 +125,9 @@ class ContestVote extends Model
             ->orderBy('updated_at', 'desc')
             ->get(['contest_work_id', 'vote', 'id']);
 
-        ds('Model '.__CLASS__.' '.__FUNCTION__.':'.__LINE__.' vote_board:'.json_encode($vote_board));
+        ds('Model ' . __CLASS__ . ' ' . __FUNCTION__ . ':' . __LINE__ . ' vote_board:' . json_encode($vote_board));
 
         return $vote_board;
-
     }
 
     // RELATIONSHIPs
@@ -170,8 +168,8 @@ class ContestVote extends Model
     {
         $work = $this->belongsTo(
             ContestWork::class, //  ext class
-            'id', //                ext contest_works.id
-            'contest_work_id' //    int contest_votes.contest_work_id
+            'contest_work_id', //   int contest_votes.contest_work_id
+            'id' //                 ext contest_works.id
         );
 
         return $work;
