@@ -1,11 +1,11 @@
 <?php
 
 /**
- * Contest Manage - Juror Single vote
- * 
+ * Contest Manage - Juror Single vote - first vote
+ *
  * For contest section pick a single work then propose it
- * with 
- * 
+ * with
+ *
  */
 
 use App\Models\ContestSection;
