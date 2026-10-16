@@ -357,10 +357,14 @@ Volt::route('/user/contest-participant/closed/{contest}', 'user.contest-particip
 Volt::route('/juror/contest/dashboard/{contest}', 'juror.contest.dashboard')
     ->middleware(['auth', 'verified'])
     ->name('juror.contest.dashboard');
+// vote in a section a work a time
 Volt::route('/juror/contest/section-vote/{contestSection}', 'juror.contest.section')
     ->middleware(['auth', 'verified'])
     ->name('juror.contest.section');
-
+// vote board to modify
+Volt::route('/juror/contest/voted-board/{contestSection}', 'juror.contest.voted-board')
+    ->middleware(['auth', 'verified'])
+    ->name('juror.contest.voted-board');
 
 /**
  * Admin all about

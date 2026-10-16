@@ -131,6 +131,32 @@ new class extends Component {
                 </h3>
                 @endif
 
+                <!-- vote board review -->
+                <table class="data-table-container w-auto">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="data-table-section-counter">{{ __("Total")}}</th>
+                            <th scope="col" class="data-table-section-code fyk text-2xl">{{ __("Contest Section n Theme")}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($contestSections as $contestSection)
+                        <tr class="border my-2">
+                            <td valign="top" class="fyk text-xl">
+                                {{ $contestSection->participantWorksCount }}
+                                <x-yapcp.header-link 
+                                    txt="Vote modify" 
+                                    url="{{ route('juror.contest.voted-board', ['contestSection' => $contestSection]) }}" />
+                            </td>
+                            <td valign="top" class="fyk text-2xl">
+                                {{ $contestSection->code }}
+                                {{ $contestSection->name_en }}
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
                 <!-- Eventuale ri-voto in/out -->
                 @if ($reviewRequired)
                     <!-- livewire -->
