@@ -34,8 +34,9 @@ new class extends Component {
                     ->from(ContestVote::TABLENAME)
                     ->where('section_id', $this->contestSection->id);
             })
+            ->inRandomOrder()
             ->first();
-        // exit strategy
+        // exit strategy - no more work to vote
         if (!$contestWork){
             redirect()
                 ->route('juror.contest.dashboard', ['contest' => $this->contestWork->contest])
@@ -66,7 +67,8 @@ new class extends Component {
     // every button 
     public function addContestVote(string $vote)
     {
-        $this->vote = $vote;
+        $this->vote = $vote; // simulated form field
+        // no vote - exit
         if ($this->vote == 'exit'){
             return redirect()
                 ->route('juror.contest.dashboard', ['contest' => $this->contestWork->contest])
@@ -81,6 +83,7 @@ new class extends Component {
             'juror_user_id' => Auth::id(),
             'vote' => $validated['vote'],
         ]);
+        // 
         return redirect()
             ->route('juror.contest.section', ['contestSection' => $this->contestSection]);
     }
