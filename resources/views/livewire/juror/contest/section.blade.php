@@ -18,6 +18,7 @@ use Livewire\Volt\Component;
 new class extends Component {
     //
     public ContestSection $contestSection;
+    public $jurorUserId;
     public $contestWork;
     public $voteMethod;
     public $vote;
@@ -28,10 +29,12 @@ new class extends Component {
         $this->authorize('vote-in-section', $contestSection );
         //
         $this->contestSection = $contestSection;
+        $this->jurorUserId    = Auth::id();
         $contestWork = ContestWork::where('section_id', $this->contestSection->id)
             ->whereNotIn('id', function($query){
                 $query->select('contest_work_id')
                     ->from(ContestVote::TABLENAME)
+                    ->where('juror_user_id', $this->jurorUserId)
                     ->where('section_id', $this->contestSection->id);
             })
             ->inRandomOrder()
@@ -39,7 +42,7 @@ new class extends Component {
         // exit strategy - no more work to vote
         if (!$contestWork){
             redirect()
-                ->route('juror.contest.dashboard', ['contest' => $this->contestWork->contest])
+                ->route('juror.contest.dashboard', ['contest' => $this->contestSection->contest])
                 ->with('success', __('Hurrah! Completed. Next?'));
         }
         $this->contestWork = $contestWork;
@@ -91,16 +94,18 @@ new class extends Component {
 
 <div>
     <!-- image here -->
-    <div class="flex justify-center items-center my-4 min-h-0" style="height: 75vh !important;">
+    <div class="flex justify-center items-center my-4 min-h-0" style="height: 75vh;">
         @if (($contestWork->userWork->short_size < $contestWork->userWork->long_size) && $contestWork->userWork->is_landscape)
+        <!-- quadrata o landscape -->
         <img src="{{ asset('storage/contests') .'/'. $contestWork->contest_id .'/'. $contestWork->section_id .'/'. $contestWork->id .'.'. $contestWork->userWork->file_format }}"
-            class="max-w-full object-contain rounded-lg shadow-md"
+            class="max-h-full max-w-full object-contain rounded-lg shadow-md"
             @contextmenu.prevent
             alt="All rights reserved"
         />
         @else
+        <!-- non quadrata e non landscape -->
         <img src="{{ asset('storage/contests') .'/'. $contestWork->contest_id .'/'. $contestWork->section_id .'/'. $contestWork->id .'.'. $contestWork->userWork->file_format }}"
-            class="h-full max-w-full object-contain rounded-lg shadow-md"
+            class="h-full max-h-full max-w-full object-contain rounded-lg shadow-md"
             @contextmenu.prevent
             alt="All rights reserved"
         />

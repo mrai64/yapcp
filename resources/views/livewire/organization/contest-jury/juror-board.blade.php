@@ -170,7 +170,7 @@ new class extends Component {
                                         url="#" />
                                     <x-yapcp.header-link 
                                         txt="Scoreboard" 
-                                        url="{{ route('organization.contest-vote.section-scoreboard', ['section' => $contestSection]) }}" />
+                                        url="{{ route('organization.contest-vote.section-scoreboard', ['contestSection' => $contestSection]) }}" />
                                 </td>
                                 <td valign="top" class="fyk text-xl px-6 py-4 whitespace-nowrap font-semibold text-gray-900">
                                     {{ $contestSection->code }}

@@ -68,14 +68,7 @@ new class extends Component {
 
 <div>
     <!-- page empty -->
-    <div class="flex justify-center items-center my-4 min-h-0" style="height: 75vh !important;">
-        @if (($contestWork->userWork->short_size < $contestWork->userWork->long_size) && $contestWork->userWork->is_landscape)
-        <img src="{{ asset('storage/contests') .'/'. $contestWork->contest_id .'/'. $contestWork->section_id .'/'. $contestWork->id .'.'. $contestWork->userWork->file_format }}"
-            class="max-w-full object-contain rounded-lg shadow-md"
-            @contextmenu.prevent
-            alt="All rights reserved"
-        />
-        @else
+    <div class="flex justify-center items-center my-4 min-h-0" style="height: 75vh;">
         <img src="{{ asset('storage/contests') .'/'. $contestWork->contest_id .'/'. $contestWork->section_id .'/'. $contestWork->id .'.'. $contestWork->userWork->file_format }}"
             class="h-full max-w-full object-contain rounded-lg shadow-md"
             @contextmenu.prevent

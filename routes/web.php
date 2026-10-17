@@ -262,7 +262,7 @@ Volt::route('/organization/contest-waiting/remove/{contest}', 'organization.cont
 Volt::route('/organization/contest-jury/juror-board/{contest}', 'organization.contest-jury.juror-board')
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-jury.juror-board');
-Volt::route('/organization/contest-vote/section-scoreboard/{section}', 'organization.contest-vote.section-scoreboard')
+Volt::route('/organization/contest-vote/section-scoreboard/{contestSection}', 'organization.contest-vote.section-scoreboard')
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-vote.section-scoreboard');
 
