@@ -55,7 +55,7 @@
 
   - [✅For new jurors](/{{route}}/{{version}}/jurors/general)
   - [✅Simplest Vote System](/{{route}}/{{version}}/jurors/vote)
-  - [Change Vote](#)
+  - [✅Change Vote](/{{route}}/{{version}}/jurors/change)
   - [Contest Minute Sign](#)
 
 - ## You as *platform minister*
