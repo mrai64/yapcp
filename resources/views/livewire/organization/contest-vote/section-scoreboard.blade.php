@@ -12,6 +12,7 @@
 
 use App\Models\Contest;
 use App\Models\ContestSection;
+use App\Models\ContestVote;
 use App\Models\ContestVoteScoreboard;
 use App\Models\ContestWork;
 use App\Models\Organization;
@@ -19,8 +20,6 @@ use Livewire\Volt\Component;
 use Livewire\WithPagination;
 
 new class extends Component {
-    //
-    use WithPagination;
     //
     public ContestSection $contestSection;
     public Contest        $contest;
@@ -65,6 +64,55 @@ new class extends Component {
             'rankings' => $rankings,
         ];
     }
+    // reset
+    public function resetIsAdmit()
+    {
+        ContestWork::where('section_id', $this->contestSection->id)
+            ->where('is_admit', true)
+            ->update(['is_admit' => false]);
+    }
+    public function resetReviewRequired()
+    {
+        ContestVote::where('section_id', $this->contestSection->id)
+            ->where('review_required', true)
+            ->update(['review_required' => false]);
+    }
+    // set
+    public function setIsAdmit(string $fromVote)
+    {
+        $this->resetIsAdmit();
+        $this->resetReviewRequired();
+
+        // 1. Rintracciamo i contest_work_id dalla vista/tabella ContestVoteScoreboard
+        $workIds = ContestVoteScoreboard::where('section_id', $this->contestSection->id)
+            ->where('total_votes', '>=', $fromVote)
+            ->pluck('contest_work_id');
+
+        // 2. Aggiorniamo i ContestWork corrispondenti
+        ContestWork::where('section_id', $this->contestSection->id)
+            ->whereIn('id', $workIds)
+            ->update(['is_admit' => true]);
+
+        session()->flash('success', __("Successfully mark as Admit all Works with sum(vote) >= of :vote", ['vote' => $fromVote]));
+    }
+    public function requestReview(string $fromVote)
+    {
+        // reset previous values
+        $this->resetIsAdmit();
+        $this->resetReviewRequired();
+
+        // 1. Rintracciamo i contest_work_id dalla vista/tabella ContestVoteScoreboard
+        $workIds = ContestVoteScoreboard::where('section_id', $this->contestSection->id)
+            ->where('total_votes', '=', $fromVote)
+            ->pluck('contest_work_id');
+
+        // 2. Aggiorniamo i ContestWork corrispondenti
+        ContestVote::where('section_id', $this->contestSection->id)
+            ->whereIn('contest_work_id', $workIds)
+            ->update(['review_required' => true]);
+
+        session()->flash('success', __("Inserted request re-vote for Jurors"));
+    }
 }; ?>
 
 <div>
@@ -100,6 +148,7 @@ new class extends Component {
                 <div class="fyk text-2xl float-end font-medium rounded-md px-4 py-2">
                     ✅ {{ session('success') }}
                 </div>
+                <hr class="my-2" />
                 @endif
 
                 <!-- errors list -->
@@ -113,7 +162,8 @@ new class extends Component {
                 </div>
                 @endif
 
-                <table class="min-w-full divide-y divide-gray-200">
+
+                <table class="w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
                             <th class="px-6 py-3 text-right fyk text-2xl font-medium text-gray-500 uppercase tracking-wider">{{ __("Vote Sum") }}</th>
@@ -126,6 +176,7 @@ new class extends Component {
                         @forelse ($rankings as $row)
                             <tr>
                                 <td class="fyk text-2xl px-6 py-4 whitespace-nowrap font-bold text-gray-900">
+                                    @php $totalVote = $row['total_votes'] @endphp
                                     {{ $row['total_votes'] }}
                                 </td>
                                 <td class="fyk text-xl px-6 py-4 whitespace-nowrap  text-gray-600">
@@ -137,12 +188,12 @@ new class extends Component {
                                     {{ sprintf("%3.2f", (100 * $row['greater_or_equal_count']) / $totalParticipant )}}%
                                 </td>
                                 <td class="px-6">
-                                    <x-yapcp.inline-link 
-                                        txt="⬆️ Admit all from ⬆️" 
-                                        url="#" />
-                                    <x-yapcp.inline-link 
-                                        txt="✂️ Request in/out" 
-                                        url="#" />
+                                    <x-button class="m-2 p-4" wire:click.prevent="setIsAdmit('{{$totalVote}}')">
+                                        {{'⬆️ Admit all from ⬆️'}}
+                                    </x-button>
+                                    <x-button class="m-2 p-4" wire:click.prevent="requestReview('{{$totalVote}}')">
+                                        {{'✂️ Request in/out'}}
+                                    </x-button>
                                 </td>
                             </tr>
                         @empty
