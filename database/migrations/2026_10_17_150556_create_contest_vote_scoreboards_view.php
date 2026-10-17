@@ -29,7 +29,7 @@ return new class extends Migration
         //     $table->timestamps();
         // });
         DB::statement("
-        CREATE VIEW contest_vote_scoreboard AS
+        CREATE VIEW contest_vote_scoreboards AS
         SELECT
             cw.id AS contest_work_id,
             cw.section_id,
