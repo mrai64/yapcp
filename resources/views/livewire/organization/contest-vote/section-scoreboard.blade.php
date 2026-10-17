@@ -87,6 +87,9 @@ new class extends Component {
         <x-yapcp.header-link
             txt="Org Dashboards"
             url="{{ route('organization.dashboard', ['organization' => $organization]) }}" />
+        <x-yapcp.header-link 
+            txt="Jury Dashboard" 
+            url="{{ route('organization.contest-jury.juror-board', ['contest' => $contest] ) }}" />
     </x-slot>
 
     <div class="py-12">
@@ -110,38 +113,47 @@ new class extends Component {
                 </div>
                 @endif
 
-        <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-                <tr>
-                    <th class="px-6 py-3 text-right fyk text-2xl font-medium text-gray-500 uppercase tracking-wider">{{ __("Vote Sum") }}</th>
-                    <th class="px-6 py-3 text-right text-xs      font-medium text-gray-500 uppercase tracking-wider">{{ __("# of GE") }}</th>
-                    <th class="px-6 py-3 text-right fyk text-2xl font-medium text-gray-500 uppercase tracking-wider">{{ __("% of GE") }}</th>
-                </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-                @forelse ($rankings as $row)
-                    <tr>
-                        <td class="fyk text-2xl px-6 py-4 whitespace-nowrap font-bold text-gray-900">
-                            {{ $row['total_votes'] }}
-                        </td>
-                        <td class="fyk text-xl px-6 py-4 whitespace-nowrap  text-gray-600">
-                            {{ $row['greater_or_equal_count'] }} 
-                            / 
-                            {{ $totalParticipant }}
-                        </td>
-                        <td class="fyk text-2xl text-right">
-                            {{ sprintf("%3.2f", (100 * $row['greater_or_equal_count']) / $totalParticipant )}}%
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="2" class="px-6 py-4 text-center text-sm text-gray-500">
-                            Nessun voto registrato in questa sezione.
-                        </td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-right fyk text-2xl font-medium text-gray-500 uppercase tracking-wider">{{ __("Vote Sum") }}</th>
+                            <th class="px-6 py-3 text-right text-xs      font-medium text-gray-500 uppercase tracking-wider">{{ __("# of GE") }}</th>
+                            <th class="px-6 py-3 text-right fyk text-2xl font-medium text-gray-500 uppercase tracking-wider">{{ __("% of GE") }}</th>
+                            <th class="px-6 py-3 text-right text-xs      font-medium text-gray-500 uppercase tracking-wider">{{ __("Actions") }}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @forelse ($rankings as $row)
+                            <tr>
+                                <td class="fyk text-2xl px-6 py-4 whitespace-nowrap font-bold text-gray-900">
+                                    {{ $row['total_votes'] }}
+                                </td>
+                                <td class="fyk text-xl px-6 py-4 whitespace-nowrap  text-gray-600">
+                                    {{ $row['greater_or_equal_count'] }} 
+                                    / 
+                                    {{ $totalParticipant }}
+                                </td>
+                                <td class="fyk text-2xl text-right">
+                                    {{ sprintf("%3.2f", (100 * $row['greater_or_equal_count']) / $totalParticipant )}}%
+                                </td>
+                                <td class="px-6">
+                                    <x-yapcp.inline-link 
+                                        txt="⬆️ Admit all from ⬆️" 
+                                        url="#" />
+                                    <x-yapcp.inline-link 
+                                        txt="✂️ Request in/out" 
+                                        url="#" />
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4" class="px-6 py-4 text-center text-sm text-gray-500">
+                                    {{ __("No vote registered, at now, for this section-theme")}}
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
 
             </div>
         </div>
