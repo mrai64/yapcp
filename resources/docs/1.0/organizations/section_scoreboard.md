@@ -14,23 +14,11 @@ Once the jurors have finished voting for the section, the organizers can go to t
 
 &nbsp;
 
-
 This panel provides a summary of the total scores awarded by the jurors to the entries, listed in descending order, alongside the number of entries that received ‘that score or higher’, and the corresponding percentage of the total number of entries.
 
 &nbsp;
 
-
 This data can assist the organizers if they need to comply with quality criteria set by the federations, and two actions are therefore available.
-
-&nbsp;
-
-
-Admission from this score (inclusive) upwards. All entries whose total score exceeds or equals the corresponding score are marked as ‘admitted’.
-
-&nbsp;
-
-
-IN/OUT request. It may be necessary to split a group of entries with equal scores into two categories: those that ‘qualify’ and those that ‘do not qualify’ for the next level of admission. These entries are marked as ‘to be reviewed’ and resubmitted to the panel of judges for a new round of voting, which will effectively involve amending the votes already cast.
 
 *Translated with DeepL.com (free version)*
 
@@ -45,5 +33,16 @@ under the "Manage Contests / Before Jury"
 &nbsp;
 
 ![_](/docs/contest_votes/score_section_img03.png)
+
+&nbsp;
+
+IN/OUT request. It may be necessary to split a group of entries with equal scores into two categories: those that ‘qualify’ and those that ‘do not qualify’ for the next level of admission. These entries are marked as ‘to be reviewed’ and resubmitted to the panel of judges for a new round of voting, which will effectively involve amending the votes already cast.
+![_](/docs/contest_votes/score_section_img04.png)
+
+&nbsp;
+
+Admission from this score (inclusive) upwards. All entries whose total score exceeds or equals the corresponding score are marked as ‘admitted’.
+
+![_](/docs/contest_votes/score_section_img05.png)
 
 &nbsp;
