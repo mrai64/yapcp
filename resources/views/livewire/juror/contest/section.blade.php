@@ -39,7 +39,7 @@ new class extends Component {
         // exit strategy - no more work to vote
         if (!$contestWork){
             redirect()
-                ->route('juror.contest.dashboard', ['contest' => $this->contestWork->contest])
+                ->route('juror.contest.dashboard', ['contest' => $this->contestSection->contest])
                 ->with('success', __('Hurrah! Completed. Next?'));
         }
         $this->contestWork = $contestWork;
