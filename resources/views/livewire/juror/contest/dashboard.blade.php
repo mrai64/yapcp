@@ -46,6 +46,10 @@ new class extends Component {
             ->withCount(['contestVotes as votedWorksCount' => function ($query) use ($jurorId){
                 $query->where('juror_user_id', $jurorId);
             }])
+            ->withCount(['contestVotes as requestedWorksCount' => function ($query) use ($jurorId){
+                $query->where('juror_user_id', $jurorId)
+                    ->where('review_required', true);
+            }])
             ->orderBy('code')
             ->get();
     }
@@ -159,7 +163,35 @@ new class extends Component {
 
                 <!-- Eventuale ri-voto in/out -->
                 @if ($reviewRequired)
-                    <!-- livewire -->
+                <table class="data-table-container w-auto">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="data-table-section-counter">{{ __("Requested")}}</th>
+                            <th scope="col" class="data-table-section-code fyk text-2xl">{{ __("Contest Section n Theme")}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($contestSections as $contestSection)
+                        <tr class="border my-2">
+                            <td valign="top" class="fyk text-xl">
+                                @if ($contestSection->requestedWorksCount)
+                                {{ $contestSection->requestedWorksCount }}
+                                <br />
+                                <x-yapcp.header-link 
+                                    txt="Req Review IN/OUT" 
+                                    url="{{ route('juror.contest.in-out-vote', ['contestSection' => $contestSection]) }}" />
+                                @else
+                                {{ __("No more") }}
+                                @endif
+                            </td>
+                            <td valign="top" class="fyk text-2xl">
+                                {{ $contestSection->code }}
+                                {{ $contestSection->name_en }}
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
                 @else
                 <hr class="my-4" />
                 <h3 class="fyk text-xl font-medium text-gray-900">

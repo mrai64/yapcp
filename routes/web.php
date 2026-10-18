@@ -369,6 +369,10 @@ Volt::route('/juror/contest/voted-board/{contestSection}', 'juror.contest.voted-
 Volt::route('/juror/contest/modify/{contestVote}', 'juror.contest.modify-vote')
     ->middleware(['auth', 'verified'])
     ->name('juror.contest.modify-vote');
+// vote in a section a work a time
+Volt::route('/juror/contest/in-out/{contestSection}', 'juror.contest.in-out-vote')
+    ->middleware(['auth', 'verified'])
+    ->name('juror.contest.in-out-vote');
 
 /**
  * Admin all about
