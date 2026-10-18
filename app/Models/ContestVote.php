@@ -72,6 +72,7 @@ class ContestVote extends Model
         'section_id', //     fk contest_sections.id
         'contest_work_id', //        fk works.id contest_works.work_id
         'juror_user_id', //  fk user_contact.id
+        'review_required',
         'vote', //           following contests.vote_rule
         // created_at        reserved
         // updated_at        reserved
@@ -86,6 +87,7 @@ class ContestVote extends Model
             'section_id' => 'string',
             'contest_work_id' => 'string',
             'juror_user_id' => 'string',
+            'review_required' => 'boolean',
             'vote' => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
