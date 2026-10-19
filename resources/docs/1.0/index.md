@@ -45,7 +45,7 @@
   - [✅Recover Waiters](/{{route}}/{{version}}/organizations/contest_waiting_revoke)
   - [✅Payment fee](/{{route}}/{{version}}/organizations/switch_fee_payment_status)
   - [✅Jury vote Board](/{{route}}/{{version}}/organizations/section_scoreboard)
-  - [Admit status assignment](#)
+  - [Admit status assignment](/{{route}}/{{version}}/organizations/admit_assignment)
   - [Section Awards assignments](#)
   - [Contest Awards assignments](#)
   - [Contest Board of participants](#)
