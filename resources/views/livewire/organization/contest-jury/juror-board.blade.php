@@ -167,7 +167,10 @@ new class extends Component {
                                 <td valign="top" class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                                     <x-yapcp.header-link 
                                         txt="Award assignment" 
-                                        url="#" />
+                                        url="{{ route('organization.contest-award.listed', ['contest' => $contest, 'contestSection' => $contestSection]) }}" />
+                                    <x-yapcp.header-link 
+                                        txt="Candidate" 
+                                        url="{{ route('organization.contest-award.candidate', ['contestSection' => $contestSection]) }}" />
                                     <x-yapcp.header-link 
                                         txt="Scoreboard" 
                                         url="{{ route('organization.contest-vote.section-scoreboard', ['contestSection' => $contestSection]) }}" />
@@ -190,13 +193,13 @@ new class extends Component {
                             <td valign="top" class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                                 <x-yapcp.header-link 
                                     txt="Award assignment" 
-                                    url="#" />
+                                    url="{{ route('organization.contest-award.listed', ['contest' => $contest]) }}" />
                             </td>
                             <td valign="top" class="fyk text-xl px-6 py-4 whitespace-nowrap font-semibold text-gray-900">
                                 --
                             </td>
                             <td valign="top" class="fyk text-xl px-6 py-4 whitespace-nowrap font-semibold text-gray-900">
-                                {{ __("Contest Awards") }}
+                                {{ __("Contest") }}
                             </td>
                         </tr>
                     </tbody>
