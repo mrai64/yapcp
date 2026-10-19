@@ -151,9 +151,9 @@ final class ContestAward extends Model
     public function contestWork(): BelongsTo
     {
         $work = $this->belongsTo(
-            related: ContestWork::class, //  ext class
+            related: ContestWork::class,
             foreignKey: 'winner_work_id', // contest_awards.winner_work_id
-            ownerKey: 'user_work_id' //      contest_works.user_work_id
+            ownerKey: 'id' //                contest_works.id
         );
         // Log
         return $work;
