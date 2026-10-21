@@ -23,21 +23,26 @@ new class extends Component {
     {
         //
         $this->contest            = $contest;
-        $this->contestSectionId   = ($contestSection->id) ?? null;
         $this->organization       = $this->contest->organization;
-        if($this->contestSectionId){
+        if($contestSection){
+            // section
             $this->contestSection     = $contestSection;
+            $this->contestSectionId   = $contestSection->id;
             $this->contestAwardsSet   = ContestAward::where('contest_id', $this->contest->id)
-                ->with(['contestWork'])
+                ->with(['contestWork.userWork', 'userContact.country'])
                 ->where('section_id', $this->contestSectionId)
                 ->orderBy('award_code')
                 ->get();
 
         } else {
-            $this->contestSection     = new ContestSection();
+            // contest
+            $this->contestSectionId   = 0;
             $this->contestAwardsSet   = ContestAward::where('contest_id', $this->contest->id)
-                ->with(['contestWork'])
-                ->whereNull('section_id')
+                ->with(['contestWork.userWork', 'userContact.country'])
+                ->where(function ($query) {
+                    $query->whereNull('section_id')
+                          ->orWhere('section_id', '');
+                })
                 ->orderBy('award_code')
                 ->get();
         }
@@ -56,9 +61,15 @@ new class extends Component {
             {{ __("WARN: Use n combination of Candidate link, for the SAME section") }}
         </p>
         <hr class="mb-4" />
-        <x-yapcp.inline-link
+        @if ($contestSectionId)
+        <x-yapcp.header-link
             txt="Candidate"
             url="{{ route('organization.contest-award.candidate', ['contestSection' => $contestSection]) }}" />
+        @else
+        <x-yapcp.header-link
+            txt="Contest"
+            url="{{ route('organization.contest-award.contest', ['contest' => $contest]) }}" />
+        @endif
         <x-yapcp.header-link
             txt="Back to User dashboard"
             url="{{ route('user.dashboard') }}" />
@@ -70,9 +81,9 @@ new class extends Component {
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
-            <!-- .. -->
+            @if ($contestSectionId)
                 <h3 class="fyk font-semibold text-xl text-gray-800 leading-tight fyk">
-                    {{ __("Section scoreboards" ) }}
+                    {{ __("Section Awards Board" ) }}
                 </h3>
                 <table class="data-table-container w-auto">
                     <tbody>
@@ -105,7 +116,56 @@ new class extends Component {
                         @endforelse
                     </tbody>
                 </table>
-            <!-- .. -->
+            @else
+                <h3 class="fyk font-semibold text-xl text-gray-800 leading-tight fyk">
+                    {{ __("Contest Awards Board" ) }}
+                </h3>
+                <p class="small">
+                    {{ __("Usually Contest awards aren't only for works, but authors or group")}}
+                </p>
+                <table class="data-table-container w-auto">
+                    <tbody>
+                        @forelse ($contestAwardsSet as $contestAward)
+                        <tr class="border">
+                            <td valign="top" class="fyk text-xl px-4">
+                                {{ $contestAward->award_code}}
+                                <br />
+                                {{ $contestAward->award_name}}
+                            </td>
+                            <td valign="top" class="fyk test-2xl px-4">
+                                @if ($contestAward->winner_work_id)
+                                <img src="{{ asset('storage/contests') .'/'. $contestAward->contest_id .'/'. $contestAward->section_id .'/'. $contestAward->winner_work_id .'.'. $contestAward->contestWork->userWork->file_format }}"
+                                    class="max-h-[150] max-w-[150] object-contain rounded-lg shadow-md"
+                                    @contextmenu.prevent
+                                    alt="All rights reserved"
+                                    lazy />
+                                @endif
+                                @if ($contestAward->winner_user_id)
+                                    {{ $contestAward->userContact->country->flag_code }}
+                                    {{ $contestAward->userContact->country->country }}
+                                    <br>
+                                    {{ $contestAward->userContact->last_name }}
+                                    {{ $contestAward->userContact->first_name }}
+                                    <br>
+                                    {{ $contestAward->userContact->city }}
+                                @endif
+                                @if ($contestAward->winner_name)
+                                    {{ $contestAward->winner_name }}
+                                @endif
+                            </td>
+                        </tr>
+                        @empty
+                            <tr>
+                                <td colspan="2">
+                                    {{ __("No award here?") }}
+                                </td>
+
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+
+            @endif
             </div>
         </div>
     </div>
