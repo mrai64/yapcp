@@ -3,6 +3,7 @@
 /**
  * Organization Contest Manage / List of award assigned and unassigned
  *
+ * For section, and without section
  */
 
 use App\Models\Contest;
@@ -31,6 +32,7 @@ new class extends Component {
             $this->contestAwardsSet   = ContestAward::where('contest_id', $this->contest->id)
                 ->with(['contestWork.userWork', 'userContact.country'])
                 ->where('section_id', $this->contestSectionId)
+                ->orderByDesc('is_award') // false 0 < true 1
                 ->orderBy('award_code')
                 ->get();
 
@@ -43,6 +45,7 @@ new class extends Component {
                     $query->whereNull('section_id')
                           ->orWhere('section_id', '');
                 })
+                ->orderByDesc('is_award') // false < true
                 ->orderBy('award_code')
                 ->get();
         }
@@ -117,6 +120,7 @@ new class extends Component {
                     </tbody>
                 </table>
             @else
+                <!-- contest prize list -->
                 <h3 class="fyk font-semibold text-xl text-gray-800 leading-tight fyk">
                     {{ __("Contest Awards Board" ) }}
                 </h3>
@@ -134,13 +138,15 @@ new class extends Component {
                             </td>
                             <td valign="top" class="fyk test-2xl px-4">
                                 @if ($contestAward->winner_work_id)
-                                <img src="{{ asset('storage/contests') .'/'. $contestAward->contest_id .'/'. $contestAward->section_id .'/'. $contestAward->winner_work_id .'.'. $contestAward->contestWork->userWork->file_format }}"
+                                <!-- winner_work_id -->
+                                <img src="{{ asset('storage/contests') .'/'. $contestAward->contest_id .'/'. $contestAward->contestWork->section_id .'/'. $contestAward->winner_work_id .'.'. $contestAward->contestWork->userWork->file_format }}"
                                     class="max-h-[150] max-w-[150] object-contain rounded-lg shadow-md"
                                     @contextmenu.prevent
                                     alt="All rights reserved"
                                     lazy />
                                 @endif
                                 @if ($contestAward->winner_user_id)
+                                <!-- winner_user_id -->
                                     {{ $contestAward->userContact->country->flag_code }}
                                     {{ $contestAward->userContact->country->country }}
                                     <br>
@@ -150,8 +156,12 @@ new class extends Component {
                                     {{ $contestAward->userContact->city }}
                                 @endif
                                 @if ($contestAward->winner_name)
+                                <!-- winner_name -->
                                     {{ $contestAward->winner_name }}
                                 @endif
+                                @if (!$contestAward->winner_work_id && !$contestAward->winner_user_id && $contestAward->winner_name === '')
+                                {{ __("Temporary Unassigned")}}
+                                @endif                                
                             </td>
                         </tr>
                         @empty

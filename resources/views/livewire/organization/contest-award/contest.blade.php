@@ -1,7 +1,13 @@
 <?php
 
 /**
- * Organization Contest Manage / List of admit and... 
+ * Organization Contest Manage / ASSIGN contest prizes 
+ *
+ * limited to contest award - without section_id
+ * Contest prize can be Best Author, but also
+ * best Group and some Sponsor prize 
+ * usually all are not valid for federation statistics 
+ * like honorable mentions, but should be marked as 1st class prize.
  *
  */
 
@@ -14,7 +20,6 @@ use Livewire\Volt\Component;
 use Livewire\WithPagination;
 
 new class extends Component {
-    use WithPagination;
     //
     public Contest      $contest;
     public Organization $organization;
@@ -25,62 +30,35 @@ new class extends Component {
     public string $contestUserId = '';
     public string $contestName   = '';
     public array  $awardCode     = [];
+    public        $winnerName    = '';
     // first
     public function mount(Contest $contest)
     {
         $this->contest             = $contest;
         $this->organization        = $this->contest->organization;
-    }
-    // for every page
-    public function with(): array
-    {
+        // assigned and unassigned awards that are awards and in contest
         $this->unassignedAwardsSet = ContestAward::query()
-            ->whereNull('section_id')
+            ->where('contest_id', $this->contest->id)
             ->whereNull('winner_work_id')
             ->whereNull('winner_user_id')
             ->where('winner_name', '')
+            ->where(function ($query) {
+                $query->whereNull('section_id')
+                    ->orWhere('section_id', '');
+            })
+            ->orderBy('is_award')
             ->orderBy('award_code')
             ->get();
-
-        // all awards 
-        $assignedContestAwards = ContestAward::query()
-            ->where('is_award', true)
-            ->where(function ($query) {
-                $query->whereNotNull('winner_work_id')
-                    ->orWhereNotNull('winner_user_id')
-                    ->orWhere(function ($q) {
-                        $q->whereNotNull('winner_name')
-                            ->where('winner_name', '!=', '');
-                        });
-                })
-            ->get();
-
-        $assignedWorkIds = collect($assignedContestAwards)
-            ->pluck('winner_work_id')
-            ->unique()
-            ->toArray();
-        // candidate to a contest prize should be any of 
-        // previous awarded images, if
-        $candidateContestWorks = ContestWork::query()
-            ->select('contest_works.*') // Evita conflitti se ci sono colonne con lo stesso nome
-            ->join('user_works', 'contest_works.user_work_id', '=', 'user_works.id') // Unisci la tabella delle relazioni
-            ->with(['userWork','userWork.userContact', 'userWork.userContact.country']) // Mantiene l'eager loading per l'utilizzo nel frontend
-            ->whereIn('contest_works.id', $assignedWorkIds)
-            ->orderBy('user_works.user_id')
-            ->orderBy('user_works.id')
-            ->paginate(6);
-
-        return [
-            'unassignedAwards'      => $this->unassignedAwardsSet,
-            'candidateContestWorks' => $candidateContestWorks,
-        ];
+        // all filled
+        return redirect()
+            ->route('organization.contest-award.listed', ['contest' => $this->contest])
+            ->with('success', __("Contest' Award All Assigned"));
     }
     //
     public function rules()
     {
         return [
-            'userId'       => 'nullable|uuid',
-            'winnerName'   => 'nullable|string|max:250',
+            'winnerName'   => 'required|string|max:250',
         ];
     }
     //
@@ -159,7 +137,7 @@ new class extends Component {
                                     wire:model="awardCode.name"
                                     required >
                                     <option value="">{{ __("...") }}</option>
-                                    @foreach ($unassignedAwards as $contestAward)
+                                    @foreach ($unassignedAwardsSet as $contestAward)
                                         <option value="{{ $contestAward->award_code }}">
                                             {{ $contestAward->award_code }}  {{ $contestAward->name_en}} 
                                         </option>
