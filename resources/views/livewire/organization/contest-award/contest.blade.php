@@ -49,10 +49,13 @@ new class extends Component {
             ->orderBy('is_award')
             ->orderBy('award_code')
             ->get();
+
         // all filled
-        return redirect()
-            ->route('organization.contest-award.listed', ['contest' => $this->contest])
-            ->with('success', __("Contest' Award All Assigned"));
+        if ($this->unassignedAwardsSet->isEmpty()){
+            return redirect()
+                ->route('organization.contest-award.listed', ['contest' => $this->contest])
+                ->with('success', __("Contest' Award All Assigned"));
+        }
     }
     //
     public function rules()
