@@ -2,10 +2,6 @@
     "$schema": "https://larecipe.saleem.dev/schemas/3.x/navigation.json",
     "groups": [
         {
-            "group": "[&larr; Your dashboard](https://yapcp.test/user/dashboard)",
-            "pages": []
-        },
-        {
             "group": "Get Started",
             "pages": [
                 {
@@ -15,6 +11,10 @@
                 {
                     "page": "dev/state-of-art",
                     "label": "ReserDEV"
+                },
+                {
+                    "href": "https://yapcp.test/user/dashboard",
+                    "label": "⬅️ Dashboard"
                 }
             ]
         },
@@ -72,7 +72,7 @@
             ]
         },
         {
-            "group": "You as Contest Organizer",
+            "group": "You, as Contest Organizer",
             "pages": [
                 {
                     "page": "users/add_organization",
@@ -149,7 +149,7 @@
             ]
         },
         {
-            "group": "You as Juror",
+            "group": "You, as Juror",
             "pages": [
                 {
                     "page": "jurors/general",
@@ -174,7 +174,7 @@
             ]
         },
         {
-            "group": "You as platform minister",
+            "group": "You, as platform minister",
             "pages": [
                 {
                     "label": "✍️ edit",

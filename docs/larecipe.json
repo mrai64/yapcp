@@ -1,9 +1,22 @@
 {
     "$schema": "https://larecipe.saleem.dev/schemas/3.x/larecipe.json",
     "name": "yaPCP",
-    "description": "",
+    "description": "Photo Contest Platform",
+    "logo": {
+        "light": "/yapcp/yapcp-logo-0500.svg",
+        "dark": "/yapcp/yapcp-logo-0500.svg"
+    },
+    "favicon": "/favicon.ico",
+    "assets": {
+        "css": ["larecipe-yapcp.css"]
+    },
     "theme": {
-        "accent": "#787AF6"
+        "accent": "#800008",
+        "radius": "soft",
+        "fonts": {
+            "sans": "Yanone Kaffeesatz",
+            "mono": "Jetbrains Mono"
+        }
     },
     "versions": [
         {
