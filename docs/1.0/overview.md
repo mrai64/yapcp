@@ -79,7 +79,7 @@ when i put "in production" the base address change. Most of them are totally or 
 The welcome page when reach platoform first time.
 Message wil not repat twice.
 
-![Pagina di benvenuto](welcome_aboard_01.png.md)
+![Pagina di benvenuto](./welcome_aboard_img01.png)
 
 ---
 
