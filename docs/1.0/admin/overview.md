@@ -1,0 +1,53 @@
+---
+title: 'Admin,  *An administrator is someone who provides services to others*'
+---
+
+# Admin,  *An administrator is someone who provides services to others*
+<!-- absolute links are /resources/docs/1.0/    -->
+<!-- larecipe links are /{{route}}/{{version}}/ -->
+<!-- images must be uploaded in same folder of md then url prefixed by ./  -->
+
+- [Admin for Users](#for-users)
+- [Admin for Organizations](#for-organizations)
+- [Admin for Contest](#for-contest)
+- [Admin for Platform](#for-platform)
+
+---
+
+That platform is for photographic contest, so as members of
+*admin group* we provide services to user, and to organization,
+and to Federation, and others to Platform itself.
+
+Instead to have an admin Dashboard you have a... An Admin Workbench
+
+As builder, Massimo Rainato is first in admin group, and an admin
+can add a user in the admin group.
+
+> <!-- to avoid -->
+- ## For Users
+
+> <!-- to avoid -->
+- ## For Organizations
+
+> <!-- to avoid -->
+- ## For Contest
+
+> <!-- to avoid -->
+## For Platform
+
+### Federations
+
+- [The Fed List](federation/read.md)
+- [Add a new Federation](federation/add.md)
+- Modify Federation
+- Remove Federation
+
+###  Federation Sections
+
+- New Federation Section
+- Modify Federation Section
+
+### Others for Platform
+
+- New Admin nominee
+- Admin

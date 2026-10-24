@@ -1,1 +1,0 @@
-# Progettare un concorso Build a contest

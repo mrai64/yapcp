@@ -11,12 +11,12 @@
     "require": {
         "php": "^8.5",
         "ext-gd": "*",
-        "binarytorch/larecipe": "^2.9",
         "intervention/image": "^3.11",
         "laravel/framework": "^13.0",
         "laravel/jetstream": "^5.5",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^3.0",
+        "larecipe/larecipe": "^3.0",
         "livewire/livewire": "^4.3.0",
         "livewire/volt": "^1.10",
         "phpoffice/phpspreadsheet": "^2.3",
