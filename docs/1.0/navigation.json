@@ -1,0 +1,352 @@
+{
+    "$schema": "https://larecipe.saleem.dev/schemas/3.x/navigation.json",
+    "groups": [
+        {
+            "group": "[&larr; Your dashboard](https://yapcp.test/user/dashboard)",
+            "pages": []
+        },
+        {
+            "group": "Get Started",
+            "pages": [
+                {
+                    "page": "overview",
+                    "label": "✅Overview"
+                },
+                {
+                    "page": "dev/state-of-art",
+                    "label": "ReserDEV"
+                }
+            ]
+        },
+        {
+            "group": "You, as Contest Participants",
+            "pages": [
+                {
+                    "page": "users/registration",
+                    "label": "✅Registration"
+                },
+                {
+                    "page": "users/registration",
+                    "label": "✅Login"
+                },
+                {
+                    "page": "users/registration",
+                    "label": "✅VerifyEmail"
+                },
+                {
+                    "page": "users/registration",
+                    "label": "✅Lost Password?"
+                },
+                {
+                    "page": "users/contact_infos",
+                    "label": "✅Contact Info"
+                },
+                {
+                    "page": "users/dashboard",
+                    "label": "✅Personal Dashboard"
+                },
+                {
+                    "page": "users/personal_gallery",
+                    "label": "✅Personal Gallery"
+                },
+                {
+                    "page": "users/contest_list",
+                    "label": "✅Open Contest List"
+                },
+                {
+                    "page": "users/contest_subscribe",
+                    "label": "✅Participate to contest"
+                },
+                {
+                    "label": "Send requested RAWs",
+                    "href": "#"
+                },
+                {
+                    "page": "users/federation_list",
+                    "label": "✅See Federation List"
+                },
+                {
+                    "page": "users/federation_section_list",
+                    "label": "✅See Federation Section List"
+                }
+            ]
+        },
+        {
+            "group": "You as Contest Organizer",
+            "pages": [
+                {
+                    "page": "users/add_organization",
+                    "label": "✅Define your Organization"
+                },
+                {
+                    "page": "users/add_organization",
+                    "label": "✅Add to an Organization"
+                },
+                {
+                    "page": "contest_design/contest/add",
+                    "label": "✅Howto open a Contest"
+                },
+                {
+                    "page": "contest_design/calendar/modify",
+                    "label": "✅Calendar"
+                },
+                {
+                    "page": "contest_design/patronages/listed",
+                    "label": "✅Patronages"
+                },
+                {
+                    "page": "contest_design/section/listed",
+                    "label": "✅Section n Themes"
+                },
+                {
+                    "page": "contest_design/jury/listed",
+                    "label": "✅Jury members"
+                },
+                {
+                    "page": "contest_design/award/listed",
+                    "label": "✅Section n ContestAwards"
+                },
+                {
+                    "page": "contest_design/contest/detail",
+                    "label": "✅Contest Details"
+                },
+                {
+                    "page": "organizations/contest_work_review",
+                    "label": "✅Participant Works Review"
+                },
+                {
+                    "page": "organizations/contest_waiting_revoke",
+                    "label": "✅Recover Waiters"
+                },
+                {
+                    "page": "organizations/switch_fee_payment_status",
+                    "label": "✅Payment fee"
+                },
+                {
+                    "page": "organizations/section_scoreboard",
+                    "label": "✅Jury vote Board"
+                },
+                {
+                    "page": "organizations/admit_assignment",
+                    "label": "✅Admit status assignment"
+                },
+                {
+                    "page": "organizations/section_awards",
+                    "label": "Section Awards assignments"
+                },
+                {
+                    "label": "Contest Awards assignments",
+                    "href": "#"
+                },
+                {
+                    "label": "Contest Board of participants",
+                    "href": "#"
+                },
+                {
+                    "label": "Contest Board of Works participants",
+                    "href": "#"
+                }
+            ]
+        },
+        {
+            "group": "You as Juror",
+            "pages": [
+                {
+                    "page": "jurors/general",
+                    "label": "✅For new jurors"
+                },
+                {
+                    "page": "jurors/vote",
+                    "label": "✅Simplest Vote System"
+                },
+                {
+                    "page": "jurors/change",
+                    "label": "✅Change Vote"
+                },
+                {
+                    "page": "jurors/in-out",
+                    "label": "✅In/Out Request"
+                },
+                {
+                    "label": "Contest Minute Sign",
+                    "href": "#"
+                }
+            ]
+        },
+        {
+            "group": "You as platform minister",
+            "pages": [
+                {
+                    "label": "✍️ edit",
+                    "href": "/resources/docs/1.0/admin/overview.md"
+                }
+            ]
+        },
+        {
+            "group": "Admin | Federations",
+            "pages": [
+                {
+                    "page": "admin/federation/read",
+                    "label": "✅List"
+                },
+                {
+                    "page": "admin/federation/add",
+                    "label": "✅Add"
+                },
+                {
+                    "page": "admin/federation/modify",
+                    "label": "✅Modify"
+                },
+                {
+                    "page": "admin/federation/remove",
+                    "label": "✅Remove"
+                }
+            ]
+        },
+        {
+            "group": "Admin | Federation' Sections",
+            "pages": [
+                {
+                    "page": "admin/federation_section/listed",
+                    "label": "✅List"
+                },
+                {
+                    "page": "admin/federation_section/add",
+                    "label": "✅Add"
+                },
+                {
+                    "page": "admin/federation_section/modify",
+                    "label": "✅Modify"
+                },
+                {
+                    "page": "admin/federation_section/remove",
+                    "label": "✅Remove"
+                }
+            ]
+        },
+        {
+            "group": "Admin | Federation' More fields",
+            "pages": [
+                {
+                    "page": "admin/federation_more/listed",
+                    "label": "✅List"
+                },
+                {
+                    "page": "admin/federation_more/add",
+                    "label": "✅Add"
+                },
+                {
+                    "page": "admin/federation_more/modify",
+                    "label": "✅Modify"
+                },
+                {
+                    "page": "admin/federation_more/remove",
+                    "label": "✅Remove"
+                }
+            ]
+        },
+        {
+            "group": "Admin | Federation' Members",
+            "pages": [
+                {
+                    "label": "List",
+                    "href": "#"
+                },
+                {
+                    "label": "Add",
+                    "href": "#"
+                },
+                {
+                    "label": "Modify",
+                    "href": "#"
+                },
+                {
+                    "label": "Remove",
+                    "href": "#"
+                }
+            ]
+        },
+        {
+            "group": "Admin | User Platform members",
+            "pages": [
+                {
+                    "label": "List",
+                    "href": "#"
+                },
+                {
+                    "label": "Add",
+                    "href": "#"
+                },
+                {
+                    "label": "Modify",
+                    "href": "#"
+                },
+                {
+                    "label": "Remove",
+                    "href": "#"
+                }
+            ]
+        },
+        {
+            "group": "Admin | Country",
+            "pages": [
+                {
+                    "page": "admin/country/listed",
+                    "label": "✅ Listed, &amp;..."
+                }
+            ]
+        },
+        {
+            "group": "Admin | Timezone",
+            "pages": [
+                {
+                    "page": "admin/timezone/listed",
+                    "label": "✅ Listed, &amp;..."
+                }
+            ]
+        },
+        {
+            "group": "Admin | User Contact",
+            "pages": [
+                {
+                    "page": "admin/user_contact/listed",
+                    "label": "✅ Listed, &amp;..."
+                }
+            ]
+        },
+        {
+            "group": "Admin | Backups",
+            "pages": [
+                {
+                    "page": "admin/backup/contest1st",
+                    "label": "✅ Contest, &amp;..."
+                },
+                {
+                    "page": "admin/backup/user",
+                    "label": "✅ User, &amp;..."
+                },
+                {
+                    "page": "admin/backup/userwork",
+                    "label": "✅ UserWork, &amp;..."
+                }
+            ]
+        },
+        {
+            "group": "Admin | Imports",
+            "pages": [
+                {
+                    "page": "admin/import/contest1st",
+                    "label": "✅ Contest, &amp;..."
+                },
+                {
+                    "page": "admin/import/user",
+                    "label": "✅ User, &amp;..."
+                },
+                {
+                    "page": "admin/import/userwork",
+                    "label": "✅ UserWork, &amp;..."
+                }
+            ]
+        }
+    ]
+}

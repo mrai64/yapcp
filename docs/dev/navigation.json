@@ -1,0 +1,109 @@
+{
+    "$schema": "https://larecipe.saleem.dev/schemas/3.x/navigation.json",
+    "groups": [
+        {
+            "group": "[Overview](/{{route}}/dev/overview)",
+            "pages": []
+        },
+        {
+            "group": "[🇮🇹 La piattaforma](/{{route}}/dev/man/index)",
+            "pages": []
+        },
+        {
+            "group": "Fix",
+            "pages": [
+                {
+                    "page": "dev/fix/0253-organization-update-not-for-all",
+                    "label": "#253"
+                },
+                {
+                    "page": "dev/fix/0142-register-test",
+                    "label": "#142"
+                },
+                {
+                    "page": "dev/fix/0107-user-role-seeder-ko",
+                    "label": "#107"
+                }
+            ]
+        },
+        {
+            "group": "Doc",
+            "pages": [
+                {
+                    "page": "dev/docs/0184-federation-read",
+                    "label": "#184"
+                },
+                {
+                    "page": "dev/docs/141-user-login",
+                    "label": "#141"
+                }
+            ]
+        },
+        {
+            "group": "Feature",
+            "pages": [
+                {
+                    "page": "dev/feat/0200-federation-list",
+                    "label": "#200"
+                },
+                {
+                    "page": "dev/feat/0164-user-work-modify",
+                    "label": "#164"
+                },
+                {
+                    "page": "dev/feat/0167-user-work-wnh",
+                    "label": "#167"
+                },
+                {
+                    "page": "dev/feat/0150-referenced",
+                    "label": "#150"
+                },
+                {
+                    "page": "dev/feat/0148-federations",
+                    "label": "#148"
+                },
+                {
+                    "page": "dev/feat/0128-breeze-remove",
+                    "label": "#128"
+                },
+                {
+                    "page": "dev/feat/0116-federation-more-crud",
+                    "label": "#116"
+                },
+                {
+                    "page": "dev/feat/0111-user-role-review",
+                    "label": "#111"
+                },
+                {
+                    "page": "dev/feat/0093-language-translation",
+                    "label": "#93"
+                },
+                {
+                    "page": "dev/feat/0020-add-me-to-org",
+                    "label": "#20"
+                }
+            ]
+        },
+        {
+            "group": "Refactor",
+            "pages": [
+                {
+                    "page": "dev/refactor/0239-contest-patronage",
+                    "label": "#239"
+                },
+                {
+                    "page": "dev/refactor/0140-big-rebuild",
+                    "label": "#140 Big Refactor"
+                },
+                {
+                    "page": "dev/refactor/0133-federation-section-fields",
+                    "label": "#133"
+                },
+                {
+                    "page": "dev/refactor/0089-regions-lookup-table",
+                    "label": "#89"
+                }
+            ]
+        }
+    ]
+}
