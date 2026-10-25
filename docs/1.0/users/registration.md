@@ -9,10 +9,10 @@ title: 'User participants | Registration'
 ## Registration to yaPCP
 
 It's obvious that you can look some platform pages as a guest,
-but when you decide to participate in a contest you need to
-registrate to platform, fill a form with your name, email and a password.  
+but when you decide to participate in a contest on our plarform, you need to
+registrate to platform, fill a form with your data: name, email and a password.  
 
-- *Only nanem, email and password?*
+- *Only name, email and password?*
 - Yes, it's a starting point.  
 
 **WARN: Pages images are reflecting development version,**
@@ -21,15 +21,15 @@ registrate to platform, fill a form with your name, email and a password.
 Start from address <https://yapcp.test> you see the
 welcome message, then some link for: *Log in*, or *Register*, and few others.
 
-![Splashscreeen image]](./registration_img01.png)
+![Splashscreeen image](./registration_img01.png)
 
 ## Registration
 
-### Except for Jurors
-
-When a photographic organization project a photographic contest must insert the jurors. Inserting juror' name and email result as
-platform registration because the jury works are done thru the platform use. So, if you are juror at first time you can ask
-a new password and confirm your email, instead of do the usual registration.
+**Except for Jurors (but not all)**
+When a photographic organization project a photographic contest, must insert the jurors. Some are already int the platform, others not. 
+But to use the platform jurors are registered into yapcp. 
+Are you a juror added by organization? A.: Yes, we assign you a unknown random password of 224 characters. And you, new member of yapcp, at first login must ask
+a new password, instead of do the usual registration.
 
 ### Registration for participants
 
@@ -55,7 +55,7 @@ Break a real 5 casual words ([diceware](https://www.eff.org/dice) ) is hard, rea
 **BTW**: yaPCP, the Platform, store passwords in a hashed, scrambled mode. So if you miss the password,
 you can *insert a new password*, but cannot ask us *to find your password* and/or set your password.
 
-![Registration entry form]](./registration_img02.png)
+![Registration entry form](./registration_img02.png)
 
 ---
 
@@ -64,7 +64,7 @@ you can *insert a new password*, but cannot ask us *to find your password* and/o
 A check for your email is required, so after you register into
 the platform a verification email was sent to your email address.
 
-![Registration after form]](./registration_img03.png)
+![Registration after form](./registration_img03.png)
 
 You need to open your email manager, receive email (usually in few second),
 then click over the button or copy n paste link explained
@@ -73,7 +73,7 @@ below the button and paste in browser address bar.
 The mail isn't arrived? As usual: connection is already on?
 Mail program push email in spam folder? You have also a "resend verification email".
 
-![Verification email]](./registration_img04.png)
+![Verification email](./registration_img04.png)
 
 ---
 
@@ -82,7 +82,7 @@ Mail program push email in spam folder? You have also a "resend verification ema
 Data required: your email, your password.  
 Also available: link to reset password.
 
-![Login form]](./login_img01.png)
+![Login form](./login_img01.png)
 
 ---
 
@@ -96,7 +96,7 @@ allow you to exit from platform.
 
 ## Lost password?
 
-![_1]](./recovery_img01.png)
+![_1](./recovery_img01.png)
 
 Give us the email used for previous registration, we send you
 an email containig the usual recovery link and, voilà,
@@ -106,27 +106,27 @@ you have access to a form for insert a new password.
 *has access to your email even for a limited window time,*
 *can change your password, your data and stole your entire gallery.*
 *It's your email.*
-![_2]](./recovery_img02.png)
+![_2](./recovery_img02.png)
 
 &nbsp;
 
 Fill with email
-![_3]](./recovery_img03.png)
+![_3](./recovery_img03.png)
 
 &nbsp;
 
 Email sent 
-![_4]](./recovery_img04.png)
+![_4](./recovery_img04.png)
 
 &nbsp;
 
 A sample of email you receive
-![_5]](./recovery_img05.png)
+![_5](./recovery_img05.png)
 
 &nbsp;
 
 Insert new password, next use new password 
-![_6]](./recovery_img06.png)
+![_6](./recovery_img06.png)
 
 ---
 

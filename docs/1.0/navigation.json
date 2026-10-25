@@ -6,15 +6,15 @@
             "pages": [
                 {
                     "page": "overview",
-                    "label": "✅Overview"
+                    "label": "Overview ✅"
                 },
                 {
-                    "page": "dev/state-of-art",
-                    "label": "ReserDEV"
+                    "page": "users/dashboard",
+                    "label": "Whats in your Dashboard"
                 },
                 {
                     "href": "https://yapcp.test/user/dashboard",
-                    "label": "⬅️ Dashboard"
+                    "label": "Your Dashboard"
                 }
             ]
         },
@@ -43,11 +43,11 @@
                 },
                 {
                     "page": "users/dashboard",
-                    "label": "✅Personal Dashboard"
+                    "label": "✅Your Personal Dashboard"
                 },
                 {
                     "page": "users/personal_gallery",
-                    "label": "✅Personal Gallery"
+                    "label": "✅Your Personal Gallery"
                 },
                 {
                     "page": "users/contest_list",
