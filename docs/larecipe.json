@@ -7,9 +7,6 @@
         "dark": "/yapcp/yapcp-logo-0500.svg"
     },
     "favicon": "/favicon.ico",
-    "assets": {
-        "css": ["larecipe-yapcp.css"]
-    },
     "theme": {
         "accent": "#800008",
         "radius": "soft",

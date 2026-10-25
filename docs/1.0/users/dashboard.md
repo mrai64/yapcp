@@ -5,7 +5,6 @@ title: 'User dashboard'
 # User dashboard
 <!-- absolute links are /resources/docs/1.0/    -->
 <!-- larecipe links are /{{route}}/{{version}}/ -->
-
 <!-- images must be uploaded in same folder of md then url prefixed by ./  -->
 
 - [Contact infos](#personal-contact-info)
@@ -15,9 +14,12 @@ title: 'User dashboard'
 
 ---
 
-## Content
+## More dashboards
 
-In user' dashboard we reunite all you can do in yaPCP.  
+User has her/him personal `User Dashboard`, then photo club here named
+Organizations has its `Organization Dashboard`, users temporary elevated as jurors have a `Juror Dashboard`.
+
+In `User Dashboard` we reunite all you can do in yaPCP.  
 The (user') dashboard content may change over time, depending on what you want to do.  
 Are you a member of an existing organization? Add yourself in the organization role list, or Add your photographic organization.  
 Then you have in your dashboard a link for
@@ -27,7 +29,11 @@ Are you a member of an existing Federation? Contact us
 to enter in Federation roles, with the authority to check
 contest that your federation sponsorship.
 
-![Example of dashboard for Participant user]](./user_dashboard_img01.png)
+## A journey over your powerful dashboard
+
+![Example of dashboard for Participant user](./user_dashboard_img01.png)
+
+Here we recognize some block of links. *(to be continued)*
 
 ### View Contact infos
 
