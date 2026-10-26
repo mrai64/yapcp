@@ -23,11 +23,11 @@
             "pages": [
                 {
                     "page": "users/registration",
-                    "label": "✅Registration"
+                    "label": "Registration ✅"
                 },
                 {
                     "page": "users/registration",
-                    "label": "✅Login"
+                    "label": "Login ✅"
                 },
                 {
                     "page": "users/registration",
