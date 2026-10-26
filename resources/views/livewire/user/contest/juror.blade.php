@@ -44,9 +44,10 @@ new class extends Component {
 }; ?>
 
 <div>
+    <!-- no page -->
     @if ($contests->isEmpty())
     <div class="fyk border text-2xl rounded-md px-4 py-6 text-center text-gray-500">
-        {{ __("You are not a juror, or the application window for your jury is not yet / no longer open.") }}
+        {{ __("You aren't a juror, and/or the jury date window is either closed or not yet open.") }}
     </div>
     @else
     <div class="fyk border text-2xl rounded-md px-4 pt-6 text-center text-gray-500">

@@ -40,16 +40,23 @@ url of your social and personal pages.
 After user creation your personal data are empty or with a default value,
 so - after first first login - you can or must update them.
 
-### View Contact infos
+### [View Contact infos]
 
-Platform access data (with passowrd) and Contact infos are separated space.  
-Contact Infos are all the data usually you send thru contest application form.
-I'ts composed by a five card about you, your postal address, online address,
-and others like your personal page (reserved, for future use) and 
-infos requested only by a federation (one more field) that can be requested
-in federation sponsored contests.
+We chose to separate access platform data (email and password) from your 
+Contact data, so anytime a "list of people" are password free. Anytime, password 
+are hashed and nobody, never us, can recreate original password  
+
+*Contact Infos* are all the data usually you send thru a contest application form.
+Here you find also che panel to change email address AND your password,
+it's not the unique point of change, you can change the password
+also using a link into the login panel.
 
 ### [Update Contact infos]
+
+It's composed by a five simple card: who are you + where are you (default country is: Italy), who's your postal address, 
+online address, and others like your personal page (reserved, for future use) and 
+infos requested only by a federation (one more field) that can be requested
+in federation sponsored contests.
 
 > <!-- to avoid index for Larecipe -->
 - [Update your personal contact info](contact_infos.md)
