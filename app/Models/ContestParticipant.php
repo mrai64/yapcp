@@ -82,6 +82,7 @@ class ContestParticipant extends Model
         'contest_id', //             fk contests.id
         'user_contact_id', //        fk user_contacts.id
         'fee_payment_completed', //  Y/N become 1/0
+        'group_name',
         // created_at                reserved
         // updated_at                reserved
         // deleted_at                reserved
@@ -94,6 +95,7 @@ class ContestParticipant extends Model
             'contest_id' => 'string',
             'user_contact_id' => 'string',
             'fee_payment_completed' => 'boolean',
+            'group_name' => 'string',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
             'deleted_at' => 'datetime',
