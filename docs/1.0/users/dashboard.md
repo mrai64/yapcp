@@ -31,9 +31,14 @@ contest that your federation sponsorship.
 
 ## A journey over your powerful dashboard
 
-![Example of dashboard for Participant user](./user_dashboard_img01.png)
+![Example of dashboard for Participant user](./dashboard_img01.png)
 
-Here we recognize some block of links. *(to be continued)*
+Here we recognize some block of links. Upper is a block over your personal data,
+i.e. postal address, email, timezone and (warn: for future use? in contest catalogies) 
+url of your social and personal pages. 
+
+After user creation your personal data are empty or with a default value,
+so - after first first login - you can or must update them.
 
 ### View Contact infos
 
