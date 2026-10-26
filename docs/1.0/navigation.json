@@ -10,11 +10,11 @@
                 },
                 {
                     "page": "users/dashboard",
-                    "label": "Whats in your Dashboard"
+                    "label": "Whats in your Dashboard ✅"
                 },
                 {
                     "href": "https://yapcp.test/user/dashboard",
-                    "label": "Your Dashboard"
+                    "label": "Your Dashboard ✅"
                 }
             ]
         },

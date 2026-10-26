@@ -4,9 +4,7 @@ title: 'User participants | Registration'
 
 # User participants | Registration
 
----
-
-## Registration to yaPCP
+**Registration to yaPCP**
 
 It's obvious that you can look some platform pages as a guest,
 but when you decide to participate in a contest on our plarform, you need to
@@ -14,20 +12,20 @@ registrate to platform, fill a form with your data: name, email and a password.
 
 - *Only name, email and password?*
 - Yes, it's a starting point.  
+- *No more data?*
+- Obviously not, but that's a *starting point*.
 
-**WARN: Pages images are reflecting development version,**
-**MUST be changed with live platform before release 1.0.**
-
-Start from address <https://yapcp.test> you see the
+Start from address <https://yapcp.test> you see a
 welcome message, then some link for: *Log in*, or *Register*, and few others.
-
 ![Splashscreeen image](./registration_img01.png)
+
+---
 
 ## Registration
 
 **Except for Jurors (but not all)**
-When a photographic organization project a photographic contest, must insert the jurors. Some are already int the platform, others not. 
-But to use the platform jurors are registered into yapcp. 
+When a photographic organization project a photographic contest, must insert the jurors. Some are already int the platform, others not.
+But to use the platform jurors are registered into yapcp.
 Are you a juror added by organization? A.: Yes, we assign you a unknown random password of 224 characters. And you, new member of yapcp, at first login must ask
 a new password, instead of do the usual registration.
 
@@ -57,8 +55,6 @@ you can *insert a new password*, but cannot ask us *to find your password* and/o
 
 ![Registration entry form](./registration_img02.png)
 
----
-
 ### Email verification
 
 A check for your email is required, so after you register into
@@ -75,18 +71,14 @@ Mail program push email in spam folder? You have also a "resend verification ema
 
 ![Verification email](./registration_img04.png)
 
----
-
-## Login
+### Login
 
 Data required: your email, your password.  
 Also available: link to reset password.
 
 ![Login form](./login_img01.png)
 
----
-
-## Logout
+###  Logout
 
 Don'n miss to use your logout function before exit platform.  
 Over every pages, in left upper corner a dropdown menù
@@ -115,7 +107,7 @@ Fill with email
 
 &nbsp;
 
-Email sent 
+Email sent
 ![_4](./recovery_img04.png)
 
 &nbsp;
@@ -125,11 +117,5 @@ A sample of email you receive
 
 &nbsp;
 
-Insert new password, next use new password 
+Insert new password, next use new password
 ![_6](./recovery_img06.png)
-
----
-
-## Next stop
-
-[Personal Dashboard](dashboard.md)
