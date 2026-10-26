@@ -17,7 +17,7 @@ registrate to platform, fill a form with your data: name, email and a password.
 
 Start from address <https://yapcp.test> you see a
 welcome message, then some link for: *Log in*, or *Register*, and few others.
-![Splashscreeen image](./registration_img01.png)
+![Splashscreen image](./registration_img01.png)
 
 ---
 
