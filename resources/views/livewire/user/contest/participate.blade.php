@@ -104,11 +104,9 @@ new class extends Component {
         <x-yapcp.header-link
             txt="Back to dashboard"
             url="{{ route('user.dashboard') }}" />
-        @if (!$memberOfGroup)
         <x-yapcp.header-link
             txt="I'm Member of Group"
             url="{{ route('user.contest.group-member', ['contest' => $contest]) }}" />
-        @endif
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
