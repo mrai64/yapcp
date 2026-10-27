@@ -21,7 +21,7 @@ easy assign *my images* to a contest' theme n section (with pre-warning if
 some trouble i.e. colour images in monochromatic section, images size too large).
 
 Platform is also in a github repository.
-Developers that wanna collaborate must read issue / *quaestio* 
+Developers that wanna collaborate must read issue / *quaestio*
 [#67](https://github.com/mrai64/yapcp/issues/67) *(A) First Read That*
 
 To manage the project that grow I try to follow few standards using
@@ -45,7 +45,7 @@ In that way can sort the *project issue table* in 3 way: priority, grouping, old
 Issue titles that don't follow these few rules must be modified to conform.
 
 When a issue become under dev a branch is created.
-name branch in that common way: 
+name branch in that common way:
 
 * first a conventional commits feat/ fix/ chore/ refactor/
 * second the ssue number in 4 digit zero leaded, i.e. 0100
@@ -61,33 +61,39 @@ Use the [template](dev/template.md) when open a new doc file.
 
 ## What about
 
-A photographic contests platform, that, had 4 subjects:
+A photographic contests platform, that, had few subjects:
 
-1. Participants user  
+1. **Participants user**  
+  *Who participate in one or more contests, and should be awarded*  
     1. register in platform
     1. see contest open to participation
     1. participate in contest
     1. appreciate result and sometimes win
     1. loop from 1.
-1. Organizations  
-   which are who design ad manage contest
+1. **Organizations**  
+  *Who organize, manage, and gain about photographic contests*  
    1. design contest
       1. main info
       1. sections n themes
       1. jury composition
       1. awards list
-    1. award ceremony
-    1. send prizes
-    1. loop from 1
-1. Federations  
-   offers help and rules to organization
-   for a *better contest* experience,
-   and consider the contest a way to
-   find "master of photography", awarding
-   them with distinctions.
+   1. award ceremony
+   1. send prizes
+   1. loop from
+1. **Jurors**  
+  *Who, nominated from Organization, have the*
+  *responsibility to find works admit at contest*
+  *and, in the number, pick who receive awards,*
+  *works and people and groups*
+1. **Federations**  
+   *Offers help and rules to Organizations*
+   *for a better contest experience,*
+   *and consider the contest a way to*
+   *find "master of photography", awarding*
+   *them with distinctions.*
 1. "admins Lodge"  
-    a user group, or an organization
-    that manage platform.
+    *a user group, like an organization*
+    *that manage platform.*
     1. check platform functionality
     1. resolve problems
     1. develop platform evolution

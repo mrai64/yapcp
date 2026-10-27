@@ -2,40 +2,72 @@
     "$schema": "https://larecipe.saleem.dev/schemas/3.x/navigation.json",
     "groups": [
         {
-            "group": "[Overview](/{{route}}/dev/overview)",
-            "pages": []
-        },
-        {
-            "group": "[🇮🇹 La piattaforma](/{{route}}/dev/man/index)",
-            "pages": []
-        },
-        {
-            "group": "Fix",
+            "group": "Panoramica",
             "pages": [
                 {
-                    "page": "dev/fix/0253-organization-update-not-for-all",
-                    "label": "#253"
+                    "page": "overview",
+                    "label": "TECH Overview"
                 },
                 {
-                    "page": "dev/fix/0142-register-test",
-                    "label": "#142"
+                    "page": "state-of-art",
+                    "label": "Stato Avanzamento Lavori"
                 },
                 {
-                    "page": "dev/fix/0107-user-role-seeder-ko",
-                    "label": "#107"
+                    "page": "welcome.aboard",
+                    "label": "Welcome Aboard / DoD"
+                },
+                {
+                    "page": "functionality-index",
+                    "label": "Lista delle Funzioni"
+                },
+                {
+                    "page": "template",
+                    "label": "Template Documento"
                 }
             ]
         },
         {
-            "group": "Doc",
+            "group": "Manuali",
             "pages": [
                 {
-                    "page": "dev/docs/0184-federation-read",
-                    "label": "#184"
+                    "page": "man/index",
+                    "label": "Indice Documentazione"
                 },
                 {
-                    "page": "dev/docs/141-user-login",
-                    "label": "#141"
+                    "page": "man/admins",
+                    "label": "Amministratori (Admins)"
+                },
+                {
+                    "page": "man/build-a-contest",
+                    "label": "Progettare un Concorso (Build a contest)"
+                },
+                {
+                    "page": "man/run-a-contest",
+                    "label": "Gestire un Concorso (Run a contest)"
+                },
+                {
+                    "page": "man/jury-works",
+                    "label": "Lavori della Giuria (Jury works)"
+                },
+                {
+                    "page": "man/organizations",
+                    "label": "Organizzazioni (Organizations)"
+                },
+                {
+                    "page": "man/users",
+                    "label": "Gestione Utenti (Users)"
+                },
+                {
+                    "page": "man/federations",
+                    "label": "Federazioni (Federations)"
+                },
+                {
+                    "page": "man/database",
+                    "label": "Database"
+                },
+                {
+                    "page": "man/dbdoc",
+                    "label": "Schema Database"
                 }
             ]
         },
@@ -43,44 +75,386 @@
             "group": "Feature",
             "pages": [
                 {
-                    "page": "dev/feat/0200-federation-list",
-                    "label": "#200"
+                    "page": "feat/0006-admin-user-index",
+                    "label": "#6 - Admin User Index"
                 },
                 {
-                    "page": "dev/feat/0164-user-work-modify",
-                    "label": "#164"
+                    "page": "feat/0016-contest-section-remove",
+                    "label": "#16 - Contest Section Remove"
                 },
                 {
-                    "page": "dev/feat/0167-user-work-wnh",
-                    "label": "#167"
+                    "page": "feat/0020-add-me-to-org",
+                    "label": "#20 - Add Me To Org"
                 },
                 {
-                    "page": "dev/feat/0150-referenced",
-                    "label": "#150"
+                    "page": "feat/0036-contest-import",
+                    "label": "#36 - Contest Import"
                 },
                 {
-                    "page": "dev/feat/0148-federations",
-                    "label": "#148"
+                    "page": "feat/0076-contest-section-modify",
+                    "label": "#76 - Contest Section Modify"
                 },
                 {
-                    "page": "dev/feat/0128-breeze-remove",
-                    "label": "#128"
+                    "page": "feat/0086-contest-jury-modify",
+                    "label": "#86 - Contest Jury Modify"
                 },
                 {
-                    "page": "dev/feat/0116-federation-more-crud",
-                    "label": "#116"
+                    "page": "feat/0093-language-translation",
+                    "label": "#93 - Language Translation"
                 },
                 {
-                    "page": "dev/feat/0111-user-role-review",
-                    "label": "#111"
+                    "page": "feat/0111-user-role-review",
+                    "label": "#111 - User Role Review"
                 },
                 {
-                    "page": "dev/feat/0093-language-translation",
-                    "label": "#93"
+                    "page": "feat/0114-federation-delete-policy",
+                    "label": "#114 - Federation Delete Policy"
                 },
                 {
-                    "page": "dev/feat/0020-add-me-to-org",
-                    "label": "#20"
+                    "page": "feat/0115-federation-delete",
+                    "label": "#115 - Federation Delete"
+                },
+                {
+                    "page": "feat/0116-federation-more-crud",
+                    "label": "#116 - Federation More CRUD"
+                },
+                {
+                    "page": "feat/0128-breeze-remove",
+                    "label": "#128 - BREEZE Remove"
+                },
+                {
+                    "page": "feat/0148-federations",
+                    "label": "#148 - Federations"
+                },
+                {
+                    "page": "feat/0161-user-work-listed2",
+                    "label": "#161 - User Work Listed2"
+                },
+                {
+                    "page": "feat/0162-user-work-remove",
+                    "label": "#162 - User Work Remove"
+                },
+                {
+                    "page": "feat/0164-user-work-modify",
+                    "label": "#164 - User Work Modify"
+                },
+                {
+                    "page": "feat/0167-user-work-wnh",
+                    "label": "#167 - User Work WNH"
+                },
+                {
+                    "page": "feat/0177-contest-participant-group_name",
+                    "label": "#177 - Contest Participant Group Name"
+                },
+                {
+                    "page": "feat/0200-federation-list",
+                    "label": "#200 - Federation List"
+                },
+                {
+                    "page": "feat/0208-contest-patronage",
+                    "label": "#208 - Contest Patronage"
+                },
+                {
+                    "page": "feat/0231-federation-more-listed",
+                    "label": "#231 - Federation More Listed"
+                },
+                {
+                    "page": "feat/0232-federation-more-add",
+                    "label": "#232 - Federation More Add"
+                },
+                {
+                    "page": "feat/0233-federation-more-modify",
+                    "label": "#233 - Federation More Modify"
+                },
+                {
+                    "page": "feat/0234-federation-more-remove",
+                    "label": "#234 - Federation More Remove"
+                },
+                {
+                    "page": "feat/0257-contest-patronage-add",
+                    "label": "#257 - Contest Patronage Add"
+                },
+                {
+                    "page": "feat/0261-contest-patronage-modify",
+                    "label": "#261 - Contest Patronage Modify"
+                },
+                {
+                    "page": "feat/0263-contest-patronage-remove",
+                    "label": "#263 - Contest Patronage Remove"
+                },
+                {
+                    "page": "feat/0265-federation-list-add",
+                    "label": "#265 - Federation List Add"
+                },
+                {
+                    "page": "feat/0266-remove-federation-list-modify",
+                    "label": "#266 - Remove Federation List Modify"
+                },
+                {
+                    "page": "feat/0267-remove-federation-list-listed",
+                    "label": "#267 - Remove Federation List Listed"
+                },
+                {
+                    "page": "feat/0284-contest-jury-remove",
+                    "label": "#284 - Contest Jury Remove"
+                },
+                {
+                    "page": "feat/0285-contest-jury-add",
+                    "label": "#285 - Contest Jury Add"
+                },
+                {
+                    "page": "feat/0286-contest-jury-listed",
+                    "label": "#286 - Contest Jury Listed"
+                },
+                {
+                    "page": "feat/0288-contest-jury-qualify",
+                    "label": "#288 - Contest Jury Qualify"
+                },
+                {
+                    "page": "feat/0296-contest-award-listed",
+                    "label": "#296 - Contest Award Listed"
+                },
+                {
+                    "page": "feat/0297-contest-award-add-section",
+                    "label": "#297 - Contest Award Add Section"
+                },
+                {
+                    "page": "feat/0298-contest-award-modify",
+                    "label": "#298 - Contest Award Modify"
+                },
+                {
+                    "page": "feat/0299-contest-award-remove",
+                    "label": "#299 - Contest Award Remove"
+                },
+                {
+                    "page": "feat/0317-user-work-backup",
+                    "label": "#317 - User Work Backup"
+                },
+                {
+                    "page": "feat/0318-user-backup",
+                    "label": "#318 - User Backup"
+                },
+                {
+                    "page": "feat/0319-user-import",
+                    "label": "#319 - User Import"
+                },
+                {
+                    "page": "feat/0344-contest-backup",
+                    "label": "#344 - Contest Backup"
+                },
+                {
+                    "page": "feat/0348-user-work-import",
+                    "label": "#348 - User Work Import"
+                },
+                {
+                    "page": "feat/0350-country-listed",
+                    "label": "#350 - Country Listed"
+                },
+                {
+                    "page": "feat/0351-timezone-listed",
+                    "label": "#351 - Timezone Listed"
+                },
+                {
+                    "page": "feat/0353-federation-mode",
+                    "label": "#353 - Federation Mode"
+                },
+                {
+                    "page": "feat/0361-contest-work-add",
+                    "label": "#361 - Contest Work Add"
+                },
+                {
+                    "page": "feat/0363-user-dashboard",
+                    "label": "#363 - User Dashboard"
+                },
+                {
+                    "page": "feat/0366-user-work-validation",
+                    "label": "#366 - User Work Validation"
+                },
+                {
+                    "page": "feat/0368-contest-work-review",
+                    "label": "#368 - Contest Work Review"
+                },
+                {
+                    "page": "feat/0369-user-work-validator",
+                    "label": "#369 - User Work Validator"
+                },
+                {
+                    "page": "feat/0375-contest-waiting-remove",
+                    "label": "#375 - Contest Waiting Remove"
+                },
+                {
+                    "page": "feat/0376-contest-participant",
+                    "label": "#376 - Contest Participant"
+                },
+                {
+                    "page": "feat/0385-juror-dashboard",
+                    "label": "#385 - Juror Dashboard"
+                },
+                {
+                    "page": "feat/0386-organization-dashboard",
+                    "label": "#386 - Organization Dashboard"
+                },
+                {
+                    "page": "feat/0387-contest-vote-add",
+                    "label": "#387 - Contest Vote Add"
+                }
+            ]
+        },
+        {
+            "group": "Fix",
+            "pages": [
+                {
+                    "page": "fix/0107-user-role-seeder-ko",
+                    "label": "#107 - User Role Seeder KO"
+                },
+                {
+                    "page": "fix/107-user-role-seeder-ko",
+                    "label": "#107 - User Role Seeder KO"
+                },
+                {
+                    "page": "fix/0142-register-test",
+                    "label": "#142 - Register Test"
+                },
+                {
+                    "page": "fix/0150-referenced",
+                    "label": "#150 - Referenced"
+                },
+                {
+                    "page": "fix/0215-federation-section-listed",
+                    "label": "#215 - Federation Section Listed"
+                },
+                {
+                    "page": "fix/0217-federation-section-listed",
+                    "label": "#217 - Federation Section Listed"
+                },
+                {
+                    "page": "fix/0219-federation-section-mono",
+                    "label": "#219 - Federation Section Mono"
+                },
+                {
+                    "page": "fix/0235-federation-mores-referenced-set-typo",
+                    "label": "#235 - Federation Mores Referenced Set Typo"
+                },
+                {
+                    "page": "fix/0253-organization-update-not-for-all",
+                    "label": "#253 - Organization Update Not For All"
+                },
+                {
+                    "page": "fix/0270-federation.modify",
+                    "label": "#270 - Federation Modify"
+                },
+                {
+                    "page": "fix/0279-contest-section-add",
+                    "label": "#279 - Contest Section Add"
+                },
+                {
+                    "page": "fix/0325-contest-uuid",
+                    "label": "#325 - Contest UUID"
+                },
+                {
+                    "page": "fix/0326-contest-award-uuid",
+                    "label": "#326 - Contest Award UUID"
+                },
+                {
+                    "page": "fix/0327-contest-jury-uuid",
+                    "label": "#327 - Contest Jury UUID"
+                },
+                {
+                    "page": "fix/0328-contest-section-uuid",
+                    "label": "#328 - Contest Section UUID"
+                },
+                {
+                    "page": "fix/0329-contest-waiting-uuid",
+                    "label": "#329 - Contest Waiting UUID"
+                },
+                {
+                    "page": "fix/0330-contest-work-uuid",
+                    "label": "#330 - Contest Work UUID"
+                },
+                {
+                    "page": "fix/0331-organization-uuid",
+                    "label": "#331 - Organization UUID"
+                },
+                {
+                    "page": "fix/0333-user-work-uuid",
+                    "label": "#333 - User Work UUID"
+                }
+            ]
+        },
+        {
+            "group": "Doc",
+            "pages": [
+                {
+                    "page": "docs/0141-user-login",
+                    "label": "#141 - User Login"
+                },
+                {
+                    "page": "docs/141-user-login",
+                    "label": "#141 - User Login"
+                },
+                {
+                    "page": "docs/0159-user-work-add",
+                    "label": "#159 - User Work Add"
+                },
+                {
+                    "page": "docs/0160-user-work-listed1",
+                    "label": "#160 - User Work Listed1"
+                },
+                {
+                    "page": "docs/0184-federation-read",
+                    "label": "#184 - Federation Read"
+                },
+                {
+                    "page": "docs/0185-federation-add",
+                    "label": "#185 - Federation Add"
+                },
+                {
+                    "page": "docs/0186-federation-update",
+                    "label": "#186 - Federation Update"
+                },
+                {
+                    "page": "docs/0187-federation-delete",
+                    "label": "#187 - Federation Delete"
+                },
+                {
+                    "page": "docs/0188-federation-policy",
+                    "label": "#188 - Federation Policy"
+                },
+                {
+                    "page": "docs/0189-federation-section-listed",
+                    "label": "#189 - Federation Section Listed"
+                },
+                {
+                    "page": "docs/0190-federation-section-add",
+                    "label": "#190 - Federation Section Add"
+                },
+                {
+                    "page": "docs/0192-federation-section-update",
+                    "label": "#192 - Federation Section Update"
+                },
+                {
+                    "page": "docs/0193-federation-section-delete",
+                    "label": "#193 - Federation Section Delete"
+                },
+                {
+                    "page": "docs/0194-federation-section-policy",
+                    "label": "#194 - Federation Section Policy"
+                },
+                {
+                    "page": "docs/0195-federation-mode-read",
+                    "label": "#195 - Federation Mode Read"
+                },
+                {
+                    "page": "docs/0199-federation-more-policy",
+                    "label": "#199 - Federation More Policy"
+                },
+                {
+                    "page": "docs/0258-contest-patronage-listed",
+                    "label": "#258 - Contest Patronage Listed"
+                },
+                {
+                    "page": "docs/0307-contest-detail",
+                    "label": "#307 - Contest Detail"
                 }
             ]
         },
@@ -88,20 +462,41 @@
             "group": "Refactor",
             "pages": [
                 {
-                    "page": "dev/refactor/0239-contest-patronage",
-                    "label": "#239"
+                    "page": "refactor/0089-regions-lookup-table",
+                    "label": "#89 - Regions Lookup Table"
                 },
                 {
-                    "page": "dev/refactor/0140-big-rebuild",
+                    "page": "refactor/89-regions-lookup-table",
+                    "label": "#89 - Regions Lookup Table"
+                },
+                {
+                    "page": "refactor/0129-user-works",
+                    "label": "#129 - User Works"
+                },
+                {
+                    "page": "refactor/0133-federation-section-fields",
+                    "label": "#133 - Federation Section Fields"
+                },
+                {
+                    "page": "refactor/0140-big-rebuild",
                     "label": "#140 Big Refactor"
                 },
                 {
-                    "page": "dev/refactor/0133-federation-section-fields",
-                    "label": "#133"
+                    "page": "refactor/0239-contest-patronage",
+                    "label": "#239 - Contest Patronage"
                 },
                 {
-                    "page": "dev/refactor/0089-regions-lookup-table",
-                    "label": "#89"
+                    "page": "refactor/0352-user-contact-whatsapp",
+                    "label": "#352 - User Contact Whatsapp"
+                }
+            ]
+        },
+        {
+            "group": "Wiki",
+            "pages": [
+                {
+                    "page": "wiki/abcde-method",
+                    "label": "Metodo ABCDE (Tracy Brian)"
                 }
             ]
         }
