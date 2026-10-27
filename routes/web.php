@@ -349,6 +349,9 @@ Volt::route('/user/contest/participate/remove/{contestWork}', 'user.contest-work
 Volt::route('/user/contest/closed-listed/{contestYear?}', 'user.contest.listed-closed')
     ->middleware(['auth', 'verified'])
     ->name('user.contest.listed-closed');
+Volt::route('/user/contest/participate/group-member/{contest}', 'user.contest.group-member')
+    ->middleware(['auth', 'verified'])
+    ->name('user.contest.group-member');
 
 // contest-participant for open contest
 Volt::route('/user/contest-participant/open/{contest}', 'user.contest-participant.listed-open')
