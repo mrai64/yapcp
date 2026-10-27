@@ -9,6 +9,7 @@
  */
 
 use App\Models\Contest;
+use App\Models\ContestParticipant;
 use App\Models\ContestSection;
 use App\Models\ContestWork;
 use App\Models\User;
@@ -23,6 +24,7 @@ new class extends Component {
     public          $userWorks;
     public          $contestWorks;
     public          $contestSections;
+    public          $memberOfGroup = null;
     // first
     public function mount(Contest $contest) // contest from route
     {
@@ -32,6 +34,10 @@ new class extends Component {
         $this->contest = $contest;
         $this->contestSections = $contest->sections;
         $this->user = Auth::user();
+        $alreadyParticipant = ContestParticipant::whereContestId($this->contest->id)
+            ->where('user_contact_id', $this->user->id)
+            ->first() ?? null;
+        $this->memberOfGroup = $alreadyParticipant?->group_name ?? '';
     }
     // every update
     public function with()
@@ -54,6 +60,8 @@ new class extends Component {
             ->with('userWorkMores')
             ->whereNotIn('id', $assignedUserWorkIds)
             ->get();
+
+        // Member of ...
 
         return [
             'contestWorks' => $contestWorks,
@@ -96,10 +104,14 @@ new class extends Component {
         <x-yapcp.header-link
             txt="Back to dashboard"
             url="{{ route('user.dashboard') }}" />
+        @if (!$memberOfGroup)
+        <x-yapcp.header-link
+            txt="I'm Member of Group"
+            url="{{ route('user.contest.group-member', ['contest' => $contest]) }}" />
+        @endif
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                 <!-- success -->
                 @if (session('success'))
