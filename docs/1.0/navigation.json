@@ -135,6 +135,10 @@
                     "label": "Section Awards assignments"
                 },
                 {
+                    "page": "organizations/jury_reasoning",
+                    "label": "Jury reasoning"
+                },
+                {
                     "label": "Contest Awards assignments",
                     "href": "#"
                 },
