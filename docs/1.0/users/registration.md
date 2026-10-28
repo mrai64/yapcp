@@ -6,14 +6,17 @@ title: 'User participants | Registration'
 
 **Registration to yaPCP**
 
-It's obvious that you can look some platform pages as a guest,
-but when you decide to participate in a contest on our plarform, you need to
-registrate to platform, fill a form with your data: name, email and a password.  
-
+- Almost the entire platform is accessible once you have registered.  
+  To register, you only need to provide:  
+  your name, email address, and a password.
 - *Only name, email and password?*
 - Yes, it's a starting point.  
 - *No more data?*
-- Obviously not, but that's a *starting point*.
+- Obviously not, we ask your contact details next, but that's a *starting point*.
+
+&nbsp;
+
+## Start
 
 Start from address <https://yapcp.test> you see a
 welcome message, then some link for: *Log in*, or *Register*, and few others.

@@ -31,15 +31,15 @@
                 },
                 {
                     "page": "users/registration",
-                    "label": "✅VerifyEmail"
+                    "label": "VerifyEmail ✅"
                 },
                 {
                     "page": "users/registration",
-                    "label": "✅Lost Password?"
+                    "label": "Lost Password? ✅"
                 },
                 {
                     "page": "users/contact_infos",
-                    "label": "✅Contact Info"
+                    "label": "✅Contact Details"
                 },
                 {
                     "page": "users/dashboard",

@@ -2,30 +2,30 @@
 title: Overview
 ---
 
-# Overview
-
 ## First Visit? What is yaPCP?
 
 yaPCP is: *yeah, an amazing photo contest platform*?  
 
-You should register in, and with your best images become a [**Contest participant**](#contest-participant), and/or become in your Organization [**Contest organizer**](#member-of-contest-organizer), and/or vote as [**Contest juror**](#contest-juror).
+You should register in, and with your best images become a [**Contest participant**](#contest-participant), and/or become in your Organization a [**Contest organizer**](#member-of-contest-organizer), and/or vote as [**Contest juror**](#contest-juror). You can also be
+authorized as **Federation member** to monitor *Contest* and some *User Works* to determine if they are regular or violate any of your federation rules.
 
 ---
 
-## Contest Participant
+## As Contest Participant
 
 - Register to our platform.
-- Upload your best photos.
-- See the *Open Contest list*, and easy participate to one, or more.
+- Upload your best photos in your depot.
+- See the *Open Contest list*, and easy participate to one, or more. If requested, pay the fee.
+  That's all your effort. Then wait for response day.
 - We do our best to help you avoid fault.  
   If a section-theme is marked
   as *monochromatic only*, and you upload a colored
   image, we warn you before load.  
-  When size limit is 2500 px wide and your work is 3000px,
-  we warn you to avoid a mistake.  
-  When section require 4 works and you try to load 5th, yes: we warn yuo.
-- In next future we plan to federate various contest platform,
-  with a way to apply from/for an external contest with the yapcp interface.
+  When size limit is 2500 px wide and your work is 3000 px size,
+  we warn you, to avoid a mistake.  
+  When section require 4 works and you try to load 5th, yes: we warn you.
+- NEXT/ TO DO: we plan to federate various contest platform,
+  with a secure and private way to apply from/for an external contest with the yapcp platform.
 
 ---
 
