@@ -275,6 +275,9 @@ Volt::route('/organization/contest-award/candidate/{contestSection}', 'organizat
 Volt::route('/organization/contest-award/contest/{contest}', 'organization.contest-award.contest')
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-award.contest');
+Volt::route('/organization/contest-award/citation/{contestAward}', 'organization.contest-award.citation')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.contest-award.citation');
 
 /**
  * Federation

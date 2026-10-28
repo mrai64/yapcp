@@ -2,9 +2,9 @@
 
 /**
  * Organization Contest Manage / list of admit...
- * 
- * used in organization.contest-award-contest 
- * as @livewire
+ *
+ * used in organization.contest-award-contest
+ *
  */
 
 use App\Models\Contest;
@@ -83,7 +83,7 @@ new class extends Component {
             <form wire:submit.prevent="assignWorkId('{{$contestWork->id}}')">
             <tr class="border">
                 <td valign="top" class="px-2">
-                        <select 
+                        <select
                             class='border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full'
                             id="awardCode"
                             name="awardCode"
@@ -92,7 +92,7 @@ new class extends Component {
                             <option value="">{{ __("...") }}</option>
                             @foreach ($unassignedAwards as $contestAward)
                                 <option value="{{ $contestAward->award_code }}">
-                                    {{ $contestAward->award_code }}  {{ $contestAward->name_en}} 
+                                    {{ $contestAward->award_code }}  {{ $contestAward->name_en}}
                                 </option>
                             @endforeach
 
