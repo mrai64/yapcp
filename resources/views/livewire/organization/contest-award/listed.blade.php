@@ -108,6 +108,11 @@ new class extends Component {
                                     {{ __("Unassigned") }}
                                 @endif
                             </td>
+                            <td valign="top" class="px-4">
+                                <x-yapcp.header-link
+                                    txt="Citation"
+                                    url="{{ route('organization.contest-award.citation', ['contestAward' => $contestAward]) }}" />
+                            </td>
                         </tr>
                         @empty
                             <tr>
@@ -127,26 +132,39 @@ new class extends Component {
                 <p class="small">
                     {{ __("Usually Contest awards aren't only for works, but authors or group")}}
                 </p>
-                <table class="data-table-container w-auto">
+                <table class="data-table-container w-full">
                     <tbody>
                         @forelse ($contestAwardsSet as $contestAward)
                         <tr class="border">
-                            <td valign="top" class="fyk text-xl px-4">
-                                {{ $contestAward->award_code}}
-                                <br />
-                                {{ $contestAward->award_name}}
+                            <td valign="top">
+                                <p class="fyk text-xl px-4">
+                                    {{ $contestAward->award_code}}
+                                    <br />
+                                    {{ $contestAward->award_name}}
+                                </p>
                             </td>
-                            <td valign="top" class="fyk test-2xl px-4">
+                            <td valign="top">
                                 @if ($contestAward->winner_work_id)
                                 <!-- winner_work_id -->
-                                <img src="{{ asset('storage/contests') .'/'. $contestAward->contest_id .'/'. $contestAward->contestWork->section_id .'/'. $contestAward->winner_work_id .'.'. $contestAward->contestWork->userWork->file_format }}"
-                                    class="max-h-[150] max-w-[150] object-contain rounded-lg shadow-md"
-                                    @contextmenu.prevent
-                                    alt="All rights reserved"
-                                    lazy />
+                                <p class="fyk text-2xl px-4">
+                                    {{ $contestAward->contestWork->userContact->first_name}}
+                                    {{ $contestAward->contestWork->userContact->last_name}}
+                                    <br />
+                                    {{ __("from") }}
+                                    {{ $contestAward->contestWork->userContact->country->flag_code}}
+                                    {{ $contestAward->contestWork->userContact->country->id}}
+                                    |
+                                    {{ $contestAward->contestWork->userContact->city}}
+                                    <img src="{{ asset('storage/contests') .'/'. $contestAward->contest_id .'/'. $contestAward->contestWork->section_id .'/'. $contestAward->winner_work_id .'.'. $contestAward->contestWork->userWork->file_format }}"
+                                        class="max-h-[150] max-w-[150] object-contain rounded-lg shadow-md"
+                                        @contextmenu.prevent
+                                        alt="All rights reserved"
+                                        lazy />
+                                </p>
                                 @endif
                                 @if ($contestAward->winner_user_id)
                                 <!-- winner_user_id -->
+                                <p class="fyk text-2xl px-4">
                                     {{ $contestAward->userContact->country->flag_code }}
                                     {{ $contestAward->userContact->country->country }}
                                     <br>
@@ -154,19 +172,27 @@ new class extends Component {
                                     {{ $contestAward->userContact->first_name }}
                                     <br>
                                     {{ $contestAward->userContact->city }}
+                                </p>
                                 @endif
                                 @if ($contestAward->winner_name)
                                 <!-- winner_name -->
+                                <p class="fyk text-2xl px-4">
                                     {{ $contestAward->winner_name }}
+                                </p>
                                 @endif
                                 @if (!$contestAward->winner_work_id && !$contestAward->winner_user_id && $contestAward->winner_name === '')
                                 {{ __("Temporary Unassigned")}}
                                 @endif                                
                             </td>
+                            <td valign="top" class="px-4">
+                                <x-yapcp.header-link
+                                    txt="Citation"
+                                    url="{{ route('organization.contest-award.citation', ['contestAward' => $contestAward]) }}" />
+                            </td>
                         </tr>
                         @empty
                             <tr>
-                                <td colspan="2">
+                                <td colspan="3">
                                     {{ __("No award here?") }}
                                 </td>
 

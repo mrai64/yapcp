@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 /**
- * @property string $id real pk si contest_id + award_code
+ * @property string $id real pk is contest_id + award_code
  * @property string $contest_id fk: contests.id contest_sections.contest_id
  * @property string|null $section_id fk: contest_sections.id
  * @property string|null $section_code from: section.id->code | null for contest/circuit
@@ -40,6 +40,7 @@ use Illuminate\Support\Str;
  * @property string|null $winner_work_id
  * @property string|null $winner_user_id
  * @property string $winner_name winner not in previous cols
+ * @property string|null $citation jury speech for minute or award show
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
@@ -55,6 +56,7 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward query()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereAwardCode($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereAwardName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereCitation($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereContestId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestAward whereDeletedAt($value)
@@ -90,6 +92,7 @@ final class ContestAward extends Model
         'winner_work_id', // nullable
         'winner_user_id', // nullable
         'winner_name', //    nullable
+        'citation', //    nullable
         // created_at        reserved
         // updated_at        reserved
         // deleted_at        reserved
@@ -104,16 +107,17 @@ final class ContestAward extends Model
     protected function casts()
     {
         return [
-            'id'           => 'string',
-            'contest_id'   => 'string',
-            'section_id'   => 'string',
-            'section_code' => 'string',
-            'award_code'   => 'string',
-            'award_name'   => 'string',
-            'is_award'     => 'boolean',
+            'id'             => 'string',
+            'contest_id'     => 'string',
+            'section_id'     => 'string',
+            'section_code'   => 'string',
+            'award_code'     => 'string',
+            'award_name'     => 'string',
+            'is_award'       => 'boolean',
             'winner_work_id' => 'string',
             'winner_user_id' => 'string',
             'winner_name'    => 'string',
+            'citation'       => 'string',
             'created_at'   => 'datetime',
             'updated_at'   => 'datetime',
             'deleted_at'   => 'datetime',

@@ -34,6 +34,7 @@ new class extends Component {
     public function with(): array
     {
         $this->unassignedAwardsSet = ContestAward::query()
+            ->where('contest_id', $this->contest->id)
             ->whereNull('section_id')
             ->whereNull('winner_work_id')
             ->whereNull('winner_user_id')

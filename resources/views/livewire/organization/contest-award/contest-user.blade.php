@@ -2,9 +2,9 @@
 
 /**
  * Organization Contest Manage / list of admit...
- * 
- * used in organization.contest-award-contest 
- * as @livewire
+ *
+ * used in organization.contest-award-contest
+ *
  */
 
 use App\Models\Contest;
@@ -20,10 +20,11 @@ new class extends Component {
     use WithPagination;
     public Contest      $contest;
     public Organization $organization;
-    public              $unassignedAwardsSet;
+    public              $unassignedAwards;
     public              $awardedParticipants;
-    public array  $awardCode     = [];
-    public string $contestWorkId = '';
+    public array  $awardCode          = [];
+    public string $userContactId      = '';
+    public string $awardedUserContact = ''; // fake form field
     //
     // first
     public function mount(Contest $contest)
@@ -49,7 +50,10 @@ new class extends Component {
             ->orderBy('first_name')
             ->get();
 
-        $this->unassignedAwardsSet = ContestAward::query()
+        $this->awardedParticipants = $userContacts;
+
+        $this->unassignedAwards = ContestAward::query()
+            ->where('contest_id', $this->contest->id)
             ->whereNull('section_id')
             ->whereNull('winner_work_id')
             ->whereNull('winner_user_id')
@@ -63,13 +67,30 @@ new class extends Component {
     {
         // ! check is a user_id in userIdsDirect
         return [
-            'winnerUser' => 'required|uuid|exists:user_contacts,id',
+            'awardedUserContact' => 'required|uuid|exists:user_contacts,id',
         ];
+    }
+    //
+    public function assignUserId(string $userContactId)
+    {
+        $this->userContactId = $userContactId;
+        $validated = $this->validate();
+        $selectedAwardCode = $this->awardCode[$userContactId] ?? null;
+        $contestAward = ContestAward::whereNull('section_id')
+            ->where('award_code', $selectedAwardCode)
+            ->firstOrFail();
+
+        $contestAward->update([
+            'winner_user_id' => $validated['awardedUserContact'],
+        ]);
+
+        return redirect()
+            ->route('organization.contest-award.contest', ['contest' => $this->contest])
+            ->with('success', __("Update the Award page"));
     }
 }; ?>
 
 <div>
-    <!-- no page -->
     <!-- no page -->
     <h3 class="fyk font-semibold text-xl text-gray-800 leading-tight fyk">
         {{ __("Assign by User Awarded") }}
@@ -80,31 +101,40 @@ new class extends Component {
             <th>{{ __("Work")}}</th>
         </thead>
         <tbody>
-            <form wire:submit.prevent="assignWorkId('{{$contestWork->id}}')">
+            @forelse ($awardedParticipants as $awardedUserContact)
+            <form wire:submit.prevent="assignUserId('{{$awardedUserContact->id}}')">
             <tr class="border">
                 <td valign="top" class="px-2">
-                        <select 
-                            class='border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full'
-                            id="awardCode"
-                            name="awardCode"
-                            wire:model="awardCode.{{$contestWork->id}}"
-                            required >
-                            <option value="">{{ __("...") }}</option>
-                            @foreach ($unassignedAwards as $contestAward)
-                                <option value="{{ $contestAward->award_code }}">
-                                    {{ $contestAward->award_code }}  {{ $contestAward->name_en}} 
-                                </option>
-                            @endforeach
+                    <select
+                        class='border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full'
+                        id="awardCode"
+                        name="awardCode"
+                        wire:model="awardCode.{{$awardedUserContact->id}}"
+                        required >
+                        <option value="">{{ __("...") }}</option>
+                        @foreach ($unassignedAwards as $contestAward)
+                            <option value="{{ $contestAward->award_code }}">
+                                {{ $contestAward->award_code }}  {{ $contestAward->name_en}}
+                            </option>
+                        @endforeach
 
-                        </select>
-                        <x-button class="mb-4 mx-4">{{ __("Assign") }}</x-button>
-                    </td>
-                    <td valign="top" class="px-4 w-full">
-                        <!-- select user id -->
-
-                    </td>
-                </tr>
+                    </select>
+                    <x-button class="mb-4 mx-4">{{ __("Assign") }}</x-button>
+                </td>
+                <td valign="top" class="px-4 w-full">
+                    {{$awardedUserContact->country->flag_code}}
+                    {{$awardedUserContact->country->country}}
+                    <br />
+                    {{$awardedUserContact->last_name}},
+                    {{$awardedUserContact->first_name}}
+                    {{__("from")}}
+                    {{$awardedUserContact->city}}
+                </td>
+            </tr>
             </form>
+                    @empty
+                
+            @endforelse
         </tbody>
     </table>
 
