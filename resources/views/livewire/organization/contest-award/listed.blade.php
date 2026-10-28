@@ -108,6 +108,11 @@ new class extends Component {
                                     {{ __("Unassigned") }}
                                 @endif
                             </td>
+                            <td valign="top" class="px-4">
+                                <x-yapcp.header-link
+                                    txt="Citation"
+                                    url="{{ route('organization.contest-award.citation', ['contestAward' => $contestAward]) }}" />
+                            </td>
                         </tr>
                         @empty
                             <tr>
