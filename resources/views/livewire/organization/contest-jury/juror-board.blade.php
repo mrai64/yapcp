@@ -1,9 +1,10 @@
 <?php
 
 /**
- * Organization contest manage - During Jury window
+ * Organization Contest Manage - During Jury window
  * 1. table of contest section voted per total 
  * 2. table of contest section total_score LINK
+ * 3. link for finale Minute Draw
  */
 
 use App\Models\Contest;
@@ -99,6 +100,9 @@ new class extends Component {
         <x-yapcp.header-link 
             txt="Back to Org Dashboard" 
             url="{{ route('organization.dashboard', ['organization' => $organization]) }}" />
+        <x-yapcp.header-link 
+            txt="Final Minute Draft" 
+            url="{{ route('organization.contest-award.minute', ['contest' => $contest]) }}" />
     </x-slot>
 
     <div class="py-12">
@@ -205,7 +209,6 @@ new class extends Component {
                     </tbody>
                 </table>
 
-                <!-- TODO HERE THE AWARD ASSIGN Link -->
             </div>
         </div>
     </div>

@@ -42,6 +42,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 /**
@@ -333,6 +334,62 @@ class Contest extends Model
             ->where('user_contact_id', $userId);
     }
 
+    // for jury minute
+    public function getSectionWithSortedJuries()
+    {
+        return $this->sections() // contest_sections.contest_id
+            ->orderBy('code') // contest_sections.code
+            ->with(['contestJuries'  => function ($query) {
+                $query->orderBy('is_president', 'desc')
+                    ->with('userContact');
+            }])
+            ->get();
+    }
+
+    public function getSectionsStats()
+    {
+        return $this->contestSections()
+            ->withCount([
+                // how many works
+                'contestWorks as total_works_count',
+                // how many works admit
+                'contestWorks as admitted_works_count' => function ($query) {
+                    $query->where('is_admit', true);
+                },
+
+                // how may authors
+                'contestWorks as total_authors_count' => function ($query) {
+                    $query->select(\DB::raw('count(distinct user_id)'));
+                },
+                // how many authors with works admit
+                'contestWorks as admitted_authors_count' => function ($query) {
+                    $query->where('is_admit', true)
+                    ->select(\DB::raw('count(distinct user_id)'));
+                },
+
+                // how may countries
+                'contestWorks as total_countries_count' => function ($query) {
+                    $query->select(\DB::raw('count(distinct country_id)'));
+                },
+                // how many countries with works admit
+                'contestWorks as admitted_countries_count' => function ($query) {
+                    $query->where('is_admit', true)
+                    ->select(\DB::raw('count(distinct country_id)'));
+                },
+            ])
+            ->get();
+    }
+
+    public function getSectionAwards()
+    {
+        return $this->sections()
+            ->orderBy('code') // sections.code
+            ->with(['awards' => function ($query) {
+                $query->orderBy('award_code');
+            }])
+            ->get();
+    }
+
     // SCOPE - used to add filter to query
 
     /**
@@ -617,5 +674,10 @@ class Contest extends Model
         );
         // Log
         return $contestPatronagesSet;
+    }
+
+    public function contestJuries(): HasMany
+    {
+        return $this->hasMany(ContestJury::class, 'contest_id', 'id');
     }
 }
