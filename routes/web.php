@@ -265,7 +265,7 @@ Volt::route('/organization/contest-jury/juror-board/{contest}', 'organization.co
 Volt::route('/organization/contest-vote/section-scoreboard/{contestSection}', 'organization.contest-vote.section-scoreboard')
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-vote.section-scoreboard');
-// missing pArm is 'for contest'
+// contestSection: missing parm is 'for contest'
 Volt::route('/organization/contest-award/listed/{contest}/{contestSection?}', 'organization.contest-award.listed')
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-award.listed');
@@ -278,6 +278,9 @@ Volt::route('/organization/contest-award/contest/{contest}', 'organization.conte
 Volt::route('/organization/contest-award/citation/{contestAward}', 'organization.contest-award.citation')
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-award.citation');
+Volt::route('/organization/contest-award/minute-draft/{contest}', 'organization.contest-award.minute')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.contest-award.minute');
 
 /**
  * Federation
