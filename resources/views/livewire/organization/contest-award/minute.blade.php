@@ -8,27 +8,48 @@
 
 use App\Models\Contest;
 use App\Models\Organization;
+use Livewire\Attributes\Computed;
 use Livewire\Volt\Component;
 
 new class extends Component {
     //
     public Contest $contest;
     public Organization $organization;
-    public $sectionJuries;
-    public $sectionStats;
-    public $sectionAwards;
-    public $contestAwards;
-    public $sortedJurors;
+
+    #[Computed]
+    public function sectionJuries()
+    {
+        return $this->contest->getSectionWithSortedJuries();
+    }
+
+    #[Computed]
+    public function sectionStats()
+    {
+        return $this->contest->getSectionsStats();
+    }
+
+    #[Computed]
+    public function sectionAwards()
+    {
+        return $this->contest->getSectionAwards();
+    }
+
+    #[Computed]
+    public function contestAwards()
+    {
+        return $this->contest->globalAwards()->get();
+    }
+
+    #[Computed]
+    public function sortedJurors()
+    {
+        return $this->contest->getSortedUniqueJuries();
+    }
     //
     public function mount(Contest $contest)
     {
         $this->contest = $contest;
         $this->organization  = $this->contest->organization;
-        $this->sectionJuries = $this->contest->getSectionWithSortedJuries();
-        $this->sectionStats  = $this->contest->getSectionsStats();
-        $this->sectionAwards = $this->contest->getSectionAwards();
-        $this->contestAwards = $this->contest->globalAwards()->get();
-        $this->sortedJurors  = $this->contest->getSortedUniqueJuries();
     }
 
     /**
@@ -36,7 +57,15 @@ new class extends Component {
      */
     public function downloadTxt()
     {
-        $content = view('livewire.organization.contest-award.minute-txt', $this->getTemplateData())->render();
+        $content = view('livewire.organization.contest-award.minute-txt', [
+            'contest'       => $this->contest,
+            'organization'  => $this->organization,
+            'sectionJuries' => $this->sectionJuries,
+            'sectionStats'  => $this->sectionStats,
+            'sectionAwards' => $this->sectionAwards,
+            'contestAwards' => $this->contestAwards,
+            'sortedJurors'  => $this->sortedJurors,
+        ])->render();
         $filename = 'contest-minute-' . Str::slug($this->contest->name_en) . '-' . now()->format('Y-m-d') . '.txt';
 
         return response()->streamDownload(function () use ($content) {
@@ -51,7 +80,15 @@ new class extends Component {
      */
     public function downloadMarkdown()
     {
-        $content = view('livewire.organization.contest-award.minute-md', $this->getTemplateData())->render();
+        $content = view('livewire.organization.contest-award.minute-md',  [
+            'contest'       => $this->contest,
+            'organization'  => $this->organization,
+            'sectionJuries' => $this->sectionJuries,
+            'sectionStats'  => $this->sectionStats,
+            'sectionAwards' => $this->sectionAwards,
+            'contestAwards' => $this->contestAwards,
+            'sortedJurors'  => $this->sortedJurors,
+        ])->render();
         $filename = 'contest-minute-' . Str::slug($this->contest->name_en) . '-' . now()->format('Y-m-d') . '.md';
 
         return response()->streamDownload(function () use ($content) {
@@ -60,23 +97,6 @@ new class extends Component {
             'Content-Type' => 'text/markdown; charset=utf-8',
         ]);
     }
-
-    /**
-     * Helper per passare le variabili al template Blade di testo
-     */
-    private function getTemplateData(): array
-    {
-        return [
-            'contest'       => $this->contest,
-            'organization'  => $this->organization,
-            'sectionJuries' => $this->sectionJuries,
-            'sectionStats'  => $this->sectionStats,
-            'sectionAwards' => $this->sectionAwards,
-            'contestAwards' => $this->contestAwards,
-            'sortedJurors'  => $this->sortedJurors,
-        ];
-    }
-
 }; ?>
 
 <div>
@@ -140,7 +160,7 @@ new class extends Component {
                 <br>
                 the following are reunited as jury
                 <br>
-                @foreach ($sectionJuries as $section)
+                @foreach ($this->sectionJuries as $section)
                     for section-theme {{$section->code}} {{$section->name_en}}
                     <br />
                     @foreach ($section->contestJuries as $jury)
@@ -157,7 +177,7 @@ new class extends Component {
                 [modus operandi]
                 <br />
                 <!-- contest section-themes list -->
-                @foreach ($sectionStats as $section)
+                @foreach ($this->sectionStats as $section)
                     for section-theme {{$section->code}} {{$section->name_en}}
                     <br />
                     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -171,7 +191,7 @@ new class extends Component {
                 The jury has decided to admit the following to the competition
                 <br />
                 <!-- contest section-themes list -->
-                @foreach ($sectionStats as $section)
+                @foreach ($this->sectionStats as $section)
                     for section-theme {{$section->code}} {{$section->name_en}}
                     <br />
                     &nbsp;&nbsp;&nbsp;&nbsp;
@@ -182,7 +202,7 @@ new class extends Component {
                 <!-- contest awards -->
                 After to award the prizes as follows
                 <br >
-                @foreach ($sectionAwards as $section)
+                @foreach ($this->sectionAwards as $section)
                     for {{$section->code}} {{$section->name_en}}
                     <br />
                     @foreach ($section->awards as $award)
@@ -228,7 +248,7 @@ new class extends Component {
                 <br />
                 organized by {{ $organization->name }}
                 <br />
-                @foreach ($contestAwards as $award)
+                @foreach ($this->contestAwards as $award)
                     {{$award->award_code}} | {{$award->award_name}}
                     <br />
                     @if ($award->winner_work_id)
@@ -284,7 +304,7 @@ new class extends Component {
                 [President of Organization / Contest manager]
                 <br />
 
-                @foreach ($sortedJurors as $juror)
+                @foreach ($this->sortedJurors as $juror)
                     <p class="my-4 py-4">
                         <br />
                         <br />
