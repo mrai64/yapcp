@@ -287,7 +287,7 @@ new class extends Component {
                     
                 <br />
                 <br />
-                <!-- jurors signage space -->
+                <!-- jurors signature space -->
                 Signed, read, approved
                 <br />
                 <br />
