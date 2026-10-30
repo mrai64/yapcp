@@ -18,7 +18,7 @@ new class extends Component {
     public $sectionStats;
     public $sectionAwards;
     public $contestAwards;
-
+    public $sortedJurors;
     //
     public function mount(Contest $contest)
     {
@@ -27,9 +27,56 @@ new class extends Component {
         $this->sectionJuries = $this->contest->getSectionWithSortedJuries();
         $this->sectionStats  = $this->contest->getSectionsStats();
         $this->sectionAwards = $this->contest->getSectionAwards();
-        $this->contestAwards = $this->contest->globalAwards()
-            ->get();
+        $this->contestAwards = $this->contest->globalAwards()->get();
+        $this->sortedJurors  = $this->contest->getSortedUniqueJuries();
     }
+
+    /**
+     * Genera e scarica il file TXT (Testo Puro)
+     */
+    public function downloadTxt()
+    {
+        $content = view('livewire.organization.contest-award.minute-txt', $this->getTemplateData())->render();
+        $filename = 'contest-minute-' . Str::slug($this->contest->name_en) . '-' . now()->format('Y-m-d') . '.txt';
+
+        return response()->streamDownload(function () use ($content) {
+            echo $content;
+        }, $filename, [
+            'Content-Type' => 'text/plain; charset=utf-8',
+        ]);
+    }
+
+    /**
+     * Genera e scarica il file Markdown (.md)
+     */
+    public function downloadMarkdown()
+    {
+        $content = view('livewire.organization.contest-award.minute-md', $this->getTemplateData())->render();
+        $filename = 'contest-minute-' . Str::slug($this->contest->name_en) . '-' . now()->format('Y-m-d') . '.md';
+
+        return response()->streamDownload(function () use ($content) {
+            echo $content;
+        }, $filename, [
+            'Content-Type' => 'text/markdown; charset=utf-8',
+        ]);
+    }
+
+    /**
+     * Helper per passare le variabili al template Blade di testo
+     */
+    private function getTemplateData(): array
+    {
+        return [
+            'contest'       => $this->contest,
+            'organization'  => $this->organization,
+            'sectionJuries' => $this->sectionJuries,
+            'sectionStats'  => $this->sectionStats,
+            'sectionAwards' => $this->sectionAwards,
+            'contestAwards' => $this->contestAwards,
+            'sortedJurors'  => $this->sortedJurors,
+        ];
+    }
+
 }; ?>
 
 <div>
@@ -63,10 +110,29 @@ new class extends Component {
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
+                <div class="flex space-x-3 mb-4">
+                    <button wire:click="downloadTxt" 
+                            wire:loading.attr="disabled"
+                            class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none transition ease-in-out duration-150">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                        {{ __('Download TXT') }}
+                    </button>
+
+                    <button wire:click="downloadMarkdown" 
+                            wire:loading.attr="disabled"
+                            class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-indigo-500 active:bg-indigo-700 focus:outline-none transition ease-in-out duration-150">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                        </svg>
+                        {{ __('Download Markdown (.md)') }}
+                    </button>
+                </div>
                 <p  class="text-red-600 small">{{ __("CUT -- Minute start here -- CUT")}}</p>
                 <hr class="text-red-600 my-4" />
                 <!-- intro and contest info -->
-                Today [day] [month] [year],
+                Today {{ now()->format('j F Y') }},
                 <br>
                 for the contest {{ $contest->name_en }}
                 <br>
@@ -86,7 +152,7 @@ new class extends Component {
                     @endforeach
                     <br />
                 @endforeach
-                to complete the jury works, started at [day] [month] [year]
+                to complete the jury works, started at {{ $contest->day_3_jury_opening->format('j F Y')}}
                 to examine 
                 [modus operandi]
                 <br />
@@ -159,12 +225,12 @@ new class extends Component {
 
                 and, for the contest
                 for the contest {{ $contest->name_en }}
-                <br>
+                <br />
                 organized by {{ $organization->name }}
-                <br>
+                <br />
                 @foreach ($contestAwards as $award)
                     {{$award->award_code}} | {{$award->award_name}}
-                    <br/>
+                    <br />
                     @if ($award->winner_work_id)
                         {{$award->contestWork->userWork->title_en}}
                         <br />
@@ -198,14 +264,36 @@ new class extends Component {
                     @endif
                     <br />
                 @endforeach
-
+                    
+                <br />
+                <br />
                 <!-- jurors signage space -->
                 Signed, read, approved
-
+                <br />
+                <br />
+                <br />
+                ____________________________________________
+                <br />
                 [city, date]
+                <br />
+                <br />
+                <br />
+                <br />
+                ____________________________________________
+                <br />
+                [President of Organization / Contest manager]
+                <br />
 
-                - loop jurors signage space -
-
+                @foreach ($sortedJurors as $juror)
+                    <p class="my-4 py-4">
+                        <br />
+                        <br />
+                        ____________________________________________
+                        <br />
+                        {{ $juror->userContact->last_name}},
+                        {{ $juror->userContact->first_name}}
+                    </p>
+                @endforeach
                 <hr class="text-red-600 my-4" />
                 <p  class="text-red-600 small">{{ __("CUT -- Minute stop here -- CUT")}}</p>
             </div>

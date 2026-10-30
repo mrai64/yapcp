@@ -83,6 +83,10 @@ use Illuminate\Support\Str;
  * @property-read int|null $contest_awards_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Contest> $contestInCircuit
  * @property-read int|null $contest_in_circuit_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestJury> $contestJuries
+ * @property-read int|null $contest_juries_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestParticipant> $contestParticipants
+ * @property-read int|null $contest_participants_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestPatronage> $contestPatronage
  * @property-read int|null $contest_patronage_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestSection> $contestSections
@@ -99,8 +103,6 @@ use Illuminate\Support\Str;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestAward> $globalAwards
  * @property-read int|null $global_awards_count
  * @property-read \App\Models\Organization|null $organization
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestParticipant> $participants
- * @property-read int|null $participants_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestSection> $sections
  * @property-read int|null $sections_count
  * @property-read \App\Models\Timezone|null $timezone
@@ -352,26 +354,23 @@ class Contest extends Model
             ->withCount([
                 // how many works
                 'contestWorks as total_works_count',
-                // how many works admit
                 'contestWorks as admitted_works_count' => function ($query) {
                     $query->where('is_admit', true);
                 },
 
-                // how may authors
+                // how many authors
                 'contestWorks as total_authors_count' => function ($query) {
                     $query->select(\DB::raw('count(distinct user_id)'));
                 },
-                // how many authors with works admit
                 'contestWorks as admitted_authors_count' => function ($query) {
                     $query->where('is_admit', true)
                     ->select(\DB::raw('count(distinct user_id)'));
                 },
 
-                // how may countries
+                // how many countries
                 'contestWorks as total_countries_count' => function ($query) {
                     $query->select(\DB::raw('count(distinct country_id)'));
                 },
-                // how many countries with works admit
                 'contestWorks as admitted_countries_count' => function ($query) {
                     $query->where('is_admit', true)
                     ->select(\DB::raw('count(distinct country_id)'));
@@ -388,6 +387,19 @@ class Contest extends Model
                 $query->orderBy('award_code');
             }])
             ->get();
+    }
+
+    public function getSortedUniqueJuries()
+    {
+        return $this->contestJuries()
+            ->with('userContact')
+            ->get()
+            ->unique('user_id')
+            ->sortBy(function ($jury) {
+                $contact = $jury->userContact;
+                return (($contact->last_name ?? '') . ', ' . ($contact->first_name ?? ''));
+            })
+            ->values();
     }
 
     // SCOPE - used to add filter to query
