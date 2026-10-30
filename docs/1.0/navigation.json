@@ -132,15 +132,15 @@
                 },
                 {
                     "page": "organizations/section_awards",
-                    "label": "Section Awards assignments"
+                    "label": "Section Awards assignments ✅"
                 },
                 {
                     "page": "organizations/jury_reasoning",
-                    "label": "Jury reasoning"
+                    "label": "Jury reasoning ✅"
                 },
                 {
-                    "label": "Contest Awards assignments",
-                    "href": "#"
+                    "page": "organizations/contest_minute",
+                    "label": "Contest Minute Draft ✅"
                 },
                 {
                     "label": "Contest Board of participants",
