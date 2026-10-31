@@ -39,6 +39,7 @@ new class extends Component {
         if (! Storage::disk('public')->exists($folder)) {
             Storage::disk('public')->makeDirectory($folder);
         }
+        $this->uploads = [];
     }
 
     /**
@@ -158,7 +159,7 @@ new class extends Component {
     {
         $units = ['B', 'KB', 'MB', 'GB'];
         $bytes = max($bytes, 0);
-        $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+        $pow = floor(($bytes ? log($bytes) : 0) / log(1000));
         $pow = min($pow, count($units) - 1);
         $bytes /= (1 << (10 * $pow));
 
@@ -169,7 +170,7 @@ new class extends Component {
 <div>
     <x-slot name="header">
         <h2 class="fyk font-semibold text-2xl text-gray-800 leading-tight">
-            {{ __("Contest Documents (_docs):") }}
+            {{ __("Contest Docs Folder for:") }}
             <br />
             {{ $contest->name_en }}
         </h2>
@@ -178,29 +179,15 @@ new class extends Component {
             {{ __("Your org: :organization", ['organization' => $organization->name]) }}
         </p>
         <hr class="my-2" />
-        <div class="fyk text-xl text-gray-600">
-            {{ __("Folder path:") }}
-            <span class="font-mono text-sm text-gray-800 bg-gray-100 px-2 py-1 rounded">
-                /storage/app/public/contests/{{ $contest->id }}/_docs/
-            </span>
-        </div>
-        <hr class="my-4" />
         <x-yapcp.header-link 
             txt="User dashboard" 
             url="{{ route('user.dashboard') }}" />
         <x-yapcp.header-link
             txt="Org Dashboard"
             url="{{ route('organization.dashboard', ['organization' => $organization]) }}" />
-        @if (Route::has('organization.contest-work.listed'))
-        <x-yapcp.header-link
-            txt="Contest Review"
-            url="{{ route('organization.contest-work.listed', ['contest' => $contest]) }}" />
-        @endif
-        @if (Route::has('organization.docs.add'))
-        <x-yapcp.header-link
-            txt="Dedicated Upload Page"
-            url="{{ route('organization.docs.add', ['contest' => $contest]) }}" />
-        @endif
+        <x-yapcp.inline-link 
+            txt="Jury Dashboard" 
+            url="{{ route('organization.contest-jury.juror-board', ['contest' => $contest] ) }}" />
     </x-slot>
 
     <div class="py-12">
@@ -210,12 +197,6 @@ new class extends Component {
             @if (session('success'))
             <div class="p-4 bg-green-100 border border-green-300 text-green-800 rounded-md fyk text-xl">
                 ✅ {{ session('success') }}
-            </div>
-            @endif
-
-            @if (session('error'))
-            <div class="p-4 bg-red-100 border border-red-300 text-red-800 rounded-md fyk text-xl">
-                ❌ {{ session('error') }}
             </div>
             @endif
 
@@ -235,13 +216,17 @@ new class extends Component {
                     📤 {{ __("Upload new file(s) into _docs") }}
                 </h3>
                 <p class="text-gray-600 mb-4 text-sm">
-                    {{ __("Select one or more documents (PDF, scans, signed minutes, regulations, images, archives) up to 50 MB each.") }}
+                    {{ __("Select one or more documents (PDF, scans, signed minutes, regulations, images, archives) up to 64 MB each.") }}
+                    <br />
+                    {{ __("Please follow that simple rule: content as first file name word, i.e. minute-2026-10-31.pdf, minute-signed-2026-11-01.pdf, catalogue-2026-11-15.pef") }}
                 </p>
 
                 <form wire:submit="uploadFiles" class="space-y-4">
+                    @csrf
+
                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-indigo-500 transition-colors">
                         <input 
-                            type="file" 
+                            type="file"
                             wire:model="uploads" 
                             multiple 
                             id="uploads-input"
@@ -278,13 +263,13 @@ new class extends Component {
                     @endif
 
                     <div class="flex items-center space-x-3">
-                        <x-button type="submit" wire:loading.attr="disabled" :disabled="empty($uploads)">
+                        <x-button type="submit" wire:loading.attr="disabled">
                             <span wire:loading.remove wire:target="uploadFiles">💾 {{ __("Save Files to _docs") }}</span>
                             <span wire:loading wire:target="uploadFiles">⏳ {{ __("Saving...") }}</span>
                         </x-button>
 
                         @if (!empty($uploads))
-                        <x-secondary-button wire:click="$set('uploads', [])">
+                        <x-secondary-button wire:click="$set('uploads', [])" wire:loading.attr="disabled">
                             {{ __("Cancel") }}
                         </x-secondary-button>
                         @endif
@@ -327,11 +312,11 @@ new class extends Component {
                         </thead>
                         <tbody class="divide-y divide-gray-200 text-sm">
                             @foreach ($this->files as $index => $file)
-                            <tr class="hover:bg-gray-50" wire:key="doc-{{ $file['name'] }}">
+                            <tr valign="top" class="text-right hover:bg-gray-50" wire:key="doc-{{ $file['name'] }}">
                                 <td class="py-3 px-4 text-gray-400 font-mono text-xs">
                                     {{ $index + 1 }}
                                 </td>
-                                <td class="py-3 px-4 font-medium text-gray-800">
+                                <td valign="top" class="py-3 px-4 font-medium text-gray-800">
                                     <div class="flex items-center space-x-2">
                                         @if (in_array($file['extension'], ['pdf']))
                                             <span class="text-red-500 text-lg">📕</span>
@@ -349,10 +334,10 @@ new class extends Component {
                                         <span class="font-mono text-sm break-all">{{ $file['name'] }}</span>
                                     </div>
                                 </td>
-                                <td class="py-3 px-4 font-mono text-xs text-gray-600">
+                                <td valign="top" nowrap class="py-3 px-4 font-mono text-xs text-right text-gray-600">
                                     {{ $file['size_formatted'] }}
                                 </td>
-                                <td class="py-3 px-4 text-gray-600">
+                                <td valign="top" nowrap class="py-3 px-4 text-gray-600">
                                     <div class="font-medium text-gray-800">
                                         {{ $file['last_modified_formatted'] }}
                                     </div>
@@ -360,11 +345,12 @@ new class extends Component {
                                         {{ $file['last_modified']->diffForHumans() }}
                                     </div>
                                 </td>
-                                <td class="py-3 px-4 text-right space-x-2">
+                                <td valign="top" class="py-3 px-4 text-right space-x-2">
                                     <!-- Download Button -->
                                     <x-secondary-button 
                                         wire:click="downloadFile('{{ $file['name'] }}')"
                                         title="{{ __('Download') }}"
+                                        class="mb-2"
                                     >
                                         📥 {{ __("Download") }}
                                     </x-secondary-button>
@@ -374,6 +360,7 @@ new class extends Component {
                                         wire:click="deleteFile('{{ $file['name'] }}')"
                                         wire:confirm="{{ __('Are you sure you want to permanently delete: :file?', ['file' => $file['name']]) }}"
                                         title="{{ __('Delete') }}"
+                                        class="mb-2"
                                     >
                                         🗑️ {{ __("Delete") }}
                                     </x-danger-button>
