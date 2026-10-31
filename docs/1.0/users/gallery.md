@@ -2,11 +2,11 @@
 title: 'Personal Gallery'
 ---
 
-- [Caricamento](gallery_add.md)
-- [Galleria come elenco](#come-elenco)
-- [Galleria miniature](#miniature)
-- [Modificare](work_modify.md)
-- [Rimuovere](work_remove.md)
+- [Upload work How to](./gallery_add.md)
+- [Gallery Title](#gallery-show---as-title-list)
+- [Miniature Gallery](#gallery-show---as-miniature-grid)
+- [Change Work Details How To](./gallery_modify.md)
+- [Remove from Gallery How To](./gallery_remove.md)
 
 ---
 
@@ -37,7 +37,7 @@ _Translated with DeepL.com (free version)_
 
 &nbsp;
 
-## [Upload Work](./gallery_add.md)
+## Upload Work
 
 You can upload as many images as you like, whilst waiting to enter them into
 a competition. If there are more than a hundred, or if they’ve been sitting there for more than three years,
@@ -48,15 +48,17 @@ but for your own sake, don’t give them all the same title – you, of all peop
 shouldn’t get your images mixed up. If you intend to
 change the title or remove a duplicate, you’ll find what you need below.
 
-[**How To**](./gallery_add.md)
+[**How To** ↗️](./gallery_add.md)
 
-## Gallery Show - as miniature grid
+## Gallery Show
 
 Upload one, ten or a hundred works; your gallery will display thumbnails 300px wide,
 which we believe are sufficient to give a clear idea
 of the uploaded photo whilst transferring less data.
+
 The gallery will be backed up and archived for the
 sole purpose of restoring the platform in the event of any problems.
+
 The works will never be transferred or sent to third parties without your explicit consent, but you should not regard this as
 your public online space, and we strongly advise against
 uploading works to the platform of which you have no other copies.
@@ -66,7 +68,7 @@ uploading works to the platform of which you have no other copies.
 This is useful if you want to quickly check the title of a work that has ‘already been used’. We would also take this opportunity to advise you not to use ‘untitled’ in its various forms as the title of a photograph; whilst this is a legitimate practice, it is frowned upon by many competitions and major international federations.
 ![gallery as listed titles](./gallery_img01.png)
 
-### Gallery show as miniature grid
+### Gallery show - as miniature grid
 
 This is useful if you want to view a photo that has already been uploaded, perhaps with a different crop. It is recommended that you do not give the same title to two different photos, even if they are ‘different crops’ of the same original photo. Whilst this is indeed a permissible practice, it is frowned upon by many competitions and major international federations.
 ![gallery as miniature grid](./gallery_img02.png)
@@ -75,7 +77,7 @@ This is useful if you want to view a photo that has already been uploaded, perha
 
 You may have noticed that both galleries feature a ‘Link Details’ option; this is used to view and edit some – but not all – of the artwork’s details.
 
-[**How To**](./gallery_modify.md)
+[**How To** ↗️](./gallery_modify.md)
 
 ## Remove work from Gallery
 
@@ -86,4 +88,4 @@ If you confirm, it will disappear from view in your gallery.
 **Please note:** if a work has been at least ‘accepted’ in previous competitions, it remains in the *competition catalogue* and cannot be edited by the user.  
 In special cases, please contact the platform administrators, explaining the situation clearly.
 
-[**How To**](./gallery_remove.md)
+[**How To** ↗️](./gallery_remove.md)
