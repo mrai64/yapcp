@@ -2,12 +2,12 @@
 title: 'User dashboard'
 ---
 
-# User dashboard
-
-**More dashboards**
+**Not dashboard, dashboardS**
 
 User has her/him personal `User Dashboard`, then photo club here named
-Organizations has its `Organization Dashboard`, users temporary elevated as jurors have a `Juror Dashboard`. And, of course, exists also the `Contest Dashboard`.
+Organizations has its `Organization Dashboard`, users - temporary elevated as -
+jurors have a `Juror Dashboard`. And, of course, exists also an
+Organization' `Contest Dashboard`.
 
 In `User Dashboard` we reunite all you can do in yaPCP.  
 The (user') dashboard content may change over time, depending on what you want to do.  
@@ -21,7 +21,7 @@ contest that your federation sponsorship.
 
 ---
 
-## A journey over your powerful dashboard
+## A journey in your powerful User Dashboard
 
 Reached after successful login, and also [here as link](/user/dashboard).
 
