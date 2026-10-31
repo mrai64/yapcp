@@ -39,15 +39,15 @@
                 },
                 {
                     "page": "users/contact_infos",
-                    "label": "✅Contact Details"
+                    "label": "Contact Details ✅"
                 },
                 {
                     "page": "users/dashboard",
-                    "label": "✅Your Personal Dashboard"
+                    "label": "User Dashboard ✅"
                 },
                 {
-                    "page": "users/personal_gallery",
-                    "label": "✅Your Personal Gallery"
+                    "page": "users/gallery",
+                    "label": "Your Works Gallery ✅"
                 },
                 {
                     "page": "users/contest_list",
