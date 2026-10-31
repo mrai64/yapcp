@@ -1,9 +1,6 @@
 # Add works to your personal Gallery
 
-<!-- index -->
-- [Upload form](#the-upload-form)
-
----
+## About
 
 Works must be uploaded one at a time because, for each work,
 essential data required for participation
@@ -33,27 +30,27 @@ in an easy way.
 ## The upload form
 
 Starting from your personal dashboard choose add Work to your Gallery
-![loading_img_1]](./works_gallery/loading_img01.png)
+![loading_img_1](./gallery_add_img01.png)
 
 &nbsp;
 
 Here you have an empty form with a miniature as placeholder. Choose a file from your local device.
-![loading_img_2]](./works_gallery/loading_img02.png)
+![loading_img_2](./gallery_add_img02.png)
 
 &nbsp;
 
 Choosed file, assign a title, and complete with a pair of infos
-![loading_img_3]](./works_gallery/loading_img03.png)
+![loading_img_3](./gallery_add_img03.png)
 
 &nbsp;
 
 Fullfilled form, complete upload.
-![loading_img_4]](./works_gallery/loading_img04.png)
+![loading_img_4](./gallery_add_img04.png)
 
 &nbsp;
 Goal! 
-![loading_img_5]](./works_gallery/loading_img05.png)
+![loading_img_5](./gallery_add_img05.png)
 
 &nbsp;
 Sample for monochromatic images
-![loading_img_6]](./works_gallery/loading_img06.png)
+![loading_img_6](./gallery_add_img06.png)
