@@ -22,6 +22,8 @@ the link that put you on first panel.
 
 *Translated with DeepL.com (free version)*
 
+---
+
 ## 1/5. You are
 
 Mandatory field are indicated as 'required' (not minimal invisible asterisk, clear words)
@@ -35,6 +37,8 @@ Mandatory field are indicated as 'required' (not minimal invisible asterisk, cle
 
 When you fill the fields and click on bottom button data are updated and if there's no error you land in second page
 
+---
+
 ## 2/5. Postal address
 
 Here we require info to pass to contest
@@ -43,35 +47,43 @@ you win (first: be optimist).
 
 ![User Contact Modify 2nd: Postal coordinates ](./contact_infos_img02.png)
 
+---
+
 ## 3/5. Cell numbers
 
 Here we require (facultative) how contact you
 in a faster and reliable way than email.
 Email remain first communication channel
-but in case of email fails we ask how contact you thru sms or whatsapp messages.
-
+but in case of email fails we ask how contact you thru sms or whatsapp messages.  
+(note: in the sample we inserted *** but it's for manual)
 ![User Contact Modify 3rd: Cell numbers ](./contact_infos_img03.png)
+
+---
 
 ## 4/5. Social and portfolio
 
 Facultative web address and social pages, for future use we offer
 you some link to add to your presentation
 in report and catalogues.
-
 ![User Contact Modify 4th: web url ](./contact_infos_img04.png)
 
-## 5/5. One more...
+---
+
+## 5/5. *One more* info
 
 There are infos required from all the contests, and others
 required only by federation sponsorship requirement, i.e. federation card id.
-So, in that form we ask the "one more" fields required from
+So, in that form we ask the "one more" fields, required from
 federation to federation.
 
-In that sample Italian federation FIAF
-ask for it's card id and a personal tax identification, in italian: *codice fiscale*.
+&nbsp;
 
-Field name, label, suggestion and default value
-are proposed. **Trick**: to remove a value,
-insert the *default* value.
+In that sample italian federation FIAF
+ask for it's *card id* named *Tessera* 
+and for a personal italian tax identification code, named: *codice fiscale*.
 
+&nbsp;
+
+Field name, label, suggestion and default value are proposed.  
+**Trick**: insert the *default* value means *remove that value*.
 ![User Contact Modify 5th: federation fields ](./contact_infos_img05.png)
