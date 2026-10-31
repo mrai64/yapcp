@@ -14,4 +14,7 @@
     <x-yapcp.header-link 
         txt="LAST: Contest details" 
         url="{{ route('organization.design.contest.detail', ['contest' => $contest]) }}" />
+    <x-yapcp.header-link 
+        txt="Contest Docs Folder" 
+        url="{{ route('organization.docs.listed', ['contest' => $contest]) }}" />
 </div>
