@@ -2,13 +2,6 @@
 title: 'Apply to a Contest | Participate'
 ---
 
-# Apply to a Contest | Participate
-<!-- absolute links are /resources/docs/1.0/    -->
-<!-- larecipe links are /{{route}}/{{version}}/ -->
-<!-- images must be uploaded in same folder of md then url prefixed by ./  -->
-
----
-
 ## General
 
 After upload of your beautiful works in your personal space, you can choose
@@ -51,7 +44,7 @@ After the deadline, the contest shift in Closed Contest list.
 ## For contest with "biggest photo club"
 
 We added a link to indicate your membership to any group,
-even not registered on the platform. Use the link `[I'm Member of Group]`
+even not registered on the platform. Use the link `I'm Member of Group`
 to open the page, choose from a previous inserted group list
 (integrated with organizations registered in platform)
 or add a new group name.

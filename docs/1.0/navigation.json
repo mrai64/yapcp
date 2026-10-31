@@ -51,11 +51,11 @@
                 },
                 {
                     "page": "users/contest_list",
-                    "label": "✅Open Contest List"
+                    "label": "Open Contest List ✅"
                 },
                 {
                     "page": "users/contest_subscribe",
-                    "label": "✅Participate to contest"
+                    "label": "How Participate in Contest"
                 },
                 {
                     "label": "Send requested RAWs",
