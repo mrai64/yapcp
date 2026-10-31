@@ -99,7 +99,7 @@ new class extends Component {
         </p>
         <hr class="mb-4" />
         <x-yapcp.header-link 
-            txt="Award assignment"
+            txt="Contest Award assignment"
             url="{{ route('organization.contest-award.listed', ['contest' => $contest]) }}" />
         <x-yapcp.header-link 
             txt="Back to User dashboard" 

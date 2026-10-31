@@ -42,6 +42,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 /**
@@ -82,6 +83,10 @@ use Illuminate\Support\Str;
  * @property-read int|null $contest_awards_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, Contest> $contestInCircuit
  * @property-read int|null $contest_in_circuit_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestJury> $contestJuries
+ * @property-read int|null $contest_juries_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestParticipant> $contestParticipants
+ * @property-read int|null $contest_participants_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestPatronage> $contestPatronage
  * @property-read int|null $contest_patronage_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestSection> $contestSections
@@ -98,8 +103,6 @@ use Illuminate\Support\Str;
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestAward> $globalAwards
  * @property-read int|null $global_awards_count
  * @property-read \App\Models\Organization|null $organization
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestParticipant> $participants
- * @property-read int|null $participants_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestSection> $sections
  * @property-read int|null $sections_count
  * @property-read \App\Models\Timezone|null $timezone
@@ -331,6 +334,72 @@ class Contest extends Model
         $userId = $userId ?? Auth::id();
         return $this->hasOne(ContestParticipant::class, 'contest_id', 'id')
             ->where('user_contact_id', $userId);
+    }
+
+    // for jury minute
+    public function getSectionWithSortedJuries()
+    {
+        return $this->sections() // contest_sections.contest_id
+            ->orderBy('code') // contest_sections.code
+            ->with(['contestJuries'  => function ($query) {
+                $query->orderBy('is_president', 'desc')
+                    ->with('userContact');
+            }])
+            ->get();
+    }
+
+    public function getSectionsStats()
+    {
+        return $this->contestSections()
+            ->withCount([
+                // how many works
+                'contestWorks as total_works_count',
+                'contestWorks as admitted_works_count' => function ($query) {
+                    $query->where('is_admit', true);
+                },
+
+                // how many authors
+                'contestWorks as total_authors_count' => function ($query) {
+                    $query->select(\DB::raw('count(distinct user_id)'));
+                },
+                'contestWorks as admitted_authors_count' => function ($query) {
+                    $query->where('is_admit', true)
+                    ->select(\DB::raw('count(distinct user_id)'));
+                },
+
+                // how many countries
+                'contestWorks as total_countries_count' => function ($query) {
+                    $query->select(\DB::raw('count(distinct country_id)'));
+                },
+                'contestWorks as admitted_countries_count' => function ($query) {
+                    $query->where('is_admit', true)
+                    ->select(\DB::raw('count(distinct country_id)'));
+                },
+            ])
+            ->get();
+    }
+
+    public function getSectionAwards()
+    {
+        return $this->sections()
+            ->orderBy('code') // sections.code
+            ->with(['awards' => function ($query) {
+                $query->orderBy('award_code');
+            }])
+            ->get();
+    }
+
+    public function getSortedUniqueJuries()
+    {
+        return $this->contestJuries()
+            ->with('userContact')
+            ->get()
+            ->unique('user_id')
+            ->sortBy(function ($jury) {
+                $contact = $jury->userContact;
+                return (($contact->last_name ?? '') . ', ' . ($contact->first_name ?? ''));
+            })
+            ->values();
     }
 
     // SCOPE - used to add filter to query
@@ -617,5 +686,10 @@ class Contest extends Model
         );
         // Log
         return $contestPatronagesSet;
+    }
+
+    public function contestJuries(): HasMany
+    {
+        return $this->hasMany(ContestJury::class, 'contest_id', 'id');
     }
 }

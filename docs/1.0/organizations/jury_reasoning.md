@@ -9,19 +9,19 @@ extend a citation. So, in the Award list is present a link to open
 a panel to insert it.
 
 From the section award listed
-![](-/jury_reasoning_img01.png)
+![Section award list](./jury_reasoning_img01.png)
 
 &nbsp;
 
-And also from the sonctest award listed
-![](-/jury_reasoning_img02.png)
+And also from the contest award listed
+![Contest Award List](./jury_reasoning_img02.png)
 
 &nbsp;
 
-if previous citation was writte, is exposed.
-![](-/jury_reasoning_img03.png)
+When a previous citation is present, it's exposed.
+![Citation](./jury_reasoning_img03.png)
 
 &nbsp;
 
-When you update, a message in upper right part of windows warn you.
-![](-/jury_reasoning_img04.png)
+After your update, a message in upper right part of windows say you due.
+![Citation updated](./jury_reasoning_img04.png)

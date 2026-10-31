@@ -58,6 +58,8 @@
                                     we are honoured of your presence and contribute to
                                     our contest platform. We hope you appreciate the way we prepared
                                     for a easy contest vote work.
+                                    <br />
+                                    <br />
                                 </li>
                                 <li>- As <strong>photo contest organizer</strong>,<br /> 
                                     you can plan and manage in yaPCP your own photo contest, 

@@ -6,15 +6,15 @@
             "pages": [
                 {
                     "page": "overview",
-                    "label": "✅Overview"
+                    "label": "Overview ✅"
                 },
                 {
-                    "page": "dev/state-of-art",
-                    "label": "ReserDEV"
+                    "page": "users/dashboard",
+                    "label": "Whats in your Dashboard ✅"
                 },
                 {
                     "href": "https://yapcp.test/user/dashboard",
-                    "label": "⬅️ Dashboard"
+                    "label": "Your Dashboard ✅"
                 }
             ]
         },
@@ -23,31 +23,31 @@
             "pages": [
                 {
                     "page": "users/registration",
-                    "label": "✅Registration"
+                    "label": "Registration ✅"
                 },
                 {
                     "page": "users/registration",
-                    "label": "✅Login"
+                    "label": "Login ✅"
                 },
                 {
                     "page": "users/registration",
-                    "label": "✅VerifyEmail"
+                    "label": "VerifyEmail ✅"
                 },
                 {
                     "page": "users/registration",
-                    "label": "✅Lost Password?"
+                    "label": "Lost Password? ✅"
                 },
                 {
                     "page": "users/contact_infos",
-                    "label": "✅Contact Info"
+                    "label": "✅Contact Details"
                 },
                 {
                     "page": "users/dashboard",
-                    "label": "✅Personal Dashboard"
+                    "label": "✅Your Personal Dashboard"
                 },
                 {
                     "page": "users/personal_gallery",
-                    "label": "✅Personal Gallery"
+                    "label": "✅Your Personal Gallery"
                 },
                 {
                     "page": "users/contest_list",
@@ -132,15 +132,15 @@
                 },
                 {
                     "page": "organizations/section_awards",
-                    "label": "Section Awards assignments"
+                    "label": "Section Awards assignments ✅"
                 },
                 {
                     "page": "organizations/jury_reasoning",
-                    "label": "Jury reasoning"
+                    "label": "Jury reasoning ✅"
                 },
                 {
-                    "label": "Contest Awards assignments",
-                    "href": "#"
+                    "page": "organizations/contest_minute",
+                    "label": "Contest Minute Draft ✅"
                 },
                 {
                     "label": "Contest Board of participants",
