@@ -35,7 +35,7 @@ In yaPCP for every Federation are exposed:
 - The local code and local name
 - link to Federation' *list of sections n themes* page (as extracted from official federation docs)
 
-*Note: Federation data are managed by admin group*
+*Note: Federation data are managed by admin group*  
 
 &nbsp;
 
