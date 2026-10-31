@@ -117,6 +117,9 @@ new class extends Component {
         <x-yapcp.header-link
             txt="Org Dashboards"
             url="{{ route('organization.dashboard', ['organization' => $organization]) }}" />
+        <x-yapcp.header-link 
+            txt="Contest Docs Folder" 
+            url="{{ route('organization.docs.listed', ['contest' => $contest]) }}" />
     </x-slot>
 
     <div class="py-12">
