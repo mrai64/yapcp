@@ -143,6 +143,10 @@
                     "label": "Contest Minute Draft ✅"
                 },
                 {
+                    "page": "organizations/contest_docs",
+                    "label": "Contest Docs Folder ✅"
+                },
+                {
                     "label": "Contest Board of participants",
                     "href": "#"
                 },

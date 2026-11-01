@@ -103,6 +103,9 @@ new class extends Component {
         <x-yapcp.header-link 
             txt="Final Minute Draft" 
             url="{{ route('organization.contest-award.minute', ['contest' => $contest]) }}" />
+        <x-yapcp.header-link 
+            txt="Contest doc folder" 
+            url="{{ route('organization.docs.listed', ['contest' => $contest]) }}" />
     </x-slot>
 
     <div class="py-12">

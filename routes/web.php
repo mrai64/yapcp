@@ -282,6 +282,14 @@ Volt::route('/organization/contest-award/minute-draft/{contest}', 'organization.
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-award.minute');
 
+// Contest Docs manage
+Volt::route('/organization/docs/listed/{contest}', 'organization.docs.listed')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.docs.listed');
+Volt::route('/organization/docs/add/{contest}', 'organization.docs.add')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.docs.add');
+
 /**
  * Federation
  */
