@@ -372,9 +372,9 @@ Volt::route('/user/contest-participant/open/{contest}', 'user.contest-participan
     ->middleware(['auth', 'verified'])
     ->name('user.contest-participant.listed-open');
 // contest-participant for closed contest
-Volt::route('/user/contest-participant/closed/{contest}', 'user.contest-participant.listed-closed')
+Volt::route('/user/contest/who-participated/{contest}', 'user.contest.who-participated')
     ->middleware(['auth', 'verified'])
-    ->name('user.contest-participant.listed-closed');
+    ->name('user.contest.who-participated');
 
 /**
  * Juror all

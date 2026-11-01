@@ -28,6 +28,7 @@ new class extends Component {
     //
     public string $contestYear;
     public $userTz; // userTimezone
+    public $now;
     //
     public function mount(?string $contestYear = null)
     {
@@ -54,6 +55,7 @@ new class extends Component {
         // 2. Creiamo il riferimento "Ora" nel fuso orario dell'utente
         // Carbon gestirà la conversione in UTC automaticamente durante la query SQL
         $now = CarbonImmutable::now($userTz);
+        $this->now =$now;
         if ($this->contestYear == $now->year) {
             return [
                 'userTz' => $userTz,
@@ -176,9 +178,10 @@ new class extends Component {
                                 url="#" />
                              @endif
                             <!-- contest general -->
+                            {{ $now }} vs {{ $contest->day_5_revelations->setTimezone($userTz)->format('Y-m-d H:i') }}
                             <x-yapcp.inline-link 
                                 txt="Result Board" 
-                                url="{{ route('user.contest-participant.listed-closed', ['contest' => $contest]) }}" />
+                                url="{{ route('user.contest.who-participated', ['contest' => $contest]) }}" />
                             <x-yapcp.inline-link 
                                 txt="Catalogues" 
                                 url="#" />
