@@ -54,6 +54,10 @@
                     "label": "Open Contest List ✅"
                 },
                 {
+                    "page": "users/past_contest_results",
+                    "label": "Past Contests results ✅"
+                },
+                {
                     "page": "users/contest_subscribe",
                     "label": "How Participate in Contest ✅"
                 },
