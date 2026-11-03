@@ -50,7 +50,7 @@ new class extends Component {
     public function mount(Organization $organization)
     {
         //
-        $this->authorize('update', [Organization::class, 'organization' => $organization]);
+        $this->authorize('update', [Organization::class, $organization]);
         //
         $this->organization = $organization;
         $this->userContact = Auth::user()->contact;
