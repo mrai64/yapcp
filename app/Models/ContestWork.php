@@ -205,9 +205,9 @@ class ContestWork extends Model
     public function country()
     {
         $country = $this->belongsTo(
-            Country::class,
-            'id',
-            'country_id'
+            Country::class, //  ext class
+            'country_id', //    contest_works.country_id
+            'id' //             countries.id
         );
         // log
         return $country;
