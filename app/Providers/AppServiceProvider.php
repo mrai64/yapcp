@@ -74,6 +74,10 @@ class AppServiceProvider extends ServiceProvider
         RateLimiter::for('welcome-page', function (Request $request) {
             return Limit::perMinute(60)->by($request->ip());
         });
+        // limitazione delle email da spedire: 5 per ogni secondo
+        RateLimiter::for('emails', function (object $job) {
+            return Limit::perSecond(5);
+        });
 
         // Forza il binding esplicito per le rotte che usano {xxx-yyy}
         Route::model('contest-award', ContestAward::class);

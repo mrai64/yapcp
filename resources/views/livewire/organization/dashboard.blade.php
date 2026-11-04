@@ -198,10 +198,16 @@ new class extends Component {
                 </h3>
                     @foreach ($juryWorkContestsSet as $contest)
                     <div class="fyk text-2xl">
+                        {{ $contest-> name_en}}
+                        <br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;
                         <x-yapcp.inline-link 
-                        txt="Jury Dashboard" 
-                        url="{{ route('organization.contest-jury.juror-board', ['contest' => $contest] ) }}" />
-                        {{ $contest-> name_en}} 
+                            txt="Jury Dashboard" 
+                            url="{{ route('organization.contest-jury.juror-board', ['contest' => $contest] ) }}" />
+                        <x-yapcp.inline-link 
+                            txt="Results NOTIFY" 
+                            wire:click="revelationResults" url="#" 
+                            />
                     </div>
                     @endforeach
                 @endif

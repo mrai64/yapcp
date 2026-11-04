@@ -209,6 +209,10 @@ new class () extends Component {
                         wire:model="contestAwardCeremonyInfo"
                         >{{ old('contestAwardCeremonyInfo') }}</textarea>
                         <x-input-error for="contestAwardCeremonyInfo" class="mt-2" />
+                        <p class="small">
+                            {{  __("This is the text that in result notification follow the words:") }}
+                            &laquo; {{ __("We invite you to partecipate at our award ceremony")}} &raquo;
+                        </p>
                     </div>
                     
                     <!-- contestFeeInfo -->

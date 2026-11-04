@@ -7,13 +7,19 @@
  * 3. link for finale Minute Draw
  */
 
+use App\Jobs\SendJuryResultJob;
 use App\Models\Contest;
 use App\Models\ContestJury;
+use App\Models\ContestParticipant;
 use App\Models\ContestSection;
 use App\Models\ContestVote;
 use App\Models\ContestWork;
 use App\Models\Organization;
+use Illuminate\Bus\Batch;
+use Illuminate\Bus\BusServiceProvider;
+use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Livewire\Volt\Component;
 
 new class extends Component {
@@ -21,6 +27,7 @@ new class extends Component {
     public Contest $contest;
     public Organization $organization;
     public $contestSections;
+    public $participants;
 
     // sectionVoteSummary
     public function getSectionVoteSummaryProperty(string $sectionId)
@@ -49,6 +56,8 @@ new class extends Component {
         $this->organization = $contest->organization;
         $this->contestSections = $contest->contestSections()
             ->orderby('code')
+            ->get();
+        $this->participants = ContestParticipant::where('contest_id', $this->contest->id)
             ->get();
     }
 
@@ -83,6 +92,29 @@ new class extends Component {
             'jurorBoards' => $jurorBoards,
         ];
     }
+
+    /**
+     * For every contestparticipant start a job
+     * to notify result
+     * 
+     * @return void
+     */
+    public function revelationResults()
+    {
+        $batch = Bus::batch([])->then(function (Batch $batch) {
+            // log
+        })->dispatch();
+        //
+        foreach($this->participants as $contestParticipant) {
+            if ($contestParticipant->userContact) {
+                $batch->add(new SendJuryResultJob($this->contest, $contestParticipant->userContact));
+              //Log::info('Juror Board -  add a job via batch for: ' . $contestParticipant->userContact->first_name . ' ' . $contestParticipant->userContact->last_name );
+            }
+        }
+
+        session()->flash('success', __("Started Job for Result Notification"));
+
+    }
 }; ?>
 
 <div>
@@ -111,47 +143,63 @@ new class extends Component {
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
-
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __("Section Code")}}</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __("Juror Name")}}</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __("Section Name")}}</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __("Voted")}}</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __("per Total Works")}}</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            @forelse($jurorBoards as $row)
-                                <tr class="p-2 my-2 border">
-                                    <td valign="top" class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                        {{ $row['section_code'] }}
-                                    </td>
-                                    <td valign="top" class="fyk px-6 py-4 whitespace-nowrap text-xl text-gray-700">
-                                        {{ $row['juror_name'] }}
-                                    </td>
-                                    <td valign="top" class="fyk px-6 py-4 whitespace-nowrap text-xl text-gray-700">
-                                        {{ $row['section_name'] }}
-                                    </td>
-                                    <td valign="top" class="px-6 py-4 whitespace-nowrap text-mono text-gray-700 text-right">
-                                        {{ $row['assigned_votes'] }}
-                                    </td>
-                                    <td valign="top" class="px-6 py-4 whitespace-nowrap text-mono text-gray-700 text-right">
-                                        {{ $row['participating_works'] }}
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="5" class="px-6 py-4 text-center text-sm text-gray-500">
-                                        {{ __("No one vote for that Contest at now") }}.
-                                    </td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                <!-- success -->
+                @if (session('success'))
+                <div class="fyk text-2xl float-end font-medium rounded-md px-4 py-2">
+                    ✅ {{ session('success') }}
                 </div>
+                <hr class="mb-4" />
+                @endif
+
+                <!-- errors list -->
+                @if ($errors->any())
+                <div>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li class="text-red-600">❌ {{ $error }} 👈</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __("Section Code")}}</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __("Juror Name")}}</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __("Section Name")}}</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __("Voted")}}</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{{ __("per Total Works")}}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @forelse($jurorBoards as $row)
+                            <tr class="p-2 my-2 border">
+                                <td valign="top" class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                                    {{ $row['section_code'] }}
+                                </td>
+                                <td valign="top" class="fyk px-6 py-4 whitespace-nowrap text-xl text-gray-700">
+                                    {{ $row['juror_name'] }}
+                                </td>
+                                <td valign="top" class="fyk px-6 py-4 whitespace-nowrap text-xl text-gray-700">
+                                    {{ $row['section_name'] }}
+                                </td>
+                                <td valign="top" class="px-6 py-4 whitespace-nowrap text-mono text-gray-700 text-right">
+                                    {{ $row['assigned_votes'] }}
+                                </td>
+                                <td valign="top" class="px-6 py-4 whitespace-nowrap text-mono text-gray-700 text-right">
+                                    {{ $row['participating_works'] }}
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="5" class="px-6 py-4 text-center text-sm text-gray-500">
+                                    {{ __("No one vote for that Contest at now") }}.
+                                </td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
                 <hr class="my-4" />
                 <!-- section scoreboards -->
                 <h3 class="fyk font-semibold text-xl text-gray-800 leading-tight fyk">
@@ -172,13 +220,13 @@ new class extends Component {
                         @forelse ($contestSections as $contestSection)
                             <tr class="p-2 my-2 border">
                                 <td valign="top" class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                    <x-yapcp.header-link 
+                                    <x-yapcp.inline-link 
                                         txt="Award assignment" 
                                         url="{{ route('organization.contest-award.listed', ['contest' => $contest, 'contestSection' => $contestSection]) }}" />
-                                    <x-yapcp.header-link 
+                                    <x-yapcp.inline-link 
                                         txt="Candidate" 
                                         url="{{ route('organization.contest-award.candidate', ['contestSection' => $contestSection]) }}" />
-                                    <x-yapcp.header-link 
+                                    <x-yapcp.inline-link 
                                         txt="Scoreboard" 
                                         url="{{ route('organization.contest-vote.section-scoreboard', ['contestSection' => $contestSection]) }}" />
                                 </td>
@@ -198,7 +246,7 @@ new class extends Component {
                         @endforelse
                         <tr class="p-2 my-2 border">
                             <td valign="top" class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
-                                <x-yapcp.header-link 
+                                <x-yapcp.inline-link 
                                     txt="Award assignment" 
                                     url="{{ route('organization.contest-award.listed', ['contest' => $contest]) }}" />
                             </td>
@@ -207,6 +255,23 @@ new class extends Component {
                             </td>
                             <td valign="top" class="fyk text-xl px-6 py-4 whitespace-nowrap font-semibold text-gray-900">
                                 {{ __("Contest") }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!-- section scoreboards -->
+                <h3 class="fyk font-semibold text-xl text-gray-800 leading-tight fyk">
+                    {{ __("After Jury" ) }}
+                </h3>
+                <table class="min-w-full divide-y divide-gray-200">
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr class="p-2 my-2 border">
+                            <td valign="top" class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
+                                <x-yapcp.inline-link 
+                                    txt="Results NOTIFY" 
+                                    url="#" 
+                                    wire:click="revelationResults"
+                                    />
                             </td>
                         </tr>
                     </tbody>
