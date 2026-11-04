@@ -28,6 +28,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * @property string $id pk fk: users.id
@@ -73,6 +74,8 @@ use Illuminate\Support\Str;
  * @property-read \App\Models\Country|null $country
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestJury> $juries
  * @property-read int|null $juries_count
+ * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
+ * @property-read int|null $notifications_count
  * @property-read \App\Models\User|null $user
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserRole> $userRoles
  * @property-read int|null $user_roles_count
@@ -117,6 +120,7 @@ class UserContact extends Model
 {
     use HasFactory;
     use HasUuids;
+    use Notifiable;
     use SoftDeletes;
 
     public const TABLENAME = 'user_contacts';
@@ -282,6 +286,16 @@ class UserContact extends Model
         return $user['country_id'];
     }
 
+    // EMAIL NOTIFICATION
+    /**
+     * Route notifications for the mail channel.
+     *
+     * @return string|array<string, string>|null
+     */
+    public function routeNotificationForMail($notification): mixed
+    {
+        return $this->email;
+    }
     // RELATIONSHIP
 
     // user_contacts.id > contest_awards.winner_user_id

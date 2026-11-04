@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * User Works depot update
+ *
+ * TODO make useful the via 'database'
+ */
+
 namespace App\Notifications;
 
 use App\Models\UserWork;
@@ -12,7 +18,9 @@ class WorkUpdatedNotification extends Notification
     use Queueable;
 
     /**
-     * Create a new notification instance.
+     * Create a new notification instance
+     *
+     * @param UserWork $userWork
      */
     public function __construct(
         public UserWork $userWork
@@ -37,7 +45,9 @@ class WorkUpdatedNotification extends Notification
         return (new MailMessage())
             ->subject('Activity in your yaPCP Gallery')
             ->line('We would like to inform you that one of the works displayed in your gallery has just been updated.')
+            ->line("title: " . $this->userWork?->title_en ?? '')
             ->line('Join yaPCP than see your Gallery.')
+            ->line('- - -')
             ->line('Note: For security reasons, we have not included any clickable links in this message.')
             ->line('Thank you for using our application!');
     }
