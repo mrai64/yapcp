@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Organization Contest Manage - participant paginated board 
+ *  with button switching payment fee completed / suspended
+ *
+ */
+
 use App\Models\Contest;
 use App\Models\ContestParticipant;
 use App\Models\Organization;
@@ -9,16 +15,16 @@ use Livewire\WithPagination;
 new class extends Component {
     use WithPagination;
     //
-    public Contest $contest;
+    public Contest      $contest;
     public Organization $organization;
-    public $contestParticipantsSet;
-    //
+    public              $contestParticipantsSet;
+    // first
     public function mount(Contest $contest)
     {
         $this->contest = $contest;
         $this->organization = $this->contest->organization;
     }
-    //
+    // every page
     public function with()
     {
         return [
@@ -41,10 +47,10 @@ new class extends Component {
         $contestParticipant = ContestParticipant::where('contest_id', $contestId)
             ->where('user_contact_id', $userId)
             ->firstOrFail();
+        //
         $contestParticipant->update([
             'fee_payment_completed' => ! $contestParticipant->fee_payment_completed,
         ]);
-
     }
 
 }; ?>
