@@ -30,7 +30,7 @@ new class extends Component {
     public $beforeJuryContestsSet;
     public $juryWorkContestsSet;
     public $afterJuryContestsSet;
-    public $pastContestsSet; 
+    public $pastContestsSet;
 
     public function mount(Organization $organization)
     {
@@ -89,6 +89,31 @@ new class extends Component {
             ->get();
     }
 
+    /**
+     * For every contestParticipant start a job
+     * to notify result
+     *
+     * @return void
+     */
+    public function revelationResults(string $contestId)
+    {
+        $contest = Contest::findOrFail($contestId);
+        $contestParticipants = ContestParticipant::where('contest_id', $contestId)
+            ->get();
+
+        $batch = Bus::batch([])->then(function (Batch $batch) {
+            // log
+        })->dispatch();
+        //
+        foreach($contestParticipants as $contestParticipant) {
+            if ($contestParticipant->userContact) {
+                $batch->add(new SendJuryResultJob($contest, $contestParticipant->userContact));
+            }
+        }
+
+        session()->flash('success', __("Started Job for Result Notification"));
+
+    }
 }; ?>
 
 <div>
@@ -205,8 +230,8 @@ new class extends Component {
                             txt="Jury Dashboard" 
                             url="{{ route('organization.contest-jury.juror-board', ['contest' => $contest] ) }}" />
                         <x-yapcp.inline-link 
-                            txt="Results NOTIFY" 
-                            wire:click="revelationResults" url="#" 
+                            txt="📥 Results NOTIFY" 
+                            wire:click="revelationResults({{$contest->id}})" url="#" 
                             />
                     </div>
                     @endforeach
