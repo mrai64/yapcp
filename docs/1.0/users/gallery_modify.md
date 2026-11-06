@@ -16,28 +16,28 @@ These things can happen.
 That’s why you can make changes to the details of the works you’ve uploaded to the gallery.
 
 You can’t change  
-the image itself—you’ll have to delete it and replace it.  
+**the image itself** - you’ll have to delete it and replace it.  
 You can’t change  
-its dimensions—you’ll have to delete it and replace it, or upload a different one.  
+**its dimensions** - you’ll have to delete it and replace it, or upload a different one.  
 
 ## From Gallery
 
 You have 2 gallery, a first named Listed gallery, where you see 10 at time an alphabetical list of works uploaded in your Gallery. And a second named miniature gallery where you see a dozen at time, in the same alphabetically order. Both have for every item a "Detail" link.
 
-![_]](./works_gallery/update_img01.png)
+![_](./gallery_modify_img01.png)
 
 &nbsp;
 
-![_]](./works_gallery/update_img02.png)
+![_](./gallery_modify_img02.png)
 
 &nbsp;
 
-![_]](./works_gallery/update_img03.png)
+![_](./gallery_modify_img03.png)
 
 &nbsp;
 
-![_]](./works_gallery/update_img04.png)
+![_](./gallery_modify_img04.png)
 
 &nbsp;
 
-![_]](./works_gallery/update_img05.png)
+![_](./gallery_modify_img05.png)
