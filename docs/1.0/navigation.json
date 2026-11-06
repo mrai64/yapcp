@@ -151,8 +151,8 @@
                     "label": "Contest Docs Folder ✅"
                 },
                 {
-                    "label": "Contest Board of participants",
-                    "href": "#"
+                    "page": "organizations/contest_board_of_participants",
+                    "label": "Contest Board of participants ✅"
                 },
                 {
                     "label": "Contest Board of Works participants",
