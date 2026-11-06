@@ -94,9 +94,9 @@ new class extends Component {
     }
 
     /**
-     * For every contestparticipant start a job
+     * For every contestParticipant start a job
      * to notify result
-     * 
+     *
      * @return void
      */
     public function revelationResults()
@@ -268,7 +268,7 @@ new class extends Component {
                         <tr class="p-2 my-2 border">
                             <td valign="top" class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-gray-900">
                                 <x-yapcp.inline-link 
-                                    txt="Results NOTIFY" 
+                                    txt="📥 Results NOTIFY" 
                                     url="#" 
                                     wire:click="revelationResults"
                                     />

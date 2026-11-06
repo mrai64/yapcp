@@ -2,6 +2,7 @@
 
 /**
  * Contest participants list, with report of section and results
+ *   paginated
  *
  */
 

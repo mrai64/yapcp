@@ -19,6 +19,8 @@ use App\Models\User;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Livewire\Volt\Component;
 use Livewire\WithPagination;
@@ -174,14 +176,22 @@ new class extends Component {
                                 url="#" />
                              @else
                             <x-yapcp.inline-link 
-                                txt="not entered" 
+                                txt="You not entered" 
                                 url="#" />
                              @endif
                             <!-- contest general -->
-                            {{ $now }} vs {{ $contest->day_5_revelations->setTimezone($userTz)->format('Y-m-d H:i') }}
                             <x-yapcp.inline-link 
-                                txt="Result Board" 
+                                txt="Result Board / Paged" 
                                 url="{{ route('user.contest.who-participated', ['contest' => $contest]) }}" />
+                            @if ($contest->existsStaticParticipationResults())
+                            <x-yapcp.inline-link
+                                txt="📋 Result Board / Full" 
+                                url="{{ 'https://yapcp.test/contests/' . $contest->id . '/participants_board.html' }}" />
+                            @else
+                            <x-yapcp.inline-link
+                                txt="✍️ Result Board / Full" 
+                                url="{{ route('user.contest.participant-board', ['contest' => $contest]) }}" />
+                            @endif
                             <x-yapcp.inline-link 
                                 txt="Catalogues" 
                                 url="#" />
