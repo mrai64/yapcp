@@ -371,10 +371,14 @@ Volt::route('/user/contest/participate/group-member/{contest}', 'user.contest.gr
 Volt::route('/user/contest-participant/open/{contest}', 'user.contest-participant.listed-open')
     ->middleware(['auth', 'verified'])
     ->name('user.contest-participant.listed-open');
-// contest-participant for closed contest
+// contest-participant for closed contest - paginated
 Volt::route('/user/contest/who-participated/{contest}', 'user.contest.who-participated')
     ->middleware(['auth', 'verified'])
     ->name('user.contest.who-participated');
+// contest-participant for closed contest - full page
+Volt::route('/user/contest/participant-board/{contest}', 'user.contest.participant-board')
+    ->middleware(['auth', 'verified'])
+    ->name('user.contest.participant-board');
 
 /**
  * Juror all

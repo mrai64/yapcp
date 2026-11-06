@@ -43,7 +43,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Livewire\Attributes\Computed;
 
 /**
  * @property string $id
@@ -400,6 +402,12 @@ class Contest extends Model
                 return (($contact->last_name ?? '') . ', ' . ($contact->first_name ?? ''));
             })
             ->values();
+    }
+
+    #[Computed]
+    public function existsStaticParticipationResults(): bool
+    {
+        return File::exists(public_path('contests/' . ($this->id) . '/participants_board.html'));
     }
 
     // SCOPE - used to add filter to query
