@@ -1,22 +1,16 @@
 <?php
 
 /**
- * Contest are made by theme and section
+ * Contests are made by theme and section
  * to apply, and should be valid for federation
- * distinctions management or not. Here we have
- * also some specific rules for section i.e.
- * min/max works (usually min 0 max 4, but for
+ * distinctions management or not.
+ * Here we have also some specific rules for section
+ * i.e. min/max works (usually min 0 max 4, but for
  * reportage n portfolio should be min 4 max 12),
  * long n short side pixel size,
  * if requested monochromatic,
  * if RAW file should be requested etc.
  *
- * related to Contest
- * related to ContestWork
- * related to ContestAward
- *
- * 2025-10-26 add federation_section_id when under_patronage == Y
- * 2026-01-17 PSR-12 and relation functions and
  */
 
 namespace App\Models;
@@ -32,29 +26,43 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 /**
- * @property string $id uuid assigned
- * @property string $contest_id fx: contests.id 1:N
- * @property string $code as fk: federationSections.code
- * @property string $under_patronage a Y/N col
- * @property int|null $federation_section_id fk: federation_sections.id
+ * @property string $id real pk contest_id n code
+ * @property string $contest_id fk: contests.id
+ * @property string $code fk: federationSections.code but also not
+ * @property bool $under_patronage section-theme valid for federation
+ * @property int|null $federation_section_id null | fk: federation_sections.id
  * @property string $name_en international
- * @property string|null $name_local in local lang - see contests.lang_local
+ * @property string $name_local in local lang - see contests.lang_local
+ * @property string|null $synopsis synopsis from federal regulation docs
  * @property string $file_formats list of permitted extension
- * @property int $min_works minimum works-per-section
- * @property int $max_works maximum works-per-section
- * @property int $short_size_max minimum short_side px
- * @property int $long_size_max maximum long_side px
- * @property int $file_size_max file weight in KB
- * @property string $monochromatic_required maybe boolean 0/N=false, 1/Y=true
- * @property int $raw_required 0 == false; 1 == true
- * @property int $unique_prize 0 = only one prize per section per person not required
+ * @property int $min_works greater zero == portfolio
+ * @property int $max_works
+ * @property int $short_size_max px
+ * @property int $long_size_max px
+ * @property int $file_size_max KB
+ * @property bool $monochromatic_required 0 == false, 1 == true
+ * @property bool $raw_required section require raw original works (not only)
+ * @property bool $unique_prize required only one prize / author n section
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon|null $deleted_at
- * @property-read \App\Models\Contest $contest
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestAward> $awards
+ * @property-read int|null $awards_count
+ * @property-read \App\Models\Contest|null $contest
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestAward> $contestAwards
+ * @property-read int|null $contest_awards_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestCatalogPage> $contestCatalogPages
+ * @property-read int|null $contest_catalog_pages_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestJury> $contestJuries
+ * @property-read int|null $contest_juries_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestVote> $contestVotes
+ * @property-read int|null $contest_votes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestWork> $contestWorks
+ * @property-read int|null $contest_works_count
  * @property-read \App\Models\FederationSection|null $federationSection
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestWork> $works
  * @property-read int|null $works_count
+ * @method static \Database\Factories\ContestSectionFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection onlyTrashed()
@@ -64,39 +72,23 @@ use Illuminate\Support\Str;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereFederationSectionId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereNameEn($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereNameLocal($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereRuleFormat($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereRuleMax($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereRuleMaxSize($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereRuleMaxWeight($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereRuleMin($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereRuleMinSize($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereRuleMonochromatic($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereRuleOnlyOne($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereRuleRawRequired($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereUnderPatronage($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection withTrashed(bool $withTrashed = true)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection withoutTrashed()
- * @method static \Database\Factories\ContestSectionFactory factory($count = null, $state = [])
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestAward> $awards
- * @property-read int|null $awards_count
- * @property string $synopsis
- * @property int $monochromatic_required BW / M only
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereFileFormats($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereFileSizeMax($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereLongSizeMax($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereMaxWorks($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereMinWorks($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereMonochromaticRequired($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereNameEn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereNameLocal($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereRawRequired($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereShortSizeMax($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereSynopsis($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereUnderPatronage($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereUniquePrize($value)
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\ContestJury> $contestJuries
- * @property-read int|null $contest_juries_count
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContestSection withoutTrashed()
  * @mixin \Eloquent
  */
 class ContestSection extends Model
@@ -253,5 +245,11 @@ class ContestSection extends Model
             foreignKey: 'section_id',    // contest_votes.section_id
             localKey: 'id'               // contest_sections.id
         );
+    }
+
+    // contest_sections.id 1<N contest_catalogue_pages.contest_section_id
+    public function contestCatalogPages(): HasMany
+    {
+        return $this->hasMany(ContestCatalogPage::class);
     }
 }

@@ -25,6 +25,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -147,8 +149,7 @@ final class ContestAward extends Model
     // was: section()
     public function contestSection(): BelongsTo
     {
-        $section = $this->belongsTo(ContestSection::class);
-        return $section;
+        return $this->belongsTo(ContestSection::class, 'section_id', 'id');
     }
 
     // contest_awards.winner_work_id > contest_works.id
@@ -174,14 +175,23 @@ final class ContestAward extends Model
         return $userContact;
     }
 
-    // contest_awards.winner_work_id > user_works.id
-    // was: work()
-    public function userWork(): BelongsTo
+    // contest_awards.winner_work_id > contest_works.id > contest_works.user_work_id > user_works.id
+    public function userWork(): HasOneThrough
     {
-        return $this->belongsTo(
-            related: UserWork::class,
-            foreignKey: 'winner_work_id', //  contest_awards.winner_work_id
-            ownerKey: 'id' //                 user_works.id
+        return $this->hasOneThrough(
+            UserWork::class,
+            ContestWork::class,
+            'id',             // Foreign key su ContestWork (contest_works.id)
+            'id',             // Foreign key su UserWork (user_works.id)
+            'winner_work_id', // Local key su ContestAward (contest_awards.winner_work_id)
+            'user_work_id'    // Local key su ContestWork (contest_works.user_work_id)
         );
+    }
+
+
+    // contest_awards.id 1:1 contest_catalog_page.contest_award_id
+    public function contestCatalogPage(): HasOne
+    {
+        return $this->hasOne(ContestCatalogPage::class);
     }
 }

@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -191,13 +192,21 @@ class ContestWork extends Model
         return $contest;
     }
 
-    // was: contest_section
-    // contest_works.section_id > contest_sections.id
+    // contest_works.contest_section_id is contest_works.section_id
+    // contest_works.section_id 1:1 contest_sections.id
     public function contestSection()
     {
-        $section = $this->belongsTo(ContestSection::class, 'section_id');
+        $section = $this->belongsTo(ContestSection::class, 'section_id', 'id');
         // log
         return $section;
+    }
+    public function section(): BelongsTo
+    {
+        return $this->belongsTo(
+            ContestSection::class, //  ext class
+            'section_id', //           int contest_works.section_id
+            'id' //                    ext contest_sections.id
+        );
     }
 
     // contest_works.country_id > user_contacts.country_id
@@ -226,43 +235,17 @@ class ContestWork extends Model
         return $userContact;
     }
 
-    // contest_works.user_work_id > user_works.id
-    // contest_works.user_work_id > contest_awards.winner_work_id
-    // w/contest_works.section_id = contest_awards.section_id
-    public function award()
+    // contest_works.id 1<N contest_awards.winner_work_id
+    // can be a section award (section_id not null) + contest sponsor award (section_id null)
+    public function contestAwards(): HasMany
     {
-        $awardReceived = $this->hasMany(
+        return $this->hasMany(
             ContestAward::class, // ext class
-            'winner_work_id', //    ext contest_awards.winner_work_id
-            'user_work_id' //       int contest_works.user_work_id
-        )
-            ->where('section_id', $this->section_id);
-
-        return $awardReceived;
-    }
-
-    /**
-     * Relation contest_works >> contest_sections
-     *
-     * @return BelongsTo
-     */
-    public function section(): BelongsTo
-    {
-        $section = $this->belongsTo(
-            ContestSection::class, //  ext class
-            'section_id', //           int contest_works.section_id
-            'id' //                    ext contest_sections.id
+            'winner_work_id', //    contest_awards.winner_work_id
+            'id' //                 contest_works.id
         );
-
-        return $section;
     }
 
-    /**
-     * relation contest_works >> user_contacts
-     *
-     * @return BelongsTo
-     */
-    // was: user_contact
     public function userContact(): BelongsTo
     {
         $contact = $this->belongsTo(
@@ -284,5 +267,11 @@ class ContestWork extends Model
         );
 
         return $work;
+    }
+
+    // contest_works.id 1<N contest_catalogue_pages.contest_work_id
+    public function contestCatalogPages(): HasMany
+    {
+        return $this->hasMany(ContestCatalogPage::class);
     }
 }

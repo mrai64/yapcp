@@ -42,7 +42,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Computed;
@@ -680,7 +679,7 @@ class Contest extends Model
     }
 
     /**
-     * Replace contests.federation_ist
+     * Replace contests.federation_list
      */
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<\App\Models\ContestPatronage, $this>
@@ -699,5 +698,10 @@ class Contest extends Model
     public function contestJuries(): HasMany
     {
         return $this->hasMany(ContestJury::class, 'contest_id', 'id');
+    }
+
+    public function contestCatalogPages(): HasMany
+    {
+        return $this->hasMany(ContestCatalogPage::class);
     }
 }
