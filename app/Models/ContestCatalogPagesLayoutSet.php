@@ -43,12 +43,12 @@ class ContestCatalogPagesLayoutSet extends Model
     use SoftDeletes;
 
     //
-    protected $primaryKey = 'layout_page'; // default 'id'
+    protected $primaryKey = 'layout_type'; // default 'id'
     protected $keyType = 'string'; //         char(16)
     public $incrementing = false; //          no autoincrement
     //
     protected $fillable = [
-        'id',
+        'layout_type',
         'template_file_path',
         'title_en',
         // created_at
@@ -70,8 +70,9 @@ class ContestCatalogPagesLayoutSet extends Model
 
     // RELATIONSHIP
 
-    public function contestCatalogPage(): HasMany
+    // contest_catalog_pages.layout_type > contest_catalog_pages_layout_sets.layout_type
+    public function contestCatalogPages(): HasMany
     {
-        return $this->hasMany(ContestCatalogPage::class, 'layout_page', 'id');
+        return $this->hasMany(ContestCatalogPage::class, 'layout_type', 'layout_type');
     }
 }
