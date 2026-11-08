@@ -4350,16 +4350,16 @@
         },
         {
             "name": "phpoffice/phpspreadsheet",
-            "version": "2.4.8",
+            "version": "2.4.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
-                "reference": "badf4f22c54332046af37687c3384c6a0ed14ae1"
+                "reference": "ee4cffaf4f91e108035dcf42c5a54d6ea721bfa5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/badf4f22c54332046af37687c3384c6a0ed14ae1",
-                "reference": "badf4f22c54332046af37687c3384c6a0ed14ae1",
+                "url": "https://api.github.com/repos/PHPOffice/PhpSpreadsheet/zipball/ee4cffaf4f91e108035dcf42c5a54d6ea721bfa5",
+                "reference": "ee4cffaf4f91e108035dcf42c5a54d6ea721bfa5",
                 "shasum": ""
             },
             "require": {
@@ -4450,9 +4450,9 @@
             ],
             "support": {
                 "issues": "https://github.com/PHPOffice/PhpSpreadsheet/issues",
-                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/2.4.8"
+                "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/2.4.9"
             },
-            "time": "2026-09-17T04:17:53+00:00"
+            "time": "2026-11-08T05:27:03+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -10570,16 +10570,16 @@
         },
         {
             "name": "laradumps/laradumps-core",
-            "version": "v4.2.0",
+            "version": "v4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laradumps/laradumps-core.git",
-                "reference": "1764023feb71db76d6b280a6adb5accd169c0cc2"
+                "reference": "e1dec7db7da7f1fb0fe66ae3afc23a83694a4e5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laradumps/laradumps-core/zipball/1764023feb71db76d6b280a6adb5accd169c0cc2",
-                "reference": "1764023feb71db76d6b280a6adb5accd169c0cc2",
+                "url": "https://api.github.com/repos/laradumps/laradumps-core/zipball/e1dec7db7da7f1fb0fe66ae3afc23a83694a4e5f",
+                "reference": "e1dec7db7da7f1fb0fe66ae3afc23a83694a4e5f",
                 "shasum": ""
             },
             "require": {
@@ -10629,7 +10629,7 @@
             "homepage": "https://github.com/laradumps/laradumps-core",
             "support": {
                 "issues": "https://github.com/laradumps/laradumps-core/issues",
-                "source": "https://github.com/laradumps/laradumps-core/tree/v4.2.0"
+                "source": "https://github.com/laradumps/laradumps-core/tree/v4.3.0"
             },
             "funding": [
                 {
@@ -10637,7 +10637,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-08-04T22:42:33+00:00"
+            "time": "2026-11-08T00:54:58+00:00"
         },
         {
             "name": "larastan/larastan",
