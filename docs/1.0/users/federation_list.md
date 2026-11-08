@@ -2,13 +2,6 @@
 title: 'The Federations list'
 ---
 
-# The Federations list
-<!-- absolute links are /resources/docs/1.0/    -->
-<!-- larecipe links are /{{route}}/{{version}}/ -->
-<!-- images must be uploaded in same folder of md then url prefixed by ./  -->
-
----
-
 ## Definition
 
 Federations are national or international photography associations that
@@ -39,4 +32,4 @@ In yaPCP for every Federation are exposed:
 
 &nbsp;
 
-![Federation List not admin view](/docs/federations/read_img01.png)
+![_](./federation_list_img01.png)
