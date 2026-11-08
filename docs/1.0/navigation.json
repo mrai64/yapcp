@@ -92,15 +92,15 @@
                 },
                 {
                     "page": "contest_design/patronages/listed",
-                    "label": "✅Patronages"
+                    "label": "Patronages ✅"
                 },
                 {
                     "page": "contest_design/section/listed",
-                    "label": "✅Section n Themes"
+                    "label": "Section n Themes ✅"
                 },
                 {
                     "page": "contest_design/jury/listed",
-                    "label": "✅Jury members"
+                    "label": "Jury members"
                 },
                 {
                     "page": "contest_design/award/listed",
