@@ -2,7 +2,7 @@
 title: 'Contest Federation Patronages | Contest Design | Organization'
 ---
 
-- [Fed Patronage](./listed.md)
+- [Fed Patronage(s)](./listed.md)
 - [Add new](./add.md)
 - [Modify](./modify.md)
 - [Remove](./remove.md)

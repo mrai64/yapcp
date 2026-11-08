@@ -2,38 +2,29 @@
 title: 'Contest Federation Patronages | Contest Design | Organization'
 ---
 
-# Contest Federation Patronages | Contest Design | Organization
-
-- [Add new](add.md)
-- [Modify](modify.md)
-- [Remove](add.md)
+- [Fed Patronage(s)](./listed.md)
+- [Add new](./add.md)
+- [Modify](./modify.md)
+- [Remove](./remove.md)
 
 ---
 
-Uhm. Wrong inserted Contest Patronage? You can easily modify.
+Uhm. Wrong inserted Contest Patronage? Wrong Federation? You can easily remove.  
+**WARN** Obviously remove a Contest Patronage can be easily done
+**ONLY WHEN** the contest is in design phase.
 
 &nbsp;
 
-![_](./modify_img01.png)
+![_](./remove_img01.png)
 
 &nbsp;
 
-![_](./modify_img02.png)
+![_](./remove_img02.png)
 
 &nbsp;
 
-![_](./modify_img03.png)
+![_](./remove_img03.png)
 
 &nbsp;
 
-![_](./modify_img04.png)
-
-&nbsp;
-
-![_](./modify_img05.png)
-
-&nbsp;
-
-![_](./modify_img06.png)
-
-&nbsp;
+![_](./remove_img04.png)
