@@ -100,11 +100,11 @@
                 },
                 {
                     "page": "contest_design/jury/listed",
-                    "label": "Jury members"
+                    "label": "Jury members ✅"
                 },
                 {
                     "page": "contest_design/award/listed",
-                    "label": "✅Section n ContestAwards"
+                    "label": "Awards Section n Contest"
                 },
                 {
                     "page": "contest_design/contest/detail",
