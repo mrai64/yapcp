@@ -91,10 +91,6 @@
                     "label": "New Contest: Name Info... ✅"
                 },
                 {
-                    "page": "contest_design/contest/calendar",
-                    "label": "Contest Calendar ✅"
-                },
-                {
                     "page": "contest_design/patronages/listed",
                     "label": "✅Patronages"
                 },
