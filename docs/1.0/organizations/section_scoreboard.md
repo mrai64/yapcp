@@ -2,12 +2,6 @@
 title: 'Section Vote Board | Organization Contest Management'
 ---
 
-# Section Vote Board | Organization Contest Management
-<!-- absolute links are /resources/docs/1.0/    -->
-<!-- larecipe links are /{{route}}/{{version}}/ -->
-
-<!-- images must be uploaded in same folder of md then url prefixed by ./  -->
-
 - [&nbsp;](#)
 
 ---

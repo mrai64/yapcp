@@ -104,27 +104,27 @@
                 },
                 {
                     "page": "contest_design/award/listed",
-                    "label": "Awards Section n Contest"
+                    "label": "Awards Section n Contest ✅"
                 },
                 {
                     "page": "contest_design/contest/detail",
-                    "label": "✅Contest Details"
+                    "label": "Contest Details ✅"
                 },
                 {
                     "page": "organizations/contest_work_review",
-                    "label": "✅Participant Works Review"
+                    "label": "Participant Works Review ✅"
                 },
                 {
                     "page": "organizations/contest_waiting_revoke",
-                    "label": "✅Recover Waiters"
+                    "label": "Recover Waiters ✅"
                 },
                 {
                     "page": "organizations/switch_fee_payment_status",
-                    "label": "✅Payment fee"
+                    "label": "Payment fee ✅"
                 },
                 {
                     "page": "organizations/section_scoreboard",
-                    "label": "✅Jury vote Board"
+                    "label": "Jury vote Board ✅"
                 },
                 {
                     "page": "organizations/admit_assignment",
