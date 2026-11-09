@@ -182,11 +182,11 @@
             ]
         },
         {
-            "group": "You, as platform minister",
+            "group": "Admin, as platform minister",
             "pages": [
                 {
-                    "label": "✍️ edit",
-                    "href": "/resources/docs/1.0/admin/overview.md"
+                    "label": "About Admin group",
+                    "page": "admin/overview"
                 }
             ]
         },
