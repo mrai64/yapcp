@@ -195,19 +195,19 @@
             "pages": [
                 {
                     "page": "admin/federation/read",
-                    "label": "✅List"
+                    "label": "List ✅"
                 },
                 {
                     "page": "admin/federation/add",
-                    "label": "✅Add"
+                    "label": "Add ✅"
                 },
                 {
                     "page": "admin/federation/modify",
-                    "label": "✅Modify"
+                    "label": "Modify ✅"
                 },
                 {
                     "page": "admin/federation/remove",
-                    "label": "✅Remove"
+                    "label": "Remove ✅"
                 }
             ]
         },
