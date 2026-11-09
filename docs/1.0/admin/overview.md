@@ -44,8 +44,8 @@ as admin group member can add a user to join the admin group.
 
 - [The Fed List](federation/read.md)
 - [Add a new Federation](federation/add.md)
-- Modify Federation
-- Remove Federation
+- [Modify Federation](./federation/modify.md)
+- [Remove Federation](./federation/remove.md)
 
 ###  Federation Sections
 
