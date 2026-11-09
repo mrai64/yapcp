@@ -279,15 +279,15 @@
             ]
         },
         {
-            "group": "Admin | User Platform members",
+            "group": "Admin | User Contact",
             "pages": [
                 {
-                    "label": "List",
-                    "href": "#"
+                    "page": "admin/user_contact/listed",
+                    "label": "Listed, &amp;... ✅"
                 },
                 {
                     "label": "Add",
-                    "href": "#"
+                    "page": "admin/user_contact/add"
                 },
                 {
                     "label": "Modify",
@@ -313,15 +313,6 @@
             "pages": [
                 {
                     "page": "admin/timezone/listed",
-                    "label": "✅ Listed, &amp;..."
-                }
-            ]
-        },
-        {
-            "group": "Admin | User Contact",
-            "pages": [
-                {
-                    "page": "admin/user_contact/listed",
                     "label": "✅ Listed, &amp;..."
                 }
             ]
