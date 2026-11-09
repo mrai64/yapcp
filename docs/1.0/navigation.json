@@ -257,6 +257,10 @@
             "group": "Admin | Federation' Members",
             "pages": [
                 {
+                    "label": "About",
+                    "page": "admin/federation_member/about ✅"
+                },
+                {
                     "label": "List",
                     "href": "#"
                 },
