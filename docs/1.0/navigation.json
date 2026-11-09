@@ -185,7 +185,7 @@
             "group": "Admin, as platform minister",
             "pages": [
                 {
-                    "label": "About Admin group",
+                    "label": "About Admin group  ✍️",
                     "page": "admin/overview"
                 }
             ]

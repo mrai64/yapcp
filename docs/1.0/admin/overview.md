@@ -9,21 +9,21 @@ title: 'Admin,  *An administrator is someone who provides services to others*'
 
 ---
 
-That platform is for photographic contest, so as members of
-*admin group* we provide services to user, and to organization,
-and to Federation, and others to Platform itself. We implement
+## About
+
+That platform is for *photographic contest*, so the members of
+*admin group* provide services to User / Authors, and to Organizations,
+and to Federations. We also implement
 a security check to access the admin user pages, so basically
 you can use these infos only during you admin period.
 
-Instead to have an admin Dashboard you have a... An Admin Workbench
-
-As builder, Massimo Rainato is first in admin group, and an admin
-can add a user in the admin group.
+As builder, Massimo Rainato is first in admin group, and btw
+as admin group member can add a user to join the admin group.
 
 > <!-- to avoid -->
 - ## For Users
 
-\[insert here the menu for ]
+  - [Complete User list](./user_contact/listed.md)
 
 > <!-- to avoid -->
 - ## For Organizations
