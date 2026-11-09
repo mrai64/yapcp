@@ -2,12 +2,6 @@
 title: 'General | Jurors'
 ---
 
-# General | Jurors
-<!-- absolute links are /resources/docs/1.0/    -->
-<!-- larecipe links are /{{route}}/{{version}}/ -->
-<!-- images must be uploaded in same folder of md then url prefixed by ./  -->
-
----
 
 ## Juror is
 
@@ -36,36 +30,36 @@ If you have any queries or questions regarding the use of the platform, or if th
 
 &nbsp;
 
-![__](/docs/jurors/general_img01.png)
+![_](./general_img01.png)
 
 &nbsp;
 
-![__](/docs/jurors/general_img02.png)
+![_](./general_img02.png)
 
 &nbsp;
 
-![__](/docs/jurors/general_img03.png)
+![_](./general_img03.png)
 
 &nbsp;
 
-![__](/docs/jurors/general_img04.png)
+![_](./general_img04.png)
 
 &nbsp;
 
-![__](/docs/jurors/general_img05.png)
+![_](./general_img05.png)
 
 &nbsp;
 
-![__](/docs/jurors/general_img06.png)
+![_](./general_img06.png)
 
 &nbsp;
 
-![__](/docs/jurors/general_img07.png)
+![_](./general_img07.png)
 
 In any case, we invite you to click straight away on the ‘Update Contact Details’ link on the dashboard page, and update or correct your personal details. We would be honoured if you, as respected judges, found our platform practical and useful for taking part in competitions and also used it as competitors.
 
 &nbsp;
 
-![__](/docs/jurors/general_img08.png)
+![_](./general_img08.png)
 
 Sample of (fake) contest, it' only a section.

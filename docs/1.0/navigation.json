@@ -151,8 +151,8 @@
                     "label": "Contest Board of participants ✅"
                 },
                 {
-                    "label": "Contest Board of Works participants",
-                    "href": "#"
+                    "label": "Contest Catalogue",
+                    "href": "#TODO"
                 }
             ]
         },
@@ -161,23 +161,23 @@
             "pages": [
                 {
                     "page": "jurors/general",
-                    "label": "✅For new jurors"
+                    "label": "R U a new jurors? ✅"
                 },
                 {
                     "page": "jurors/vote",
-                    "label": "✅Simplest Vote System"
+                    "label": "A Simple Vote System ✅"
                 },
                 {
                     "page": "jurors/change",
-                    "label": "✅Change Vote"
+                    "label": "Change Vote ✅"
                 },
                 {
                     "page": "jurors/in-out",
-                    "label": "✅In/Out Request"
+                    "label": "In/Out Request ✅"
                 },
                 {
-                    "label": "Contest Minute Sign",
-                    "href": "#"
+                    "label": "Contest Minute Sign ✅",
+                    "page": "jurors/minute_sign"
                 }
             ]
         },
