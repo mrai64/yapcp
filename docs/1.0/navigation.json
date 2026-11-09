@@ -216,19 +216,19 @@
             "pages": [
                 {
                     "page": "admin/federation_section/listed",
-                    "label": "✅List"
+                    "label": "List ✅"
                 },
                 {
                     "page": "admin/federation_section/add",
-                    "label": "✅Add"
+                    "label": "Add ✅"
                 },
                 {
                     "page": "admin/federation_section/modify",
-                    "label": "✅Modify"
+                    "label": "Modify ✅"
                 },
                 {
                     "page": "admin/federation_section/remove",
-                    "label": "✅Remove"
+                    "label": "Remove ✅"
                 }
             ]
         },
@@ -237,19 +237,19 @@
             "pages": [
                 {
                     "page": "admin/federation_more/listed",
-                    "label": "✅List"
+                    "label": "List ✅"
                 },
                 {
                     "page": "admin/federation_more/add",
-                    "label": "✅Add"
+                    "label": "Add ✅"
                 },
                 {
                     "page": "admin/federation_more/modify",
-                    "label": "✅Modify"
+                    "label": "Modify ✅"
                 },
                 {
                     "page": "admin/federation_more/remove",
-                    "label": "✅Remove"
+                    "label": "Remove ✅"
                 }
             ]
         },
