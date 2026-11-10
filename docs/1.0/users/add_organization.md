@@ -2,12 +2,8 @@
 title: "User' Organization Add"
 ---
 
-# User' Organization Add
-<!-- absolute links are /resources/docs/1.0/    -->
-<!-- larecipe links are /{{route}}/{{version}}/ -->
-<!-- images must be uploaded in same folder of md then url prefixed by ./  -->
-
 - [Add a new Organization](#add-a-new-organization)
+- [Add you in an existing](#add-you-in-an-existin-organization)
 
 ---
 
@@ -27,20 +23,22 @@ Anche quando partecipate a un concorso potete indicare a quale Circolo Fotografi
 
 You see the organization list and YOUR society isn't in the list.
 Add a New organization? You can. Even if you are a new register user in platform.
+So, from your User Dashboard click on Organization List,
+![01_from Organization List click on Add button](./add_organization_img01.png)
 
-![01_from Organization List click on Add button]](./organizations/listed_img01.png)
+&nbsp;
 
-Then click on Add a new Organization  
-![02_empty_form]](./organizations/add_organization_img01.png)
+Then click on Add a new Organization link on the head nav bar  
+![02_empty_form](./add_organization_img02.png)
 
 Fill the few info required  
-![03_fullfilled_form]](./organizations/add_organization_img02.png)
+![03_fullfilled_form](./add_organization_img03.png)
 
 And that's all, a new Organization is in list  
-![04_new_in_list]](./organizations/add_organization_img03.png)
+![04_new_in_list](./add_organization_img04.png)
 
 And, (surprise?) in your dashboard, you are already an Organization member  
-![05_you_r_member]](./organizations/add_organization_img04.png)
+![05_you_r_member](./add_organization_img05.png)
 
 ---
 
@@ -49,24 +47,24 @@ And, (surprise?) in your dashboard, you are already an Organization member
 Add you to an existing organization is more simple,
 
 Use the **Add me to** link  
-![01_from organization_list]](./organizations/add_me_to_img01.png)
+![01_from organization_list](./add_organization_img06.png)
 
 &nbsp;
 
 Fill the form - simply choice a role
-![02_role_choice]](./organizations/add_me_to_img02.png)
+![02_role_choice](./add_organization_img07.png)
 
 &nbsp;
 
 Then click on unique button
-![03_role_choiced]](./organizations/add_me_to_img03.png)
+![03_role_choiced](./add_organization_img08.png)
 
 &nbsp;
 
 Clicking on *organization link* in your dashboard you enter in the *Organization Dashboard*
-![04_user_dashboard]](./organizations/add_me_to_img04.png)
+![04_user_dashboard](./add_organization_img09.png)
 
 &nbsp;
 
 When you see yourself as Organization member and what role.
-![05_organization_dashboard]](./organizations/add_me_to_img05.png)
+![05_organization_dashboard](./add_organization_img10.png)

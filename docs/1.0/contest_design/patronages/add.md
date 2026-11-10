@@ -2,17 +2,16 @@
 title: 'Contest Federation Patronages | Contest Design | Organization'
 ---
 
-# Contest Federation Patronages | Contest Design | Organization
-
-- [Add new](add.md)
-- [Modify](modify.md)
-- [Remove](remove.md)
+- [Fed Patronage(s)](./listed.md)
+- [Add new](./add.md)
+- [Modify](./modify.md)
+- [Remove](./remove.md)
 
 ---
 
 We made add a contest patronage simple as possible.
-You reach tje page, cchoose the federation then insert the code,
-uh. dont miss to push the button.
+You reach the page, choose the federation then insert the
+patronage federation code assigned to you, or the placeholder
 
 &nbsp;
 
@@ -41,5 +40,3 @@ uh. dont miss to push the button.
 &nbsp;
 
 ![_](./add_img07.png)
-
-&nbsp;

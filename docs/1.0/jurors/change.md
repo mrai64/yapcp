@@ -2,12 +2,6 @@
 title: 'Immutable vote? No! | Jurors'
 ---
 
-# Immutable vote? No! | Jurors
-<!-- absolute links are /resources/docs/1.0/    -->
-<!-- larecipe links are /{{route}}/{{version}}/ -->
-<!-- images must be uploaded in same folder of md then url prefixed by ./  -->
-
----
 
 ## Vote review, individually
 
@@ -23,16 +17,16 @@ Is presented a group of six and every image had a link and a vote. After the vot
 
 &nbsp;
 
-![__](/docs/jurors/change_img01.png)
+![_](./change_img01.png)
 &nbsp;
 
-![__](/docs/jurors/change_img02.png)
+![_](./change_img02.png)
 &nbsp;
 
-![__](/docs/jurors/change_img03.png)
+![_](./change_img03.png)
 &nbsp;
 
-![__](/docs/jurors/change_img04.png)
+![_](./change_img04.png)
 &nbsp;
 
-![__](/docs/jurors/change_img05.png)
+![_](./change_img05.png)

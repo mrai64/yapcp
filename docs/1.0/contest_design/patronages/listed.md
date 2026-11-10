@@ -2,11 +2,10 @@
 title: 'Contest Federation Patronages | Contest Design | Organization'
 ---
 
-# Contest Federation Patronages | Contest Design | Organization
-
-- [Add new](add.md)
-- [Modify](modify.md)
-- [Remove](remove.md)
+- [Fed Patronage(s)](./listed.md)
+- [Add new](./add.md)
+- [Modify](./modify.md)
+- [Remove](./remove.md)
 
 ---
 
@@ -26,19 +25,19 @@ a structured relation between federation, and contest.
 ##  Reach Contest Patronage page
 
 From personal dashboard follow
-![_](./list_img01.png)
+![_](./listed_img01.png)
 
 &nbsp;
 
 ...The organization dashboard link...
-![_](./list_img02.png)
+![_](./listed_img02.png)
 
 &nbsp;
 
 ...Then in the main / unique navigation bar ...
-![_](./list_img03.png)
+![_](./listed_img03.png)
 
 &nbsp;
 
 ...The Patronages link...
-![_](./list_img04.png)
+![_](./listed_img04.png)

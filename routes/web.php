@@ -423,6 +423,10 @@ Volt::route('/admin/timezone/listed', 'admin.timezone.listed')
 Volt::route('/admin/user-contact/listed', 'admin.user-contact.listed')
     ->middleware(['auth', 'verified', 'can:access-admin'])
     ->name('admin.user-contact.listed');
+// TODO
+Volt::route('/admin/user-contact/add', 'admin.user-contact.add')
+    ->middleware(['auth', 'verified', 'can:access-admin'])
+    ->name('admin.user-contact.add');
 // Backups
 Volt::route('/admin/backup/contest/1st', 'admin.backup.contest1st')
     ->middleware(['auth', 'verified', 'can:access-admin'])

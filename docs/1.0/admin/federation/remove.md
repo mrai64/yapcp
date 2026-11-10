@@ -2,23 +2,7 @@
 title: 'Remove "empty" Federation'
 ---
 
-# Remove "empty" Federation
-<!-- absolute links are /resources/docs/1.0/    -->
-<!-- larecipe links are /{{route}}/{{version}}/ -->
-<!-- images must be uploaded in same folder of md then url prefixed by ./  -->
-
----
-
-## 🇮🇹 Rimozione di una Federazione, quando...
-
-Quando si può rimuovere la scheda di una Federazione? Ci sono due casi: quesndo si è appena sbagliato a inserirla, quando si conclude la collaborazione con la federazione. Molto più rara l'eventualità che una federazione, rappresentante un gruppo di fotografi a livello nazionale o internazionale, si sciolga.
-
-In ogni caso la scheda della federazione può essere rimossa solo a due condizioni: che lo faccia un membro del gruppo admin e che non risultino in corso dei cocnorsi a patrocinio della federazione. In questo caso è possibile accedere dalla lista delle federazioni alla pagina di cancellazione, altrimenti no.
-
-Il pannello ha una sola funzione: esporre i dati e dare il tempo di ragionare prma di procedere alla richiesta di cancellazione.
-Per la mole di dati che possono essere collegati in più parti della piattaforma all'id della federazione l'attività è delegata alla piattaforma che prima procede alla cancellazione di tutti gli elementi correlati, e al termine esegue la cancellazione della scheda della federazione. Pertanto anche se la cancellazione è stata richiesta per qualche minuto potrebbe ancora presentarsi nella lista delle federazioni.
-
-## 🇬🇧 Remove a Federation, when?
+## 🇬🇧 Remove a Federation, Really? When?
 
 When can a federation’s profile be removed? There are two cases: when it was added by mistake, or when the collaboration with the federation ends. It is much rarer for a federation—representing a group of photographers at the national or international level—to dissolve.
 

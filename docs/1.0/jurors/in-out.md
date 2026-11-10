@@ -2,12 +2,6 @@
 title: 'In? 👍🏻 or Out?👎 | Jurors'
 ---
 
-# In? 👍🏻 or Out?👎 | Jurors
-<!-- absolute links are /resources/docs/1.0/    -->
-<!-- larecipe links are /{{route}}/{{version}}/ -->
-<!-- images must be uploaded in same folder of md then url prefixed by ./  -->
-
----
 
 ## Sometimes the vote is for IN /OUT
 

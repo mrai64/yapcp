@@ -2,12 +2,11 @@
 title: 'Contest | Contest Design | Organization'
 ---
 
-# Contest | Contest Design | Organization
-
-- [Name info](.add.md)
+- [New w/name](./add.md)
+- [Name modify](./modify.md)
 - [Calendar](./calendar.md)
 - [Web links](./weblink.md)
-- [Detail](./detail.md)
+- [Contest Detail](./detail.md)
 
 ---
 

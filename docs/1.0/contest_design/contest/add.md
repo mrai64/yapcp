@@ -1,14 +1,12 @@
 ---
-title: 'Contest | Contest Design | Organization'
+title: 'New Contest | Contest Design | Organization'
 ---
 
-# Contest | Contest Design | Organization
-
-- [Name info](add.md)
-- [Name modify](modify.md)
-- [Calendar](../calendar/modify.md)
-- [Web links](weblink.md)
-- [Detail](detail.md)
+- [New w/name](./add.md)
+- [Name modify](./modify.md)
+- [Calendar](./calendar.md)
+- [Web links](./weblink.md)
+- [Contest Detail](./detail.md)
 
 ---
 
@@ -18,7 +16,7 @@ First is create and name your Contest designed, from your personal dashboard
 reach the organization dashboard then click on Design New Contest.
 
 **FOR CIRCUIT** we are in development to aim insert and manage circuit
-contest. At now a field is present but for future use.
+contest. At now; a field is present, but *for future use*.
 
 &nbsp;
 
