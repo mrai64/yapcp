@@ -81,7 +81,7 @@ Volt::route('/user/contact/modify5/{user_contact}', 'user.contact.modify5')
 // user.contact.remove
 //   userContact remove no - remove is a job after n month of inactivity
 //   and require also removing user works after backup
-// TODO admin.user.listed userContact paginated list - for admin
+// see admin.user-contact.listed userContact paginated list - for admin
 
 /**
  * UserWork
