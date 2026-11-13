@@ -4,6 +4,15 @@ aka *MAD developer journal*
 Free thinking, in italian lang  
 [Project](https://github.com/users/mrai64/projects/1/views/1?filterQuery=is%3Aopen&sortedBy%5Bdirection%5D=asc&sortedBy%5BcolumnId%5D=352635177&sortedBy%5Bdirection%5D=desc&sortedBy%5BcolumnId%5D=226158474), was ~~[ToDo List](./TDL.md)~~
 
+## dicembre 2026
+
+| Lun    | Mar    | Mer    | Gio    | Ven    | Sab    | Dom    | Lun    | Mar    | Mer    | Gio    | Ven    | Sab    | Dom    |
+| ---:   | ---:   | ---:   | ---:   | ---:   | ---:   | ---:   | ---:   | ---:   | ---:   | ---:   | ---:   | ---:   | ---:   |
+| ______ | 1dic | 2 dic | 3 dic | 4 dic | 5 dic | 6 dic | 7 dic | 8 dic | 9 dic | 10 dic | 11 dic | 12 dic | 13 dic |
+| 14 dic | 15 dic | 16 dic | 17 dic | 18 dic | 19 dic | 20 dic | 21 dic | 22 dic | 23 dic | 24 dic | 25 dic | 26 dic | 27 dic |
+| 28 dic | 29 dic | 30 dic | 31 dic | ______ | ______ | ______ | ______ | ______ | ______ | ______ | ______ | ______ | ______ |
+| ______ | ______ | ______ | ______ | ______ | ______ | ______ | ______ | ______ | ______ | ______ | ______ | ______ | ______ |
+
 ## novembre 2026
 
 | Lun    | Mar    | Mer    | Gio    | Ven    | Sab    | Dom    | Lun    | Mar    | Mer    | Gio    | Ven    | Sab    | Dom    |
