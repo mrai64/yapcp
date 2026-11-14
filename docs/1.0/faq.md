@@ -4,10 +4,10 @@ title: Frequently Asked Question
 
 ## For Contest participants
 
-### 1. Register
+### 1. Register to platform require a lot of details?
 
-To register in platform only 3 elements are required: first name, last name and email.  
-Obv, to partecipate at contest more personal details are required but there is a
+No. To register in platform only 2 elements are required: first name, last name and email.  
+Obv, to partecipate at any contest more contact details are required, but there is a
 separate form, voted to user contact details. Start from [here](https://yapcp.test/register)
 
 ### 2. Term of Service and Privacy Policy - GDPR
