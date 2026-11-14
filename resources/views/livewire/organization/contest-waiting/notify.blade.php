@@ -26,7 +26,7 @@ new class extends Component {
     public UserWork $userWork;
     public User $userParticipant;
     public User $userReviewer;
-    public $because;
+    public $lockedBecause;
     //
     public function mount(ContestWork $contestWork)
     {
@@ -42,11 +42,11 @@ new class extends Component {
     public function rules()
     {
         return [
-            'because' => 'required|string',
+            'lockedBecause' => 'required|string|max:2000',
         ];
     }
     //
-    public function registerAndNotify()
+    public function lockAndNotify()
     {
         Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
             . ' called');
@@ -55,13 +55,14 @@ new class extends Component {
             . ' validated:' . json_encode($validated));
 
         // integration
-        $validated['contest_id']          = $this->contestWork->contest_id;
-        $validated['section_id']          = $this->contestWork->section_id;
-        $validated['participant_user_id'] = $this->contestWork->user_id;
-        $validated['user_work_id']        = $this->contestWork->user_work_id;
-        $validated['portfolio_sequence']  = $this->contestWork->portfolio_sequence;
-        $validated['email']               = $this->contestWork->userContact->email;
-        $validated['organization_user_id'] = Auth::id();
+        $validated['contest_id']           = $this->contestWork->contest_id;
+        $validated['section_id']           = $this->contestWork->section_id;
+        $validated['participant_user_id']  = $this->contestWork->user_id;
+        $validated['user_work_id']         = $this->contestWork->user_work_id;
+        $validated['portfolio_sequence']   = $this->contestWork->portfolio_sequence;
+        $validated['email']                = $this->contestWork->userContact->email;
+        $validated['locked_by_user_id']    = Auth::id();
+        $validated['locked_because']       = $validated['lockedBecause'];
         Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
             . ' validated:' . json_encode($validated));
 
@@ -69,7 +70,7 @@ new class extends Component {
         Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__
             . ' contestWaiting:' . json_encode($contestWaiting));
 
-        // ContestWarning notification w/ContestWaiting 'emailgram'
+        // ContestWarning notification w/ContestWaiting 'email-gram'
         $contestWaiting->notifyNow(new ContestWarning($contestWaiting));
 
         return redirect()
@@ -92,7 +93,7 @@ new class extends Component {
         </p>
         <hr class="my-2" />
         <div class="fyk text-xl">
-            {{ __("Be patient an kind. You are informing an AUTHOR that him/her work IS NOT GOOD.")}}<br>
+            {{ __("Be patient an kind. You are informing an AUTHOR that him/her work IS LOCKED.")}}<br>
             {{ __("First, it could be an inadvertent mistake.")}}<br>
             {{ __("Second, there may be time to fix it. Almost always.")}}
         </div>
@@ -129,7 +130,7 @@ new class extends Component {
                 </div>
                 @endif
 
-                <form wire:submit="registerAndNotify">
+                <form wire:submit="lockAndNotify">
                     @csrf
 
                     <div class="mb-4">
@@ -138,19 +139,23 @@ new class extends Component {
                             {{ $contestWork->userWork->user->name }} ,    <br />
                             {{ __("we are sorry to inform you that your work titled") }} <br />
                             {{ $contestWork->userWork->title_en }} <br />
-                            {{ __("was parked from our contest because of")}}
+                            {{ __("was parked from our contest because of:")}}
                         </p>
                         <style>textarea {resize:vertical;}</style>
                         <textarea 
                             class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
                             type="text" 
-                            name="because"
-                            wire:model="because"
-                        >{{ old('because') }}</textarea>
+                            name="lockedBecause"
+                            wire:model="lockedBecause"
+                        >{{ old('lockedBecause') }}</textarea>
                     </div>
 
+                    <hr class="my-4" />
+                    <p class="fyk text-2xl">
+                        {{ __('Check three times. Every Single Word. All the Words. AND count to TEN.') }}
+                    </p>
                     <x-button class="mt-2 ms-4">
-                        {{ __('Check three times. AND count to TEN. Then, SEND.') }}
+                        {{ __('Then, SEND.') }}
                     </x-button>
                 </form>
 
