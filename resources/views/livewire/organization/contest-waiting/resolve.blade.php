@@ -2,6 +2,7 @@
 
 /**
  * Organization Contest Manage - ContestWaiting list, for remove
+ *  as resolved problem into contestWork
  *
  */
 

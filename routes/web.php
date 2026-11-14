@@ -254,9 +254,9 @@ Volt::route('/organization/contest-waiting/notify/{contestWork}', 'organization.
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-waiting.notify');
 // remove record from a list
-Volt::route('/organization/contest-waiting/remove/{contest}', 'organization.contest-waiting.remove')
+Volt::route('/organization/contest-waiting/remove/{contest}', 'organization.contest-waiting.resolve')
     ->middleware(['auth', 'verified'])
-    ->name('organization.contest-waiting.remove');
+    ->name('organization.contest-waiting.resolve');
 
 // Contest Jury manage
 Volt::route('/organization/contest-jury/juror-board/{contest}', 'organization.contest-jury.juror-board')
