@@ -213,7 +213,7 @@ new class extends Component {
                     url="{{ route('organization.contest-work.listed', ['contest' => $contest]) }}" />
                 <x-yapcp.inline-link 
                     txt="{{ __('No more waiting Works') }}" 
-                    url="{{ route('organization.contest-waiting.remove', ['contest' => $contest]) }}" />
+                    url="{{ route('organization.contest-waiting.resolve', ['contest' => $contest]) }}" />
                     @endforeach
                 @endif
 

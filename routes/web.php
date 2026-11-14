@@ -249,14 +249,18 @@ Volt::route('/organization/user-work-validation/validate/{contestWork}', 'organi
     ->name('organization.user-work-validation.validate');
 
 // ContesWaiting manage
-// single work review: NOTIFY
+// ask locked because - exclude ContestWork from participate
 Volt::route('/organization/contest-waiting/notify/{contestWork}', 'organization.contest-waiting.notify')
     ->middleware(['auth', 'verified'])
     ->name('organization.contest-waiting.notify');
-// remove record from a list
-Volt::route('/organization/contest-waiting/remove/{contest}', 'organization.contest-waiting.remove')
+// Resolve contestWaiting issue, list of - contestWork return valid for participate
+Volt::route('/organization/contest-waiting/resolve/{contest}', 'organization.contest-waiting.resolve')
     ->middleware(['auth', 'verified'])
-    ->name('organization.contest-waiting.remove');
+    ->name('organization.contest-waiting.resolve');
+// ask resolve - ContestWork associated
+Volt::route('/organization/contest-waiting/solved-because/{contestWaiting}', 'organization.contest-waiting.resolved-because')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.contest-waiting.resolved-because');
 
 // Contest Jury manage
 Volt::route('/organization/contest-jury/juror-board/{contest}', 'organization.contest-jury.juror-board')

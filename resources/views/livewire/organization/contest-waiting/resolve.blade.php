@@ -2,12 +2,14 @@
 
 /**
  * Organization Contest Manage - ContestWaiting list, for remove
+ *  as resolved problem into contestWork
  *
  */
 
 use App\Models\Contest;
 use App\Models\ContestWaiting;
 use App\Models\Organization;
+use Illuminate\Support\Facades\Log;
 use Livewire\Volt\Component;
 use Livewire\WithPagination;
 
@@ -20,12 +22,14 @@ new class extends Component {
     //
     public function mount(Contest $contest)
     {
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         $this->contest = $contest;
         $this->organization = $this->contest->organization;
     }
     //
     public function with(): array
     {
+        Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
         return [
             'contestWaitingSet' => ContestWaiting::query()
                 ->with(['userWork'])
@@ -33,13 +37,6 @@ new class extends Component {
                 ->orderBy('section_id')
                 ->paginate(6),
         ];
-    }
-    //
-    public function revokeContestWaiting(string $sectionId, string $userWorkId)
-    {
-        ContestWaiting::where('section_id', $sectionId)
-            ->where('user_work_id', $userWorkId)
-            ->delete();
     }
 }; ?>
 
@@ -108,11 +105,9 @@ new class extends Component {
                         <tr class="border my-2" wire:key="waiting-{{ $contestWaiting->section_id }}-{{ $contestWaiting->user_work_id }}">
                             <td valign="top" class="pe-4">{{ $contestWaitingSet->firstItem() + $deltaItem }}</td>
                             <td valign="top" >
-                                <form wire:submit.prevent="revokeContestWaiting('{{ $contestWaiting->section_id }}', '{{ $contestWaiting->user_work_id }}')">
-                                    <x-button class="mb-4 mx-4">
-                                        {{ __("✅ SOLVED ✅") }}
-                                    </x-button>
-                                </form>
+                                <x-yapcp.inline-link
+                                    txt="Resolved because..."
+                                    url="{{ route('organization.contest-waiting.resolved-because', ['contestWaiting' => $contestWaiting]) }}" />
                             </td>
                             <td valign="top" class="fyk text-2xl ms-4">{{ $contestWaiting->userWork->title_en }}</td>
                         </tr>
