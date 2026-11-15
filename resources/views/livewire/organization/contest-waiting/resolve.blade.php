@@ -34,6 +34,7 @@ new class extends Component {
             'contestWaitingSet' => ContestWaiting::query()
                 ->with(['userWork'])
                 ->where('contest_id', $this->contest->id)
+                ->whereNull('resolved_by_user_id')
                 ->orderBy('section_id')
                 ->paginate(6),
         ];
@@ -102,6 +103,8 @@ new class extends Component {
                 <table class="data-table-container w-auto">
                     <tbody>
                     @foreach ($contestWaitingSet as $deltaItem => $contestWaiting)
+                    @endforeach
+                    @forelse ( as )
                         <tr class="border my-2" wire:key="waiting-{{ $contestWaiting->section_id }}-{{ $contestWaiting->user_work_id }}">
                             <td valign="top" class="pe-4">{{ $contestWaitingSet->firstItem() + $deltaItem }}</td>
                             <td valign="top" >
@@ -111,7 +114,14 @@ new class extends Component {
                             </td>
                             <td valign="top" class="fyk text-2xl ms-4">{{ $contestWaiting->userWork->title_en }}</td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr class="border my-2">
+                            <td valign="top" class="pe-4">0.</td>
+                            <td valign="top" colspan="2">
+                                {{ __("No one, Not more")}}
+                            </td>
+                        </tr>
+                    @endforelse
                     </tbody>
                 </table>
                 @endif
