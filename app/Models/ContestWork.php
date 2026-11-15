@@ -19,6 +19,7 @@
 
 namespace App\Models;
 
+use App\Models\ContestSection;
 use App\Observers\ContestWorkObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -160,7 +161,6 @@ class ContestWork extends Model
         return $path . $miniatureFileName;
     }
 
-    // was: count_works_for_section_user
     public static function sectionWorksCounter(string $sectionId, string $userId): int
     {
         $count = self::where('user_id', $userId)
@@ -169,7 +169,6 @@ class ContestWork extends Model
         return $count;
     }
 
-    // was: get_user_for_contest_work
     public static function userWorksCounter(string $contestId, string $workId): string
     {
         $participant = self::where('contest_id', $contestId)
@@ -180,6 +179,28 @@ class ContestWork extends Model
         // log
         return $participantId;
     }
+
+    // CHECKER is_*
+
+    /**
+     * The user has reached contest_sections.max_works?
+     */
+    public static function sectionIsFull(string $sectionId, string $userId): bool
+    {
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' called');
+
+        $section = ContestSection::find($sectionId);
+
+        if (!$section) {
+            return false; // O gestisci l'eccezione a seconda delle tue esigenze
+        }
+
+        $currentCount = self::sectionWorksCounter($sectionId, $userId);
+        Log::info('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ . ' current: ' . $currentCount . ' vs. max: ' . $section->max_works);
+        return $currentCount >= $section->max_works;
+    }
+    // TODO sectionIsUnder - check if user hasn't reached minimum to participate in a portfolio section with min_works > 0
+
 
     // RELATIONSHIP
 

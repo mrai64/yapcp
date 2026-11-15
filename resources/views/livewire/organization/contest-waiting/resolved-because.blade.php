@@ -8,6 +8,7 @@
 
 use App\Models\Contest;
 use App\Models\ContestWaiting;
+use App\Models\ContestWork;
 use App\Models\Organization;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -18,6 +19,7 @@ new class extends Component {
     public ContestWaiting $contestWaiting;
     public Contest $contest;
     public Organization $organization;
+    public bool $sectionIsFull = false;
     //
     public string $resolvedBecause;
     //
@@ -29,6 +31,9 @@ new class extends Component {
         $this->organization   = $this->contest->organization;
 
         $this->resolvedBecause = '';
+        $this->sectionIsFull = ContestWork::sectionIsFull($this->contestWaiting->section_id, $this->contestWaiting->participant_user_id);
+        // sectionIsFull -> image remain locked
+
     }
     // for validation
     public function rules()
@@ -47,14 +52,16 @@ new class extends Component {
             'resolved_by_user_id'  => Auth::id(),
             'resolved_because'     => $validated['resolvedBecause'],
         ]);
-        // then remove
-        $this->contestWaiting->delete();
-        Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ 
-            . ' ContestWaiting id: ' . $this->contestWaiting->id . ' resolved and soft-deleted.');
+        if (! $this->sectionIsFull) {
+            // then remove
+            $this->contestWaiting->delete();
+            Log::debug('Component ' . __CLASS__ . ' f:' . __FUNCTION__ . ' l:' . __LINE__ 
+                . ' ContestWaiting id: ' . $this->contestWaiting->id . ' resolved and soft-deleted.');
+        }
         // redirect to list updated 
         return redirect()
             ->route('organization.contest-waiting.resolve', ['contest' => $this->contest])
-            ->with('success', __("Solved and Updated"));
+            ->with('success', __("Updated"));
     }
 }; ?>
 
@@ -113,6 +120,14 @@ new class extends Component {
                 <form wire:submit="solvedContestWaiting">
                     @csrf
 
+                    @if ($sectionIsFull)
+                        <x-input-label for="resolvedBecause" :value="__('Remain locked')" />
+                        <textarea readonly
+                            class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" 
+                            type="text" name="resolvedBecause"
+                            wire:model="resolvedBecause"
+                        >{{ __("This image remains frozen, because the contestant has already used up all the available slots to take part.")}}</textarea>
+                    @else
                     <div class="mb-4">
                         <style>textarea {resize:vertical;}</style>
                         <x-input-label for="resolvedBecause" :value="__('Resolution reasoning, english')" />
@@ -124,7 +139,7 @@ new class extends Component {
                         <p class="test-sm">{{ __("Input area can be resized. Facultative. ")}}</p>
                         <x-input-error for="resolvedBecause" class="mt-2" />
                     </div>
-
+                    @endif
 
                     <br style="clear:both;" />
 
