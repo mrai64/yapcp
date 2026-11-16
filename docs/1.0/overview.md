@@ -81,7 +81,7 @@ participant to verify any issue with works presented for Salons.
 ## The yaPCP mark
 
 Our trademark reflect a podium with 1st 2nd 3th place.
-Because contest have winners.
+Because contest must have winners.
 
 ![yaPCP mark](./overview_favicon.png)
 
