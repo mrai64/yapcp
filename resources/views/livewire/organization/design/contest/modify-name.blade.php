@@ -22,6 +22,7 @@ new class () extends Component {
     public string  $contestNameLocal;
     public bool    $contestIsCircuit;
     public string  $contestCircuitId;
+    public         $contestCircuitsSet;
     public string  $contestContactInfo;
     public string  $contestAwardCeremonyInfo;
     public string  $contestFeeInfo;
@@ -35,15 +36,19 @@ new class () extends Component {
         $this->creator = Auth::user()->contact;
 
         $this->contestNameEn = $contest->name_en ?? '';
-        $this->contestCountryId = $contest->country_id ?? $this->creator->country_id;
-        $this->contestTimezoneId = $contest->timezone_id ?? $this->creator->timezone_id;
-        $this->contestLangLocal = $contest->lang_local ?? $this->creator->lang_local;
-        $this->contestNameLocal = $contest->name_local ?? '';
-        $this->contestIsCircuit = $contest->is_circuit ?? false;
-        $this->contestCircuitId = ($this->contestIsCircuit) ? ($contest->is_circuit ?? '') : '';
+        $this->contestCountryId   = $contest->country_id ?? $this->creator->country_id;
+        $this->contestTimezoneId  = $contest->timezone_id ?? $this->creator->timezone_id;
+        $this->contestLangLocal   = $contest->lang_local ?? $this->creator->lang_local;
+        $this->contestNameLocal   = $contest->name_local ?? '';
+        $this->contestIsCircuit   = (bool) ($contest->is_circuit ?? false);
+        $this->contestCircuitId   = $this->contestIsCircuit ? '' : ($contest->circuit_id ?? '');
         $this->contestContactInfo = $this->contest->contact_info ?? '';
         $this->contestAwardCeremonyInfo = $this->contest->award_ceremony_info ?? '';
-        $this->contestFeeInfo = $this->contest->fee_info ?? '';
+        $this->contestFeeInfo     = $this->contest->fee_info ?? '';
+        //
+        $this->contestCircuitsSet = Contest::where('is_circuit', true)
+            ->orderBy('updated_at')
+            ->get();
     }
 
     public function rules()
@@ -57,7 +62,6 @@ new class () extends Component {
             'contestNameLocal' => 'string|max:250',
             'contestIsCircuit' => 'boolean',
             'contestCircuitId'    => [
-                'required_if:contestIsCircuit,true',
                 'nullable',
                 'exists:contests,id'
             ],
@@ -77,7 +81,7 @@ new class () extends Component {
         $this->contest->lang_local = $validated['contestLangLocal'];
         $this->contest->name_local = $validated['contestNameLocal'];
         $this->contest->is_circuit = $validated['contestIsCircuit'];
-        $this->contest->circuit_id = $validated['contestCircuitId'] ?: null;
+        $this->contest->circuit_id = $validated['contestIsCircuit'] ? null : ($validated['contestCircuitId'] ?: null);
         $this->contest->contact_info = $validated['contestContactInfo'];
         $this->contest->award_ceremony_info = $validated['contestAwardCeremonyInfo'];
         $this->contest->fee_info = $validated['contestFeeInfo'];
@@ -119,7 +123,7 @@ new class () extends Component {
                 </div>
                 <hr />
                 @endif
-                
+
                 <!-- errors list -->
                 @if ($errors->any())
                 <br />
@@ -135,7 +139,7 @@ new class () extends Component {
 
                 <form wire:submit="modifyContest">
                     @csrf
-                    
+
                     <!-- contestNameEn -->
                     <div class="mb-4">
                         <x-input-label for="contestNameEn" :value="__('Contest denomination, english')" />
@@ -170,7 +174,7 @@ new class () extends Component {
                     <!-- Is a Circuit  -->
                     <div class="mb-4">
                         <x-input-label for="contestIsCircuit" :value="__('Circuit record')" />
-                            <x-checkbox wire:model="contestIsCircuit" id="contestIsCircuit" name="contestIsCircuit" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" />
+                            <x-checkbox wire:model.live="contestIsCircuit" id="contestIsCircuit" name="contestIsCircuit" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" />
                             {{ __('Is a Circuit') }}
                         </label>
                         <p class="small">{{ __('Circuit is a contests aggregation') }}</p>
@@ -178,14 +182,17 @@ new class () extends Component {
                     </div>
                     <!--/Is a Circuit -->
 
+                    @if (! $contestIsCircuit )
                     <!-- contestCircuitId -->
                     <div class="mb-4">
                         <x-input-label for="contestCircuitId" :value="__('Circuit ID')" />
-                        <x-text-input wire:model="contestCircuitId" id="contestCircuitId" name="contestCircuitId" 
-                            lang="{{ $contestCircuitId }}" class="block mt-1 w-full" type="text" />
-                        <p class="small">{{ __('TODO: change in a select form field') }}</p>
+                        <x-text-input wire:model="contestCircuitId" 
+                            id="contestCircuitId" 
+                            name="contestCircuitId" 
+                            class="block mt-1 w-full" type="text" />
                         <x-input-error for="contestCircuitId" class="mt-2" />
                     </div>
+                    @endif
 
                     <!-- contestContactInfo -->
                     <div class="mb-4">

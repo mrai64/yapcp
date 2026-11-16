@@ -37,12 +37,12 @@ return new class () extends Migration {
                 ->index()->comment('fk: organizations.id');
 
             $table->boolean('is_circuit')->default(false)
-                ->comment('contests joined in circuit');
+                ->comment('false: is contest');
             $table->char('circuit_id', 36)
                 ->charset('ascii')->collation('ascii_general_ci')
                 ->nullable()
                 ->index()
-                ->comment('null or self fk: contests.id');
+                ->comment('null, or self fk: contests.id');
 
             $table->string('federation_list')
                 ->default('')
