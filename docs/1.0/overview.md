@@ -22,19 +22,19 @@ see in other platforms, so we build one.
 
 Are you managing a different Contest platform? We consider you as a collegues
 not enemies, so our aim is to build a federal message based approach
-to consent our contest members to participate in your hosted contest and your 
+to consent our contest members to participate in your hosted contest and your
 contest participants open to participate at our hosted contest.
 
-## 3. Four Roles? Which? 
+## 3. Four Roles? Which?
 
-You should register in, and with your best images become a [**Contest participant**](#contest-participant), and/or become in your Organization a [**Contest organiser**](#member-of-contest-organizer), and/or vote as [**Contest juror**](#contest-juror). You can also be
-authorized as **Federation member** to monitor *Contest* and some *User Works* to determine if they are regular or violate any of your federation rules.
+We think that n Photographic Salon / Contest we have: [Organiser](#member-of-contest-organizer) crew, a qualified set of [Jurors](#contest-juror),
+an enthusiastic community of [Participants](#as-contest-participant) and few Federation controllers.
 
 ---
 
 ## As Contest Participant
 
-- Register to our platform.
+- Register to our platform,
 - Upload your best photos in your depot.
 - See the *Open Contest list*, and easy participate to one, or more. If requested, pay the fee.
   That's all your effort. Then wait for response day.
@@ -66,6 +66,15 @@ authorized as **Federation member** to monitor *Contest* and some *User Works* t
 - For the period preceding the final meeting, you can assign and manage assigned vote for every section-n-theme.
 - Before the final meeting you should vote for a go n stop
 - And in last Juror meet assign Prizes and Mentions.
+
+---
+
+## Federation marshall
+
+Federation are photographic organization, national and international
+that made rules to design and manage a well done Salon.
+In some case they assume the right to check contest and
+participant to verify any issue with works presented for Salons.
 
 ---
 
