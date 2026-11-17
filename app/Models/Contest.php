@@ -258,13 +258,15 @@ class Contest extends Model
 
     /**
      * Set of Circuits
-     * Warn: circuit set, not contest-in-circuit set
+     *   Warn: circuit set, not contest-in-circuit set
+     *   for set of contest in circuit (if they are) use contestsInCircuit()
+     *
      */
-    public static function getCircuitSet()
+    public static function getCircuits()
     {
         $circuitSet = self::select('id', 'name_en')
             ->where('is_circuit', true)
-            ->orderBy('name_en')
+            ->orderByDesc('updated_at')
             ->get();
 
         return $circuitSet;

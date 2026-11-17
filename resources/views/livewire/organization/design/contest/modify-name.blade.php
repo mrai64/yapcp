@@ -46,9 +46,7 @@ new class () extends Component {
         $this->contestAwardCeremonyInfo = $this->contest->award_ceremony_info ?? '';
         $this->contestFeeInfo     = $this->contest->fee_info ?? '';
         //
-        $this->contestCircuitsSet = Contest::where('is_circuit', true)
-            ->orderBy('updated_at')
-            ->get();
+        $this->contestCircuitsSet = Contest::getCircuits();
     }
 
     public function rules()
@@ -182,14 +180,21 @@ new class () extends Component {
                     </div>
                     <!--/Is a Circuit -->
 
-                    @if (! $contestIsCircuit )
+                    @if (! $contestIsCircuit ) && (! $contestCircuitsSet->isEmpty())
                     <!-- contestCircuitId -->
                     <div class="mb-4">
-                        <x-input-label for="contestCircuitId" :value="__('Circuit ID')" />
-                        <x-text-input wire:model="contestCircuitId" 
-                            id="contestCircuitId" 
-                            name="contestCircuitId" 
-                            class="block mt-1 w-full" type="text" />
+                        <x-input-label for="contestCircuitId" :value="__('Circuit')" />
+                        <select wire:model="contestCircuitId"
+                            id="contestCircuitId"
+                            name="contestCircuitId"
+                            required >
+                            <option value="">{{ __("...") }}</option>
+                            @foreach ($contestCircuitsSet as $circuit)
+                                <option value="{{ $circuit->id }}">
+                                    {{ $circuit->name_en }}
+                                </option>
+                            @endforeach
+                        </select>
                         <x-input-error for="contestCircuitId" class="mt-2" />
                     </div>
                     @endif
