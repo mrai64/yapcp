@@ -31,7 +31,7 @@ Nessuna modifica necessaria al database
 
 > <!-- to avoid index in Larecipe -->
 - [ ] **Test:** Tutti i test (nuovi ed esistenti) passano in verde (`php artisan test`)?
-- [ ] **Docs:** Il file in `/resources/docs/dev/` è aggiornato?
+- [ ] **Docs:** Il file in `/docs/dev/` è aggiornato?
 - [ ] **Manual:** Il manuale utente riflette le modifiche introdotte?
 - [ ] **Cleanup:** Ho rimosso eventuali `dd()` o `dump()` dimenticati?
 - [ ] **Commit:** I messaggi dei commit sono chiari?
