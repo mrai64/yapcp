@@ -157,6 +157,12 @@ Volt::route('/organization/design/contest/modify-calendar/{contest}', 'organizat
 Volt::route('/organization/design/contest/modify-url/{contest}', 'organization.design.contest.modify-url')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest.modify-url');
+Volt::route('/organization/design/circuit/make/{organization}', 'organization.design.circuit.make')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.circuit.make');
+Volt::route('/organization/design/circuit/modify-name/{contest}', 'organization.design.circuit.modify-name')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.circuit.modify-name');
 
 // ContestPatronage design
 Volt::route('/organization/design/contest-patronage/listed/{contest}', 'organization.design.contest-patronage.listed')
