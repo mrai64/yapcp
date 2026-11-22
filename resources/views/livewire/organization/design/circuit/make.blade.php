@@ -28,6 +28,9 @@ new class () extends Component {
             'is_circuit'           => true,
             // 'circuit_id'
             'contest_mark'         => '', // file path to logo
+            'contact_info'         => '', // without default
+            'award_ceremony_info'  => '', // without default
+            'fee_info'             => '', // without default
             // 'vote_rule'
             // url_1_rule
             // url_2_concurrent_list
@@ -45,7 +48,7 @@ new class () extends Component {
         ]);
 
         return redirect()
-            ->route('organization.design.circuit.modify-name', ['contest' => $contest])
+            ->route('organization.design.circuit.modify-name', ['contest' => $circuit])
             ->with('success', __("Start Modify your Circuit"));
     }
 }; ?>

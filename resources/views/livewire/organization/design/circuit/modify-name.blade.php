@@ -57,7 +57,7 @@ new class () extends Component {
         ];
     }
 
-    public function modifyContest()
+    public function modifyCircuit()
     {
         $validated = $this->validate();
 
@@ -86,7 +86,7 @@ new class () extends Component {
             {{ __('Modify Circuit infos') }}
         </h2>
         <hr class="mb-4" />
-        <!-- x-yapcp.organization.design.circuit-nav :circuit="$circuit" active="general" / -->
+        <x-yapcp.organization.design.circuit-nav :circuit="$circuit" active="general" />
         <hr class="mb-2" />
         <!-- livewire:organization.design.circuit.general-nav :circuit="$circuit" / -->
         <hr class="mb-2" />
@@ -122,6 +122,12 @@ new class () extends Component {
                 <br />
                 @endif
 
+                <div class="mb-4">
+                    <p class="fyk text-xl">
+                        {{__("Circuit is already created and this is the modify page") }}
+                    </p>
+                </div>
+
                 <form wire:submit="modifyCircuit">
                     @csrf
 
@@ -137,7 +143,7 @@ new class () extends Component {
                     <x-select-country-app wire:model="circuitCountryId" :country_id="$circuitCountryId" required /> 
 
                     <!-- circuitTimezoneId -->
-                    <x-select-timezone-app wire:model="circuitTimezoneId" :country_id="$circuitTimezoneId" required /> 
+                    <x-select-timezone-app wire:model="circuitTimezoneId" :timezone_id="$circuitTimezoneId" required /> 
 
                     <!-- circuitLangLocal -->
                     <div class="mb-4">
