@@ -148,7 +148,7 @@ new class () extends Component {
                     <x-select-country-app wire:model="contestCountryId" :country_id="$contestCountryId" required /> 
 
                     <!-- contestTimezoneId -->
-                    <x-select-timezone-app wire:model="contestTimezoneId" :country_id="$contestTimezoneId" required /> 
+                    <x-select-timezone-app wire:model="contestTimezoneId" :timezone_id="$contestTimezoneId" required /> 
 
                     <!-- contestLangLocal -->
                     <div class="mb-4">

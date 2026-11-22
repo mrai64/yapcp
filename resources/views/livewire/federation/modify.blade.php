@@ -155,7 +155,7 @@ new class () extends Component {
                     </div>
                     
                     <!-- timezone select -->
-                    <x-select-timezone-app wire:model="federationTimezoneId" :country_id="$federationTimezoneId" /> 
+                    <x-select-timezone-app wire:model="federationTimezoneId" :timezone_id="$federationTimezoneId" /> 
 
                     <!-- federationContactInfo -->
                     <div class="mb-4">
