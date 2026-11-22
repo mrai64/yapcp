@@ -197,6 +197,9 @@ Volt::route(
 )
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-section.remove');
+Volt::route('/organization/design/circuit-section/listed/{contest}', 'organization.design.circuit-section.listed')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.circuit-section.listed');
 
 // ContestJury design
 Volt::route('/organization/design/contest-jury/listed/{contest}', 'organization.design.contest-jury.listed')
@@ -217,6 +220,9 @@ Volt::route('/organization/design/contest-jury/modify/{contest_jury}', 'organiza
 Volt::route('/organization/design/contest-jury/remove/{contest_jury}', 'organization.design.contest-jury.remove')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-jury.remove');
+Volt::route('/organization/design/circuit-jury/listed/{contest}', 'organization.design.circuit-jury.listed')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.circuit-jury.listed');
 
 // ContestAwards design
 Volt::route('/organization/design/contest-award/listed/{contest}', 'organization.design.contest-award.listed')
@@ -233,6 +239,9 @@ Volt::route('/organization/design/contest-award/modify/{contest_award}', 'organi
 Volt::route('/organization/design/contest-award/remove/{contest_award}', 'organization.design.contest-award.remove')
     ->middleware(['auth', 'verified'])
     ->name('organization.design.contest-award.remove');
+Volt::route('/organization/design/circuit-award/listed/{contest}', 'organization.design.circuit-award.listed')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.circuit-award.listed');
 
 // ContestParticipant manage
 // list of contest participants for manage fee_payment
