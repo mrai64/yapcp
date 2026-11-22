@@ -1,16 +1,14 @@
 ---
-title: 'Feature: Nome Funzione'
+title: 'Feature: Contest Design: Circuit Add'
 ---
-
-# Feature: Nome Funzione
 
 > **Branch:** `feat/0435-contest-review`  
 > **Stato:** In Corso  
 > **priorità:** A  
 > **id assegnato:** 2026-11-16.01  
-> **Titolo e urgenza:** Quello riportato nel project, senza id  
+> **Titolo e urgenza:** (A) feat: Organization / Contest Design / Contest - Circuit Add  
 > **Project/issue link:** [#435](https://github.com/mrai64/yapcp/issues/435)  
-> **Milestone link:** [M5](https://github.com/mrai64/yapcp/milestones/5)
+> **Milestone link:** [M7](https://github.com/mrai64/yapcp/milestones/7)
 
 - [📝 Logica Tecnica](#-logica-tecnica)
 - [🗄️ Modifiche al Database](#️-modifiche-al-database)
@@ -39,24 +37,19 @@ Funzione comoda per i circuiti è che se viene definito prima dei
 concorsi, questi "riprendono" i temi e sezioni dal circuito.
 E anche la partecipazione, essendo per circuito, produce l'inserimento
 di N record (uno per concorso, uno per giuria) al colpo.
-E anche la creazione del verbale deve essere indipendente, non legata
-alla creazione dei concorsi.
+E anche l'assegnazione dei premi di circuito, come la creazione del verbale 
+deve essere indipendente, non legata alla creazione dei concorsi.
+
 
 ## 🗄️ Modifiche al Database
 
-Nessuna modifica necessaria al database
-
-oppure
-
-> <!-- to avoid index in Larecipe -->
-- [x] Creata migration `create_xxx_table`
-- [ ] Lorem ipsum
+Nessuna modifica necessaria al database, il model Contest contiene uno switch dedicato is_circuit.
 
 ## 👮‍♂️ Pre Merge check
 
 > <!-- to avoid index in Larecipe -->
 - [ ] **Test:** Tutti i test (nuovi ed esistenti) passano in verde (`php artisan test`)?
-- [ ] **Docs:** Il file in `/resources/docs/dev/` è aggiornato?
+- [x] **Docs:** Il file in `/docs/dev/` è aggiornato?
 - [ ] **Manual:** Il manuale utente riflette le modifiche introdotte?
 - [ ] **Cleanup:** Ho rimosso eventuali `dd()` o `dump()` dimenticati?
 - [ ] **Commit:** I messaggi dei commit sono chiari?
