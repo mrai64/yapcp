@@ -187,12 +187,18 @@ new class extends Component {
 
                 @if ($designContestsSet->isNotEmpty())
                 <h3 class="fyk text-2xl font-bold mb-4">
-                    {{ __("Future Contests") }}
+                    {{ __("Future Contests | Circuits") }}
                 </h3>
                     @foreach ($designContestsSet as $contest)
-                <x-yapcp.inline-link 
-                    txt="{{ ($contest->name_en) ? $contest->name_en : $contest->id }}" 
-                    url="{{ route('organization.design.contest.modify-name', ['contest' => $contest]) }}" />
+                    @if ($contest->is_circuit)
+                    <x-yapcp.inline-link 
+                        txt="{{ ($contest->name_en) ? $contest->name_en : $contest->id }}" 
+                        url="{{ route('organization.design.circuit.modify-name', ['contest' => $contest]) }}" />
+                    @else
+                    <x-yapcp.inline-link 
+                        txt="{{ ($contest->name_en) ? $contest->name_en : $contest->id }}" 
+                        url="{{ route('organization.design.contest.modify-name', ['contest' => $contest]) }}" />
+                    @endif
                     @endforeach
                 @else
                 <h3 class="fyk text-xl font-bold mb-4">
