@@ -88,7 +88,7 @@ new class () extends Component {
         <hr class="mb-4" />
         <x-yapcp.organization.design.circuit-nav :circuit="$circuit" active="general" />
         <hr class="mb-2" />
-        <!-- livewire:organization.design.circuit.general-nav :circuit="$circuit" / -->
+        <livewire:organization.design.circuit.circuit-nav :circuit="$circuit" />
         <hr class="mb-2" />
         <x-yapcp.header-link 
             txt="Back to User dashboard" 
