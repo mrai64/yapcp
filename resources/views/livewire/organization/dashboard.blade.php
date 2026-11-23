@@ -181,6 +181,9 @@ new class extends Component {
                 <x-yapcp.inline-link 
                     txt="Design new Contest" 
                     url="{{ route('organization.design.contest.make', ['organization' => $organization]) }}" />
+                <x-yapcp.inline-link 
+                    txt="Design new Circuit" 
+                    url="{{ route('organization.design.circuit.make', ['organization' => $organization]) }}" />
 
                 @if ($designContestsSet->isNotEmpty())
                 <h3 class="fyk text-2xl font-bold mb-4">
