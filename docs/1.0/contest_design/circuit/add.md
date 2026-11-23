@@ -1,5 +1,5 @@
 ---
-title: 'Circuit: a Contest pool | Contest Design | Organization'
+title: 'Circuit: One for all | Contest Design | Organization'
 ---
 
 - [New w/name](./add.md)
@@ -10,40 +10,28 @@ title: 'Circuit: a Contest pool | Contest Design | Organization'
 
 ---
 
-When a group of contest have the same section themes, the
-same calendar, and a unique organization to manage subscription,
-they usually are grouped into a Circuit.
+As you know, Circuit are *group of contest* usually over 3, that have
+the same calendar, and the same set of section n themes.
+Usually mamaged by a unique organization, every contest
+had it's own juries and awards.  
 
-Here Circuit have the common part of all contest, not the jury
-composition. btw.
+So in yaPCP we used circuit as a partial contest, you can insert
+circuit in yaPCP, before o after the others contests. But,
+when you insert Circuit first, for the circuited contest some infos
+are imported by circuit record.
+
+The details required on the Circuit Creation form are those that are
+subsequently shared across all circuits; therefore, the following
+will be required: the circuit name, the calendar of dates, the list of themes
+and sections, and the web addresses where the call for entries and
+rules can be found and the circuit catalogue viewed.
+A set of prizes for the circuit is usually provided, but there are
+no section- or theme-specific prizes for the circuit.
+
+*Translated with DeepL.com (free version)*
 
 &nbsp;
 
 ## Add a Circuit
 
-It's not mandatory, but useful define *first the Circuit, then the Contests*,
-so common choices are downloaded from circuit to contest. But Circuit can be
-register also after the contests, the contest_id should be update later.
-
-*This is the way* (cit)  
-From Organization dashboard, after the link Define Contest, we find the
-Design New Circuit link
-
-![Organization dashboard](./add_img01.png)
-
-&nbsp;
-
-The Circuit empty form (as new)
-![The Circuit empty form](./add_img02.png)
-
-&nbsp;
-
-The Circuit filled form (info from FIAF public contest panel)
-![The Circuit filled form](./add_img03.png)
-
-&nbsp;
-
-Updated info
-![The Circuit filled form](./add_img03.png)
-
-Next Step:
+![_](./add_img01.png)

@@ -62,16 +62,16 @@
                     "label": "How Participate in Contest"
                 },
                 {
-                    "label": "Send requested RAWs",
+                    "label": "✍️ Send requested RAWs",
                     "href": "#"
                 },
                 {
                     "page": "users/federation_list",
-                    "label": "See Federation List"
+                    "label": "See Federation List [info]"
                 },
                 {
                     "page": "users/federation_section",
-                    "label": "See Federation Section List"
+                    "label": "See Federation Section List [info]"
                 }
             ]
         },
@@ -89,6 +89,10 @@
                 {
                     "page": "contest_design/contest/add",
                     "label": "New Contest: Name Info..."
+                },
+                {
+                    "href": "#",
+                    "label": "✍️ Circuit: one for all..."
                 },
                 {
                     "page": "contest_design/patronages/listed",

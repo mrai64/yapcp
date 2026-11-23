@@ -54,7 +54,7 @@ use Livewire\Attributes\Computed;
  * @property string|null $name_local
  * @property string $lang_local dev: in LangList[]
  * @property string $organization_id fk: organizations.id
- * @property bool $is_circuit contests joined in circuit
+ * @property bool $is_circuit false: is contest
  * @property string|null $circuit_id null or self fk: contests.id
  * @property string $federation_list free text for federation patronages
  * @property string|null $contest_mark The contest or organization passport photo - mark
@@ -172,7 +172,6 @@ class Contest extends Model
         'contact_info', //              free text
         'is_circuit', //                boolean
         'circuit_id',  //               fk contests.id | NULL
-        'federation_list', //           ! REMOVE after ContestPatronage works
         'url_1_rule', //                web url
         'url_2_concurrent_list', //     web url
         'url_3_admit_n_award_list', //  web url
@@ -220,7 +219,6 @@ class Contest extends Model
             'name_local' => 'string',
             'organization_id' => 'string',
 
-            'federation_list' => 'string',
             'contest_mark' => 'string',
             'contact_info' => 'string',
 
@@ -259,14 +257,16 @@ class Contest extends Model
     }
 
     /**
-     * Set of ordered contests w/is_circuit 1/Y, named circuits.
-     * Warn: circuit set, not contest-in-circuit set
+     * Set of Circuits
+     *   Warn: circuit set, not contest-in-circuit set
+     *   for set of contest in circuit (if they are) use contestsInCircuit()
+     *
      */
-    public static function getCircuitSet()
+    public static function getCircuits()
     {
         $circuitSet = self::select('id', 'name_en')
             ->where('is_circuit', true)
-            ->orderBy('name_en')
+            ->orderByDesc('updated_at')
             ->get();
 
         return $circuitSet;
@@ -275,7 +275,7 @@ class Contest extends Model
     // for validation?
     public function contestIsInCircuit(): bool
     {
-        return $this->is_circuit;
+        return ($this->circuit_id !== null);
     }
 
     // for validation?
@@ -298,18 +298,6 @@ class Contest extends Model
         $refDate = $refDate ? Carbon::instance($refDate) : now();
         // participation contest open
         return $refDate->gte($this->day_3_jury_opening) && $refDate->lte($this->day_4_jury_closing);
-    }
-
-    // for circuit: get contest in circuit
-    public function getContests(): HasMany
-    {
-        $contestSet = $this->hasMany(
-            related: static::class,
-            foreignKey: 'circuit_id',
-            localKey: 'id'
-        );
-
-        return $contestSet;
     }
 
     // substitute federation_list
@@ -474,18 +462,6 @@ class Contest extends Model
         return $organization;
     }
 
-    // valid for is_circuit 'Y'
-    public function contestInCircuit(): HasMany
-    {
-        $contests = $this->hasMany(
-            related: static::class,
-            foreignKey: 'circuit_id',
-            localKey: 'id'
-        );
-
-        return $contests;
-    }
-
     // contest_juries.section_id > contest_sections.id > contests.id
 
     // contest_awards.contest_id > contests.id
@@ -634,8 +610,8 @@ class Contest extends Model
     }
 
     /**
-     * For contest in circuit, from circuit
-     * to find contest under / circuit
+     * Pick a list of contest in circuit
+     *   if the contest is in Circuit (then circuitId is not null)
      *
      * @return HasMany
      */
