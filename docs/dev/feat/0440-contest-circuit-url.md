@@ -1,0 +1,52 @@
+---
+title: 'Feature: Contest Design / Circuit web links add'
+---
+
+> **Branch:** `feat/0440-contest-circuit-url`  
+> **Project/issue link:** [#440](https://github.com/mrai64/yapcp/issues/440)  
+> **Stato:** In Corso / Revisione / Chiuso  
+> **priorità:** A  
+> **id assegnato:** aaaa-mm-gg.nn  
+> **Titolo e urgenza:** Quello riportato nel project, senza id  
+> **Milestone link:** [M7](https://github.com/mrai64/yapcp/milestones/7)
+> **Autori:** mrai64, Antigravity
+
+- [📝 Logica Tecnica](#-logica-tecnica)
+- [🗄️ Modifiche al Database](#️-modifiche-al-database)
+- [👮‍♂️ Pre Merge check](#️-pre-merge-check)
+- [🚀 Note per il Deploy](#-note-per-il-deploy)
+
+---
+
+## 📝 Logica Tecnica
+
+Spiega qui il "perché" hai scelto una certa soluzione (es. "Uso un Job invece di un listener sincrono perché l'API esterna è lenta").
+
+## 🗄️ Modifiche al Database
+
+Nessuna modifica necessaria al database
+
+oppure
+
+> <!-- to avoid index in Larecipe -->
+- [x] Creata migration `create_xxx_table`
+- [ ] Lorem ipsum
+
+## 👮‍♂️ Pre Merge check
+
+> <!-- to avoid index in Larecipe -->
+- [ ] **Test:** Tutti i test (nuovi ed esistenti) passano in verde (`php artisan test`)?
+- [ ] **Docs:** Il file in `/docs/dev/` è aggiornato?
+- [ ] **Manual:** Il manuale utente riflette le modifiche introdotte?
+- [ ] **Cleanup:** Ho rimosso eventuali `dd()` o `dump()` dimenticati?
+- [ ] **Commit:** I messaggi dei commit sono chiari?
+
+## 🚀 Note per il Deploy
+
+Niente di particolare, nessuna migrazione o azione speciale richiesta al deploy.
+
+oppure
+
+> <!-- to avoid index in Larecipe -->
+- Eseguire `php artisan migrate`
+- Lorem ipsum
