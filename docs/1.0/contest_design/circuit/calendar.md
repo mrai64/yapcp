@@ -1,5 +1,5 @@
 ---
-title: 'Contest | Contest Design | Organization'
+title: 'Circuit: Calendar | Contest Design | Organization'
 ---
 
 - [New w/name](./add.md)

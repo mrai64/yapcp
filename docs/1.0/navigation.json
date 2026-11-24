@@ -91,7 +91,7 @@
                     "label": "New Contest: Name Info..."
                 },
                 {
-                    "href": "#",
+                    "page": "contest_design/circuit/add",
                     "label": "✍️ Circuit: one for all..."
                 },
                 {
