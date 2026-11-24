@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Organization ContestDesign / Circuit Stemp 1 - Name and Circuit Infos
+ * Organization Contest Design / Circuit Step 1 - Name and Circuit Infos
  *   Circuit is a group of contests, so here we need infos that are common
  *   to all contests, i.e. of circuit.
  */

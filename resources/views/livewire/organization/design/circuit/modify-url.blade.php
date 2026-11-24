@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Organization Contest Design / Step 3 - Some url
+ * Organization Contest Design / Circuit Step 3 - Some url
  *
  */
 
@@ -20,7 +20,7 @@ new class extends Component {
 
     public function mount(Contest $contest)
     {
-        $this->contest      = $contest;
+        $this->contest      = $contest; // should be circuit
         $this->organization = $contest->organization;
 
         $this->url1Rule            = $contest->url_1_rule ?? '';
@@ -33,7 +33,7 @@ new class extends Component {
     {
         return [
             'url1Rule'            => 'required|active_url|string|max:255',
-            'url2ConcurrentList' => 'required|active_url|string|max:255',
+            'url2ConcurrentList'  => 'required|active_url|string|max:255',
             'url3AdmitNAwardList' => 'required|active_url|string|max:255',
             'url4Catalogue'       => 'required|active_url|string|max:255',
         ];
@@ -52,8 +52,8 @@ new class extends Component {
 
         // redirect itself
         return redirect()
-            ->route('organization.design.contest.modify-url', ['contest' => $this->contest])
-            ->with('success', __('Contest infos updated.'));
+            ->route('organization.design.circuit.modify-url', ['contest' => $this->contest])
+            ->with('success', __('Circuit infos updated.'));
 
     }
 
@@ -62,12 +62,12 @@ new class extends Component {
 <div>
     <x-slot name="header">
         <h2 class="fyk text-2xl font-medium text-gray-900">
-            {{ __('Modify Contest infos') }}
+            {{ __('Modify Circuit Web links') }}
         </h2>
         <hr class="mb-4" />
-        <x-yapcp.organization.design.contest-nav :contest="$contest" active="general" />
+        <x-yapcp.organization.design.circuit-nav :circuit="$contest" active="general" />
         <hr class="mb-2" />
-        <livewire:organization.design.contest.general-nav :contest="$contest" />
+        <livewire:organization.design.circuit.circuit-nav :circuit="$contest" />
         <hr class="mb-2" />
         <x-yapcp.header-link 
             txt="Back to User dashboard" 
@@ -103,7 +103,7 @@ new class extends Component {
 
                 <div class="mb-4">
                     <h3 class="fyk text-xl font-medium text-gray-900">
-                        {{ __('How find Contest Rule doc, Board of participants, n others. In or Out platform.') }}
+                        {{ __('How find on web: Circuit Rules, Board of participants, others. In or Out yaPCP platform. Full address.') }}
                     </h3>
                 </div>
 
@@ -112,9 +112,10 @@ new class extends Component {
 
                     <!-- url for rules -->
                     <div class="mb-4">
-                        <x-input-label for="url1Rule" :value="__('Where is, or where will be, the contest rules?')" />
+                        <x-input-label for="url1Rule" :value="__('Where is, or where will be, the circuit rules?')" />
                         <x-text-input wire:model="url1Rule" id="url1Rule" name="url1Rule" 
-                            class="block mt-1 w-full" type="url" required />
+                            class="block mt-1 w-full" 
+                            type="url" required />
                         <x-input-error for="url1Rule" class="mt-2" />
                     </div>
 
@@ -122,23 +123,26 @@ new class extends Component {
                     <div class="mb-4">
                         <x-input-label for="url2ConcurrentList" :value="__('Board of participants')" />
                         <x-text-input wire:model="url2ConcurrentList" id="url2ConcurrentList" name="url2ConcurrentList" 
-                            class="block mt-1 w-full" type="url" required />
+                            class="block mt-1 w-full" 
+                            type="url" required />
                         <x-input-error for="url2ConcurrentList" class="mt-2" />
                     </div>
 
                     <!-- url3AdmitNAwardList -->
                     <div class="mb-4">
-                        <x-input-label for="url3AdmitNAwardList" :value="__('Board of contest result')" />
+                        <x-input-label for="url3AdmitNAwardList" :value="__('Board of circuit result')" />
                         <x-text-input wire:model="url3AdmitNAwardList" id="url3AdmitNAwardList" name="url3AdmitNAwardList" 
-                            class="block mt-1 w-full" type="url" required />
+                            class="block mt-1 w-full" 
+                            type="url" required />
                         <x-input-error for="url3AdmitNAwardList" class="mt-2" />
                     </div>
 
                     <!-- url4Catalogue -->
                     <div class="mb-4">
-                        <x-input-label for="url4Catalogue" :value="__('Catalogue uel, when published')" />
+                        <x-input-label for="url4Catalogue" :value="__('Catalogue url, when published')" />
                         <x-text-input wire:model="url4Catalogue" id="url4Catalogue" name="url4Catalogue" 
-                            class="block mt-1 w-full" type="url" required />
+                            class="block mt-1 w-full" 
+                            type="url" required />
                         <x-input-error for="url4Catalogue" class="mt-2" />
                     </div>
                     <br style="clear:both;" />

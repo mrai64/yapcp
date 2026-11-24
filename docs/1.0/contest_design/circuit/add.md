@@ -35,3 +35,17 @@ no section- or theme-specific prizes for the circuit.
 ## Add a Circuit
 
 ![_](./add_img01.png)
+
+&nbsp;
+
+![_](./add_img02.png)
+
+&nbsp;
+
+![_](./add_img03.png)
+
+&nbsp;
+
+![_](./add_img04.png)
+
+&nbsp;

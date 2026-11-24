@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Organization Design Contest - Step 0
+ * Organization Contest Design / Circuit - Step 0
  * build circuit for group of contest followed by organization_id
  * then pass to modify-name
  * 
