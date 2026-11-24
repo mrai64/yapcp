@@ -93,9 +93,9 @@ new class () extends Component {
             'day2Closing'     => 'required|date|after:day1Opening|before:day3JuryOpening',
 
             'day3JuryOpening' => 'required|date|after:day2Closing|beforeOrEqual:day4JuryClosing',
-            'day4JuryClosing' => 'required|date|after:day3JuryOpening|before:',
+            'day4JuryClosing' => 'required|date|after:day3JuryOpening|before:day5Revelations',
 
-            'day5Revelations' => 'required|date|after:day4JuryClosing|before:day5Revelations',
+            'day5Revelations' => 'required|date|after:day4JuryClosing|before:day6Awards',
             'day6Awards'      => 'required|date|after:day5Revelations|before:day8Closing',
             'day7Catalogues'  => 'required|date|after:day5Revelations|before:day8Closing',
             'day8Closing'     => 'required|date|after:day6Awards|after:day7Catalogues',
