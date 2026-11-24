@@ -40,7 +40,7 @@ class WriteParticipantBoardResultJob implements ShouldQueue
         $jobName = class_basename($this);
         //
         try {
-            $isAfterRevelations = true || now()->greaterThan($this->contest->day_5_revelations);
+            $isAfterRevelations = now()->greaterThan($this->contest->day_5_revelations);
             $sections = $this->contest->contestSections()->orderBy('code')->get();
             Log::info($jobName . ' 1');
 

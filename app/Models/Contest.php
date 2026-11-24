@@ -33,7 +33,8 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Monolog\DateTimeImmutable;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -379,18 +380,30 @@ class Contest extends Model
             ->get();
     }
 
-    public function getSortedUniqueJuries()
+    /**
+     * @return \Illuminate\Database\Eloquent\Collection<int, ContestJury>
+     */
+    public function getSortedUniqueJuries(): \Illuminate\Database\Eloquent\Collection
     {
         return $this->contestJuries()
             ->with('userContact')
             ->get()
             ->unique('user_id')
-            ->sortBy(function ($jury) {
-                $contact = $jury->userContact;
-                return (($contact->last_name ?? '') . ', ' . ($contact->first_name ?? ''));
-            })
+            ->sortBy(
+                /**
+                 * @param ContestJury $jury
+                 */
+                function ($jury): string {
+                    $contact = $jury->userContact;
+
+                    return ($contact->last_name ?? '') . ', '
+                        . ($contact->first_name ?? '');
+                }
+            )
             ->values();
     }
+
+
 
     #[Computed]
     public function existsStaticParticipationResults(): bool
@@ -672,6 +685,9 @@ class Contest extends Model
         return $contestPatronagesSet;
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<ContestJury, $this>
+     */
     public function contestJuries(): HasMany
     {
         return $this->hasMany(ContestJury::class, 'contest_id', 'id');

@@ -43,12 +43,12 @@ class WorkUpdatedNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage())
-            ->subject('Activity in your yaPCP Gallery')
+            ->subject('Activity signal in your yaPCP Gallery')
             ->line('We would like to inform you that one of the works displayed in your gallery has just been updated.')
-            ->line("title: " . $this->userWork?->title_en ?? '')
+            ->line("title: " . $this->userWork->title_en)
             ->line('Join yaPCP than see your Gallery.')
             ->line('- - -')
-            ->line('Note: For security reasons, we have not included any clickable links in this message.')
+            ->line('Note: For security reasons, we have not included any clickable link in that message.')
             ->line('Thank you for using our application!');
     }
 

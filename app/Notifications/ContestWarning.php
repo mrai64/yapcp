@@ -37,16 +37,10 @@ class ContestWarning extends Notification
     {
         // ds('Notification ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' called');
         $this->contestWaiting = $contestWaiting;
-        $this->contest = $this->contestWaiting->contest;
-        $this->section = $this->contestWaiting->section;
-        $this->userWork = $this->contestWaiting->work;
+        $this->contest   = $this->contestWaiting->contest;
+        $this->section   = $this->contestWaiting->contestSection;
+        $this->userWork  = $this->contestWaiting->userWork;
         $this->participantUser = $this->contestWaiting->participantUser;
-
-        // ds('Notification ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' contestWaiting:' . json_encode($this->contestWaiting));
-        // ds('Notification ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' contest:' . json_encode($this->contest));
-        // ds('Notification ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' section:' . json_encode($this->section));
-        // ds('Notification ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' userWork:' . json_encode($this->userWork));
-        // ds('Notification ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' participantUser:' . json_encode($this->participantUser));
     }
 
     /**
@@ -56,8 +50,6 @@ class ContestWarning extends Notification
      */
     public function via(object $notifiable): array
     {
-        // ds('Notification ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' called');
-
         return ['mail'];
     }
 
@@ -66,8 +58,6 @@ class ContestWarning extends Notification
      */
     public function routeNotificationForMail(Notification $notification)
     {
-        // ds('Notification ' . __CLASS__ . ' f/' . __FUNCTION__ . ':' . __LINE__ . ' called');
-
         return [$this->participantUser->email => (
             $this->participantUser->first_name . ' '
             . $this->participantUser->last_name
@@ -79,19 +69,21 @@ class ContestWarning extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        // ds('Notification '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' called');
         $subject = config('app.name') . ' about your work "' . $this->userWork->title_en . '"';
 
-        $mail_message = (new MailMessage())
+        $mailMessage = (new MailMessage())
             ->subject($subject)
             ->line($this->participantUser->first_name . ', ')
-            ->line('unfortunately your work titled [' . $this->userWork->title_en . "], \nparticipating to our contest [" . $this->contest->name_en . "], \nseem have a little problem during a human check, and now it's temporary excluded from contest.")
+            ->line('unfortunately your work titled')
+            ->line($this->userWork->title_en)
+            ->line("participating to our contest ")
+            ->line($this->contest->name_en)
+            ->line("appears to have encountered a minor issue during a manual review carried out by us, and has therefore been temporarily(!) excluded from the competition for the time being.")
             ->line("Because: \n" . $this->contestWaiting->because . "\n\n")
-            ->line('At now suggest you to upload another version of your work ASAP, thru your personal dashboard, or contact Contest Organization.')
-            ->line('Thank you for using our contest platform!');
-        // ds('Notification '.__CLASS__.' f/'.__FUNCTION__.':'.__LINE__.' mail_message:'.json_encode($mail_message));
+            ->line('We suggest you upload a new version of your entry as soon as possible, or contact us.')
+            ->line('Thank you for the patience!');
 
-        return $mail_message;
+        return $mailMessage;
     }
 
     /**
@@ -101,7 +93,6 @@ class ContestWarning extends Notification
      *
         public function toArray(object $notifiable): array
         {
-            // ds('Notification '. __CLASS__ .' f/'. __FUNCTION__ .':'. __LINE__ .' called' );
             return [
                 //
             ];
