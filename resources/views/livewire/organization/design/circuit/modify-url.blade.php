@@ -62,7 +62,7 @@ new class extends Component {
 <div>
     <x-slot name="header">
         <h2 class="fyk text-2xl font-medium text-gray-900">
-            {{ __('Modify Circuit Calendar') }}
+            {{ __('Modify Circuit Web links') }}
         </h2>
         <hr class="mb-4" />
         <x-yapcp.organization.design.circuit-nav :circuit="$contest" active="general" />
