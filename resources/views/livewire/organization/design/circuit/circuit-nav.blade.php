@@ -1,7 +1,7 @@
 @props(['circuit'])
 
 <div>
-    <!-- Organization Contest Design / Contest page nav bar -->
+    <!-- Organization Contest Design / Circuit page nav bar -->
     <x-yapcp.header-link 
         txt="Name n Infos" 
         url="{{ route('organization.design.circuit.modify-name', ['contest' => $circuit]) }}" />
