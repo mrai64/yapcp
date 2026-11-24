@@ -38,7 +38,7 @@ class ContestPatronagePolicy
         if ($user->isAdmin()) {
             return true;
         }
-        $evaluate = $contest && $contest->organization_id !== null
+        $evaluate = $contest // even true && $contest->organization_id !== null
             && $user->isMemberOfOrganization($contest->organization_id);
         // Log
         return $evaluate;
@@ -54,7 +54,7 @@ class ContestPatronagePolicy
         }
         // Log::info('typeof: ' . gettype($contest_patronage));
         $contest = $contest_patronage->contest;
-        $evaluate = $contest && $contest->organization_id !== null
+        $evaluate = $contest // even true && $contest->organization_id !== null
             && $user->isMemberOfOrganization($contest->organization_id);
         // Log
         return $evaluate;
@@ -69,7 +69,7 @@ class ContestPatronagePolicy
             return true;
         }
         $contest = $contestPatronage->contest;
-        $evaluate = $contest && $contest->organization_id !== null
+        $evaluate = $contest // even true && $contest->organization_id !== null
             && $user->isMemberOfOrganization($contest->organization_id);
         // Log
         return $evaluate;
