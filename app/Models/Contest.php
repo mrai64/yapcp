@@ -248,7 +248,7 @@ class Contest extends Model
     }
 
     // GETTERs
-    // unused - remove
+
     public static function getNameEn(string $contestId): string
     {
         $getContest = self::find($contestId);

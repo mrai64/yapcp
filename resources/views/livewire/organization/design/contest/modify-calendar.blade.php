@@ -91,7 +91,7 @@ new class extends Component {
             'day7Catalogues' => 'required|date|afterOrEqual:day6Awards',
             'day8Closing' => 'required|date|after:day7Catalogues',
 
-            'voteRule' => 'required|string||exists:contests_vote_rule_sets,vote_rule'
+            'voteRule' => 'required|string|exists:contests_vote_rule_sets,vote_rule',
         ];
     }
 
@@ -99,7 +99,7 @@ new class extends Component {
     {
         // sample 
         return [
-            'day1Opening.after' => 'La data di apertura deve essere successiva al ' 
+            'day1Opening.after' => __("Opening participation day must be later than (yyyy-mm-dd): ") 
                 . CarbonImmutable::now()->addMonths(2)->format('Y-m-d'),
         ];
     }
@@ -122,7 +122,6 @@ new class extends Component {
         $this->contest->day_7_catalogues = CarbonImmutable::createFromFormat('Y-m-d', $validated['day7Catalogues'], $this->contest->timezone_id)->endOfDay();
 
         $this->contest->day_8_closing = CarbonImmutable::createFromFormat('Y-m-d', $validated['day8Closing'], $this->contest->timezone_id)->endOfDay();
-
 
         $this->contest->save();
 

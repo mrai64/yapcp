@@ -2,10 +2,8 @@
 title: 'Feature: Contest Design: Circuit Add'
 ---
 
-# Feature: Contest Design: Circuit Add
-
 > **Branch:** `feat/0435-contest-review`  
-> **Stato:** In Corso  
+> **Stato:** Chiuso  
 > **priorità:** A  
 > **id assegnato:** 2026-11-16.01  
 > **Titolo e urgenza:** (A) feat: Organization / Contest Design / Contest - Circuit Add  
