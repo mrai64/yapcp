@@ -11,10 +11,12 @@ use App\Models\Organization;
 use App\Models\UserContact;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Livewire\Attributes\Computed;
 use Livewire\Volt\Component;
 
-new class extends Component {
+new class () extends Component {
+    //
     public Contest $circuit; // it's a contest w/is_circuit true
     public Organization $organization;
     public UserContact $creator;
@@ -27,6 +29,7 @@ new class extends Component {
     public $day6Awards;
     public $day7Catalogues;
     public $day8Closing;
+    //
     public string $circuitVoteRule;
     public $contestVoteRulesSet; // lookup table
 
@@ -34,14 +37,16 @@ new class extends Component {
     public function daysFromToday()
     {
         if (!$this->day1Opening) return 0;
-        return CarbonImmutable::today()->diffInDays(CarbonImmutable::parse($this->day1Opening), false);
+        return CarbonImmutable::today()
+            ->diffInDays(CarbonImmutable::parse($this->day1Opening), false);
     }
 
     #[Computed]
     public function daysBetween($start, $end)
     {
         if (!$start || !$end) return 0;
-        return CarbonImmutable::parse($start)->diffInDays(CarbonImmutable::parse($end));
+        return CarbonImmutable::parse($start)
+            ->diffInDays(CarbonImmutable::parse($end));
     }
 
 
@@ -79,37 +84,36 @@ new class extends Component {
         $this->contestVoteRulesSet = ContestsVoteRuleSet::query()
             ->orderBy('vote_rule')
             ->get();
-
     }
 
     public function rules()
     {
         return [
-            'day1Opening' => 'required|date',
-            'day2Closing' => 'required|date|after:day1Opening',
+            'day1Opening'     => 'required|date',
+            'day2Closing'     => 'required|date|after:day1Opening|before:day3JuryOpening',
 
-            'day3JuryOpening' => 'required|date|after:day2Closing',
-            'day4JuryClosing' => 'required|date|after:day3JuryOpening',
+            'day3JuryOpening' => 'required|date|after:day2Closing|beforeOrEqual:day4JuryClosing',
+            'day4JuryClosing' => 'required|date|after:day3JuryOpening|before:',
 
-            'day5Revelations' => 'required|date|after:day4JuryClosing',
-            'day6Awards' => 'required|date|after:day5Revelations',
-            'day7Catalogues' => 'required|date|afterOrEqual:day6Awards',
-            'day8Closing' => 'required|date|after:day7Catalogues',
+            'day5Revelations' => 'required|date|after:day4JuryClosing|before:day5Revelations',
+            'day6Awards'      => 'required|date|after:day5Revelations|before:day8Closing',
+            'day7Catalogues'  => 'required|date|after:day5Revelations|before:day8Closing',
+            'day8Closing'     => 'required|date|after:day6Awards|after:day7Catalogues',
 
-            'circuitVoteRule' => 'required|string||exists:contests_vote_rule_sets,vote_rule'
+            'circuitVoteRule' => 'required|exists:contests_vote_rule_sets,vote_rule',
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         // sample 
         return [
-            'day1Opening.after' => _("Opening data must be after (yyyy-mm-dd): ") 
+            'day1Opening.after' => __("Opening data must be after (yyyy-mm-dd): ") 
                 . CarbonImmutable::now()->addMonths(2)->format('Y-m-d'),
         ];
     }
 
-    public function modifyContest()
+    public function modifyCircuit()
     {
         $validated = $this->validate();
 
@@ -144,7 +148,7 @@ new class extends Component {
         // redirect itself
         return redirect()
             ->route('organization.design.circuit.modify-calendar', ['contest' => $this->circuit])
-            ->with('success', __('Contest infos updated.'));
+            ->with('success', __('Circuit infos updated.'));
     }
 }; ?>
 
@@ -201,7 +205,7 @@ new class extends Component {
                     </p>
                 </div>
 
-                <form wire:submit="modifyContest">
+                <form wire:submit="modifyCircuit">
                     @csrf
 
                     <!-- 1. Opening -->
@@ -299,7 +303,6 @@ new class extends Component {
                             class="form-control" type="date" required />
                         <p class="small">{{ __(':daysFromDay2 total days from participation deadline', ['daysFromDay2' => $this->daysBetween($day2Closing, $day8Closing ) ]) }}</p>
                         <p class="small float-end">{{ __(':daysByDay1 total days from start', ['daysByDay1' => $this->daysBetween($day1Opening, $day8Closing ) ]) }}</p>
-
                         <x-input-error for="day8Closing" class="mt-2" />
                     </div>
 
