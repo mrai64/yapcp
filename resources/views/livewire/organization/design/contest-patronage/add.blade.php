@@ -35,7 +35,7 @@ new class () extends Component {
     {
         return [
             'contPatrFederationId' => 'required|string|exists:federations,id',
-            'contPatrPatronageCode' => 'required|string|uppercase|max:20',
+            'contPatrPatronageCode' => 'required|string|uppercase|max:72',
         ];
     }
     //
