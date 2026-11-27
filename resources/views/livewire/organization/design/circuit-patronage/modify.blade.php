@@ -140,7 +140,8 @@ new class () extends Component {
                     <div class="mb-4">
                         <x-input-label for="contPatrPatronageCode" :value="__('Patronage code')" />
                         <x-text-input wire:model="contPatrPatronageCode" id="contPatrPatronageCode" name="contPatrPatronageCode" 
-                            class="block mt-1 w-60" type="text" required />
+                            class="block mt-1 w-full" 
+                            type="text" required />
                         <x-input-error for="contPatrPatronageCode" class="mt-2" />
                     </div>
 
