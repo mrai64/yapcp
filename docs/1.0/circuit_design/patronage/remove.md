@@ -20,7 +20,7 @@ From Patronage Circuit list choose remove link
 
 &nbsp;
 
-Youare warned, it's not a modify: it's a REMOVE
+You are warned, it's not a modify: it's a REMOVE
 ![_](./remove_img02.png)
 
 &nbsp;
