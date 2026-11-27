@@ -9,6 +9,7 @@ title: 'Feature: Nome Funzione'
 > **id assegnato:** aaaa-mm-gg.nn  
 > **Titolo e urgenza:** Quello riportato nel project, senza id  
 > **Milestone link:** [M5](https://github.com/mrai64/yapcp/milestones/5)
+> **Autori:** mrai64, antigravity / copilot / gemini / claude
 
 - [📝 Logica Tecnica](#-logica-tecnica)
 - [🗄️ Modifiche al Database](#️-modifiche-al-database)
