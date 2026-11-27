@@ -183,6 +183,19 @@ Volt::route('/organization/design/contest-patronage/modify/{contest_patronage}',
 Volt::route('/organization/design/contest-patronage/remove/{contest_patronage}', 'organization.design.contest-patronage.remove')
     ->middleware(['auth', 'verified']) // , 'can:delete,contest-patronage,contest'])
     ->name('organization.design.contest-patronage.remove');
+// ContestPatronage for Circuit
+Volt::route('/organization/design/circuit-patronage/listed/{contest}', 'organization.design.circuit-patronage.listed')
+    ->middleware(['auth', 'verified'])
+    ->name('organization.design.circuit-patronage.listed');
+Volt::route('/organization/design/circuit-patronage/add/{contest}', 'organization.design.circuit-patronage.add')
+    ->middleware(['auth', 'verified']) // authorize in mount()
+    ->name('organization.design.circuit-patronage.add');
+Volt::route('/organization/design/circuit-patronage/modify/{contest_patronage}', 'organization.design.circuit-patronage.modify')
+    ->middleware(['auth', 'verified']) // authorize in mount() was: ", 'can:modify,contest_patronage,contest'])"
+    ->name('organization.design.circuit-patronage.modify');
+Volt::route('/organization/design/circuit-patronage/remove/{contest_patronage}', 'organization.design.circuit-patronage.remove')
+    ->middleware(['auth', 'verified']) // , 'can:delete,contest_patronage,contest'])
+    ->name('organization.design.circuit-patronage.remove');
 
 // ContestSection design
 Volt::route('/organization/design/contest-section/listed/{contest}', 'organization.design.contest-section.listed')
