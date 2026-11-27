@@ -91,10 +91,6 @@
                     "label": "New Contest: Name Info..."
                 },
                 {
-                    "page": "contest_design/circuit/add",
-                    "label": "✍️ Circuit: one for all..."
-                },
-                {
                     "page": "contest_design/patronages/listed",
                     "label": "Patronages"
                 },
@@ -113,6 +109,22 @@
                 {
                     "page": "contest_design/contest/detail",
                     "label": "Contest Details"
+                },
+                {
+                    "page": "circuit_design/circuit/add",
+                    "label": "✍️ New Circuit: one for all..."
+                },
+                {
+                    "page": "circuit_design/patronage/listed",
+                    "label": "✍️ Circuit: Patronages"
+                },
+                {
+                    "page": "circuit_design/jury/listed",
+                    "label": "✍️ Circuit: Jury"
+                },
+                {
+                    "page": "circuit_design/award/listed",
+                    "label": "✍️ Circuit: Awards"
                 },
                 {
                     "page": "organizations/contest_work_review",

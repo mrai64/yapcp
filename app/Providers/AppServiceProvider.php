@@ -84,6 +84,7 @@ class AppServiceProvider extends ServiceProvider
         Route::model('contest-jury', ContestJury::class);
         Route::model('contest-participant', ContestParticipant::class);
         Route::model('contest-patronage', ContestPatronage::class);
+        Route::model('circuit-patronage', ContestPatronage::class);
         Route::model('contest-section', ContestSection::class);
         Route::model('contest-vote', ContestVote::class);
         Route::model('contest-waiting', ContestWaiting::class);
