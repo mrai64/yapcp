@@ -20,7 +20,7 @@ we add some fields in the head of form, to copy FederationSection data in Contes
 
 &nbsp;
 
-First, we need a contest with almost a Federation Patronage \[ &rarr; [add Contest Patronage](../patronages/add.md) \]  
+First, we need a contest with almost a Federation Patronage, check if any registered
 ![_](./add2_img01.png)  
 
 &nbsp;
