@@ -130,7 +130,8 @@ new class () extends Component {
         /** @use ContestSectionPolicy<\App\Policies\ContestSectionPolicy> */
         $this->authorize('update', [ContestSection::class, $contest_section]);
 
-        $this->circuit = $contest_section->contest;         
+        $this->contestSection = $contest_section;
+        $this->circuit = $contest_section->contest;
         $this->organization = $this->circuit->organization; 
         $this->hasContestPatronages = $this->circuit->contestPatronage()->exists();
         // campi modulo
@@ -142,7 +143,7 @@ new class () extends Component {
             $this->selectedSectionCode               = $contest_section->federationSection->code ?? '';
         } else {
             $this->contestSectionFederationId        = '';
-            $this->contestSectionFederationSectionId = '';
+            $this->contestSectionFederationSectionId =  0;
             $this->selectedFederationId              = '';
             $this->selectedSectionCode               = '';
         }
@@ -209,10 +210,8 @@ new class () extends Component {
             $federationSectionId = null;
         }
 
-        $contestSection = ContestSection::updateOrCreate([
-            'contest_id' => $this->circuit->id,
-            'code'       => $validated['contestSectionCode'],
-        ], [
+        $this->contestSection->update([
+            'code'                   => $validated['contestSectionCode'],
             'under_patronage'        => (bool) $this->contestSectionUnderPatronage,
             'federation_section_id'  => $federationSectionId, // was: $validated['contestSectionFederationSectionId'],
             'name_en'                => $validated['contestSectionNameEn'],
@@ -231,7 +230,7 @@ new class () extends Component {
 
         // redirect itself
         return redirect()
-            ->route('organization.design.circuit-section.listed', ['contest' => $contestSection->contest ])
+            ->route('organization.design.circuit-section.listed', ['contest' => $this->contestSection->contest ])
             ->with('success', __('Section modified, enjoy!'));
 
     }
@@ -338,18 +337,20 @@ new class () extends Component {
                     @if ($hasContestPatronages)
                     <!-- contestSectionFederationId -->
                     <div class="mb-4">
-                        <x-input-label for="contestSectionFederationId" :value="__('Federation Id')" />
+                        <x-input-label for="contestSectionFederationId" :value="__('Federation Id 🔓')" />
                         <x-text-input wire:model="contestSectionFederationId" id="contestSectionFederationId" 
-                            class="block mt-1 w-60" type="text" readonly />
+                            class="block mt-1 w-60" 
+                            type="text" readonly />
                         <p class="text-sm">{{ __('Managed automatically by patronage. Readonly') }}</p>
                         <x-input-error for="contestSectionFederationId" class="mt-2" />
                     </div>
 
                     <!-- contestSectionFederationSectionId -->
                     <div class="mb-4">
-                        <x-input-label for="contestSectionFederationSectionId" :value="__('Federation Section Code')" />
+                        <x-input-label for="contestSectionFederationSectionId" :value="__('Federation Section Code 🔓')" />
                         <x-text-input wire:model="contestSectionFederationSectionId" id="contestSectionFederationSectionId" 
-                            class="block mt-1 w-48" type="text" readonly />
+                            class="block mt-1 w-36" 
+                            type="text" readonly />
                         <p class="text-sm">{{ __('Managed automatically by patronage. Readonly') }}</p>
                         <x-input-error for="contestSectionFederationSectionId" class="mt-2" />
                     </div>
