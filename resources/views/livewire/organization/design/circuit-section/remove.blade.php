@@ -82,7 +82,7 @@ new class extends Component {
                 @endif
 
                 <h3 class="fyk text-2xl font-medium text-gray-900">
-                    {{ __('Contest Section n theme') }}
+                    {{ __('Circuit Section n theme') }}
                 </h3>
                 <hr class="mb-4" />
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
@@ -107,7 +107,7 @@ new class extends Component {
                             <dt class="fyk text-xl font-medium text-gray-700">
                                 {{ __('Synopsis') }}
                             </dt>
-                            <dd class="mt-1 text-xl text-gray-900 font-semibold">
+                            <dd class="mt-1 fyk text-xl text-gray-900 font-semibold">
                                 {{ ($contestSection->synopsis) ? $contestSection->synopsis : '--' }}
                             </dd>
                         </div>
