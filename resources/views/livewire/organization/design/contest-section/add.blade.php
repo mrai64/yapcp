@@ -40,9 +40,9 @@ new class () extends Component {
     public string $contestSectionShortSizeMax;
     public string $contestSectionLongSizeMax;
     public string $contestSectionFileSizeMax;
-    public string $contestSectionMonochromaticRequired;
-    public string $contestSectionRawRequired;
-    public string $contestSectionUniquePrize;
+    public bool   $contestSectionMonochromaticRequired;
+    public bool   $contestSectionRawRequired;
+    public bool   $contestSectionUniquePrize;
     // used in separated form
     public ?string $selectedFederationId = null;
     public ?string $selectedSectionCode = null;

@@ -20,7 +20,7 @@ we add some fields in the head of form, to copy FederationSection data in Contes
 
 &nbsp;
 
-First, we need a contest with almost a Federation Patronage \[ &rarr; [add Contest Patronage](../patronages/add.md) \]  
+First, we need a contest with almost a Federation Patronage, check if any registered
 ![_](./add2_img01.png)  
 
 &nbsp;
@@ -51,7 +51,7 @@ When you choose first a federation from the Federation list (TODO limited to con
 
 &nbsp;
 
-Then for the federation chhosed a section related from FederationSection
+Then for the federation choose a section picked by FederationSection set
 ![_](./add2_img07.png)  
 
 &nbsp;
@@ -69,14 +69,14 @@ So fields (not all) are filled with FederationSection default values.
 
 &nbsp;
 
-And the newset Section was added to contest.
+And the new Section was added to contest.
 ![_](./add2_img11.png)  
 
 &nbsp;
 
 All the fields are modifiable, but don't enlarge FederationSection
 limits without explicit permission of Federation. I.e. if max works for section
-was limited by federation upto 6 (six) you can reduce it to 4 (four),
+was limited by federation up to 6 (six) you can reduce it to 4 (four),
 but to enlarge at 8 (eight) require an explicit Special Dispensation.  
 Choose the Fed / Fed Section then modify only Section Name and/or Synopsis,
 then click on Add button.  
@@ -92,9 +92,9 @@ Fields are:
   The federation section picked as reference.
 - **Section Code**  
   When applicable, the Federation Section code  
-  *Uppercase code, min 1 upto 10 char* must be unique in contest
+  *Uppercase code, min 1 up to 10 char* must be unique in contest
 - **Section Name**  
-  When appliable, the Federation Section name  
+  When from Federation, must be the Federation Section name  
   In international english, short description of theme and section
 - **Section Name, local lang**  
   for future use
